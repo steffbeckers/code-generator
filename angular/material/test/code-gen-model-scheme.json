@@ -4,9 +4,6 @@
       "name": "Account",
       "plural": "Accounts",
       "entity": "account",
-      "api": {
-        "url": "http://localhost:5000/api"
-      },
       "fields": [
         {
           "name": "id",

@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "SchemanticsForMenu",
+    "title": "Menu Schema",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "$default": {
+          "$source": "argv",
+          "index": 0
+        }
+      },
+      "project": {
+        "type": "string",
+        "description": "The name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }        
+      },
+      "path": {
+        "type": "string",
+        "format": "path",
+        "description": "The path to create the component.",
+        "visible": false
+      },
+      "appRoot": {
+        "type": "string"
+      },
+      "sourceDir": {
+        "type": "string",
+        "default": "src"
+      },
+
+      "module":  {
+        "type": "string",
+        "description": "The declaring module.",
+        "alias": "m"
+      },
+      "export": {
+        "type": "boolean",
+        "default": false,
+        "description": "Export component from module?"
+      },
+
+      "model": {
+        "type": "string",
+        "default": "model.json",
+        "description": "Model describing the crud form"
+      }
+    }
+  }
+  
