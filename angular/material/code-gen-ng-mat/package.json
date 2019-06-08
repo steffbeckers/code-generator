@@ -1,15 +1,20 @@
 {
-  "name": "code-gen-ng-mat",
-  "version": "0.0.0",
-  "description": "A blank schematics",
+  "name": "@steffbeckers/code-gen-ng-mat",
+  "version": "0.0.2",
+  "description": "A code generator for Angular Material projects",
   "scripts": {
+    "start": "tsc -p tsconfig.json --watch",
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine src/**/*_spec.js"
   },
   "keywords": [
-    "schematics"
+    "schematics",
+    "generator",
+    "code generator",
+    "angular",
+    "material"
   ],
-  "author": "",
+  "author": "Steff Beckers <steff@steffbeckers.eu>",
   "license": "MIT",
   "schematics": "./src/collection.json",
   "dependencies": {

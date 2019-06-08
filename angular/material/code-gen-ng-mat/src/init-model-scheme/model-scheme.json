@@ -1,0 +1,18 @@
+{
+  "models": [
+    {
+      "name": "Account",
+      "plural": "Accounts",
+      "fields": [
+        {
+          "name": "Name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "plural": "Contacts"
+    }
+  ]
+}
