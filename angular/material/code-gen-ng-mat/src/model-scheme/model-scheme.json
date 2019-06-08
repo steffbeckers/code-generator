@@ -5,7 +5,7 @@
       "plural": "Accounts",
       "entity": "account",
       "api": {
-        "url": "http://localhost:5000/api"
+        "url": "http://localhost:5000/api/accounts"
       },
       "fields": [
         {

@@ -29,7 +29,6 @@ function setupOptions(options: MenuOptions, host: Tree): void {
   const parsedPath = parseName(options.path, options.name);
   options.name = parsedPath.name;
   options.path = parsedPath.path;
-
 }
 
 export default function (options: MenuOptions): Rule {

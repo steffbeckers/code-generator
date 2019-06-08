@@ -4,10 +4,10 @@ import * as path from "path";
 
 const collectionPath = path.join(__dirname, "../collection.json");
 
-describe("init-model-scheme", () => {
+describe("model-scheme-init", () => {
   it("works", () => {
     const runner = new SchematicTestRunner("schematics", collectionPath);
-    const tree = runner.runSchematic("init-model-scheme", {}, Tree.empty());
+    const tree = runner.runSchematic("model-scheme-init", {}, Tree.empty());
 
     expect(tree.files).toEqual(["/code-gen-model-scheme.json"]);
   });
