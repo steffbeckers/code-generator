@@ -1,0 +1,9 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "code-gen-ng-mat": {
+      "description": "A blank schematic.",
+      "factory": "./code-gen-ng-mat/index#codeGenNgMat"
+    }
+  }
+}
