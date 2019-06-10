@@ -6,6 +6,7 @@ export interface IModel {
   name: string;
   plural: string;
   entity: string;
+  entityPlural: string;
   api: IEndpoint;
   filter: string[];
   fields: IField[];
