@@ -1,0 +1,13 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "model-scheme-init": {
+      "description": "Initialize model scheme.",
+      "factory": "./model-scheme/index#init"
+    },
+    "crud": {
+      "description": "Generate modules based on model scheme.",
+      "factory": "./crud/index"
+    }
+  }
+}

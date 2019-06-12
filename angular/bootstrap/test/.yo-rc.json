@@ -1,0 +1,25 @@
+{
+  "generator-ngx-rocket": {
+    "version": "6.2.0",
+    "props": {
+      "location": "path",
+      "strict": false,
+      "skipInstall": false,
+      "skipQuickstart": false,
+      "initGit": true,
+      "appName": "Test Bootstrap",
+      "target": ["web"],
+      "pwa": true,
+      "ui": "bootstrap",
+      "auth": true,
+      "lazy": false,
+      "angulartics": false,
+      "tools": ["prettier", "hads", "compodoc"],
+      "utility": [],
+      "projectName": "test-bootstrap",
+      "packageManager": "npm",
+      "mobile": [],
+      "desktop": []
+    }
+  }
+}

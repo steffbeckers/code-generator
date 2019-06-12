@@ -1,0 +1,94 @@
+<div *ngIf="account" class="detail-account-component">
+  <nav class="top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="entity-type-icon">
+            <i class="fa fa-building" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <div class="entity-type">Account</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h3 class="entity-name-value">{{ account.name }}</h3>
+            </div>
+            <div class="col pr-0 d-flex justify-content-end actions">
+              <button [routerLink]="['/accounts', account.id, 'edit']" type="button" class="btn btn-primary">
+                Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="main">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Name</label>
+          <div class="accountName detail-field">{{ account.name }}</div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Parent account</label>
+          <div class="accountParentAccount detail-field">{{ account.parentAccount?.name }}</div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Billing account</label>
+          <div class="accountBillingAccount detail-field">{{ account.billingAccount?.name }}</div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Relation type</label>
+          <div class="accountRelationType detail-field">{{ account.relationType?.name }}</div>
+        </div>
+      </div>
+      <fieldset class="form-group row">
+        <legend class="col">Contact</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Telephone</label>
+              <div class="accountTelephone detail-field">
+                <a *ngIf="account.telephone" href="tel:{{ account.telephone }}">{{ account.telephone }}</a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Email</label>
+              <div class="accountEmail detail-field">
+                <a *ngIf="account.email" href="mailto:{{ account.email }}">{{ account.email }}</a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Website</label>
+              <div class="accountWebsite detail-field">
+                <a *ngIf="account.website" [href]="account.website" target="_blank">{{ account.website }}</a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>FAX</label>
+              <div class="accountFAX detail-field">{{ account.fax }}</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group row">
+        <legend class="col">Address</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 form-group">
+              <label>Street and number</label>
+              <div class="accountAddressStreetAndNumber detail-field">
+                {{ account.address?.street }} {{ account.address?.number }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+</div>

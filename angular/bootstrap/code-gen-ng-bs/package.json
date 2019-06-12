@@ -1,7 +1,7 @@
 {
-  "name": "@steffbeckers/code-gen-ng-mat",
-  "version": "0.0.3",
-  "description": "A code generator for Angular Material projects.",
+  "name": "@steffbeckers/code-gen-ng-bs",
+  "version": "0.0.1",
+  "description": "A code generator for Angular Bootstrap projects.",
   "scripts": {
     "start": "tsc -p tsconfig.json --watch",
     "build": "tsc -p tsconfig.json",
@@ -12,7 +12,7 @@
     "generator",
     "code generator",
     "angular",
-    "material"
+    "bootstrap"
   ],
   "author": "Steff Beckers <steff@steffbeckers.eu>",
   "license": "MIT",
@@ -20,7 +20,6 @@
   "dependencies": {
     "@angular-devkit/core": "^8.0.2",
     "@angular-devkit/schematics": "^8.0.2",
-    "@schematics/angular": "^8.0.2",
     "@types/jasmine": "^3.3.9",
     "@types/node": "^8.0.31",
     "jasmine": "^3.3.1",
