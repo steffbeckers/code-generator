@@ -1,63 +1,178 @@
-import {
-  Rule,
-  SchematicContext,
-  Tree,
-  SchematicsException,
-  apply,
-  url,
-  template,
-  move,
-  chain,
-  branchAndMerge,
-  mergeWith
-} from "@angular-devkit/schematics";
-import { strings as stringUtils } from "@angular-devkit/core";
+//import { Rule, Tree, SchematicContext } from "@angular-devkit/schematics";
+import { Rule, Tree } from "@angular-devkit/schematics";
+import { Observable } from "rxjs/internal/Observable";
+
+const util = require("util");
 
 // code generator
-import { CodeGenOptions } from "./schema";
-import { IModelScheme } from "../model-scheme/model-scheme";
+import { CodeGenOptions, CodeGenCrudOptions } from "./schema";
+
+// To retrieve OData metadata
+import fetch from "node-fetch";
+import * as XMLJS from "xml-js";
 
 export default function(options: CodeGenOptions): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    // load model scheme JSON config
-    const modelSchemeFile = `/${options.modelScheme}`;
+  let crudOptions: CodeGenCrudOptions = {
+    entities: [],
+    enums: []
+  };
 
-    const modelSchemeBuffer = tree.read(modelSchemeFile);
-    if (modelSchemeBuffer === null) {
-      throw new SchematicsException(
-        `Model file ${options.modelScheme} does not exist.`
-      );
+  // return (tree: Tree, context: SchematicContext) => {
+  return (tree: Tree) => {
+    if (options.debug) {
+      console.debug("OPTIONS");
+      console.debug(options);
+      console.debug();
     }
 
-    const modelSchemeJson = modelSchemeBuffer.toString("utf-8");
-    const modelScheme = JSON.parse(modelSchemeJson) as IModelScheme;
-
-    // Rule chain
-    let rules: Rule[] = [];
-
-    // For each model in model scheme, generate the files
-    modelScheme.models.forEach(model => {
-      // templates in ./files/
-      const templateSource = apply(url("./files"), [
-        template({
-          ...stringUtils,
-          ...options,
-          entity: model.entity,
-          model
-        }),
-        move("/src/app/" + model.entityPlural || "")
-      ]);
-
-      rules.push(
-        branchAndMerge(
-          // chain([mergeWith(templateSource), addImportToParentModule(options)])
-          chain([mergeWith(templateSource)])
-        )
+    // If no endpoint specified, don't do anything
+    if (!options.metadata) {
+      console.error(
+        "Please provide an OData metadata endpoint with the --metadata=http://.../$metadata parameter."
       );
+      return tree;
+    }
+
+    // When the $metadata is cut from CLI input
+    if (!options.metadata.includes("$metadata")) {
+      options.metadata += "$metadata";
+    }
+
+    return new Observable<Tree>(observer => {
+      // Retrieve the OData $metadata
+      fetch(options.metadata, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/xml; charset=utf-8"
+        }
+      })
+        .then((res: any) => res.text())
+        .then((xml: string) => {
+          if (options.debug) {
+            console.debug("RETRIEVED XML");
+            console.debug(xml);
+            console.debug();
+          }
+
+          if (options.saveMetadataAsXML) {
+            tree.create("metadata.xml", xml);
+          }
+
+          // Convert the metadata XML to JSON
+          let metadataString: any = XMLJS.xml2json(xml);
+
+          // Parse as JSON
+          let metadata = JSON.parse(metadataString);
+
+          if (options.debug) {
+            console.debug("ODATA METADATA AS JSON");
+            console.debug(metadata);
+            console.debug();
+          }
+
+          if (options.saveMetadataAsJSON) {
+            tree.create("metadata.json", JSON.stringify(metadata, null, 2));
+          }
+
+          // Get the data we need from this metadata
+          if (options.debug) {
+            console.debug(
+              util.inspect(
+                metadata.elements[0].elements[0].elements[0].elements[0],
+                false,
+                null,
+                true /* enable colors */
+              )
+            );
+            console.debug();
+          }
+
+          // All data elements
+          metadata.elements[0].elements[0].elements[0].elements.forEach(
+            (element: any) => {
+              // Entities
+              if (element.name === "EntityType") {
+                let entity: any = {
+                  name: element.attributes.Name,
+                  id: null,
+                  fields: []
+                };
+
+                // Entity fields
+                element.elements.forEach((fieldElement: any) => {
+                  // Key
+                  if (fieldElement.name === "Key") {
+                    entity.key = fieldElement.elements[0].attributes.Name;
+                  }
+
+                  // Properties
+                  if (fieldElement.name === "Property") {
+                    let prop: any = {};
+                    prop.name = fieldElement.attributes.Name;
+                    prop.dataType = fieldElement.attributes.Type;
+                    prop.required =
+                      fieldElement.attributes.Nullable === "false"
+                        ? true
+                        : false;
+
+                    // Custom for code generator
+                    prop.inputType =
+                      fieldElement.attributes["codegen:InputType"] || null;
+                    prop.displayName =
+                      fieldElement.attributes["codegen:DisplayName"] || null;
+                    prop.sort = fieldElement.attributes["codegen:Sort"]
+                      ? parseInt(fieldElement.attributes["codegen:Sort"])
+                      : null;
+                    prop.hidden =
+                      fieldElement.attributes["codegen:Hidden"] === "true"
+                        ? true
+                        : false;
+
+                    entity.fields.push(prop);
+                  }
+                });
+
+                crudOptions.entities.push(entity);
+              }
+
+              // Enums
+              if (element.name === "EnumType") {
+                let enumerable: any = {
+                  name: element.attributes.Name,
+                  values: []
+                };
+
+                element.elements.forEach((enumElement: any) => {
+                  enumerable.values.push({
+                    name: enumElement.attributes.Name,
+                    value: enumElement.attributes.Value
+                  });
+                });
+
+                crudOptions.enums.push(enumerable);
+              }
+            }
+          );
+
+          if (options.debug) {
+            console.debug("CRUD OPTIONS");
+            console.debug(util.inspect(crudOptions, false, null, true));
+            console.debug();
+          }
+
+          if (options.saveCRUDOptions) {
+            tree.create(
+              "code-gen-model-scheme.json",
+              JSON.stringify(crudOptions, null, 2)
+            );
+          }
+
+          observer.next(tree);
+          observer.complete();
+        })
+        .catch((err: any) => {
+          observer.error(err);
+        });
     });
-
-    let rule: Rule = chain(rules);
-
-    return rule(tree, context);
   };
 }

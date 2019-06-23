@@ -1,3 +1,14 @@
 export interface CodeGenOptions {
-  modelScheme: string;
+  metadata: string;
+
+  saveMetadataAsXML: boolean;
+  saveMetadataAsJSON: boolean;
+  saveCRUDOptions: boolean;
+
+  debug: boolean;
+}
+
+export interface CodeGenCrudOptions {
+  entities: any[];
+  enums: any[];
 }

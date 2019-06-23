@@ -1,6 +1,6 @@
 {
   "name": "@steffbeckers/code-gen-ng-bs",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A code generator for Angular Bootstrap projects.",
   "scripts": {
     "start": "tsc -p tsconfig.json --watch",
@@ -22,7 +22,10 @@
     "@angular-devkit/schematics": "^8.0.2",
     "@types/jasmine": "^3.3.9",
     "@types/node": "^8.0.31",
+    "@types/node-fetch": "^2.3.7",
     "jasmine": "^3.3.1",
-    "typescript": "~3.4.3"
+    "node-fetch": "^2.6.0",
+    "typescript": "~3.4.3",
+    "xml-js": "^1.6.11"
   }
 }

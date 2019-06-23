@@ -4,10 +4,29 @@
   "title": "Code Generator",
   "type": "object",
   "properties": {
-    "modelScheme": {
+    "metadata": {
       "type": "string",
-      "default": "code-gen-model-scheme.json",
-      "description": "Model scheme structure JSON file"
+      "description": "OData metadata endpoint."
+    },
+    "saveMetadataAsXML": {
+      "type": "boolean",
+      "default": false,
+      "description": "Save the OData metadata as metadata.xml."
+    },
+    "saveMetadataAsJSON": {
+      "type": "boolean",
+      "default": false,
+      "description": "Save the OData metadata as metadata.json."
+    },
+    "saveCRUDOptions": {
+      "type": "boolean",
+      "default": false,
+      "description": "Save as code-gen-model-scheme.json."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable debugging, adds some logging."
     }
   }
 }
