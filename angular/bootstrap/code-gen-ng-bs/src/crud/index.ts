@@ -95,7 +95,8 @@ export default function(options: CodeGenOptions): Rule {
                 let entity: any = {
                   name: element.attributes.Name,
                   id: null,
-                  fields: []
+                  fields: [],
+                  relations: []
                 };
 
                 // Entity fields
@@ -129,6 +130,47 @@ export default function(options: CodeGenOptions): Rule {
                         : false;
 
                     entity.fields.push(prop);
+                  }
+
+                  // Relations
+                  if (fieldElement.name === "NavigationProperty") {
+                    // Collection
+                    if (fieldElement.attributes.Type.includes("Collection(")) {
+                      let relation: any = {
+                        name: fieldElement.attributes.Name
+                      };
+
+                      // Type
+                      let type = fieldElement.attributes.Type.replace(
+                        "Collection(",
+                        ""
+                      );
+                      type = type.replace(")", "");
+                      let typeArr = type.split(".");
+                      relation.dataType = typeArr[typeArr.length - 1];
+
+                      // Custom for code generator
+                      relation.sort = fieldElement.attributes["codegen:Sort"]
+                        ? parseInt(fieldElement.attributes["codegen:Sort"])
+                        : null;
+
+                      entity.relations.push(relation);
+                    } else {
+                      // Lookup
+                      let lookup: any = {
+                        name: fieldElement.attributes.Name
+                      };
+
+                      // Type
+                      let typeArr = fieldElement.attributes.Type.split(".");
+                      lookup.dataType = typeArr[typeArr.length - 1];
+
+                      // Custom for code generator
+                      lookup.forId =
+                        fieldElement.attributes["codegen:LookupId"] || null;
+
+                      entity.fields.push(lookup);
+                    }
                   }
                 });
 
