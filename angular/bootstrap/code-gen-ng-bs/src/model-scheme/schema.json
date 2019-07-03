@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchemanticsForCodeGenNgBsModelScheme",
+  "title": "Code Generator",
+  "type": "object",
+  "properties": {
+    "odataMetadata": {
+      "type": "string",
+      "description": "OData metadata endpoint."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable debugging, adds some logging."
+    }
+  }
+}

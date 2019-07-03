@@ -1,7 +1,7 @@
 {
   "name": "@steffbeckers/code-gen-ng-bs",
-  "version": "0.0.5",
-  "description": "A code generator for Angular Bootstrap projects.",
+  "version": "0.0.6",
+  "description": "A code generator for Angular Bootstrap projects, based on OData metadata.",
   "scripts": {
     "start": "tsc -p tsconfig.json --watch",
     "build": "tsc -p tsconfig.json",
@@ -12,7 +12,8 @@
     "generator",
     "code generator",
     "angular",
-    "bootstrap"
+    "bootstrap",
+    "odata"
   ],
   "author": "Steff Beckers <steff@steffbeckers.eu>",
   "license": "MIT",

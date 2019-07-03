@@ -1,0 +1,181 @@
+<div *ngIf="account" class="edit-account-component">
+  <ng-template #resultTemplateAccount let-r="result" let-t="term">
+    {{ r.name }}
+  </ng-template>
+  <form [formGroup]="accountForm" (ngSubmit)="editAccount()" novalidate>
+    <nav class="top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-1">
+            <div class="entity-type-icon">
+              <i class="fa fa-building" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="entity-type">Account</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3
+                  class="entity-name-value"
+                  [routerLink]="['/accounts', account.id]"
+                  routerLinkActive="router-link-active"
+                >
+                  {{ account.name }}
+                </h3>
+              </div>
+              <div class="col pr-0 d-flex justify-content-end actions">
+                <button [routerLink]="['/accounts', account.id]" class="btn btn-secondary m-1">
+                  Cancel
+                </button>
+                <button [disabled]="accountForm.invalid" type="submit" class="btn btn-primary ml-1 mt-1 mb-1">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="main">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="accountName">Name</label>
+            <input
+              formControlName="name"
+              [ngClass]="{
+                'is-invalid':
+                  (accountForm.get('name').touched || accountForm.get('name').dirty) && !accountForm.get('name').valid
+              }"
+              type="text"
+              name="accountName"
+              id="accountName"
+              class="form-control"
+            />
+            <span
+              *ngIf="
+                (accountForm.get('name').touched || accountForm.get('name').dirty) && accountForm.get('name').errors
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="accountForm.get('name').errors.required">Please enter a name</span>
+              <span *ngIf="accountForm.get('name').errors.maxlength">The name can't be longer than 100 characters</span>
+              <!-- <span *ngIf="accountForm.get('name').errors.uniqueness">Club already exists</span> -->
+            </span>
+          </div>
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="accountParentAccount">Parent account</label>
+            <input
+              formControlName="parentAccountId"
+              [ngClass]="{
+                'is-invalid':
+                  (accountForm.get('parentAccountId').touched || accountForm.get('parentAccountId').dirty) &&
+                  !accountForm.get('parentAccountId').valid
+              }"
+              [ngbTypeahead]="searchAccount"
+              [resultTemplate]="resultTemplateAccount"
+              [inputFormatter]="inputFormatterAccount"
+              type="text"
+              name="accountParentAccount"
+              id="accountParentAccount"
+              class="form-control"
+            />
+          </div>
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="accountBillingAccount">Billing account</label>
+            <input
+              formControlName="billingAccountId"
+              [ngClass]="{
+                'is-invalid':
+                  (accountForm.get('billingAccountId').touched || accountForm.get('billingAccountId').dirty) &&
+                  !accountForm.get('billingAccountId').valid
+              }"
+              [ngbTypeahead]="searchAccount"
+              [resultTemplate]="resultTemplateAccount"
+              [inputFormatter]="inputFormatterAccount"
+              type="text"
+              name="accountBillingAccount"
+              id="accountBillingAccount"
+              class="form-control"
+            />
+          </div>
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="accountRelationType">Relation type</label>
+            <select class="form-control" name="accountRelationType" id="accountRelationType">
+              <option selected>Select one</option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <fieldset class="form-group row">
+          <legend class="col">Contact</legend>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="accountTelephone">Telephone</label>
+                <input
+                  formControlName="telephone"
+                  type="text"
+                  name="accountTelephone"
+                  id="accountTelephone"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="accountEmail">Email</label>
+                <input formControlName="email" type="text" class="form-control" name="accountEmail" id="accountEmail" />
+              </div>
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="accountWebsite">Website</label>
+                <input
+                  formControlName="website"
+                  type="text"
+                  class="form-control"
+                  name="accountWebsite"
+                  id="accountWebsite"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="accountFax">FAX</label>
+                <input formControlName="fax" type="text" name="accountFax" id="accountFax" class="form-control" />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset formGroupName="address" class="form-group row">
+          <legend class="col">Address</legend>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 form-group">
+                <label for="accountAddressStreet">Street</label>
+                <input
+                  formControlName="street"
+                  type="text"
+                  name="accountAddressStreet"
+                  id="accountAddressStreet"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-4 form-group">
+                <label for="accountAddressNumber">Number</label>
+                <input
+                  formControlName="number"
+                  type="text"
+                  class="form-control"
+                  name="accountAddressNumber"
+                  id="accountAddressNumber"
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+  </form>
+</div>
