@@ -1,0 +1,33 @@
+<div class="<%= dasherize(entityPluralized) %>-component">
+  <h3><%= classify(entityPluralized) %></h3>
+  <ng-container *ngIf="<%= dasherize(entityPluralized) %> && <%= dasherize(entityPluralized) %>.length; else elseTemplate">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Website</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let <%= dasherize(entityName) %> of <%= dasherize(entityPluralized) %>"
+            [routerLink]="['/<%= dasherize(entityPluralized) %>', <%= dasherize(entityName) %>.id]"
+          >
+            <td scope="row">{{ <%= dasherize(entityName) %>.name }}</td>
+            <td>{{ <%= dasherize(entityName) %>.telephone }}</td>
+            <td>{{ <%= dasherize(entityName) %>.email }}</td>
+            <td>{{ <%= dasherize(entityName) %>.website }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <p>There are currently no <%= dasherize(entityPluralized) %>.</p>
+  </ng-template>
+</div>

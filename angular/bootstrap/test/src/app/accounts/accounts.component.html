@@ -1,0 +1,33 @@
+<div class="accounts-component">
+  <h3>Accounts</h3>
+  <ng-container *ngIf="accounts && accounts.length; else elseTemplate">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Website</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let account of accounts"
+            [routerLink]="['/accounts', account.id]"
+          >
+            <td scope="row">{{ account.name }}</td>
+            <td>{{ account.telephone }}</td>
+            <td>{{ account.email }}</td>
+            <td>{{ account.website }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <p>There are currently no accounts.</p>
+  </ng-template>
+</div>

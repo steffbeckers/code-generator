@@ -1,0 +1,115 @@
+<div *ngIf="address" class="detail-address-component">
+  <nav class="top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="entity-type-icon">
+            <i class="fa fa-building" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <div class="entity-type">Address</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h3 class="entity-name-value">{{ address.name }}</h3>
+            </div>
+            <div class="col pr-0 d-flex justify-content-end actions">
+              <button
+                [routerLink]="['/addresses', address.id, 'edit']"
+                type="button"
+                class="btn btn-primary"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="main">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Name</label>
+          <div class="addressName detail-field">{{ address.name }}</div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Parent address</label>
+          <div class="addressParentAddress detail-field">
+            {{ address.parentAddress?.name }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Billing address</label>
+          <div class="addressBillingAddress detail-field">
+            {{ address.billingAddress?.name }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Relation type</label>
+          <div class="addressRelationType detail-field">
+            {{ address.relationType?.name }}
+          </div>
+        </div>
+      </div>
+      <fieldset class="form-group row">
+        <legend class="col">Contact</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Telephone</label>
+              <div class="addressTelephone detail-field">
+                <a
+                  *ngIf="address.telephone"
+                  href="tel:{{ address.telephone }}"
+                  >{{ address.telephone }}</a
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Email</label>
+              <div class="addressEmail detail-field">
+                <a *ngIf="address.email" href="mailto:{{ address.email }}">{{
+                  address.email
+                }}</a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Website</label>
+              <div class="addressWebsite detail-field">
+                <a
+                  *ngIf="address.website"
+                  [href]="address.website"
+                  target="_blank"
+                  >{{ address.website }}</a
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>FAX</label>
+              <div class="addressFAX detail-field">{{ address.fax }}</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group row">
+        <legend class="col">Address</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 form-group">
+              <label>Street and number</label>
+              <div class="addressAddressStreetAndNumber detail-field">
+                {{ address.address?.street }} {{ address.address?.number }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+</div>

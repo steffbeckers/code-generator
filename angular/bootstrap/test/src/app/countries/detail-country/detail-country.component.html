@@ -1,0 +1,115 @@
+<div *ngIf="country" class="detail-country-component">
+  <nav class="top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="entity-type-icon">
+            <i class="fa fa-building" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <div class="entity-type">Country</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h3 class="entity-name-value">{{ country.name }}</h3>
+            </div>
+            <div class="col pr-0 d-flex justify-content-end actions">
+              <button
+                [routerLink]="['/countries', country.id, 'edit']"
+                type="button"
+                class="btn btn-primary"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="main">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Name</label>
+          <div class="countryName detail-field">{{ country.name }}</div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Parent country</label>
+          <div class="countryParentCountry detail-field">
+            {{ country.parentCountry?.name }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Billing country</label>
+          <div class="countryBillingCountry detail-field">
+            {{ country.billingCountry?.name }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Relation type</label>
+          <div class="countryRelationType detail-field">
+            {{ country.relationType?.name }}
+          </div>
+        </div>
+      </div>
+      <fieldset class="form-group row">
+        <legend class="col">Contact</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Telephone</label>
+              <div class="countryTelephone detail-field">
+                <a
+                  *ngIf="country.telephone"
+                  href="tel:{{ country.telephone }}"
+                  >{{ country.telephone }}</a
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Email</label>
+              <div class="countryEmail detail-field">
+                <a *ngIf="country.email" href="mailto:{{ country.email }}">{{
+                  country.email
+                }}</a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Website</label>
+              <div class="countryWebsite detail-field">
+                <a
+                  *ngIf="country.website"
+                  [href]="country.website"
+                  target="_blank"
+                  >{{ country.website }}</a
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>FAX</label>
+              <div class="countryFAX detail-field">{{ country.fax }}</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group row">
+        <legend class="col">Address</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 form-group">
+              <label>Street and number</label>
+              <div class="countryAddressStreetAndNumber detail-field">
+                {{ country.address?.street }} {{ country.address?.number }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+</div>

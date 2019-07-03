@@ -1,0 +1,33 @@
+<div class="contacts-component">
+  <h3>Contacts</h3>
+  <ng-container *ngIf="contacts && contacts.length; else elseTemplate">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Website</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let contact of contacts"
+            [routerLink]="['/contacts', contact.id]"
+          >
+            <td scope="row">{{ contact.name }}</td>
+            <td>{{ contact.telephone }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.website }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <p>There are currently no contacts.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,115 @@
+<div *ngIf="user" class="detail-user-component">
+  <nav class="top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="entity-type-icon">
+            <i class="fa fa-building" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <div class="entity-type">User</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h3 class="entity-name-value">{{ user.name }}</h3>
+            </div>
+            <div class="col pr-0 d-flex justify-content-end actions">
+              <button
+                [routerLink]="['/users', user.id, 'edit']"
+                type="button"
+                class="btn btn-primary"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="main">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Name</label>
+          <div class="userName detail-field">{{ user.name }}</div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Parent user</label>
+          <div class="userParentUser detail-field">
+            {{ user.parentUser?.name }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Billing user</label>
+          <div class="userBillingUser detail-field">
+            {{ user.billingUser?.name }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 form-group">
+          <label>Relation type</label>
+          <div class="userRelationType detail-field">
+            {{ user.relationType?.name }}
+          </div>
+        </div>
+      </div>
+      <fieldset class="form-group row">
+        <legend class="col">Contact</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Telephone</label>
+              <div class="userTelephone detail-field">
+                <a
+                  *ngIf="user.telephone"
+                  href="tel:{{ user.telephone }}"
+                  >{{ user.telephone }}</a
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Email</label>
+              <div class="userEmail detail-field">
+                <a *ngIf="user.email" href="mailto:{{ user.email }}">{{
+                  user.email
+                }}</a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>Website</label>
+              <div class="userWebsite detail-field">
+                <a
+                  *ngIf="user.website"
+                  [href]="user.website"
+                  target="_blank"
+                  >{{ user.website }}</a
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 form-group">
+              <label>FAX</label>
+              <div class="userFAX detail-field">{{ user.fax }}</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group row">
+        <legend class="col">Address</legend>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 form-group">
+              <label>Street and number</label>
+              <div class="userAddressStreetAndNumber detail-field">
+                {{ user.address?.street }} {{ user.address?.number }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+</div>

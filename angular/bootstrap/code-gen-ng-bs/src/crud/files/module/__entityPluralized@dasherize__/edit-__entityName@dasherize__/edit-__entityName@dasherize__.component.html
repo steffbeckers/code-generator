@@ -1,0 +1,181 @@
+<div *ngIf="<%= dasherize(entityName) %>" class="edit-<%= dasherize(entityName) %>-component">
+  <ng-template #resultTemplate<%= classify(entityName) %> let-r="result" let-t="term">
+    {{ r.name }}
+  </ng-template>
+  <form [formGroup]="<%= dasherize(entityName) %>Form" (ngSubmit)="edit<%= classify(entityName) %>()" novalidate>
+    <nav class="top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-1">
+            <div class="entity-type-icon">
+              <i class="fa fa-building" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="entity-type"><%= classify(entityName) %></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3
+                  class="entity-name-value"
+                  [routerLink]="['/<%= dasherize(entityPluralized) %>', <%= dasherize(entityName) %>.id]"
+                  routerLinkActive="router-link-active"
+                >
+                  {{ <%= dasherize(entityName) %>.name }}
+                </h3>
+              </div>
+              <div class="col pr-0 d-flex justify-content-end actions">
+                <button [routerLink]="['/<%= dasherize(entityPluralized) %>', <%= dasherize(entityName) %>.id]" class="btn btn-secondary m-1">
+                  Cancel
+                </button>
+                <button [disabled]="<%= dasherize(entityName) %>Form.invalid" type="submit" class="btn btn-primary ml-1 mt-1 mb-1">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="main">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="<%= dasherize(entityName) %>Name">Name</label>
+            <input
+              formControlName="name"
+              [ngClass]="{
+                'is-invalid':
+                  (<%= dasherize(entityName) %>Form.get('name').touched || <%= dasherize(entityName) %>Form.get('name').dirty) && !<%= dasherize(entityName) %>Form.get('name').valid
+              }"
+              type="text"
+              name="<%= dasherize(entityName) %>Name"
+              id="<%= dasherize(entityName) %>Name"
+              class="form-control"
+            />
+            <span
+              *ngIf="
+                (<%= dasherize(entityName) %>Form.get('name').touched || <%= dasherize(entityName) %>Form.get('name').dirty) && <%= dasherize(entityName) %>Form.get('name').errors
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="<%= dasherize(entityName) %>Form.get('name').errors.required">Please enter a name</span>
+              <span *ngIf="<%= dasherize(entityName) %>Form.get('name').errors.maxlength">The name can't be longer than 100 characters</span>
+              <!-- <span *ngIf="<%= dasherize(entityName) %>Form.get('name').errors.uniqueness">Club already exists</span> -->
+            </span>
+          </div>
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="<%= dasherize(entityName) %>Parent<%= classify(entityName) %>">Parent <%= dasherize(entityName) %></label>
+            <input
+              formControlName="parent<%= classify(entityName) %>Id"
+              [ngClass]="{
+                'is-invalid':
+                  (<%= dasherize(entityName) %>Form.get('parent<%= classify(entityName) %>Id').touched || <%= dasherize(entityName) %>Form.get('parent<%= classify(entityName) %>Id').dirty) &&
+                  !<%= dasherize(entityName) %>Form.get('parent<%= classify(entityName) %>Id').valid
+              }"
+              [ngbTypeahead]="search<%= classify(entityName) %>"
+              [resultTemplate]="resultTemplate<%= classify(entityName) %>"
+              [inputFormatter]="inputFormatter<%= classify(entityName) %>"
+              type="text"
+              name="<%= dasherize(entityName) %>Parent<%= classify(entityName) %>"
+              id="<%= dasherize(entityName) %>Parent<%= classify(entityName) %>"
+              class="form-control"
+            />
+          </div>
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="<%= dasherize(entityName) %>Billing<%= classify(entityName) %>">Billing <%= dasherize(entityName) %></label>
+            <input
+              formControlName="billing<%= classify(entityName) %>Id"
+              [ngClass]="{
+                'is-invalid':
+                  (<%= dasherize(entityName) %>Form.get('billing<%= classify(entityName) %>Id').touched || <%= dasherize(entityName) %>Form.get('billing<%= classify(entityName) %>Id').dirty) &&
+                  !<%= dasherize(entityName) %>Form.get('billing<%= classify(entityName) %>Id').valid
+              }"
+              [ngbTypeahead]="search<%= classify(entityName) %>"
+              [resultTemplate]="resultTemplate<%= classify(entityName) %>"
+              [inputFormatter]="inputFormatter<%= classify(entityName) %>"
+              type="text"
+              name="<%= dasherize(entityName) %>Billing<%= classify(entityName) %>"
+              id="<%= dasherize(entityName) %>Billing<%= classify(entityName) %>"
+              class="form-control"
+            />
+          </div>
+          <div class="col-xs-12 col-sm-4 form-group">
+            <label for="<%= dasherize(entityName) %>RelationType">Relation type</label>
+            <select class="form-control" name="<%= dasherize(entityName) %>RelationType" id="<%= dasherize(entityName) %>RelationType">
+              <option selected>Select one</option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <fieldset class="form-group row">
+          <legend class="col">Contact</legend>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="<%= dasherize(entityName) %>Telephone">Telephone</label>
+                <input
+                  formControlName="telephone"
+                  type="text"
+                  name="<%= dasherize(entityName) %>Telephone"
+                  id="<%= dasherize(entityName) %>Telephone"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="<%= dasherize(entityName) %>Email">Email</label>
+                <input formControlName="email" type="text" class="form-control" name="<%= dasherize(entityName) %>Email" id="<%= dasherize(entityName) %>Email" />
+              </div>
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="<%= dasherize(entityName) %>Website">Website</label>
+                <input
+                  formControlName="website"
+                  type="text"
+                  class="form-control"
+                  name="<%= dasherize(entityName) %>Website"
+                  id="<%= dasherize(entityName) %>Website"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-3 form-group">
+                <label for="<%= dasherize(entityName) %>Fax">FAX</label>
+                <input formControlName="fax" type="text" name="<%= dasherize(entityName) %>Fax" id="<%= dasherize(entityName) %>Fax" class="form-control" />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset formGroupName="address" class="form-group row">
+          <legend class="col">Address</legend>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 form-group">
+                <label for="<%= dasherize(entityName) %>AddressStreet">Street</label>
+                <input
+                  formControlName="street"
+                  type="text"
+                  name="<%= dasherize(entityName) %>AddressStreet"
+                  id="<%= dasherize(entityName) %>AddressStreet"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-4 form-group">
+                <label for="<%= dasherize(entityName) %>AddressNumber">Number</label>
+                <input
+                  formControlName="number"
+                  type="text"
+                  class="form-control"
+                  name="<%= dasherize(entityName) %>AddressNumber"
+                  id="<%= dasherize(entityName) %>AddressNumber"
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+  </form>
+</div>

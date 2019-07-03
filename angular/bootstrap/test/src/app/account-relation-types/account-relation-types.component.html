@@ -1,0 +1,33 @@
+<div class="account-relation-types-component">
+  <h3>AccountRelationTypes</h3>
+  <ng-container *ngIf="account-relation-types && account-relation-types.length; else elseTemplate">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Website</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let account-relation-type of account-relation-types"
+            [routerLink]="['/account-relation-types', account-relation-type.id]"
+          >
+            <td scope="row">{{ account-relation-type.name }}</td>
+            <td>{{ account-relation-type.telephone }}</td>
+            <td>{{ account-relation-type.email }}</td>
+            <td>{{ account-relation-type.website }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <p>There are currently no account-relation-types.</p>
+  </ng-template>
+</div>

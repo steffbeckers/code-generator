@@ -1,0 +1,772 @@
+{
+  "entities": [
+    {
+      "name": "Account",
+      "pluralized": "Accounts",
+      "id": null,
+      "fields": [
+        {
+          "name": "id",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "name",
+          "dataType": "string",
+          "required": true,
+          "inputType": "Text",
+          "displayName": "Account Name",
+          "sort": 10,
+          "hidden": false
+        },
+        {
+          "name": "email",
+          "dataType": "string",
+          "required": false,
+          "inputType": "Email",
+          "displayName": "Email Address",
+          "sort": 20,
+          "hidden": false
+        },
+        {
+          "name": "telephone",
+          "dataType": "string",
+          "required": false,
+          "inputType": "Telephone",
+          "displayName": "Telephone",
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "fax",
+          "dataType": "string",
+          "required": false,
+          "inputType": "Telephone",
+          "displayName": "FAX",
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "website",
+          "dataType": "string",
+          "required": false,
+          "inputType": "Text",
+          "displayName": "Website URL",
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "vatNumber",
+          "dataType": "string",
+          "required": false,
+          "inputType": "Text",
+          "displayName": "VAT Number",
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "description",
+          "dataType": "string",
+          "required": false,
+          "inputType": "TextArea",
+          "displayName": "Description",
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "addressId",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "parentAccountId",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "billingAccountId",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "relationTypeId",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "primaryContactId",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "createdOn",
+          "dataType": "Date",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "modifiedOn",
+          "dataType": "Date",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "deletedOn",
+          "dataType": "Date",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "createdById",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "modifiedById",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": true
+        },
+        {
+          "name": "address",
+          "lookup": true,
+          "dataType": "Address",
+          "forId": "addressId"
+        },
+        {
+          "name": "parentAccount",
+          "lookup": true,
+          "dataType": "Account",
+          "forId": "parentAccountId"
+        },
+        {
+          "name": "billingAccount",
+          "lookup": true,
+          "dataType": "Account",
+          "forId": "billingAccountId"
+        },
+        {
+          "name": "relationType",
+          "lookup": true,
+          "dataType": "AccountRelationType",
+          "forId": "relationTypeId"
+        },
+        {
+          "name": "primaryContact",
+          "lookup": true,
+          "dataType": "Contact",
+          "forId": "primaryContactId"
+        },
+        {
+          "name": "createdBy",
+          "lookup": true,
+          "dataType": "User",
+          "forId": "createdById"
+        },
+        {
+          "name": "modifiedBy",
+          "lookup": true,
+          "dataType": "User",
+          "forId": "modifiedById"
+        }
+      ],
+      "relations": [
+        {
+          "name": "contacts",
+          "dataType": "Contact",
+          "sort": 10
+        }
+      ],
+      "key": "id"
+    },
+    {
+      "name": "User",
+      "pluralized": "Users",
+      "id": null,
+      "fields": [
+        {
+          "name": "firstName",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "lastName",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "id",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "userName",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "email",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "emailConfirmed",
+          "dataType": "bool",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "phoneNumber",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "phoneNumberConfirmed",
+          "dataType": "bool",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "twoFactorEnabled",
+          "dataType": "bool",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "lockoutEnd",
+          "dataType": "Date",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "lockoutEnabled",
+          "dataType": "bool",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "accessFailedCount",
+          "dataType": "number",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        }
+      ],
+      "relations": [],
+      "key": "id"
+    },
+    {
+      "name": "Address",
+      "pluralized": "Addresses",
+      "id": null,
+      "fields": [
+        {
+          "name": "id",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "street",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "number",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "city",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "state",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "postalCode",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "latitude",
+          "dataType": "number",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "longitude",
+          "dataType": "number",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "countryId",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "createdOn",
+          "dataType": "Date",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "modifiedOn",
+          "dataType": "Date",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "deletedOn",
+          "dataType": "Date",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "createdById",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "modifiedById",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "country",
+          "lookup": true,
+          "dataType": "Country",
+          "forId": null
+        }
+      ],
+      "relations": [],
+      "key": "id"
+    },
+    {
+      "name": "Country",
+      "pluralized": "Countries",
+      "id": null,
+      "fields": [
+        {
+          "name": "id",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "name",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "nativeName",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "alpha2Code",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "alpha3Code",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "capital",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "region",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "subregion",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "numericCode",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "flag",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        }
+      ],
+      "relations": [],
+      "key": "id"
+    },
+    {
+      "name": "AccountRelationType",
+      "pluralized": "AccountRelationTypes",
+      "id": null,
+      "fields": [
+        {
+          "name": "id",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "name",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "displayName",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        }
+      ],
+      "relations": [],
+      "key": "id"
+    },
+    {
+      "name": "Contact",
+      "pluralized": "Contacts",
+      "id": null,
+      "fields": [
+        {
+          "name": "id",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "firstName",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "lastName",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "jobTitle",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "email",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "telephone",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "mobilePhone",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "gender",
+          "dataType": "CRM.API.Models.Gender",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "accountId",
+          "dataType": "string",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "createdOn",
+          "dataType": "Date",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "modifiedOn",
+          "dataType": "Date",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "deletedOn",
+          "dataType": "Date",
+          "required": false,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "createdById",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "modifiedById",
+          "dataType": "string",
+          "required": true,
+          "inputType": null,
+          "displayName": null,
+          "sort": null,
+          "hidden": false
+        },
+        {
+          "name": "account",
+          "lookup": true,
+          "dataType": "Account",
+          "forId": null
+        }
+      ],
+      "relations": [],
+      "key": "id"
+    }
+  ],
+  "enums": [
+    {
+      "name": "Gender",
+      "values": [
+        {
+          "name": "Male",
+          "value": "0"
+        },
+        {
+          "name": "Female",
+          "value": "1"
+        }
+      ]
+    }
+  ]
+}
