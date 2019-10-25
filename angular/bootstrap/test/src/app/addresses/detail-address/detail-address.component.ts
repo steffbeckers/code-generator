@@ -1,24 +1,21 @@
-import { Component, OnInit } from "./node_modules/@angular/core";
-import { ActivatedRoute } from "./node_modules/@angular/router";
+import { Component, OnInit } from './node_modules/@angular/core';
+import { ActivatedRoute } from './node_modules/@angular/router';
 
 // Services
-import { AddressService } from "../__entityName@dasherize__.service";
+import { AddressService } from '../__entityName@dasherize__.service';
 
 // Models
-import { Address } from "../__entityName@dasherize__";
+import { Address } from '../__entityName@dasherize__';
 
 @Component({
-  selector: "app-addresses-detail",
-  templateUrl: "./detail-address.component.html",
-  styleUrls: ["./detail-address.component.scss"]
+  selector: 'app-addresses-detail',
+  templateUrl: './detail-address.component.html',
+  styleUrls: ['./detail-address.component.scss']
 })
 export class DetailAddressComponent implements OnInit {
   address: Address;
 
-  constructor(
-    private route: ActivatedRoute,
-    private addressService: AddressService
-  ) {}
+  constructor(private route: ActivatedRoute, private addressService: AddressService) {}
 
   ngOnInit() {
     this.getAddress();

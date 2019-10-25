@@ -1,12 +1,12 @@
-import { Injectable } from "./edit-__entityName@dasherize__/node_modules/@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { environment } from "@env/environment";
+import { Injectable } from './edit-__entityName@dasherize__/node_modules/@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '@env/environment';
 
 // RxJS
-import { of } from "rxjs";
+import { of } from 'rxjs';
 
 // Models
-import { Address } from "../shared/models/address";
+import { Address } from '../shared/models/address';
 
 @Injectable()
 export class AddressService {
@@ -14,12 +14,12 @@ export class AddressService {
 
   // Create
   public create(address: Address) {
-    return this.http.post(environment.api + "/addresses", address);
+    return this.http.post(environment.api + '/addresses', address);
   }
 
   // Read
   public getAll() {
-    return this.http.get(environment.api + "/addresses");
+    return this.http.get(environment.api + '/addresses');
   }
 
   public getById(id: string) {
@@ -27,14 +27,14 @@ export class AddressService {
   }
 
   public getByName(name: string) {
-    if (name === "") {
+    if (name === '') {
       return of([]);
     }
 
     let params = new HttpParams();
-    params.set("name", name);
+    params.set('name', name);
 
-    return this.http.get(environment.api + "/addresses", { params });
+    return this.http.get(environment.api + '/addresses', { params });
   }
 
   // Update

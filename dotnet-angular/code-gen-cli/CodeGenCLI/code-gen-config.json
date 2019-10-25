@@ -1,0 +1,9 @@
+{
+  "name": "CRM",
+  "description": "",
+  "models": [
+    {
+      "name": "Account"
+    }
+  ]
+}

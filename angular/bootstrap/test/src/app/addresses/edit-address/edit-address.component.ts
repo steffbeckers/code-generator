@@ -1,31 +1,19 @@
-import { Component, OnInit } from "./node_modules/@angular/core";
-import { ActivatedRoute, Router } from "./node_modules/@angular/router";
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl
-} from "./node_modules/@angular/forms";
+import { Component, OnInit } from './node_modules/@angular/core';
+import { ActivatedRoute, Router } from './node_modules/@angular/router';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from './node_modules/@angular/forms';
 
 // RxJS
-import { Observable, of } from "./node_modules/rxjs";
-import {
-  catchError,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap
-} from "./node_modules/rxjs/operators";
+import { Observable, of } from './node_modules/rxjs';
+import { catchError, debounceTime, distinctUntilChanged, switchMap } from './node_modules/rxjs/operators';
 
 // Services
-import { AddressService } from "../__entityName@dasherize__.service";
+import { AddressService } from '../__entityName@dasherize__.service';
 
 // Models
-import { Address } from "../__entityName@dasherize__";
+import { Address } from '../__entityName@dasherize__';
 
 // Validators
-function notRequiredEmailValidator(
-  control: AbstractControl
-): { [key: string]: any } {
+function notRequiredEmailValidator(control: AbstractControl): { [key: string]: any } {
   if (!control.value) {
     return null;
   }
@@ -33,9 +21,9 @@ function notRequiredEmailValidator(
 }
 
 @Component({
-  selector: "app-addresses-edit",
-  templateUrl: "./edit-address.component.html",
-  styleUrls: ["./edit-address.component.scss"]
+  selector: 'app-addresses-edit',
+  templateUrl: './edit-address.component.html',
+  styleUrls: ['./edit-address.component.scss']
 })
 export class EditAddressComponent implements OnInit {
   address: Address;
@@ -66,27 +54,27 @@ export class EditAddressComponent implements OnInit {
 
   ngOnInit() {
     this.addressForm = this.fb.group({
-      id: [""],
-      name: ["", [Validators.required, Validators.maxLength(50)]],
-      telephone: ["", Validators.maxLength(50)],
-      fax: ["", Validators.maxLength(50)],
-      email: ["", [notRequiredEmailValidator, Validators.maxLength(100)]],
-      website: ["", Validators.maxLength(200)],
-      vatNumber: ["", Validators.maxLength(50)],
-      description: ["", Validators.maxLength(4000)],
+      id: [''],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      telephone: ['', Validators.maxLength(50)],
+      fax: ['', Validators.maxLength(50)],
+      email: ['', [notRequiredEmailValidator, Validators.maxLength(100)]],
+      website: ['', Validators.maxLength(200)],
+      vatNumber: ['', Validators.maxLength(50)],
+      description: ['', Validators.maxLength(4000)],
       address: this.fb.group({
-        id: [""],
-        street: ["", Validators.maxLength(250)],
-        number: ["", Validators.maxLength(50)],
-        postalcode: ["", Validators.maxLength(10)],
-        city: ["", Validators.maxLength(80)],
-        state: ["", Validators.maxLength(50)],
-        country: "",
+        id: [''],
+        street: ['', Validators.maxLength(250)],
+        number: ['', Validators.maxLength(50)],
+        postalcode: ['', Validators.maxLength(10)],
+        city: ['', Validators.maxLength(80)],
+        state: ['', Validators.maxLength(50)],
+        country: '',
         latitude: [0, [Validators.min(-90), Validators.max(90)]],
         longitude: [0, [Validators.min(-180), Validators.max(180)]]
       }),
-      parentAddressId: [""],
-      billingAddressId: [""]
+      parentAddressId: [''],
+      billingAddressId: ['']
     });
 
     this.getAddress();
@@ -110,10 +98,8 @@ export class EditAddressComponent implements OnInit {
       return;
     }
 
-    this.addressService
-      .update(this.address.id, this.addressForm.value)
-      .subscribe(() => {
-        this.router.navigate(["/addresses", this.address.id]);
-      });
+    this.addressService.update(this.address.id, this.addressForm.value).subscribe(() => {
+      this.router.navigate(['/addresses', this.address.id]);
+    });
   }
 }

@@ -1,31 +1,19 @@
-import { Component, OnInit } from "./node_modules/@angular/core";
-import { ActivatedRoute, Router } from "./node_modules/@angular/router";
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl
-} from "./node_modules/@angular/forms";
+import { Component, OnInit } from './node_modules/@angular/core';
+import { ActivatedRoute, Router } from './node_modules/@angular/router';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from './node_modules/@angular/forms';
 
 // RxJS
-import { Observable, of } from "./node_modules/rxjs";
-import {
-  catchError,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap
-} from "./node_modules/rxjs/operators";
+import { Observable, of } from './node_modules/rxjs';
+import { catchError, debounceTime, distinctUntilChanged, switchMap } from './node_modules/rxjs/operators';
 
 // Services
-import { AccountService } from "../__entityName@dasherize__.service";
+import { AccountService } from '../__entityName@dasherize__.service';
 
 // Models
-import { Account } from "../__entityName@dasherize__";
+import { Account } from '../__entityName@dasherize__';
 
 // Validators
-function notRequiredEmailValidator(
-  control: AbstractControl
-): { [key: string]: any } {
+function notRequiredEmailValidator(control: AbstractControl): { [key: string]: any } {
   if (!control.value) {
     return null;
   }
@@ -33,9 +21,9 @@ function notRequiredEmailValidator(
 }
 
 @Component({
-  selector: "app-accounts-edit",
-  templateUrl: "./edit-account.component.html",
-  styleUrls: ["./edit-account.component.scss"]
+  selector: 'app-accounts-edit',
+  templateUrl: './edit-account.component.html',
+  styleUrls: ['./edit-account.component.scss']
 })
 export class EditAccountComponent implements OnInit {
   account: Account;
@@ -66,27 +54,27 @@ export class EditAccountComponent implements OnInit {
 
   ngOnInit() {
     this.accountForm = this.fb.group({
-      id: [""],
-      name: ["", [Validators.required, Validators.maxLength(50)]],
-      telephone: ["", Validators.maxLength(50)],
-      fax: ["", Validators.maxLength(50)],
-      email: ["", [notRequiredEmailValidator, Validators.maxLength(100)]],
-      website: ["", Validators.maxLength(200)],
-      vatNumber: ["", Validators.maxLength(50)],
-      description: ["", Validators.maxLength(4000)],
+      id: [''],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      telephone: ['', Validators.maxLength(50)],
+      fax: ['', Validators.maxLength(50)],
+      email: ['', [notRequiredEmailValidator, Validators.maxLength(100)]],
+      website: ['', Validators.maxLength(200)],
+      vatNumber: ['', Validators.maxLength(50)],
+      description: ['', Validators.maxLength(4000)],
       address: this.fb.group({
-        id: [""],
-        street: ["", Validators.maxLength(250)],
-        number: ["", Validators.maxLength(50)],
-        postalcode: ["", Validators.maxLength(10)],
-        city: ["", Validators.maxLength(80)],
-        state: ["", Validators.maxLength(50)],
-        country: "",
+        id: [''],
+        street: ['', Validators.maxLength(250)],
+        number: ['', Validators.maxLength(50)],
+        postalcode: ['', Validators.maxLength(10)],
+        city: ['', Validators.maxLength(80)],
+        state: ['', Validators.maxLength(50)],
+        country: '',
         latitude: [0, [Validators.min(-90), Validators.max(90)]],
         longitude: [0, [Validators.min(-180), Validators.max(180)]]
       }),
-      parentAccountId: [""],
-      billingAccountId: [""]
+      parentAccountId: [''],
+      billingAccountId: ['']
     });
 
     this.getAccount();
@@ -110,10 +98,8 @@ export class EditAccountComponent implements OnInit {
       return;
     }
 
-    this.accountService
-      .update(this.account.id, this.accountForm.value)
-      .subscribe(() => {
-        this.router.navigate(["/accounts", this.account.id]);
-      });
+    this.accountService.update(this.account.id, this.accountForm.value).subscribe(() => {
+      this.router.navigate(['/accounts', this.account.id]);
+    });
   }
 }

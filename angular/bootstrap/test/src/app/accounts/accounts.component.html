@@ -13,10 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let account of accounts"
-            [routerLink]="['/accounts', account.id]"
-          >
+          <tr *ngFor="let account of accounts" [routerLink]="['/accounts', account.id]">
             <td scope="row">{{ account.name }}</td>
             <td>{{ account.telephone }}</td>
             <td>{{ account.email }}</td>

@@ -16,7 +16,12 @@ import { EditAccountRelationTypeComponent } from './edit-account-relation-type/e
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [AccountRelationTypesComponent, CreateAccountRelationTypeComponent, DetailAccountRelationTypeComponent, EditAccountRelationTypeComponent],
+  declarations: [
+    AccountRelationTypesComponent,
+    CreateAccountRelationTypeComponent,
+    DetailAccountRelationTypeComponent,
+    EditAccountRelationTypeComponent
+  ],
   imports: [CommonModule, ReactiveFormsModule, NgbModule, AccountRelationTypesRoutingModule],
   providers: [AccountRelationTypeService]
 })

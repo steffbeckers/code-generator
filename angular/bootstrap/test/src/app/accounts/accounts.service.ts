@@ -1,12 +1,12 @@
-import { Injectable } from "./edit-__entityName@dasherize__/node_modules/@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { environment } from "@env/environment";
+import { Injectable } from './edit-__entityName@dasherize__/node_modules/@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '@env/environment';
 
 // RxJS
-import { of } from "rxjs";
+import { of } from 'rxjs';
 
 // Models
-import { Account } from "../shared/models/account";
+import { Account } from '../shared/models/account';
 
 @Injectable()
 export class AccountService {
@@ -14,12 +14,12 @@ export class AccountService {
 
   // Create
   public create(account: Account) {
-    return this.http.post(environment.api + "/accounts", account);
+    return this.http.post(environment.api + '/accounts', account);
   }
 
   // Read
   public getAll() {
-    return this.http.get(environment.api + "/accounts");
+    return this.http.get(environment.api + '/accounts');
   }
 
   public getById(id: string) {
@@ -27,14 +27,14 @@ export class AccountService {
   }
 
   public getByName(name: string) {
-    if (name === "") {
+    if (name === '') {
       return of([]);
     }
 
     let params = new HttpParams();
-    params.set("name", name);
+    params.set('name', name);
 
-    return this.http.get(environment.api + "/accounts", { params });
+    return this.http.get(environment.api + '/accounts', { params });
   }
 
   // Update

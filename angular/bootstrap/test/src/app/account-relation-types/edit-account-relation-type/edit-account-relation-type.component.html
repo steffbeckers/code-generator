@@ -1,8 +1,8 @@
-<div *ngIf="account-relation-type" class="edit-account-relation-type-component">
+<div *ngIf="account - relation - type" class="edit-account-relation-type-component">
   <ng-template #resultTemplateAccountRelationType let-r="result" let-t="term">
     {{ r.name }}
   </ng-template>
-  <form [formGroup]="account-relation-typeForm" (ngSubmit)="editAccountRelationType()" novalidate>
+  <form [formGroup]="account - relation - typeForm" (ngSubmit)="editAccountRelationType()" novalidate>
     <nav class="top">
       <div class="container-fluid">
         <div class="row">
@@ -21,17 +21,24 @@
               <div class="col">
                 <h3
                   class="entity-name-value"
-                  [routerLink]="['/account-relation-types', account-relation-type.id]"
+                  [routerLink]="['/account-relation-types', account - relation - type.id]"
                   routerLinkActive="router-link-active"
                 >
-                  {{ account-relation-type.name }}
+                  {{ account - relation - type.name }}
                 </h3>
               </div>
               <div class="col pr-0 d-flex justify-content-end actions">
-                <button [routerLink]="['/account-relation-types', account-relation-type.id]" class="btn btn-secondary m-1">
+                <button
+                  [routerLink]="['/account-relation-types', account - relation - type.id]"
+                  class="btn btn-secondary m-1"
+                >
                   Cancel
                 </button>
-                <button [disabled]="account-relation-typeForm.invalid" type="submit" class="btn btn-primary ml-1 mt-1 mb-1">
+                <button
+                  [disabled]="account - relation - typeForm.invalid"
+                  type="submit"
+                  class="btn btn-primary ml-1 mt-1 mb-1"
+                >
                   Save
                 </button>
               </div>
@@ -49,7 +56,9 @@
               formControlName="name"
               [ngClass]="{
                 'is-invalid':
-                  (account-relation-typeForm.get('name').touched || account-relation-typeForm.get('name').dirty) && !account-relation-typeForm.get('name').valid
+                  (account - relation - typeForm.get('name').touched ||
+                    account - relation - typeForm.get('name').dirty) &&
+                  !account - relation - typeForm.get('name').valid
               }"
               type="text"
               name="account-relation-typeName"
@@ -58,12 +67,16 @@
             />
             <span
               *ngIf="
-                (account-relation-typeForm.get('name').touched || account-relation-typeForm.get('name').dirty) && account-relation-typeForm.get('name').errors
+                (account - relation - typeForm.get('name').touched ||
+                  account - relation - typeForm.get('name').dirty) &&
+                account - relation - typeForm.get('name').errors
               "
               class="invalid-feedback"
             >
-              <span *ngIf="account-relation-typeForm.get('name').errors.required">Please enter a name</span>
-              <span *ngIf="account-relation-typeForm.get('name').errors.maxlength">The name can't be longer than 100 characters</span>
+              <span *ngIf="account - relation - typeForm.get('name').errors.required">Please enter a name</span>
+              <span *ngIf="account - relation - typeForm.get('name').errors.maxlength"
+                >The name can't be longer than 100 characters</span
+              >
               <!-- <span *ngIf="account-relation-typeForm.get('name').errors.uniqueness">Club already exists</span> -->
             </span>
           </div>
@@ -73,8 +86,9 @@
               formControlName="parentAccountRelationTypeId"
               [ngClass]="{
                 'is-invalid':
-                  (account-relation-typeForm.get('parentAccountRelationTypeId').touched || account-relation-typeForm.get('parentAccountRelationTypeId').dirty) &&
-                  !account-relation-typeForm.get('parentAccountRelationTypeId').valid
+                  (account - relation - typeForm.get('parentAccountRelationTypeId').touched ||
+                    account - relation - typeForm.get('parentAccountRelationTypeId').dirty) &&
+                  !account - relation - typeForm.get('parentAccountRelationTypeId').valid
               }"
               [ngbTypeahead]="searchAccountRelationType"
               [resultTemplate]="resultTemplateAccountRelationType"
@@ -91,8 +105,9 @@
               formControlName="billingAccountRelationTypeId"
               [ngClass]="{
                 'is-invalid':
-                  (account-relation-typeForm.get('billingAccountRelationTypeId').touched || account-relation-typeForm.get('billingAccountRelationTypeId').dirty) &&
-                  !account-relation-typeForm.get('billingAccountRelationTypeId').valid
+                  (account - relation - typeForm.get('billingAccountRelationTypeId').touched ||
+                    account - relation - typeForm.get('billingAccountRelationTypeId').dirty) &&
+                  !account - relation - typeForm.get('billingAccountRelationTypeId').valid
               }"
               [ngbTypeahead]="searchAccountRelationType"
               [resultTemplate]="resultTemplateAccountRelationType"
@@ -105,7 +120,11 @@
           </div>
           <div class="col-xs-12 col-sm-4 form-group">
             <label for="account-relation-typeRelationType">Relation type</label>
-            <select class="form-control" name="account-relation-typeRelationType" id="account-relation-typeRelationType">
+            <select
+              class="form-control"
+              name="account-relation-typeRelationType"
+              id="account-relation-typeRelationType"
+            >
               <option selected>Select one</option>
               <option value=""></option>
               <option value=""></option>
@@ -129,7 +148,13 @@
               </div>
               <div class="col-xs-12 col-sm-3 form-group">
                 <label for="account-relation-typeEmail">Email</label>
-                <input formControlName="email" type="text" class="form-control" name="account-relation-typeEmail" id="account-relation-typeEmail" />
+                <input
+                  formControlName="email"
+                  type="text"
+                  class="form-control"
+                  name="account-relation-typeEmail"
+                  id="account-relation-typeEmail"
+                />
               </div>
               <div class="col-xs-12 col-sm-3 form-group">
                 <label for="account-relation-typeWebsite">Website</label>
@@ -143,7 +168,13 @@
               </div>
               <div class="col-xs-12 col-sm-3 form-group">
                 <label for="account-relation-typeFax">FAX</label>
-                <input formControlName="fax" type="text" name="account-relation-typeFax" id="account-relation-typeFax" class="form-control" />
+                <input
+                  formControlName="fax"
+                  type="text"
+                  name="account-relation-typeFax"
+                  id="account-relation-typeFax"
+                  class="form-control"
+                />
               </div>
             </div>
           </div>

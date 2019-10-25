@@ -18,11 +18,7 @@
               <h3 class="entity-name-value">{{ contact.name }}</h3>
             </div>
             <div class="col pr-0 d-flex justify-content-end actions">
-              <button
-                [routerLink]="['/contacts', contact.id, 'edit']"
-                type="button"
-                class="btn btn-primary"
-              >
+              <button [routerLink]="['/contacts', contact.id, 'edit']" type="button" class="btn btn-primary">
                 Edit
               </button>
             </div>
@@ -64,30 +60,19 @@
             <div class="col-xs-12 col-sm-3 form-group">
               <label>Telephone</label>
               <div class="contactTelephone detail-field">
-                <a
-                  *ngIf="contact.telephone"
-                  href="tel:{{ contact.telephone }}"
-                  >{{ contact.telephone }}</a
-                >
+                <a *ngIf="contact.telephone" href="tel:{{ contact.telephone }}">{{ contact.telephone }}</a>
               </div>
             </div>
             <div class="col-xs-12 col-sm-3 form-group">
               <label>Email</label>
               <div class="contactEmail detail-field">
-                <a *ngIf="contact.email" href="mailto:{{ contact.email }}">{{
-                  contact.email
-                }}</a>
+                <a *ngIf="contact.email" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
               </div>
             </div>
             <div class="col-xs-12 col-sm-3 form-group">
               <label>Website</label>
               <div class="contactWebsite detail-field">
-                <a
-                  *ngIf="contact.website"
-                  [href]="contact.website"
-                  target="_blank"
-                  >{{ contact.website }}</a
-                >
+                <a *ngIf="contact.website" [href]="contact.website" target="_blank">{{ contact.website }}</a>
               </div>
             </div>
             <div class="col-xs-12 col-sm-3 form-group">

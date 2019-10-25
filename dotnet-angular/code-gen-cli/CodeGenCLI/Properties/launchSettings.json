@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CodeGenCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "generate"
+    }
+  }
+}

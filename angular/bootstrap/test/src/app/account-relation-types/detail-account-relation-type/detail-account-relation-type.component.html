@@ -1,4 +1,4 @@
-<div *ngIf="account-relation-type" class="detail-account-relation-type-component">
+<div *ngIf="account - relation - type" class="detail-account-relation-type-component">
   <nav class="top">
     <div class="container-fluid">
       <div class="row">
@@ -15,11 +15,11 @@
           </div>
           <div class="row">
             <div class="col">
-              <h3 class="entity-name-value">{{ account-relation-type.name }}</h3>
+              <h3 class="entity-name-value">{{ account - relation - type.name }}</h3>
             </div>
             <div class="col pr-0 d-flex justify-content-end actions">
               <button
-                [routerLink]="['/account-relation-types', account-relation-type.id, 'edit']"
+                [routerLink]="['/account-relation-types', account - relation - type.id, 'edit']"
                 type="button"
                 class="btn btn-primary"
               >
@@ -36,24 +36,24 @@
       <div class="row">
         <div class="col-xs-12 col-sm-4 form-group">
           <label>Name</label>
-          <div class="account-relation-typeName detail-field">{{ account-relation-type.name }}</div>
+          <div class="account-relation-typeName detail-field">{{ account - relation - type.name }}</div>
         </div>
         <div class="col-xs-12 col-sm-4 form-group">
           <label>Parent account-relation-type</label>
           <div class="account-relation-typeParentAccountRelationType detail-field">
-            {{ account-relation-type.parentAccountRelationType?.name }}
+            {{ account - relation - type.parentAccountRelationType?.name }}
           </div>
         </div>
         <div class="col-xs-12 col-sm-4 form-group">
           <label>Billing account-relation-type</label>
           <div class="account-relation-typeBillingAccountRelationType detail-field">
-            {{ account-relation-type.billingAccountRelationType?.name }}
+            {{ account - relation - type.billingAccountRelationType?.name }}
           </div>
         </div>
         <div class="col-xs-12 col-sm-4 form-group">
           <label>Relation type</label>
           <div class="account-relation-typeRelationType detail-field">
-            {{ account-relation-type.relationType?.name }}
+            {{ account - relation - type.relationType?.name }}
           </div>
         </div>
       </div>
@@ -64,18 +64,16 @@
             <div class="col-xs-12 col-sm-3 form-group">
               <label>Telephone</label>
               <div class="account-relation-typeTelephone detail-field">
-                <a
-                  *ngIf="account-relation-type.telephone"
-                  href="tel:{{ account-relation-type.telephone }}"
-                  >{{ account-relation-type.telephone }}</a
-                >
+                <a *ngIf="account - relation - type.telephone" href="tel:{{ account - relation - type.telephone }}">{{
+                  account - relation - type.telephone
+                }}</a>
               </div>
             </div>
             <div class="col-xs-12 col-sm-3 form-group">
               <label>Email</label>
               <div class="account-relation-typeEmail detail-field">
-                <a *ngIf="account-relation-type.email" href="mailto:{{ account-relation-type.email }}">{{
-                  account-relation-type.email
+                <a *ngIf="account - relation - type.email" href="mailto:{{ account - relation - type.email }}">{{
+                  account - relation - type.email
                 }}</a>
               </div>
             </div>
@@ -83,16 +81,16 @@
               <label>Website</label>
               <div class="account-relation-typeWebsite detail-field">
                 <a
-                  *ngIf="account-relation-type.website"
-                  [href]="account-relation-type.website"
+                  *ngIf="account - relation - type.website"
+                  [href]="account - relation - type.website"
                   target="_blank"
-                  >{{ account-relation-type.website }}</a
+                  >{{ account - relation - type.website }}</a
                 >
               </div>
             </div>
             <div class="col-xs-12 col-sm-3 form-group">
               <label>FAX</label>
-              <div class="account-relation-typeFAX detail-field">{{ account-relation-type.fax }}</div>
+              <div class="account-relation-typeFAX detail-field">{{ account - relation - type.fax }}</div>
             </div>
           </div>
         </div>
@@ -104,7 +102,7 @@
             <div class="col-xs-12 col-sm-4 form-group">
               <label>Street and number</label>
               <div class="account-relation-typeAddressStreetAndNumber detail-field">
-                {{ account-relation-type.address?.street }} {{ account-relation-type.address?.number }}
+                {{ account - relation - type.address?.street }} {{ account - relation - type.address?.number }}
               </div>
             </div>
           </div>
