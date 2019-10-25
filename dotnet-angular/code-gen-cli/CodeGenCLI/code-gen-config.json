@@ -1,9 +1,56 @@
 {
   "name": "CRM",
-  "description": "",
+  //"namespaceRoot": "", // Optional
+  "description": "", // Optional
   "models": [
     {
-      "name": "Account"
+      "name": "Account",
+      "properties": [
+        {
+          "name": "Name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "properties": [
+        {
+          "name": "FirstName",
+          "type": "string"
+        },
+        {
+          "name": "LastName",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Call",
+      "properties": [
+        {
+          "name": "Date",
+          "type": "DateTime"
+        }
+      ]
+    },
+    {
+      "name": "Note",
+      "properties": [
+        {
+          "name": "Title",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Document",
+      "properties": [
+        {
+          "name": "Name",
+          "type": "string"
+        }
+      ]
     }
   ]
 }
