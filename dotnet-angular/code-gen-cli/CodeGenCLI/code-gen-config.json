@@ -1,13 +1,25 @@
 {
-  "name": "CRM",
-  //"namespaceRoot": "", // Optional
+  "name": "Test",
   "description": "", // Optional
+  "override": true,
   "models": [
     {
       "name": "Account",
       "properties": [
         {
           "name": "Name",
+          "type": "string"
+        },
+        {
+          "name": "Website",
+          "type": "string"
+        },
+        {
+          "name": "Telephone",
+          "type": "string"
+        },
+        {
+          "name": "Email",
           "type": "string"
         }
       ]
@@ -52,5 +64,13 @@
         }
       ]
     }
-  ]
+  ],
+  "webAPI": {
+    "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
+    "namespaceRoot": "Test.API" // Optional
+    //"modelsPath": "Data\\Models", // Optional
+    //"viewModelsPath": "Data\\ViewModels", // Optional
+    //"dalPath": "Data" // Optional
+  },
+  "angular": {}
 }

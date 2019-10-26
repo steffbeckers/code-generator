@@ -10,14 +10,14 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("namespaceRoot")]
-        public string NamespaceRoot { get; set; }
-
         [JsonProperty("description")]
         public string Description { get; set; }
 
         [JsonProperty("override")]
         public bool Override { get; set; }
+
+        [JsonProperty("webAPI")]
+        public CodeGenWebAPIConfig WebAPI { get; set; }
 
         public List<CodeGenModel> Models { get; set; }
     }
