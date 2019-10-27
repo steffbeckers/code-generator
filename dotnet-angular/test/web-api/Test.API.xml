@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Test.API</name>
+    </assembly>
+    <members>
+        <member name="M:Test.API.Controllers.AccountsController.GetAccounts">
+            <summary>
+            Retrieves all accounts.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.GetAccount(System.Guid)">
+            <summary>
+            Retrieves a specific account.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.CreateAccount(Test.API.ViewModels.AccountVM)">
+            <summary>
+            Creates a new account.
+            </summary>
+            <param name="accountVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.UpdateAccount(System.Guid,Test.API.ViewModels.AccountVM)">
+            <summary>
+            Updates a specific account.
+            </summary>
+            <param name="id"></param>
+            <param name="accountVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.DeleteAccount(System.Guid)">
+            <summary>
+            Deletes a specific account.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.CallsController.GetCalls">
+            <summary>
+            Retrieves all calls.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.CallsController.GetCall(System.Guid)">
+            <summary>
+            Retrieves a specific call.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.CallsController.CreateCall(Test.API.ViewModels.CallVM)">
+            <summary>
+            Creates a new call.
+            </summary>
+            <param name="callVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.CallsController.UpdateCall(System.Guid,Test.API.ViewModels.CallVM)">
+            <summary>
+            Updates a specific call.
+            </summary>
+            <param name="id"></param>
+            <param name="callVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.CallsController.DeleteCall(System.Guid)">
+            <summary>
+            Deletes a specific call.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ContactsController.GetContacts">
+            <summary>
+            Retrieves all contacts.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.ContactsController.GetContact(System.Guid)">
+            <summary>
+            Retrieves a specific contact.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ContactsController.CreateContact(Test.API.ViewModels.ContactVM)">
+            <summary>
+            Creates a new contact.
+            </summary>
+            <param name="contactVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ContactsController.UpdateContact(System.Guid,Test.API.ViewModels.ContactVM)">
+            <summary>
+            Updates a specific contact.
+            </summary>
+            <param name="id"></param>
+            <param name="contactVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ContactsController.DeleteContact(System.Guid)">
+            <summary>
+            Deletes a specific contact.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.DocumentsController.GetDocuments">
+            <summary>
+            Retrieves all documents.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.DocumentsController.GetDocument(System.Guid)">
+            <summary>
+            Retrieves a specific document.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.DocumentsController.CreateDocument(Test.API.ViewModels.DocumentVM)">
+            <summary>
+            Creates a new document.
+            </summary>
+            <param name="documentVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.DocumentsController.UpdateDocument(System.Guid,Test.API.ViewModels.DocumentVM)">
+            <summary>
+            Updates a specific document.
+            </summary>
+            <param name="id"></param>
+            <param name="documentVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.DocumentsController.DeleteDocument(System.Guid)">
+            <summary>
+            Deletes a specific document.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.EmailsController.GetEmails">
+            <summary>
+            Retrieves all emails.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.EmailsController.GetEmail(System.Guid)">
+            <summary>
+            Retrieves a specific email.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.EmailsController.CreateEmail(Test.API.ViewModels.EmailVM)">
+            <summary>
+            Creates a new email.
+            </summary>
+            <param name="emailVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.EmailsController.UpdateEmail(System.Guid,Test.API.ViewModels.EmailVM)">
+            <summary>
+            Updates a specific email.
+            </summary>
+            <param name="id"></param>
+            <param name="emailVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.EmailsController.DeleteEmail(System.Guid)">
+            <summary>
+            Deletes a specific email.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.GetNotes">
+            <summary>
+            Retrieves all notes.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.GetNote(System.Guid)">
+            <summary>
+            Retrieves a specific note.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.CreateNote(Test.API.ViewModels.NoteVM)">
+            <summary>
+            Creates a new note.
+            </summary>
+            <param name="noteVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.UpdateNote(System.Guid,Test.API.ViewModels.NoteVM)">
+            <summary>
+            Updates a specific note.
+            </summary>
+            <param name="id"></param>
+            <param name="noteVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.DeleteNote(System.Guid)">
+            <summary>
+            Deletes a specific note.
+            </summary>
+            <param name="id"></param>
+        </member>
+    </members>
+</doc>

@@ -163,7 +163,7 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
-            this.Write("()\r\n        {\r\n            return await this.");
+            this.Write("Async()\r\n        {\r\n            return await this.");
             
             #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
@@ -184,7 +184,7 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
-            this.Write("ById(Guid id)\r\n        {\r\n            return await this.");
+            this.Write("ByIdAsync(Guid id)\r\n        {\r\n            return await this.");
             
             #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));

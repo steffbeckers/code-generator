@@ -29,6 +29,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLLTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\ControllerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ControllerTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\DbContextTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DbContextTemplate.cs</LastGenOutput>
@@ -69,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\ControllerTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ControllerTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\DbContextTemplate.cs">
       <DesignTime>True</DesignTime>

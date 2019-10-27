@@ -26,12 +26,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // TODO: this.<#= model.Name #>...Repository = <#= model.Name #>...Repository;
         }
 
-		public async Task<IEnumerable<<#= model.Name #>>> GetAll<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>()
+		public async Task<IEnumerable<<#= model.Name #>>> GetAll<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Async()
         {
             return await this.<#= model.Name.ToLower() #>Repository.GetAsync();
         }
 
-		public async Task<<#= model.Name #>> Get<#= model.Name #>ById(Guid id)
+		public async Task<<#= model.Name #>> Get<#= model.Name #>ByIdAsync(Guid id)
         {
             return await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
         }

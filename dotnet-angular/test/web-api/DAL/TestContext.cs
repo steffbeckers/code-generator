@@ -19,6 +19,7 @@ namespace Test.API.DAL
 		public DbSet<Call> Calls { get; set; }
 		public DbSet<Note> Notes { get; set; }
 		public DbSet<Document> Documents { get; set; }
+		public DbSet<Email> Emails { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -100,6 +101,19 @@ namespace Test.API.DAL
             modelBuilder.Entity<Document>().Property(e => e.Name).IsRequired();
 
             #endregion
+
+			#region Emails
+
+            // Soft delete query filter
+            modelBuilder.Entity<Email>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<Email>().ToTable("Emails");
+
+            // Required properties
+            modelBuilder.Entity<Email>().Property(e => e.Subject).IsRequired();
+
+            #endregion
 		}
 
 		public override int SaveChanges()
@@ -124,7 +138,7 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document)				)
+					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document) ||					entry.Entity.GetType() == typeof(Email)				)
                 {
                     switch (entry.State)
                     {
@@ -146,7 +160,7 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document)				)
+					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document) ||					entry.Entity.GetType() == typeof(Email)				)
                 {
                     switch (entry.State)
                     {

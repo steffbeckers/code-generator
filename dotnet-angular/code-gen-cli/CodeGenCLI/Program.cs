@@ -138,7 +138,18 @@ namespace CodeGenCLI
                         }
 
                         // Controllers
+                        if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers")))
+                        {
+                            Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers"));
+                        }
+                        foreach (CodeGenModel codeGenModel in Config.Models)
+                        {
+                            ControllerTemplate controllerTemplate = new ControllerTemplate(Config, codeGenModel);
+                            string controllerTemplateContent = controllerTemplate.TransformText();
 
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs", controllerTemplateContent);
+                            Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs");
+                        }
 
                         // Startup
                         StartupTemplate startupTemplate = new StartupTemplate(Config);

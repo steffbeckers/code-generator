@@ -20,12 +20,12 @@ namespace Test.API.BLL
             // TODO: this.Call...Repository = Call...Repository;
         }
 
-		public async Task<IEnumerable<Call>> GetAllCalls()
+		public async Task<IEnumerable<Call>> GetAllCallsAsync()
         {
             return await this.callRepository.GetAsync();
         }
 
-		public async Task<Call> GetCallById(Guid id)
+		public async Task<Call> GetCallByIdAsync(Guid id)
         {
             return await this.callRepository.GetByIdAsync(id);
         }

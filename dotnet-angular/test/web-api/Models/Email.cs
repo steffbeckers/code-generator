@@ -2,9 +2,10 @@ using System;
 
 namespace Test.API.Models
 {
-    public class Call
+    public class Email
     {
-		public DateTime Date { get; set; }
+		public string Subject { get; set; }
+		public string Body { get; set; }
 
 		// Generic
 		public Guid Id { get; set; }

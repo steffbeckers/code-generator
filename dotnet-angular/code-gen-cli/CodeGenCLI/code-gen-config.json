@@ -73,6 +73,20 @@
           "required": true
         }
       ]
+    },
+    {
+      "name": "Email",
+      "properties": [
+        {
+          "name": "Subject",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "Body",
+          "type": "string"
+        }
+      ]
     }
   ],
   "webAPI": {

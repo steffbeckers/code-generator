@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.ViewModels
 {
@@ -12,6 +13,10 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     {
 		public Guid Id { get; set; }
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
+<# if (property.Required) { #>
+
+        [Required]
+<# } #>
 		public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }

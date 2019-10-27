@@ -20,12 +20,12 @@ namespace Test.API.BLL
             // TODO: this.Note...Repository = Note...Repository;
         }
 
-		public async Task<IEnumerable<Note>> GetAllNotes()
+		public async Task<IEnumerable<Note>> GetAllNotesAsync()
         {
             return await this.noteRepository.GetAsync();
         }
 
-		public async Task<Note> GetNoteById(Guid id)
+		public async Task<Note> GetNoteByIdAsync(Guid id)
         {
             return await this.noteRepository.GetByIdAsync(id);
         }

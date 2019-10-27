@@ -27,6 +27,10 @@ namespace Test.API.DAL
             // Documents
 			CreateMap<Document, DocumentVM>();
             CreateMap<DocumentVM, Document>();
+
+            // Emails
+			CreateMap<Email, EmailVM>();
+            CreateMap<EmailVM, Email>();
         }
     }
 }

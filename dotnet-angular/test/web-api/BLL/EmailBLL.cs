@@ -6,48 +6,49 @@ using System.Collections.Generic;
 
 namespace Test.API.BLL
 {
-    public class DocumentBLL
+    public class EmailBLL
     {
-        private readonly DocumentRepository documentRepository;
-        // TODO: private readonly Document...Repository document...Repository;
+        private readonly EmailRepository emailRepository;
+        // TODO: private readonly Email...Repository email...Repository;
 
-        public DocumentBLL(
-			DocumentRepository documentRepository//,
-			// TODO: Document...Repository document...Repository
+        public EmailBLL(
+			EmailRepository emailRepository//,
+			// TODO: Email...Repository email...Repository
 		)
         {
-            this.documentRepository = documentRepository;
-            // TODO: this.Document...Repository = Document...Repository;
+            this.emailRepository = emailRepository;
+            // TODO: this.Email...Repository = Email...Repository;
         }
 
-		public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
+		public async Task<IEnumerable<Email>> GetAllEmailsAsync()
         {
-            return await this.documentRepository.GetAsync();
+            return await this.emailRepository.GetAsync();
         }
 
-		public async Task<Document> GetDocumentByIdAsync(Guid id)
+		public async Task<Email> GetEmailByIdAsync(Guid id)
         {
-            return await this.documentRepository.GetByIdAsync(id);
+            return await this.emailRepository.GetByIdAsync(id);
         }
 
-        public async Task<Document> CreateDocumentAsync(Document document)
+        public async Task<Email> CreateEmailAsync(Email email)
         {
-            return await this.documentRepository.InsertAsync(document);
+            return await this.emailRepository.InsertAsync(email);
         }
 
-        public async Task<Document> UpdateDocumentAsync(Guid id, Document documentUpdate)
+        public async Task<Email> UpdateEmailAsync(Guid id, Email emailUpdate)
         {
             // Retrieve existing
-            Document document = await this.documentRepository.GetByIdAsync(id);
-            if (document == null)
+            Email email = await this.emailRepository.GetByIdAsync(id);
+            if (email == null)
             {
                 return null;
             }
 
             // Mapping
-            document.Name = documentUpdate.Name;
+            email.Subject = emailUpdate.Subject;
+            email.Body = emailUpdate.Body;
 
-            return await this.documentRepository.UpdateAsync(document);
+            return await this.emailRepository.UpdateAsync(email);
         }
 
 		// TODO
@@ -83,16 +84,16 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-        public async Task<bool> RemoveDocumentAsync(Guid id)
+        public async Task<bool> RemoveEmailAsync(Guid id)
         {
             // Retrieve existing
-            Document document = await this.documentRepository.GetByIdAsync(id);
-            if (document == null)
+            Email email = await this.emailRepository.GetByIdAsync(id);
+            if (email == null)
             {
                 return true;
             }
 
-            await this.documentRepository.DeleteAsync(document);
+            await this.emailRepository.DeleteAsync(email);
 
             return true;
         }

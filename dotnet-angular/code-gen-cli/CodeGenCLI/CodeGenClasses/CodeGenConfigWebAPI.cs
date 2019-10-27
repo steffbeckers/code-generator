@@ -23,5 +23,8 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonProperty("bllPath")]
         public string BLLPath { get; set; }
+
+        [JsonProperty("controllersPath")]
+        public string ControllersPath { get; set; }
     }
 }

@@ -20,12 +20,12 @@ namespace Test.API.BLL
             // TODO: this.Account...Repository = Account...Repository;
         }
 
-		public async Task<IEnumerable<Account>> GetAllAccounts()
+		public async Task<IEnumerable<Account>> GetAllAccountsAsync()
         {
             return await this.accountRepository.GetAsync();
         }
 
-		public async Task<Account> GetAccountById(Guid id)
+		public async Task<Account> GetAccountByIdAsync(Guid id)
         {
             return await this.accountRepository.GetByIdAsync(id);
         }

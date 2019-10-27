@@ -20,12 +20,12 @@ namespace Test.API.BLL
             // TODO: this.Contact...Repository = Contact...Repository;
         }
 
-		public async Task<IEnumerable<Contact>> GetAllContacts()
+		public async Task<IEnumerable<Contact>> GetAllContactsAsync()
         {
             return await this.contactRepository.GetAsync();
         }
 
-		public async Task<Contact> GetContactById(Guid id)
+		public async Task<Contact> GetContactByIdAsync(Guid id)
         {
             return await this.contactRepository.GetByIdAsync(id);
         }

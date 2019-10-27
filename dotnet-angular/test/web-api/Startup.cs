@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 using AutoMapper;
 using Test.API.BLL;
 using Test.API.DAL;
@@ -37,6 +41,7 @@ namespace Test.API
 			services.AddScoped<CallRepository>();
 			services.AddScoped<NoteRepository>();
 			services.AddScoped<DocumentRepository>();
+			services.AddScoped<EmailRepository>();
 
 			// BLLs
 			services.AddScoped<AccountBLL>();
@@ -44,6 +49,7 @@ namespace Test.API
 			services.AddScoped<CallBLL>();
 			services.AddScoped<NoteBLL>();
 			services.AddScoped<DocumentBLL>();
+			services.AddScoped<EmailBLL>();
 
 			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
@@ -53,7 +59,24 @@ namespace Test.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+			// MVC
             services.AddControllers();
+
+			// Swagger
+			// Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Test Web API",
+                    Version = "v1"
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +107,17 @@ namespace Test.API
 
 			// Authentication and Authorization
             app.UseAuthorization();
+
+			// Swagger
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger()
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            .UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "Test Web API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
 			// MVC
             app.UseRouting();

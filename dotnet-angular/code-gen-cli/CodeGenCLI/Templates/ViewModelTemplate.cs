@@ -29,44 +29,57 @@ namespace CodeGenCLI.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\n\r\nnamespace ");
+            this.Write("using System;\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace ");
             
-            #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".ViewModels\r\n{\r\n    public class ");
             
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+            #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM\r\n    {\r\n\t\tpublic Guid Id { get; set; }\r\n");
             
-            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
+            
+            #line default
+            #line hidden
+            
+            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+ if (property.Required) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        [Required]\r\n");
+            
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+ } 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
+            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
  } 
             
             #line default
