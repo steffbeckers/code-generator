@@ -7,10 +7,16 @@ using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.Nam
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories
 {
+	/// <summary>
+	/// The repository for <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #> in the data access layer.
+	/// </summary>
     public class <#= model.Name #>Repository : Repository<<#= model.Name #>>
     {
         private new readonly <#= config.Name #>Context context;
 
+		/// <summary>
+		/// The constructor of the <#= model.Name #> repository.
+		/// </summary>
         public <#= model.Name #>Repository(<#= config.Name #>Context context) : base(context)
         {
             this.context = context;

@@ -42,37 +42,51 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
-            this.Write(".DAL.Repositories\r\n{\r\n    public class ");
+            this.Write(".DAL.Repositories\r\n{\r\n\t/// <summary>\r\n\t/// The repository for ");
             
-            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            
+            #line default
+            #line hidden
+            this.Write(" in the data access layer.\r\n\t/// </summary>\r\n    public class ");
+            
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Repository : Repository<");
             
-            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">\r\n    {\r\n        private new readonly ");
             
-            #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
-            this.Write("Context context;\r\n\r\n        public ");
+            this.Write("Context context;\r\n\r\n\t\t/// <summary>\r\n\t\t/// The constructor of the ");
             
-            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" repository.\r\n\t\t/// </summary>\r\n        public ");
+            
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Repository(");
             
-            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default

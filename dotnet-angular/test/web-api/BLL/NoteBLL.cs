@@ -6,11 +6,17 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
+	/// <summary>
+	/// The business logic layer for Notes.
+	/// </summary>
     public class NoteBLL
     {
         private readonly NoteRepository noteRepository;
         // TODO: private readonly Note...Repository note...Repository;
 
+		/// <summary>
+		/// The constructor of the Note business logic layer.
+		/// </summary>
         public NoteBLL(
 			NoteRepository noteRepository//,
 			// TODO: Note...Repository note...Repository
@@ -20,21 +26,33 @@ namespace Test.API.BLL
             // TODO: this.Note...Repository = Note...Repository;
         }
 
+		/// <summary>
+		/// Retrieves all notes.
+		/// </summary>
 		public async Task<IEnumerable<Note>> GetAllNotesAsync()
         {
             return await this.noteRepository.GetAsync();
         }
 
+		/// <summary>
+		/// Retrieves one note by Id.
+		/// </summary>
 		public async Task<Note> GetNoteByIdAsync(Guid id)
         {
             return await this.noteRepository.GetByIdAsync(id);
         }
 
+		/// <summary>
+		/// Creates a new note record.
+		/// </summary>
         public async Task<Note> CreateNoteAsync(Note note)
         {
             return await this.noteRepository.InsertAsync(note);
         }
 
+		/// <summary>
+		/// Updates an existing note record by Id.
+		/// </summary>
         public async Task<Note> UpdateNoteAsync(Guid id, Note noteUpdate)
         {
             // Retrieve existing
@@ -84,18 +102,14 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-        public async Task<bool> RemoveNoteAsync(Guid id)
+		/// <summary>
+		/// Deletes an existing note record by Id.
+		/// </summary>
+        public async Task<Note> DeleteNoteAsync(Note note)
         {
-            // Retrieve existing
-            Note note = await this.noteRepository.GetByIdAsync(id);
-            if (note == null)
-            {
-                return true;
-            }
-
             await this.noteRepository.DeleteAsync(note);
 
-            return true;
+            return note;
         }
     }
 }

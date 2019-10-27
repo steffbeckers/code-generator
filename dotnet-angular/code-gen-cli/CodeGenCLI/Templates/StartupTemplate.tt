@@ -83,7 +83,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 		    // CORS
-            app.UseCors(options => {
+            app.UseCors(options =>
+			{
                 options.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();

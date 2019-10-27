@@ -182,24 +182,24 @@ using ");
                     "     c.IncludeXmlComments(xmlPath);\r\n            });\r\n        }\r\n\r\n        // Th" +
                     "is method gets called by the runtime. Use this method to configure the HTTP requ" +
                     "est pipeline.\r\n        public void Configure(IApplicationBuilder app, IWebHostEn" +
-                    "vironment env)\r\n        {\r\n\t\t    // CORS\r\n            app.UseCors(options => {\r\n" +
-                    "                options.AllowAnyOrigin()\r\n                    .AllowAnyMethod()\r" +
-                    "\n                    .AllowAnyHeader();\r\n            });\r\n\r\n            if (env." +
-                    "IsDevelopment())\r\n            {\r\n                app.UseDeveloperExceptionPage()" +
-                    ";\r\n            }\r\n            else\r\n            {\r\n                app.UseExcept" +
-                    "ionHandler(appBuilder =>\r\n                {\r\n                    appBuilder.Run(" +
-                    "async context =>\r\n                    {\r\n                        context.Respons" +
-                    "e.StatusCode = 500;\r\n                        await context.Response.WriteAsync(\"" +
-                    "An unexpected fault happened. Try again later.\");\r\n                    });\r\n    " +
-                    "            });\r\n            }\r\n\r\n\t\t\t// Authentication and Authorization\r\n      " +
-                    "      app.UseAuthorization();\r\n\r\n\t\t\t// Swagger\r\n            // Enable middleware" +
-                    " to serve generated Swagger as a JSON endpoint.\r\n            app.UseSwagger()\r\n " +
-                    "           // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), \r\n   " +
-                    "         // specifying the Swagger JSON endpoint.\r\n            .UseSwaggerUI(c =" +
-                    ">\r\n            {\r\n                c.SwaggerEndpoint(\"./swagger/v1/swagger.json\"," +
-                    " \"");
+                    "vironment env)\r\n        {\r\n\t\t    // CORS\r\n            app.UseCors(options =>\r\n\t\t" +
+                    "\t{\r\n                options.AllowAnyOrigin()\r\n                    .AllowAnyMetho" +
+                    "d()\r\n                    .AllowAnyHeader();\r\n            });\r\n\r\n            if (" +
+                    "env.IsDevelopment())\r\n            {\r\n                app.UseDeveloperExceptionPa" +
+                    "ge();\r\n            }\r\n            else\r\n            {\r\n                app.UseEx" +
+                    "ceptionHandler(appBuilder =>\r\n                {\r\n                    appBuilder." +
+                    "Run(async context =>\r\n                    {\r\n                        context.Res" +
+                    "ponse.StatusCode = 500;\r\n                        await context.Response.WriteAsy" +
+                    "nc(\"An unexpected fault happened. Try again later.\");\r\n                    });\r\n" +
+                    "                });\r\n            }\r\n\r\n\t\t\t// Authentication and Authorization\r\n  " +
+                    "          app.UseAuthorization();\r\n\r\n\t\t\t// Swagger\r\n            // Enable middle" +
+                    "ware to serve generated Swagger as a JSON endpoint.\r\n            app.UseSwagger(" +
+                    ")\r\n            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), \r" +
+                    "\n            // specifying the Swagger JSON endpoint.\r\n            .UseSwaggerUI" +
+                    "(c =>\r\n            {\r\n                c.SwaggerEndpoint(\"./swagger/v1/swagger.js" +
+                    "on\", \"");
             
-            #line 118 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 119 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default

@@ -6,11 +6,17 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
+	/// <summary>
+	/// The business logic layer for Emails.
+	/// </summary>
     public class EmailBLL
     {
         private readonly EmailRepository emailRepository;
         // TODO: private readonly Email...Repository email...Repository;
 
+		/// <summary>
+		/// The constructor of the Email business logic layer.
+		/// </summary>
         public EmailBLL(
 			EmailRepository emailRepository//,
 			// TODO: Email...Repository email...Repository
@@ -20,21 +26,33 @@ namespace Test.API.BLL
             // TODO: this.Email...Repository = Email...Repository;
         }
 
+		/// <summary>
+		/// Retrieves all emails.
+		/// </summary>
 		public async Task<IEnumerable<Email>> GetAllEmailsAsync()
         {
             return await this.emailRepository.GetAsync();
         }
 
+		/// <summary>
+		/// Retrieves one email by Id.
+		/// </summary>
 		public async Task<Email> GetEmailByIdAsync(Guid id)
         {
             return await this.emailRepository.GetByIdAsync(id);
         }
 
+		/// <summary>
+		/// Creates a new email record.
+		/// </summary>
         public async Task<Email> CreateEmailAsync(Email email)
         {
             return await this.emailRepository.InsertAsync(email);
         }
 
+		/// <summary>
+		/// Updates an existing email record by Id.
+		/// </summary>
         public async Task<Email> UpdateEmailAsync(Guid id, Email emailUpdate)
         {
             // Retrieve existing
@@ -84,18 +102,14 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-        public async Task<bool> RemoveEmailAsync(Guid id)
+		/// <summary>
+		/// Deletes an existing email record by Id.
+		/// </summary>
+        public async Task<Email> DeleteEmailAsync(Email email)
         {
-            // Retrieve existing
-            Email email = await this.emailRepository.GetByIdAsync(id);
-            if (email == null)
-            {
-                return true;
-            }
-
             await this.emailRepository.DeleteAsync(email);
 
-            return true;
+            return email;
         }
     }
 }

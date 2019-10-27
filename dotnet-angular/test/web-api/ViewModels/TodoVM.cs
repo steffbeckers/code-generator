@@ -4,23 +4,22 @@ using System.ComponentModel.DataAnnotations;
 namespace Test.API.ViewModels
 {
 	/// <summary>
-    /// Note view model
+    /// Todo view model
     /// </summary>
-    public class NoteVM
+    public class TodoVM
     {
 		/// <summary>
-        /// The identifier of Note.
+        /// The identifier of Todo.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Title property of Note.
+        /// The Title property of Todo.
         /// </summary>
-        [Required]
 		public string Title { get; set; }
 
 		/// <summary>
-        /// The Body property of Note.
+        /// The Body property of Todo.
         /// </summary>
 		public string Body { get; set; }
     }

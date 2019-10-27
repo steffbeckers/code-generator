@@ -10,14 +10,21 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
+	/// <summary>
+	/// The Contacts controller.
+	/// </summary>
     [Route("api/[controller]")]
     [ApiController]
+	[Produces("application/json")]
     public class ContactsController : ControllerBase
     {
         private readonly ILogger<ContactsController> logger;
         private readonly IMapper mapper;
         private readonly ContactBLL bll;
 
+		/// <summary>
+		/// The constructor of the Contacts controller.
+		/// </summary>
         public ContactsController(
             ILogger<ContactsController> logger,
 			IMapper mapper,
@@ -133,7 +140,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-            await this.bll.RemoveContactAsync(id);
+            await this.bll.DeleteContactAsync(contact);
 
             return this.mapper.Map<Contact, ContactVM>(contact);
         }

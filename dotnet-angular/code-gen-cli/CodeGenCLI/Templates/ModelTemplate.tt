@@ -8,19 +8,52 @@ using System;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models
 {
+	/// <summary>
+    /// <#= model.Name #> model
+<# if (!string.IsNullOrEmpty(model.Description)) { #>
+    /// <#= model.Description #>.
+<# } #>
+    /// </summary>
     public class <#= model.Name #>
     {
+		/// <summary>
+        /// The identifier of <#= model.Name #>.
+        /// </summary>
+		public Guid Id { get; set; }
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
+
+<# if (!string.IsNullOrEmpty(property.Description)) { #>
+		/// <summary>
+        /// <#= property.Description #>.
+        /// </summary>
+<# } else { #>
+		/// <summary>
+        /// The <#= property.Name #> property of <#= model.Name #>.
+        /// </summary>
+<# } #>
 		public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
 
-		// Generic
-		public Guid Id { get; set; }
-		//public Guid TenantId { get; set; }
+		// Generic properties
+
+		/// <summary>
+        /// The date and time of when the record is created
+        /// </summary>
 		public DateTime CreatedOn { get; set; }
-		//public Guid CreatedByUserId { get; set; }
+
+		/// <summary>
+        /// The date and time of when the record is modified
+        /// </summary>
 		public DateTime ModifiedOn { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
+
+		/// <summary>
+        /// The date and time of when the record is (soft) deleted
+        /// </summary>
 		public DateTime? DeletedOn { get; set; }
+
+		// TODO:
+		//public Guid CreatedByUserId { get; set; }
+		//public Guid ModifiedByUserId { get; set; }
+		//public Guid TenantId { get; set; }
     }
 }

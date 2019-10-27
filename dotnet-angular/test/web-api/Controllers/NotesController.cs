@@ -10,14 +10,21 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
+	/// <summary>
+	/// The Notes controller.
+	/// </summary>
     [Route("api/[controller]")]
     [ApiController]
+	[Produces("application/json")]
     public class NotesController : ControllerBase
     {
         private readonly ILogger<NotesController> logger;
         private readonly IMapper mapper;
         private readonly NoteBLL bll;
 
+		/// <summary>
+		/// The constructor of the Notes controller.
+		/// </summary>
         public NotesController(
             ILogger<NotesController> logger,
 			IMapper mapper,
@@ -133,7 +140,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-            await this.bll.RemoveNoteAsync(id);
+            await this.bll.DeleteNoteAsync(note);
 
             return this.mapper.Map<Note, NoteVM>(note);
         }

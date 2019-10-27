@@ -20,6 +20,8 @@ namespace Test.API.DAL
 		public DbSet<Note> Notes { get; set; }
 		public DbSet<Document> Documents { get; set; }
 		public DbSet<Email> Emails { get; set; }
+		public DbSet<Project> Projects { get; set; }
+		public DbSet<Todo> Todoes { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -114,6 +116,31 @@ namespace Test.API.DAL
             modelBuilder.Entity<Email>().Property(e => e.Subject).IsRequired();
 
             #endregion
+
+			#region Projects
+
+            // Soft delete query filter
+            modelBuilder.Entity<Project>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<Project>().ToTable("Projects");
+
+            // Required properties
+            modelBuilder.Entity<Project>().Property(e => e.Name).IsRequired();
+
+            #endregion
+
+			#region Todoes
+
+            // Soft delete query filter
+            modelBuilder.Entity<Todo>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<Todo>().ToTable("Todoes");
+
+            // Required properties
+
+            #endregion
 		}
 
 		public override int SaveChanges()
@@ -138,7 +165,15 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document) ||					entry.Entity.GetType() == typeof(Email)				)
+					entry.Entity.GetType() == typeof(Account) ||
+					entry.Entity.GetType() == typeof(Contact) ||
+					entry.Entity.GetType() == typeof(Call) ||
+					entry.Entity.GetType() == typeof(Note) ||
+					entry.Entity.GetType() == typeof(Document) ||
+					entry.Entity.GetType() == typeof(Email) ||
+					entry.Entity.GetType() == typeof(Project) ||
+					entry.Entity.GetType() == typeof(Todo)
+				)
                 {
                     switch (entry.State)
                     {
@@ -160,7 +195,15 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document) ||					entry.Entity.GetType() == typeof(Email)				)
+					entry.Entity.GetType() == typeof(Account) ||
+					entry.Entity.GetType() == typeof(Contact) ||
+					entry.Entity.GetType() == typeof(Call) ||
+					entry.Entity.GetType() == typeof(Note) ||
+					entry.Entity.GetType() == typeof(Document) ||
+					entry.Entity.GetType() == typeof(Email) ||
+					entry.Entity.GetType() == typeof(Project) ||
+					entry.Entity.GetType() == typeof(Todo)
+				)
                 {
                     switch (entry.State)
                     {

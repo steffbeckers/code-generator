@@ -10,14 +10,21 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
+	/// <summary>
+	/// The Accounts controller.
+	/// </summary>
     [Route("api/[controller]")]
     [ApiController]
+	[Produces("application/json")]
     public class AccountsController : ControllerBase
     {
         private readonly ILogger<AccountsController> logger;
         private readonly IMapper mapper;
         private readonly AccountBLL bll;
 
+		/// <summary>
+		/// The constructor of the Accounts controller.
+		/// </summary>
         public AccountsController(
             ILogger<AccountsController> logger,
 			IMapper mapper,
@@ -135,7 +142,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-            await this.bll.RemoveAccountAsync(id);
+            await this.bll.DeleteAccountAsync(account);
 
             return this.mapper.Map<Account, AccountVM>(account);
         }

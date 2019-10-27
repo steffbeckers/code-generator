@@ -4,8 +4,14 @@ using Test.API.ViewModels;
 
 namespace Test.API.DAL
 {
+	/// <summary>
+	/// Profile for mapping models to/from view models with AutoMapper.
+	/// </summary>
     public class AutoMapperProfile : Profile
     {
+		/// <summary>
+		/// The constructor of AutoMapperProfile.
+		/// </summary>
         public AutoMapperProfile()
         {
             // Accounts
@@ -31,6 +37,14 @@ namespace Test.API.DAL
             // Emails
 			CreateMap<Email, EmailVM>();
             CreateMap<EmailVM, Email>();
+
+            // Projects
+			CreateMap<Project, ProjectVM>();
+            CreateMap<ProjectVM, Project>();
+
+            // Todoes
+			CreateMap<Todo, TodoVM>();
+            CreateMap<TodoVM, Todo>();
         }
     }
 }

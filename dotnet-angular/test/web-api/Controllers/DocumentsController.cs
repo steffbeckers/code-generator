@@ -10,14 +10,21 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
+	/// <summary>
+	/// The Documents controller.
+	/// </summary>
     [Route("api/[controller]")]
     [ApiController]
+	[Produces("application/json")]
     public class DocumentsController : ControllerBase
     {
         private readonly ILogger<DocumentsController> logger;
         private readonly IMapper mapper;
         private readonly DocumentBLL bll;
 
+		/// <summary>
+		/// The constructor of the Documents controller.
+		/// </summary>
         public DocumentsController(
             ILogger<DocumentsController> logger,
 			IMapper mapper,
@@ -132,7 +139,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-            await this.bll.RemoveDocumentAsync(id);
+            await this.bll.DeleteDocumentAsync(document);
 
             return this.mapper.Map<Document, DocumentVM>(document);
         }

@@ -12,11 +12,17 @@ using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.Nam
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL
 {
+	/// <summary>
+	/// The business logic layer for <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>.
+	/// </summary>
     public class <#= model.Name #>BLL
     {
         private readonly <#= model.Name #>Repository <#= model.Name.ToLower() #>Repository;
         // TODO: private readonly <#= model.Name #>...Repository <#= model.Name.ToLower() #>...Repository;
 
+		/// <summary>
+		/// The constructor of the <#= model.Name #> business logic layer.
+		/// </summary>
         public <#= model.Name #>BLL(
 			<#= model.Name #>Repository <#= model.Name.ToLower() #>Repository//,
 			// TODO: <#= model.Name #>...Repository <#= model.Name.ToLower() #>...Repository
@@ -26,21 +32,33 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // TODO: this.<#= model.Name #>...Repository = <#= model.Name #>...Repository;
         }
 
+		/// <summary>
+		/// Retrieves all <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>.
+		/// </summary>
 		public async Task<IEnumerable<<#= model.Name #>>> GetAll<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Async()
         {
             return await this.<#= model.Name.ToLower() #>Repository.GetAsync();
         }
 
+		/// <summary>
+		/// Retrieves one <#= model.Name.ToLower() #> by Id.
+		/// </summary>
 		public async Task<<#= model.Name #>> Get<#= model.Name #>ByIdAsync(Guid id)
         {
             return await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
         }
 
+		/// <summary>
+		/// Creates a new <#= model.Name.ToLower() #> record.
+		/// </summary>
         public async Task<<#= model.Name #>> Create<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToLower() #>)
         {
             return await this.<#= model.Name.ToLower() #>Repository.InsertAsync(<#= model.Name.ToLower() #>);
         }
 
+		/// <summary>
+		/// Updates an existing <#= model.Name.ToLower() #> record by Id.
+		/// </summary>
         public async Task<<#= model.Name #>> Update<#= model.Name #>Async(Guid id, <#= model.Name #> <#= model.Name.ToLower() #>Update)
         {
             // Retrieve existing
@@ -91,18 +109,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-        public async Task<bool> Remove<#= model.Name #>Async(Guid id)
+		/// <summary>
+		/// Deletes an existing <#= model.Name.ToLower() #> record by Id.
+		/// </summary>
+        public async Task<<#= model.Name #>> Delete<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToLower() #>)
         {
-            // Retrieve existing
-            <#= model.Name #> <#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
-            if (<#= model.Name.ToLower() #> == null)
-            {
-                return true;
-            }
-
             await this.<#= model.Name.ToLower() #>Repository.DeleteAsync(<#= model.Name.ToLower() #>);
 
-            return true;
+            return <#= model.Name.ToLower() #>;
         }
     }
 }

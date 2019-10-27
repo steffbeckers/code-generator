@@ -59,17 +59,24 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
-            this.Write(".Controllers\r\n{\r\n    [Route(\"api/[controller]\")]\r\n    [ApiController]\r\n    public" +
-                    " class ");
+            this.Write(".Controllers\r\n{\r\n\t/// <summary>\r\n\t/// The ");
             
-            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            
+            #line default
+            #line hidden
+            this.Write(" controller.\r\n\t/// </summary>\r\n    [Route(\"api/[controller]\")]\r\n    [ApiControlle" +
+                    "r]\r\n\t[Produces(\"application/json\")]\r\n    public class ");
+            
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("Controller : ControllerBase\r\n    {\r\n        private readonly ILogger<");
             
-            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
@@ -77,28 +84,35 @@ namespace CodeGenCLI.Templates
             this.Write("Controller> logger;\r\n        private readonly IMapper mapper;\r\n        private re" +
                     "adonly ");
             
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write("BLL bll;\r\n\r\n        public ");
+            this.Write("BLL bll;\r\n\r\n\t\t/// <summary>\r\n\t\t/// The constructor of the ");
             
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            
+            #line default
+            #line hidden
+            this.Write(" controller.\r\n\t\t/// </summary>\r\n        public ");
+            
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("Controller(\r\n            ILogger<");
             
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("Controller> logger,\r\n\t\t\tIMapper mapper,\r\n            ");
             
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
@@ -106,14 +120,14 @@ namespace CodeGenCLI.Templates
             this.Write("BLL bll\r\n        )\r\n        {\r\n            this.logger = logger;\r\n\t\t\tthis.mapper " +
                     "= mapper;\r\n            this.bll = bll;\r\n        }\r\n\r\n        // GET: api/");
             
-            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t/// <summary>\r\n\t\t/// Retrieves all ");
             
-            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
@@ -121,70 +135,70 @@ namespace CodeGenCLI.Templates
             this.Write(".\r\n\t\t/// </summary>\r\n        [HttpGet]\r\n        public async Task<ActionResult<IE" +
                     "numerable<");
             
-            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>>> Get");
             
-            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("()\r\n        {\r\n            IEnumerable<");
             
-            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.bll.GetAll");
             
-            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("Async();\r\n\r\n            return this.mapper.Map<IEnumerable<");
             
-            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">, List<");
             
-            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>>(");
             
-            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n        }\r\n\r\n        // GET: api/");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("/{id}\r\n\t\t/// <summary>\r\n\t\t/// Retrieves a specific ");
             
-            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -192,42 +206,42 @@ namespace CodeGenCLI.Templates
             this.Write(".\r\n\t\t/// </summary>\r\n\t\t/// <param name=\"id\"></param>\r\n        [HttpGet(\"{id}\")]\r\n" +
                     "        public async Task<ActionResult<");
             
-            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 63 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>> Get");
             
-            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 63 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("([FromRoute] Guid id)\r\n        {\r\n            ");
             
-            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.bll.Get");
             
-            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("ByIdAsync(id);\r\n            if (");
             
-            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 66 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -235,70 +249,70 @@ namespace CodeGenCLI.Templates
             this.Write(" == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n  " +
                     "          return this.mapper.Map<");
             
-            #line 64 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 64 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>(");
             
-            #line 64 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n        }\r\n\r\n        // POST: api/");
             
-            #line 67 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 74 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t/// <summary>\r\n\t\t/// Creates a new ");
             
-            #line 69 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(".\r\n\t\t/// </summary>\r\n\t\t/// <param name=\"");
             
-            #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 78 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("VM\"></param>\r\n        [HttpPost]\r\n        public async Task<ActionResult<");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>> Create");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("([FromBody] ");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM ");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -307,147 +321,147 @@ namespace CodeGenCLI.Templates
                     "   {\r\n                return BadRequest(ModelState);\r\n            }\r\n\r\n         " +
                     "   // Mapping\r\n            ");
             
-            #line 82 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 82 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = this.mapper.Map<");
             
-            #line 82 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM, ");
             
-            #line 82 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">(");
             
-            #line 82 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("VM);\r\n\r\n            ");
             
-            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 91 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.bll.Create");
             
-            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 91 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Async(");
             
-            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 91 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n            return CreatedAtAction(\r\n\t\t\t\t\"Get");
             
-            #line 87 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("\",\r\n\t\t\t\tnew { id = ");
             
-            #line 88 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 95 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(".Id },\r\n\t\t\t\tthis.mapper.Map<");
             
-            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 96 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 96 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>(");
             
-            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 96 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t);\r\n        }\r\n\r\n\t\t// PUT: api/");
             
-            #line 93 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 100 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("/{id}\r\n\t\t/// <summary>\r\n\t\t/// Updates a specific ");
             
-            #line 95 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 102 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(".\r\n\t\t/// </summary>\r\n\t\t/// <param name=\"id\"></param>\r\n\t\t/// <param name=\"");
             
-            #line 98 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("VM\"></param>\r\n        [HttpPut(\"{id}\")]\r\n        public async Task<ActionResult<");
             
-            #line 100 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>> Update");
             
-            #line 100 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("([FromRoute] Guid id, [FromBody] ");
             
-            #line 100 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM ");
             
-            #line 100 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("VM)\r\n        {\r\n\t\t\t// Validation\r\n            if (!ModelState.IsValid || id != ");
             
-            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 110 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -455,35 +469,35 @@ namespace CodeGenCLI.Templates
             this.Write("VM.Id)\r\n            {\r\n                return BadRequest(ModelState);\r\n          " +
                     "  }\r\n\r\n            // Retrieve existing ");
             
-            #line 108 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 115 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.bll.Get");
             
-            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("ByIdAsync(id);\r\n            if (");
             
-            #line 110 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 117 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -491,133 +505,133 @@ namespace CodeGenCLI.Templates
             this.Write(" == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n\t\t" +
                     "\t// Mapping\r\n            ");
             
-            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Update = this.mapper.Map<");
             
-            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM, ");
             
-            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">(");
             
-            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("VM);\r\n\r\n\t\t\t// Update fields\r\n");
             
-            #line 119 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 126 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 120 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 127 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 120 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 127 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 120 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 127 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Update.");
             
-            #line 120 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 127 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 121 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\r\n            ");
             
-            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 130 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.bll.Update");
             
-            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 130 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Async(id, ");
             
-            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 130 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n\t\t\treturn this.mapper.Map<");
             
-            #line 125 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 132 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 125 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 132 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>(");
             
-            #line 125 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 132 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n        }\r\n\r\n        // DELETE: api/");
             
-            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 135 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("/{id}\r\n\t\t/// <summary>\r\n\t\t/// Deletes a specific ");
             
-            #line 130 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -625,78 +639,85 @@ namespace CodeGenCLI.Templates
             this.Write(".\r\n\t\t/// </summary>\r\n\t\t/// <param name=\"id\"></param>\r\n        [HttpDelete(\"{id}\")" +
                     "]\r\n        public async Task<ActionResult<");
             
-            #line 134 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 141 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>> Delete");
             
-            #line 134 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 141 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("([FromRoute] Guid id)\r\n        {\r\n            // Retrieve existing ");
             
-            #line 136 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 143 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 144 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 144 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.bll.Get");
             
-            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 144 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("ByIdAsync(id);\r\n            if (");
             
-            #line 138 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 145 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n  " +
-                    "          await this.bll.Remove");
+                    "          await this.bll.Delete");
             
-            #line 143 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 150 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write("Async(id);\r\n\r\n            return this.mapper.Map<");
+            this.Write("Async(");
             
-            #line 145 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 150 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n\r\n            return this.mapper.Map<");
+            
+            #line 152 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 145 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 152 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>(");
             
-            #line 145 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 152 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default

@@ -7,66 +7,66 @@ using Test.API.Models;
 namespace Test.API.BLL
 {
 	/// <summary>
-	/// The business logic layer for Contacts.
+	/// The business logic layer for Projects.
 	/// </summary>
-    public class ContactBLL
+    public class ProjectBLL
     {
-        private readonly ContactRepository contactRepository;
-        // TODO: private readonly Contact...Repository contact...Repository;
+        private readonly ProjectRepository projectRepository;
+        // TODO: private readonly Project...Repository project...Repository;
 
 		/// <summary>
-		/// The constructor of the Contact business logic layer.
+		/// The constructor of the Project business logic layer.
 		/// </summary>
-        public ContactBLL(
-			ContactRepository contactRepository//,
-			// TODO: Contact...Repository contact...Repository
+        public ProjectBLL(
+			ProjectRepository projectRepository//,
+			// TODO: Project...Repository project...Repository
 		)
         {
-            this.contactRepository = contactRepository;
-            // TODO: this.Contact...Repository = Contact...Repository;
+            this.projectRepository = projectRepository;
+            // TODO: this.Project...Repository = Project...Repository;
         }
 
 		/// <summary>
-		/// Retrieves all contacts.
+		/// Retrieves all projects.
 		/// </summary>
-		public async Task<IEnumerable<Contact>> GetAllContactsAsync()
+		public async Task<IEnumerable<Project>> GetAllProjectsAsync()
         {
-            return await this.contactRepository.GetAsync();
+            return await this.projectRepository.GetAsync();
         }
 
 		/// <summary>
-		/// Retrieves one contact by Id.
+		/// Retrieves one project by Id.
 		/// </summary>
-		public async Task<Contact> GetContactByIdAsync(Guid id)
+		public async Task<Project> GetProjectByIdAsync(Guid id)
         {
-            return await this.contactRepository.GetByIdAsync(id);
+            return await this.projectRepository.GetByIdAsync(id);
         }
 
 		/// <summary>
-		/// Creates a new contact record.
+		/// Creates a new project record.
 		/// </summary>
-        public async Task<Contact> CreateContactAsync(Contact contact)
+        public async Task<Project> CreateProjectAsync(Project project)
         {
-            return await this.contactRepository.InsertAsync(contact);
+            return await this.projectRepository.InsertAsync(project);
         }
 
 		/// <summary>
-		/// Updates an existing contact record by Id.
+		/// Updates an existing project record by Id.
 		/// </summary>
-        public async Task<Contact> UpdateContactAsync(Guid id, Contact contactUpdate)
+        public async Task<Project> UpdateProjectAsync(Guid id, Project projectUpdate)
         {
             // Retrieve existing
-            Contact contact = await this.contactRepository.GetByIdAsync(id);
-            if (contact == null)
+            Project project = await this.projectRepository.GetByIdAsync(id);
+            if (project == null)
             {
                 return null;
             }
 
             // Mapping
-            contact.FirstName = contactUpdate.FirstName;
-            contact.LastName = contactUpdate.LastName;
+            project.Name = projectUpdate.Name;
+            project.Description = projectUpdate.Description;
 
-            return await this.contactRepository.UpdateAsync(contact);
+            return await this.projectRepository.UpdateAsync(project);
         }
 
 		// TODO
@@ -103,13 +103,13 @@ namespace Test.API.BLL
         //}
 
 		/// <summary>
-		/// Deletes an existing contact record by Id.
+		/// Deletes an existing project record by Id.
 		/// </summary>
-        public async Task<Contact> DeleteContactAsync(Contact contact)
+        public async Task<Project> DeleteProjectAsync(Project project)
         {
-            await this.contactRepository.DeleteAsync(contact);
+            await this.projectRepository.DeleteAsync(project);
 
-            return contact;
+            return project;
         }
     }
 }

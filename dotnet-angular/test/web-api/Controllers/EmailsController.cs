@@ -10,14 +10,21 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
+	/// <summary>
+	/// The Emails controller.
+	/// </summary>
     [Route("api/[controller]")]
     [ApiController]
+	[Produces("application/json")]
     public class EmailsController : ControllerBase
     {
         private readonly ILogger<EmailsController> logger;
         private readonly IMapper mapper;
         private readonly EmailBLL bll;
 
+		/// <summary>
+		/// The constructor of the Emails controller.
+		/// </summary>
         public EmailsController(
             ILogger<EmailsController> logger,
 			IMapper mapper,
@@ -133,7 +140,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-            await this.bll.RemoveEmailAsync(id);
+            await this.bll.DeleteEmailAsync(email);
 
             return this.mapper.Map<Email, EmailVM>(email);
         }

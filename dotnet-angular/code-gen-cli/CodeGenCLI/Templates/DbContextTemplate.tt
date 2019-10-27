@@ -84,7 +84,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 // Models that have soft delete
                 if (
 <# foreach (CodeGenModel model in config.Models) { #>
-					entry.Entity.GetType() == typeof(<#= model.Name #>)<# if (!model.Equals(lastModel)) { #> ||<# } #>
+<# if (!model.Equals(lastModel)) { #>
+					entry.Entity.GetType() == typeof(<#= model.Name #>) ||
+<# } else { #>
+					entry.Entity.GetType() == typeof(<#= model.Name #>)
+<# } #>
 <# } #>
 				)
                 {
@@ -109,7 +113,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 // Models that have soft delete
                 if (
 <# foreach (CodeGenModel model in config.Models) { #>
-					entry.Entity.GetType() == typeof(<#= model.Name #>)<# if (!model.Equals(lastModel)) { #> ||<# } #>
+<# if (!model.Equals(lastModel)) { #>
+					entry.Entity.GetType() == typeof(<#= model.Name #>) ||
+<# } else { #>
+					entry.Entity.GetType() == typeof(<#= model.Name #>)
+<# } #>
 <# } #>
 				)
                 {

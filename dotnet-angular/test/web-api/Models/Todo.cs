@@ -3,24 +3,24 @@ using System;
 namespace Test.API.Models
 {
 	/// <summary>
-    /// Contact model
+    /// Todo model
     /// </summary>
-    public class Contact
+    public class Todo
     {
 		/// <summary>
-        /// The identifier of Contact.
+        /// The identifier of Todo.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The FirstName property of Contact.
+        /// The Title property of Todo.
         /// </summary>
-		public string FirstName { get; set; }
+		public string Title { get; set; }
 
 		/// <summary>
-        /// The LastName property of Contact.
+        /// The Body property of Todo.
         /// </summary>
-		public string LastName { get; set; }
+		public string Body { get; set; }
 
 		// Generic properties
 

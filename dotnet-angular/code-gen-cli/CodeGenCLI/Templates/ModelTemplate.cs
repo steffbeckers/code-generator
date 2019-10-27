@@ -36,50 +36,140 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
-            this.Write(".Models\r\n{\r\n    public class ");
+            this.Write(".Models\r\n{\r\n\t/// <summary>\r\n    /// ");
             
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write("\r\n    {\r\n");
+            this.Write(" model\r\n");
             
             #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
- foreach (CodeGenModelProperty property in model.Properties) { 
+ if (!string.IsNullOrEmpty(model.Description)) { 
             
             #line default
             #line hidden
-            this.Write("\t\tpublic ");
+            this.Write("    /// ");
             
             #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Type));
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Description));
             
             #line default
             #line hidden
-            this.Write(" ");
-            
-            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" { get; set; }\r\n");
+            this.Write(".\r\n");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
  } 
             
             #line default
             #line hidden
+            this.Write("    /// </summary>\r\n    public class ");
+            
+            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    {\r\n\t\t/// <summary>\r\n        /// The identifier of ");
+            
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".\r\n        /// </summary>\r\n\t\tpublic Guid Id { get; set; }\r\n");
+            
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+ foreach (CodeGenModelProperty property in model.Properties) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+ if (!string.IsNullOrEmpty(property.Description)) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t/// <summary>\r\n        /// ");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Description));
+            
+            #line default
+            #line hidden
+            this.Write(".\r\n        /// </summary>\r\n");
+            
+            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t/// <summary>\r\n        /// The ");
+            
+            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" property of ");
+            
+            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".\r\n        /// </summary>\r\n");
+            
+            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic ");
+            
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Type));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" { get; set; }\r\n");
+            
+            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
             this.Write(@"
-		// Generic
-		public Guid Id { get; set; }
-		//public Guid TenantId { get; set; }
+		// Generic properties
+
+		/// <summary>
+        /// The date and time of when the record is created
+        /// </summary>
 		public DateTime CreatedOn { get; set; }
-		//public Guid CreatedByUserId { get; set; }
+
+		/// <summary>
+        /// The date and time of when the record is modified
+        /// </summary>
 		public DateTime ModifiedOn { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
+
+		/// <summary>
+        /// The date and time of when the record is (soft) deleted
+        /// </summary>
 		public DateTime? DeletedOn { get; set; }
+
+		// TODO:
+		//public Guid CreatedByUserId { get; set; }
+		//public Guid ModifiedByUserId { get; set; }
+		//public Guid TenantId { get; set; }
     }
 }
 ");

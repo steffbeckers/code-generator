@@ -6,11 +6,17 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
+	/// <summary>
+	/// The business logic layer for Documents.
+	/// </summary>
     public class DocumentBLL
     {
         private readonly DocumentRepository documentRepository;
         // TODO: private readonly Document...Repository document...Repository;
 
+		/// <summary>
+		/// The constructor of the Document business logic layer.
+		/// </summary>
         public DocumentBLL(
 			DocumentRepository documentRepository//,
 			// TODO: Document...Repository document...Repository
@@ -20,21 +26,33 @@ namespace Test.API.BLL
             // TODO: this.Document...Repository = Document...Repository;
         }
 
+		/// <summary>
+		/// Retrieves all documents.
+		/// </summary>
 		public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
         {
             return await this.documentRepository.GetAsync();
         }
 
+		/// <summary>
+		/// Retrieves one document by Id.
+		/// </summary>
 		public async Task<Document> GetDocumentByIdAsync(Guid id)
         {
             return await this.documentRepository.GetByIdAsync(id);
         }
 
+		/// <summary>
+		/// Creates a new document record.
+		/// </summary>
         public async Task<Document> CreateDocumentAsync(Document document)
         {
             return await this.documentRepository.InsertAsync(document);
         }
 
+		/// <summary>
+		/// Updates an existing document record by Id.
+		/// </summary>
         public async Task<Document> UpdateDocumentAsync(Guid id, Document documentUpdate)
         {
             // Retrieve existing
@@ -83,18 +101,14 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-        public async Task<bool> RemoveDocumentAsync(Guid id)
+		/// <summary>
+		/// Deletes an existing document record by Id.
+		/// </summary>
+        public async Task<Document> DeleteDocumentAsync(Document document)
         {
-            // Retrieve existing
-            Document document = await this.documentRepository.GetByIdAsync(id);
-            if (document == null)
-            {
-                return true;
-            }
-
             await this.documentRepository.DeleteAsync(document);
 
-            return true;
+            return document;
         }
     }
 }

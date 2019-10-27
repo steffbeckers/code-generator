@@ -3,16 +3,16 @@ using Test.API.Models;
 namespace Test.API.DAL.Repositories
 {
 	/// <summary>
-	/// The repository for Emails in the data access layer.
+	/// The repository for Projects in the data access layer.
 	/// </summary>
-    public class EmailRepository : Repository<Email>
+    public class ProjectRepository : Repository<Project>
     {
         private new readonly TestContext context;
 
 		/// <summary>
-		/// The constructor of the Email repository.
+		/// The constructor of the Project repository.
 		/// </summary>
-        public EmailRepository(TestContext context) : base(context)
+        public ProjectRepository(TestContext context) : base(context)
         {
             this.context = context;
         }

@@ -7,66 +7,66 @@ using Test.API.Models;
 namespace Test.API.BLL
 {
 	/// <summary>
-	/// The business logic layer for Contacts.
+	/// The business logic layer for Todoes.
 	/// </summary>
-    public class ContactBLL
+    public class TodoBLL
     {
-        private readonly ContactRepository contactRepository;
-        // TODO: private readonly Contact...Repository contact...Repository;
+        private readonly TodoRepository todoRepository;
+        // TODO: private readonly Todo...Repository todo...Repository;
 
 		/// <summary>
-		/// The constructor of the Contact business logic layer.
+		/// The constructor of the Todo business logic layer.
 		/// </summary>
-        public ContactBLL(
-			ContactRepository contactRepository//,
-			// TODO: Contact...Repository contact...Repository
+        public TodoBLL(
+			TodoRepository todoRepository//,
+			// TODO: Todo...Repository todo...Repository
 		)
         {
-            this.contactRepository = contactRepository;
-            // TODO: this.Contact...Repository = Contact...Repository;
+            this.todoRepository = todoRepository;
+            // TODO: this.Todo...Repository = Todo...Repository;
         }
 
 		/// <summary>
-		/// Retrieves all contacts.
+		/// Retrieves all todoes.
 		/// </summary>
-		public async Task<IEnumerable<Contact>> GetAllContactsAsync()
+		public async Task<IEnumerable<Todo>> GetAllTodoesAsync()
         {
-            return await this.contactRepository.GetAsync();
+            return await this.todoRepository.GetAsync();
         }
 
 		/// <summary>
-		/// Retrieves one contact by Id.
+		/// Retrieves one todo by Id.
 		/// </summary>
-		public async Task<Contact> GetContactByIdAsync(Guid id)
+		public async Task<Todo> GetTodoByIdAsync(Guid id)
         {
-            return await this.contactRepository.GetByIdAsync(id);
+            return await this.todoRepository.GetByIdAsync(id);
         }
 
 		/// <summary>
-		/// Creates a new contact record.
+		/// Creates a new todo record.
 		/// </summary>
-        public async Task<Contact> CreateContactAsync(Contact contact)
+        public async Task<Todo> CreateTodoAsync(Todo todo)
         {
-            return await this.contactRepository.InsertAsync(contact);
+            return await this.todoRepository.InsertAsync(todo);
         }
 
 		/// <summary>
-		/// Updates an existing contact record by Id.
+		/// Updates an existing todo record by Id.
 		/// </summary>
-        public async Task<Contact> UpdateContactAsync(Guid id, Contact contactUpdate)
+        public async Task<Todo> UpdateTodoAsync(Guid id, Todo todoUpdate)
         {
             // Retrieve existing
-            Contact contact = await this.contactRepository.GetByIdAsync(id);
-            if (contact == null)
+            Todo todo = await this.todoRepository.GetByIdAsync(id);
+            if (todo == null)
             {
                 return null;
             }
 
             // Mapping
-            contact.FirstName = contactUpdate.FirstName;
-            contact.LastName = contactUpdate.LastName;
+            todo.Title = todoUpdate.Title;
+            todo.Body = todoUpdate.Body;
 
-            return await this.contactRepository.UpdateAsync(contact);
+            return await this.todoRepository.UpdateAsync(todo);
         }
 
 		// TODO
@@ -103,13 +103,13 @@ namespace Test.API.BLL
         //}
 
 		/// <summary>
-		/// Deletes an existing contact record by Id.
+		/// Deletes an existing todo record by Id.
 		/// </summary>
-        public async Task<Contact> DeleteContactAsync(Contact contact)
+        public async Task<Todo> DeleteTodoAsync(Todo todo)
         {
-            await this.contactRepository.DeleteAsync(contact);
+            await this.todoRepository.DeleteAsync(todo);
 
-            return contact;
+            return todo;
         }
     }
 }

@@ -4,6 +4,296 @@
         <name>Test.API</name>
     </assembly>
     <members>
+        <member name="T:Test.API.BLL.AccountBLL">
+            <summary>
+            The business logic layer for Accounts.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.#ctor(Test.API.DAL.Repositories.AccountRepository)">
+            <summary>
+            The constructor of the Account business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.GetAllAccountsAsync">
+            <summary>
+            Retrieves all accounts.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.GetAccountByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one account by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.CreateAccountAsync(Test.API.Models.Account)">
+            <summary>
+            Creates a new account record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.UpdateAccountAsync(System.Guid,Test.API.Models.Account)">
+            <summary>
+            Updates an existing account record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.DeleteAccountAsync(Test.API.Models.Account)">
+            <summary>
+            Deletes an existing account record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.BLL.CallBLL">
+            <summary>
+            The business logic layer for Calls.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.CallBLL.#ctor(Test.API.DAL.Repositories.CallRepository)">
+            <summary>
+            The constructor of the Call business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.CallBLL.GetAllCallsAsync">
+            <summary>
+            Retrieves all calls.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.CallBLL.GetCallByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one call by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.CallBLL.CreateCallAsync(Test.API.Models.Call)">
+            <summary>
+            Creates a new call record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.CallBLL.UpdateCallAsync(System.Guid,Test.API.Models.Call)">
+            <summary>
+            Updates an existing call record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.CallBLL.DeleteCallAsync(Test.API.Models.Call)">
+            <summary>
+            Deletes an existing call record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.BLL.ContactBLL">
+            <summary>
+            The business logic layer for Contacts.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ContactBLL.#ctor(Test.API.DAL.Repositories.ContactRepository)">
+            <summary>
+            The constructor of the Contact business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ContactBLL.GetAllContactsAsync">
+            <summary>
+            Retrieves all contacts.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ContactBLL.GetContactByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one contact by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ContactBLL.CreateContactAsync(Test.API.Models.Contact)">
+            <summary>
+            Creates a new contact record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ContactBLL.UpdateContactAsync(System.Guid,Test.API.Models.Contact)">
+            <summary>
+            Updates an existing contact record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ContactBLL.DeleteContactAsync(Test.API.Models.Contact)">
+            <summary>
+            Deletes an existing contact record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.BLL.DocumentBLL">
+            <summary>
+            The business logic layer for Documents.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.DocumentBLL.#ctor(Test.API.DAL.Repositories.DocumentRepository)">
+            <summary>
+            The constructor of the Document business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.DocumentBLL.GetAllDocumentsAsync">
+            <summary>
+            Retrieves all documents.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.DocumentBLL.GetDocumentByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one document by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.DocumentBLL.CreateDocumentAsync(Test.API.Models.Document)">
+            <summary>
+            Creates a new document record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.DocumentBLL.UpdateDocumentAsync(System.Guid,Test.API.Models.Document)">
+            <summary>
+            Updates an existing document record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.DocumentBLL.DeleteDocumentAsync(Test.API.Models.Document)">
+            <summary>
+            Deletes an existing document record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.BLL.EmailBLL">
+            <summary>
+            The business logic layer for Emails.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.EmailBLL.#ctor(Test.API.DAL.Repositories.EmailRepository)">
+            <summary>
+            The constructor of the Email business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.EmailBLL.GetAllEmailsAsync">
+            <summary>
+            Retrieves all emails.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.EmailBLL.GetEmailByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one email by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.EmailBLL.CreateEmailAsync(Test.API.Models.Email)">
+            <summary>
+            Creates a new email record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.EmailBLL.UpdateEmailAsync(System.Guid,Test.API.Models.Email)">
+            <summary>
+            Updates an existing email record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.EmailBLL.DeleteEmailAsync(Test.API.Models.Email)">
+            <summary>
+            Deletes an existing email record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.BLL.NoteBLL">
+            <summary>
+            The business logic layer for Notes.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.#ctor(Test.API.DAL.Repositories.NoteRepository)">
+            <summary>
+            The constructor of the Note business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.GetAllNotesAsync">
+            <summary>
+            Retrieves all notes.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.GetNoteByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one note by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.CreateNoteAsync(Test.API.Models.Note)">
+            <summary>
+            Creates a new note record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.UpdateNoteAsync(System.Guid,Test.API.Models.Note)">
+            <summary>
+            Updates an existing note record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.DeleteNoteAsync(Test.API.Models.Note)">
+            <summary>
+            Deletes an existing note record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.BLL.ProjectBLL">
+            <summary>
+            The business logic layer for Projects.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProjectBLL.#ctor(Test.API.DAL.Repositories.ProjectRepository)">
+            <summary>
+            The constructor of the Project business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProjectBLL.GetAllProjectsAsync">
+            <summary>
+            Retrieves all projects.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProjectBLL.GetProjectByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one project by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProjectBLL.CreateProjectAsync(Test.API.Models.Project)">
+            <summary>
+            Creates a new project record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProjectBLL.UpdateProjectAsync(System.Guid,Test.API.Models.Project)">
+            <summary>
+            Updates an existing project record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProjectBLL.DeleteProjectAsync(Test.API.Models.Project)">
+            <summary>
+            Deletes an existing project record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.BLL.TodoBLL">
+            <summary>
+            The business logic layer for Todoes.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.#ctor(Test.API.DAL.Repositories.TodoRepository)">
+            <summary>
+            The constructor of the Todo business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.GetAllTodoesAsync">
+            <summary>
+            Retrieves all todoes.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.GetTodoByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one todo by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.CreateTodoAsync(Test.API.Models.Todo)">
+            <summary>
+            Creates a new todo record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.UpdateTodoAsync(System.Guid,Test.API.Models.Todo)">
+            <summary>
+            Updates an existing todo record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.DeleteTodoAsync(Test.API.Models.Todo)">
+            <summary>
+            Deletes an existing todo record by Id.
+            </summary>
+        </member>
+        <member name="T:Test.API.Controllers.AccountsController">
+            <summary>
+            The Accounts controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AccountsController},AutoMapper.IMapper,Test.API.BLL.AccountBLL)">
+            <summary>
+            The constructor of the Accounts controller.
+            </summary>
+        </member>
         <member name="M:Test.API.Controllers.AccountsController.GetAccounts">
             <summary>
             Retrieves all accounts.
@@ -33,6 +323,16 @@
             Deletes a specific account.
             </summary>
             <param name="id"></param>
+        </member>
+        <member name="T:Test.API.Controllers.CallsController">
+            <summary>
+            The Calls controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.CallsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.CallsController},AutoMapper.IMapper,Test.API.BLL.CallBLL)">
+            <summary>
+            The constructor of the Calls controller.
+            </summary>
         </member>
         <member name="M:Test.API.Controllers.CallsController.GetCalls">
             <summary>
@@ -64,6 +364,16 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:Test.API.Controllers.ContactsController">
+            <summary>
+            The Contacts controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.ContactsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ContactsController},AutoMapper.IMapper,Test.API.BLL.ContactBLL)">
+            <summary>
+            The constructor of the Contacts controller.
+            </summary>
+        </member>
         <member name="M:Test.API.Controllers.ContactsController.GetContacts">
             <summary>
             Retrieves all contacts.
@@ -93,6 +403,16 @@
             Deletes a specific contact.
             </summary>
             <param name="id"></param>
+        </member>
+        <member name="T:Test.API.Controllers.DocumentsController">
+            <summary>
+            The Documents controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.DocumentsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.DocumentsController},AutoMapper.IMapper,Test.API.BLL.DocumentBLL)">
+            <summary>
+            The constructor of the Documents controller.
+            </summary>
         </member>
         <member name="M:Test.API.Controllers.DocumentsController.GetDocuments">
             <summary>
@@ -124,6 +444,16 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:Test.API.Controllers.EmailsController">
+            <summary>
+            The Emails controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.EmailsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.EmailsController},AutoMapper.IMapper,Test.API.BLL.EmailBLL)">
+            <summary>
+            The constructor of the Emails controller.
+            </summary>
+        </member>
         <member name="M:Test.API.Controllers.EmailsController.GetEmails">
             <summary>
             Retrieves all emails.
@@ -154,6 +484,16 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:Test.API.Controllers.NotesController">
+            <summary>
+            The Notes controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.NotesController},AutoMapper.IMapper,Test.API.BLL.NoteBLL)">
+            <summary>
+            The constructor of the Notes controller.
+            </summary>
+        </member>
         <member name="M:Test.API.Controllers.NotesController.GetNotes">
             <summary>
             Retrieves all notes.
@@ -183,6 +523,616 @@
             Deletes a specific note.
             </summary>
             <param name="id"></param>
+        </member>
+        <member name="T:Test.API.Controllers.ProjectsController">
+            <summary>
+            The Projects controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.ProjectsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ProjectsController},AutoMapper.IMapper,Test.API.BLL.ProjectBLL)">
+            <summary>
+            The constructor of the Projects controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.ProjectsController.GetProjects">
+            <summary>
+            Retrieves all projects.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.ProjectsController.GetProject(System.Guid)">
+            <summary>
+            Retrieves a specific project.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ProjectsController.CreateProject(Test.API.ViewModels.ProjectVM)">
+            <summary>
+            Creates a new project.
+            </summary>
+            <param name="projectVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ProjectsController.UpdateProject(System.Guid,Test.API.ViewModels.ProjectVM)">
+            <summary>
+            Updates a specific project.
+            </summary>
+            <param name="id"></param>
+            <param name="projectVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ProjectsController.DeleteProject(System.Guid)">
+            <summary>
+            Deletes a specific project.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:Test.API.Controllers.TodoesController">
+            <summary>
+            The Todoes controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.TodoesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.TodoesController},AutoMapper.IMapper,Test.API.BLL.TodoBLL)">
+            <summary>
+            The constructor of the Todoes controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.TodoesController.GetTodoes">
+            <summary>
+            Retrieves all todoes.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.TodoesController.GetTodo(System.Guid)">
+            <summary>
+            Retrieves a specific todo.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.TodoesController.CreateTodo(Test.API.ViewModels.TodoVM)">
+            <summary>
+            Creates a new todo.
+            </summary>
+            <param name="todoVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.TodoesController.UpdateTodo(System.Guid,Test.API.ViewModels.TodoVM)">
+            <summary>
+            Updates a specific todo.
+            </summary>
+            <param name="id"></param>
+            <param name="todoVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.TodoesController.DeleteTodo(System.Guid)">
+            <summary>
+            Deletes a specific todo.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:Test.API.DAL.AutoMapperProfile">
+            <summary>
+            Profile for mapping models to/from view models with AutoMapper.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.AutoMapperProfile.#ctor">
+            <summary>
+            The constructor of AutoMapperProfile.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.AccountRepository">
+            <summary>
+            The repository for Accounts in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.AccountRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Account repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.CallRepository">
+            <summary>
+            The repository for Calls in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.CallRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Call repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.ContactRepository">
+            <summary>
+            The repository for Contacts in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.ContactRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Contact repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.DocumentRepository">
+            <summary>
+            The repository for Documents in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.DocumentRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Document repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.EmailRepository">
+            <summary>
+            The repository for Emails in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.EmailRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Email repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.NoteRepository">
+            <summary>
+            The repository for Notes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.NoteRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Note repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.ProjectRepository">
+            <summary>
+            The repository for Projects in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.ProjectRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Project repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.TodoRepository">
+            <summary>
+            The repository for Todoes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.TodoRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Todo repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Account">
+            <summary>
+            Account model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Id">
+            <summary>
+            The identifier of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Name">
+            <summary>
+            The Name property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Website">
+            <summary>
+            The Website property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Telephone">
+            <summary>
+            The Telephone property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Email">
+            <summary>
+            The Email property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Call">
+            <summary>
+            Call model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Call.Id">
+            <summary>
+            The identifier of Call.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Call.Date">
+            <summary>
+            The Date property of Call.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Call.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Call.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Call.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Contact">
+            <summary>
+            Contact model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.Id">
+            <summary>
+            The identifier of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.FirstName">
+            <summary>
+            The FirstName property of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.LastName">
+            <summary>
+            The LastName property of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Document">
+            <summary>
+            Document model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Document.Id">
+            <summary>
+            The identifier of Document.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Document.Name">
+            <summary>
+            The Name property of Document.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Document.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Document.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Document.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Email">
+            <summary>
+            Email model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Email.Id">
+            <summary>
+            The identifier of Email.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Email.Subject">
+            <summary>
+            The Subject property of Email.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Email.Body">
+            <summary>
+            The Body property of Email.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Email.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Email.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Email.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Note">
+            <summary>
+            Note model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.Id">
+            <summary>
+            The identifier of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.Title">
+            <summary>
+            The Title property of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.Body">
+            <summary>
+            The Body property of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Project">
+            <summary>
+            Project model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Project.Id">
+            <summary>
+            The identifier of Project.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Project.Name">
+            <summary>
+            The Name property of Project.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Project.Description">
+            <summary>
+            The Description property of Project.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Project.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Project.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Project.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Todo">
+            <summary>
+            Todo model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.Id">
+            <summary>
+            The identifier of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.Title">
+            <summary>
+            The Title property of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.Body">
+            <summary>
+            The Body property of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.AccountVM">
+            <summary>
+            Account view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Id">
+            <summary>
+            The identifier of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Name">
+            <summary>
+            The Name property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Website">
+            <summary>
+            The Website property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Telephone">
+            <summary>
+            The Telephone property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Email">
+            <summary>
+            The Email property of Account.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.CallVM">
+            <summary>
+            Call view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.CallVM.Id">
+            <summary>
+            The identifier of Call.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.CallVM.Date">
+            <summary>
+            The Date property of Call.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.ContactVM">
+            <summary>
+            Contact view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ContactVM.Id">
+            <summary>
+            The identifier of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ContactVM.FirstName">
+            <summary>
+            The FirstName property of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ContactVM.LastName">
+            <summary>
+            The LastName property of Contact.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.DocumentVM">
+            <summary>
+            Document view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.DocumentVM.Id">
+            <summary>
+            The identifier of Document.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.DocumentVM.Name">
+            <summary>
+            The Name property of Document.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.EmailVM">
+            <summary>
+            Email view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.EmailVM.Id">
+            <summary>
+            The identifier of Email.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.EmailVM.Subject">
+            <summary>
+            The Subject property of Email.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.EmailVM.Body">
+            <summary>
+            The Body property of Email.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.NoteVM">
+            <summary>
+            Note view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.NoteVM.Id">
+            <summary>
+            The identifier of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.NoteVM.Title">
+            <summary>
+            The Title property of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.NoteVM.Body">
+            <summary>
+            The Body property of Note.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.ProjectVM">
+            <summary>
+            Project view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectVM.Id">
+            <summary>
+            The identifier of Project.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectVM.Name">
+            <summary>
+            The Name property of Project.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectVM.Description">
+            <summary>
+            The Description property of Project.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.TodoVM">
+            <summary>
+            Todo view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.Id">
+            <summary>
+            The identifier of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.Title">
+            <summary>
+            The Title property of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.Body">
+            <summary>
+            The Body property of Todo.
+            </summary>
         </member>
     </members>
 </doc>

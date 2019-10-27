@@ -4,24 +4,24 @@ using System.ComponentModel.DataAnnotations;
 namespace Test.API.ViewModels
 {
 	/// <summary>
-    /// Note view model
+    /// Project view model
     /// </summary>
-    public class NoteVM
+    public class ProjectVM
     {
 		/// <summary>
-        /// The identifier of Note.
+        /// The identifier of Project.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Title property of Note.
+        /// The Name property of Project.
         /// </summary>
         [Required]
-		public string Title { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
-        /// The Body property of Note.
+        /// The Description property of Project.
         /// </summary>
-		public string Body { get; set; }
+		public string Description { get; set; }
     }
 }

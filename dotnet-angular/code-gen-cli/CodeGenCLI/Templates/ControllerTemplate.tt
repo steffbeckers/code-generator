@@ -16,14 +16,21 @@ using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.Nam
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Controllers
 {
+	/// <summary>
+	/// The <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #> controller.
+	/// </summary>
     [Route("api/[controller]")]
     [ApiController]
+	[Produces("application/json")]
     public class <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Controller : ControllerBase
     {
         private readonly ILogger<<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Controller> logger;
         private readonly IMapper mapper;
         private readonly <#= model.Name #>BLL bll;
 
+		/// <summary>
+		/// The constructor of the <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #> controller.
+		/// </summary>
         public <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Controller(
             ILogger<<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Controller> logger,
 			IMapper mapper,
@@ -140,7 +147,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 return NotFound();
             }
 
-            await this.bll.Remove<#= model.Name #>Async(id);
+            await this.bll.Delete<#= model.Name #>Async(<#= model.Name.ToLower() #>);
 
             return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>);
         }

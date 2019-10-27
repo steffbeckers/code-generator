@@ -6,11 +6,17 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
+	/// <summary>
+	/// The business logic layer for Calls.
+	/// </summary>
     public class CallBLL
     {
         private readonly CallRepository callRepository;
         // TODO: private readonly Call...Repository call...Repository;
 
+		/// <summary>
+		/// The constructor of the Call business logic layer.
+		/// </summary>
         public CallBLL(
 			CallRepository callRepository//,
 			// TODO: Call...Repository call...Repository
@@ -20,21 +26,33 @@ namespace Test.API.BLL
             // TODO: this.Call...Repository = Call...Repository;
         }
 
+		/// <summary>
+		/// Retrieves all calls.
+		/// </summary>
 		public async Task<IEnumerable<Call>> GetAllCallsAsync()
         {
             return await this.callRepository.GetAsync();
         }
 
+		/// <summary>
+		/// Retrieves one call by Id.
+		/// </summary>
 		public async Task<Call> GetCallByIdAsync(Guid id)
         {
             return await this.callRepository.GetByIdAsync(id);
         }
 
+		/// <summary>
+		/// Creates a new call record.
+		/// </summary>
         public async Task<Call> CreateCallAsync(Call call)
         {
             return await this.callRepository.InsertAsync(call);
         }
 
+		/// <summary>
+		/// Updates an existing call record by Id.
+		/// </summary>
         public async Task<Call> UpdateCallAsync(Guid id, Call callUpdate)
         {
             // Retrieve existing
@@ -83,18 +101,14 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-        public async Task<bool> RemoveCallAsync(Guid id)
+		/// <summary>
+		/// Deletes an existing call record by Id.
+		/// </summary>
+        public async Task<Call> DeleteCallAsync(Call call)
         {
-            // Retrieve existing
-            Call call = await this.callRepository.GetByIdAsync(id);
-            if (call == null)
-            {
-                return true;
-            }
-
             await this.callRepository.DeleteAsync(call);
 
-            return true;
+            return call;
         }
     }
 }

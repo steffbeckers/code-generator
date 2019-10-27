@@ -5,6 +5,7 @@
   "models": [
     {
       "name": "Account",
+      //"description": "Also; Company or Business", // Optional
       "properties": [
         {
           "name": "Name",
@@ -13,6 +14,7 @@
         },
         {
           "name": "Website",
+          //"description": "Homepage of the account's website", // Optional
           "type": "string"
         },
         {
@@ -87,11 +89,39 @@
           "type": "string"
         }
       ]
+    },
+    {
+      "name": "Project",
+      "properties": [
+        {
+          "name": "Name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "Description",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Todo",
+      "namePlural": "Todoes",
+      "properties": [
+        {
+          "name": "Title",
+          "type": "string"
+        },
+        {
+          "name": "Body",
+          "type": "string"
+        }
+      ]
     }
   ],
   "webAPI": {
     "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
-    "namespaceRoot": "Test.API" // Optional
+    "namespaceRoot": "Test.API"
     //"modelsPath": "Data\\Models", // Optional
     //"viewModelsPath": "Data\\ViewModels", // Optional
     //"dalPath": "Data" // Optional

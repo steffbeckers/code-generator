@@ -6,11 +6,17 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
+	/// <summary>
+	/// The business logic layer for Accounts.
+	/// </summary>
     public class AccountBLL
     {
         private readonly AccountRepository accountRepository;
         // TODO: private readonly Account...Repository account...Repository;
 
+		/// <summary>
+		/// The constructor of the Account business logic layer.
+		/// </summary>
         public AccountBLL(
 			AccountRepository accountRepository//,
 			// TODO: Account...Repository account...Repository
@@ -20,21 +26,33 @@ namespace Test.API.BLL
             // TODO: this.Account...Repository = Account...Repository;
         }
 
+		/// <summary>
+		/// Retrieves all accounts.
+		/// </summary>
 		public async Task<IEnumerable<Account>> GetAllAccountsAsync()
         {
             return await this.accountRepository.GetAsync();
         }
 
+		/// <summary>
+		/// Retrieves one account by Id.
+		/// </summary>
 		public async Task<Account> GetAccountByIdAsync(Guid id)
         {
             return await this.accountRepository.GetByIdAsync(id);
         }
 
+		/// <summary>
+		/// Creates a new account record.
+		/// </summary>
         public async Task<Account> CreateAccountAsync(Account account)
         {
             return await this.accountRepository.InsertAsync(account);
         }
 
+		/// <summary>
+		/// Updates an existing account record by Id.
+		/// </summary>
         public async Task<Account> UpdateAccountAsync(Guid id, Account accountUpdate)
         {
             // Retrieve existing
@@ -86,18 +104,14 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-        public async Task<bool> RemoveAccountAsync(Guid id)
+		/// <summary>
+		/// Deletes an existing account record by Id.
+		/// </summary>
+        public async Task<Account> DeleteAccountAsync(Account account)
         {
-            // Retrieve existing
-            Account account = await this.accountRepository.GetByIdAsync(id);
-            if (account == null)
-            {
-                return true;
-            }
-
             await this.accountRepository.DeleteAsync(account);
 
-            return true;
+            return account;
         }
     }
 }

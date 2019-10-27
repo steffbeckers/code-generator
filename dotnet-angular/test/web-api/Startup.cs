@@ -42,6 +42,8 @@ namespace Test.API
 			services.AddScoped<NoteRepository>();
 			services.AddScoped<DocumentRepository>();
 			services.AddScoped<EmailRepository>();
+			services.AddScoped<ProjectRepository>();
+			services.AddScoped<TodoRepository>();
 
 			// BLLs
 			services.AddScoped<AccountBLL>();
@@ -50,6 +52,8 @@ namespace Test.API
 			services.AddScoped<NoteBLL>();
 			services.AddScoped<DocumentBLL>();
 			services.AddScoped<EmailBLL>();
+			services.AddScoped<ProjectBLL>();
+			services.AddScoped<TodoBLL>();
 
 			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
@@ -83,7 +87,8 @@ namespace Test.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 		    // CORS
-            app.UseCors(options => {
+            app.UseCors(options =>
+			{
                 options.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
