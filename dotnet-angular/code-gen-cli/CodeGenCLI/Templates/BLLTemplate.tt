@@ -1,0 +1,108 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL
+{
+    public class <#= model.Name #>BLL
+    {
+        private readonly <#= model.Name #>Repository <#= model.Name.ToLower() #>Repository;
+        // TODO: private readonly <#= model.Name #>...Repository <#= model.Name.ToLower() #>...Repository;
+
+        public <#= model.Name #>BLL(
+			<#= model.Name #>Repository <#= model.Name.ToLower() #>Repository//,
+			// TODO: <#= model.Name #>...Repository <#= model.Name.ToLower() #>...Repository
+		)
+        {
+            this.<#= model.Name.ToLower() #>Repository = <#= model.Name.ToLower() #>Repository;
+            // TODO: this.<#= model.Name #>...Repository = <#= model.Name #>...Repository;
+        }
+
+		public async Task<IEnumerable<<#= model.Name #>>> GetAll<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>()
+        {
+            return await this.<#= model.Name.ToLower() #>Repository.GetAsync();
+        }
+
+		public async Task<<#= model.Name #>> Get<#= model.Name #>ById(Guid id)
+        {
+            return await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
+        }
+
+        public async Task<<#= model.Name #>> Create<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToLower() #>)
+        {
+            return await this.<#= model.Name.ToLower() #>Repository.InsertAsync(<#= model.Name.ToLower() #>);
+        }
+
+        public async Task<<#= model.Name #>> Update<#= model.Name #>Async(Guid id, <#= model.Name #> <#= model.Name.ToLower() #>Update)
+        {
+            // Retrieve existing
+            <#= model.Name #> <#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
+            if (<#= model.Name.ToLower() #> == null)
+            {
+                return null;
+            }
+
+            // Mapping
+<# foreach (CodeGenModelProperty property in model.Properties) { #>
+            <#= model.Name.ToLower() #>.<#= property.Name #> = <#= model.Name.ToLower() #>Update.<#= property.Name #>;
+<# } #>
+
+            return await this.<#= model.Name.ToLower() #>Repository.UpdateAsync(<#= model.Name.ToLower() #>);
+        }
+
+		// TODO
+        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
+        //{
+        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
+		//
+        //    if (leaguePlayerLink == null)
+        //    {
+        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
+        //    }
+        //    else
+        //    {
+        //        // Mapping
+        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
+		//
+        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
+        //    }
+		//
+        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
+        //}
+
+		// TODO
+        //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
+        //{
+        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
+		//
+        //    if (leaguePlayerLink != null)
+        //    {
+        //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
+        //    }
+
+        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
+        //}
+
+        public async Task<bool> Remove<#= model.Name #>Async(Guid id)
+        {
+            // Retrieve existing
+            <#= model.Name #> <#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
+            if (<#= model.Name.ToLower() #> == null)
+            {
+                return true;
+            }
+
+            await this.<#= model.Name.ToLower() #>Repository.DeleteAsync(<#= model.Name.ToLower() #>);
+
+            return true;
+        }
+    }
+}

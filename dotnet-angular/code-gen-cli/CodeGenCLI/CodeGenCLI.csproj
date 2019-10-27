@@ -21,9 +21,25 @@
     <None Update="code-gen-config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Templates\AutoMapperProfileTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AutoMapperProfileTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\BLLTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BLLTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\DbContextTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DbContextTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\RepositoryBaseTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RepositoryBaseTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\RepositoryTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\StartupTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -44,6 +60,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Templates\AutoMapperProfileTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AutoMapperProfileTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\BLLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\DbContextTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -53,6 +79,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\RepositoryBaseTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RepositoryBaseTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\RepositoryTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\StartupTemplate.cs">
       <DesignTime>True</DesignTime>

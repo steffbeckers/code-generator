@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace CodeGenCLI.CodeGenClasses
 {
     [JsonObject("webAPI")]
-    public class CodeGenWebAPIConfig
+    public class CodeGenConfigWebAPI
     {
         [JsonProperty("projectPath")]
         public string ProjectPath { get; set; }
@@ -20,5 +20,8 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonProperty("dalPath")]
         public string DALPath { get; set; }
+
+        [JsonProperty("bllPath")]
+        public string BLLPath { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace CodeGenCLI.Templates
     {
         private CodeGenConfig config;
         private CodeGenModel model;
+
         public ViewModelTemplate(CodeGenConfig config, CodeGenModel model)
         {
             this.config = config;

@@ -12,16 +12,15 @@ namespace CodeGenCLI.Templates
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using CodeGenCLI.CodeGenClasses;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class StartupTemplate : StartupTemplateBase
+    public partial class RepositoryTemplate : RepositoryTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,142 +28,57 @@ namespace CodeGenCLI.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using AutoMapper;
-using ");
+            this.Write("using ");
             
-            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 6 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".BLL;\r\nusing ");
+            this.Write(".Models;\r\n\r\nnamespace ");
             
-            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 8 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".DAL;\r\nusing ");
+            this.Write(".DAL.Repositories\r\n{\r\n    public class ");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".DAL.Repositories;\r\n\r\nnamespace ");
-            
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(@"
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-		    // CORS
-            services.AddCors();
-
-            // Connection to the ");
-            
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" database\r\n            services.AddDbContext<");
-            
-            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Context>(options =>\r\n                options.UseSqlServer(Configuration.GetConnec" +
-                    "tionString(\"");
-            
-            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Context\")));\r\n\r\n            // Repositories\r\n");
-            
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\tservices.AddScoped<");
-            
-            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write("Repository>();\r\n");
+            this.Write("Repository : Repository<");
             
-            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t\t// BLLs\r\n");
-            
-            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\tservices.AddScoped<");
-            
-            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write("BLL>();\r\n");
+            this.Write(">\r\n    {\r\n        private new readonly ");
             
-            #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- } 
+            #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t// AutoMapper\r\n            var mappingConfig = new MapperConfiguration(mc =>" +
-                    "\r\n            {\r\n                mc.AddProfile(new AutoMapperProfile());\r\n      " +
-                    "      });\r\n            IMapper mapper = mappingConfig.CreateMapper();\r\n         " +
-                    "   services.AddSingleton(mapper);\r\n\r\n            services.AddControllers();\r\n   " +
-                    "     }\r\n\r\n        // This method gets called by the runtime. Use this method to " +
-                    "configure the HTTP request pipeline.\r\n        public void Configure(IApplication" +
-                    "Builder app, IWebHostEnvironment env)\r\n        {\r\n\t\t    // CORS\r\n            app" +
-                    ".UseCors(options => {\r\n                options.AllowAnyOrigin()\r\n               " +
-                    "     .AllowAnyMethod()\r\n                    .AllowAnyHeader();\r\n            });\r" +
-                    "\n\r\n            if (env.IsDevelopment())\r\n            {\r\n                app.UseD" +
-                    "eveloperExceptionPage();\r\n            }\r\n            else\r\n            {\r\n      " +
-                    "          app.UseExceptionHandler(appBuilder =>\r\n                {\r\n            " +
-                    "        appBuilder.Run(async context =>\r\n                    {\r\n                " +
-                    "        context.Response.StatusCode = 500;\r\n                        await contex" +
-                    "t.Response.WriteAsync(\"An unexpected fault happened. Try again later.\");\r\n      " +
-                    "              });\r\n                });\r\n            }\r\n\r\n\t\t\t// Authentication an" +
-                    "d Authorization\r\n            app.UseAuthorization();\r\n\r\n\t\t\t// MVC\r\n            a" +
-                    "pp.UseRouting();\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n    " +
-                    "            endpoints.MapControllers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
+            this.Write("Context context;\r\n\r\n        public ");
+            
+            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Repository(");
+            
+            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Context context) : base(context)\r\n        {\r\n            this.context = context;\r" +
+                    "\n        }\r\n\r\n        // Additional functionality and overrides\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -176,7 +90,7 @@ using ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class StartupTemplateBase
+    public class RepositoryTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

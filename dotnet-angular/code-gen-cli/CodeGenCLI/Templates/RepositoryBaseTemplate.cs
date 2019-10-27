@@ -12,16 +12,15 @@ namespace CodeGenCLI.Templates
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using CodeGenCLI.CodeGenClasses;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryBaseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class StartupTemplate : StartupTemplateBase
+    public partial class RepositoryBaseTemplate : RepositoryBaseTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,142 +28,80 @@ namespace CodeGenCLI.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using AutoMapper;
-using ");
+            this.Write("using Microsoft.EntityFrameworkCore;\r\nusing System;\r\nusing System.Collections.Gen" +
+                    "eric;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\nusing System.Threadin" +
+                    "g.Tasks;\r\n\r\nnamespace ");
             
-            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryBaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".BLL;\r\nusing ");
-            
-            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".DAL;\r\nusing ");
-            
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".DAL.Repositories;\r\n\r\nnamespace ");
-            
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(@"
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-		    // CORS
-            services.AddCors();
-
-            // Connection to the ");
-            
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" database\r\n            services.AddDbContext<");
-            
-            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Context>(options =>\r\n                options.UseSqlServer(Configuration.GetConnec" +
-                    "tionString(\"");
-            
-            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Context\")));\r\n\r\n            // Repositories\r\n");
-            
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\tservices.AddScoped<");
-            
-            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Repository>();\r\n");
-            
-            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t\t// BLLs\r\n");
-            
-            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\tservices.AddScoped<");
-            
-            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("BLL>();\r\n");
-            
-            #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t\t// AutoMapper\r\n            var mappingConfig = new MapperConfiguration(mc =>" +
-                    "\r\n            {\r\n                mc.AddProfile(new AutoMapperProfile());\r\n      " +
-                    "      });\r\n            IMapper mapper = mappingConfig.CreateMapper();\r\n         " +
-                    "   services.AddSingleton(mapper);\r\n\r\n            services.AddControllers();\r\n   " +
-                    "     }\r\n\r\n        // This method gets called by the runtime. Use this method to " +
-                    "configure the HTTP request pipeline.\r\n        public void Configure(IApplication" +
-                    "Builder app, IWebHostEnvironment env)\r\n        {\r\n\t\t    // CORS\r\n            app" +
-                    ".UseCors(options => {\r\n                options.AllowAnyOrigin()\r\n               " +
-                    "     .AllowAnyMethod()\r\n                    .AllowAnyHeader();\r\n            });\r" +
-                    "\n\r\n            if (env.IsDevelopment())\r\n            {\r\n                app.UseD" +
-                    "eveloperExceptionPage();\r\n            }\r\n            else\r\n            {\r\n      " +
-                    "          app.UseExceptionHandler(appBuilder =>\r\n                {\r\n            " +
-                    "        appBuilder.Run(async context =>\r\n                    {\r\n                " +
-                    "        context.Response.StatusCode = 500;\r\n                        await contex" +
-                    "t.Response.WriteAsync(\"An unexpected fault happened. Try again later.\");\r\n      " +
-                    "              });\r\n                });\r\n            }\r\n\r\n\t\t\t// Authentication an" +
-                    "d Authorization\r\n            app.UseAuthorization();\r\n\r\n\t\t\t// MVC\r\n            a" +
-                    "pp.UseRouting();\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n    " +
-                    "            endpoints.MapControllers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
+            this.Write(".DAL\r\n{\r\n    interface IRepository<TEntity> where TEntity : class\r\n    {\r\n       " +
+                    " // Create\r\n        TEntity Insert(TEntity entity);\r\n        Task<TEntity> Inser" +
+                    "tAsync(TEntity entity);\r\n\r\n        // Read\r\n        TEntity GetById(Guid id);\r\n " +
+                    "       Task<TEntity> GetByIdAsync(Guid id);\r\n\r\n        IEnumerable<TEntity> Get(" +
+                    "\r\n            Expression<Func<TEntity, bool>> filter = null,\r\n            Func<I" +
+                    "Queryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,\r\n            str" +
+                    "ing includeProperties = \"\"\r\n        );\r\n        Task<IEnumerable<TEntity>> GetAs" +
+                    "ync(\r\n            Expression<Func<TEntity, bool>> filter = null,\r\n            Fu" +
+                    "nc<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,\r\n           " +
+                    " string includeProperties = \"\"\r\n        );\r\n\r\n        // Update\r\n        TEntity" +
+                    " Update(TEntity entityToUpdate);\r\n        Task<TEntity> UpdateAsync(TEntity enti" +
+                    "tyToUpdate);\r\n\r\n        // Delete\r\n        void Delete(Guid id);\r\n        Task D" +
+                    "eleteAsync(Guid id);\r\n\r\n        void Delete(TEntity entity);\r\n        Task Delet" +
+                    "eAsync(TEntity entity);\r\n    }\r\n\r\n    public class Repository<TEntity> : IReposi" +
+                    "tory<TEntity> where TEntity : class\r\n    {\r\n        protected readonly DbContext" +
+                    " context;\r\n        private readonly DbSet<TEntity> dbSet;\r\n\r\n        public Repo" +
+                    "sitory(DbContext context)\r\n        {\r\n            this.context = context;\r\n     " +
+                    "       dbSet = context.Set<TEntity>();\r\n        }\r\n\r\n        public virtual TEnt" +
+                    "ity GetById(Guid id)\r\n        {\r\n            return dbSet.Find(id);\r\n        }\r\n" +
+                    "\r\n        public virtual async Task<TEntity> GetByIdAsync(Guid id)\r\n        {\r\n " +
+                    "           return await dbSet.FindAsync(id);\r\n        }\r\n\r\n        public virtua" +
+                    "l IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<I" +
+                    "Queryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includePr" +
+                    "operties = \"\")\r\n        {\r\n            IQueryable<TEntity> query = dbSet;\r\n\r\n   " +
+                    "         if (filter != null)\r\n            {\r\n                query = query.Where" +
+                    "(filter);\r\n            }\r\n\r\n            foreach (var includeProperty in includeP" +
+                    "roperties.Split(new[] { \',\' }, StringSplitOptions.RemoveEmptyEntries))\r\n        " +
+                    "    {\r\n                query = query.Include(includeProperty);\r\n            }\r\n\r" +
+                    "\n            if (orderBy != null)\r\n            {\r\n                return orderBy" +
+                    "(query).ToList();\r\n            }\r\n\r\n            return query.ToList();\r\n        " +
+                    "}\r\n\r\n        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression" +
+                    "<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable" +
+                    "<TEntity>> orderBy = null, string includeProperties = \"\")\r\n        {\r\n          " +
+                    "  IQueryable<TEntity> query = dbSet;\r\n\r\n            if (filter != null)\r\n       " +
+                    "     {\r\n                query = query.Where(filter);\r\n            }\r\n\r\n         " +
+                    "   foreach (var includeProperty in includeProperties.Split(new[] { \',\' }, String" +
+                    "SplitOptions.RemoveEmptyEntries))\r\n            {\r\n                query = query." +
+                    "Include(includeProperty);\r\n            }\r\n\r\n            if (orderBy != null)\r\n  " +
+                    "          {\r\n                return await orderBy(query).ToListAsync();\r\n       " +
+                    "     }\r\n\r\n            return await query.ToListAsync();\r\n        }\r\n\r\n        pu" +
+                    "blic virtual TEntity Insert(TEntity entity)\r\n        {\r\n            dbSet.Add(en" +
+                    "tity);\r\n            context.SaveChanges();\r\n\r\n            return entity;\r\n      " +
+                    "  }\r\n\r\n        public virtual async Task<TEntity> InsertAsync(TEntity entity)\r\n " +
+                    "       {\r\n            await dbSet.AddAsync(entity);\r\n            await context.S" +
+                    "aveChangesAsync();\r\n\r\n            return entity;\r\n        }\r\n\r\n        public vi" +
+                    "rtual TEntity Update(TEntity entityToUpdate)\r\n        {\r\n            dbSet.Attac" +
+                    "h(entityToUpdate);\r\n            context.Entry(entityToUpdate).State = EntityStat" +
+                    "e.Modified;\r\n            context.SaveChanges();\r\n\r\n            return entityToUp" +
+                    "date;\r\n        }\r\n\r\n        public virtual async Task<TEntity> UpdateAsync(TEnti" +
+                    "ty entityToUpdate)\r\n        {\r\n            dbSet.Attach(entityToUpdate);\r\n      " +
+                    "      context.Entry(entityToUpdate).State = EntityState.Modified;\r\n            a" +
+                    "wait context.SaveChangesAsync();\r\n\r\n            return entityToUpdate;\r\n        " +
+                    "}\r\n\r\n        public virtual void Delete(Guid id)\r\n        {\r\n            TEntity" +
+                    " entityToDelete = dbSet.Find(id);\r\n            Delete(entityToDelete);\r\n        " +
+                    "}\r\n\r\n        public virtual async Task DeleteAsync(Guid id)\r\n        {\r\n        " +
+                    "    TEntity entityToDelete = await dbSet.FindAsync(id);\r\n            await Delet" +
+                    "eAsync(entityToDelete);\r\n        }\r\n\r\n        public virtual void Delete(TEntity" +
+                    " entityToDelete)\r\n        {\r\n            if (context.Entry(entityToDelete).State" +
+                    " == EntityState.Detached)\r\n            {\r\n                dbSet.Attach(entityToD" +
+                    "elete);\r\n            }\r\n\r\n            dbSet.Remove(entityToDelete);\r\n           " +
+                    " context.SaveChanges();\r\n        }\r\n\r\n        public virtual async Task DeleteAs" +
+                    "ync(TEntity entityToDelete)\r\n        {\r\n            if (context.Entry(entityToDe" +
+                    "lete).State == EntityState.Detached)\r\n            {\r\n                dbSet.Attac" +
+                    "h(entityToDelete);\r\n            }\r\n\r\n            dbSet.Remove(entityToDelete);\r\n" +
+                    "            await context.SaveChangesAsync();\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -176,7 +113,7 @@ using ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class StartupTemplateBase
+    public class RepositoryBaseTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

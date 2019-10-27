@@ -2,11 +2,11 @@
 
 namespace CodeGenCLI.Templates
 {
-    public partial class StartupTemplate
+    public partial class AutoMapperProfileTemplate
     {
         private CodeGenConfig config;
 
-        public StartupTemplate(CodeGenConfig config)
+        public AutoMapperProfileTemplate(CodeGenConfig config)
         {
             this.config = config;
         }

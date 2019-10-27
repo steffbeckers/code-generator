@@ -61,7 +61,7 @@ namespace CodeGenCLI
                             ModelTemplate modelTemplate = new ModelTemplate(Config, codeGenModel);
                             string modelTemplateContent = modelTemplate.TransformText();
 
-                            // TODO
+                            // TODO: For all file writes?
                             //if (!File.Exists(...path...) || Config.Override)
                             File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\" + codeGenModel.Name + ".cs", modelTemplateContent);
                             Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\" + codeGenModel.Name + ".cs");
@@ -77,33 +77,75 @@ namespace CodeGenCLI
                             ViewModelTemplate viewModelTemplate = new ViewModelTemplate(Config, codeGenModel);
                             string viewModelTemplateContent = viewModelTemplate.TransformText();
 
-                            // TODO
-                            //if (!File.Exists(...path...) || Config.Override)
                             File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\" + codeGenModel.Name + "VM.cs", viewModelTemplateContent);
                             Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\" + codeGenModel.Name + "VM.cs");
                         }
 
                         // DAL
-
-                        // DbContext
                         if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL")))
                         {
                             Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL"));
                         }
+
+                        //// DbContext
                         DbContextTemplate dbContextTemplate = new DbContextTemplate(Config);
                         string dbContextTemplateContent = dbContextTemplate.TransformText();
                         
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + Config.Name + "Context.cs", dbContextTemplateContent);
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + Config.Name + "Context.cs");
 
-                        // Startup
+                        //// AutoMapper
+                        AutoMapperProfileTemplate autoMapperProfileTemplate = new AutoMapperProfileTemplate(Config);
+                        string autoMapperProfileTemplateContent = autoMapperProfileTemplate.TransformText();
 
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "AutoMapperProfile.cs", autoMapperProfileTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "AutoMapperProfile.cs");
+
+                        //// Repositories
+                        ////// Base
+                        RepositoryBaseTemplate repositoryBaseTemplate = new RepositoryBaseTemplate(Config);
+                        string repositoryBaseTemplateContent = repositoryBaseTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repository.cs", repositoryBaseTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repository.cs");
+
+                        ////// Per model
+                        if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repositories"))
+                        {
+                            Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repositories");
+                        }
+                        foreach (CodeGenModel codeGenModel in Config.Models)
+                        {
+                            RepositoryTemplate repositoryTemplate = new RepositoryTemplate(Config, codeGenModel);
+                            string repositoryTemplateContent = repositoryTemplate.TransformText();
+
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repositories" + "\\" + codeGenModel.Name + "Repository.cs", repositoryTemplateContent);
+                            Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repositories" + "\\" + codeGenModel.Name + "Repository.cs");
+                        }
+
+                        // BLL
+                        if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL")))
+                        {
+                            Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL"));
+                        }
+                        foreach (CodeGenModel codeGenModel in Config.Models)
+                        {
+                            BLLTemplate bllTemplate = new BLLTemplate(Config, codeGenModel);
+                            string bllTemplateContent = bllTemplate.TransformText();
+
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs", bllTemplateContent);
+                            Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs");
+                        }
+
+                        // Controllers
+
+
+                        // Startup
                         StartupTemplate startupTemplate = new StartupTemplate(Config);
                         string startupTemplateContent = startupTemplate.TransformText();
 
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + "Startup.cs", startupTemplateContent);
                         Console.WriteLine("Startup.cs");
-
 
                         // TODO: Migrations
                         //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");

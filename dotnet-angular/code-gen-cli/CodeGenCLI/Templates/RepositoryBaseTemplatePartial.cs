@@ -2,11 +2,11 @@
 
 namespace CodeGenCLI.Templates
 {
-    public partial class StartupTemplate
+    public partial class RepositoryBaseTemplate
     {
         private CodeGenConfig config;
 
-        public StartupTemplate(CodeGenConfig config)
+        public RepositoryBaseTemplate(CodeGenConfig config)
         {
             this.config = config;
         }

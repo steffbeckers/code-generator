@@ -17,7 +17,7 @@ namespace CodeGenCLI.CodeGenClasses
         public bool Override { get; set; }
 
         [JsonProperty("webAPI")]
-        public CodeGenWebAPIConfig WebAPI { get; set; }
+        public CodeGenConfigWebAPI WebAPI { get; set; }
 
         public List<CodeGenModel> Models { get; set; }
     }

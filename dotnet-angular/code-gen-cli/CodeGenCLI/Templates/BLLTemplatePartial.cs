@@ -2,13 +2,15 @@
 
 namespace CodeGenCLI.Templates
 {
-    public partial class StartupTemplate
+    public partial class BLLTemplate
     {
         private CodeGenConfig config;
+        private CodeGenModel model;
 
-        public StartupTemplate(CodeGenConfig config)
+        public BLLTemplate(CodeGenConfig config, CodeGenModel model)
         {
             this.config = config;
+            this.model = model;
         }
     }
 }
