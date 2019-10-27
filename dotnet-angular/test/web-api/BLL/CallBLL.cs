@@ -12,18 +12,15 @@ namespace Test.API.BLL
     public class CallBLL
     {
         private readonly CallRepository callRepository;
-        // TODO: private readonly Call...Repository call...Repository;
 
 		/// <summary>
 		/// The constructor of the Call business logic layer.
 		/// </summary>
         public CallBLL(
-			CallRepository callRepository//,
-			// TODO: Call...Repository call...Repository
+			CallRepository callRepository
 		)
         {
             this.callRepository = callRepository;
-            // TODO: this.Call...Repository = Call...Repository;
         }
 
 		/// <summary>
@@ -67,26 +64,6 @@ namespace Test.API.BLL
 
             return await this.callRepository.UpdateAsync(call);
         }
-
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
 
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)

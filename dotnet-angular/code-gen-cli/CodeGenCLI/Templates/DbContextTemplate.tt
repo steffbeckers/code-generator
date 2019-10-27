@@ -21,7 +21,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
 <# foreach (CodeGenModel model in config.Models) { #>
+<# if (model.ManyToMany) { #>
+		public DbSet<<#= model.Name #>> <#= model.Name #> { get; set; }
+<# } else { #>
 		public DbSet<<#= model.Name #>> <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #> { get; set; }
+<# } #>
 <# } #>
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -41,17 +45,31 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         {
 <# CodeGenModel lastModel = config.Models.Last(); #>
 <# foreach (CodeGenModel model in config.Models) { #>
+<# if (model.ManyToMany) { #>
+			#region <#= model.Name #>
+<# } else { #>
 			#region <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+<# } #>
 
             // Soft delete query filter
             modelBuilder.Entity<<#= model.Name #>>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>");
+<# if (model.ManyToMany) { #>
+			modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= model.Name #>");
+<# } else { #>
+			modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>");
+<# } #>
+
+			// Key
+			modelBuilder.Entity<<#= model.Name #>>().HasKey(e => e.<#= !string.IsNullOrEmpty(model.Key) ? model.Key : "Id" #>);
 
             // Required properties
 <# foreach (CodeGenModelProperty property in model.Properties.Where(p => p.Required)) { #>
             modelBuilder.Entity<<#= model.Name #>>().Property(e => e.<#= property.Name #>).IsRequired();
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(p => p.Required)) { #>
+            modelBuilder.Entity<<#= model.Name #>>().Property(e => e.<#= relation.Model #>Id).IsRequired();
 <# } #>
 
             #endregion

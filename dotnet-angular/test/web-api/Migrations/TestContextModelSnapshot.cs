@@ -213,6 +213,36 @@ namespace Test.API.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("Test.API.Models.ProjectNote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("NoteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NoteId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectNote");
+                });
+
             modelBuilder.Entity("Test.API.Models.Todo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -246,14 +276,29 @@ namespace Test.API.Migrations
 
             modelBuilder.Entity("Test.API.Models.Contact", b =>
                 {
-                    b.HasOne("Test.API.Models.Account", null)
+                    b.HasOne("Test.API.Models.Account", "Account")
                         .WithMany("Contacts")
                         .HasForeignKey("AccountId");
                 });
 
+            modelBuilder.Entity("Test.API.Models.ProjectNote", b =>
+                {
+                    b.HasOne("Test.API.Models.Note", "Note")
+                        .WithMany("ProjectNote")
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Test.API.Models.Project", "Project")
+                        .WithMany("ProjectNote")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Test.API.Models.Todo", b =>
                 {
-                    b.HasOne("Test.API.Models.Project", null)
+                    b.HasOne("Test.API.Models.Project", "Project")
                         .WithMany("Todoes")
                         .HasForeignKey("ProjectId");
                 });

@@ -622,16 +622,73 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
-            this.Write(");\r\n        }\r\n\r\n        // DELETE: api/");
+            this.Write(");\r\n        }\r\n\r\n\t\t// TODO\r\n        //// PUT: api/Skills/5/SkillTags/123/Link\r\n  " +
+                    "      //[HttpPut(\"{skillId}/SkillTags/{skillTagId}/Link\")]\r\n        //public asy" +
+                    "nc Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [Fr" +
+                    "omRoute] Guid skillTagId)\r\n        //{\r\n        //    Skill skill = await contex" +
+                    "t.Skills\r\n        //                        .Include(s => s.SkillSkillTag)\r\n    " +
+                    "    //                            .ThenInclude(cs => cs.SkillTag)\r\n        //   " +
+                    "                     .SingleOrDefaultAsync(s => s.Id == skillId);\r\n        //   " +
+                    " if (skill == null)\r\n        //    {\r\n        //        return NotFound(\"Skill n" +
+                    "ot found\");\r\n        //    }\r\n\r\n        //    SkillTag skillTag = await context." +
+                    "SkillTags.FindAsync(skillTagId);\r\n        //    if (skillTag == null)\r\n        /" +
+                    "/    {\r\n        //        return NotFound(\"Skill tag not found\");\r\n        //   " +
+                    " }\r\n\r\n        //    // Retrieve existing link\r\n        //    SkillSkillTag skill" +
+                    "SkillTag = await context.SkillSkillTag\r\n        //                              " +
+                    "      .Include(cs => cs.SkillTag)\r\n        //                                   " +
+                    " .Where(cs => cs.SkillId == skill.Id && cs.SkillTagId == skillTag.Id)\r\n        /" +
+                    "/                                    .SingleOrDefaultAsync();\r\n        //    if " +
+                    "(skillSkillTag != null)\r\n        //    {\r\n        //        // Link already exis" +
+                    "ts\r\n\r\n        //        // Update in local\r\n        //        int skillSkillTagI" +
+                    "ndex = skill.SkillSkillTag.IndexOf(skillSkillTag);\r\n\r\n        //        // Updat" +
+                    "e link\r\n        //        skillSkillTag.DateModified = DateTime.Now;\r\n\r\n        " +
+                    "//        context.SkillSkillTag.Update(skillSkillTag);\r\n        //        await " +
+                    "context.SaveChangesAsync();\r\n\r\n        //        // Update in local\r\n        // " +
+                    "       if (skillSkillTagIndex != -1)\r\n        //            skill.SkillSkillTag[" +
+                    "skillSkillTagIndex] = skillSkillTag;\r\n        //    }\r\n        //    else\r\n     " +
+                    "   //    {\r\n        //        // Link doesn\'t exist yet\r\n\r\n        //        // " +
+                    "Add link\r\n        //        skillSkillTag = new SkillSkillTag();\r\n        //    " +
+                    "    skillSkillTag.Id = Guid.NewGuid();\r\n        //        skillSkillTag.SkillId " +
+                    "= skill.Id;\r\n        //        skillSkillTag.SkillTagId = skillTag.Id;\r\n        " +
+                    "//        skillSkillTag.SkillTag = skillTag;\r\n        //        skillSkillTag.Da" +
+                    "teEntered = DateTime.Now;\r\n        //        skillSkillTag.DateModified = DateTi" +
+                    "me.Now;\r\n\r\n        //        await context.SkillSkillTag.AddAsync(skillSkillTag)" +
+                    ";\r\n        //        await context.SaveChangesAsync();\r\n        //    }\r\n\r\n     " +
+                    "   //    return Ok(this.mapper.Map<Skill, SkillVM>(skill));\r\n        //}\r\n\r\n    " +
+                    "    // TODO\r\n        //// DELETE: api/Skills/5/SkillTags/123/Unlink\r\n        //[" +
+                    "HttpDelete(\"{skillId}/SkillTags/{skillTagId}/Unlink\")]\r\n        //public async T" +
+                    "ask<ActionResult<SkillVM>> UnlinkSkillTagFromSkill([FromRoute] Guid skillId, [Fr" +
+                    "omRoute] Guid skillTagId)\r\n        //{\r\n        //    Skill skill = await contex" +
+                    "t.Skills\r\n        //                        .Include(s => s.SkillSkillTag)\r\n    " +
+                    "    //                            .ThenInclude(cs => cs.SkillTag)\r\n        //   " +
+                    "                     .SingleOrDefaultAsync(s => s.Id == skillId);\r\n        //   " +
+                    " if (skill == null)\r\n        //    {\r\n        //        return NotFound(\"Skill n" +
+                    "ot found\");\r\n        //    }\r\n\r\n        //    SkillTag skillTag = await context." +
+                    "SkillTags.FindAsync(skillTagId);\r\n        //    if (skillTag == null)\r\n        /" +
+                    "/    {\r\n        //        return NotFound(\"Skill tag not found\");\r\n        //   " +
+                    " }\r\n\r\n        //    // Retrieve existing link\r\n        //    SkillSkillTag skill" +
+                    "SkillTag = await context.SkillSkillTag\r\n        //                              " +
+                    "      .Include(cs => cs.SkillTag)\r\n        //                                   " +
+                    " .Where(cs => cs.SkillId == skill.Id && cs.SkillTagId == skillTag.Id)\r\n        /" +
+                    "/                                    .SingleOrDefaultAsync();\r\n        //    if " +
+                    "(skillSkillTag != null)\r\n        //    {\r\n        //        // Link exists\r\n\r\n  " +
+                    "      //        // Remove from local\r\n        //        int skillSkillTagIndex =" +
+                    " skill.SkillSkillTag.IndexOf(skillSkillTag);\r\n\r\n        //        // Remove link" +
+                    "\r\n        //        context.SkillSkillTag.Remove(skillSkillTag);\r\n        //    " +
+                    "    await context.SaveChangesAsync();\r\n\r\n        //        // Remove from local\r" +
+                    "\n        //        if (skillSkillTagIndex != -1)\r\n        //            skill.Sk" +
+                    "illSkillTag.RemoveAt(skillSkillTagIndex);\r\n        //    }\r\n\r\n        //    retu" +
+                    "rn Ok(this.mapper.Map<Skill, SkillVM>(skill));\r\n        //}\r\n\r\n        // DELETE" +
+                    ": api/");
             
-            #line 135 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 241 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("/{id}\r\n\t\t/// <summary>\r\n\t\t/// Deletes a specific ");
             
-            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 243 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -639,49 +696,49 @@ namespace CodeGenCLI.Templates
             this.Write(".\r\n\t\t/// </summary>\r\n\t\t/// <param name=\"id\"></param>\r\n        [HttpDelete(\"{id}\")" +
                     "]\r\n        public async Task<ActionResult<");
             
-            #line 141 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 247 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>> Delete");
             
-            #line 141 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 247 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("([FromRoute] Guid id)\r\n        {\r\n            // Retrieve existing ");
             
-            #line 143 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 249 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 144 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 250 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 144 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 250 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.bll.Get");
             
-            #line 144 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 250 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("ByIdAsync(id);\r\n            if (");
             
-            #line 145 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 251 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -689,35 +746,35 @@ namespace CodeGenCLI.Templates
             this.Write(" == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n  " +
                     "          await this.bll.Delete");
             
-            #line 150 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 256 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Async(");
             
-            #line 150 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 256 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n            return this.mapper.Map<");
             
-            #line 152 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 258 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 152 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 258 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>(");
             
-            #line 152 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
+            #line 258 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default

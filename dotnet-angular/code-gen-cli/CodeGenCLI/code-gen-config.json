@@ -152,11 +152,13 @@
         {
           "name": "Project",
           "type": "many-to-one",
+          "required": true, 
           "model": "Project"
         },
         {
           "name": "Note",
           "type": "many-to-one",
+          "required": true,
           "model": "Note"
         }
       ]

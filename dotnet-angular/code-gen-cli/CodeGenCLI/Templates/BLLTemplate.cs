@@ -13,6 +13,7 @@ namespace CodeGenCLI.Templates
     using System.Text;
     using System.Collections.Generic;
     using CodeGenCLI.CodeGenClasses;
+    using CodeGenCLI.Extensions;
     using System;
     
     /// <summary>
@@ -32,301 +33,363 @@ namespace CodeGenCLI.Templates
             this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tasks;\r\n" +
                     "using ");
             
-            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".DAL.Repositories;\r\nusing ");
             
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".Models;\r\n\r\nnamespace ");
             
-            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".BLL\r\n{\r\n\t/// <summary>\r\n\t/// The business logic layer for ");
             
-            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write(".\r\n\t/// </summary>\r\n    public class ");
             
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("BLL\r\n    {\r\n        private readonly ");
             
-            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Repository ");
             
-            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write("Repository;\r\n        // TODO: private readonly ");
-            
-            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("...Repository ");
-            
             #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("...Repository;\r\n\r\n\t\t/// <summary>\r\n\t\t/// The constructor of the ");
+            this.Write("Repository;\r\n");
+            
+            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { 
+            
+            #line default
+            #line hidden
+            this.Write("        private readonly ");
+            
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through));
+            
+            #line default
+            #line hidden
+            this.Write("Repository ");
+            
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository;\r\n");
             
             #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t/// <summary>\r\n\t\t/// The constructor of the ");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" business logic layer.\r\n\t\t/// </summary>\r\n        public ");
             
-            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("BLL(\r\n\t\t\t");
             
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Repository ");
             
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("Repository//,\r\n\t\t\t// TODO: ");
+            this.Write("Repository");
             
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("...Repository ");
-            
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).ToList().Count() > 0 ? "," : "")));
             
             #line default
             #line hidden
-            this.Write("...Repository\r\n\t\t)\r\n        {\r\n            this.");
+            this.Write("\r\n");
             
             #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { 
+            
+            #line default
+            #line hidden
+            
+            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t");
+            
+            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through));
+            
+            #line default
+            #line hidden
+            this.Write("Repository ");
+            
+            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository");
+            
+            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((!relation.Equals(lastModelManyToManyRelation) ? "," : "")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t)\r\n        {\r\n            this.");
+            
+            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Repository = ");
             
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("Repository;\r\n            // TODO: this.");
+            this.Write("Repository;\r\n");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("...Repository = ");
-            
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { 
             
             #line default
             #line hidden
-            this.Write("...Repository;\r\n        }\r\n\r\n\t\t/// <summary>\r\n\t\t/// Retrieves all ");
+            this.Write("\t\t\tthis.");
             
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository = ");
+            
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository;\r\n");
+            
+            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("        }\r\n\r\n\t\t/// <summary>\r\n\t\t/// Retrieves all ");
+            
+            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
             this.Write(".\r\n\t\t/// </summary>\r\n\t\tpublic async Task<IEnumerable<");
             
-            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">> GetAll");
             
-            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("Async()\r\n        {\r\n            return await this.");
             
-            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Repository.GetAsync();\r\n        }\r\n\r\n\t\t/// <summary>\r\n\t\t/// Retrieves one ");
             
-            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" by Id.\r\n\t\t/// </summary>\r\n\t\tpublic async Task<");
             
-            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("> Get");
             
-            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("ByIdAsync(Guid id)\r\n        {\r\n            return await this.");
             
-            #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Repository.GetByIdAsync(id);\r\n        }\r\n\r\n\t\t/// <summary>\r\n\t\t/// Creates a new ");
             
-            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" record.\r\n\t\t/// </summary>\r\n        public async Task<");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("> Create");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Async(");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            return await this.");
             
-            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 64 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Repository.InsertAsync(");
             
-            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 64 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n        }\r\n\r\n\t\t/// <summary>\r\n\t\t/// Updates an existing ");
             
-            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 68 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" record by Id.\r\n\t\t/// </summary>\r\n        public async Task<");
             
-            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("> Update");
             
-            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Async(Guid id, ");
             
-            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Update)\r\n        {\r\n            // Retrieve existing\r\n            ");
             
-            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" = await this.");
             
-            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Repository.GetByIdAsync(id);\r\n            if (");
             
-            #line 66 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 74 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
@@ -334,125 +397,291 @@ namespace CodeGenCLI.Templates
             this.Write(" == null)\r\n            {\r\n                return null;\r\n            }\r\n\r\n        " +
                     "    // Mapping\r\n");
             
-            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 81 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 81 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 81 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Update.");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 81 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 74 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 82 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 75 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 83 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
  foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
             this.Write("Id = ");
             
-            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Update.");
             
-            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
             this.Write("Id;\r\n");
             
-            #line 77 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 85 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n            return await this.");
             
-            #line 79 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 87 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Repository.UpdateAsync(");
             
-            #line 79 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 87 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write(@");
-        }
-
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
-
-		// TODO
+            this.Write(");\r\n        }\r\n\r\n");
+            
+            #line 90 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { 
+            
+            #line default
+            #line hidden
+            
+            #line 91 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); 
+            
+            #line default
+            #line hidden
+            this.Write("        public async Task<");
+            
+            #line 92 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("> Link");
+            
+            #line 92 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            
+            #line default
+            #line hidden
+            this.Write("To");
+            
+            #line 92 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Async(");
+            
+            #line 92 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 92 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        {\r\n            ");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Link = this.");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository.GetBy");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("And");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            
+            #line default
+            #line hidden
+            this.Write("Id(");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Id, ");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 94 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            
+            #line default
+            #line hidden
+            this.Write("Id);\r\n\r\n            if (");
+            
+            #line 96 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Link == null)\r\n            {\r\n                await this.");
+            
+            #line 98 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository.InsertAsync(");
+            
+            #line 98 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n            }\r\n            else\r\n            {\r\n                // TODO: Mapp" +
+                    "ing of fields on many-to-many\r\n                //");
+            
+            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Link.Field = ");
+            
+            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".Field;\r\n\r\n                await this.");
+            
+            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository.UpdateAsync(");
+            
+            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Link);\r\n            }\r\n\r\n            return await this.Get");
+            
+            #line 108 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ByIdAsync(");
+            
+            #line 108 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Through.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 108 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Id);\r\n        }\r\n\r\n");
+            
+            #line 111 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write(@"		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
         //{
         //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
@@ -468,56 +697,56 @@ namespace CodeGenCLI.Templates
 		/// <summary>
 		/// Deletes an existing ");
             
-            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 126 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(" record by Id.\r\n\t\t/// </summary>\r\n        public async Task<");
             
-            #line 118 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("> Delete");
             
-            #line 118 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Async(");
             
-            #line 118 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 118 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            await this.");
             
-            #line 120 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 130 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("Repository.DeleteAsync(");
             
-            #line 120 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 130 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n            return ");
             
-            #line 122 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
+            #line 132 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default

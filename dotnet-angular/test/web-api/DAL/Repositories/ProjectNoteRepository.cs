@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Test.API.Models;
 
 namespace Test.API.DAL.Repositories
@@ -18,5 +20,19 @@ namespace Test.API.DAL.Repositories
         }
 
         // Additional functionality and overrides
+
+        public ProjectNote GetByProjectAndNoteId(Guid projectId, Guid noteId)
+        {
+            return this.context.ProjectNote
+                .Where(x => x.ProjectId == projectId && x.NoteId == noteId)
+                .SingleOrDefault();
+        }
+
+		public ProjectNote GetByNoteAndProjectId(Guid noteId, Guid projectId)
+        {
+            return this.context.ProjectNote
+                .Where(x => x.NoteId == noteId && x.ProjectId == projectId)
+                .SingleOrDefault();
+        }
     }
 }

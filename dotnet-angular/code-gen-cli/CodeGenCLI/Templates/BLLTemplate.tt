@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,18 +19,25 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     public class <#= model.Name #>BLL
     {
         private readonly <#= model.Name #>Repository <#= model.Name.ToLower() #>Repository;
-        // TODO: private readonly <#= model.Name #>...Repository <#= model.Name.ToLower() #>...Repository;
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+        private readonly <#= relation.Through #>Repository <#= relation.Through.ToCamelCase() #>Repository;
+<# } #>
 
 		/// <summary>
 		/// The constructor of the <#= model.Name #> business logic layer.
 		/// </summary>
         public <#= model.Name #>BLL(
-			<#= model.Name #>Repository <#= model.Name.ToLower() #>Repository//,
-			// TODO: <#= model.Name #>...Repository <#= model.Name.ToLower() #>...Repository
+			<#= model.Name #>Repository <#= model.Name.ToLower() #>Repository<#= (model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).ToList().Count() > 0 ? "," : "") #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+<# CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); #>
+			<#= relation.Through #>Repository <#= relation.Through.ToCamelCase() #>Repository<#= (!relation.Equals(lastModelManyToManyRelation) ? "," : "") #>
+<# } #>
 		)
         {
             this.<#= model.Name.ToLower() #>Repository = <#= model.Name.ToLower() #>Repository;
-            // TODO: this.<#= model.Name #>...Repository = <#= model.Name #>...Repository;
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+			this.<#= relation.Through.ToCamelCase() #>Repository = <#= relation.Through.ToCamelCase() #>Repository;
+<# } #>
         }
 
 		/// <summary>
@@ -79,26 +87,28 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             return await this.<#= model.Name.ToLower() #>Repository.UpdateAsync(<#= model.Name.ToLower() #>);
         }
 
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+<# CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); #>
+        public async Task<<#= model.Name #>> Link<#= relation.Model #>To<#= model.Name #>Async(<#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
+        {
+            <#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = this.<#= relation.Through.ToCamelCase() #>Repository.GetBy<#= model.Name #>And<#= relation.Model #>Id(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id, <#= relation.Through.ToCamelCase() #>.<#= relation.Model #>Id);
 
+            if (<#= relation.Through.ToCamelCase() #>Link == null)
+            {
+                await this.<#= relation.Through.ToCamelCase() #>Repository.InsertAsync(<#= relation.Through.ToCamelCase() #>);
+            }
+            else
+            {
+                // TODO: Mapping of fields on many-to-many
+                //<#= relation.Through.ToCamelCase() #>Link.Field = <#= relation.Through.ToCamelCase() #>.Field;
+
+                await this.<#= relation.Through.ToCamelCase() #>Repository.UpdateAsync(<#= relation.Through.ToCamelCase() #>Link);
+            }
+
+            return await this.Get<#= model.Name #>ByIdAsync(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id);
+        }
+
+<# } #>
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
         //{

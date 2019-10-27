@@ -3,6 +3,10 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
+using System;
+using System.Linq;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories
@@ -23,5 +27,23 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
         // Additional functionality and overrides
+
+<# if (model.ManyToMany) { #>
+<# CodeGenModelRelation manyToManyModel1 = model.Relations.Where(r => r.Required && r.Name == r.Model).First(); #>
+<# CodeGenModelRelation manyToManyModel2 = model.Relations.Where(r => r.Required && r.Name == r.Model && !r.Equals(manyToManyModel1)).First(); #>
+        public <#= model.Name #> GetBy<#= manyToManyModel1.Model #>And<#= manyToManyModel2.Model #>Id(Guid <#= manyToManyModel1.Model.ToCamelCase() #>Id, Guid <#= manyToManyModel2.Model.ToCamelCase() #>Id)
+        {
+            return this.context.<#= model.Name #>
+                .Where(x => x.<#= manyToManyModel1.Model #>Id == <#= manyToManyModel1.Model.ToCamelCase() #>Id && x.<#= manyToManyModel2.Model #>Id == <#= manyToManyModel2.Model.ToCamelCase() #>Id)
+                .SingleOrDefault();
+        }
+
+		public <#= model.Name #> GetBy<#= manyToManyModel2.Model #>And<#= manyToManyModel1.Model #>Id(Guid <#= manyToManyModel2.Model.ToCamelCase() #>Id, Guid <#= manyToManyModel1.Model.ToCamelCase() #>Id)
+        {
+            return this.context.<#= model.Name #>
+                .Where(x => x.<#= manyToManyModel2.Model #>Id == <#= manyToManyModel2.Model.ToCamelCase() #>Id && x.<#= manyToManyModel1.Model #>Id == <#= manyToManyModel1.Model.ToCamelCase() #>Id)
+                .SingleOrDefault();
+        }
+<# } #>
     }
 }

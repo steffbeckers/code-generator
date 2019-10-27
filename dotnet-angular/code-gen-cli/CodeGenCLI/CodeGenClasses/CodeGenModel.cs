@@ -21,6 +21,9 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("key")]
+        public string Key { get; set; }
+
         [JsonProperty("manyToMany")]
         public bool ManyToMany { get; set; }
 

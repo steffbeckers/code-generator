@@ -13,6 +13,13 @@ namespace Test.API.Models
             // Relations
         }
 
+		// Properties
+
+		/// <summary>
+        /// The identifier of ProjectNote.
+        /// </summary>
+		public Guid Id { get; set; }
+
 		// Relations
 
 		//// Many-to-one
@@ -20,7 +27,7 @@ namespace Test.API.Models
 	    /// <summary>
         /// The related foreign key ProjectId for Project of ProjectNote.
         /// </summary>
-		public Guid? ProjectId { get; set; }
+		public Guid ProjectId { get; set; }
 
 		/// <summary>
         /// The related Project of ProjectNote.
@@ -30,7 +37,7 @@ namespace Test.API.Models
 	    /// <summary>
         /// The related foreign key NoteId for Note of ProjectNote.
         /// </summary>
-		public Guid? NoteId { get; set; }
+		public Guid NoteId { get; set; }
 
 		/// <summary>
         /// The related Note of ProjectNote.

@@ -12,18 +12,15 @@ namespace Test.API.BLL
     public class AccountBLL
     {
         private readonly AccountRepository accountRepository;
-        // TODO: private readonly Account...Repository account...Repository;
 
 		/// <summary>
 		/// The constructor of the Account business logic layer.
 		/// </summary>
         public AccountBLL(
-			AccountRepository accountRepository//,
-			// TODO: Account...Repository account...Repository
+			AccountRepository accountRepository
 		)
         {
             this.accountRepository = accountRepository;
-            // TODO: this.Account...Repository = Account...Repository;
         }
 
 		/// <summary>
@@ -70,26 +67,6 @@ namespace Test.API.BLL
 
             return await this.accountRepository.UpdateAsync(account);
         }
-
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
 
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)

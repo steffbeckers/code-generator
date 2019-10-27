@@ -12,18 +12,15 @@ namespace Test.API.BLL
     public class ContactBLL
     {
         private readonly ContactRepository contactRepository;
-        // TODO: private readonly Contact...Repository contact...Repository;
 
 		/// <summary>
 		/// The constructor of the Contact business logic layer.
 		/// </summary>
         public ContactBLL(
-			ContactRepository contactRepository//,
-			// TODO: Contact...Repository contact...Repository
+			ContactRepository contactRepository
 		)
         {
             this.contactRepository = contactRepository;
-            // TODO: this.Contact...Repository = Contact...Repository;
         }
 
 		/// <summary>
@@ -69,26 +66,6 @@ namespace Test.API.BLL
 
             return await this.contactRepository.UpdateAsync(contact);
         }
-
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
 
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)

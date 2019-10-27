@@ -12,18 +12,15 @@ namespace Test.API.BLL
     public class EmailBLL
     {
         private readonly EmailRepository emailRepository;
-        // TODO: private readonly Email...Repository email...Repository;
 
 		/// <summary>
 		/// The constructor of the Email business logic layer.
 		/// </summary>
         public EmailBLL(
-			EmailRepository emailRepository//,
-			// TODO: Email...Repository email...Repository
+			EmailRepository emailRepository
 		)
         {
             this.emailRepository = emailRepository;
-            // TODO: this.Email...Repository = Email...Repository;
         }
 
 		/// <summary>
@@ -68,26 +65,6 @@ namespace Test.API.BLL
 
             return await this.emailRepository.UpdateAsync(email);
         }
-
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
 
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)

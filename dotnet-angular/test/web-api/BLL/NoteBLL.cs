@@ -12,18 +12,18 @@ namespace Test.API.BLL
     public class NoteBLL
     {
         private readonly NoteRepository noteRepository;
-        // TODO: private readonly Note...Repository note...Repository;
+        private readonly ProjectNoteRepository projectNoteRepository;
 
 		/// <summary>
 		/// The constructor of the Note business logic layer.
 		/// </summary>
         public NoteBLL(
-			NoteRepository noteRepository//,
-			// TODO: Note...Repository note...Repository
+			NoteRepository noteRepository,
+			ProjectNoteRepository projectNoteRepository
 		)
         {
             this.noteRepository = noteRepository;
-            // TODO: this.Note...Repository = Note...Repository;
+			this.projectNoteRepository = projectNoteRepository;
         }
 
 		/// <summary>
@@ -69,25 +69,24 @@ namespace Test.API.BLL
             return await this.noteRepository.UpdateAsync(note);
         }
 
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
+        public async Task<Note> LinkProjectToNoteAsync(ProjectNote projectNote)
+        {
+            ProjectNote projectNoteLink = this.projectNoteRepository.GetByNoteAndProjectId(projectNote.NoteId, projectNote.ProjectId);
+
+            if (projectNoteLink == null)
+            {
+                await this.projectNoteRepository.InsertAsync(projectNote);
+            }
+            else
+            {
+                // TODO: Mapping of fields on many-to-many
+                //projectNoteLink.Field = projectNote.Field;
+
+                await this.projectNoteRepository.UpdateAsync(projectNoteLink);
+            }
+
+            return await this.GetNoteByIdAsync(projectNote.NoteId);
+        }
 
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)

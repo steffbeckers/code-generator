@@ -37,7 +37,6 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# } #>
 <# } #>
         }
-<# if (model.Properties.ToList().Count > 0) { #>
 
 		// Properties
 
@@ -57,7 +56,6 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         /// </summary>
 <# } #>
 		public <#= property.Type #> <#= property.Name #> { get; set; }
-<# } #>
 <# } #>
 
 <# if (model.Relations.ToList().Count > 0) { #>

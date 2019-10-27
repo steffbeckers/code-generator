@@ -73,23 +73,56 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
-            this.Write("\t\tpublic DbSet<");
             
             #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ if (model.ManyToMany) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic DbSet<");
+            
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" { get; set; }\r\n");
+            
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\tpublic DbSet<");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("> ");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default
@@ -106,7 +139,7 @@ namespace CodeGenCLI.Templates
                     .Build();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString(""");
             
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -114,90 +147,192 @@ namespace CodeGenCLI.Templates
             this.Write("Context\"));\r\n            }\r\n        }\r\n\r\n\t\tprotected override void OnModelCreatin" +
                     "g(ModelBuilder modelBuilder)\r\n        {\r\n");
             
-            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  CodeGenModel lastModel = config.Models.Last(); 
             
             #line default
             #line hidden
             
-            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
+            
+            #line default
+            #line hidden
+            
+            #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ if (model.ManyToMany) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t#region ");
             
-            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\r\n            // Soft delete query filter\r\n            modelBuilder.Entity<");
-            
-            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write(">().HasQueryFilter(e => e.DeletedOn == null);\r\n\r\n            // Table\r\n          " +
-                    "  modelBuilder.Entity<");
+            this.Write("\r\n");
             
             #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t#region ");
+            
+            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            // Soft delete query filter\r\n            modelBuilder.Entity<");
+            
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">().HasQueryFilter(e => e.DeletedOn == null);\r\n\r\n            // Table\r\n");
+            
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ if (model.ManyToMany) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\tmodelBuilder.Entity<");
+            
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">().ToTable(\"");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\");\r\n");
+            
+            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\tmodelBuilder.Entity<");
+            
+            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">().ToTable(\"");
+            
+            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
-            this.Write("\");\r\n\r\n            // Required properties\r\n");
+            this.Write("\");\r\n");
             
-            #line 53 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t// Key\r\n\t\t\tmodelBuilder.Entity<");
+            
+            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">().HasKey(e => e.");
+            
+            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.Key) ? model.Key : "Id"));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n\r\n            // Required properties\r\n");
+            
+            #line 68 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties.Where(p => p.Required)) { 
             
             #line default
             #line hidden
             this.Write("            modelBuilder.Entity<");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 69 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">().Property(e => e.");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 69 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(").IsRequired();\r\n");
             
-            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(p => p.Required)) { 
+            
+            #line default
+            #line hidden
+            this.Write("            modelBuilder.Entity<");
+            
+            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">().Property(e => e.");
+            
+            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            
+            #line default
+            #line hidden
+            this.Write("Id).IsRequired();\r\n");
+            
+            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n            #endregion\r\n");
             
-            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 78 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 79 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default
@@ -228,47 +363,47 @@ namespace CodeGenCLI.Templates
                 if (
 ");
             
-            #line 86 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 104 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
             
             #line default
             #line hidden
             
-            #line 87 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 88 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(") ||\r\n");
             
-            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 90 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 108 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 91 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 92 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 110 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default
@@ -297,47 +432,47 @@ namespace CodeGenCLI.Templates
                 if (
 ");
             
-            #line 115 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 133 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
             
             #line default
             #line hidden
             
-            #line 116 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 134 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 117 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 135 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(") ||\r\n");
             
-            #line 118 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 136 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 119 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 120 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 138 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 121 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 139 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
  } 
             
             #line default

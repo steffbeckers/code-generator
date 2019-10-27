@@ -12,18 +12,15 @@ namespace Test.API.BLL
     public class TodoBLL
     {
         private readonly TodoRepository todoRepository;
-        // TODO: private readonly Todo...Repository todo...Repository;
 
 		/// <summary>
 		/// The constructor of the Todo business logic layer.
 		/// </summary>
         public TodoBLL(
-			TodoRepository todoRepository//,
-			// TODO: Todo...Repository todo...Repository
+			TodoRepository todoRepository
 		)
         {
             this.todoRepository = todoRepository;
-            // TODO: this.Todo...Repository = Todo...Repository;
         }
 
 		/// <summary>
@@ -69,26 +66,6 @@ namespace Test.API.BLL
 
             return await this.todoRepository.UpdateAsync(todo);
         }
-
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
 
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)

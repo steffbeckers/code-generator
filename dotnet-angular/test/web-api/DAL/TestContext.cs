@@ -21,7 +21,7 @@ namespace Test.API.DAL
 		public DbSet<Document> Documents { get; set; }
 		public DbSet<Email> Emails { get; set; }
 		public DbSet<Project> Projects { get; set; }
-		public DbSet<ProjectNote> ProjectNotes { get; set; }
+		public DbSet<ProjectNote> ProjectNote { get; set; }
 		public DbSet<Todo> Todoes { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,7 +45,10 @@ namespace Test.API.DAL
             modelBuilder.Entity<Account>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Account>().ToTable("Accounts");
+			modelBuilder.Entity<Account>().ToTable("Accounts");
+
+			// Key
+			modelBuilder.Entity<Account>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
@@ -58,7 +61,10 @@ namespace Test.API.DAL
             modelBuilder.Entity<Contact>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Contact>().ToTable("Contacts");
+			modelBuilder.Entity<Contact>().ToTable("Contacts");
+
+			// Key
+			modelBuilder.Entity<Contact>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Contact>().Property(e => e.FirstName).IsRequired();
@@ -72,7 +78,10 @@ namespace Test.API.DAL
             modelBuilder.Entity<Call>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Call>().ToTable("Calls");
+			modelBuilder.Entity<Call>().ToTable("Calls");
+
+			// Key
+			modelBuilder.Entity<Call>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Call>().Property(e => e.Date).IsRequired();
@@ -85,7 +94,10 @@ namespace Test.API.DAL
             modelBuilder.Entity<Note>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Note>().ToTable("Notes");
+			modelBuilder.Entity<Note>().ToTable("Notes");
+
+			// Key
+			modelBuilder.Entity<Note>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Note>().Property(e => e.Title).IsRequired();
@@ -98,7 +110,10 @@ namespace Test.API.DAL
             modelBuilder.Entity<Document>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Document>().ToTable("Documents");
+			modelBuilder.Entity<Document>().ToTable("Documents");
+
+			// Key
+			modelBuilder.Entity<Document>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Document>().Property(e => e.Name).IsRequired();
@@ -111,7 +126,10 @@ namespace Test.API.DAL
             modelBuilder.Entity<Email>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Email>().ToTable("Emails");
+			modelBuilder.Entity<Email>().ToTable("Emails");
+
+			// Key
+			modelBuilder.Entity<Email>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Email>().Property(e => e.Subject).IsRequired();
@@ -124,22 +142,30 @@ namespace Test.API.DAL
             modelBuilder.Entity<Project>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Project>().ToTable("Projects");
+			modelBuilder.Entity<Project>().ToTable("Projects");
+
+			// Key
+			modelBuilder.Entity<Project>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Project>().Property(e => e.Name).IsRequired();
 
             #endregion
 
-			#region ProjectNotes
+			#region ProjectNote
 
             // Soft delete query filter
             modelBuilder.Entity<ProjectNote>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<ProjectNote>().ToTable("ProjectNotes");
+			modelBuilder.Entity<ProjectNote>().ToTable("ProjectNote");
+
+			// Key
+			modelBuilder.Entity<ProjectNote>().HasKey(e => e.Id);
 
             // Required properties
+            modelBuilder.Entity<ProjectNote>().Property(e => e.ProjectId).IsRequired();
+            modelBuilder.Entity<ProjectNote>().Property(e => e.NoteId).IsRequired();
 
             #endregion
 
@@ -149,7 +175,10 @@ namespace Test.API.DAL
             modelBuilder.Entity<Todo>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Todo>().ToTable("Todoes");
+			modelBuilder.Entity<Todo>().ToTable("Todoes");
+
+			// Key
+			modelBuilder.Entity<Todo>().HasKey(e => e.Id);
 
             // Required properties
 

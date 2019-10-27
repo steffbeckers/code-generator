@@ -12,18 +12,15 @@ namespace Test.API.BLL
     public class DocumentBLL
     {
         private readonly DocumentRepository documentRepository;
-        // TODO: private readonly Document...Repository document...Repository;
 
 		/// <summary>
 		/// The constructor of the Document business logic layer.
 		/// </summary>
         public DocumentBLL(
-			DocumentRepository documentRepository//,
-			// TODO: Document...Repository document...Repository
+			DocumentRepository documentRepository
 		)
         {
             this.documentRepository = documentRepository;
-            // TODO: this.Document...Repository = Document...Repository;
         }
 
 		/// <summary>
@@ -67,26 +64,6 @@ namespace Test.API.BLL
 
             return await this.documentRepository.UpdateAsync(document);
         }
-
-		// TODO
-        //public async Task<League> LinkPlayerToLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink == null)
-        //    {
-        //        await this.leaguePlayerRepository.InsertAsync(leaguePlayer);
-        //    }
-        //    else
-        //    {
-        //        // Mapping
-        //        leaguePlayerLink.Handicap = leaguePlayer.Handicap;
-		//
-        //        await this.leaguePlayerRepository.UpdateAsync(leaguePlayerLink);
-        //    }
-		//
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
 
 		// TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
