@@ -72,6 +72,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
             <#= model.Name.ToLower() #>.<#= property.Name #> = <#= model.Name.ToLower() #>Update.<#= property.Name #>;
 <# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+            <#= model.Name.ToLower() #>.<#= relation.Name #>Id = <#= model.Name.ToLower() #>Update.<#= relation.Name #>Id;
+<# } #>
 
             return await this.<#= model.Name.ToLower() #>Repository.UpdateAsync(<#= model.Name.ToLower() #>);
         }

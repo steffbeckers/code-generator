@@ -11,10 +11,9 @@ namespace Test.API.ViewModels
     {
 		public DocumentVM()
         {
-            // Relations
-
-			//// One-to-many
         }
+
+		// Properties
 
 		/// <summary>
         /// The identifier of Document.
@@ -26,13 +25,6 @@ namespace Test.API.ViewModels
         /// </summary>
         [Required]
 		public string Name { get; set; }
-
-		// Relations
-
-		//// Many-to-one
-
-
-		//// One-to-many
 
     }
 }

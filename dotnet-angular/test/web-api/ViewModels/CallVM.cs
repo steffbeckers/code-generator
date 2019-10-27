@@ -11,10 +11,9 @@ namespace Test.API.ViewModels
     {
 		public CallVM()
         {
-            // Relations
-
-			//// One-to-many
         }
+
+		// Properties
 
 		/// <summary>
         /// The identifier of Call.
@@ -26,13 +25,6 @@ namespace Test.API.ViewModels
         /// </summary>
         [Required]
 		public DateTime Date { get; set; }
-
-		// Relations
-
-		//// Many-to-one
-
-
-		//// One-to-many
 
     }
 }

@@ -65,6 +65,7 @@ namespace Test.API.BLL
             // Mapping
             todo.Title = todoUpdate.Title;
             todo.Body = todoUpdate.Body;
+            todo.ProjectId = todoUpdate.ProjectId;
 
             return await this.todoRepository.UpdateAsync(todo);
         }

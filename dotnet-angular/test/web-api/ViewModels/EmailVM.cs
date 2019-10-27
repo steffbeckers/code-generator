@@ -11,10 +11,9 @@ namespace Test.API.ViewModels
     {
 		public EmailVM()
         {
-            // Relations
-
-			//// One-to-many
         }
+
+		// Properties
 
 		/// <summary>
         /// The identifier of Email.
@@ -31,13 +30,6 @@ namespace Test.API.ViewModels
         /// The Body property of Email.
         /// </summary>
 		public string Body { get; set; }
-
-		// Relations
-
-		//// Many-to-one
-
-
-		//// One-to-many
 
     }
 }

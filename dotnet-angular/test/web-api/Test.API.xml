@@ -796,7 +796,7 @@
         </member>
         <member name="P:Test.API.Models.Contact.AccountId">
             <summary>
-            The related AccountId of Contact.
+            The related foreign key AccountId for Account of Contact.
             </summary>
         </member>
         <member name="P:Test.API.Models.Contact.Account">
@@ -979,6 +979,16 @@
             The Body property of Todo.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Todo.ProjectId">
+            <summary>
+            The related foreign key ProjectId for Project of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.Project">
+            <summary>
+            The related Project of Todo.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Todo.CreatedOn">
             <summary>
             The date and time of when the record is created
@@ -1062,6 +1072,11 @@
         <member name="P:Test.API.ViewModels.ContactVM.LastName">
             <summary>
             The LastName property of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ContactVM.AccountId">
+            <summary>
+            The related foreign key AccountId for Account of Contact.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.ContactVM.Account">
@@ -1167,6 +1182,16 @@
         <member name="P:Test.API.ViewModels.TodoVM.Body">
             <summary>
             The Body property of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.ProjectId">
+            <summary>
+            The related foreign key ProjectId for Project of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.Project">
+            <summary>
+            The related Project of Todo.
             </summary>
         </member>
     </members>

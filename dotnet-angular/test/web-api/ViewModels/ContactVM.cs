@@ -11,10 +11,9 @@ namespace Test.API.ViewModels
     {
 		public ContactVM()
         {
-            // Relations
-
-			//// One-to-many
         }
+
+		// Properties
 
 		/// <summary>
         /// The identifier of Contact.
@@ -37,12 +36,14 @@ namespace Test.API.ViewModels
 
 		//// Many-to-one
 
+	    /// <summary>
+        /// The related foreign key AccountId for Account of Contact.
+        /// </summary>
+		public Guid? AccountId { get; set; }
+
 		/// <summary>
         /// The related Account of Contact.
         /// </summary>
-		public IList<AccountVM> Account { get; set; }
-
-		//// One-to-many
-
+		public AccountVM Account { get; set; }
     }
 }

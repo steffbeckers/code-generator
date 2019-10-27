@@ -17,6 +17,8 @@ namespace Test.API.ViewModels
 			this.Contacts = new List<ContactVM>();
         }
 
+		// Properties
+
 		/// <summary>
         /// The identifier of Account.
         /// </summary>
@@ -44,9 +46,6 @@ namespace Test.API.ViewModels
 		public string Email { get; set; }
 
 		// Relations
-
-		//// Many-to-one
-
 
 		//// One-to-many
 

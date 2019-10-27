@@ -65,6 +65,7 @@ namespace Test.API.BLL
             // Mapping
             contact.FirstName = contactUpdate.FirstName;
             contact.LastName = contactUpdate.LastName;
+            contact.AccountId = contactUpdate.AccountId;
 
             return await this.contactRepository.UpdateAsync(contact);
         }

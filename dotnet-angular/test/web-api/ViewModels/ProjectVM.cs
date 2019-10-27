@@ -17,6 +17,8 @@ namespace Test.API.ViewModels
 			this.Todoes = new List<TodoVM>();
         }
 
+		// Properties
+
 		/// <summary>
         /// The identifier of Project.
         /// </summary>
@@ -34,9 +36,6 @@ namespace Test.API.ViewModels
 		public string Description { get; set; }
 
 		// Relations
-
-		//// Many-to-one
-
 
 		//// One-to-many
 

@@ -11,10 +11,9 @@ namespace Test.API.ViewModels
     {
 		public TodoVM()
         {
-            // Relations
-
-			//// One-to-many
         }
+
+		// Properties
 
 		/// <summary>
         /// The identifier of Todo.
@@ -35,12 +34,14 @@ namespace Test.API.ViewModels
 
 		//// Many-to-one
 
+	    /// <summary>
+        /// The related foreign key ProjectId for Project of Todo.
+        /// </summary>
+		public Guid? ProjectId { get; set; }
+
 		/// <summary>
         /// The related Project of Todo.
         /// </summary>
-		public IList<ProjectVM> Project { get; set; }
-
-		//// One-to-many
-
+		public ProjectVM Project { get; set; }
     }
 }
