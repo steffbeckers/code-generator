@@ -10,5 +10,8 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonProperty("type")]
         public string Type { get; set; }
+
+        [JsonProperty("required")]
+        public bool Required { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace CodeGenCLI.Templates
             this.Write("using System;\r\n\r\nnamespace ");
             
             #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.NamespaceRoot ?? config.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden

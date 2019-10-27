@@ -8,7 +8,8 @@
       "properties": [
         {
           "name": "Name",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         {
           "name": "Website",
@@ -29,11 +30,13 @@
       "properties": [
         {
           "name": "FirstName",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         {
           "name": "LastName",
-          "type": "string"
+          "type": "string",
+          "required": true
         }
       ]
     },
@@ -42,7 +45,8 @@
       "properties": [
         {
           "name": "Date",
-          "type": "DateTime"
+          "type": "DateTime",
+          "required": true
         }
       ]
     },
@@ -51,6 +55,11 @@
       "properties": [
         {
           "name": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "Body",
           "type": "string"
         }
       ]
@@ -60,7 +69,8 @@
       "properties": [
         {
           "name": "Name",
-          "type": "string"
+          "type": "string",
+          "required": true
         }
       ]
     }

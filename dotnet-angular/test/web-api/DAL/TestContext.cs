@@ -1,28 +1,24 @@
-﻿<#@ template language="C#" #>
-<#@ assembly name="System.Core" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
+using Test.API.Models;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace <#= config.WebAPI.NamespaceRoot ?? config.Name #>.DAL
+namespace Test.API.DAL
 {
-    public class <#= config.Name #>Context : DbContext
+    public class TestContext : DbContext
 	{
-		public <#= config.Name #>Context(DbContextOptions<<#= config.Name #>Context> options) : base(options)
+		public TestContext(DbContextOptions<TestContext> options) : base(options)
         {
         }
 
-<# foreach (CodeGenModel model in config.Models) { #>
-		public DbSet<<#= model.Name #>> <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #> { get; set; }
-<# } #>
+		public DbSet<Account> Accounts { get; set; }
+		public DbSet<Contact> Contacts { get; set; }
+		public DbSet<Call> Calls { get; set; }
+		public DbSet<Note> Notes { get; set; }
+		public DbSet<Document> Documents { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,32 +29,77 @@ namespace <#= config.WebAPI.NamespaceRoot ?? config.Name #>.DAL
                     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                     .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
                     .Build();
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("<#= config.Name #>Context"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("TestContext"));
             }
         }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-<# CodeGenModel lastModel = config.Models.Last(); #>
-<# foreach (CodeGenModel model in config.Models) { #>
-			#region <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+			#region Accounts
 
             // Soft delete query filter
-            modelBuilder.Entity<<#= model.Name #>>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<Account>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>");
+            modelBuilder.Entity<Account>().ToTable("Accounts");
 
             // Required properties
-<# foreach (CodeGenModelProperty property in model.Properties.Where(p => p.Required)) { #>
-            modelBuilder.Entity<<#= model.Name #>>().Property(e => e.<#= property.Name #>).IsRequired();
-<# } #>
+            modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
 
             #endregion
-<# if (!model.Equals(lastModel)) { #>
 
-<# } #>
-<# } #>
+			#region Contacts
+
+            // Soft delete query filter
+            modelBuilder.Entity<Contact>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<Contact>().ToTable("Contacts");
+
+            // Required properties
+            modelBuilder.Entity<Contact>().Property(e => e.FirstName).IsRequired();
+            modelBuilder.Entity<Contact>().Property(e => e.LastName).IsRequired();
+
+            #endregion
+
+			#region Calls
+
+            // Soft delete query filter
+            modelBuilder.Entity<Call>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<Call>().ToTable("Calls");
+
+            // Required properties
+            modelBuilder.Entity<Call>().Property(e => e.Date).IsRequired();
+
+            #endregion
+
+			#region Notes
+
+            // Soft delete query filter
+            modelBuilder.Entity<Note>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<Note>().ToTable("Notes");
+
+            // Required properties
+            modelBuilder.Entity<Note>().Property(e => e.Title).IsRequired();
+
+            #endregion
+
+			#region Documents
+
+            // Soft delete query filter
+            modelBuilder.Entity<Document>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<Document>().ToTable("Documents");
+
+            // Required properties
+            modelBuilder.Entity<Document>().Property(e => e.Name).IsRequired();
+
+            #endregion
 		}
 
 		public override int SaveChanges()
@@ -83,10 +124,7 @@ namespace <#= config.WebAPI.NamespaceRoot ?? config.Name #>.DAL
             {
                 // Models that have soft delete
                 if (
-<# foreach (CodeGenModel model in config.Models) { #>
-					entry.Entity.GetType() == typeof(<#= model.Name #>)<# if (!model.Equals(lastModel)) { #> ||<# } #>
-<# } #>
-				)
+					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document)				)
                 {
                     switch (entry.State)
                     {
@@ -108,10 +146,7 @@ namespace <#= config.WebAPI.NamespaceRoot ?? config.Name #>.DAL
             {
                 // Models that have soft delete
                 if (
-<# foreach (CodeGenModel model in config.Models) { #>
-					entry.Entity.GetType() == typeof(<#= model.Name #>)<# if (!model.Equals(lastModel)) { #> ||<# } #>
-<# } #>
-				)
+					entry.Entity.GetType() == typeof(Account) ||					entry.Entity.GetType() == typeof(Contact) ||					entry.Entity.GetType() == typeof(Call) ||					entry.Entity.GetType() == typeof(Note) ||					entry.Entity.GetType() == typeof(Document)				)
                 {
                     switch (entry.State)
                     {

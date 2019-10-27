@@ -6,7 +6,7 @@
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 using System;
 
-namespace <#= config.WebAPI.NamespaceRoot ?? config.Name #>.Models
+namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models
 {
     public class <#= model.Name #>
     {

@@ -3,6 +3,7 @@ using CodeGenCLI.Templates;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -63,7 +64,6 @@ namespace CodeGenCLI
                             // TODO
                             //if (!File.Exists(...path...) || Config.Override)
                             File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\" + codeGenModel.Name + ".cs", modelTemplateContent);
-                            
                             Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\" + codeGenModel.Name + ".cs");
                         }
 
@@ -80,16 +80,40 @@ namespace CodeGenCLI
                             // TODO
                             //if (!File.Exists(...path...) || Config.Override)
                             File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\" + codeGenModel.Name + "VM.cs", viewModelTemplateContent);
-
                             Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\" + codeGenModel.Name + "VM.cs");
                         }
 
                         // DAL
+
+                        // DbContext
                         if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL")))
                         {
                             Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL"));
                         }
-                        // TODO: DbContextTemplate
+                        DbContextTemplate dbContextTemplate = new DbContextTemplate(Config);
+                        string dbContextTemplateContent = dbContextTemplate.TransformText();
+                        
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + Config.Name + "Context.cs", dbContextTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + Config.Name + "Context.cs");
+
+                        // Startup
+
+                        StartupTemplate startupTemplate = new StartupTemplate(Config);
+                        string startupTemplateContent = startupTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + "Startup.cs", startupTemplateContent);
+                        Console.WriteLine("Startup.cs");
+
+
+                        // TODO: Migrations
+                        //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");
+                        //removeInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
+                        //Process.Start(removeInitialMigration);
+
+                        //ProcessStartInfo addInitialMigration = new ProcessStartInfo("Add-Migration");
+                        //addInitialMigration.Arguments = @"Initial";
+                        //addInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
+                        //Process.Start(addInitialMigration);
 
                         // Stop
                         Console.WriteLine("### DONE ###");

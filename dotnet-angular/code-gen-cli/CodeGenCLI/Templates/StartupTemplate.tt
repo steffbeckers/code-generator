@@ -1,3 +1,8 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Test.API.DAL;
 
-namespace Test.API
+namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>
 {
     public class Startup
     {
@@ -24,9 +29,9 @@ namespace Test.API
 		    // CORS
             services.AddCors();
 
-            // Connection to the Test database
-            services.AddDbContext<TestContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("TestContext")));
+            // Connection to the <#= config.Name #> database
+            services.AddDbContext<<#= config.Name #>Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("<#= config.Name #>Context")));
 
             services.AddControllers();
         }
