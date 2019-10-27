@@ -6,50 +6,50 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for Emails.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for Emails.
+    /// </summary>
     public class EmailBLL
     {
         private readonly EmailRepository emailRepository;
 
-		/// <summary>
-		/// The constructor of the Email business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Email business logic layer.
+        /// </summary>
         public EmailBLL(
-			EmailRepository emailRepository
-		)
+            EmailRepository emailRepository
+        )
         {
             this.emailRepository = emailRepository;
         }
 
-		/// <summary>
-		/// Retrieves all emails.
-		/// </summary>
-		public async Task<IEnumerable<Email>> GetAllEmailsAsync()
+        /// <summary>
+        /// Retrieves all emails.
+        /// </summary>
+        public async Task<IEnumerable<Email>> GetAllEmailsAsync()
         {
             return await this.emailRepository.GetAsync();
         }
 
-		/// <summary>
-		/// Retrieves one email by Id.
-		/// </summary>
-		public async Task<Email> GetEmailByIdAsync(Guid id)
+        /// <summary>
+        /// Retrieves one email by Id.
+        /// </summary>
+        public async Task<Email> GetEmailByIdAsync(Guid id)
         {
             return await this.emailRepository.GetByIdAsync(id);
         }
 
-		/// <summary>
-		/// Creates a new email record.
-		/// </summary>
+        /// <summary>
+        /// Creates a new email record.
+        /// </summary>
         public async Task<Email> CreateEmailAsync(Email email)
         {
             return await this.emailRepository.InsertAsync(email);
         }
 
-		/// <summary>
-		/// Updates an existing email record by Id.
-		/// </summary>
+        /// <summary>
+        /// Updates an existing email record by Id.
+        /// </summary>
         public async Task<Email> UpdateEmailAsync(Guid id, Email emailUpdate)
         {
             // Retrieve existing
@@ -66,11 +66,11 @@ namespace Test.API.BLL
             return await this.emailRepository.UpdateAsync(email);
         }
 
-		// TODO
+        // TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
         //{
         //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
+        //
         //    if (leaguePlayerLink != null)
         //    {
         //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
@@ -79,9 +79,9 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-		/// <summary>
-		/// Deletes an existing email record by Id.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing email record by Id.
+        /// </summary>
         public async Task<Email> DeleteEmailAsync(Email email)
         {
             await this.emailRepository.DeleteAsync(email);

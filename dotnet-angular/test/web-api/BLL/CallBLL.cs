@@ -6,50 +6,50 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for Calls.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for Calls.
+    /// </summary>
     public class CallBLL
     {
         private readonly CallRepository callRepository;
 
-		/// <summary>
-		/// The constructor of the Call business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Call business logic layer.
+        /// </summary>
         public CallBLL(
-			CallRepository callRepository
-		)
+            CallRepository callRepository
+        )
         {
             this.callRepository = callRepository;
         }
 
-		/// <summary>
-		/// Retrieves all calls.
-		/// </summary>
-		public async Task<IEnumerable<Call>> GetAllCallsAsync()
+        /// <summary>
+        /// Retrieves all calls.
+        /// </summary>
+        public async Task<IEnumerable<Call>> GetAllCallsAsync()
         {
             return await this.callRepository.GetAsync();
         }
 
-		/// <summary>
-		/// Retrieves one call by Id.
-		/// </summary>
-		public async Task<Call> GetCallByIdAsync(Guid id)
+        /// <summary>
+        /// Retrieves one call by Id.
+        /// </summary>
+        public async Task<Call> GetCallByIdAsync(Guid id)
         {
             return await this.callRepository.GetByIdAsync(id);
         }
 
-		/// <summary>
-		/// Creates a new call record.
-		/// </summary>
+        /// <summary>
+        /// Creates a new call record.
+        /// </summary>
         public async Task<Call> CreateCallAsync(Call call)
         {
             return await this.callRepository.InsertAsync(call);
         }
 
-		/// <summary>
-		/// Updates an existing call record by Id.
-		/// </summary>
+        /// <summary>
+        /// Updates an existing call record by Id.
+        /// </summary>
         public async Task<Call> UpdateCallAsync(Guid id, Call callUpdate)
         {
             // Retrieve existing
@@ -65,11 +65,11 @@ namespace Test.API.BLL
             return await this.callRepository.UpdateAsync(call);
         }
 
-		// TODO
+        // TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
         //{
         //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
+        //
         //    if (leaguePlayerLink != null)
         //    {
         //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
@@ -78,9 +78,9 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-		/// <summary>
-		/// Deletes an existing call record by Id.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing call record by Id.
+        /// </summary>
         public async Task<Call> DeleteCallAsync(Call call)
         {
             await this.callRepository.DeleteAsync(call);

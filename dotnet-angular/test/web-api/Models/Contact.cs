@@ -1,70 +1,69 @@
 using System;
-using System.Collections.Generic;
 
 namespace Test.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// Contact model
     /// </summary>
     public class Contact
     {
-		public Contact()
+        public Contact()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Contact.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The FirstName property of Contact.
         /// </summary>
-		public string FirstName { get; set; }
+        public string FirstName { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The LastName property of Contact.
         /// </summary>
-		public string LastName { get; set; }
+        public string LastName { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key AccountId for Account of Contact.
         /// </summary>
-		public Guid? AccountId { get; set; }
+        public Guid? AccountId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Account of Contact.
         /// </summary>
-		public Account Account { get; set; }
+        public Account Account { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		// TODO:
-		//public Guid CreatedByUserId { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
-		//public Guid TenantId { get; set; }
+        // TODO:
+        //public Guid CreatedByUserId { get; set; }
+        //public Guid ModifiedByUserId { get; set; }
+        //public Guid TenantId { get; set; }
     }
 }

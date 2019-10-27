@@ -3,75 +3,75 @@ using System.Collections.Generic;
 
 namespace Test.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// Account model
     /// </summary>
     public class Account
     {
-		public Account()
+        public Account()
         {
             // Relations
 
-			//// One-to-many
-			this.Contacts = new List<Contact>();
+            //// One-to-many
+            this.Contacts = new List<Contact>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Account.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of Account.
         /// </summary>
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Website property of Account.
         /// </summary>
-		public string Website { get; set; }
+        public string Website { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Telephone property of Account.
         /// </summary>
-		public string Telephone { get; set; }
+        public string Telephone { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Email property of Account.
         /// </summary>
-		public string Email { get; set; }
+        public string Email { get; set; }
 
-		// Relations
+        // Relations
 
-		//// One-to-many
+        //// One-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Contacts of Account.
         /// </summary>
-		public IList<Contact> Contacts { get; set; }
+        public IList<Contact> Contacts { get; set; }
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		// TODO:
-		//public Guid CreatedByUserId { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
-		//public Guid TenantId { get; set; }
+        // TODO:
+        //public Guid CreatedByUserId { get; set; }
+        //public Guid ModifiedByUserId { get; set; }
+        //public Guid TenantId { get; set; }
     }
 }

@@ -10,36 +10,36 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
-	/// <summary>
-	/// The Calls controller.
-	/// </summary>
+    /// <summary>
+    /// The Calls controller.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class CallsController : ControllerBase
     {
         private readonly ILogger<CallsController> logger;
         private readonly IMapper mapper;
         private readonly CallBLL bll;
 
-		/// <summary>
-		/// The constructor of the Calls controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Calls controller.
+        /// </summary>
         public CallsController(
             ILogger<CallsController> logger,
-			IMapper mapper,
+            IMapper mapper,
             CallBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/Calls
-		/// <summary>
-		/// Retrieves all calls.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all calls.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CallVM>>> GetCalls()
         {
@@ -49,10 +49,10 @@ namespace Test.API.Controllers
         }
 
         // GET: api/Calls/{id}
-		/// <summary>
-		/// Retrieves a specific call.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific call.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<CallVM>> GetCall([FromRoute] Guid id)
         {
@@ -66,14 +66,14 @@ namespace Test.API.Controllers
         }
 
         // POST: api/Calls
-		/// <summary>
-		/// Creates a new call.
-		/// </summary>
-		/// <param name="callVM"></param>
+        /// <summary>
+        /// Creates a new call.
+        /// </summary>
+        /// <param name="callVM"></param>
         [HttpPost]
         public async Task<ActionResult<CallVM>> CreateCall([FromBody] CallVM callVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,22 +85,22 @@ namespace Test.API.Controllers
             call = await this.bll.CreateCallAsync(call);
 
             return CreatedAtAction(
-				"GetCall",
-				new { id = call.Id },
-				this.mapper.Map<Call, CallVM>(call)
-			);
+                "GetCall",
+                new { id = call.Id },
+                this.mapper.Map<Call, CallVM>(call)
+            );
         }
 
-		// PUT: api/Calls/{id}
-		/// <summary>
-		/// Updates a specific call.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="callVM"></param>
+        // PUT: api/Calls/{id}
+        /// <summary>
+        /// Updates a specific call.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="callVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<CallVM>> UpdateCall([FromRoute] Guid id, [FromBody] CallVM callVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != callVM.Id)
             {
                 return BadRequest(ModelState);
@@ -113,18 +113,18 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             Call callUpdate = this.mapper.Map<CallVM, Call>(callVM);
 
-			// Update fields
+            // Update fields
             call.Date = callUpdate.Date;
-			
+
             call = await this.bll.UpdateCallAsync(id, call);
 
-			return this.mapper.Map<Call, CallVM>(call);
+            return this.mapper.Map<Call, CallVM>(call);
         }
 
-		// TODO
+        // TODO
         //// PUT: api/Skills/5/SkillTags/123/Link
         //[HttpPut("{skillId}/SkillTags/{skillTagId}/Link")]
         //public async Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
@@ -231,10 +231,10 @@ namespace Test.API.Controllers
         //}
 
         // DELETE: api/Calls/{id}
-		/// <summary>
-		/// Deletes a specific call.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific call.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<CallVM>> DeleteCall([FromRoute] Guid id)
         {

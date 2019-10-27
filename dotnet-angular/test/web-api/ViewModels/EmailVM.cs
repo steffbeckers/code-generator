@@ -1,35 +1,34 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Email view model
     /// </summary>
     public class EmailVM
     {
-		public EmailVM()
+        public EmailVM()
         {
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Email.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Subject property of Email.
         /// </summary>
         [Required]
-		public string Subject { get; set; }
+        public string Subject { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Body property of Email.
         /// </summary>
-		public string Body { get; set; }
+        public string Body { get; set; }
 
     }
 }

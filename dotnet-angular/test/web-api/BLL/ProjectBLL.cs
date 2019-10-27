@@ -6,53 +6,53 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for Projects.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for Projects.
+    /// </summary>
     public class ProjectBLL
     {
         private readonly ProjectRepository projectRepository;
         private readonly ProjectNoteRepository projectNoteRepository;
 
-		/// <summary>
-		/// The constructor of the Project business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Project business logic layer.
+        /// </summary>
         public ProjectBLL(
-			ProjectRepository projectRepository,
-			ProjectNoteRepository projectNoteRepository
-		)
+            ProjectRepository projectRepository,
+            ProjectNoteRepository projectNoteRepository
+        )
         {
             this.projectRepository = projectRepository;
-			this.projectNoteRepository = projectNoteRepository;
+            this.projectNoteRepository = projectNoteRepository;
         }
 
-		/// <summary>
-		/// Retrieves all projects.
-		/// </summary>
-		public async Task<IEnumerable<Project>> GetAllProjectsAsync()
+        /// <summary>
+        /// Retrieves all projects.
+        /// </summary>
+        public async Task<IEnumerable<Project>> GetAllProjectsAsync()
         {
             return await this.projectRepository.GetAsync();
         }
 
-		/// <summary>
-		/// Retrieves one project by Id.
-		/// </summary>
-		public async Task<Project> GetProjectByIdAsync(Guid id)
+        /// <summary>
+        /// Retrieves one project by Id.
+        /// </summary>
+        public async Task<Project> GetProjectByIdAsync(Guid id)
         {
             return await this.projectRepository.GetByIdAsync(id);
         }
 
-		/// <summary>
-		/// Creates a new project record.
-		/// </summary>
+        /// <summary>
+        /// Creates a new project record.
+        /// </summary>
         public async Task<Project> CreateProjectAsync(Project project)
         {
             return await this.projectRepository.InsertAsync(project);
         }
 
-		/// <summary>
-		/// Updates an existing project record by Id.
-		/// </summary>
+        /// <summary>
+        /// Updates an existing project record by Id.
+        /// </summary>
         public async Task<Project> UpdateProjectAsync(Guid id, Project projectUpdate)
         {
             // Retrieve existing
@@ -88,11 +88,11 @@ namespace Test.API.BLL
             return await this.GetProjectByIdAsync(projectNote.ProjectId);
         }
 
-		// TODO
+        // TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
         //{
         //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
+        //
         //    if (leaguePlayerLink != null)
         //    {
         //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
@@ -101,9 +101,9 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-		/// <summary>
-		/// Deletes an existing project record by Id.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing project record by Id.
+        /// </summary>
         public async Task<Project> DeleteProjectAsync(Project project)
         {
             await this.projectRepository.DeleteAsync(project);

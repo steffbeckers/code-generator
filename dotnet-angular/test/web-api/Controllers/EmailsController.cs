@@ -10,36 +10,36 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
-	/// <summary>
-	/// The Emails controller.
-	/// </summary>
+    /// <summary>
+    /// The Emails controller.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class EmailsController : ControllerBase
     {
         private readonly ILogger<EmailsController> logger;
         private readonly IMapper mapper;
         private readonly EmailBLL bll;
 
-		/// <summary>
-		/// The constructor of the Emails controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Emails controller.
+        /// </summary>
         public EmailsController(
             ILogger<EmailsController> logger,
-			IMapper mapper,
+            IMapper mapper,
             EmailBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/Emails
-		/// <summary>
-		/// Retrieves all emails.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all emails.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmailVM>>> GetEmails()
         {
@@ -49,10 +49,10 @@ namespace Test.API.Controllers
         }
 
         // GET: api/Emails/{id}
-		/// <summary>
-		/// Retrieves a specific email.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific email.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<EmailVM>> GetEmail([FromRoute] Guid id)
         {
@@ -66,14 +66,14 @@ namespace Test.API.Controllers
         }
 
         // POST: api/Emails
-		/// <summary>
-		/// Creates a new email.
-		/// </summary>
-		/// <param name="emailVM"></param>
+        /// <summary>
+        /// Creates a new email.
+        /// </summary>
+        /// <param name="emailVM"></param>
         [HttpPost]
         public async Task<ActionResult<EmailVM>> CreateEmail([FromBody] EmailVM emailVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,22 +85,22 @@ namespace Test.API.Controllers
             email = await this.bll.CreateEmailAsync(email);
 
             return CreatedAtAction(
-				"GetEmail",
-				new { id = email.Id },
-				this.mapper.Map<Email, EmailVM>(email)
-			);
+                "GetEmail",
+                new { id = email.Id },
+                this.mapper.Map<Email, EmailVM>(email)
+            );
         }
 
-		// PUT: api/Emails/{id}
-		/// <summary>
-		/// Updates a specific email.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="emailVM"></param>
+        // PUT: api/Emails/{id}
+        /// <summary>
+        /// Updates a specific email.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="emailVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<EmailVM>> UpdateEmail([FromRoute] Guid id, [FromBody] EmailVM emailVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != emailVM.Id)
             {
                 return BadRequest(ModelState);
@@ -113,19 +113,19 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             Email emailUpdate = this.mapper.Map<EmailVM, Email>(emailVM);
 
-			// Update fields
+            // Update fields
             email.Subject = emailUpdate.Subject;
             email.Body = emailUpdate.Body;
-			
+
             email = await this.bll.UpdateEmailAsync(id, email);
 
-			return this.mapper.Map<Email, EmailVM>(email);
+            return this.mapper.Map<Email, EmailVM>(email);
         }
 
-		// TODO
+        // TODO
         //// PUT: api/Skills/5/SkillTags/123/Link
         //[HttpPut("{skillId}/SkillTags/{skillTagId}/Link")]
         //public async Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
@@ -232,10 +232,10 @@ namespace Test.API.Controllers
         //}
 
         // DELETE: api/Emails/{id}
-		/// <summary>
-		/// Deletes a specific email.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific email.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<EmailVM>> DeleteEmail([FromRoute] Guid id)
         {

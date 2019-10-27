@@ -1,51 +1,50 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Contact view model
     /// </summary>
     public class ContactVM
     {
-		public ContactVM()
+        public ContactVM()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Contact.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The FirstName property of Contact.
         /// </summary>
         [Required]
-		public string FirstName { get; set; }
+        public string FirstName { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The LastName property of Contact.
         /// </summary>
         [Required]
-		public string LastName { get; set; }
+        public string LastName { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key AccountId for Account of Contact.
         /// </summary>
-		public Guid? AccountId { get; set; }
+        public Guid? AccountId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Account of Contact.
         /// </summary>
-		public AccountVM Account { get; set; }
+        public AccountVM Account { get; set; }
 
     }
 }

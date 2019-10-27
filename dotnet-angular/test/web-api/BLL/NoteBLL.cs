@@ -6,53 +6,53 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for Notes.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for Notes.
+    /// </summary>
     public class NoteBLL
     {
         private readonly NoteRepository noteRepository;
         private readonly ProjectNoteRepository projectNoteRepository;
 
-		/// <summary>
-		/// The constructor of the Note business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Note business logic layer.
+        /// </summary>
         public NoteBLL(
-			NoteRepository noteRepository,
-			ProjectNoteRepository projectNoteRepository
-		)
+            NoteRepository noteRepository,
+            ProjectNoteRepository projectNoteRepository
+        )
         {
             this.noteRepository = noteRepository;
-			this.projectNoteRepository = projectNoteRepository;
+            this.projectNoteRepository = projectNoteRepository;
         }
 
-		/// <summary>
-		/// Retrieves all notes.
-		/// </summary>
-		public async Task<IEnumerable<Note>> GetAllNotesAsync()
+        /// <summary>
+        /// Retrieves all notes.
+        /// </summary>
+        public async Task<IEnumerable<Note>> GetAllNotesAsync()
         {
             return await this.noteRepository.GetAsync();
         }
 
-		/// <summary>
-		/// Retrieves one note by Id.
-		/// </summary>
-		public async Task<Note> GetNoteByIdAsync(Guid id)
+        /// <summary>
+        /// Retrieves one note by Id.
+        /// </summary>
+        public async Task<Note> GetNoteByIdAsync(Guid id)
         {
             return await this.noteRepository.GetByIdAsync(id);
         }
 
-		/// <summary>
-		/// Creates a new note record.
-		/// </summary>
+        /// <summary>
+        /// Creates a new note record.
+        /// </summary>
         public async Task<Note> CreateNoteAsync(Note note)
         {
             return await this.noteRepository.InsertAsync(note);
         }
 
-		/// <summary>
-		/// Updates an existing note record by Id.
-		/// </summary>
+        /// <summary>
+        /// Updates an existing note record by Id.
+        /// </summary>
         public async Task<Note> UpdateNoteAsync(Guid id, Note noteUpdate)
         {
             // Retrieve existing
@@ -88,11 +88,11 @@ namespace Test.API.BLL
             return await this.GetNoteByIdAsync(projectNote.NoteId);
         }
 
-		// TODO
+        // TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
         //{
         //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
+        //
         //    if (leaguePlayerLink != null)
         //    {
         //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
@@ -101,9 +101,9 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-		/// <summary>
-		/// Deletes an existing note record by Id.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing note record by Id.
+        /// </summary>
         public async Task<Note> DeleteNoteAsync(Note note)
         {
             await this.noteRepository.DeleteAsync(note);

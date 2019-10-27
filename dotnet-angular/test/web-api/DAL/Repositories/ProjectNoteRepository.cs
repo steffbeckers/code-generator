@@ -4,16 +4,16 @@ using Test.API.Models;
 
 namespace Test.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for ProjectNotes in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for ProjectNotes in the data access layer.
+    /// </summary>
     public class ProjectNoteRepository : Repository<ProjectNote>
     {
         private new readonly TestContext context;
 
-		/// <summary>
-		/// The constructor of the ProjectNote repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the ProjectNote repository.
+        /// </summary>
         public ProjectNoteRepository(TestContext context) : base(context)
         {
             this.context = context;
@@ -28,7 +28,7 @@ namespace Test.API.DAL.Repositories
                 .SingleOrDefault();
         }
 
-		public ProjectNote GetByNoteAndProjectId(Guid noteId, Guid projectId)
+        public ProjectNote GetByNoteAndProjectId(Guid noteId, Guid projectId)
         {
             return this.context.ProjectNote
                 .Where(x => x.NoteId == noteId && x.ProjectId == projectId)

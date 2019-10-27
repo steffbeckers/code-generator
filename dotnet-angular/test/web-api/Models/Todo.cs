@@ -1,70 +1,69 @@
 using System;
-using System.Collections.Generic;
 
 namespace Test.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// Todo model
     /// </summary>
     public class Todo
     {
-		public Todo()
+        public Todo()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Todo.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Title property of Todo.
         /// </summary>
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Body property of Todo.
         /// </summary>
-		public string Body { get; set; }
+        public string Body { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key ProjectId for Project of Todo.
         /// </summary>
-		public Guid? ProjectId { get; set; }
+        public Guid? ProjectId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Project of Todo.
         /// </summary>
-		public Project Project { get; set; }
+        public Project Project { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		// TODO:
-		//public Guid CreatedByUserId { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
-		//public Guid TenantId { get; set; }
+        // TODO:
+        //public Guid CreatedByUserId { get; set; }
+        //public Guid ModifiedByUserId { get; set; }
+        //public Guid TenantId { get; set; }
     }
 }

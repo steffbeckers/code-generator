@@ -4,54 +4,54 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Project view model
     /// </summary>
     public class ProjectVM
     {
-		public ProjectVM()
+        public ProjectVM()
         {
             // Relations
 
-			//// One-to-many
-			this.Todoes = new List<TodoVM>();
+            //// One-to-many
+            this.Todoes = new List<TodoVM>();
 
-			//// Many-to-many
-			this.Notes = new List<NoteVM>();
+            //// Many-to-many
+            this.Notes = new List<NoteVM>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Project.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of Project.
         /// </summary>
         [Required]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Description property of Project.
         /// </summary>
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		// Relations
+        // Relations
 
-		//// One-to-many
+        //// One-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Todoes of Project.
         /// </summary>
-		public IList<TodoVM> Todoes { get; set; }
+        public IList<TodoVM> Todoes { get; set; }
 
-		//// Many-to-many
+        //// Many-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Notes of Project.
         /// </summary>
-		public IList<NoteVM> Notes { get; set; }
+        public IList<NoteVM> Notes { get; set; }
     }
 }

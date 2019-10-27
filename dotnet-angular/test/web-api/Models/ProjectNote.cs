@@ -1,70 +1,69 @@
 using System;
-using System.Collections.Generic;
 
 namespace Test.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// ProjectNote model
     /// </summary>
     public class ProjectNote
     {
-		public ProjectNote()
+        public ProjectNote()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of ProjectNote.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key ProjectId for Project of ProjectNote.
         /// </summary>
-		public Guid ProjectId { get; set; }
+        public Guid ProjectId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Project of ProjectNote.
         /// </summary>
-		public Project Project { get; set; }
+        public Project Project { get; set; }
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key NoteId for Note of ProjectNote.
         /// </summary>
-		public Guid NoteId { get; set; }
+        public Guid NoteId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Note of ProjectNote.
         /// </summary>
-		public Note Note { get; set; }
+        public Note Note { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		// TODO:
-		//public Guid CreatedByUserId { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
-		//public Guid TenantId { get; set; }
+        // TODO:
+        //public Guid CreatedByUserId { get; set; }
+        //public Guid ModifiedByUserId { get; set; }
+        //public Guid TenantId { get; set; }
     }
 }

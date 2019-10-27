@@ -10,36 +10,36 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
-	/// <summary>
-	/// The Documents controller.
-	/// </summary>
+    /// <summary>
+    /// The Documents controller.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class DocumentsController : ControllerBase
     {
         private readonly ILogger<DocumentsController> logger;
         private readonly IMapper mapper;
         private readonly DocumentBLL bll;
 
-		/// <summary>
-		/// The constructor of the Documents controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Documents controller.
+        /// </summary>
         public DocumentsController(
             ILogger<DocumentsController> logger,
-			IMapper mapper,
+            IMapper mapper,
             DocumentBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/Documents
-		/// <summary>
-		/// Retrieves all documents.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all documents.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DocumentVM>>> GetDocuments()
         {
@@ -49,10 +49,10 @@ namespace Test.API.Controllers
         }
 
         // GET: api/Documents/{id}
-		/// <summary>
-		/// Retrieves a specific document.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific document.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<DocumentVM>> GetDocument([FromRoute] Guid id)
         {
@@ -66,14 +66,14 @@ namespace Test.API.Controllers
         }
 
         // POST: api/Documents
-		/// <summary>
-		/// Creates a new document.
-		/// </summary>
-		/// <param name="documentVM"></param>
+        /// <summary>
+        /// Creates a new document.
+        /// </summary>
+        /// <param name="documentVM"></param>
         [HttpPost]
         public async Task<ActionResult<DocumentVM>> CreateDocument([FromBody] DocumentVM documentVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,22 +85,22 @@ namespace Test.API.Controllers
             document = await this.bll.CreateDocumentAsync(document);
 
             return CreatedAtAction(
-				"GetDocument",
-				new { id = document.Id },
-				this.mapper.Map<Document, DocumentVM>(document)
-			);
+                "GetDocument",
+                new { id = document.Id },
+                this.mapper.Map<Document, DocumentVM>(document)
+            );
         }
 
-		// PUT: api/Documents/{id}
-		/// <summary>
-		/// Updates a specific document.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="documentVM"></param>
+        // PUT: api/Documents/{id}
+        /// <summary>
+        /// Updates a specific document.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="documentVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<DocumentVM>> UpdateDocument([FromRoute] Guid id, [FromBody] DocumentVM documentVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != documentVM.Id)
             {
                 return BadRequest(ModelState);
@@ -113,18 +113,18 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             Document documentUpdate = this.mapper.Map<DocumentVM, Document>(documentVM);
 
-			// Update fields
+            // Update fields
             document.Name = documentUpdate.Name;
-			
+
             document = await this.bll.UpdateDocumentAsync(id, document);
 
-			return this.mapper.Map<Document, DocumentVM>(document);
+            return this.mapper.Map<Document, DocumentVM>(document);
         }
 
-		// TODO
+        // TODO
         //// PUT: api/Skills/5/SkillTags/123/Link
         //[HttpPut("{skillId}/SkillTags/{skillTagId}/Link")]
         //public async Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
@@ -231,10 +231,10 @@ namespace Test.API.Controllers
         //}
 
         // DELETE: api/Documents/{id}
-		/// <summary>
-		/// Deletes a specific document.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific document.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<DocumentVM>> DeleteDocument([FromRoute] Guid id)
         {

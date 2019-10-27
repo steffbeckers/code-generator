@@ -1,30 +1,29 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Document view model
     /// </summary>
     public class DocumentVM
     {
-		public DocumentVM()
+        public DocumentVM()
         {
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Document.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Name property of Document.
         /// </summary>
         [Required]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
     }
 }

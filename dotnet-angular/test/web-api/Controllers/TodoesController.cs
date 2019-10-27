@@ -10,36 +10,36 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
-	/// <summary>
-	/// The Todoes controller.
-	/// </summary>
+    /// <summary>
+    /// The Todoes controller.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class TodoesController : ControllerBase
     {
         private readonly ILogger<TodoesController> logger;
         private readonly IMapper mapper;
         private readonly TodoBLL bll;
 
-		/// <summary>
-		/// The constructor of the Todoes controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Todoes controller.
+        /// </summary>
         public TodoesController(
             ILogger<TodoesController> logger,
-			IMapper mapper,
+            IMapper mapper,
             TodoBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/Todoes
-		/// <summary>
-		/// Retrieves all todoes.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all todoes.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoVM>>> GetTodoes()
         {
@@ -49,10 +49,10 @@ namespace Test.API.Controllers
         }
 
         // GET: api/Todoes/{id}
-		/// <summary>
-		/// Retrieves a specific todo.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific todo.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoVM>> GetTodo([FromRoute] Guid id)
         {
@@ -66,14 +66,14 @@ namespace Test.API.Controllers
         }
 
         // POST: api/Todoes
-		/// <summary>
-		/// Creates a new todo.
-		/// </summary>
-		/// <param name="todoVM"></param>
+        /// <summary>
+        /// Creates a new todo.
+        /// </summary>
+        /// <param name="todoVM"></param>
         [HttpPost]
         public async Task<ActionResult<TodoVM>> CreateTodo([FromBody] TodoVM todoVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,22 +85,22 @@ namespace Test.API.Controllers
             todo = await this.bll.CreateTodoAsync(todo);
 
             return CreatedAtAction(
-				"GetTodo",
-				new { id = todo.Id },
-				this.mapper.Map<Todo, TodoVM>(todo)
-			);
+                "GetTodo",
+                new { id = todo.Id },
+                this.mapper.Map<Todo, TodoVM>(todo)
+            );
         }
 
-		// PUT: api/Todoes/{id}
-		/// <summary>
-		/// Updates a specific todo.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="todoVM"></param>
+        // PUT: api/Todoes/{id}
+        /// <summary>
+        /// Updates a specific todo.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="todoVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<TodoVM>> UpdateTodo([FromRoute] Guid id, [FromBody] TodoVM todoVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != todoVM.Id)
             {
                 return BadRequest(ModelState);
@@ -113,19 +113,19 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             Todo todoUpdate = this.mapper.Map<TodoVM, Todo>(todoVM);
 
-			// Update fields
+            // Update fields
             todo.Title = todoUpdate.Title;
             todo.Body = todoUpdate.Body;
-			
+
             todo = await this.bll.UpdateTodoAsync(id, todo);
 
-			return this.mapper.Map<Todo, TodoVM>(todo);
+            return this.mapper.Map<Todo, TodoVM>(todo);
         }
 
-		// TODO
+        // TODO
         //// PUT: api/Skills/5/SkillTags/123/Link
         //[HttpPut("{skillId}/SkillTags/{skillTagId}/Link")]
         //public async Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
@@ -232,10 +232,10 @@ namespace Test.API.Controllers
         //}
 
         // DELETE: api/Todoes/{id}
-		/// <summary>
-		/// Deletes a specific todo.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific todo.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<TodoVM>> DeleteTodo([FromRoute] Guid id)
         {

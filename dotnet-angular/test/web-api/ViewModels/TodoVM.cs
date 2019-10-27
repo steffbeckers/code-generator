@@ -1,49 +1,47 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Todo view model
     /// </summary>
     public class TodoVM
     {
-		public TodoVM()
+        public TodoVM()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Todo.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Title property of Todo.
         /// </summary>
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Body property of Todo.
         /// </summary>
-		public string Body { get; set; }
+        public string Body { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key ProjectId for Project of Todo.
         /// </summary>
-		public Guid? ProjectId { get; set; }
+        public Guid? ProjectId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Project of Todo.
         /// </summary>
-		public ProjectVM Project { get; set; }
+        public ProjectVM Project { get; set; }
 
     }
 }

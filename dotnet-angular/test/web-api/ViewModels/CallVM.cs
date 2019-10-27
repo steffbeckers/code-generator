@@ -1,30 +1,29 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Call view model
     /// </summary>
     public class CallVM
     {
-		public CallVM()
+        public CallVM()
         {
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Call.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Date property of Call.
         /// </summary>
         [Required]
-		public DateTime Date { get; set; }
+        public DateTime Date { get; set; }
 
     }
 }

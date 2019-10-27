@@ -10,36 +10,36 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
-	/// <summary>
-	/// The Contacts controller.
-	/// </summary>
+    /// <summary>
+    /// The Contacts controller.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class ContactsController : ControllerBase
     {
         private readonly ILogger<ContactsController> logger;
         private readonly IMapper mapper;
         private readonly ContactBLL bll;
 
-		/// <summary>
-		/// The constructor of the Contacts controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Contacts controller.
+        /// </summary>
         public ContactsController(
             ILogger<ContactsController> logger,
-			IMapper mapper,
+            IMapper mapper,
             ContactBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/Contacts
-		/// <summary>
-		/// Retrieves all contacts.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all contacts.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ContactVM>>> GetContacts()
         {
@@ -49,10 +49,10 @@ namespace Test.API.Controllers
         }
 
         // GET: api/Contacts/{id}
-		/// <summary>
-		/// Retrieves a specific contact.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific contact.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<ContactVM>> GetContact([FromRoute] Guid id)
         {
@@ -66,14 +66,14 @@ namespace Test.API.Controllers
         }
 
         // POST: api/Contacts
-		/// <summary>
-		/// Creates a new contact.
-		/// </summary>
-		/// <param name="contactVM"></param>
+        /// <summary>
+        /// Creates a new contact.
+        /// </summary>
+        /// <param name="contactVM"></param>
         [HttpPost]
         public async Task<ActionResult<ContactVM>> CreateContact([FromBody] ContactVM contactVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,22 +85,22 @@ namespace Test.API.Controllers
             contact = await this.bll.CreateContactAsync(contact);
 
             return CreatedAtAction(
-				"GetContact",
-				new { id = contact.Id },
-				this.mapper.Map<Contact, ContactVM>(contact)
-			);
+                "GetContact",
+                new { id = contact.Id },
+                this.mapper.Map<Contact, ContactVM>(contact)
+            );
         }
 
-		// PUT: api/Contacts/{id}
-		/// <summary>
-		/// Updates a specific contact.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="contactVM"></param>
+        // PUT: api/Contacts/{id}
+        /// <summary>
+        /// Updates a specific contact.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="contactVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<ContactVM>> UpdateContact([FromRoute] Guid id, [FromBody] ContactVM contactVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != contactVM.Id)
             {
                 return BadRequest(ModelState);
@@ -113,19 +113,19 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             Contact contactUpdate = this.mapper.Map<ContactVM, Contact>(contactVM);
 
-			// Update fields
+            // Update fields
             contact.FirstName = contactUpdate.FirstName;
             contact.LastName = contactUpdate.LastName;
-			
+
             contact = await this.bll.UpdateContactAsync(id, contact);
 
-			return this.mapper.Map<Contact, ContactVM>(contact);
+            return this.mapper.Map<Contact, ContactVM>(contact);
         }
 
-		// TODO
+        // TODO
         //// PUT: api/Skills/5/SkillTags/123/Link
         //[HttpPut("{skillId}/SkillTags/{skillTagId}/Link")]
         //public async Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
@@ -232,10 +232,10 @@ namespace Test.API.Controllers
         //}
 
         // DELETE: api/Contacts/{id}
-		/// <summary>
-		/// Deletes a specific contact.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific contact.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<ContactVM>> DeleteContact([FromRoute] Guid id)
         {

@@ -10,36 +10,36 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
-	/// <summary>
-	/// The Projects controller.
-	/// </summary>
+    /// <summary>
+    /// The Projects controller.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class ProjectsController : ControllerBase
     {
         private readonly ILogger<ProjectsController> logger;
         private readonly IMapper mapper;
         private readonly ProjectBLL bll;
 
-		/// <summary>
-		/// The constructor of the Projects controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Projects controller.
+        /// </summary>
         public ProjectsController(
             ILogger<ProjectsController> logger,
-			IMapper mapper,
+            IMapper mapper,
             ProjectBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/Projects
-		/// <summary>
-		/// Retrieves all projects.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all projects.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjectVM>>> GetProjects()
         {
@@ -49,10 +49,10 @@ namespace Test.API.Controllers
         }
 
         // GET: api/Projects/{id}
-		/// <summary>
-		/// Retrieves a specific project.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific project.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjectVM>> GetProject([FromRoute] Guid id)
         {
@@ -66,14 +66,14 @@ namespace Test.API.Controllers
         }
 
         // POST: api/Projects
-		/// <summary>
-		/// Creates a new project.
-		/// </summary>
-		/// <param name="projectVM"></param>
+        /// <summary>
+        /// Creates a new project.
+        /// </summary>
+        /// <param name="projectVM"></param>
         [HttpPost]
         public async Task<ActionResult<ProjectVM>> CreateProject([FromBody] ProjectVM projectVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,22 +85,22 @@ namespace Test.API.Controllers
             project = await this.bll.CreateProjectAsync(project);
 
             return CreatedAtAction(
-				"GetProject",
-				new { id = project.Id },
-				this.mapper.Map<Project, ProjectVM>(project)
-			);
+                "GetProject",
+                new { id = project.Id },
+                this.mapper.Map<Project, ProjectVM>(project)
+            );
         }
 
-		// PUT: api/Projects/{id}
-		/// <summary>
-		/// Updates a specific project.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="projectVM"></param>
+        // PUT: api/Projects/{id}
+        /// <summary>
+        /// Updates a specific project.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="projectVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<ProjectVM>> UpdateProject([FromRoute] Guid id, [FromBody] ProjectVM projectVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != projectVM.Id)
             {
                 return BadRequest(ModelState);
@@ -113,19 +113,19 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             Project projectUpdate = this.mapper.Map<ProjectVM, Project>(projectVM);
 
-			// Update fields
+            // Update fields
             project.Name = projectUpdate.Name;
             project.Description = projectUpdate.Description;
-			
+
             project = await this.bll.UpdateProjectAsync(id, project);
 
-			return this.mapper.Map<Project, ProjectVM>(project);
+            return this.mapper.Map<Project, ProjectVM>(project);
         }
 
-		// TODO
+        // TODO
         //// PUT: api/Skills/5/SkillTags/123/Link
         //[HttpPut("{skillId}/SkillTags/{skillTagId}/Link")]
         //public async Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
@@ -232,10 +232,10 @@ namespace Test.API.Controllers
         //}
 
         // DELETE: api/Projects/{id}
-		/// <summary>
-		/// Deletes a specific project.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific project.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<ProjectVM>> DeleteProject([FromRoute] Guid id)
         {

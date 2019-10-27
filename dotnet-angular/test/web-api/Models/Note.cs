@@ -3,65 +3,65 @@ using System.Collections.Generic;
 
 namespace Test.API.Models
 {
-	/// <summary>
+    /// <summary>
     /// Note model
     /// </summary>
     public class Note
     {
-		public Note()
+        public Note()
         {
             // Relations
 
-			//// Many-to-many
-			this.ProjectNote = new List<ProjectNote>();
+            //// Many-to-many
+            this.ProjectNote = new List<ProjectNote>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Note.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Title property of Note.
         /// </summary>
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Body property of Note.
         /// </summary>
-		public string Body { get; set; }
+        public string Body { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-many
+        //// Many-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Projects of Note.
         /// </summary>
-		public IList<ProjectNote> ProjectNote { get; set; }
+        public IList<ProjectNote> ProjectNote { get; set; }
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-		public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
-		// TODO:
-		//public Guid CreatedByUserId { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
-		//public Guid TenantId { get; set; }
+        // TODO:
+        //public Guid CreatedByUserId { get; set; }
+        //public Guid ModifiedByUserId { get; set; }
+        //public Guid TenantId { get; set; }
     }
 }

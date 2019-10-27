@@ -6,50 +6,50 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
-	/// <summary>
-	/// The business logic layer for Documents.
-	/// </summary>
+    /// <summary>
+    /// The business logic layer for Documents.
+    /// </summary>
     public class DocumentBLL
     {
         private readonly DocumentRepository documentRepository;
 
-		/// <summary>
-		/// The constructor of the Document business logic layer.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Document business logic layer.
+        /// </summary>
         public DocumentBLL(
-			DocumentRepository documentRepository
-		)
+            DocumentRepository documentRepository
+        )
         {
             this.documentRepository = documentRepository;
         }
 
-		/// <summary>
-		/// Retrieves all documents.
-		/// </summary>
-		public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
+        /// <summary>
+        /// Retrieves all documents.
+        /// </summary>
+        public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
         {
             return await this.documentRepository.GetAsync();
         }
 
-		/// <summary>
-		/// Retrieves one document by Id.
-		/// </summary>
-		public async Task<Document> GetDocumentByIdAsync(Guid id)
+        /// <summary>
+        /// Retrieves one document by Id.
+        /// </summary>
+        public async Task<Document> GetDocumentByIdAsync(Guid id)
         {
             return await this.documentRepository.GetByIdAsync(id);
         }
 
-		/// <summary>
-		/// Creates a new document record.
-		/// </summary>
+        /// <summary>
+        /// Creates a new document record.
+        /// </summary>
         public async Task<Document> CreateDocumentAsync(Document document)
         {
             return await this.documentRepository.InsertAsync(document);
         }
 
-		/// <summary>
-		/// Updates an existing document record by Id.
-		/// </summary>
+        /// <summary>
+        /// Updates an existing document record by Id.
+        /// </summary>
         public async Task<Document> UpdateDocumentAsync(Guid id, Document documentUpdate)
         {
             // Retrieve existing
@@ -65,11 +65,11 @@ namespace Test.API.BLL
             return await this.documentRepository.UpdateAsync(document);
         }
 
-		// TODO
+        // TODO
         //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
         //{
         //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
+        //
         //    if (leaguePlayerLink != null)
         //    {
         //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
@@ -78,9 +78,9 @@ namespace Test.API.BLL
         //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
         //}
 
-		/// <summary>
-		/// Deletes an existing document record by Id.
-		/// </summary>
+        /// <summary>
+        /// Deletes an existing document record by Id.
+        /// </summary>
         public async Task<Document> DeleteDocumentAsync(Document document)
         {
             await this.documentRepository.DeleteAsync(document);

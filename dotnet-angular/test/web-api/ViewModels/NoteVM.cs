@@ -4,44 +4,44 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// Note view model
     /// </summary>
     public class NoteVM
     {
-		public NoteVM()
+        public NoteVM()
         {
             // Relations
 
-			//// Many-to-many
-			this.Projects = new List<ProjectVM>();
+            //// Many-to-many
+            this.Projects = new List<ProjectVM>();
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of Note.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Title property of Note.
         /// </summary>
         [Required]
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Body property of Note.
         /// </summary>
-		public string Body { get; set; }
+        public string Body { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-many
+        //// Many-to-many
 
-		/// <summary>
+        /// <summary>
         /// The related Projects of Note.
         /// </summary>
-		public IList<ProjectVM> Projects { get; set; }
+        public IList<ProjectVM> Projects { get; set; }
     }
 }
