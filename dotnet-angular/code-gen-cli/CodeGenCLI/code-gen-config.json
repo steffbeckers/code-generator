@@ -9,12 +9,12 @@
       "properties": [
         {
           "name": "Name",
+          //"description": "", // Optional
           "type": "string",
           "required": true
         },
         {
           "name": "Website",
-          //"description": "Homepage of the account's website", // Optional
           "type": "string"
         },
         {
@@ -24,6 +24,13 @@
         {
           "name": "Email",
           "type": "string"
+        }
+      ],
+      "relations": [
+        {
+          "name": "Contacts",
+          "type": "one-to-many",
+          "model": "Contact"
         }
       ]
     },
@@ -40,6 +47,15 @@
           "type": "string",
           "required": true
         }
+      ],
+      "relations": [
+        {
+          "name": "Account",
+          "type": "many-to-one",
+          //"required": true,
+          "model": "Account"
+          //"idField": "ParentAccountId" // TODO: Optional override
+        }
       ]
     },
     {
@@ -50,7 +66,8 @@
           "type": "DateTime",
           "required": true
         }
-      ]
+      ],
+      "relations": []
     },
     {
       "name": "Note",
@@ -64,7 +81,8 @@
           "name": "Body",
           "type": "string"
         }
-      ]
+      ],
+      "relations": []
     },
     {
       "name": "Document",
@@ -74,7 +92,8 @@
           "type": "string",
           "required": true
         }
-      ]
+      ],
+      "relations": []
     },
     {
       "name": "Email",
@@ -88,7 +107,8 @@
           "name": "Body",
           "type": "string"
         }
-      ]
+      ],
+      "relations": []
     },
     {
       "name": "Project",
@@ -101,6 +121,13 @@
         {
           "name": "Description",
           "type": "string"
+        }
+      ],
+      "relations": [
+        {
+          "name": "Todoes",
+          "type": "one-to-many",
+          "model": "Todo"
         }
       ]
     },
@@ -115,6 +142,13 @@
         {
           "name": "Body",
           "type": "string"
+        }
+      ],
+      "relations": [
+        {
+          "name": "Project",
+          "type": "many-to-one",
+          "model": "Project"
         }
       ]
     }

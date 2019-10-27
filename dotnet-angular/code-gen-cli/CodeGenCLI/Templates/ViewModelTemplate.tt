@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.ViewModels
@@ -17,6 +18,16 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     /// </summary>
     public class <#= model.Name #>VM
     {
+		public <#= model.Name #>VM()
+        {
+            // Relations
+
+			//// One-to-many
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+			this.<#= relation.Name #> = new List<<#= relation.Model #>VM>();
+<# } #>
+        }
+
 		/// <summary>
         /// The identifier of <#= model.Name #>.
         /// </summary>
@@ -36,6 +47,26 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         [Required]
 <# } #>
 		public <#= property.Type #> <#= property.Name #> { get; set; }
+<# } #>
+
+		// Relations
+
+		//// Many-to-one
+
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+		/// <summary>
+        /// The related <#= relation.Name #> of <#= model.Name #>.
+        /// </summary>
+		public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
+<# } #>
+
+		//// One-to-many
+
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+		/// <summary>
+        /// The related <#= relation.Name #> of <#= model.Name #>.
+        /// </summary>
+		public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
 <# } #>
     }
 }

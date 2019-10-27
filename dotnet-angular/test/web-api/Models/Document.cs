@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
@@ -7,6 +8,12 @@ namespace Test.API.Models
     /// </summary>
     public class Document
     {
+		public Document()
+        {
+        }
+
+		// Properties
+
 		/// <summary>
         /// The identifier of Document.
         /// </summary>
@@ -16,6 +23,7 @@ namespace Test.API.Models
         /// The Name property of Document.
         /// </summary>
 		public string Name { get; set; }
+
 
 		// Generic properties
 

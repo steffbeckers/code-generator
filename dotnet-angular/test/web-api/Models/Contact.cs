@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
@@ -7,6 +8,12 @@ namespace Test.API.Models
     /// </summary>
     public class Contact
     {
+		public Contact()
+        {
+        }
+
+		// Properties
+
 		/// <summary>
         /// The identifier of Contact.
         /// </summary>
@@ -21,6 +28,20 @@ namespace Test.API.Models
         /// The LastName property of Contact.
         /// </summary>
 		public string LastName { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+	    /// <summary>
+        /// The related foreign key AccountId for Account of Contact.
+        /// </summary>
+		public Guid? AccountId { get; set; }
+
+		/// <summary>
+        /// The related Account of Contact.
+        /// </summary>
+		public Account Account { get; set; }
 
 		// Generic properties
 

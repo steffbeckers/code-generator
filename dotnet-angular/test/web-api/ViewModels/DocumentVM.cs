@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
@@ -8,6 +9,13 @@ namespace Test.API.ViewModels
     /// </summary>
     public class DocumentVM
     {
+		public DocumentVM()
+        {
+            // Relations
+
+			//// One-to-many
+        }
+
 		/// <summary>
         /// The identifier of Document.
         /// </summary>
@@ -18,5 +26,13 @@ namespace Test.API.ViewModels
         /// </summary>
         [Required]
 		public string Name { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+
+		//// One-to-many
+
     }
 }

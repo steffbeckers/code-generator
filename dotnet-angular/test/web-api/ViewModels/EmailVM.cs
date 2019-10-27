@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
@@ -8,6 +9,13 @@ namespace Test.API.ViewModels
     /// </summary>
     public class EmailVM
     {
+		public EmailVM()
+        {
+            // Relations
+
+			//// One-to-many
+        }
+
 		/// <summary>
         /// The identifier of Email.
         /// </summary>
@@ -23,5 +31,13 @@ namespace Test.API.ViewModels
         /// The Body property of Email.
         /// </summary>
 		public string Body { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+
+		//// One-to-many
+
     }
 }

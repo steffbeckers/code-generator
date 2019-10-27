@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
@@ -8,6 +9,13 @@ namespace Test.API.ViewModels
     /// </summary>
     public class CallVM
     {
+		public CallVM()
+        {
+            // Relations
+
+			//// One-to-many
+        }
+
 		/// <summary>
         /// The identifier of Call.
         /// </summary>
@@ -18,5 +26,13 @@ namespace Test.API.ViewModels
         /// </summary>
         [Required]
 		public DateTime Date { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+
+		//// One-to-many
+
     }
 }

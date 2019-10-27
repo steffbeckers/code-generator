@@ -3,10 +3,15 @@ using System.Collections.Generic;
 
 namespace CodeGenCLI.CodeGenClasses
 {
-
     [JsonObject("model")]
     public class CodeGenModel
     {
+        public CodeGenModel()
+        {
+            this.Properties = new List<CodeGenModelProperty>();
+            this.Relations = new List<CodeGenModelRelation>();
+        }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -16,6 +21,7 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("description")]
         public string Description { get; set; }
 
-        public List<CodeGenModelProperty> Properties { get; set; }
+        public IList<CodeGenModelProperty> Properties { get; set; }
+        public IList<CodeGenModelRelation> Relations { get; set; }
     }
 }

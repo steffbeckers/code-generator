@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
@@ -8,6 +9,14 @@ namespace Test.API.ViewModels
     /// </summary>
     public class AccountVM
     {
+		public AccountVM()
+        {
+            // Relations
+
+			//// One-to-many
+			this.Contacts = new List<ContactVM>();
+        }
+
 		/// <summary>
         /// The identifier of Account.
         /// </summary>
@@ -33,5 +42,17 @@ namespace Test.API.ViewModels
         /// The Email property of Account.
         /// </summary>
 		public string Email { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related Contacts of Account.
+        /// </summary>
+		public IList<ContactVM> Contacts { get; set; }
     }
 }

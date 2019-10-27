@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
@@ -7,6 +8,16 @@ namespace Test.API.Models
     /// </summary>
     public class Project
     {
+		public Project()
+        {
+            // Relations
+
+			//// One-to-many
+			this.Todoes = new List<Todo>();
+        }
+
+		// Properties
+
 		/// <summary>
         /// The identifier of Project.
         /// </summary>
@@ -21,6 +32,15 @@ namespace Test.API.Models
         /// The Description property of Project.
         /// </summary>
 		public string Description { get; set; }
+
+		// Relations
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related Todoes of Project.
+        /// </summary>
+		public IList<Todo> Todoes { get; set; }
 
 		// Generic properties
 

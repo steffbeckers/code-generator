@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
@@ -7,6 +8,16 @@ namespace Test.API.Models
     /// </summary>
     public class Account
     {
+		public Account()
+        {
+            // Relations
+
+			//// One-to-many
+			this.Contacts = new List<Contact>();
+        }
+
+		// Properties
+
 		/// <summary>
         /// The identifier of Account.
         /// </summary>
@@ -31,6 +42,15 @@ namespace Test.API.Models
         /// The Email property of Account.
         /// </summary>
 		public string Email { get; set; }
+
+		// Relations
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related Contacts of Account.
+        /// </summary>
+		public IList<Contact> Contacts { get; set; }
 
 		// Generic properties
 

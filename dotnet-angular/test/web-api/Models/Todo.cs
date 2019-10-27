@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
@@ -7,6 +8,12 @@ namespace Test.API.Models
     /// </summary>
     public class Todo
     {
+		public Todo()
+        {
+        }
+
+		// Properties
+
 		/// <summary>
         /// The identifier of Todo.
         /// </summary>
@@ -21,6 +28,20 @@ namespace Test.API.Models
         /// The Body property of Todo.
         /// </summary>
 		public string Body { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+	    /// <summary>
+        /// The related foreign key ProjectId for Project of Todo.
+        /// </summary>
+		public Guid? ProjectId { get; set; }
+
+		/// <summary>
+        /// The related Project of Todo.
+        /// </summary>
+		public Project Project { get; set; }
 
 		// Generic properties
 

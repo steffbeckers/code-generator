@@ -724,6 +724,11 @@
             The Email property of Account.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Account.Contacts">
+            <summary>
+            The related Contacts of Account.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Account.CreatedOn">
             <summary>
             The date and time of when the record is created
@@ -787,6 +792,16 @@
         <member name="P:Test.API.Models.Contact.LastName">
             <summary>
             The LastName property of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.AccountId">
+            <summary>
+            The related AccountId of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Contact.Account">
+            <summary>
+            The related Account of Contact.
             </summary>
         </member>
         <member name="P:Test.API.Models.Contact.CreatedOn">
@@ -924,6 +939,11 @@
             The Description property of Project.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Project.Todoes">
+            <summary>
+            The related Todoes of Project.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Project.CreatedOn">
             <summary>
             The date and time of when the record is created
@@ -1004,6 +1024,11 @@
             The Email property of Account.
             </summary>
         </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Contacts">
+            <summary>
+            The related Contacts of Account.
+            </summary>
+        </member>
         <member name="T:Test.API.ViewModels.CallVM">
             <summary>
             Call view model
@@ -1037,6 +1062,11 @@
         <member name="P:Test.API.ViewModels.ContactVM.LastName">
             <summary>
             The LastName property of Contact.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ContactVM.Account">
+            <summary>
+            The related Account of Contact.
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.DocumentVM">
@@ -1112,6 +1142,11 @@
         <member name="P:Test.API.ViewModels.ProjectVM.Description">
             <summary>
             The Description property of Project.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectVM.Todoes">
+            <summary>
+            The related Todoes of Project.
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.TodoVM">

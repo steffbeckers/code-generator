@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
@@ -8,6 +9,14 @@ namespace Test.API.ViewModels
     /// </summary>
     public class ProjectVM
     {
+		public ProjectVM()
+        {
+            // Relations
+
+			//// One-to-many
+			this.Todoes = new List<TodoVM>();
+        }
+
 		/// <summary>
         /// The identifier of Project.
         /// </summary>
@@ -23,5 +32,17 @@ namespace Test.API.ViewModels
         /// The Description property of Project.
         /// </summary>
 		public string Description { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related Todoes of Project.
+        /// </summary>
+		public IList<TodoVM> Todoes { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
@@ -7,6 +8,12 @@ namespace Test.API.Models
     /// </summary>
     public class Call
     {
+		public Call()
+        {
+        }
+
+		// Properties
+
 		/// <summary>
         /// The identifier of Call.
         /// </summary>
@@ -16,6 +23,7 @@ namespace Test.API.Models
         /// The Date property of Call.
         /// </summary>
 		public DateTime Date { get; set; }
+
 
 		// Generic properties
 

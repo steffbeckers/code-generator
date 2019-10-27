@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 using System;
+using System.Collections.Generic;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models
 {
@@ -16,6 +17,21 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     /// </summary>
     public class <#= model.Name #>
     {
+		public <#= model.Name #>()
+        {
+<# if (model.Relations.Where(r => r.Type == "one-to-many").ToList().Count > 0) { #>
+            // Relations
+
+			//// One-to-many
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+			this.<#= relation.Name #> = new List<<#= relation.Model #>>();
+<# } #>
+<# } #>
+        }
+<# if (model.Properties.ToList().Count > 0) { #>
+
+		// Properties
+
 		/// <summary>
         /// The identifier of <#= model.Name #>.
         /// </summary>
@@ -32,6 +48,38 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         /// </summary>
 <# } #>
 		public <#= property.Type #> <#= property.Name #> { get; set; }
+<# } #>
+<# } #>
+
+<# if (model.Relations.ToList().Count > 0) { #>
+		// Relations
+<# if (model.Relations.Where(r => r.Type == "many-to-one").ToList().Count > 0) { #>
+
+		//// Many-to-one
+
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+	    /// <summary>
+        /// The related foreign key <#= relation.Name #>Id for <#= relation.Name #> of <#= model.Name #>.
+        /// </summary>
+		public Guid<#= (relation.Required ? "" : "?") #> <#= relation.Model #>Id { get; set; }
+
+		/// <summary>
+        /// The related <#= relation.Name #> of <#= model.Name #>.
+        /// </summary>
+		public <#= relation.Model #> <#= relation.Name #> { get; set; }
+<# } #>
+<# } #>
+<# if (model.Relations.Where(r => r.Type == "one-to-many").ToList().Count > 0) { #>
+
+		//// One-to-many
+
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+		/// <summary>
+        /// The related <#= relation.Name #> of <#= model.Name #>.
+        /// </summary>
+		public IList<<#= relation.Model #>> <#= relation.Name #> { get; set; }
+<# } #>
+<# } #>
 <# } #>
 
 		// Generic properties

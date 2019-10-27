@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
@@ -8,6 +9,13 @@ namespace Test.API.ViewModels
     /// </summary>
     public class TodoVM
     {
+		public TodoVM()
+        {
+            // Relations
+
+			//// One-to-many
+        }
+
 		/// <summary>
         /// The identifier of Todo.
         /// </summary>
@@ -22,5 +30,17 @@ namespace Test.API.ViewModels
         /// The Body property of Todo.
         /// </summary>
 		public string Body { get; set; }
+
+		// Relations
+
+		//// Many-to-one
+
+		/// <summary>
+        /// The related Project of Todo.
+        /// </summary>
+		public IList<ProjectVM> Project { get; set; }
+
+		//// One-to-many
+
     }
 }
