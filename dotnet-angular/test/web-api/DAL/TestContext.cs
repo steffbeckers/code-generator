@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Test.API.Models;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Test.API.Models;
 
 namespace Test.API.DAL
 {

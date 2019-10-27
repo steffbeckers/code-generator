@@ -30,15 +30,15 @@ namespace CodeGenCLI.Templates
         public virtual string TransformText()
         {
             this.Write("using Microsoft.EntityFrameworkCore;\r\nusing Microsoft.Extensions.Configuration;\r\n" +
-                    "using ");
+                    "using System;\r\nusing System.IO;\r\nusing System.Threading;\r\nusing System.Threading" +
+                    ".Tasks;\r\nusing ");
             
-            #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".Models;\r\nusing System;\r\nusing System.IO;\r\nusing System.Threading;\r\nusing System." +
-                    "Threading.Tasks;\r\n\r\nnamespace ");
+            this.Write(".Models;\r\n\r\nnamespace ");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));

@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
-using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace Test.API.BLL
 {
