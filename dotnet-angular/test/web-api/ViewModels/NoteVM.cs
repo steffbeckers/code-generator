@@ -11,6 +11,10 @@ namespace Test.API.ViewModels
     {
 		public NoteVM()
         {
+            // Relations
+
+			//// Many-to-many
+			this.Projects = new List<ProjectVM>();
         }
 
 		// Properties
@@ -31,5 +35,13 @@ namespace Test.API.ViewModels
         /// </summary>
 		public string Body { get; set; }
 
+		// Relations
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Projects of Note.
+        /// </summary>
+		public IList<ProjectVM> Projects { get; set; }
     }
 }

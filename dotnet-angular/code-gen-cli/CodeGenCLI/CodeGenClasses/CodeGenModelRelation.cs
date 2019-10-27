@@ -22,5 +22,8 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonProperty("idField")]
         public string IdField { get; set; }
+
+        [JsonProperty("through")]
+        public string Through { get; set; }
     }
 }

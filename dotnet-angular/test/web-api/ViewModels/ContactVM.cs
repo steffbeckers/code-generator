@@ -11,6 +11,7 @@ namespace Test.API.ViewModels
     {
 		public ContactVM()
         {
+            // Relations
         }
 
 		// Properties

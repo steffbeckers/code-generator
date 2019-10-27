@@ -20,12 +20,21 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     {
 		public <#= model.Name #>VM()
         {
-<# if (model.Relations.Where(r => r.Type == "one-to-many").ToList().Count > 0) { #>
+<# if (model.Relations.ToList().Count > 0) { #>
             // Relations
+<# if (model.Relations.Where(r => r.Type == "one-to-many").ToList().Count > 0) { #>
 
 			//// One-to-many
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
 			this.<#= relation.Name #> = new List<<#= relation.Model #>VM>();
+<# } #>
+<# } #>
+<# if (model.Relations.Where(r => r.Type == "many-to-many").ToList().Count > 0) { #>
+
+			//// Many-to-many
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+			this.<#= relation.Name #> = new List<<#= relation.Model #>VM>();
+<# } #>
 <# } #>
 <# } #>
         }
@@ -79,6 +88,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		//// One-to-many
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+		/// <summary>
+        /// The related <#= relation.Name #> of <#= model.Name #>.
+        /// </summary>
+		public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
+<# } #>
+<# } #>
+<# if (model.Relations.Where(r => r.Type == "many-to-many").ToList().Count > 0) { #>
+
+		//// Many-to-many
+
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
 		/// <summary>
         /// The related <#= relation.Name #> of <#= model.Name #>.
         /// </summary>

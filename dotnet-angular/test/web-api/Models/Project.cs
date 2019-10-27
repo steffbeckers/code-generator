@@ -14,6 +14,9 @@ namespace Test.API.Models
 
 			//// One-to-many
 			this.Todoes = new List<Todo>();
+
+			//// Many-to-many
+			this.ProjectNote = new List<ProjectNote>();
         }
 
 		// Properties
@@ -41,6 +44,13 @@ namespace Test.API.Models
         /// The related Todoes of Project.
         /// </summary>
 		public IList<Todo> Todoes { get; set; }
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Notes of Project.
+        /// </summary>
+		public IList<ProjectNote> ProjectNote { get; set; }
 
 		// Generic properties
 

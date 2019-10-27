@@ -82,7 +82,14 @@
           "type": "string"
         }
       ],
-      "relations": []
+      "relations": [
+        {
+          "name": "Projects",
+          "type": "many-to-many",
+          "model": "Project",
+          "through": "ProjectNote"
+        }
+      ]
     },
     {
       "name": "Document",
@@ -128,6 +135,12 @@
           "name": "Todoes",
           "type": "one-to-many",
           "model": "Todo"
+        },
+        {
+          "name": "Notes",
+          "type": "many-to-many",
+          "model": "Note",
+          "through": "ProjectNote"
         }
       ]
     },

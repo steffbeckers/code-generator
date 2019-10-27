@@ -15,6 +15,9 @@ namespace Test.API.ViewModels
 
 			//// One-to-many
 			this.Todoes = new List<TodoVM>();
+
+			//// Many-to-many
+			this.Notes = new List<NoteVM>();
         }
 
 		// Properties
@@ -43,5 +46,12 @@ namespace Test.API.ViewModels
         /// The related Todoes of Project.
         /// </summary>
 		public IList<TodoVM> Todoes { get; set; }
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Notes of Project.
+        /// </summary>
+		public IList<NoteVM> Notes { get; set; }
     }
 }

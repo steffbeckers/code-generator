@@ -10,6 +10,10 @@ namespace Test.API.Models
     {
 		public Note()
         {
+            // Relations
+
+			//// Many-to-many
+			this.ProjectNote = new List<ProjectNote>();
         }
 
 		// Properties
@@ -29,6 +33,14 @@ namespace Test.API.Models
         /// </summary>
 		public string Body { get; set; }
 
+		// Relations
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Projects of Note.
+        /// </summary>
+		public IList<ProjectNote> ProjectNote { get; set; }
 
 		// Generic properties
 

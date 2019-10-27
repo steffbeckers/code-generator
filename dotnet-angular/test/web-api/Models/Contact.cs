@@ -10,6 +10,7 @@ namespace Test.API.Models
     {
 		public Contact()
         {
+            // Relations
         }
 
 		// Properties
