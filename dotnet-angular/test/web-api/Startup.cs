@@ -43,6 +43,7 @@ namespace Test.API
 			services.AddScoped<DocumentRepository>();
 			services.AddScoped<EmailRepository>();
 			services.AddScoped<ProjectRepository>();
+			services.AddScoped<ProjectNoteRepository>();
 			services.AddScoped<TodoRepository>();
 
 			// BLLs

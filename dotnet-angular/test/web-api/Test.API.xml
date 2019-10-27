@@ -674,6 +674,16 @@
             The constructor of the Note repository.
             </summary>
         </member>
+        <member name="T:Test.API.DAL.Repositories.ProjectNoteRepository">
+            <summary>
+            The repository for ProjectNotes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.ProjectNoteRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the ProjectNote repository.
+            </summary>
+        </member>
         <member name="T:Test.API.DAL.Repositories.ProjectRepository">
             <summary>
             The repository for Projects in the data access layer.
@@ -959,6 +969,46 @@
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
+        <member name="T:Test.API.Models.ProjectNote">
+            <summary>
+            ProjectNote model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProjectNote.ProjectId">
+            <summary>
+            The related foreign key ProjectId for Project of ProjectNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProjectNote.Project">
+            <summary>
+            The related Project of ProjectNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProjectNote.NoteId">
+            <summary>
+            The related foreign key NoteId for Note of ProjectNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProjectNote.Note">
+            <summary>
+            The related Note of ProjectNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProjectNote.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProjectNote.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProjectNote.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
         <member name="T:Test.API.Models.Todo">
             <summary>
             Todo model
@@ -1137,6 +1187,31 @@
         <member name="P:Test.API.ViewModels.NoteVM.Body">
             <summary>
             The Body property of Note.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.ProjectNoteVM">
+            <summary>
+            ProjectNote view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectNoteVM.ProjectId">
+            <summary>
+            The related foreign key ProjectId for Project of ProjectNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectNoteVM.Project">
+            <summary>
+            The related Project of ProjectNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectNoteVM.NoteId">
+            <summary>
+            The related foreign key NoteId for Note of ProjectNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProjectNoteVM.Note">
+            <summary>
+            The related Note of ProjectNote.
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.ProjectVM">

@@ -132,6 +132,23 @@
       ]
     },
     {
+      "name": "ProjectNote",
+      "manyToMany": true,
+      "properties": [],
+      "relations": [
+        {
+          "name": "Project",
+          "type": "many-to-one",
+          "model": "Project"
+        },
+        {
+          "name": "Note",
+          "type": "many-to-one",
+          "model": "Note"
+        }
+      ]
+    },
+    {
       "name": "Todo",
       "namePlural": "Todoes",
       "properties": [

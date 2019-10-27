@@ -132,7 +132,7 @@ using ");
             this.Write("\r\n\t\t\t// BLLs\r\n");
             
             #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
+ foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { 
             
             #line default
             #line hidden

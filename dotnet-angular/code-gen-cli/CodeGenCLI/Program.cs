@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace CodeGenCLI
@@ -72,7 +73,7 @@ namespace CodeGenCLI
                         {
                             Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels"));
                         }
-                        foreach (CodeGenModel codeGenModel in Config.Models)
+                        foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                         {
                             ViewModelTemplate viewModelTemplate = new ViewModelTemplate(Config, codeGenModel);
                             string viewModelTemplateContent = viewModelTemplate.TransformText();
@@ -128,7 +129,7 @@ namespace CodeGenCLI
                         {
                             Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL"));
                         }
-                        foreach (CodeGenModel codeGenModel in Config.Models)
+                        foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                         {
                             BLLTemplate bllTemplate = new BLLTemplate(Config, codeGenModel);
                             string bllTemplateContent = bllTemplate.TransformText();
@@ -142,7 +143,7 @@ namespace CodeGenCLI
                         {
                             Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers"));
                         }
-                        foreach (CodeGenModel codeGenModel in Config.Models)
+                        foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                         {
                             ControllerTemplate controllerTemplate = new ControllerTemplate(Config, codeGenModel);
                             string controllerTemplateContent = controllerTemplate.TransformText();

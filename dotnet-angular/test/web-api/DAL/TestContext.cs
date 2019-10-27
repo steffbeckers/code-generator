@@ -21,6 +21,7 @@ namespace Test.API.DAL
 		public DbSet<Document> Documents { get; set; }
 		public DbSet<Email> Emails { get; set; }
 		public DbSet<Project> Projects { get; set; }
+		public DbSet<ProjectNote> ProjectNotes { get; set; }
 		public DbSet<Todo> Todoes { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -130,6 +131,18 @@ namespace Test.API.DAL
 
             #endregion
 
+			#region ProjectNotes
+
+            // Soft delete query filter
+            modelBuilder.Entity<ProjectNote>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+            modelBuilder.Entity<ProjectNote>().ToTable("ProjectNotes");
+
+            // Required properties
+
+            #endregion
+
 			#region Todoes
 
             // Soft delete query filter
@@ -172,6 +185,7 @@ namespace Test.API.DAL
 					entry.Entity.GetType() == typeof(Document) ||
 					entry.Entity.GetType() == typeof(Email) ||
 					entry.Entity.GetType() == typeof(Project) ||
+					entry.Entity.GetType() == typeof(ProjectNote) ||
 					entry.Entity.GetType() == typeof(Todo)
 				)
                 {
@@ -202,6 +216,7 @@ namespace Test.API.DAL
 					entry.Entity.GetType() == typeof(Document) ||
 					entry.Entity.GetType() == typeof(Email) ||
 					entry.Entity.GetType() == typeof(Project) ||
+					entry.Entity.GetType() == typeof(ProjectNote) ||
 					entry.Entity.GetType() == typeof(Todo)
 				)
                 {

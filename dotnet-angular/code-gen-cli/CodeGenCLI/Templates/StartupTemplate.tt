@@ -47,7 +47,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# } #>
 
 			// BLLs
-<# foreach (CodeGenModel model in config.Models) { #>
+<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 			services.AddScoped<<#= model.Name #>BLL>();
 <# } #>
 

@@ -21,7 +21,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public AutoMapperProfile()
         {
 <# CodeGenModel lastModel = config.Models.Last(); #>
-<# foreach (CodeGenModel model in config.Models) { #>
+<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
             // <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
 			CreateMap<<#= model.Name #>, <#= model.Name #>VM>();
             CreateMap<<#= model.Name #>VM, <#= model.Name #>>();

@@ -45,5 +45,6 @@ namespace Test.API.ViewModels
         /// The related Account of Contact.
         /// </summary>
 		public AccountVM Account { get; set; }
+
     }
 }

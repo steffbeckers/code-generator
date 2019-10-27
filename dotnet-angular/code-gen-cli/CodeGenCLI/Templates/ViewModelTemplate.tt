@@ -71,6 +71,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         /// The related <#= relation.Name #> of <#= model.Name #>.
         /// </summary>
 		public <#= relation.Model #>VM <#= relation.Name #> { get; set; }
+
 <# } #>
 <# } #>
 <# if (model.Relations.Where(r => r.Type == "one-to-many").ToList().Count > 0) { #>

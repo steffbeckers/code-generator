@@ -21,6 +21,9 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("manyToMany")]
+        public bool ManyToMany { get; set; }
+
         public IList<CodeGenModelProperty> Properties { get; set; }
         public IList<CodeGenModelRelation> Relations { get; set; }
     }

@@ -4,44 +4,37 @@ using System.Collections.Generic;
 namespace Test.API.Models
 {
 	/// <summary>
-    /// Contact model
+    /// ProjectNote model
     /// </summary>
-    public class Contact
+    public class ProjectNote
     {
-		public Contact()
+		public ProjectNote()
         {
         }
-
-		// Properties
-
-		/// <summary>
-        /// The identifier of Contact.
-        /// </summary>
-		public Guid Id { get; set; }
-
-		/// <summary>
-        /// The FirstName property of Contact.
-        /// </summary>
-		public string FirstName { get; set; }
-
-		/// <summary>
-        /// The LastName property of Contact.
-        /// </summary>
-		public string LastName { get; set; }
 
 		// Relations
 
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key AccountId for Account of Contact.
+        /// The related foreign key ProjectId for Project of ProjectNote.
         /// </summary>
-		public Guid? AccountId { get; set; }
+		public Guid? ProjectId { get; set; }
 
 		/// <summary>
-        /// The related Account of Contact.
+        /// The related Project of ProjectNote.
         /// </summary>
-		public Account Account { get; set; }
+		public Project Project { get; set; }
+
+	    /// <summary>
+        /// The related foreign key NoteId for Note of ProjectNote.
+        /// </summary>
+		public Guid? NoteId { get; set; }
+
+		/// <summary>
+        /// The related Note of ProjectNote.
+        /// </summary>
+		public Note Note { get; set; }
 
 
 		// Generic properties
