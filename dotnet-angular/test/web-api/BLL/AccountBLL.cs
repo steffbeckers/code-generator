@@ -6,50 +6,61 @@ using Test.API.Models;
 
 namespace Test.API.BLL
 {
-    /// <summary>
-    /// The business logic layer for Accounts.
-    /// </summary>
+	/// <summary>
+	/// The business logic layer for Accounts.
+	/// </summary>
     public class AccountBLL
     {
         private readonly AccountRepository accountRepository;
 
-        /// <summary>
-        /// The constructor of the Account business logic layer.
-        /// </summary>
+		/// <summary>
+		/// The constructor of the Account business logic layer.
+		/// </summary>
         public AccountBLL(
-            AccountRepository accountRepository
-        )
+			AccountRepository accountRepository
+		)
         {
             this.accountRepository = accountRepository;
         }
 
-        /// <summary>
-        /// Retrieves all accounts.
-        /// </summary>
-        public async Task<IEnumerable<Account>> GetAllAccountsAsync()
+		/// <summary>
+		/// Retrieves all accounts.
+		/// </summary>
+		public async Task<IEnumerable<Account>> GetAllAccountsAsync()
         {
             return await this.accountRepository.GetAsync();
         }
 
-        /// <summary>
-        /// Retrieves one account by Id.
-        /// </summary>
-        public async Task<Account> GetAccountByIdAsync(Guid id)
+		/// <summary>
+		/// Retrieves one account by Id.
+		/// </summary>
+		public async Task<Account> GetAccountByIdAsync(Guid id)
         {
-            return await this.accountRepository.GetByIdAsync(id);
+            return await this.accountRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
-        /// <summary>
-        /// Creates a new account record.
-        /// </summary>
+		/// <summary>
+		/// Creates a new account record.
+		/// </summary>
         public async Task<Account> CreateAccountAsync(Account account)
         {
-            return await this.accountRepository.InsertAsync(account);
+            // #-#-#  
+            // Before creation
+            account.Name = account.Name.Trim();
+			// #-#-#
+
+			account = await this.accountRepository.InsertAsync(account);
+
+			// #-#-#  
+			// After creation
+			// #-#-#
+
+            return account;
         }
 
-        /// <summary>
-        /// Updates an existing account record by Id.
-        /// </summary>
+		/// <summary>
+		/// Updates an existing account record by Id.
+		/// </summary>
         public async Task<Account> UpdateAccountAsync(Guid id, Account accountUpdate)
         {
             // Retrieve existing
@@ -68,22 +79,9 @@ namespace Test.API.BLL
             return await this.accountRepository.UpdateAsync(account);
         }
 
-        // TODO
-        //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-        //
-        //    if (leaguePlayerLink != null)
-        //    {
-        //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
-        //    }
-
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
-
-        /// <summary>
-        /// Deletes an existing account record by Id.
-        /// </summary>
+		/// <summary>
+		/// Deletes an existing account record by Id.
+		/// </summary>
         public async Task<Account> DeleteAccountAsync(Account account)
         {
             await this.accountRepository.DeleteAsync(account);

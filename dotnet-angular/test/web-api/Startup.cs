@@ -28,7 +28,7 @@ namespace Test.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // CORS
+		    // CORS
             services.AddCors();
 
             // Connection to the Test database
@@ -36,27 +36,16 @@ namespace Test.API
                 options.UseSqlServer(Configuration.GetConnectionString("TestContext")));
 
             // Repositories
-            services.AddScoped<AccountRepository>();
-            services.AddScoped<ContactRepository>();
-            services.AddScoped<CallRepository>();
-            services.AddScoped<NoteRepository>();
-            services.AddScoped<DocumentRepository>();
-            services.AddScoped<EmailRepository>();
-            services.AddScoped<ProjectRepository>();
-            services.AddScoped<ProjectNoteRepository>();
-            services.AddScoped<TodoRepository>();
+			services.AddScoped<AccountRepository>();
+			services.AddScoped<ContactRepository>();
+			services.AddScoped<AddressRepository>();
 
-            // BLLs
-            services.AddScoped<AccountBLL>();
-            services.AddScoped<ContactBLL>();
-            services.AddScoped<CallBLL>();
-            services.AddScoped<NoteBLL>();
-            services.AddScoped<DocumentBLL>();
-            services.AddScoped<EmailBLL>();
-            services.AddScoped<ProjectBLL>();
-            services.AddScoped<TodoBLL>();
+			// BLLs
+			services.AddScoped<AccountBLL>();
+			services.AddScoped<ContactBLL>();
+			services.AddScoped<AddressBLL>();
 
-            // AutoMapper
+			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutoMapperProfile());
@@ -64,11 +53,17 @@ namespace Test.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            // MVC
-            services.AddControllers();
+			// MVC
+            services.AddControllers()
+                .AddNewtonsoftJson(options => {
+                    options.SerializerSettings.MaxDepth = 5;
+                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                }
+            );
 
-            // Swagger
-            // Register the Swagger generator, defining 1 or more Swagger documents
+			// Swagger
+			// Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -87,9 +82,9 @@ namespace Test.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // CORS
+		    // CORS
             app.UseCors(options =>
-            {
+			{
                 options.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
@@ -111,10 +106,10 @@ namespace Test.API
                 });
             }
 
-            // Authentication and Authorization
+			// Authentication and Authorization
             app.UseAuthorization();
 
-            // Swagger
+			// Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger()
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
@@ -125,7 +120,7 @@ namespace Test.API
                 c.RoutePrefix = string.Empty;
             });
 
-            // MVC
+			// MVC
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

@@ -53,7 +53,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// </summary>
 		public async Task<<#= model.Name #>> Get<#= model.Name #>ByIdAsync(Guid id)
         {
-            return await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
+            return await this.<#= model.Name.ToLower() #>Repository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
 		/// <summary>
@@ -61,7 +61,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// </summary>
         public async Task<<#= model.Name #>> Create<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToLower() #>)
         {
-            return await this.<#= model.Name.ToLower() #>Repository.InsertAsync(<#= model.Name.ToLower() #>);
+			// #-#-#  
+			// Before creation
+			// #-#-#
+
+			<#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.InsertAsync(<#= model.Name.ToLower() #>);
+
+			// #-#-#  
+			// After creation
+			// #-#-#
+
+            return <#= model.Name.ToLower() #>;
         }
 
 		/// <summary>
@@ -88,7 +98,6 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
-<# CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); #>
         public async Task<<#= model.Name #>> Link<#= relation.Model #>To<#= model.Name #>Async(<#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
             <#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = this.<#= relation.Through.ToCamelCase() #>Repository.GetBy<#= model.Name #>And<#= relation.Model #>Id(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id, <#= relation.Through.ToCamelCase() #>.<#= relation.Model #>Id);
@@ -109,19 +118,20 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
 <# } #>
-		// TODO
-        //public async Task<League> UnlinkPlayerFromLeagueAsync(LeaguePlayer leaguePlayer)
-        //{
-        //    LeaguePlayer leaguePlayerLink = this.leaguePlayerRepository.GetByLeagueAndPlayerId(leaguePlayer.LeagueId, leaguePlayer.PlayerId);
-		//
-        //    if (leaguePlayerLink != null)
-        //    {
-        //        await this.leaguePlayerRepository.DeleteAsync(leaguePlayerLink);
-        //    }
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+        public async Task<<#= model.Name #>> Unlink<#= relation.Model #>From<#= model.Name #>Async(<#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
+        {
+            <#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = this.<#= relation.Through.ToCamelCase() #>Repository.GetBy<#= model.Name #>And<#= relation.Model #>Id(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id, <#= relation.Through.ToCamelCase() #>.<#= relation.Model #>Id);
+		
+            if (<#= relation.Through.ToCamelCase() #>Link != null)
+            {
+                await this.<#= relation.Through.ToCamelCase() #>Repository.DeleteAsync(<#= relation.Through.ToCamelCase() #>Link);
+            }
 
-        //    return this.leagueRepository.GetWithPlayersById(leaguePlayer.LeagueId);
-        //}
+            return await this.Get<#= model.Name #>ByIdAsync(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id);
+        }
 
+<# } #>
 		/// <summary>
 		/// Deletes an existing <#= model.Name.ToLower() #> record by Id.
 		/// </summary>

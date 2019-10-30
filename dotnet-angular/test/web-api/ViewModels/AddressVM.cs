@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Test.API.ViewModels
 {
 	/// <summary>
-    /// Contact view model
+    /// Address view model
     /// </summary>
-    public class ContactVM
+    public class AddressVM
     {
-		public ContactVM()
+		public AddressVM()
         {
             // Relations
         }
@@ -17,48 +17,46 @@ namespace Test.API.ViewModels
 		// Properties
 
 		/// <summary>
-        /// The identifier of Contact.
+        /// The identifier of Address.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The FirstName property of Contact.
+        /// The Street property of Address.
         /// </summary>
-        [Required]
-		public string FirstName { get; set; }
+		public string Street { get; set; }
 
 		/// <summary>
-        /// The LastName property of Contact.
+        /// The Number property of Address.
         /// </summary>
-        [Required]
-		public string LastName { get; set; }
+		public string Number { get; set; }
 
 		/// <summary>
-        /// The Website property of Contact.
+        /// The PostalCode property of Address.
         /// </summary>
-		public string Website { get; set; }
+		public string PostalCode { get; set; }
 
 		/// <summary>
-        /// The Telephone property of Contact.
+        /// The City property of Address.
         /// </summary>
-		public string Telephone { get; set; }
+		public string City { get; set; }
 
 		/// <summary>
-        /// The Email property of Contact.
+        /// The Country property of Address.
         /// </summary>
-		public string Email { get; set; }
+		public string Country { get; set; }
 
 		// Relations
 
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key AccountId for Account of Contact.
+        /// The related foreign key AccountId for Account of Address.
         /// </summary>
 		public Guid? AccountId { get; set; }
 
 		/// <summary>
-        /// The related Account of Contact.
+        /// The related Account of Address.
         /// </summary>
 		public AccountVM Account { get; set; }
 

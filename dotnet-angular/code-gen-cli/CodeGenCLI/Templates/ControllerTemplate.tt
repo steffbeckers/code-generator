@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -132,112 +133,44 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>);
         }
 
-		// TODO
-        //// PUT: api/Skills/5/SkillTags/123/Link
-        //[HttpPut("{skillId}/SkillTags/{skillTagId}/Link")]
-        //public async Task<ActionResult<SkillVM>> LinkSkillTagToSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
-        //{
-        //    Skill skill = await context.Skills
-        //                        .Include(s => s.SkillSkillTag)
-        //                            .ThenInclude(cs => cs.SkillTag)
-        //                        .SingleOrDefaultAsync(s => s.Id == skillId);
-        //    if (skill == null)
-        //    {
-        //        return NotFound("Skill not found");
-        //    }
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+        // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
+        [HttpPut("{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link")]
+        public async Task<ActionResult<<#= model.Name #>VM>> Link<#= relation.Model #>To<#= model.Name #>([FromRoute] Guid <#= model.Name.ToLower() #>Id, [FromRoute] Guid <#= relation.Model.ToLower() #>Id)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    SkillTag skillTag = await context.SkillTags.FindAsync(skillTagId);
-        //    if (skillTag == null)
-        //    {
-        //        return NotFound("Skill tag not found");
-        //    }
+			<#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = new <#= relation.Through #>() {
+				<#= model.Name #>Id = <#= model.Name.ToLower() #>Id,
+				<#= relation.Model #>Id = <#= relation.Model.ToLower() #>Id
+			};
 
-        //    // Retrieve existing link
-        //    SkillSkillTag skillSkillTag = await context.SkillSkillTag
-        //                                    .Include(cs => cs.SkillTag)
-        //                                    .Where(cs => cs.SkillId == skill.Id && cs.SkillTagId == skillTag.Id)
-        //                                    .SingleOrDefaultAsync();
-        //    if (skillSkillTag != null)
-        //    {
-        //        // Link already exists
+            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(await this.bll.Link<#= relation.Model #>To<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>Link));
+        }
 
-        //        // Update in local
-        //        int skillSkillTagIndex = skill.SkillSkillTag.IndexOf(skillSkillTag);
+        // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
+        [HttpDelete("{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Unlink")]
+        public async Task<ActionResult<<#= model.Name #>VM>> Unlink<#= relation.Model #>From<#= model.Name #>([FromRoute] Guid <#= model.Name.ToLower() #>Id, [FromRoute] Guid <#= relation.Model.ToLower() #>Id)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //        // Update link
-        //        skillSkillTag.DateModified = DateTime.Now;
+			<#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = new <#= relation.Through #>() {
+				<#= model.Name #>Id = <#= model.Name.ToLower() #>Id,
+				<#= relation.Model #>Id = <#= relation.Model.ToLower() #>Id
+			};
 
-        //        context.SkillSkillTag.Update(skillSkillTag);
-        //        await context.SaveChangesAsync();
+            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(await this.bll.Unlink<#= relation.Model #>From<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>Link));
+        }
 
-        //        // Update in local
-        //        if (skillSkillTagIndex != -1)
-        //            skill.SkillSkillTag[skillSkillTagIndex] = skillSkillTag;
-        //    }
-        //    else
-        //    {
-        //        // Link doesn't exist yet
-
-        //        // Add link
-        //        skillSkillTag = new SkillSkillTag();
-        //        skillSkillTag.Id = Guid.NewGuid();
-        //        skillSkillTag.SkillId = skill.Id;
-        //        skillSkillTag.SkillTagId = skillTag.Id;
-        //        skillSkillTag.SkillTag = skillTag;
-        //        skillSkillTag.DateEntered = DateTime.Now;
-        //        skillSkillTag.DateModified = DateTime.Now;
-
-        //        await context.SkillSkillTag.AddAsync(skillSkillTag);
-        //        await context.SaveChangesAsync();
-        //    }
-
-        //    return Ok(this.mapper.Map<Skill, SkillVM>(skill));
-        //}
-
-        // TODO
-        //// DELETE: api/Skills/5/SkillTags/123/Unlink
-        //[HttpDelete("{skillId}/SkillTags/{skillTagId}/Unlink")]
-        //public async Task<ActionResult<SkillVM>> UnlinkSkillTagFromSkill([FromRoute] Guid skillId, [FromRoute] Guid skillTagId)
-        //{
-        //    Skill skill = await context.Skills
-        //                        .Include(s => s.SkillSkillTag)
-        //                            .ThenInclude(cs => cs.SkillTag)
-        //                        .SingleOrDefaultAsync(s => s.Id == skillId);
-        //    if (skill == null)
-        //    {
-        //        return NotFound("Skill not found");
-        //    }
-
-        //    SkillTag skillTag = await context.SkillTags.FindAsync(skillTagId);
-        //    if (skillTag == null)
-        //    {
-        //        return NotFound("Skill tag not found");
-        //    }
-
-        //    // Retrieve existing link
-        //    SkillSkillTag skillSkillTag = await context.SkillSkillTag
-        //                                    .Include(cs => cs.SkillTag)
-        //                                    .Where(cs => cs.SkillId == skill.Id && cs.SkillTagId == skillTag.Id)
-        //                                    .SingleOrDefaultAsync();
-        //    if (skillSkillTag != null)
-        //    {
-        //        // Link exists
-
-        //        // Remove from local
-        //        int skillSkillTagIndex = skill.SkillSkillTag.IndexOf(skillSkillTag);
-
-        //        // Remove link
-        //        context.SkillSkillTag.Remove(skillSkillTag);
-        //        await context.SaveChangesAsync();
-
-        //        // Remove from local
-        //        if (skillSkillTagIndex != -1)
-        //            skill.SkillSkillTag.RemoveAt(skillSkillTagIndex);
-        //    }
-
-        //    return Ok(this.mapper.Map<Skill, SkillVM>(skill));
-        //}
-
+<# } #>
         // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{id}
 		/// <summary>
 		/// Deletes a specific <#= model.Name.ToLower() #>.

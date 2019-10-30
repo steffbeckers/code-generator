@@ -3,6 +3,7 @@ using CodeGenCLI.Templates;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -131,6 +132,14 @@ namespace CodeGenCLI
                         }
                         foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                         {
+                            // Existing template
+                            List<string> customBLLCodeBlocks = new List<string>();
+                            if (File.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs"))
+                            {
+                                string existingBLLTemplate = File.ReadAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs");
+
+                            }
+
                             BLLTemplate bllTemplate = new BLLTemplate(Config, codeGenModel);
                             string bllTemplateContent = bllTemplate.TransformText();
 

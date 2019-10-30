@@ -30,232 +30,302 @@ namespace CodeGenCLI.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Linq;\r\nusing ");
+            this.Write("using Microsoft.EntityFrameworkCore;\r\nusing System;\r\nusing System.Threading.Tasks" +
+                    ";\r\nusing ");
             
-            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".Models;\r\n\r\nnamespace ");
             
-            #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".DAL.Repositories\r\n{\r\n\t/// <summary>\r\n\t/// The repository for ");
             
-            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write(" in the data access layer.\r\n\t/// </summary>\r\n    public class ");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Repository : Repository<");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">\r\n    {\r\n        private new readonly ");
             
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
             this.Write("Context context;\r\n\r\n\t\t/// <summary>\r\n\t\t/// The constructor of the ");
             
-            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" repository.\r\n\t\t/// </summary>\r\n        public ");
             
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Repository(");
             
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
             this.Write("Context context) : base(context)\r\n        {\r\n            this.context = context;\r" +
-                    "\n        }\r\n\r\n        // Additional functionality and overrides\r\n\r\n");
+                    "\n        }\r\n\r\n        // Additional functionality and overrides\r\n\r\n\t\tpublic asyn" +
+                    "c Task<");
             
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("> GetWithLinkedEntitiesByIdAsync(Guid id)\r\n        {\r\n            return await th" +
+                    "is.context.");
+            
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { 
+            
+            #line default
+            #line hidden
+            this.Write("                .Include(x => x.");
+            
+            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n");
+            
+            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
+            
+            #line default
+            #line hidden
+            this.Write("                .Include(x => x.");
+            
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n");
+            
+            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { 
+            
+            #line default
+            #line hidden
+            
+            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                .SingleOrDefaultAsync(x => x.Id == id);\r\n        }\r\n\r\n");
+            
+            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
  if (model.ManyToMany) { 
             
             #line default
             #line hidden
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
  CodeGenModelRelation manyToManyModel1 = model.Relations.Where(r => r.Required && r.Name == r.Model).First(); 
             
             #line default
             #line hidden
             
-            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
  CodeGenModelRelation manyToManyModel2 = model.Relations.Where(r => r.Required && r.Name == r.Model && !r.Equals(manyToManyModel1)).First(); 
             
             #line default
             #line hidden
             this.Write("        public ");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" GetBy");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model));
             
             #line default
             #line hidden
             this.Write("And");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model));
             
             #line default
             #line hidden
             this.Write("Id(Guid ");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id, Guid ");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id)\r\n        {\r\n            return this.context.");
             
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("\r\n                .Where(x => x.");
             
-            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model));
             
             #line default
             #line hidden
             this.Write("Id == ");
             
-            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id && x.");
             
-            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model));
             
             #line default
             #line hidden
             this.Write("Id == ");
             
-            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id)\r\n                .SingleOrDefault();\r\n        }\r\n\r\n\t\tpublic ");
             
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" GetBy");
             
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model));
             
             #line default
             #line hidden
             this.Write("And");
             
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model));
             
             #line default
             #line hidden
             this.Write("Id(Guid ");
             
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id, Guid ");
             
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id)\r\n        {\r\n            return this.context.");
             
-            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("\r\n                .Where(x => x.");
             
-            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model));
             
             #line default
             #line hidden
             this.Write("Id == ");
             
-            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel2.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id && x.");
             
-            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model));
             
             #line default
             #line hidden
             this.Write("Id == ");
             
-            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyModel1.Model.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Id)\r\n                .SingleOrDefault();\r\n        }\r\n");
             
-            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
+            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\RepositoryTemplate.tt"
  } 
             
             #line default

@@ -6,25 +6,25 @@ using Test.API.Models;
 namespace Test.API.DAL.Repositories
 {
 	/// <summary>
-	/// The repository for Contacts in the data access layer.
+	/// The repository for Addresses in the data access layer.
 	/// </summary>
-    public class ContactRepository : Repository<Contact>
+    public class AddressRepository : Repository<Address>
     {
         private new readonly TestContext context;
 
 		/// <summary>
-		/// The constructor of the Contact repository.
+		/// The constructor of the Address repository.
 		/// </summary>
-        public ContactRepository(TestContext context) : base(context)
+        public AddressRepository(TestContext context) : base(context)
         {
             this.context = context;
         }
 
         // Additional functionality and overrides
 
-		public async Task<Contact> GetWithLinkedEntitiesByIdAsync(Guid id)
+		public async Task<Address> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
-            return await this.context.Contacts
+            return await this.context.Addresses
                 .Include(x => x.Account)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }

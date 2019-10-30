@@ -160,7 +160,13 @@ using ");
             services.AddSingleton(mapper);
 
 			// MVC
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => {
+                    options.SerializerSettings.MaxDepth = 5;
+                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                }
+            );
 
 			// Swagger
 			// Register the Swagger generator, defining 1 or more Swagger documents
@@ -170,7 +176,7 @@ using ");
                 {
                     Title = """);
             
-            #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 77 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -199,7 +205,7 @@ using ");
                     "(c =>\r\n            {\r\n                c.SwaggerEndpoint(\"./swagger/v1/swagger.js" +
                     "on\", \"");
             
-            #line 119 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
+            #line 125 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default

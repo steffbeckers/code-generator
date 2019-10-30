@@ -60,7 +60,13 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             services.AddSingleton(mapper);
 
 			// MVC
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => {
+                    options.SerializerSettings.MaxDepth = 5;
+                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                }
+            );
 
 			// Swagger
 			// Register the Swagger generator, defining 1 or more Swagger documents

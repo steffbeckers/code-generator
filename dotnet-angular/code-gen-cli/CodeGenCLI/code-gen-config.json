@@ -28,6 +28,11 @@
       ],
       "relations": [
         {
+          "name": "Addresses",
+          "type": "one-to-many",
+          "model": "Address"
+        },
+        {
           "name": "Contacts",
           "type": "one-to-many",
           "model": "Contact"
@@ -46,6 +51,18 @@
           "name": "LastName",
           "type": "string",
           "required": true
+        },
+        {
+          "name": "Website",
+          "type": "string"
+        },
+        {
+          "name": "Telephone",
+          "type": "string"
+        },
+        {
+          "name": "Email",
+          "type": "string"
         }
       ],
       "relations": [
@@ -59,128 +76,37 @@
       ]
     },
     {
-      "name": "Call",
+      "name": "Address",
+      "namePlural": "Addresses",
       "properties": [
         {
-          "name": "Date",
-          "type": "DateTime",
-          "required": true
-        }
-      ],
-      "relations": []
-    },
-    {
-      "name": "Note",
-      "properties": [
-        {
-          "name": "Title",
-          "type": "string",
-          "required": true
+          "name": "Street",
+          "type": "string"
         },
         {
-          "name": "Body",
+          "name": "Number",
+          "type": "string"
+        },
+        {
+          "name": "PostalCode",
+          "type": "string"
+        },
+        {
+          "name": "City",
+          "type": "string"
+        },
+        {
+          "name": "Country",
           "type": "string"
         }
       ],
       "relations": [
         {
-          "name": "Projects",
-          "type": "many-to-many",
-          "model": "Project",
-          "through": "ProjectNote"
-        }
-      ]
-    },
-    {
-      "name": "Document",
-      "properties": [
-        {
-          "name": "Name",
-          "type": "string",
-          "required": true
-        }
-      ],
-      "relations": []
-    },
-    {
-      "name": "Email",
-      "properties": [
-        {
-          "name": "Subject",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "Body",
-          "type": "string"
-        }
-      ],
-      "relations": []
-    },
-    {
-      "name": "Project",
-      "properties": [
-        {
-          "name": "Name",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "Description",
-          "type": "string"
-        }
-      ],
-      "relations": [
-        {
-          "name": "Todoes",
-          "type": "one-to-many",
-          "model": "Todo"
-        },
-        {
-          "name": "Notes",
-          "type": "many-to-many",
-          "model": "Note",
-          "through": "ProjectNote"
-        }
-      ]
-    },
-    {
-      "name": "ProjectNote",
-      "manyToMany": true,
-      "properties": [],
-      "relations": [
-        {
-          "name": "Project",
+          "name": "Account",
           "type": "many-to-one",
-          "required": true, 
-          "model": "Project"
-        },
-        {
-          "name": "Note",
-          "type": "many-to-one",
-          "required": true,
-          "model": "Note"
-        }
-      ]
-    },
-    {
-      "name": "Todo",
-      "namePlural": "Todoes",
-      "properties": [
-        {
-          "name": "Title",
-          "type": "string"
-        },
-        {
-          "name": "Body",
-          "type": "string"
-        }
-      ],
-      "relations": [
-        {
-          "name": "Project",
-          "type": "many-to-one",
-          "model": "Project"
+          //"required": true,
+          "model": "Account"
+          //"idField": "ParentAccountId" // TODO: Optional override
         }
       ]
     }

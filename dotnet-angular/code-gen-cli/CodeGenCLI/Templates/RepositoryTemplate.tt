@@ -5,8 +5,9 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
+using System.Threading.Tasks;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories
@@ -27,6 +28,20 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
         // Additional functionality and overrides
+
+		public async Task<<#= model.Name #>> GetWithLinkedEntitiesByIdAsync(Guid id)
+        {
+            return await this.context.<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+                .Include(x => x.<#= relation.Name #>)
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+                .Include(x => x.<#= relation.Name #>)
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+<# } #>
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
 
 <# if (model.ManyToMany) { #>
 <# CodeGenModelRelation manyToManyModel1 = model.Relations.Where(r => r.Required && r.Name == r.Model).First(); #>

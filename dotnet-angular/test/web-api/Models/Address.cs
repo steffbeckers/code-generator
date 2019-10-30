@@ -4,58 +4,61 @@ using System.Collections.Generic;
 namespace Test.API.Models
 {
 	/// <summary>
-    /// Account model
+    /// Address model
     /// </summary>
-    public class Account
+    public class Address
     {
-		public Account()
+		public Address()
         {
             // Relations
-
-			//// One-to-many
-			this.Addresses = new List<Address>();
-			this.Contacts = new List<Contact>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Account.
+        /// The identifier of Address.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Name property of Account.
+        /// The Street property of Address.
         /// </summary>
-		public string Name { get; set; }
+		public string Street { get; set; }
 
 		/// <summary>
-        /// The Website property of Account.
+        /// The Number property of Address.
         /// </summary>
-		public string Website { get; set; }
+		public string Number { get; set; }
 
 		/// <summary>
-        /// The Telephone property of Account.
+        /// The PostalCode property of Address.
         /// </summary>
-		public string Telephone { get; set; }
+		public string PostalCode { get; set; }
 
 		/// <summary>
-        /// The Email property of Account.
+        /// The City property of Address.
         /// </summary>
-		public string Email { get; set; }
+		public string City { get; set; }
+
+		/// <summary>
+        /// The Country property of Address.
+        /// </summary>
+		public string Country { get; set; }
 
 		// Relations
 
-		//// One-to-many
+		//// Many-to-one
+
+	    /// <summary>
+        /// The related foreign key AccountId for Account of Address.
+        /// </summary>
+		public Guid? AccountId { get; set; }
 
 		/// <summary>
-        /// The related Addresses of Account.
+        /// The related Account of Address.
         /// </summary>
-		public IList<Address> Addresses { get; set; }
-		/// <summary>
-        /// The related Contacts of Account.
-        /// </summary>
-		public IList<Contact> Contacts { get; set; }
+		public Account Account { get; set; }
+
 
 		// Generic properties
 

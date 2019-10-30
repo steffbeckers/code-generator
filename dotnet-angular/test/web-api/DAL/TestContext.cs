@@ -9,22 +9,16 @@ using Test.API.Models;
 namespace Test.API.DAL
 {
     public class TestContext : DbContext
-    {
-        public TestContext(DbContextOptions<TestContext> options) : base(options)
+	{
+		public TestContext(DbContextOptions<TestContext> options) : base(options)
         {
         }
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Call> Calls { get; set; }
-        public DbSet<Note> Notes { get; set; }
-        public DbSet<Document> Documents { get; set; }
-        public DbSet<Email> Emails { get; set; }
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectNote> ProjectNote { get; set; }
-        public DbSet<Todo> Todoes { get; set; }
+		public DbSet<Account> Accounts { get; set; }
+		public DbSet<Contact> Contacts { get; set; }
+		public DbSet<Address> Addresses { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
@@ -37,34 +31,34 @@ namespace Test.API.DAL
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region Accounts
+			#region Accounts
 
             // Soft delete query filter
             modelBuilder.Entity<Account>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Account>().ToTable("Accounts");
+			modelBuilder.Entity<Account>().ToTable("Accounts");
 
-            // Key
-            modelBuilder.Entity<Account>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<Account>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
 
             #endregion
 
-            #region Contacts
+			#region Contacts
 
             // Soft delete query filter
             modelBuilder.Entity<Contact>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Contact>().ToTable("Contacts");
+			modelBuilder.Entity<Contact>().ToTable("Contacts");
 
-            // Key
-            modelBuilder.Entity<Contact>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<Contact>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Contact>().Property(e => e.FirstName).IsRequired();
@@ -72,120 +66,23 @@ namespace Test.API.DAL
 
             #endregion
 
-            #region Calls
+			#region Addresses
 
             // Soft delete query filter
-            modelBuilder.Entity<Call>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<Address>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Call>().ToTable("Calls");
+			modelBuilder.Entity<Address>().ToTable("Addresses");
 
-            // Key
-            modelBuilder.Entity<Call>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<Call>().Property(e => e.Date).IsRequired();
-
-            #endregion
-
-            #region Notes
-
-            // Soft delete query filter
-            modelBuilder.Entity<Note>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-            modelBuilder.Entity<Note>().ToTable("Notes");
-
-            // Key
-            modelBuilder.Entity<Note>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<Note>().Property(e => e.Title).IsRequired();
-
-            #endregion
-
-            #region Documents
-
-            // Soft delete query filter
-            modelBuilder.Entity<Document>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-            modelBuilder.Entity<Document>().ToTable("Documents");
-
-            // Key
-            modelBuilder.Entity<Document>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<Document>().Property(e => e.Name).IsRequired();
-
-            #endregion
-
-            #region Emails
-
-            // Soft delete query filter
-            modelBuilder.Entity<Email>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-            modelBuilder.Entity<Email>().ToTable("Emails");
-
-            // Key
-            modelBuilder.Entity<Email>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<Email>().Property(e => e.Subject).IsRequired();
-
-            #endregion
-
-            #region Projects
-
-            // Soft delete query filter
-            modelBuilder.Entity<Project>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-            modelBuilder.Entity<Project>().ToTable("Projects");
-
-            // Key
-            modelBuilder.Entity<Project>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<Project>().Property(e => e.Name).IsRequired();
-
-            #endregion
-
-            #region ProjectNote
-
-            // Soft delete query filter
-            modelBuilder.Entity<ProjectNote>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-            modelBuilder.Entity<ProjectNote>().ToTable("ProjectNote");
-
-            // Key
-            modelBuilder.Entity<ProjectNote>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<ProjectNote>().Property(e => e.ProjectId).IsRequired();
-            modelBuilder.Entity<ProjectNote>().Property(e => e.NoteId).IsRequired();
-
-            #endregion
-
-            #region Todoes
-
-            // Soft delete query filter
-            modelBuilder.Entity<Todo>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-            modelBuilder.Entity<Todo>().ToTable("Todoes");
-
-            // Key
-            modelBuilder.Entity<Todo>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<Address>().HasKey(e => e.Id);
 
             // Required properties
 
             #endregion
-        }
+		}
 
-        public override int SaveChanges()
+		public override int SaveChanges()
         {
             SoftDeleteLogic();
             TimeStampsLogic();
@@ -207,16 +104,10 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-                    entry.Entity.GetType() == typeof(Account) ||
-                    entry.Entity.GetType() == typeof(Contact) ||
-                    entry.Entity.GetType() == typeof(Call) ||
-                    entry.Entity.GetType() == typeof(Note) ||
-                    entry.Entity.GetType() == typeof(Document) ||
-                    entry.Entity.GetType() == typeof(Email) ||
-                    entry.Entity.GetType() == typeof(Project) ||
-                    entry.Entity.GetType() == typeof(ProjectNote) ||
-                    entry.Entity.GetType() == typeof(Todo)
-                )
+					entry.Entity.GetType() == typeof(Account) ||
+					entry.Entity.GetType() == typeof(Contact) ||
+					entry.Entity.GetType() == typeof(Address)
+				)
                 {
                     switch (entry.State)
                     {
@@ -238,16 +129,10 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-                    entry.Entity.GetType() == typeof(Account) ||
-                    entry.Entity.GetType() == typeof(Contact) ||
-                    entry.Entity.GetType() == typeof(Call) ||
-                    entry.Entity.GetType() == typeof(Note) ||
-                    entry.Entity.GetType() == typeof(Document) ||
-                    entry.Entity.GetType() == typeof(Email) ||
-                    entry.Entity.GetType() == typeof(Project) ||
-                    entry.Entity.GetType() == typeof(ProjectNote) ||
-                    entry.Entity.GetType() == typeof(Todo)
-                )
+					entry.Entity.GetType() == typeof(Account) ||
+					entry.Entity.GetType() == typeof(Contact) ||
+					entry.Entity.GetType() == typeof(Address)
+				)
                 {
                     switch (entry.State)
                     {
@@ -262,5 +147,5 @@ namespace Test.API.DAL
                 }
             }
         }
-    }
+	}
 }

@@ -4,54 +4,59 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels
 {
-    /// <summary>
+	/// <summary>
     /// Account view model
     /// </summary>
     public class AccountVM
     {
-        public AccountVM()
+		public AccountVM()
         {
             // Relations
 
-            //// One-to-many
-            this.Contacts = new List<ContactVM>();
+			//// One-to-many
+			this.Addresses = new List<AddressVM>();
+			this.Contacts = new List<ContactVM>();
         }
 
-        // Properties
+		// Properties
 
-        /// <summary>
+		/// <summary>
         /// The identifier of Account.
         /// </summary>
-        public Guid Id { get; set; }
+		public Guid Id { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Name property of Account.
         /// </summary>
         [Required]
-        public string Name { get; set; }
+		public string Name { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Website property of Account.
         /// </summary>
-        public string Website { get; set; }
+		public string Website { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Telephone property of Account.
         /// </summary>
-        public string Telephone { get; set; }
+		public string Telephone { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Email property of Account.
         /// </summary>
-        public string Email { get; set; }
+		public string Email { get; set; }
 
-        // Relations
+		// Relations
 
-        //// One-to-many
+		//// One-to-many
 
-        /// <summary>
+		/// <summary>
+        /// The related Addresses of Account.
+        /// </summary>
+		public IList<AddressVM> Addresses { get; set; }
+		/// <summary>
         /// The related Contacts of Account.
         /// </summary>
-        public IList<ContactVM> Contacts { get; set; }
+		public IList<ContactVM> Contacts { get; set; }
     }
 }
