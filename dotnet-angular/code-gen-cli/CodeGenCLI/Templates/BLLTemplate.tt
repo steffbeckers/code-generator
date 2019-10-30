@@ -61,13 +61,13 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// </summary>
         public async Task<<#= model.Name #>> Create<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToLower() #>)
         {
-			// #-#-#  
+			// #-#-# {6B392F7F-C4B3-4E64-8703-AE95C834E86A}
 			// Before creation
 			// #-#-#
 
 			<#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.InsertAsync(<#= model.Name.ToLower() #>);
 
-			// #-#-#  
+			// #-#-# {086618AE-01D1-4162-8C4C-03080741C2CB}
 			// After creation
 			// #-#-#
 
@@ -86,6 +86,10 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 return null;
             }
 
+			// #-#-# {573CD65B-4771-4335-85AC-74C5FB2E2AC8}
+			// Before update mapping
+			// #-#-#
+
             // Mapping
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
             <#= model.Name.ToLower() #>.<#= property.Name #> = <#= model.Name.ToLower() #>Update.<#= property.Name #>;
@@ -94,7 +98,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             <#= model.Name.ToLower() #>.<#= relation.Name #>Id = <#= model.Name.ToLower() #>Update.<#= relation.Name #>Id;
 <# } #>
 
-            return await this.<#= model.Name.ToLower() #>Repository.UpdateAsync(<#= model.Name.ToLower() #>);
+			// #-#-# {61904A6D-4EB9-47DF-B58E-8DDA26B0FB8C}
+			// Before update
+			// #-#-#
+
+			<#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.UpdateAsync(<#= model.Name.ToLower() #>);
+
+			// #-#-# {0DB85255-BF4B-462A-A3E9-847F47A6C1F0}
+			// After update
+			// #-#-#
+
+            return <#= model.Name.ToLower() #>;
         }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>

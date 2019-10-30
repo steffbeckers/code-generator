@@ -133,16 +133,32 @@ namespace CodeGenCLI
                         }
                         foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                         {
-                            // Existing template
-                            List<string> customBLLCodeBlocks = new List<string>();
+                            // Existing code
+                            Dictionary<string, string> customBLLCodeBlocks = new Dictionary<string, string>();
                             if (File.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs"))
                             {
                                 string existingBLLTemplate = File.ReadAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs");
-                                MatchCollection matches = Regex.Matches(existingBLLTemplate, @"#-#-#(.*)#-#-#", RegexOptions.Singleline);
+                                MatchCollection existingBLLCodeRegionMatches = Regex.Matches(existingBLLTemplate, @"#-#-#(.+?)#-#-#", RegexOptions.Singleline);
+                                foreach (Match existingBLLCodeRegionMatch in existingBLLCodeRegionMatches)
+                                {
+                                    customBLLCodeBlocks.Add(existingBLLCodeRegionMatch.Value.Substring(6, 38), existingBLLCodeRegionMatch.Value);
+                                }
                             }
 
+                            // Generate tempate
                             BLLTemplate bllTemplate = new BLLTemplate(Config, codeGenModel);
                             string bllTemplateContent = bllTemplate.TransformText();
+
+                            // Replace custom code from existing code
+                            MatchCollection bllCodeRegionMatches = Regex.Matches(bllTemplateContent, @"#-#-#(.+?)#-#-#", RegexOptions.Singleline);
+                            foreach (Match bllCodeRegionMatch in bllCodeRegionMatches)
+                            {
+                                if (customBLLCodeBlocks.ContainsKey(bllCodeRegionMatch.Value.Substring(6, 38)))
+                                {
+                                    bllTemplateContent = bllTemplateContent.Remove(bllCodeRegionMatch.Index, bllCodeRegionMatch.Length);
+                                    bllTemplateContent = bllTemplateContent.Insert(bllCodeRegionMatch.Index, customBLLCodeBlocks.GetValueOrDefault(bllCodeRegionMatch.Value.Substring(6, 38)));
+                                }
+                            }
 
                             File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs", bllTemplateContent);
                             Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs");

@@ -44,15 +44,17 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Account> CreateAccountAsync(Account account)
         {
-			// #-#
+			// #-#-# {6B392F7F-C4B3-4E64-8703-AE95C834E86A}
 			// Before creation
-			// #-#
+
+			// #-#-#
 
 			account = await this.accountRepository.InsertAsync(account);
 
-			// #-#
+			// #-#-# {086618AE-01D1-4162-8C4C-03080741C2CB}
 			// After creation
-			// #-#
+
+			// #-#-#
 
             return account;
         }
@@ -69,13 +71,29 @@ namespace Test.API.BLL
                 return null;
             }
 
+			// #-#-# {573CD65B-4771-4335-85AC-74C5FB2E2AC8}
+			// Before update mapping
+			// #-#-#
+
             // Mapping
             account.Name = accountUpdate.Name;
             account.Website = accountUpdate.Website;
             account.Telephone = accountUpdate.Telephone;
             account.Email = accountUpdate.Email;
 
-            return await this.accountRepository.UpdateAsync(account);
+            // #-#-# {61904A6D-4EB9-47DF-B58E-8DDA26B0FB8C}
+            // Before update
+            account.Name = account.Name.Trim();
+			// #-#-#
+
+			account = await this.accountRepository.UpdateAsync(account);
+
+			// #-#-# {0DB85255-BF4B-462A-A3E9-847F47A6C1F0}
+			// After update
+            // TODO: Send email
+			// #-#-#
+
+            return account;
         }
 
 		/// <summary>
