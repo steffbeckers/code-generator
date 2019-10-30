@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace CodeGenCLI
 {
@@ -137,7 +138,7 @@ namespace CodeGenCLI
                             if (File.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs"))
                             {
                                 string existingBLLTemplate = File.ReadAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs");
-
+                                MatchCollection matches = Regex.Matches(existingBLLTemplate, @"#-#-#(.*)#-#-#", RegexOptions.Singleline);
                             }
 
                             BLLTemplate bllTemplate = new BLLTemplate(Config, codeGenModel);

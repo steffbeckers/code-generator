@@ -44,16 +44,15 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Account> CreateAccountAsync(Account account)
         {
-            // #-#-#  
-            // Before creation
-            account.Name = account.Name.Trim();
-			// #-#-#
+			// #-#
+			// Before creation
+			// #-#
 
 			account = await this.accountRepository.InsertAsync(account);
 
-			// #-#-#  
+			// #-#
 			// After creation
-			// #-#-#
+			// #-#
 
             return account;
         }
