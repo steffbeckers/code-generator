@@ -24,6 +24,9 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("webAPI")]
         public CodeGenConfigWebAPI WebAPI { get; set; }
 
+        [JsonProperty("angular")]
+        public CodeGenConfigAngular Angular { get; set; }
+
         public IList<CodeGenModel> Models { get; set; }
     }
 }

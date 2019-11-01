@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenCLI": {
       "commandName": "Project",
-      "commandLineArgs": "generate"
+      "commandLineArgs": "angular"
     }
   }
 }

@@ -21,39 +21,43 @@
     <None Update="code-gen-config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\AutoMapperProfileTemplate.tt">
+    <None Update="Templates\Angular\ModelTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebAPI\AutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AutoMapperProfileTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\BLLTemplate.tt">
+    <None Update="Templates\WebAPI\BLLTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLLTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\ControllerTemplate.tt">
+    <None Update="Templates\WebAPI\ControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ControllerTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\DbContextTemplate.tt">
+    <None Update="Templates\WebAPI\DbContextTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DbContextTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\RepositoryBaseTemplate.tt">
+    <None Update="Templates\WebAPI\RepositoryBaseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RepositoryBaseTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\RepositoryTemplate.tt">
+    <None Update="Templates\WebAPI\RepositoryTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\StartupTemplate.tt">
+    <None Update="Templates\WebAPI\StartupTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>StartupTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\ViewModelTemplate.tt">
+    <None Update="Templates\WebAPI\ViewModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ViewModelTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\ModelTemplate.tt">
+    <None Update="Templates\WebAPI\ModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ModelTemplate.cs</LastGenOutput>
     </None>
@@ -64,47 +68,52 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Templates\AutoMapperProfileTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AutoMapperProfileTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\BLLTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\ControllerTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ControllerTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\DbContextTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>DbContextTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\ModelTemplate.cs">
+    <Compile Update="Templates\Angular\ModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\RepositoryBaseTemplate.cs">
+    <Compile Update="Templates\WebAPI\AutoMapperProfileTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AutoMapperProfileTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\BLLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\ControllerTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ControllerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\DbContextTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DbContextTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\ModelTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModelTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\RepositoryBaseTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>RepositoryBaseTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\RepositoryTemplate.cs">
+    <Compile Update="Templates\WebAPI\RepositoryTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\StartupTemplate.cs">
+    <Compile Update="Templates\WebAPI\StartupTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StartupTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\ViewModelTemplate.cs">
+    <Compile Update="Templates\WebAPI\ViewModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ViewModelTemplate.tt</DependentUpon>

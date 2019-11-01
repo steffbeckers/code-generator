@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CodeGenCLI.Extensions
+﻿namespace CodeGenCLI.Extensions
 {
     public static class StringExtensions
     {
@@ -11,6 +7,24 @@ namespace CodeGenCLI.Extensions
             if (!string.IsNullOrEmpty(str) && str.Length > 1)
             {
                 return char.ToLowerInvariant(str[0]) + str.Substring(1);
+            }
+
+            return str;
+        }
+
+        public static string ToTypeScript(this string str)
+        {
+            if (!string.IsNullOrEmpty(str) && str.Length > 1)
+            {
+                switch (str)
+                {
+                    case "bool":
+                        return "boolean";
+                    case "Guid":
+                        return "string";
+                    case "DateTime":
+                        return "string";
+                }
             }
 
             return str;

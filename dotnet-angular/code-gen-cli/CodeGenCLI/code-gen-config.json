@@ -114,9 +114,8 @@
   "webAPI": {
     "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
     "namespaceRoot": "Test.API"
-    //"modelsPath": "Data\\Models", // Optional
-    //"viewModelsPath": "Data\\ViewModels", // Optional
-    //"dalPath": "Data" // Optional
   },
-  "angular": {}
+  "angular": {
+    "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\angular"
+  }
 }

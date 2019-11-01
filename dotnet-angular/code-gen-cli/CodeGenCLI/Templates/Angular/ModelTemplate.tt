@@ -1,0 +1,27 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
+<# foreach (CodeGenModelRelation relation in model.Relations) { #>
+import { <#= relation.Model #> } from './<#= relation.Model #>';
+<# } #>
+
+export class <#= model.Name #> {
+  public id: string;
+<# foreach (CodeGenModelProperty property in model.Properties) { #>
+<# if (!string.IsNullOrEmpty(property.Description)) { #>
+  // <#= property.Description #>.
+<# } #>
+  public <#= property.Name.ToCamelCase() #>: <#= property.Type.ToTypeScript() #>;
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+  public <#= relation.Name.ToCamelCase() #>Id: string;
+  public <#= relation.Name.ToCamelCase() #>: <#= relation.Model #>;
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many" || r.Type == "many-to-many")) { #>
+  public <#= relation.Name.ToCamelCase() #>: <#= relation.Model #>[];
+<# } #>
+}
