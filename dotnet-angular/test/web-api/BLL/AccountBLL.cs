@@ -28,6 +28,10 @@ namespace Test.API.BLL
 		/// </summary>
 		public async Task<IEnumerable<Account>> GetAllAccountsAsync()
         {
+			// #-#-# {83B8AA9F-713A-42FB-ADE1-8A4AA43886C8}
+			// Before retrieval
+			// #-#-#
+
             return await this.accountRepository.GetAsync();
         }
 
@@ -36,6 +40,10 @@ namespace Test.API.BLL
 		/// </summary>
 		public async Task<Account> GetAccountByIdAsync(Guid id)
         {
+			// #-#-# {F838CE2A-D0FB-4F8A-A826-0D653DEECB2B}
+			// Before retrieval
+			// #-#-#
+
             return await this.accountRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
@@ -44,16 +52,20 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Account> CreateAccountAsync(Account account)
         {
-			// #-#-# {6B392F7F-C4B3-4E64-8703-AE95C834E86A}
-			// Before creation
+			// Trimming strings
+            account.Name = account.Name.Trim();
+            account.Website = account.Website.Trim();
+            account.Telephone = account.Telephone.Trim();
+            account.Email = account.Email.Trim();
 
+			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
+            // Before creation
 			// #-#-#
 
 			account = await this.accountRepository.InsertAsync(account);
 
-			// #-#-# {086618AE-01D1-4162-8C4C-03080741C2CB}
+			// #-#-# {1972C619-D2F2-48FD-8474-3A69621B1F78}
 			// After creation
-
 			// #-#-#
 
             return account;
@@ -71,9 +83,11 @@ namespace Test.API.BLL
                 return null;
             }
 
-			// #-#-# {573CD65B-4771-4335-85AC-74C5FB2E2AC8}
-			// Before update mapping
-			// #-#-#
+			// Trimming strings
+            accountUpdate.Name = accountUpdate.Name.Trim();
+            accountUpdate.Website = accountUpdate.Website.Trim();
+            accountUpdate.Telephone = accountUpdate.Telephone.Trim();
+            accountUpdate.Email = accountUpdate.Email.Trim();
 
             // Mapping
             account.Name = accountUpdate.Name;
@@ -81,16 +95,14 @@ namespace Test.API.BLL
             account.Telephone = accountUpdate.Telephone;
             account.Email = accountUpdate.Email;
 
-            // #-#-# {61904A6D-4EB9-47DF-B58E-8DDA26B0FB8C}
-            // Before update
-            account.Name = account.Name.Trim();
+			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
+			// Before update
 			// #-#-#
 
 			account = await this.accountRepository.UpdateAsync(account);
 
-			// #-#-# {0DB85255-BF4B-462A-A3E9-847F47A6C1F0}
+			// #-#-# {983B1B6C-14A7-4925-8571-D77447DF0ADA}
 			// After update
-            // TODO: Send email
 			// #-#-#
 
             return account;
@@ -101,7 +113,15 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Account> DeleteAccountAsync(Account account)
         {
+			// #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
+			// Before deletion
+			// #-#-#
+
             await this.accountRepository.DeleteAsync(account);
+
+			// #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
+			// After deletion
+			// #-#-#
 
             return account;
         }

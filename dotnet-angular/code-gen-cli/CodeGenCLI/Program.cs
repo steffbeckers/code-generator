@@ -155,8 +155,7 @@ namespace CodeGenCLI
                             {
                                 if (customBLLCodeBlocks.ContainsKey(bllCodeRegionMatch.Value.Substring(6, 38)))
                                 {
-                                    bllTemplateContent = bllTemplateContent.Remove(bllCodeRegionMatch.Index, bllCodeRegionMatch.Length);
-                                    bllTemplateContent = bllTemplateContent.Insert(bllCodeRegionMatch.Index, customBLLCodeBlocks.GetValueOrDefault(bllCodeRegionMatch.Value.Substring(6, 38)));
+                                    bllTemplateContent = bllTemplateContent.Replace(bllCodeRegionMatch.Value, customBLLCodeBlocks.GetValueOrDefault(bllCodeRegionMatch.Value.Substring(6, 38)));
                                 }
                             }
 
@@ -185,7 +184,7 @@ namespace CodeGenCLI
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + "Startup.cs", startupTemplateContent);
                         Console.WriteLine("Startup.cs");
 
-                        // TODO: Migrations
+                        // TODO: Migrations?
                         //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");
                         //removeInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
                         //Process.Start(removeInitialMigration);

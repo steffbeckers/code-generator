@@ -235,6 +235,12 @@ namespace CodeGenCLI.Templates
             
             #line default
             #line hidden
+            
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : ""))));
+            
+            #line default
+            #line hidden
             this.Write(" ");
             
             #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\ModelTemplate.tt"

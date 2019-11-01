@@ -354,9 +354,9 @@
             The City property of Address.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Country">
+        <member name="P:Test.API.Models.Address.Primary">
             <summary>
-            The Country property of Address.
+            The Primary property of Address.
             </summary>
         </member>
         <member name="P:Test.API.Models.Address.AccountId">
@@ -514,9 +514,9 @@
             The City property of Address.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Country">
+        <member name="P:Test.API.ViewModels.AddressVM.Primary">
             <summary>
-            The Country property of Address.
+            The Primary property of Address.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.AddressVM.AccountId">

@@ -42,9 +42,9 @@ namespace Test.API.ViewModels
 		public string City { get; set; }
 
 		/// <summary>
-        /// The Country property of Address.
+        /// The Primary property of Address.
         /// </summary>
-		public string Country { get; set; }
+		public bool Primary { get; set; }
 
 		// Relations
 

@@ -121,7 +121,7 @@ namespace Test.API.Controllers
             address.Number = addressUpdate.Number;
             address.PostalCode = addressUpdate.PostalCode;
             address.City = addressUpdate.City;
-            address.Country = addressUpdate.Country;
+            address.Primary = addressUpdate.Primary;
 			
             address = await this.bll.UpdateAddressAsync(id, address);
 

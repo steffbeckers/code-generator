@@ -96,8 +96,8 @@
           "type": "string"
         },
         {
-          "name": "Country",
-          "type": "string"
+          "name": "Primary",
+          "type": "bool"
         }
       ],
       "relations": [

@@ -59,7 +59,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# if (property.Required) { #>
         [Required]
 <# } #>
-		public <#= property.Type #> <#= property.Name #> { get; set; }
+		public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
 <# } #>
 
 <# if (model.Relations.ToList().Count > 0) { #>
