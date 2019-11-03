@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 
 // Services
 import { AccountService } from './shared/services/AccountService';
+import { AddressService } from './shared/services/AddressService';
+import { ContactService } from './shared/services/ContactService';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AccountService } from './shared/services/AccountService';
     AppRoutingModule
   ],
   providers: [
-    AccountService
+    AccountService,
+    AddressService,
+    ContactService
   ],
   bootstrap: [AppComponent]
 })
