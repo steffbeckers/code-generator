@@ -10,5 +10,14 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonProperty("modelsPath")]
         public string ModelsPath { get; set; }
+
+        [JsonProperty("modelsPathForTypeScript")]
+        public string ModelsPathForTypeScript { get; set; }
+
+        [JsonProperty("servicesPath")]
+        public string ServicesPath { get; set; }
+        
+        [JsonProperty("servicesPathForTypeScript")]
+        public string ServicesPathForTypeScript { get; set; }
     }
 }

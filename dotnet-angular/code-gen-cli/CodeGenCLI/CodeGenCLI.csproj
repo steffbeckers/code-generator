@@ -21,9 +21,17 @@
     <None Update="code-gen-config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Templates\Angular\DataServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataServiceTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\Angular\ModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ModelTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\SharedModuleTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SharedModuleTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\WebAPI\AutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -68,10 +76,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Templates\Angular\DataServiceTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataServiceTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\Angular\ModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\SharedModuleTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SharedModuleTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\AutoMapperProfileTemplate.cs">
       <DesignTime>True</DesignTime>

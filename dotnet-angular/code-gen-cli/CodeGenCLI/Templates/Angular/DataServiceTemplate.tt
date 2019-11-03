@@ -1,0 +1,53 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+// RxJS
+import { Observable } from 'rxjs';
+
+// Models
+import { <#= model.Name #> } from '<#= !string.IsNullOrEmpty(config.Angular.ModelsPathForTypeScript) ? config.Angular.ModelsPathForTypeScript : "src/app/shared/models/" + model.Name #>';
+
+@Injectable({ providedIn: 'root' })
+export class <#= model.Name #>Service {
+  constructor(private http: HttpClient) {}
+
+  // GET: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>
+  // Retrieves all <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>.
+  public get<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>(): Observable<<#= model.Name #>[]> {
+    return this.http.get<<#= model.Name #>[]>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>`);
+  }
+
+  // GET: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
+  // Retrieves a specific <#= model.Name.ToLower() #>.
+  public get<#= model.Name #>(<#= model.Name.ToCamelCase() #>: <#= model.Name #> | string): Observable<<#= model.Name #>> {
+    const id = typeof <#= model.Name.ToCamelCase() #> === 'string' ? <#= model.Name.ToCamelCase() #> : (<#= model.Name.ToCamelCase() #> as <#= model.Name #>).id;
+    return this.http.get<<#= model.Name #>>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/${id}`);
+  }
+
+  // POST: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>
+  // Creates a new <#= model.Name.ToLower() #>.
+  public create<#= model.Name #>(<#= model.Name.ToCamelCase() #>: <#= model.Name #>): Observable<<#= model.Name #>> {
+    return this.http.post<<#= model.Name #>>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>`, <#= model.Name.ToCamelCase() #>);
+  }
+
+  // PUT: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
+  // Updates a specific <#= model.Name.ToLower() #>.
+  public update<#= model.Name #>(<#= model.Name.ToCamelCase() #>: <#= model.Name #>): Observable<<#= model.Name #>> {
+    return this.http.put<<#= model.Name #>>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/${<#= model.Name.ToCamelCase() #>.id}`, <#= model.Name.ToCamelCase() #>);
+  }
+
+  // DELETE: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
+  // Deletes a specific <#= model.Name.ToLower() #>.
+  public delete<#= model.Name #>(<#= model.Name.ToCamelCase() #>: <#= model.Name #> | string): Observable<<#= model.Name #>> {
+    const id = typeof <#= model.Name.ToCamelCase() #> === 'string' ? <#= model.Name.ToCamelCase() #> : (<#= model.Name.ToCamelCase() #> as <#= model.Name #>).id;
+    return this.http.delete<<#= model.Name #>>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/${id}`);
+  }
+}

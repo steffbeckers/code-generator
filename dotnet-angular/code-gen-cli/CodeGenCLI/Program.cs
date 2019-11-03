@@ -235,6 +235,20 @@ namespace CodeGenCLI
                         Console.WriteLine((!string.IsNullOrEmpty(Config.Angular.ModelsPath) ? Config.Angular.ModelsPath : "src\\app\\shared\\models") + "\\" + codeGenModel.Name + ".ts");
                     }
 
+                    // Services
+                    if (!Directory.Exists(Config.Angular.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.Angular.ServicesPath) ? Config.Angular.ServicesPath : "src\\app\\shared\\services")))
+                    {
+                        Directory.CreateDirectory(Config.Angular.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.Angular.ServicesPath) ? Config.Angular.ServicesPath : "src\\app\\shared\\services"));
+                    }
+                    foreach (CodeGenModel codeGenModel in Config.Models)
+                    {
+                        AngularTemplates.DataServiceTemplate dataServiceTemplate = new AngularTemplates.DataServiceTemplate(Config, codeGenModel);
+                        string dataServiceTemplateContent = dataServiceTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.Angular.ServicesPath) ? Config.Angular.ServicesPath : "src\\app\\shared\\services") + "\\" + codeGenModel.Name + "Service.ts", dataServiceTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.Angular.ServicesPath) ? Config.Angular.ServicesPath : "src\\app\\shared\\services") + "\\" + codeGenModel.Name + "Service.ts");
+                    }
+
                     // Stop
                     Console.WriteLine("### DONE ###");
                     return 0;
