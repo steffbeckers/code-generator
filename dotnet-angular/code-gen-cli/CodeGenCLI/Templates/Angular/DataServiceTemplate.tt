@@ -44,6 +44,14 @@ export class <#= model.Name #>Service {
     return this.http.put<<#= model.Name #>>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/${<#= model.Name.ToCamelCase() #>.id}`, <#= model.Name.ToCamelCase() #>);
   }
 
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+  // TODO
+  // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
+  
+  // TODO
+  // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
+
+<# } #>
   // DELETE: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
   // Deletes a specific <#= model.Name.ToLower() #>.
   public delete<#= model.Name #>(<#= model.Name.ToCamelCase() #>: <#= model.Name #> | string): Observable<<#= model.Name #>> {

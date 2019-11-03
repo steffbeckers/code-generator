@@ -312,86 +312,156 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(");\r\n  }\r\n\r\n  // DELETE: api/");
+            this.Write(");\r\n  }\r\n\r\n");
             
             #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { 
+            
+            #line default
+            #line hidden
+            this.Write("  // TODO\r\n  // PUT: api/");
+            
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            
+            #line default
+            #line hidden
+            this.Write("/{");
+            
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("Id}/");
+            
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
+            
+            #line default
+            #line hidden
+            this.Write("/{");
+            
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("Id}/Link\r\n  \r\n  // TODO\r\n  // DELETE: api/");
+            
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            
+            #line default
+            #line hidden
+            this.Write("/{");
+            
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("Id}/");
+            
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
+            
+            #line default
+            #line hidden
+            this.Write("/{");
+            
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("Id}/Link\r\n\r\n");
+            
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("  // DELETE: api/");
+            
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
             this.Write("/{id}\r\n  // Deletes a specific ");
             
-            #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(".\r\n  public delete");
             
-            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(": ");
             
-            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" | string): Observable<");
             
-            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("> {\r\n    const id = typeof ");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" === \'string\' ? ");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" : (");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" as ");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(").id;\r\n    return this.http.delete<");
             
-            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(">(`${environment.api}/");
             
-            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
