@@ -17,6 +17,7 @@ namespace Test.API.DAL
 		public DbSet<Account> Accounts { get; set; }
 		public DbSet<Contact> Contacts { get; set; }
 		public DbSet<Address> Addresses { get; set; }
+		public DbSet<Note> Notes { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -80,6 +81,22 @@ namespace Test.API.DAL
             // Required properties
 
             #endregion
+
+			#region Notes
+
+            // Soft delete query filter
+            modelBuilder.Entity<Note>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+			modelBuilder.Entity<Note>().ToTable("Notes");
+
+			// Key
+			modelBuilder.Entity<Note>().HasKey(e => e.Id);
+
+            // Required properties
+            modelBuilder.Entity<Note>().Property(e => e.Title).IsRequired();
+
+            #endregion
 		}
 
 		public override int SaveChanges()
@@ -106,7 +123,8 @@ namespace Test.API.DAL
                 if (
 					entry.Entity.GetType() == typeof(Account) ||
 					entry.Entity.GetType() == typeof(Contact) ||
-					entry.Entity.GetType() == typeof(Address)
+					entry.Entity.GetType() == typeof(Address) ||
+					entry.Entity.GetType() == typeof(Note)
 				)
                 {
                     switch (entry.State)
@@ -131,7 +149,8 @@ namespace Test.API.DAL
                 if (
 					entry.Entity.GetType() == typeof(Account) ||
 					entry.Entity.GetType() == typeof(Contact) ||
-					entry.Entity.GetType() == typeof(Address)
+					entry.Entity.GetType() == typeof(Address) ||
+					entry.Entity.GetType() == typeof(Note)
 				)
                 {
                     switch (entry.State)

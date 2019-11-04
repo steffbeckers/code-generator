@@ -25,6 +25,10 @@ namespace Test.API.DAL
             // Addresses
 			CreateMap<Address, AddressVM>();
             CreateMap<AddressVM, Address>();
+
+            // Notes
+			CreateMap<Note, NoteVM>();
+            CreateMap<NoteVM, Note>();
         }
     }
 }

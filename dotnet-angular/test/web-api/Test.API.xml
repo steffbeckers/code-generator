@@ -109,6 +109,41 @@
             Deletes an existing contact record by Id.
             </summary>
         </member>
+        <member name="T:Test.API.BLL.NoteBLL">
+            <summary>
+            The business logic layer for Notes.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.#ctor(Test.API.DAL.Repositories.NoteRepository)">
+            <summary>
+            The constructor of the Note business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.GetAllNotesAsync">
+            <summary>
+            Retrieves all notes.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.GetNoteByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one note by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.CreateNoteAsync(Test.API.Models.Note)">
+            <summary>
+            Creates a new note record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.UpdateNoteAsync(System.Guid,Test.API.Models.Note)">
+            <summary>
+            Updates an existing note record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.NoteBLL.DeleteNoteAsync(Test.API.Models.Note)">
+            <summary>
+            Deletes an existing note record by Id.
+            </summary>
+        </member>
         <member name="T:Test.API.Controllers.AccountsController">
             <summary>
             The Accounts controller.
@@ -229,6 +264,46 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:Test.API.Controllers.NotesController">
+            <summary>
+            The Notes controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.NotesController},AutoMapper.IMapper,Test.API.BLL.NoteBLL)">
+            <summary>
+            The constructor of the Notes controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.GetNotes">
+            <summary>
+            Retrieves all notes.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.GetNote(System.Guid)">
+            <summary>
+            Retrieves a specific note.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.CreateNote(Test.API.ViewModels.NoteVM)">
+            <summary>
+            Creates a new note.
+            </summary>
+            <param name="noteVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.UpdateNote(System.Guid,Test.API.ViewModels.NoteVM)">
+            <summary>
+            Updates a specific note.
+            </summary>
+            <param name="id"></param>
+            <param name="noteVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.DeleteNote(System.Guid)">
+            <summary>
+            Deletes a specific note.
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="T:Test.API.DAL.AutoMapperProfile">
             <summary>
             Profile for mapping models to/from view models with AutoMapper.
@@ -267,6 +342,16 @@
         <member name="M:Test.API.DAL.Repositories.ContactRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
             The constructor of the Contact repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.NoteRepository">
+            <summary>
+            The repository for Notes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.NoteRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Note repository.
             </summary>
         </member>
         <member name="T:Test.API.Models.Account">
@@ -444,6 +529,41 @@
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
+        <member name="T:Test.API.Models.Note">
+            <summary>
+            Note model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.Id">
+            <summary>
+            The identifier of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.Title">
+            <summary>
+            The Title property of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.Body">
+            <summary>
+            The Body property of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Note.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
         <member name="T:Test.API.ViewModels.AccountVM">
             <summary>
             Account view model
@@ -572,6 +692,26 @@
         <member name="P:Test.API.ViewModels.ContactVM.Account">
             <summary>
             The related Account of Contact.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.NoteVM">
+            <summary>
+            Note view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.NoteVM.Id">
+            <summary>
+            The identifier of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.NoteVM.Title">
+            <summary>
+            The Title property of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.NoteVM.Body">
+            <summary>
+            The Body property of Note.
             </summary>
         </member>
     </members>

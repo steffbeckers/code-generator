@@ -39,11 +39,13 @@ namespace Test.API
 			services.AddScoped<AccountRepository>();
 			services.AddScoped<ContactRepository>();
 			services.AddScoped<AddressRepository>();
+			services.AddScoped<NoteRepository>();
 
 			// BLLs
 			services.AddScoped<AccountBLL>();
 			services.AddScoped<ContactBLL>();
 			services.AddScoped<AddressBLL>();
+			services.AddScoped<NoteBLL>();
 
 			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
