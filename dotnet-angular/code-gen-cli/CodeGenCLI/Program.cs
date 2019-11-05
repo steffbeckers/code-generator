@@ -249,6 +249,21 @@ namespace CodeGenCLI
                         Console.WriteLine((!string.IsNullOrEmpty(Config.Angular.ServicesPath) ? Config.Angular.ServicesPath : "src\\app\\shared\\services") + "\\" + codeGenModel.Name + "Service.ts");
                     }
 
+                    // Modules
+                    foreach (CodeGenModel codeGenModel in Config.Models)
+                    {
+                        if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower()))
+                        {
+                            Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower());
+                        }
+
+                        AngularTemplates.DataModuleTemplate dataModuleTemplate = new AngularTemplates.DataModuleTemplate(Config, codeGenModel);
+                        string dataModuleTemplateContent = dataModuleTemplate.TransformText();
+                        
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + ".module.ts", dataModuleTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + ".module.ts");
+                    }
+
                     // Stop
                     Console.WriteLine("### DONE ###");
                     return 0;
