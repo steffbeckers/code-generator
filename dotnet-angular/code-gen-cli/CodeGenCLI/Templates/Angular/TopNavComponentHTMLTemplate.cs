@@ -20,9 +20,9 @@ namespace CodeGenCLI.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\TopNavComponentHTMLTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class AppModuleTemplate : AppModuleTemplateBase
+    public partial class TopNavComponentHTMLTemplate : TopNavComponentHTMLTemplateBase
     {
 #line hidden
         /// <summary>
@@ -30,71 +30,35 @@ namespace CodeGenCLI.Templates.Angular
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-
-// Modules
-import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
-
-// Components
-import { AppComponent } from './app.component';
-import { TopNavComponent } from './shared/top-nav/top-nav.component';
-
-// Services
-");
+            this.Write("<div fxLayout=\"row\" fxLayoutAlign=\"start center\" fxLayoutGap=\"20px\">\r\n");
             
-            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
+            #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\TopNavComponentHTMLTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
             
             #line default
             #line hidden
-            this.Write("import { ");
+            this.Write("  <a routerLink=\"/");
             
-            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Service } from \'./shared/services/");
-            
-            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\TopNavComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
-            this.Write("Service\';\r\n");
+            this.Write("\" routerLinkActive=\"bold\">");
             
-            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
+            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\TopNavComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's'));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n");
+            
+            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\TopNavComponentHTMLTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    TopNavComponent\r\n  ],\r\n " +
-                    " imports: [\r\n    BrowserModule,\r\n    HttpClientModule,\r\n    AppRoutingModule,\r\n " +
-                    "   SharedModule\r\n  ],\r\n  providers: [\r\n");
-            
-            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
-            
-            #line default
-            #line hidden
-            this.Write("    ");
-            
-            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Service,\r\n");
-            
-            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("  ],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule {}\r\n");
+            this.Write("</div>\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -106,7 +70,7 @@ import { TopNavComponent } from './shared/top-nav/top-nav.component';
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class AppModuleTemplateBase
+    public class TopNavComponentHTMLTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

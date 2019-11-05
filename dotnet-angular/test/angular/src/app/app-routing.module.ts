@@ -3,24 +3,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: "accounts",
-    loadChildren: "./accounts/accounts.module#AccountsModule",
+    path: 'accounts',
+    loadChildren: './accounts/accounts.module#AccountsModule',
   },
   {
-    path: "contacts",
-    loadChildren: "./contacts/contacts.module#ContactsModule",
+    path: 'contacts',
+    loadChildren: './contacts/contacts.module#ContactsModule',
   },
   {
-    path: "addresses",
-    loadChildren: "./addresses/addresses.module#AddressesModule",
+    path: 'addresses',
+    loadChildren: './addresses/addresses.module#AddressesModule',
   },
   {
-    path: "notes",
-    loadChildren: "./notes/notes.module#NotesModule",
+    path: 'notes',
+    loadChildren: './notes/notes.module#NotesModule',
   },
   {
-    path: "**",
-    redirectTo: "",
+    path: '**',
+    redirectTo: '',
   }
 ];
 
@@ -28,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 
 // Components
 import { AppComponent } from './app.component';
+import { TopNavComponent } from './shared/top-nav/top-nav.component';
 
 // Services
 import { AccountService } from './shared/services/AccountService';
@@ -17,7 +18,8 @@ import { NoteService } from './shared/services/NoteService';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopNavComponent
   ],
   imports: [
     BrowserModule,

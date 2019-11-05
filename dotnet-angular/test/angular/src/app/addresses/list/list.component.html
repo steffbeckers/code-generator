@@ -6,6 +6,7 @@
     <th>Postal Code</th>
     <th>City</th>
     <th>Primary</th>
+    <th>Account</th>
   </thead>
   <tbody>
     <tr *ngFor="let address of addresses">
@@ -14,6 +15,7 @@
       <td>{{ address.postalCode }}</td>
       <td>{{ address.city }}</td>
       <td>{{ address.primary }}</td>
+      <td>{{ address.account.name }}</td>
     </tr>
   </tbody>
 </table>

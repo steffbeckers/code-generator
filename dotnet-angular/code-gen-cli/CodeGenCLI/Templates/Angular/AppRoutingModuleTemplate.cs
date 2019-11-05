@@ -38,44 +38,44 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("  {\r\n    path: \"");
+            this.Write("  {\r\n    path: \'");
             
             #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
-            this.Write("\",\r\n    loadChildren: \"./");
+            this.Write("\',\r\n    loadChildren: \'./");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
             this.Write("/");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
             this.Write(".module#");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's'));
             
             #line default
             #line hidden
-            this.Write("Module\",\r\n  },\r\n");
+            this.Write("Module\',\r\n  },\r\n");
             
             #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppRoutingModuleTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("  {\r\n    path: \"**\",\r\n    redirectTo: \"\",\r\n  }\r\n];\r\n\r\n@NgModule({\r\n  imports: [Ro" +
+            this.Write("  {\r\n    path: \'**\',\r\n    redirectTo: \'\',\r\n  }\r\n];\r\n\r\n@NgModule({\r\n  imports: [Ro" +
                     "uterModule.forRoot(routes)],\r\n  exports: [RouterModule]\r\n})\r\nexport class AppRou" +
-                    "tingModule { }\r\n");
+                    "tingModule {}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

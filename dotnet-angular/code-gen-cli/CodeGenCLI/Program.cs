@@ -272,6 +272,35 @@ namespace CodeGenCLI
                     File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\shared\\shared.module.ts", sharedModuleTemplateContent);
                     Console.WriteLine("src\\app\\shared\\shared.module.ts");
 
+                    // Components
+
+                    //// Top navigation
+                    if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\shared\\top-nav"))
+                    {
+                        Directory.CreateDirectory("src\\app\\shared\\top-nav");
+                    }
+
+                    ////// HTML
+                    AngularTemplates.TopNavComponentHTMLTemplate topNavComponentHTMLTemplate = new AngularTemplates.TopNavComponentHTMLTemplate(Config);
+                    string topNavComponentHTMLTemplateContent = topNavComponentHTMLTemplate.TransformText();
+
+                    File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\shared\\top-nav\\top-nav.component.html", topNavComponentHTMLTemplateContent);
+                    Console.WriteLine("src\\app\\shared\\top-nav\\top-nav.component.html");
+
+                    ////// SCSS
+                    AngularTemplates.TopNavComponentSCSSTemplate topNavComponentSCSSTemplate = new AngularTemplates.TopNavComponentSCSSTemplate(Config);
+                    string topNavComponentSCSSTemplateContent = topNavComponentSCSSTemplate.TransformText();
+
+                    File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\shared\\top-nav\\top-nav.component.scss", topNavComponentSCSSTemplateContent);
+                    Console.WriteLine("src\\app\\shared\\top-nav\\top-nav.component.scss");
+
+                    ////// TS
+                    AngularTemplates.TopNavComponentTSTemplate topNavComponentTSTemplate = new AngularTemplates.TopNavComponentTSTemplate(Config);
+                    string topNavComponentTSTemplateContent = topNavComponentTSTemplate.TransformText();
+
+                    File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\shared\\top-nav\\top-nav.component.ts", topNavComponentTSTemplateContent);
+                    Console.WriteLine("src\\app\\shared\\top-nav\\top-nav.component.ts");
+
                     // Per model
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
@@ -298,7 +327,7 @@ namespace CodeGenCLI
                         ////// List
                         if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list"))
                         {
-                            Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list");
+                            Directory.CreateDirectory("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list");
                         }
 
                         //////// HTML

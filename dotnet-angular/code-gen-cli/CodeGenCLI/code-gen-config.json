@@ -110,8 +110,9 @@
           "name": "Account",
           "type": "many-to-one",
           //"required": true,
-          "model": "Account"
-          //"idField": "ParentAccountId" // TODO: Optional override
+          "model": "Account",
+          //"idField": "ParentAccountId", // TODO: Optional override
+          "displayField": "Name"
         }
       ]
     },

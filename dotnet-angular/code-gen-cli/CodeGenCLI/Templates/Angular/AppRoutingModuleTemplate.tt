@@ -11,13 +11,13 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
 <# foreach (CodeGenModel model in config.Models) { #>
   {
-    path: "<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>",
-    loadChildren: "./<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>.module#<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Module",
+    path: '<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>',
+    loadChildren: './<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>.module#<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's' #>Module',
   },
 <# } #>
   {
-    path: "**",
-    redirectTo: "",
+    path: '**',
+    redirectTo: '',
   }
 ];
 
@@ -25,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -38,6 +38,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataRoutingModuleTemplate.tt</DependentUpon>
     </None>
+    <None Include="Templates\Angular\TopNavComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TopNavComponentSCSSTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\TopNavComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TopNavComponentTSTemplate.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -93,6 +103,18 @@
     <None Update="Templates\Angular\SharedModuleTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>SharedModuleTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\TopNavComponentSCSSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TopNavComponentSCSSTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\TopNavComponentHTMLTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TopNavComponentHTMLTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\TopNavComponentTSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TopNavComponentTSTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\WebAPI\AutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -186,6 +208,26 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SharedModuleTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\TopNavComponentHTMLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TopNavComponentHTMLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\TopNavComponentSCSSTemplate - Copy.cs">
+      <DependentUpon>TopNavComponentSCSSTemplate.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Templates\Angular\TopNavComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TopNavComponentSCSSTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\TopNavComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TopNavComponentTSTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\AutoMapperProfileTemplate.cs">
       <DesignTime>True</DesignTime>
