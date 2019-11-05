@@ -23,6 +23,7 @@
         },
         {
           "name": "Email",
+          "displayName": "Email Address",
           "type": "string"
         }
       ],
@@ -44,11 +45,13 @@
       "properties": [
         {
           "name": "FirstName",
+          "displayName": "First Name",
           "type": "string",
           "required": true
         },
         {
           "name": "LastName",
+          "displayName": "Last Name",
           "type": "string",
           "required": true
         },
@@ -70,8 +73,9 @@
           "name": "Account",
           "type": "many-to-one",
           //"required": true,
-          "model": "Account"
-          //"idField": "ParentAccountId" // TODO: Optional override
+          "model": "Account",
+          //"idField": "ParentAccountId", // TODO: Optional override
+          "displayField": "Name"
         }
       ]
     },
@@ -89,6 +93,7 @@
         },
         {
           "name": "PostalCode",
+          "displayName": "Postal Code",
           "type": "string"
         },
         {

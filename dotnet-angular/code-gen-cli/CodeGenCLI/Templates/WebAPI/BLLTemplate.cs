@@ -255,7 +255,8 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("Repository.GetAsync();\r\n        }\r\n\r\n\t\t/// <summary>\r\n\t\t/// Retrieves one ");
+            this.Write("Repository.GetWithLinkedEntitiesAsync();\r\n        }\r\n\r\n\t\t/// <summary>\r\n\t\t/// Ret" +
+                    "rieves one ");
             
             #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));

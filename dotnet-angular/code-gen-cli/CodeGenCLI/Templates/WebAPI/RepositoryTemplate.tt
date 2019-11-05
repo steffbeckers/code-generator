@@ -7,6 +7,7 @@
 <#@ import namespace="CodeGenCLI.Extensions" #>
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 
@@ -29,6 +30,21 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
         // Additional functionality and overrides
 
+		public async Task<IEnumerable<<#= model.Name #>>> GetWithLinkedEntitiesAsync()
+        {
+            return await this.context.<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+                .Include(x => x.<#= relation.Name #>)
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+                .Include(x => x.<#= relation.Name #>)
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+                // TODO: Include many-to-many relation
+<# } #>
+                .ToListAsync();
+        }
+
 		public async Task<<#= model.Name #>> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
@@ -39,6 +55,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 .Include(x => x.<#= relation.Name #>)
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+                // TODO: Include many-to-many relation
 <# } #>
                 .SingleOrDefaultAsync(x => x.Id == id);
         }

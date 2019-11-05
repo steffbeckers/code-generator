@@ -32,7 +32,7 @@ namespace Test.API.BLL
 			// Before retrieval
 			// #-#-#
 
-            return await this.contactRepository.GetAsync();
+            return await this.contactRepository.GetWithLinkedEntitiesAsync();
         }
 
 		/// <summary>

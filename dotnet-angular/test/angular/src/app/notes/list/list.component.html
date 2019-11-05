@@ -1,0 +1,13 @@
+<h1>Notes</h1>
+<table cellspacing="0" cellpadding="5">
+  <thead>
+    <th>Title</th>
+    <th>Body</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let note of notes">
+      <td>{{ note.title }}</td>
+      <td>{{ note.body }}</td>
+    </tr>
+  </tbody>
+</table>

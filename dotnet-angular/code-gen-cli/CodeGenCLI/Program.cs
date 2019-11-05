@@ -250,6 +250,29 @@ namespace CodeGenCLI
                     }
 
                     // Modules
+
+                    //// App
+                    AngularTemplates.AppModuleTemplate appModuleTemplate = new AngularTemplates.AppModuleTemplate(Config);
+                    string appModuleTemplateContent = appModuleTemplate.TransformText();
+
+                    File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\app.module.ts", appModuleTemplateContent);
+                    Console.WriteLine("src\\app\\app.module.ts");
+
+                    //// App Routing
+                    AngularTemplates.AppRoutingModuleTemplate appRoutingModuleTemplate = new AngularTemplates.AppRoutingModuleTemplate(Config);
+                    string appRoutingModuleTemplateContent = appRoutingModuleTemplate.TransformText();
+
+                    File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\app-routing.module.ts", appRoutingModuleTemplateContent);
+                    Console.WriteLine("src\\app\\app-routing.module.ts");
+
+                    //// Shared
+                    AngularTemplates.SharedModuleTemplate sharedModuleTemplate = new AngularTemplates.SharedModuleTemplate(Config);
+                    string sharedModuleTemplateContent = sharedModuleTemplate.TransformText();
+
+                    File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\shared\\shared.module.ts", sharedModuleTemplateContent);
+                    Console.WriteLine("src\\app\\shared\\shared.module.ts");
+
+                    // Per model
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
                         if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower()))
@@ -257,15 +280,56 @@ namespace CodeGenCLI
                             Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower());
                         }
 
+                        //// Modules
                         AngularTemplates.DataModuleTemplate dataModuleTemplate = new AngularTemplates.DataModuleTemplate(Config, codeGenModel);
                         string dataModuleTemplateContent = dataModuleTemplate.TransformText();
                         
                         File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + ".module.ts", dataModuleTemplateContent);
                         Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + ".module.ts");
+
+                        AngularTemplates.DataRoutingModuleTemplate dataRoutingModuleTemplate = new AngularTemplates.DataRoutingModuleTemplate(Config, codeGenModel);
+                        string dataRoutingModuleTemplateContent = dataRoutingModuleTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "-routing.module.ts", dataRoutingModuleTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "-routing.module.ts");
+
+                        //// Components
+
+                        ////// List
+                        if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list"))
+                        {
+                            Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list");
+                        }
+
+                        //////// HTML
+                        AngularTemplates.DataListComponentHTMLTemplate dataListComponentHTMLTemplate = new AngularTemplates.DataListComponentHTMLTemplate(Config, codeGenModel);
+                        string dataListComponentHTMLTemplateContent = dataListComponentHTMLTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.html", dataListComponentHTMLTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.html");
+
+                        //////// SCSS
+                        AngularTemplates.DataListComponentSCSSTemplate dataListComponentSCSSTemplate = new AngularTemplates.DataListComponentSCSSTemplate(Config, codeGenModel);
+                        string dataListComponentSCSSTemplateContent = dataListComponentSCSSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.scss", dataListComponentSCSSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.scss");
+
+                        //////// TS
+                        AngularTemplates.DataListComponentTSTemplate dataListComponentTSTemplate = new AngularTemplates.DataListComponentTSTemplate(Config, codeGenModel);
+                        string dataListComponentTSTemplateContent = dataListComponentTSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.ts", dataListComponentTSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.ts");
                     }
 
                     // Stop
                     Console.WriteLine("### DONE ###");
+                    Console.WriteLine();
+
+                    Console.WriteLine("### Dependencies ###");
+                    Console.WriteLine("npm i --save @angular/cdk @angular/flex-layout");
+
                     return 0;
                 });
             });

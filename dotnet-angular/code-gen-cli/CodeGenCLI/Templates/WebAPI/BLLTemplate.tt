@@ -49,7 +49,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			// Before retrieval
 			// #-#-#
 
-            return await this.<#= model.Name.ToLower() #>Repository.GetAsync();
+            return await this.<#= model.Name.ToLower() #>Repository.GetWithLinkedEntitiesAsync();
         }
 
 		/// <summary>

@@ -3,18 +3,25 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
- imports: [
-	CommonModule
- ],
- declarations: [],
- exports: [
-  CommonModule,
-  FormsModule
- ]
+  imports: [
+    CommonModule
+  ],
+  declarations: [],
+  exports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ]
 })
 export class SharedModule {}

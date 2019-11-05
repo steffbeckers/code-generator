@@ -8,6 +8,9 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("displayName")]
+        public string DisplayName { get; set; }
+
         [JsonProperty("description")]
         public string Description { get; set; }
 
@@ -22,6 +25,9 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonProperty("idField")]
         public string IdField { get; set; }
+
+        [JsonProperty("displayField")]
+        public string DisplayField { get; set; }
 
         [JsonProperty("through")]
         public string Through { get; set; }

@@ -4,14 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 // Components
 import { AppComponent } from './app.component';
 
 // Services
 import { AccountService } from './shared/services/AccountService';
-import { AddressService } from './shared/services/AddressService';
 import { ContactService } from './shared/services/ContactService';
+import { AddressService } from './shared/services/AddressService';
+import { NoteService } from './shared/services/NoteService';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,14 @@ import { ContactService } from './shared/services/ContactService';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [
     AccountService,
+    ContactService,
     AddressService,
-    ContactService
+    NoteService,
   ],
   bootstrap: [AppComponent]
 })

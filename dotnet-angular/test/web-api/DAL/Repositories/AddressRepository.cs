@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Test.API.Models;
 
@@ -21,6 +22,13 @@ namespace Test.API.DAL.Repositories
         }
 
         // Additional functionality and overrides
+
+		public async Task<IEnumerable<Address>> GetWithLinkedEntitiesAsync()
+        {
+            return await this.context.Addresses
+                .Include(x => x.Account)
+                .ToListAsync();
+        }
 
 		public async Task<Address> GetWithLinkedEntitiesByIdAsync(Guid id)
         {

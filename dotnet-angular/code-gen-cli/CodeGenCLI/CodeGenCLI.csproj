@@ -8,10 +8,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Templates\Angular\AppModuleTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppModuleTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\AppRoutingModuleTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppRoutingModuleTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\DataListComponentHTMLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataListComponentHTMLTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\DataListComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataListComponentSCSSTemplate.tt</DependentUpon>
+    </None>
     <None Include="Templates\Angular\DataModuleTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataModuleTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\DataRoutingModuleTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataRoutingModuleTemplate.tt</DependentUpon>
     </None>
   </ItemGroup>
 
@@ -29,9 +54,33 @@
     <None Update="code-gen-config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Templates\Angular\AppModuleTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AppModuleTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\AppRoutingModuleTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AppRoutingModuleTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataListComponentHTMLTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataListComponentHTMLTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataListComponentSCSSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataListComponentSCSSTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataListComponentTSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataListComponentTSTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\Angular\DataModuleTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataModuleTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataRoutingModuleTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataRoutingModuleTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\Angular\DataServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -88,10 +137,40 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Templates\Angular\AppModuleTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppModuleTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\AppRoutingModuleTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppRoutingModuleTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataListComponentHTMLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataListComponentHTMLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataListComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataListComponentSCSSTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataListComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataListComponentTSTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\Angular\DataModuleTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataModuleTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataRoutingModuleTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataRoutingModuleTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\Angular\DataServiceTemplate.cs">
       <DesignTime>True</DesignTime>

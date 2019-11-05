@@ -1,0 +1,17 @@
+<h1>Accounts</h1>
+<table cellspacing="0" cellpadding="5">
+  <thead>
+    <th>Name</th>
+    <th>Website</th>
+    <th>Telephone</th>
+    <th>Email Address</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.name }}</td>
+      <td>{{ account.website }}</td>
+      <td>{{ account.telephone }}</td>
+      <td>{{ account.email }}</td>
+    </tr>
+  </tbody>
+</table>
