@@ -90,7 +90,7 @@ namespace CodeGenCLI.Templates.Angular
             #line default
             #line hidden
             this.Write("Form: FormGroup;\r\n  public creating = false;\r\n\r\n  constructor(\r\n    private route" +
-                    "r: Router,\r\n    public fb: FormBuilder,\r\n    public ");
+                    "r: Router,\r\n    private fb: FormBuilder,\r\n    private ");
             
             #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
@@ -160,52 +160,52 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Form.invalid || this.creating) {\r\n      return;\r\n    }\r\n    this.creating = true;" +
-                    "\r\n\r\n    this.");
+            this.Write("Form.invalid || this.creating) {\r\n      return;\r\n    }\r\n\r\n    // Already creating" +
+                    " check\r\n    this.creating = true;\r\n\r\n    this.");
             
-            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
+            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Service.create");
             
-            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
+            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(this.");
             
-            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
+            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Form.value).subscribe(\r\n      (");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(": ");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write(") => {\r\n        this.router.navigateByUrl(\'/");
+            this.Write(") => {\r\n        this.creating = false;\r\n\r\n        this.router.navigateByUrl(\'/");
             
-            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
             this.Write("/\' + ");
             
-            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default

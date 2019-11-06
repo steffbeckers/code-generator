@@ -20,8 +20,8 @@ export class NoteCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public fb: FormBuilder,
-    public noteService: NoteService
+    private fb: FormBuilder,
+    private noteService: NoteService
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +36,14 @@ export class NoteCreateComponent implements OnInit {
     if (this.noteForm.invalid || this.creating) {
       return;
     }
+
+    // Already creating check
     this.creating = true;
 
     this.noteService.createNote(this.noteForm.value).subscribe(
       (note: Note) => {
+        this.creating = false;
+
         this.router.navigateByUrl('/notes/' + note.id);
       }
     );

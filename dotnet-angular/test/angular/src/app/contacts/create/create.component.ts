@@ -20,8 +20,8 @@ export class ContactCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public fb: FormBuilder,
-    public contactService: ContactService
+    private fb: FormBuilder,
+    private contactService: ContactService
   ) {}
 
   ngOnInit(): void {
@@ -39,10 +39,14 @@ export class ContactCreateComponent implements OnInit {
     if (this.contactForm.invalid || this.creating) {
       return;
     }
+
+    // Already creating check
     this.creating = true;
 
     this.contactService.createContact(this.contactForm.value).subscribe(
       (contact: Contact) => {
+        this.creating = false;
+
         this.router.navigateByUrl('/contacts/' + contact.id);
       }
     );

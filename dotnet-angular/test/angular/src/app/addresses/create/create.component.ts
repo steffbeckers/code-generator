@@ -20,8 +20,8 @@ export class AddressCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public fb: FormBuilder,
-    public addressService: AddressService
+    private fb: FormBuilder,
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
@@ -39,10 +39,14 @@ export class AddressCreateComponent implements OnInit {
     if (this.addressForm.invalid || this.creating) {
       return;
     }
+
+    // Already creating check
     this.creating = true;
 
     this.addressService.createAddress(this.addressForm.value).subscribe(
       (address: Address) => {
+        this.creating = false;
+
         this.router.navigateByUrl('/addresses/' + address.id);
       }
     );

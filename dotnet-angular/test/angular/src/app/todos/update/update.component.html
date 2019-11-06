@@ -1,0 +1,20 @@
+<div *ngIf="todo?.id" fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="todoForm" (ngSubmit)="updateTodo()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>{{ todo.title }}</h1>
+      <button (click)="deleteTodo()">Delete</button>
+      <button (click)="updateTodo()" [disabled]="todoForm.invalid">Save</button>
+      <button (click)="updateTodo(true)" [disabled]="todoForm.invalid">Save and Close</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Title</label>
+        <input formControlName="title" placeholder="Title" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Due</label>
+        <input formControlName="dueDate" placeholder="Due" />
+      </div>
+    </div>
+  </form>
+</div>

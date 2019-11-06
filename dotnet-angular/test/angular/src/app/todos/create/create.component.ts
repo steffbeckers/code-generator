@@ -20,8 +20,8 @@ export class TodoCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public fb: FormBuilder,
-    public todoService: TodoService
+    private fb: FormBuilder,
+    private todoService: TodoService
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +36,14 @@ export class TodoCreateComponent implements OnInit {
     if (this.todoForm.invalid || this.creating) {
       return;
     }
+
+    // Already creating check
     this.creating = true;
 
     this.todoService.createTodo(this.todoForm.value).subscribe(
       (todo: Todo) => {
+        this.creating = false;
+
         this.router.navigateByUrl('/todos/' + todo.id);
       }
     );

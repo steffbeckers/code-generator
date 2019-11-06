@@ -2,7 +2,7 @@
   <form [formGroup]="todoForm" (ngSubmit)="createTodo()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <h1>Add new Todo</h1>
-      <button (click)="createTodo()" [disabled]="todoForm.invalid">Create</button>
+      <button (click)="createTodo()" [disabled]="todoForm.invalid">Add</button>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>

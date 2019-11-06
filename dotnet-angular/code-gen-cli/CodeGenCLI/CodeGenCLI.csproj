@@ -63,6 +63,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataRoutingModuleTemplate.tt</DependentUpon>
     </None>
+    <None Include="Templates\Angular\DataUpdateComponentHTMLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataUpdateComponentHTMLTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\DataUpdateComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataUpdateComponentSCSSTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\DataUpdateComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataUpdateComponentTSTemplate.tt</DependentUpon>
+    </None>
     <None Include="Templates\Angular\TopNavComponentSCSSTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -144,6 +159,18 @@
     <None Update="Templates\Angular\DataServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataUpdateComponentHTMLTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataUpdateComponentHTMLTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataUpdateComponentSCSSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataUpdateComponentSCSSTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataUpdateComponentTSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataUpdateComponentTSTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\Angular\ModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -277,6 +304,21 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataServiceTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataUpdateComponentHTMLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataUpdateComponentHTMLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataUpdateComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataUpdateComponentSCSSTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataUpdateComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataUpdateComponentTSTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\Angular\ModelTemplate.cs">
       <DesignTime>True</DesignTime>

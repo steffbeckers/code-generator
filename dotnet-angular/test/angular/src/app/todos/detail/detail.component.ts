@@ -46,9 +46,7 @@ export class TodoDetailComponent implements OnInit {
     }
 
     // Confirmation
-    // #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0}
     if (confirm('Are you sure you want to delete todo: ' + this.todo.title + '?')) {
-    // #-#-#
       this.todoService.deleteTodo(this.todo.id).subscribe(
         () => {
           this.router.navigateByUrl('/todos');

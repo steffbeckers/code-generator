@@ -1,0 +1,20 @@
+<div *ngIf="note?.id" fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="noteForm" (ngSubmit)="updateNote()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>{{ note.title }}</h1>
+      <button (click)="deleteNote()">Delete</button>
+      <button (click)="updateNote()" [disabled]="noteForm.invalid">Save</button>
+      <button (click)="updateNote(true)" [disabled]="noteForm.invalid">Save and Close</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Title</label>
+        <input formControlName="title" placeholder="Title" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Body</label>
+        <input formControlName="body" placeholder="Body" />
+      </div>
+    </div>
+  </form>
+</div>

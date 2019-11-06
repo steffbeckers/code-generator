@@ -27,8 +27,8 @@ export class <#= model.Name #>CreateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public fb: FormBuilder,
-    public <#= model.Name.ToCamelCase() #>Service: <#= model.Name #>Service
+    private fb: FormBuilder,
+    private <#= model.Name.ToCamelCase() #>Service: <#= model.Name #>Service
   ) {}
 
   ngOnInit(): void {
@@ -44,10 +44,14 @@ export class <#= model.Name #>CreateComponent implements OnInit {
     if (this.<#= model.Name.ToCamelCase() #>Form.invalid || this.creating) {
       return;
     }
+
+    // Already creating check
     this.creating = true;
 
     this.<#= model.Name.ToCamelCase() #>Service.create<#= model.Name #>(this.<#= model.Name.ToCamelCase() #>Form.value).subscribe(
       (<#= model.Name.ToCamelCase() #>: <#= model.Name #>) => {
+        this.creating = false;
+
         this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>/' + <#= model.Name.ToCamelCase() #>.id);
       }
     );

@@ -66,8 +66,8 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Form.invalid\">Create</button>\r\n    </div>\r\n    <div fxLayout=\"row wrap\" fxLayoutA" +
-                    "lign=\"start\" fxLayoutGap=\"10px grid\">\r\n");
+            this.Write("Form.invalid\">Add</button>\r\n    </div>\r\n    <div fxLayout=\"row wrap\" fxLayoutAlig" +
+                    "n=\"start\" fxLayoutGap=\"10px grid\">\r\n");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 

@@ -2,7 +2,7 @@
   <form [formGroup]="contactForm" (ngSubmit)="createContact()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <h1>Add new Contact</h1>
-      <button (click)="createContact()" [disabled]="contactForm.invalid">Create</button>
+      <button (click)="createContact()" [disabled]="contactForm.invalid">Add</button>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>

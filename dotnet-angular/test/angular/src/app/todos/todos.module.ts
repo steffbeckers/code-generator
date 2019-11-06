@@ -7,12 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 import { TodosListComponent } from '../todos/list/list.component';
 import { TodoDetailComponent } from '../todos/detail/detail.component';
 import { TodoCreateComponent } from '../todos/create/create.component';
+import { TodoUpdateComponent } from '../todos/update/update.component';
 
 @NgModule({
   declarations: [
     TodosListComponent,
     TodoDetailComponent,
     TodoCreateComponent,
+    TodoUpdateComponent,
   ],
   imports: [CommonModule, TodosRoutingModule, SharedModule]
 })

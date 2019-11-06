@@ -5,11 +5,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotesListComponent } from './list/list.component';
 import { NoteDetailComponent } from './detail/detail.component';
 import { NoteCreateComponent } from './create/create.component';
+import { NoteUpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: NoteCreateComponent
+  },
+  {
+    path: ':id/edit',
+    component: NoteUpdateComponent
   },
   {
     path: ':id',

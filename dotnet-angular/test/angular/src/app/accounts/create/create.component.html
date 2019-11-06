@@ -2,7 +2,7 @@
   <form [formGroup]="accountForm" (ngSubmit)="createAccount()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <h1>Add new Account</h1>
-      <button (click)="createAccount()" [disabled]="accountForm.invalid">Create</button>
+      <button (click)="createAccount()" [disabled]="accountForm.invalid">Add</button>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>

@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
-<div fxLayout="column" fxLayoutAlign="start">
+<div *ngIf="<#= model.Name.ToCamelCase() #>?.id" fxLayout="column" fxLayoutAlign="start">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
     <h1>{{ <#= model.Name.ToCamelCase() #>.<#= model.DisplayField.ToCamelCase() #> }}</h1>

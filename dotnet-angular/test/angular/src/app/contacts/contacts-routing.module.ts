@@ -5,11 +5,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContactsListComponent } from './list/list.component';
 import { ContactDetailComponent } from './detail/detail.component';
 import { ContactCreateComponent } from './create/create.component';
+import { ContactUpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: ContactCreateComponent
+  },
+  {
+    path: ':id/edit',
+    component: ContactUpdateComponent
   },
   {
     path: ':id',

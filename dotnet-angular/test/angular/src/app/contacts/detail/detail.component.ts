@@ -46,9 +46,7 @@ export class ContactDetailComponent implements OnInit {
     }
 
     // Confirmation
-    // #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0}
     if (confirm('Are you sure you want to delete contact: ' + this.contact.firstName + '?')) {
-    // #-#-#
       this.contactService.deleteContact(this.contact.id).subscribe(
         () => {
           this.router.navigateByUrl('/contacts');

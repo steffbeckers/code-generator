@@ -322,6 +322,7 @@ namespace CodeGenCLI
                         File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "-routing.module.ts", dataRoutingModuleTemplateContent);
                         Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "-routing.module.ts");
 
+
                         //// Components
 
                         ////// List
@@ -351,6 +352,7 @@ namespace CodeGenCLI
                         File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.ts", dataListComponentTSTemplateContent);
                         Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.ts");
 
+
                         ////// Detail
                         if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\detail"))
                         {
@@ -358,32 +360,8 @@ namespace CodeGenCLI
                         }
 
                         //////// HTML
-                        
-                        // Existing code
-                        Dictionary<string, string> customDataListComponentHTMLCodeBlocks = new Dictionary<string, string>();
-                        if (File.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\detail\\detail.component.html"))
-                        {
-                            string existingDataListComponentHTMLTemplate = File.ReadAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\detail\\detail.component.html");
-                            MatchCollection existingDataListComponentHTMLCodeRegionMatches = Regex.Matches(existingDataListComponentHTMLTemplate, @"#-#-#(.+?)#-#-#", RegexOptions.Singleline);
-                            foreach (Match existingDataListComponentHTMLCodeRegionMatch in existingDataListComponentHTMLCodeRegionMatches)
-                            {
-                                customDataListComponentHTMLCodeBlocks.Add(existingDataListComponentHTMLCodeRegionMatch.Value.Substring(6, 38), existingDataListComponentHTMLCodeRegionMatch.Value);
-                            }
-                        }
-
-                        // Generate tempate
                         AngularTemplates.DataDetailComponentHTMLTemplate dataDetailComponentHTMLTemplate = new AngularTemplates.DataDetailComponentHTMLTemplate(Config, codeGenModel);
                         string dataDetailComponentHTMLTemplateContent = dataDetailComponentHTMLTemplate.TransformText();
-
-                        // Replace custom code from existing code
-                        MatchCollection dataListComponentHTMLCodeRegionMatches = Regex.Matches(dataDetailComponentHTMLTemplateContent, @"#-#-#(.+?)#-#-#", RegexOptions.Singleline);
-                        foreach (Match dataListComponentHTMLCodeRegionMatch in dataListComponentHTMLCodeRegionMatches)
-                        {
-                            if (customDataListComponentHTMLCodeBlocks.ContainsKey(dataListComponentHTMLCodeRegionMatch.Value.Substring(6, 38)))
-                            {
-                                dataDetailComponentHTMLTemplateContent = dataDetailComponentHTMLTemplateContent.Replace(dataListComponentHTMLCodeRegionMatch.Value, customDataListComponentHTMLCodeBlocks.GetValueOrDefault(dataListComponentHTMLCodeRegionMatch.Value.Substring(6, 38)));
-                            }
-                        }
 
                         File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\detail\\detail.component.html", dataDetailComponentHTMLTemplateContent);
                         Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\detail\\detail.component.html");
@@ -401,6 +379,35 @@ namespace CodeGenCLI
 
                         File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\detail\\detail.component.ts", dataDetailComponentTSTemplateContent);
                         Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\detail\\detail.component.ts");
+
+
+                        ////// Update
+                        if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update"))
+                        {
+                            Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update");
+                        }
+
+                        //////// HTML
+                        AngularTemplates.DataUpdateComponentHTMLTemplate dataUpdateComponentHTMLTemplate = new AngularTemplates.DataUpdateComponentHTMLTemplate(Config, codeGenModel);
+                        string dataUpdateComponentHTMLTemplateContent = dataUpdateComponentHTMLTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update\\update.component.html", dataUpdateComponentHTMLTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update\\update.component.html");
+
+                        //////// SCSS
+                        AngularTemplates.DataUpdateComponentSCSSTemplate dataUpdateComponentSCSSTemplate = new AngularTemplates.DataUpdateComponentSCSSTemplate(Config, codeGenModel);
+                        string dataUpdateComponentSCSSTemplateContent = dataUpdateComponentSCSSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update\\update.component.scss", dataUpdateComponentSCSSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update\\update.component.scss");
+
+                        //////// TS
+                        AngularTemplates.DataUpdateComponentTSTemplate dataUpdateComponentTSTemplate = new AngularTemplates.DataUpdateComponentTSTemplate(Config, codeGenModel);
+                        string dataUpdateComponentTSTemplateContent = dataUpdateComponentTSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update\\update.component.ts", dataUpdateComponentTSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\update\\update.component.ts");
+
 
                         ////// Create
                         if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create"))

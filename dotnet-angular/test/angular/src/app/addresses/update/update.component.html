@@ -1,0 +1,32 @@
+<div *ngIf="address?.id" fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="addressForm" (ngSubmit)="updateAddress()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>{{ address.street }}</h1>
+      <button (click)="deleteAddress()">Delete</button>
+      <button (click)="updateAddress()" [disabled]="addressForm.invalid">Save</button>
+      <button (click)="updateAddress(true)" [disabled]="addressForm.invalid">Save and Close</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Street</label>
+        <input formControlName="street" placeholder="Street" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Number</label>
+        <input formControlName="number" placeholder="Number" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Postal Code</label>
+        <input formControlName="postalCode" placeholder="Postal Code" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">City</label>
+        <input formControlName="city" placeholder="City" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Primary</label>
+        <input formControlName="primary" placeholder="Primary" />
+      </div>
+    </div>
+  </form>
+</div>

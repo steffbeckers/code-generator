@@ -30,9 +30,16 @@ namespace CodeGenCLI.Templates.Angular
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<div fxLayout=\"column\" fxLayoutAlign=\"start\">\r\n  <div fxLayout=\"row\" fxLayoutAlig" +
-                    "n=\"start center\" fxLayoutGap=\"20px\">\r\n    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6" +
-                    "781BD5E2D0} -->\r\n    <h1>{{ ");
+            this.Write("<div *ngIf=\"");
+            
+            #line 8 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("?.id\" fxLayout=\"column\" fxLayoutAlign=\"start\">\r\n  <div fxLayout=\"row\" fxLayoutAli" +
+                    "gn=\"start center\" fxLayoutGap=\"20px\">\r\n    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D" +
+                    "6781BD5E2D0} -->\r\n    <h1>{{ ");
             
             #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));

@@ -7,12 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 import { NotesListComponent } from '../notes/list/list.component';
 import { NoteDetailComponent } from '../notes/detail/detail.component';
 import { NoteCreateComponent } from '../notes/create/create.component';
+import { NoteUpdateComponent } from '../notes/update/update.component';
 
 @NgModule({
   declarations: [
     NotesListComponent,
     NoteDetailComponent,
     NoteCreateComponent,
+    NoteUpdateComponent,
   ],
   imports: [CommonModule, NotesRoutingModule, SharedModule]
 })

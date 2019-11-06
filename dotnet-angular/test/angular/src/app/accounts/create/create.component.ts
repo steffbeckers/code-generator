@@ -20,8 +20,8 @@ export class AccountCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public fb: FormBuilder,
-    public accountService: AccountService
+    private fb: FormBuilder,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -38,10 +38,14 @@ export class AccountCreateComponent implements OnInit {
     if (this.accountForm.invalid || this.creating) {
       return;
     }
+
+    // Already creating check
     this.creating = true;
 
     this.accountService.createAccount(this.accountForm.value).subscribe(
       (account: Account) => {
+        this.creating = false;
+
         this.router.navigateByUrl('/accounts/' + account.id);
       }
     );

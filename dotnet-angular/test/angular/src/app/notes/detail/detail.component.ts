@@ -46,9 +46,7 @@ export class NoteDetailComponent implements OnInit {
     }
 
     // Confirmation
-    // #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0}
     if (confirm('Are you sure you want to delete note: ' + this.note.title + '?')) {
-    // #-#-#
       this.noteService.deleteNote(this.note.id).subscribe(
         () => {
           this.router.navigateByUrl('/notes');

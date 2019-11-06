@@ -5,11 +5,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { TodosListComponent } from './list/list.component';
 import { TodoDetailComponent } from './detail/detail.component';
 import { TodoCreateComponent } from './create/create.component';
+import { TodoUpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: TodoCreateComponent
+  },
+  {
+    path: ':id/edit',
+    component: TodoUpdateComponent
   },
   {
     path: ':id',
