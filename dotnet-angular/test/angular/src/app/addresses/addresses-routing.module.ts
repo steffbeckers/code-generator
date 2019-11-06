@@ -3,8 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Components
 import { AddressesListComponent } from './list/list.component';
+import { AddressCreateComponent } from './create/create.component';
 
 const routes: Routes = [
+  {
+    path: 'create',
+    component: AddressCreateComponent
+  },
   {
     path: '',
     component: AddressesListComponent

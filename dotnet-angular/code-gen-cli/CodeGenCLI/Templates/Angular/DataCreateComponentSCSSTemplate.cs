@@ -20,9 +20,9 @@ namespace CodeGenCLI.Templates.Angular
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentSCSSTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class DataListComponentHTMLTemplate : DataListComponentHTMLTemplateBase
+    public partial class DataCreateComponentSCSSTemplate : DataCreateComponentSCSSTemplateBase
     {
 #line hidden
         /// <summary>
@@ -30,147 +30,6 @@ namespace CodeGenCLI.Templates.Angular
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<div fxLayout=\"column\" fxLayoutAlign=\"start\">\r\n  <div fxLayout=\"row\" fxLayoutAlig" +
-                    "n=\"start center\" fxLayoutGap=\"20px\">\r\n    <h1>");
-            
-            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
-            
-            #line default
-            #line hidden
-            this.Write("</h1>\r\n    <a routerLink=\"/");
-            
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write("/create\">Add new ");
-            
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\r\n  </div>\r\n  <div fxLayout=\"row\" fxLayoutAlign=\"start\">\r\n    <table cellspac" +
-                    "ing=\"0\" cellpadding=\"5\">\r\n      <thead>\r\n");
-            
-            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- foreach (CodeGenModelProperty property in model.Properties) { 
-            
-            #line default
-            #line hidden
-            this.Write("        <th>");
-            
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.DisplayName ?? property.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</th>\r\n");
-            
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
-            
-            #line default
-            #line hidden
-            this.Write("        <th>");
-            
-            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayName ?? relation.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</th>\r\n");
-            
-            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let ");
-            
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write(" of ");
-            
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write("\">\r\n");
-            
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- foreach (CodeGenModelProperty property in model.Properties) { 
-            
-            #line default
-            #line hidden
-            this.Write("          <td>{{ ");
-            
-            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write(".");
-            
-            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write(" }}</td>\r\n");
-            
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
-            
-            #line default
-            #line hidden
-            this.Write("          <td>{{ ");
-            
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write(".");
-            
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write(".");
-            
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayField.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write(" }}</td>\r\n");
-            
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -182,7 +41,7 @@ namespace CodeGenCLI.Templates.Angular
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class DataListComponentHTMLTemplateBase
+    public class DataCreateComponentSCSSTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -5,24 +5,31 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
-<h1><#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #></h1>
-<table cellspacing="0" cellpadding="5">
-  <thead>
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1><#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #></h1>
+    <a routerLink="/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/create">Add new <#= model.Name #></a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <table cellspacing="0" cellpadding="5">
+      <thead>
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
-    <th><#= property.DisplayName ?? property.Name #></th>
+        <th><#= property.DisplayName ?? property.Name #></th>
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-    <th><#= relation.DisplayName ?? relation.Name #></th>
+        <th><#= relation.DisplayName ?? relation.Name #></th>
 <# } #>
-  </thead>
-  <tbody>
-    <tr *ngFor="let <#= model.Name.ToCamelCase() #> of <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>">
+      </thead>
+      <tbody>
+        <tr *ngFor="let <#= model.Name.ToCamelCase() #> of <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>">
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
-      <td>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</td>
+          <td>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</td>
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-      <td>{{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}</td>
+          <td>{{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}</td>
 <# } #>
-    </tr>
-  </tbody>
-</table>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

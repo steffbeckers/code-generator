@@ -5,10 +5,12 @@ import { SharedModule } from '../shared/shared.module';
 
 // Components
 import { AccountsListComponent } from '../accounts/list/list.component';
+import { AccountCreateComponent } from '../accounts/create/create.component';
 
 @NgModule({
   declarations: [
     AccountsListComponent,
+    AccountCreateComponent,
   ],
   imports: [CommonModule, AccountsRoutingModule, SharedModule]
 })

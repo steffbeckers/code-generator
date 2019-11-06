@@ -18,6 +18,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppRoutingModuleTemplate.tt</DependentUpon>
     </None>
+    <None Include="Templates\Angular\DataCreateComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataCreateComponentSCSSTemplate.tt</DependentUpon>
+    </None>
+    <None Include="Templates\Angular\DataCreateComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataCreateComponentTSTemplate.tt</DependentUpon>
+    </None>
     <None Include="Templates\Angular\DataListComponentHTMLTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -71,6 +81,18 @@
     <None Update="Templates\Angular\AppRoutingModuleTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AppRoutingModuleTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataCreateComponentHTMLTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataCreateComponentHTMLTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataCreateComponentSCSSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataCreateComponentSCSSTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Angular\DataCreateComponentTSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataCreateComponentTSTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\Angular\DataListComponentHTMLTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -168,6 +190,21 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppRoutingModuleTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataCreateComponentHTMLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataCreateComponentHTMLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataCreateComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataCreateComponentSCSSTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataCreateComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataCreateComponentTSTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\Angular\DataListComponentHTMLTemplate.cs">
       <DesignTime>True</DesignTime>

@@ -327,7 +327,7 @@ namespace CodeGenCLI
                         ////// List
                         if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list"))
                         {
-                            Directory.CreateDirectory("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list");
+                            Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list");
                         }
 
                         //////// HTML
@@ -350,6 +350,33 @@ namespace CodeGenCLI
 
                         File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.ts", dataListComponentTSTemplateContent);
                         Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\list\\list.component.ts");
+
+                        ////// Create
+                        if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create"))
+                        {
+                            Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create");
+                        }
+
+                        //////// HTML
+                        AngularTemplates.DataCreateComponentHTMLTemplate dataCreateComponentHTMLTemplate = new AngularTemplates.DataCreateComponentHTMLTemplate(Config, codeGenModel);
+                        string dataCreateComponentHTMLTemplateContent = dataCreateComponentHTMLTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.html", dataCreateComponentHTMLTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.html");
+
+                        //////// SCSS
+                        AngularTemplates.DataCreateComponentSCSSTemplate dataCreateComponentSCSSTemplate = new AngularTemplates.DataCreateComponentSCSSTemplate(Config, codeGenModel);
+                        string dataCreateComponentSCSSTemplateContent = dataCreateComponentSCSSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.scss", dataCreateComponentSCSSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.scss");
+
+                        //////// TS
+                        AngularTemplates.DataCreateComponentTSTemplate dataCreateComponentTSTemplate = new AngularTemplates.DataCreateComponentTSTemplate(Config, codeGenModel);
+                        string dataCreateComponentTSTemplateContent = dataCreateComponentTSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.ts", dataCreateComponentTSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.ts");
                     }
 
                     // Stop

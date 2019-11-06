@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="noteForm" (ngSubmit)="createNote()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Add new Note</h1>
+      <button fxFlex="100px" mat-button color="primary" (click)="createNote()" [disabled]="noteForm.invalid">Create</button>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start">
+      <div fxFlex>
+        <input formControlName="title" placeholder="Title" required />
+      </div>
+      <div fxFlex>
+        <input formControlName="body" placeholder="Body" />
+      </div>
+    </div>
+  </form>
+</div>

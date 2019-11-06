@@ -1,21 +1,28 @@
-<h1>Addresses</h1>
-<table cellspacing="0" cellpadding="5">
-  <thead>
-    <th>Street</th>
-    <th>Number</th>
-    <th>Postal Code</th>
-    <th>City</th>
-    <th>Primary</th>
-    <th>Account</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let address of addresses">
-      <td>{{ address.street }}</td>
-      <td>{{ address.number }}</td>
-      <td>{{ address.postalCode }}</td>
-      <td>{{ address.city }}</td>
-      <td>{{ address.primary }}</td>
-      <td>{{ address.account.name }}</td>
-    </tr>
-  </tbody>
-</table>
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1>Addresses</h1>
+    <a routerLink="/addresses/create">Add new Address</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <table cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Street</th>
+        <th>Number</th>
+        <th>Postal Code</th>
+        <th>City</th>
+        <th>Primary</th>
+        <th>Account</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let address of addresses">
+          <td>{{ address.street }}</td>
+          <td>{{ address.number }}</td>
+          <td>{{ address.postalCode }}</td>
+          <td>{{ address.city }}</td>
+          <td>{{ address.primary }}</td>
+          <td>{{ address.account.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

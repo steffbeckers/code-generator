@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="accountForm" (ngSubmit)="createAccount()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Add new Account</h1>
+      <button fxFlex="100px" mat-button color="primary" (click)="createAccount()" [disabled]="accountForm.invalid">Create</button>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start">
+      <div fxFlex>
+        <input formControlName="name" placeholder="Name" required />
+      </div>
+      <div fxFlex>
+        <input formControlName="website" placeholder="Website" />
+      </div>
+      <div fxFlex>
+        <input formControlName="telephone" placeholder="Telephone" />
+      </div>
+      <div fxFlex>
+        <input formControlName="email" placeholder="Email Address" />
+      </div>
+    </div>
+  </form>
+</div>

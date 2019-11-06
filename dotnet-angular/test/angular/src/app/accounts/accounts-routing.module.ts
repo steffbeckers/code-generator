@@ -3,8 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Components
 import { AccountsListComponent } from './list/list.component';
+import { AccountCreateComponent } from './create/create.component';
 
 const routes: Routes = [
+  {
+    path: 'create',
+    component: AccountCreateComponent
+  },
   {
     path: '',
     component: AccountsListComponent

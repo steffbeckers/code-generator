@@ -38,10 +38,24 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("ListComponent } from \'./list/list.component\';\r\n\r\nconst routes: Routes = [\r\n  {\r\n " +
-                    "   path: \'\',\r\n    component: ");
+            this.Write("ListComponent } from \'./list/list.component\';\r\nimport { ");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataRoutingModuleTemplate.tt"
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("CreateComponent } from \'./create/create.component\';\r\n\r\nconst routes: Routes = [\r\n" +
+                    "  {\r\n    path: \'create\',\r\n    component: ");
+            
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("CreateComponent\r\n  },\r\n  {\r\n    path: \'\',\r\n    component: ");
+            
+            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataRoutingModuleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
@@ -50,7 +64,7 @@ namespace CodeGenCLI.Templates.Angular
                     "ule({\r\n  imports: [RouterModule.forChild(routes)],\r\n  exports: [RouterModule]\r\n}" +
                     ")\r\nexport class ");
             
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataRoutingModuleTemplate.tt"
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataRoutingModuleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
