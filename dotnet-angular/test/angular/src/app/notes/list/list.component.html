@@ -10,7 +10,7 @@
         <th>Body</th>
       </thead>
       <tbody>
-        <tr *ngFor="let note of notes">
+        <tr *ngFor="let note of notes" [routerLink]="['/notes', note.id]">
           <td>{{ note.title }}</td>
           <td>{{ note.body }}</td>
         </tr>

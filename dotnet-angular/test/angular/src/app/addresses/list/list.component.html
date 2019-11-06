@@ -14,13 +14,17 @@
         <th>Account</th>
       </thead>
       <tbody>
-        <tr *ngFor="let address of addresses">
+        <tr *ngFor="let address of addresses" [routerLink]="['/addresses', address.id]">
           <td>{{ address.street }}</td>
           <td>{{ address.number }}</td>
           <td>{{ address.postalCode }}</td>
           <td>{{ address.city }}</td>
           <td>{{ address.primary }}</td>
-          <td>{{ address.account.name }}</td>
+          <td>
+            <span *ngIf="address.account">
+              {{ address.account.name }}
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>

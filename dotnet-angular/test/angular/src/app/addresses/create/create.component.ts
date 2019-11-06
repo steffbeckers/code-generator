@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+// Models
+import { Address } from 'src/app/shared/models/Address';
+
 // Services
 import { AddressService } from 'src/app/shared/services/AddressService';
 
@@ -39,8 +42,8 @@ export class AddressCreateComponent implements OnInit {
     this.creating = true;
 
     this.addressService.createAddress(this.addressForm.value).subscribe(
-      () => {
-        this.router.navigateByUrl('/addresses');
+      (address: Address) => {
+        this.router.navigateByUrl('/addresses/' + address.id);
       }
     );
   }

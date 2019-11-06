@@ -1,0 +1,24 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
+    <h1>{{ <#= model.Name.ToCamelCase() #>.<#= model.DisplayField.ToCamelCase() #> }}</h1>
+    <!-- #-#-# -->
+    <button (click)="delete<#= model.Name #>()">Delete</button>
+    <button [routerLink]="['/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>', <#= model.Name.ToCamelCase() #>.id, 'edit']">Edit</button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+<# foreach (CodeGenModelProperty property in model.Properties) { #>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold"><#= property.DisplayName ?? property.Name #></label>
+      <span>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</span>
+    </div>
+<# } #>
+  </div>
+</div>

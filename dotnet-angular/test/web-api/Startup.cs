@@ -40,12 +40,14 @@ namespace Test.API
 			services.AddScoped<ContactRepository>();
 			services.AddScoped<AddressRepository>();
 			services.AddScoped<NoteRepository>();
+			services.AddScoped<TodoRepository>();
 
 			// BLLs
 			services.AddScoped<AccountBLL>();
 			services.AddScoped<ContactBLL>();
 			services.AddScoped<AddressBLL>();
 			services.AddScoped<NoteBLL>();
+			services.AddScoped<TodoBLL>();
 
 			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>

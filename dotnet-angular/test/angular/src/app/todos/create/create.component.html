@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="todoForm" (ngSubmit)="createTodo()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Add new Todo</h1>
+      <button (click)="createTodo()" [disabled]="todoForm.invalid">Create</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Title</label>
+        <input formControlName="title" placeholder="Title" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Due</label>
+        <input formControlName="dueDate" placeholder="Due" />
+      </div>
+    </div>
+  </form>
+</div>

@@ -9,11 +9,12 @@
   <form [formGroup]="<#= model.Name.ToCamelCase() #>Form" (ngSubmit)="create<#= model.Name #>()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <h1>Add new <#= model.Name #></h1>
-      <button fxFlex="100px" mat-button color="primary" (click)="create<#= model.Name #>()" [disabled]="<#= model.Name.ToCamelCase() #>Form.invalid">Create</button>
+      <button (click)="create<#= model.Name #>()" [disabled]="<#= model.Name.ToCamelCase() #>Form.invalid">Create</button>
     </div>
-    <div fxLayout="column" fxLayoutAlign="start">
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
-      <div fxFlex>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold"><#= property.DisplayName ?? property.Name #></label>
         <input formControlName="<#= property.Name.ToCamelCase() #>" placeholder="<#= property.DisplayName ?? property.Name #>"<# if (property.Required) { #> required<# } #> />
       </div>
 <# } #>

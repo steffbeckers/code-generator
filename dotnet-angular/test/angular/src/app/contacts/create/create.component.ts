@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+// Models
+import { Contact } from 'src/app/shared/models/Contact';
+
 // Services
 import { ContactService } from 'src/app/shared/services/ContactService';
 
@@ -39,8 +42,8 @@ export class ContactCreateComponent implements OnInit {
     this.creating = true;
 
     this.contactService.createContact(this.contactForm.value).subscribe(
-      () => {
-        this.router.navigateByUrl('/contacts');
+      (contact: Contact) => {
+        this.router.navigateByUrl('/contacts/' + contact.id);
       }
     );
   }

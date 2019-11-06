@@ -52,7 +52,7 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("</h1>\r\n      <button fxFlex=\"100px\" mat-button color=\"primary\" (click)=\"create");
+            this.Write("</h1>\r\n      <button (click)=\"create");
             
             #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
@@ -66,45 +66,53 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Form.invalid\">Create</button>\r\n    </div>\r\n    <div fxLayout=\"column\" fxLayoutAli" +
-                    "gn=\"start\">\r\n");
+            this.Write("Form.invalid\">Create</button>\r\n    </div>\r\n    <div fxLayout=\"row wrap\" fxLayoutA" +
+                    "lign=\"start\" fxLayoutGap=\"10px grid\">\r\n");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
             
             #line default
             #line hidden
-            this.Write("      <div fxFlex>\r\n        <input formControlName=\"");
-            
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write("\" placeholder=\"");
+            this.Write("      <div fxLayout=\"column\" fxLayoutAlign=\"start\" fxLayoutGap=\"5px\" fxFlex>\r\n   " +
+                    "     <label class=\"bold\">");
             
             #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.DisplayName ?? property.Name));
             
             #line default
             #line hidden
+            this.Write("</label>\r\n        <input formControlName=\"");
+            
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("\" placeholder=\"");
+            
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.DisplayName ?? property.Name));
+            
+            #line default
+            #line hidden
             this.Write("\"");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
  if (property.Required) { 
             
             #line default
             #line hidden
             this.Write(" required");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write(" />\r\n      </div>\r\n");
             
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataCreateComponentHTMLTemplate.tt"
  } 
             
             #line default

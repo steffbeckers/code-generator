@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1>Todos</h1>
+    <a routerLink="/todos/create">Add new Todo</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <table cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Title</th>
+        <th>Due</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of todos" [routerLink]="['/todos', todo.id]">
+          <td>{{ todo.title }}</td>
+          <td>{{ todo.dueDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

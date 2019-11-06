@@ -14,13 +14,17 @@
         <th>Account</th>
       </thead>
       <tbody>
-        <tr *ngFor="let contact of contacts">
+        <tr *ngFor="let contact of contacts" [routerLink]="['/contacts', contact.id]">
           <td>{{ contact.firstName }}</td>
           <td>{{ contact.lastName }}</td>
           <td>{{ contact.website }}</td>
           <td>{{ contact.telephone }}</td>
           <td>{{ contact.email }}</td>
-          <td>{{ contact.account.name }}</td>
+          <td>
+            <span *ngIf="contact.account">
+              {{ contact.account.name }}
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>

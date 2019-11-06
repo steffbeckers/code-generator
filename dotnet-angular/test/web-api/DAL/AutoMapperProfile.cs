@@ -29,6 +29,10 @@ namespace Test.API.DAL
             // Notes
 			CreateMap<Note, NoteVM>();
             CreateMap<NoteVM, Note>();
+
+            // Todos
+			CreateMap<Todo, TodoVM>();
+            CreateMap<TodoVM, Todo>();
         }
     }
 }

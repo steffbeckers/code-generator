@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+// Models
+import { Account } from 'src/app/shared/models/Account';
+
 // Services
 import { AccountService } from 'src/app/shared/services/AccountService';
 
@@ -38,8 +41,8 @@ export class AccountCreateComponent implements OnInit {
     this.creating = true;
 
     this.accountService.createAccount(this.accountForm.value).subscribe(
-      () => {
-        this.router.navigateByUrl('/accounts');
+      (account: Account) => {
+        this.router.navigateByUrl('/accounts/' + account.id);
       }
     );
   }

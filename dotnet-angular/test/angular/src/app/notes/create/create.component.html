@@ -2,13 +2,15 @@
   <form [formGroup]="noteForm" (ngSubmit)="createNote()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <h1>Add new Note</h1>
-      <button fxFlex="100px" mat-button color="primary" (click)="createNote()" [disabled]="noteForm.invalid">Create</button>
+      <button (click)="createNote()" [disabled]="noteForm.invalid">Create</button>
     </div>
-    <div fxLayout="column" fxLayoutAlign="start">
-      <div fxFlex>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Title</label>
         <input formControlName="title" placeholder="Title" required />
       </div>
-      <div fxFlex>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Body</label>
         <input formControlName="body" placeholder="Body" />
       </div>
     </div>

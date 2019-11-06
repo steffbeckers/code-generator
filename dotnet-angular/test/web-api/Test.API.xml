@@ -144,6 +144,41 @@
             Deletes an existing note record by Id.
             </summary>
         </member>
+        <member name="T:Test.API.BLL.TodoBLL">
+            <summary>
+            The business logic layer for Todos.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.#ctor(Test.API.DAL.Repositories.TodoRepository)">
+            <summary>
+            The constructor of the Todo business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.GetAllTodosAsync">
+            <summary>
+            Retrieves all todos.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.GetTodoByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one todo by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.CreateTodoAsync(Test.API.Models.Todo)">
+            <summary>
+            Creates a new todo record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.UpdateTodoAsync(System.Guid,Test.API.Models.Todo)">
+            <summary>
+            Updates an existing todo record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.TodoBLL.DeleteTodoAsync(Test.API.Models.Todo)">
+            <summary>
+            Deletes an existing todo record by Id.
+            </summary>
+        </member>
         <member name="T:Test.API.Controllers.AccountsController">
             <summary>
             The Accounts controller.
@@ -304,6 +339,46 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:Test.API.Controllers.TodosController">
+            <summary>
+            The Todos controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.TodosController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.TodosController},AutoMapper.IMapper,Test.API.BLL.TodoBLL)">
+            <summary>
+            The constructor of the Todos controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.TodosController.GetTodos">
+            <summary>
+            Retrieves all todos.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.TodosController.GetTodo(System.Guid)">
+            <summary>
+            Retrieves a specific todo.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.TodosController.CreateTodo(Test.API.ViewModels.TodoVM)">
+            <summary>
+            Creates a new todo.
+            </summary>
+            <param name="todoVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.TodosController.UpdateTodo(System.Guid,Test.API.ViewModels.TodoVM)">
+            <summary>
+            Updates a specific todo.
+            </summary>
+            <param name="id"></param>
+            <param name="todoVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.TodosController.DeleteTodo(System.Guid)">
+            <summary>
+            Deletes a specific todo.
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="T:Test.API.DAL.AutoMapperProfile">
             <summary>
             Profile for mapping models to/from view models with AutoMapper.
@@ -352,6 +427,16 @@
         <member name="M:Test.API.DAL.Repositories.NoteRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
             The constructor of the Note repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.DAL.Repositories.TodoRepository">
+            <summary>
+            The repository for Todos in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.TodoRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Todo repository.
             </summary>
         </member>
         <member name="T:Test.API.Models.Account">
@@ -564,6 +649,41 @@
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
+        <member name="T:Test.API.Models.Todo">
+            <summary>
+            Todo model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.Id">
+            <summary>
+            The identifier of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.Title">
+            <summary>
+            The Title property of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.DueDate">
+            <summary>
+            The DueDate property of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Todo.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
         <member name="T:Test.API.ViewModels.AccountVM">
             <summary>
             Account view model
@@ -712,6 +832,26 @@
         <member name="P:Test.API.ViewModels.NoteVM.Body">
             <summary>
             The Body property of Note.
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.TodoVM">
+            <summary>
+            Todo view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.Id">
+            <summary>
+            The identifier of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.Title">
+            <summary>
+            The Title property of Todo.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.TodoVM.DueDate">
+            <summary>
+            The DueDate property of Todo.
             </summary>
         </member>
     </members>

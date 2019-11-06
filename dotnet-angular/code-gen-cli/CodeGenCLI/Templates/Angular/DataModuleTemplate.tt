@@ -12,11 +12,13 @@ import { SharedModule } from '../shared/shared.module';
 
 // Components
 import { <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>ListComponent } from '../<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/list/list.component';
+import { <#= model.Name #>DetailComponent } from '../<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/detail/detail.component';
 import { <#= model.Name #>CreateComponent } from '../<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/create/create.component';
 
 @NgModule({
   declarations: [
     <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>ListComponent,
+    <#= model.Name #>DetailComponent,
     <#= model.Name #>CreateComponent,
   ],
   imports: [CommonModule, <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>RoutingModule, SharedModule]

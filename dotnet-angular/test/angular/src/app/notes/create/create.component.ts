@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+// Models
+import { Note } from 'src/app/shared/models/Note';
+
 // Services
 import { NoteService } from 'src/app/shared/services/NoteService';
 
@@ -36,8 +39,8 @@ export class NoteCreateComponent implements OnInit {
     this.creating = true;
 
     this.noteService.createNote(this.noteForm.value).subscribe(
-      () => {
-        this.router.navigateByUrl('/notes');
+      (note: Note) => {
+        this.router.navigateByUrl('/notes/' + note.id);
       }
     );
   }

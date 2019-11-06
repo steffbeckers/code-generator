@@ -5,11 +5,13 @@ import { SharedModule } from '../shared/shared.module';
 
 // Components
 import { ContactsListComponent } from '../contacts/list/list.component';
+import { ContactDetailComponent } from '../contacts/detail/detail.component';
 import { ContactCreateComponent } from '../contacts/create/create.component';
 
 @NgModule({
   declarations: [
     ContactsListComponent,
+    ContactDetailComponent,
     ContactCreateComponent,
   ],
   imports: [CommonModule, ContactsRoutingModule, SharedModule]

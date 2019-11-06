@@ -21,12 +21,16 @@
 <# } #>
       </thead>
       <tbody>
-        <tr *ngFor="let <#= model.Name.ToCamelCase() #> of <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>">
+        <tr *ngFor="let <#= model.Name.ToCamelCase() #> of <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>', <#= model.Name.ToCamelCase() #>.id]">
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
           <td>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</td>
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-          <td>{{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}</td>
+          <td>
+            <span *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>">
+              {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}
+            </span>
+          </td>
 <# } #>
         </tr>
       </tbody>

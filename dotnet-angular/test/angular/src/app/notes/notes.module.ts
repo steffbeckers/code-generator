@@ -5,11 +5,13 @@ import { SharedModule } from '../shared/shared.module';
 
 // Components
 import { NotesListComponent } from '../notes/list/list.component';
+import { NoteDetailComponent } from '../notes/detail/detail.component';
 import { NoteCreateComponent } from '../notes/create/create.component';
 
 @NgModule({
   declarations: [
     NotesListComponent,
+    NoteDetailComponent,
     NoteCreateComponent,
   ],
   imports: [CommonModule, NotesRoutingModule, SharedModule]

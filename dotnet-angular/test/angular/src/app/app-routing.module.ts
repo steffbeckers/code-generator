@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: './notes/notes.module#NotesModule',
   },
   {
+    path: 'todos',
+    loadChildren: './todos/todos.module#TodosModule',
+  },
+  {
     path: '**',
     redirectTo: '',
   }

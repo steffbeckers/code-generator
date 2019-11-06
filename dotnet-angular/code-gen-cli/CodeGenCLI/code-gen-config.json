@@ -6,6 +6,7 @@
     {
       "name": "Account",
       //"description": "Also; Company or Business", // Optional
+      "displayField": "Name",
       "properties": [
         {
           "name": "Name",
@@ -42,6 +43,7 @@
     },
     {
       "name": "Contact",
+      "displayField": "FirstName",
       "properties": [
         {
           "name": "FirstName",
@@ -82,6 +84,7 @@
     {
       "name": "Address",
       "namePlural": "Addresses",
+      "displayField": "Street",
       "properties": [
         {
           "name": "Street",
@@ -118,6 +121,7 @@
     },
     {
       "name": "Note",
+      "displayField": "Title",
       "properties": [
         {
           "name": "Title",
@@ -127,6 +131,22 @@
         {
           "name": "Body",
           "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Todo",
+      "displayField": "Title",
+      "properties": [
+        {
+          "name": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "DueDate",
+          "displayName": "Due",
+          "type": "DateTime"
         }
       ]
     }

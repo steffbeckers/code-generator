@@ -2,22 +2,27 @@
   <form [formGroup]="addressForm" (ngSubmit)="createAddress()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <h1>Add new Address</h1>
-      <button fxFlex="100px" mat-button color="primary" (click)="createAddress()" [disabled]="addressForm.invalid">Create</button>
+      <button (click)="createAddress()" [disabled]="addressForm.invalid">Create</button>
     </div>
-    <div fxLayout="column" fxLayoutAlign="start">
-      <div fxFlex>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Street</label>
         <input formControlName="street" placeholder="Street" />
       </div>
-      <div fxFlex>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Number</label>
         <input formControlName="number" placeholder="Number" />
       </div>
-      <div fxFlex>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Postal Code</label>
         <input formControlName="postalCode" placeholder="Postal Code" />
       </div>
-      <div fxFlex>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">City</label>
         <input formControlName="city" placeholder="City" />
       </div>
-      <div fxFlex>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Primary</label>
         <input formControlName="primary" placeholder="Primary" />
       </div>
     </div>

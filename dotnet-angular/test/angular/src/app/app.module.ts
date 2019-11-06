@@ -15,6 +15,7 @@ import { AccountService } from './shared/services/AccountService';
 import { ContactService } from './shared/services/ContactService';
 import { AddressService } from './shared/services/AddressService';
 import { NoteService } from './shared/services/NoteService';
+import { TodoService } from './shared/services/TodoService';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NoteService } from './shared/services/NoteService';
     ContactService,
     AddressService,
     NoteService,
+    TodoService,
   ],
   bootstrap: [AppComponent]
 })

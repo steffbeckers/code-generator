@@ -9,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+// Models
+import { <#= model.Name #> } from 'src/app/shared/models/<#= model.Name #>';
+
 // Services
 import { <#= model.Name #>Service } from 'src/app/shared/services/<#= model.Name #>Service';
 
@@ -44,8 +47,8 @@ export class <#= model.Name #>CreateComponent implements OnInit {
     this.creating = true;
 
     this.<#= model.Name.ToCamelCase() #>Service.create<#= model.Name #>(this.<#= model.Name.ToCamelCase() #>Form.value).subscribe(
-      () => {
-        this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>');
+      (<#= model.Name.ToCamelCase() #>: <#= model.Name #>) => {
+        this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>/' + <#= model.Name.ToCamelCase() #>.id);
       }
     );
   }
