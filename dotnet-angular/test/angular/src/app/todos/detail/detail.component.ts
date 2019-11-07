@@ -35,6 +35,12 @@ export class TodoDetailComponent implements OnInit {
     this.todoService.getTodo(id).subscribe(
       (todo: Todo) => {
         this.todo = todo;
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Todo could not be found.');
+          this.router.navigateByUrl('/todos');
+        }
       }
     );
   }
@@ -50,6 +56,12 @@ export class TodoDetailComponent implements OnInit {
       this.todoService.deleteTodo(this.todo.id).subscribe(
         () => {
           this.router.navigateByUrl('/todos');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Todo could not be found.');
+            this.router.navigateByUrl('/todos');
+          }
         }
       );
     }

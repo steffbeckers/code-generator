@@ -52,6 +52,12 @@ export class <#= model.Name #>UpdateComponent implements OnInit {
       (<#= model.Name.ToCamelCase() #>: <#= model.Name #>) => {
         this.<#= model.Name.ToCamelCase() #> = <#= model.Name.ToCamelCase() #>;
         this.<#= model.Name.ToCamelCase() #>Form.patchValue(this.<#= model.Name.ToCamelCase() #>);
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('<#= model.Name #> could not be found.');
+          this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>');
+        }
       }
     );
   }
@@ -73,14 +79,16 @@ export class <#= model.Name #>UpdateComponent implements OnInit {
 
     this.<#= model.Name.ToCamelCase() #>Service.update<#= model.Name #>(this.<#= model.Name.ToCamelCase() #>Form.value).subscribe(
       (<#= model.Name.ToCamelCase() #>: <#= model.Name #>) => {
-        this.updating = false;
-
         if (andClose) {
           this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>/' + <#= model.Name.ToCamelCase() #>.id);
         }
 
         this.<#= model.Name.ToCamelCase() #> = <#= model.Name.ToCamelCase() #>;
         this.<#= model.Name.ToCamelCase() #>Form.patchValue(this.<#= model.Name.ToCamelCase() #>);
+      },
+      null,
+      () => {
+        this.updating = false;
       }
     );
   }
@@ -96,6 +104,12 @@ export class <#= model.Name #>UpdateComponent implements OnInit {
       this.<#= model.Name.ToCamelCase() #>Service.delete<#= model.Name #>(this.<#= model.Name.ToCamelCase() #>.id).subscribe(
         () => {
           this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('<#= model.Name #> could not be found.');
+            this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>');
+          }
         }
       );
     }

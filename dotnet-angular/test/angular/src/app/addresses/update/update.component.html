@@ -1,7 +1,7 @@
 <div *ngIf="address?.id" fxLayout="column" fxLayoutAlign="start">
   <form [formGroup]="addressForm" (ngSubmit)="updateAddress()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <h1>{{ address.street }}</h1>
+      <h1>Address - {{ address.street }}</h1>
       <button (click)="deleteAddress()">Delete</button>
       <button (click)="updateAddress()" [disabled]="addressForm.invalid">Save</button>
       <button (click)="updateAddress(true)" [disabled]="addressForm.invalid">Save and Close</button>

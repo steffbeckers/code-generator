@@ -1,7 +1,7 @@
 <div *ngIf="note?.id" fxLayout="column" fxLayoutAlign="start">
   <form [formGroup]="noteForm" (ngSubmit)="updateNote()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <h1>{{ note.title }}</h1>
+      <h1>Note - {{ note.title }}</h1>
       <button (click)="deleteNote()">Delete</button>
       <button (click)="updateNote()" [disabled]="noteForm.invalid">Save</button>
       <button (click)="updateNote(true)" [disabled]="noteForm.invalid">Save and Close</button>

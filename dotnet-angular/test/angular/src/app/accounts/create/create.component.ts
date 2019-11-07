@@ -47,6 +47,10 @@ export class AccountCreateComponent implements OnInit {
         this.creating = false;
 
         this.router.navigateByUrl('/accounts/' + account.id);
+      },
+      null,
+      () => {
+        this.creating = false;
       }
     );
   }

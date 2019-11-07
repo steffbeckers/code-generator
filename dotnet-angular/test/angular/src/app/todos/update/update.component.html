@@ -1,7 +1,7 @@
 <div *ngIf="todo?.id" fxLayout="column" fxLayoutAlign="start">
   <form [formGroup]="todoForm" (ngSubmit)="updateTodo()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <h1>{{ todo.title }}</h1>
+      <h1>Todo - {{ todo.title }}</h1>
       <button (click)="deleteTodo()">Delete</button>
       <button (click)="updateTodo()" [disabled]="todoForm.invalid">Save</button>
       <button (click)="updateTodo(true)" [disabled]="todoForm.invalid">Save and Close</button>

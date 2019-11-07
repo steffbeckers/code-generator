@@ -35,6 +35,12 @@ export class AddressDetailComponent implements OnInit {
     this.addressService.getAddress(id).subscribe(
       (address: Address) => {
         this.address = address;
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Address could not be found.');
+          this.router.navigateByUrl('/addresses');
+        }
       }
     );
   }
@@ -50,6 +56,12 @@ export class AddressDetailComponent implements OnInit {
       this.addressService.deleteAddress(this.address.id).subscribe(
         () => {
           this.router.navigateByUrl('/addresses');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Address could not be found.');
+            this.router.navigateByUrl('/addresses');
+          }
         }
       );
     }

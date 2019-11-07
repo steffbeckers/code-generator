@@ -48,6 +48,10 @@ export class ContactCreateComponent implements OnInit {
         this.creating = false;
 
         this.router.navigateByUrl('/contacts/' + contact.id);
+      },
+      null,
+      () => {
+        this.creating = false;
       }
     );
   }

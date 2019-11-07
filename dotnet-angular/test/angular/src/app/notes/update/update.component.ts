@@ -44,6 +44,12 @@ export class NoteUpdateComponent implements OnInit {
       (note: Note) => {
         this.note = note;
         this.noteForm.patchValue(this.note);
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Note could not be found.');
+          this.router.navigateByUrl('/notes');
+        }
       }
     );
   }
@@ -65,14 +71,16 @@ export class NoteUpdateComponent implements OnInit {
 
     this.noteService.updateNote(this.noteForm.value).subscribe(
       (note: Note) => {
-        this.updating = false;
-
         if (andClose) {
           this.router.navigateByUrl('/notes/' + note.id);
         }
 
         this.note = note;
         this.noteForm.patchValue(this.note);
+      },
+      null,
+      () => {
+        this.updating = false;
       }
     );
   }
@@ -88,6 +96,12 @@ export class NoteUpdateComponent implements OnInit {
       this.noteService.deleteNote(this.note.id).subscribe(
         () => {
           this.router.navigateByUrl('/notes');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Note could not be found.');
+            this.router.navigateByUrl('/notes');
+          }
         }
       );
     }

@@ -35,6 +35,12 @@ export class NoteDetailComponent implements OnInit {
     this.noteService.getNote(id).subscribe(
       (note: Note) => {
         this.note = note;
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Note could not be found.');
+          this.router.navigateByUrl('/notes');
+        }
       }
     );
   }
@@ -50,6 +56,12 @@ export class NoteDetailComponent implements OnInit {
       this.noteService.deleteNote(this.note.id).subscribe(
         () => {
           this.router.navigateByUrl('/notes');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Note could not be found.');
+            this.router.navigateByUrl('/notes');
+          }
         }
       );
     }

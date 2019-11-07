@@ -44,6 +44,12 @@ export class TodoUpdateComponent implements OnInit {
       (todo: Todo) => {
         this.todo = todo;
         this.todoForm.patchValue(this.todo);
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Todo could not be found.');
+          this.router.navigateByUrl('/todos');
+        }
       }
     );
   }
@@ -65,14 +71,16 @@ export class TodoUpdateComponent implements OnInit {
 
     this.todoService.updateTodo(this.todoForm.value).subscribe(
       (todo: Todo) => {
-        this.updating = false;
-
         if (andClose) {
           this.router.navigateByUrl('/todos/' + todo.id);
         }
 
         this.todo = todo;
         this.todoForm.patchValue(this.todo);
+      },
+      null,
+      () => {
+        this.updating = false;
       }
     );
   }
@@ -88,6 +96,12 @@ export class TodoUpdateComponent implements OnInit {
       this.todoService.deleteTodo(this.todo.id).subscribe(
         () => {
           this.router.navigateByUrl('/todos');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Todo could not be found.');
+            this.router.navigateByUrl('/todos');
+          }
         }
       );
     }

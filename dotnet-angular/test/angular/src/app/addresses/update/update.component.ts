@@ -47,6 +47,12 @@ export class AddressUpdateComponent implements OnInit {
       (address: Address) => {
         this.address = address;
         this.addressForm.patchValue(this.address);
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Address could not be found.');
+          this.router.navigateByUrl('/addresses');
+        }
       }
     );
   }
@@ -68,14 +74,16 @@ export class AddressUpdateComponent implements OnInit {
 
     this.addressService.updateAddress(this.addressForm.value).subscribe(
       (address: Address) => {
-        this.updating = false;
-
         if (andClose) {
           this.router.navigateByUrl('/addresses/' + address.id);
         }
 
         this.address = address;
         this.addressForm.patchValue(this.address);
+      },
+      null,
+      () => {
+        this.updating = false;
       }
     );
   }
@@ -91,6 +99,12 @@ export class AddressUpdateComponent implements OnInit {
       this.addressService.deleteAddress(this.address.id).subscribe(
         () => {
           this.router.navigateByUrl('/addresses');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Address could not be found.');
+            this.router.navigateByUrl('/addresses');
+          }
         }
       );
     }

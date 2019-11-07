@@ -45,6 +45,10 @@ export class TodoCreateComponent implements OnInit {
         this.creating = false;
 
         this.router.navigateByUrl('/todos/' + todo.id);
+      },
+      null,
+      () => {
+        this.creating = false;
       }
     );
   }

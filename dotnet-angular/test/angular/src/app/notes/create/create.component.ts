@@ -45,6 +45,10 @@ export class NoteCreateComponent implements OnInit {
         this.creating = false;
 
         this.router.navigateByUrl('/notes/' + note.id);
+      },
+      null,
+      () => {
+        this.creating = false;
       }
     );
   }

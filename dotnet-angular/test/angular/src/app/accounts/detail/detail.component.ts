@@ -35,6 +35,12 @@ export class AccountDetailComponent implements OnInit {
     this.accountService.getAccount(id).subscribe(
       (account: Account) => {
         this.account = account;
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Account could not be found.');
+          this.router.navigateByUrl('/accounts');
+        }
       }
     );
   }
@@ -50,6 +56,12 @@ export class AccountDetailComponent implements OnInit {
       this.accountService.deleteAccount(this.account.id).subscribe(
         () => {
           this.router.navigateByUrl('/accounts');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Account could not be found.');
+            this.router.navigateByUrl('/accounts');
+          }
         }
       );
     }

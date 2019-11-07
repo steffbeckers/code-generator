@@ -53,6 +53,10 @@ export class <#= model.Name #>CreateComponent implements OnInit {
         this.creating = false;
 
         this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>/' + <#= model.Name.ToCamelCase() #>.id);
+      },
+      null,
+      () => {
+        this.creating = false;
       }
     );
   }

@@ -210,7 +210,8 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(".id);\r\n      }\r\n    );\r\n  }\r\n}\r\n");
+            this.Write(".id);\r\n      },\r\n      null,\r\n      () => {\r\n        this.creating = false;\r\n    " +
+                    "  }\r\n    );\r\n  }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -35,6 +35,12 @@ export class ContactDetailComponent implements OnInit {
     this.contactService.getContact(id).subscribe(
       (contact: Contact) => {
         this.contact = contact;
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Contact could not be found.');
+          this.router.navigateByUrl('/contacts');
+        }
       }
     );
   }
@@ -50,6 +56,12 @@ export class ContactDetailComponent implements OnInit {
       this.contactService.deleteContact(this.contact.id).subscribe(
         () => {
           this.router.navigateByUrl('/contacts');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Contact could not be found.');
+            this.router.navigateByUrl('/contacts');
+          }
         }
       );
     }

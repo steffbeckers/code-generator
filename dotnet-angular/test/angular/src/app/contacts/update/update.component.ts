@@ -47,6 +47,12 @@ export class ContactUpdateComponent implements OnInit {
       (contact: Contact) => {
         this.contact = contact;
         this.contactForm.patchValue(this.contact);
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Contact could not be found.');
+          this.router.navigateByUrl('/contacts');
+        }
       }
     );
   }
@@ -68,14 +74,16 @@ export class ContactUpdateComponent implements OnInit {
 
     this.contactService.updateContact(this.contactForm.value).subscribe(
       (contact: Contact) => {
-        this.updating = false;
-
         if (andClose) {
           this.router.navigateByUrl('/contacts/' + contact.id);
         }
 
         this.contact = contact;
         this.contactForm.patchValue(this.contact);
+      },
+      null,
+      () => {
+        this.updating = false;
       }
     );
   }
@@ -91,6 +99,12 @@ export class ContactUpdateComponent implements OnInit {
       this.contactService.deleteContact(this.contact.id).subscribe(
         () => {
           this.router.navigateByUrl('/contacts');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Contact could not be found.');
+            this.router.navigateByUrl('/contacts');
+          }
         }
       );
     }

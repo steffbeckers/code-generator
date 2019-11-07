@@ -52,7 +52,14 @@ namespace CodeGenCLI.Templates.Angular
             #line default
             #line hidden
             this.Write("()\" novalidate>\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"start center\" fxLayoutGap" +
-                    "=\"20px\">\r\n      <h1>{{ ");
+                    "=\"20px\">\r\n      <h1>");
+            
+            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" - {{ ");
             
             #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));

@@ -46,6 +46,12 @@ export class AccountUpdateComponent implements OnInit {
       (account: Account) => {
         this.account = account;
         this.accountForm.patchValue(this.account);
+      },
+      (error: any) => {
+        if (error.status === 404) {
+          alert('Account could not be found.');
+          this.router.navigateByUrl('/accounts');
+        }
       }
     );
   }
@@ -67,14 +73,16 @@ export class AccountUpdateComponent implements OnInit {
 
     this.accountService.updateAccount(this.accountForm.value).subscribe(
       (account: Account) => {
-        this.updating = false;
-
         if (andClose) {
           this.router.navigateByUrl('/accounts/' + account.id);
         }
 
         this.account = account;
         this.accountForm.patchValue(this.account);
+      },
+      null,
+      () => {
+        this.updating = false;
       }
     );
   }
@@ -90,6 +98,12 @@ export class AccountUpdateComponent implements OnInit {
       this.accountService.deleteAccount(this.account.id).subscribe(
         () => {
           this.router.navigateByUrl('/accounts');
+        },
+        (error: any) => {
+          if (error.status === 404) {
+            alert('Account could not be found.');
+            this.router.navigateByUrl('/accounts');
+          }
         }
       );
     }

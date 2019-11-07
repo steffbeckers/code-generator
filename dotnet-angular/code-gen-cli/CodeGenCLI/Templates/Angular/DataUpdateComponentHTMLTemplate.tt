@@ -8,7 +8,7 @@
 <div *ngIf="<#= model.Name.ToCamelCase() #>?.id" fxLayout="column" fxLayoutAlign="start">
   <form [formGroup]="<#= model.Name.ToCamelCase() #>Form" (ngSubmit)="update<#= model.Name #>()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <h1>{{ <#= model.Name.ToCamelCase() #>.<#= model.DisplayField.ToCamelCase() #> }}</h1>
+      <h1><#= model.Name #> - {{ <#= model.Name.ToCamelCase() #>.<#= model.DisplayField.ToCamelCase() #> }}</h1>
       <button (click)="delete<#= model.Name #>()">Delete</button>
       <button (click)="update<#= model.Name #>()" [disabled]="<#= model.Name.ToCamelCase() #>Form.invalid">Save</button>
       <button (click)="update<#= model.Name #>(true)" [disabled]="<#= model.Name.ToCamelCase() #>Form.invalid">Save and Close</button>

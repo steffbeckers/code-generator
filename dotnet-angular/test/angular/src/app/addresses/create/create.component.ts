@@ -48,6 +48,10 @@ export class AddressCreateComponent implements OnInit {
         this.creating = false;
 
         this.router.navigateByUrl('/addresses/' + address.id);
+      },
+      null,
+      () => {
+        this.creating = false;
       }
     );
   }

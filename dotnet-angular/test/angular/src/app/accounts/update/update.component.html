@@ -1,7 +1,7 @@
 <div *ngIf="account?.id" fxLayout="column" fxLayoutAlign="start">
   <form [formGroup]="accountForm" (ngSubmit)="updateAccount()" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <h1>{{ account.name }}</h1>
+      <h1>Account - {{ account.name }}</h1>
       <button (click)="deleteAccount()">Delete</button>
       <button (click)="updateAccount()" [disabled]="accountForm.invalid">Save</button>
       <button (click)="updateAccount(true)" [disabled]="accountForm.invalid">Save and Close</button>
