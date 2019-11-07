@@ -122,6 +122,7 @@ namespace Test.API.Controllers
             contact.Website = contactUpdate.Website;
             contact.Telephone = contactUpdate.Telephone;
             contact.Email = contactUpdate.Email;
+            contact.AccountId = contactUpdate.AccountId;
 			
             contact = await this.bll.UpdateContactAsync(id, contact);
 

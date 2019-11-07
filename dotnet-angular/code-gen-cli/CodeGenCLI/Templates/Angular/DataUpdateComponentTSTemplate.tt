@@ -42,6 +42,9 @@ export class <#= model.Name #>UpdateComponent implements OnInit {
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
       <#= property.Name.ToCamelCase() #>: [''<# if (property.Required) { #>, Validators.required<# } #>],
 <# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations) { #>
+      <#= relation.Name.ToCamelCase() #>Id: [''<# if (relation.Required) { #>, Validators.required<# } #>],
+<# } #>
     });
 
     // Get id from params

@@ -27,5 +27,11 @@
       <label class="bold">Email</label>
       <span>{{ contact.email }}</span>
     </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Account</label>
+        <span *ngIf="contact.account">
+          {{ contact.account.name }}
+        </span>
+      </div>
   </div>
 </div>

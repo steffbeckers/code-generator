@@ -159,6 +159,55 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
+            
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
+            
+            #line default
+            #line hidden
+            this.Write("      <div fxLayout=\"column\" fxLayoutAlign=\"start\" fxLayoutGap=\"5px\" fxFlex>\r\n   " +
+                    "     <label class=\"bold\">");
+            
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayName ?? relation.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" ID</label>\r\n        <input formControlName=\"");
+            
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Id\" placeholder=\"");
+            
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayName ?? relation.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" ID\"");
+            
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+ if (relation.Required) { 
+            
+            #line default
+            #line hidden
+            this.Write(" required");
+            
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write(" />\r\n      </div>\r\n");
+            
+            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
             this.Write("    </div>\r\n  </form>\r\n</div>\r\n");
             return this.GenerationEnvironment.ToString();
         }

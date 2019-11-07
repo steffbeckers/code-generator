@@ -66,6 +66,13 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
+            this.Write(" && ");
+            
+            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
+            
+            #line default
+            #line hidden
             this.Write(".length === 0\">No ");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
@@ -74,6 +81,13 @@ namespace CodeGenCLI.Templates.Angular
             #line default
             #line hidden
             this.Write(" added yet.</p>\r\n    <table *ngIf=\"");
+            
+            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(" && ");
             
             #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));

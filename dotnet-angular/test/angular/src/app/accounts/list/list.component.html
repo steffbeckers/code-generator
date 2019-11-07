@@ -5,8 +5,8 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
     <p *ngIf="!accounts">Loading...</p>
-    <p *ngIf="accounts.length === 0">No accounts added yet.</p>
-    <table *ngIf="accounts.length > 0" cellspacing="0" cellpadding="5">
+    <p *ngIf="accounts && accounts.length === 0">No accounts added yet.</p>
+    <table *ngIf="accounts && accounts.length > 0" cellspacing="0" cellpadding="5">
       <thead>
         <th>Name</th>
         <th>Website</th>

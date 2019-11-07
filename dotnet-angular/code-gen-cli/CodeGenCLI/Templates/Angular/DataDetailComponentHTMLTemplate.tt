@@ -20,5 +20,13 @@
       <span>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</span>
     </div>
 <# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold"><#= relation.DisplayName ?? relation.Name #></label>
+        <span *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>">
+          {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}
+        </span>
+      </div>
+<# } #>
   </div>
 </div>

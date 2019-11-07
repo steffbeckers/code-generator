@@ -37,6 +37,7 @@ export class AddressUpdateComponent implements OnInit {
       postalCode: [''],
       city: [''],
       primary: [''],
+      accountId: [''],
     });
 
     // Get id from params

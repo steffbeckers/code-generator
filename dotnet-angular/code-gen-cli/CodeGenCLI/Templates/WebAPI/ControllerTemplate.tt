@@ -105,32 +105,35 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// <param name="id"></param>
 		/// <param name="<#= model.Name.ToLower() #>VM"></param>
         [HttpPut("{id}")]
-        public async Task<ActionResult<<#= model.Name #>VM>> Update<#= model.Name #>([FromRoute] Guid id, [FromBody] <#= model.Name #>VM <#= model.Name.ToLower() #>VM)
+        public async Task<ActionResult<<#= model.Name #>VM>> Update<#= model.Name #>([FromRoute] Guid id, [FromBody] <#= model.Name #>VM <#= model.Name.ToCamelCase() #>VM)
         {
 			// Validation
-            if (!ModelState.IsValid || id != <#= model.Name.ToLower() #>VM.Id)
+            if (!ModelState.IsValid || id != <#= model.Name.ToCamelCase() #>VM.Id)
             {
                 return BadRequest(ModelState);
             }
 
             // Retrieve existing <#= model.Name.ToLower() #>
-            <#= model.Name #> <#= model.Name.ToLower() #> = await this.bll.Get<#= model.Name #>ByIdAsync(id);
-            if (<#= model.Name.ToLower() #> == null)
+            <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.bll.Get<#= model.Name #>ByIdAsync(id);
+            if (<#= model.Name.ToCamelCase() #> == null)
             {
                 return NotFound();
             }
 
 			// Mapping
-            <#= model.Name #> <#= model.Name.ToLower() #>Update = this.mapper.Map<<#= model.Name #>VM, <#= model.Name #>>(<#= model.Name.ToLower() #>VM);
+            <#= model.Name #> <#= model.Name.ToCamelCase() #>Update = this.mapper.Map<<#= model.Name #>VM, <#= model.Name #>>(<#= model.Name.ToCamelCase() #>VM);
 
 			// Update fields
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
-            <#= model.Name.ToLower() #>.<#= property.Name #> = <#= model.Name.ToLower() #>Update.<#= property.Name #>;
+            <#= model.Name.ToCamelCase() #>.<#= property.Name #> = <#= model.Name.ToCamelCase() #>Update.<#= property.Name #>;
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+            <#= model.Name.ToCamelCase() #>.<#= relation.Name #>Id = <#= model.Name.ToCamelCase() #>Update.<#= relation.Name #>Id;
 <# } #>
 			
-            <#= model.Name.ToLower() #> = await this.bll.Update<#= model.Name #>Async(id, <#= model.Name.ToLower() #>);
+            <#= model.Name.ToCamelCase() #> = await this.bll.Update<#= model.Name #>Async(id, <#= model.Name.ToLower() #>);
 
-			return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>);
+			return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
         }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>

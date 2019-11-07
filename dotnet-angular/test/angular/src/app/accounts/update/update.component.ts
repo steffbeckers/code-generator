@@ -36,6 +36,8 @@ export class AccountUpdateComponent implements OnInit {
       website: [''],
       telephone: [''],
       email: [''],
+      addressesId: [''],
+      contactsId: [''],
     });
 
     // Get id from params

@@ -27,5 +27,11 @@
       <label class="bold">Primary</label>
       <span>{{ address.primary }}</span>
     </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Account</label>
+        <span *ngIf="address.account">
+          {{ address.account.name }}
+        </span>
+      </div>
   </div>
 </div>

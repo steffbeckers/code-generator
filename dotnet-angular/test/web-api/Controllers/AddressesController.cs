@@ -122,6 +122,7 @@ namespace Test.API.Controllers
             address.PostalCode = addressUpdate.PostalCode;
             address.City = addressUpdate.City;
             address.Primary = addressUpdate.Primary;
+            address.AccountId = addressUpdate.AccountId;
 			
             address = await this.bll.UpdateAddressAsync(id, address);
 

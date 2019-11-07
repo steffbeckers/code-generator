@@ -118,6 +118,62 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
+            
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
+            
+            #line default
+            #line hidden
+            this.Write("      <div fxLayout=\"column\" fxLayoutAlign=\"start\" fxLayoutGap=\"5px\" fxFlex>\r\n   " +
+                    "     <label class=\"bold\">");
+            
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayName ?? relation.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</label>\r\n        <span *ngIf=\"");
+            
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("\">\r\n          {{ ");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayField.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(" }}\r\n        </span>\r\n      </div>\r\n");
+            
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
             this.Write("  </div>\r\n</div>\r\n");
             return this.GenerationEnvironment.ToString();
         }
