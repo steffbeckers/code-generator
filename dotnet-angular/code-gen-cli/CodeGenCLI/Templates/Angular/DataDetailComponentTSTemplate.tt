@@ -28,7 +28,7 @@ export class <#= model.Name #>DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private <#= model.Name.ToCamelCase() #>Service: <#= model.Name #>Service
   ) {
-    this.<#= model.Name.ToCamelCase() #> = new <#= model.Name #>();
+    this.<#= model.Name.ToCamelCase() #> = null;
   }
 
   ngOnInit(): void {

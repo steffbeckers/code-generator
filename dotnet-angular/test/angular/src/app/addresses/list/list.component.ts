@@ -15,7 +15,7 @@ export class AddressesListComponent implements OnInit {
   public addresses: Address[];
 
   constructor(private addressService: AddressService) {
-    this.addresses = [];
+    this.addresses = null;
   }
 
   ngOnInit(): void {

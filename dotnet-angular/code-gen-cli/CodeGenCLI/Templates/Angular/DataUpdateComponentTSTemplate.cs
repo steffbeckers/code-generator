@@ -103,9 +103,9 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Form: FormGroup;\r\n  public updating = false;\r\n\r\n  constructor(\r\n    private route" +
-                    "r: Router,\r\n    private route: ActivatedRoute,\r\n    private fb: FormBuilder,\r\n  " +
-                    "  private ");
+            this.Write("Form: FormGroup;\r\n  public updating: boolean;\r\n\r\n  constructor(\r\n    private rout" +
+                    "er: Router,\r\n    private route: ActivatedRoute,\r\n    private fb: FormBuilder,\r\n " +
+                    "   private ");
             
             #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
@@ -119,115 +119,122 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Service\r\n  ) {}\r\n\r\n  ngOnInit(): void {\r\n    // Get id from params\r\n    this.rout" +
-                    "e.params.subscribe((routeParams) => {\r\n      this.get");
+            this.Write("Service\r\n  ) {\r\n    this.");
             
-            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write("(routeParams.id);\r\n    });\r\n\r\n    this.");
+            this.Write(" = null;\r\n    this.updating = false;\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.");
             
-            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Form = this.fb.group({\r\n      id: [\'\', Validators.required],\r\n");
             
-            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
             
             #line default
             #line hidden
             this.Write("      ");
             
-            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(": [\'\'");
             
-            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
  if (property.Required) { 
             
             #line default
             #line hidden
             this.Write(", Validators.required");
             
-            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("],\r\n");
             
-            #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("    });\r\n  }\r\n\r\n  private get");
+            this.Write("    });\r\n\r\n    // Get id from params\r\n    this.route.params.subscribe((routeParam" +
+                    "s) => {\r\n      this.get");
             
-            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("(routeParams.id);\r\n    });\r\n  }\r\n\r\n  private get");
+            
+            #line 53 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(id: string): void {\r\n    this.");
             
-            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Service.get");
             
-            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(id).subscribe(\r\n      (");
             
-            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(": ");
             
-            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(") => {\r\n        this.");
             
-            #line 53 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 53 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(";\r\n        this.");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Form.patchValue(this.");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
@@ -235,28 +242,28 @@ namespace CodeGenCLI.Templates.Angular
             this.Write(");\r\n      },\r\n      (error: any) => {\r\n        if (error.status === 404) {\r\n     " +
                     "     alert(\'");
             
-            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" could not be found.\');\r\n          this.router.navigateByUrl(\'/");
             
-            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 62 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
             this.Write("\');\r\n        }\r\n      }\r\n    );\r\n  }\r\n\r\n  public update");
             
-            #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 68 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(andClose: boolean = false): void {\r\n    // Validate\r\n    if (this.");
             
-            #line 67 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
@@ -264,21 +271,21 @@ namespace CodeGenCLI.Templates.Angular
             this.Write("Form.invalid || this.updating) {\r\n      return;\r\n    }\r\n\r\n    // Only close when " +
                     "nothing changed\r\n    if (this.");
             
-            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 75 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Form.pristine && andClose) {\r\n      this.router.navigateByUrl(\'/");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
             this.Write("/\' + this.");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
@@ -286,77 +293,77 @@ namespace CodeGenCLI.Templates.Angular
             this.Write(".id);\r\n      return;\r\n    }\r\n\r\n    // Already updating check\r\n    this.updating =" +
                     " true;\r\n\r\n    this.");
             
-            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 83 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Service.update");
             
-            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 83 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(this.");
             
-            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 83 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Form.value).subscribe(\r\n      (");
             
-            #line 81 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(": ");
             
-            #line 81 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 84 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(") => {\r\n        if (andClose) {\r\n          this.router.navigateByUrl(\'/");
             
-            #line 83 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 86 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
             #line hidden
             this.Write("/\' + ");
             
-            #line 83 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 86 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".id);\r\n        }\r\n\r\n        this.");
             
-            #line 86 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 86 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 89 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(";\r\n        this.");
             
-            #line 87 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 90 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Form.patchValue(this.");
             
-            #line 87 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 90 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
@@ -364,21 +371,21 @@ namespace CodeGenCLI.Templates.Angular
             this.Write(");\r\n      },\r\n      null,\r\n      () => {\r\n        this.updating = false;\r\n      }" +
                     "\r\n    );\r\n  }\r\n\r\n  public delete");
             
-            #line 96 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 99 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(): void {\r\n    // Validate\r\n    if (!this.");
             
-            #line 98 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 101 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" && !this.");
             
-            #line 98 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 101 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
@@ -386,49 +393,49 @@ namespace CodeGenCLI.Templates.Angular
             this.Write(".id) {\r\n      return;\r\n    }\r\n\r\n    // Confirmation\r\n    if (confirm(\'Are you sur" +
                     "e you want to delete ");
             
-            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(": \' + this.");
             
-            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.DisplayField.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" + \'?\')) {\r\n      this.");
             
-            #line 104 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Service.delete");
             
-            #line 104 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("(this.");
             
-            #line 104 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".id).subscribe(\r\n        () => {\r\n          this.router.navigateByUrl(\'/");
             
-            #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default
@@ -436,14 +443,14 @@ namespace CodeGenCLI.Templates.Angular
             this.Write("\');\r\n        },\r\n        (error: any) => {\r\n          if (error.status === 404) {" +
                     "\r\n            alert(\'");
             
-            #line 110 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 113 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(" could not be found.\');\r\n            this.router.navigateByUrl(\'/");
             
-            #line 111 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
+            #line 114 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower()));
             
             #line default

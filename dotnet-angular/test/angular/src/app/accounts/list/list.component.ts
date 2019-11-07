@@ -15,7 +15,7 @@ export class AccountsListComponent implements OnInit {
   public accounts: Account[];
 
   constructor(private accountService: AccountService) {
-    this.accounts = [];
+    this.accounts = null;
   }
 
   ngOnInit(): void {

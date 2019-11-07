@@ -21,7 +21,7 @@ export class AccountDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private accountService: AccountService
   ) {
-    this.account = new Account();
+    this.account = null;
   }
 
   ngOnInit(): void {

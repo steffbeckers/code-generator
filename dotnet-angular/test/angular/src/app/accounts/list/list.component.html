@@ -4,7 +4,9 @@
     <a routerLink="/accounts/create">Add new Account</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
-    <table cellspacing="0" cellpadding="5">
+    <p *ngIf="!accounts">Loading...</p>
+    <p *ngIf="accounts.length === 0">No accounts added yet.</p>
+    <table *ngIf="accounts.length > 0" cellspacing="0" cellpadding="5">
       <thead>
         <th>Name</th>
         <th>Website</th>

@@ -11,7 +11,9 @@
     <a routerLink="/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/create">Add new <#= model.Name #></a>
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
-    <table cellspacing="0" cellpadding="5">
+    <p *ngIf="!<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>">Loading...</p>
+    <p *ngIf="<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>.length === 0">No <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #> added yet.</p>
+    <table *ngIf="<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>.length > 0" cellspacing="0" cellpadding="5">
       <thead>
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
         <th><#= property.DisplayName ?? property.Name #></th>

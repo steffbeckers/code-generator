@@ -16,13 +16,15 @@ import { TodoService } from 'src/app/shared/services/TodoService';
 export class TodoCreateComponent implements OnInit {
   // Todo
   public todoForm: FormGroup;
-  public creating = false;
+  public creating: boolean;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private todoService: TodoService
-  ) {}
+  ) {
+    this.creating = false;
+  }
 
   ngOnInit(): void {
     this.todoForm = this.fb.group({

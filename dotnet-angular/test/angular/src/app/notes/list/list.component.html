@@ -4,7 +4,9 @@
     <a routerLink="/notes/create">Add new Note</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
-    <table cellspacing="0" cellpadding="5">
+    <p *ngIf="!notes">Loading...</p>
+    <p *ngIf="notes.length === 0">No notes added yet.</p>
+    <table *ngIf="notes.length > 0" cellspacing="0" cellpadding="5">
       <thead>
         <th>Title</th>
         <th>Body</th>

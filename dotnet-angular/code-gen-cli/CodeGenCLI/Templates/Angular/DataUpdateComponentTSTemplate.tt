@@ -24,26 +24,29 @@ export class <#= model.Name #>UpdateComponent implements OnInit {
   // <#= model.Name #>
   public <#= model.Name.ToCamelCase() #>: <#= model.Name #>;
   public <#= model.Name.ToCamelCase() #>Form: FormGroup;
-  public updating = false;
+  public updating: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private <#= model.Name.ToCamelCase() #>Service: <#= model.Name #>Service
-  ) {}
+  ) {
+    this.<#= model.Name.ToCamelCase() #> = null;
+    this.updating = false;
+  }
 
   ngOnInit(): void {
-    // Get id from params
-    this.route.params.subscribe((routeParams) => {
-      this.get<#= model.Name #>(routeParams.id);
-    });
-
     this.<#= model.Name.ToCamelCase() #>Form = this.fb.group({
       id: ['', Validators.required],
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
       <#= property.Name.ToCamelCase() #>: [''<# if (property.Required) { #>, Validators.required<# } #>],
 <# } #>
+    });
+
+    // Get id from params
+    this.route.params.subscribe((routeParams) => {
+      this.get<#= model.Name #>(routeParams.id);
     });
   }
 

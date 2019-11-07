@@ -17,25 +17,28 @@ export class NoteUpdateComponent implements OnInit {
   // Note
   public note: Note;
   public noteForm: FormGroup;
-  public updating = false;
+  public updating: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private noteService: NoteService
-  ) {}
+  ) {
+    this.note = null;
+    this.updating = false;
+  }
 
   ngOnInit(): void {
-    // Get id from params
-    this.route.params.subscribe((routeParams) => {
-      this.getNote(routeParams.id);
-    });
-
     this.noteForm = this.fb.group({
       id: ['', Validators.required],
       title: ['', Validators.required],
       body: [''],
+    });
+
+    // Get id from params
+    this.route.params.subscribe((routeParams) => {
+      this.getNote(routeParams.id);
     });
   }
 

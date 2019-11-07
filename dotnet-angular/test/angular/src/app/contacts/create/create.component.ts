@@ -16,13 +16,15 @@ import { ContactService } from 'src/app/shared/services/ContactService';
 export class ContactCreateComponent implements OnInit {
   // Contact
   public contactForm: FormGroup;
-  public creating = false;
+  public creating: boolean;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private contactService: ContactService
-  ) {}
+  ) {
+    this.creating = false;
+  }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({

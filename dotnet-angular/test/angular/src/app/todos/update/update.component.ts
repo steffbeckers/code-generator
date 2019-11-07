@@ -17,25 +17,28 @@ export class TodoUpdateComponent implements OnInit {
   // Todo
   public todo: Todo;
   public todoForm: FormGroup;
-  public updating = false;
+  public updating: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private todoService: TodoService
-  ) {}
+  ) {
+    this.todo = null;
+    this.updating = false;
+  }
 
   ngOnInit(): void {
-    // Get id from params
-    this.route.params.subscribe((routeParams) => {
-      this.getTodo(routeParams.id);
-    });
-
     this.todoForm = this.fb.group({
       id: ['', Validators.required],
       title: ['', Validators.required],
       dueDate: [''],
+    });
+
+    // Get id from params
+    this.route.params.subscribe((routeParams) => {
+      this.getTodo(routeParams.id);
     });
   }
 

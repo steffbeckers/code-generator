@@ -23,13 +23,15 @@ import { <#= model.Name #>Service } from 'src/app/shared/services/<#= model.Name
 export class <#= model.Name #>CreateComponent implements OnInit {
   // <#= model.Name #>
   public <#= model.Name.ToCamelCase() #>Form: FormGroup;
-  public creating = false;
+  public creating: boolean;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private <#= model.Name.ToCamelCase() #>Service: <#= model.Name #>Service
-  ) {}
+  ) {
+    this.creating = false;
+  }
 
   ngOnInit(): void {
     this.<#= model.Name.ToCamelCase() #>Form = this.fb.group({

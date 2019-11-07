@@ -108,7 +108,7 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(" = [];\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.get");
+            this.Write(" = null;\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.get");
             
             #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));

@@ -21,7 +21,7 @@ export class ContactDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private contactService: ContactService
   ) {
-    this.contact = new Contact();
+    this.contact = null;
   }
 
   ngOnInit(): void {

@@ -16,13 +16,15 @@ import { AccountService } from 'src/app/shared/services/AccountService';
 export class AccountCreateComponent implements OnInit {
   // Account
   public accountForm: FormGroup;
-  public creating = false;
+  public creating: boolean;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private accountService: AccountService
-  ) {}
+  ) {
+    this.creating = false;
+  }
 
   ngOnInit(): void {
     this.accountForm = this.fb.group({

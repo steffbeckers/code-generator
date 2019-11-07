@@ -21,7 +21,7 @@ export class AddressDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private addressService: AddressService
   ) {
-    this.address = new Address();
+    this.address = null;
   }
 
   ngOnInit(): void {

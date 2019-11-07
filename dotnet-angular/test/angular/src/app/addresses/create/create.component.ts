@@ -16,13 +16,15 @@ import { AddressService } from 'src/app/shared/services/AddressService';
 export class AddressCreateComponent implements OnInit {
   // Address
   public addressForm: FormGroup;
-  public creating = false;
+  public creating: boolean;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private addressService: AddressService
-  ) {}
+  ) {
+    this.creating = false;
+  }
 
   ngOnInit(): void {
     this.addressForm = this.fb.group({

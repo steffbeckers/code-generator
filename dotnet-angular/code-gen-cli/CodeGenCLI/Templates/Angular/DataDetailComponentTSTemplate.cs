@@ -117,15 +117,8 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(" = new ");
-            
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentTSTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("();\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    // Get id from params\r\n    this.route.param" +
-                    "s.subscribe((routeParams) => {\r\n      this.get");
+            this.Write(" = null;\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    // Get id from params\r\n    this.route." +
+                    "params.subscribe((routeParams) => {\r\n      this.get");
             
             #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));

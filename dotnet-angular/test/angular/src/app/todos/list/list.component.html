@@ -4,7 +4,9 @@
     <a routerLink="/todos/create">Add new Todo</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
-    <table cellspacing="0" cellpadding="5">
+    <p *ngIf="!todos">Loading...</p>
+    <p *ngIf="todos.length === 0">No todos added yet.</p>
+    <table *ngIf="todos.length > 0" cellspacing="0" cellpadding="5">
       <thead>
         <th>Title</th>
         <th>Due</th>

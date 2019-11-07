@@ -22,7 +22,7 @@ export class <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : mo
   public <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>: <#= model.Name #>[];
 
   constructor(private <#= model.Name.ToCamelCase() #>Service: <#= model.Name #>Service) {
-    this.<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #> = [];
+    this.<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #> = null;
   }
 
   ngOnInit(): void {

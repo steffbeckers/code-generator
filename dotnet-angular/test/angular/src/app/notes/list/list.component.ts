@@ -15,7 +15,7 @@ export class NotesListComponent implements OnInit {
   public notes: Note[];
 
   constructor(private noteService: NoteService) {
-    this.notes = [];
+    this.notes = null;
   }
 
   ngOnInit(): void {

@@ -17,21 +17,19 @@ export class AddressUpdateComponent implements OnInit {
   // Address
   public address: Address;
   public addressForm: FormGroup;
-  public updating = false;
+  public updating: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private addressService: AddressService
-  ) {}
+  ) {
+    this.address = null;
+    this.updating = false;
+  }
 
   ngOnInit(): void {
-    // Get id from params
-    this.route.params.subscribe((routeParams) => {
-      this.getAddress(routeParams.id);
-    });
-
     this.addressForm = this.fb.group({
       id: ['', Validators.required],
       street: [''],
@@ -39,6 +37,11 @@ export class AddressUpdateComponent implements OnInit {
       postalCode: [''],
       city: [''],
       primary: [''],
+    });
+
+    // Get id from params
+    this.route.params.subscribe((routeParams) => {
+      this.getAddress(routeParams.id);
     });
   }
 

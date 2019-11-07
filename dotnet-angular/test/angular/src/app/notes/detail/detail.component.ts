@@ -21,7 +21,7 @@ export class NoteDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private noteService: NoteService
   ) {
-    this.note = new Note();
+    this.note = null;
   }
 
   ngOnInit(): void {

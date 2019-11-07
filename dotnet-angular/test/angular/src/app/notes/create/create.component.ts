@@ -16,13 +16,15 @@ import { NoteService } from 'src/app/shared/services/NoteService';
 export class NoteCreateComponent implements OnInit {
   // Note
   public noteForm: FormGroup;
-  public creating = false;
+  public creating: boolean;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private noteService: NoteService
-  ) {}
+  ) {
+    this.creating = false;
+  }
 
   ngOnInit(): void {
     this.noteForm = this.fb.group({

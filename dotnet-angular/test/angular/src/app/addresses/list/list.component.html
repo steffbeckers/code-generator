@@ -4,7 +4,9 @@
     <a routerLink="/addresses/create">Add new Address</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
-    <table cellspacing="0" cellpadding="5">
+    <p *ngIf="!addresses">Loading...</p>
+    <p *ngIf="addresses.length === 0">No addresses added yet.</p>
+    <table *ngIf="addresses.length > 0" cellspacing="0" cellpadding="5">
       <thead>
         <th>Street</th>
         <th>Number</th>

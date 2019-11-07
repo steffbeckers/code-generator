@@ -17,27 +17,30 @@ export class AccountUpdateComponent implements OnInit {
   // Account
   public account: Account;
   public accountForm: FormGroup;
-  public updating = false;
+  public updating: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private accountService: AccountService
-  ) {}
+  ) {
+    this.account = null;
+    this.updating = false;
+  }
 
   ngOnInit(): void {
-    // Get id from params
-    this.route.params.subscribe((routeParams) => {
-      this.getAccount(routeParams.id);
-    });
-
     this.accountForm = this.fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
       website: [''],
       telephone: [''],
       email: [''],
+    });
+
+    // Get id from params
+    this.route.params.subscribe((routeParams) => {
+      this.getAccount(routeParams.id);
     });
   }
 

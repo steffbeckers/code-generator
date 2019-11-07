@@ -17,21 +17,19 @@ export class ContactUpdateComponent implements OnInit {
   // Contact
   public contact: Contact;
   public contactForm: FormGroup;
-  public updating = false;
+  public updating: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private contactService: ContactService
-  ) {}
+  ) {
+    this.contact = null;
+    this.updating = false;
+  }
 
   ngOnInit(): void {
-    // Get id from params
-    this.route.params.subscribe((routeParams) => {
-      this.getContact(routeParams.id);
-    });
-
     this.contactForm = this.fb.group({
       id: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -39,6 +37,11 @@ export class ContactUpdateComponent implements OnInit {
       website: [''],
       telephone: [''],
       email: [''],
+    });
+
+    // Get id from params
+    this.route.params.subscribe((routeParams) => {
+      this.getContact(routeParams.id);
     });
   }
 
