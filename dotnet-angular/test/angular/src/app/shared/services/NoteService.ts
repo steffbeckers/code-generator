@@ -37,6 +37,12 @@ export class NoteService {
     return this.http.put<Note>(`${environment.api}/notes/${note.id}`, note);
   }
 
+  // TODO
+  // PUT: api/Notes/{noteId}/Accounts/{accountId}/Link
+  
+  // TODO
+  // DELETE: api/Notes/{noteId}/Accounts/{accountId}/Link
+
   // DELETE: api/notes/{id}
   // Deletes a specific note.
   public deleteNote(note: Note | string): Observable<Note> {

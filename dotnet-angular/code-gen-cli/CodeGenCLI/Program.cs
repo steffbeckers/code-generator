@@ -228,6 +228,9 @@ namespace CodeGenCLI
                     }
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
+                        // Exclude many-to-many models
+                        if (codeGenModel.ManyToMany) { continue; }
+
                         AngularTemplates.ModelTemplate modelTemplate = new AngularTemplates.ModelTemplate(Config, codeGenModel);
                         string modelTemplateContent = modelTemplate.TransformText();
 

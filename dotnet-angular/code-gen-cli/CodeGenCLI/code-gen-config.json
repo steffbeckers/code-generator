@@ -38,6 +38,12 @@
           "name": "Contacts",
           "type": "one-to-many",
           "model": "Contact"
+        },
+        {
+          "name": "Notes",
+          "type": "many-to-many",
+          "model": "Note",
+          "through": "AccountNote"
         }
       ]
     },
@@ -132,6 +138,14 @@
           "name": "Body",
           "type": "string"
         }
+      ],
+      "relations": [
+        {
+          "name": "Accounts",
+          "type": "many-to-many",
+          "model": "Account",
+          "through": "AccountNote"
+        }
       ]
     },
     {
@@ -147,6 +161,25 @@
           "name": "DueDate",
           "displayName": "Due",
           "type": "DateTime"
+        }
+      ]
+    },
+    {
+      "name": "AccountNote",
+      "manyToMany": true,
+      "properties": [],
+      "relations": [
+        {
+          "name": "Account",
+          "type": "many-to-one",
+          "required": true,
+          "model": "Account"
+        },
+        {
+          "name": "Note",
+          "type": "many-to-one",
+          "required": true,
+          "model": "Note"
         }
       ]
     }

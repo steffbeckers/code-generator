@@ -37,6 +37,12 @@ export class AccountService {
     return this.http.put<Account>(`${environment.api}/accounts/${account.id}`, account);
   }
 
+  // TODO
+  // PUT: api/Accounts/{accountId}/Notes/{noteId}/Link
+  
+  // TODO
+  // DELETE: api/Accounts/{accountId}/Notes/{noteId}/Link
+
   // DELETE: api/accounts/{id}
   // Deletes a specific account.
   public deleteAccount(account: Account | string): Observable<Account> {
