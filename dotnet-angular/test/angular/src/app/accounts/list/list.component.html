@@ -14,11 +14,19 @@
         <th>Email Address</th>
       </thead>
       <tbody>
-        <tr *ngFor="let account of accounts" [routerLink]="['/accounts', account.id]">
-          <td>{{ account.name }}</td>
-          <td>{{ account.website }}</td>
-          <td>{{ account.telephone }}</td>
-          <td>{{ account.email }}</td>
+        <tr *ngFor="let account of accounts" [routerLink]="['/accounts', account.id]" class="cursor--pointer">
+          <td>
+            {{ account.name }}
+          </td>
+          <td>
+            {{ account.website }}
+          </td>
+          <td>
+            {{ account.telephone }}
+          </td>
+          <td>
+            {{ account.email }}
+          </td>
         </tr>
       </tbody>
     </table>

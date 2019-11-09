@@ -23,9 +23,15 @@
 <# } #>
       </thead>
       <tbody>
-        <tr *ngFor="let <#= model.Name.ToCamelCase() #> of <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>', <#= model.Name.ToCamelCase() #>.id]">
+        <tr *ngFor="let <#= model.Name.ToCamelCase() #> of <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>', <#= model.Name.ToCamelCase() #>.id]" class="cursor--pointer">
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
-          <td>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</td>
+          <td>
+<# if (property.Type == "bool") { #>
+            <input type="checkbox" [ngModel]="<#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #>" disabled>
+<# } else { #>
+            {{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}
+<# } #>
+          </td>
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>

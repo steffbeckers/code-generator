@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
+<p *ngIf="!<#= model.Name.ToCamelCase() #>">Loading...</p>
 <div *ngIf="<#= model.Name.ToCamelCase() #>?.id" fxLayout="column" fxLayoutAlign="start">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
@@ -17,13 +18,18 @@
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
     <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
       <label class="bold"><#= property.DisplayName ?? property.Name #></label>
+<# if (property.Type == "bool") { #>
+      <input type="checkbox" [ngModel]="<#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #>" disabled>
+<# } else { #>
       <span>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</span>
+<# } #>
     </div>
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold"><#= relation.DisplayName ?? relation.Name #></label>
-        <span *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>">
+        <span *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToLower() #>', <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.id]" class="cursor--pointer">
           {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}
         </span>
       </div>
@@ -46,7 +52,13 @@
       <tbody>
         <tr *ngFor="let <#= relationModel.Name.ToCamelCase() #> of <#= model.Name.ToCamelCase() #>.<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>', <#= relationModel.Name.ToCamelCase() #>.id]">
 <# foreach (CodeGenModelProperty property in relationModel.Properties) { #>
-          <td>{{ <#= relationModel.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</td>
+          <td>
+<# if (property.Type == "bool") { #>
+            <input type="checkbox" [ngModel]="<#= relationModel.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #>" disabled>
+<# } else { #>
+            {{ <#= relationModel.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}
+<# } #>
+          </td>
 <# } #>
         </tr>
       </tbody>

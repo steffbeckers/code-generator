@@ -5,7 +5,3 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
-table, th, td {
-  border: 1px solid #eeeeee;
-  text-align: left;
-}

@@ -163,119 +163,154 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(".id]\">\r\n");
+            this.Write(".id]\" class=\"cursor--pointer\">\r\n");
             
             #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
             
             #line default
             #line hidden
-            this.Write("          <td>{{ ");
+            this.Write("          <td>\r\n");
             
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+ if (property.Type == "bool") { 
+            
+            #line default
+            #line hidden
+            this.Write("            <input type=\"checkbox\" [ngModel]=\"");
+            
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write(" }}</td>\r\n");
+            this.Write("\" disabled>\r\n");
             
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("            {{ ");
+            
+            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".");
+            
+            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(" }}\r\n");
+            
+            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("          </td>\r\n");
+            
+            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
  foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
             
             #line default
             #line hidden
             
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
  CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); 
             
             #line default
             #line hidden
             this.Write("          <td *ngIf=\"");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("\" [routerLink]=\"[\'/");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToLower()));
             
             #line default
             #line hidden
             this.Write("\', ");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".id]\">\r\n            {{ ");
             
-            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayField.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(" }}\r\n          </td>\r\n          <td *ngIf=\"!");
             
-            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("\"></td>\r\n");
             
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
+            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
  } 
             
             #line default

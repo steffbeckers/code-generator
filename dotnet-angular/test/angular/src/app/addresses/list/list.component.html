@@ -16,12 +16,22 @@
         <th>Account</th>
       </thead>
       <tbody>
-        <tr *ngFor="let address of addresses" [routerLink]="['/addresses', address.id]">
-          <td>{{ address.street }}</td>
-          <td>{{ address.number }}</td>
-          <td>{{ address.postalCode }}</td>
-          <td>{{ address.city }}</td>
-          <td>{{ address.primary }}</td>
+        <tr *ngFor="let address of addresses" [routerLink]="['/addresses', address.id]" class="cursor--pointer">
+          <td>
+            {{ address.street }}
+          </td>
+          <td>
+            {{ address.number }}
+          </td>
+          <td>
+            {{ address.postalCode }}
+          </td>
+          <td>
+            {{ address.city }}
+          </td>
+          <td>
+            <input type="checkbox" [ngModel]="address.primary" disabled>
+          </td>
           <td *ngIf="address.account" [routerLink]="['/accounts', address.account.id]">
             {{ address.account.name }}
           </td>

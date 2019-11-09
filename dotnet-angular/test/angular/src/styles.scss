@@ -3,6 +3,11 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+table, th, td {
+  border: 1px solid #eeeeee;
+  text-align: left;
+}
+
 a {
   color: #000000;
   text-decoration: none;
@@ -14,4 +19,8 @@ a:hover {
 
 .bold {
   font-weight: bold;
+}
+
+.cursor--pointer {
+  cursor: pointer;
 }

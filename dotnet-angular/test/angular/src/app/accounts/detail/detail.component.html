@@ -1,3 +1,4 @@
+<p *ngIf="!account">Loading...</p>
 <div *ngIf="account?.id" fxLayout="column" fxLayoutAlign="start">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
@@ -40,11 +41,21 @@
       </thead>
       <tbody>
         <tr *ngFor="let address of account.addresses" [routerLink]="['/addresses', address.id]">
-          <td>{{ address.street }}</td>
-          <td>{{ address.number }}</td>
-          <td>{{ address.postalCode }}</td>
-          <td>{{ address.city }}</td>
-          <td>{{ address.primary }}</td>
+          <td>
+            {{ address.street }}
+          </td>
+          <td>
+            {{ address.number }}
+          </td>
+          <td>
+            {{ address.postalCode }}
+          </td>
+          <td>
+            {{ address.city }}
+          </td>
+          <td>
+            <input type="checkbox" [ngModel]="address.primary" disabled>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -65,11 +76,21 @@
       </thead>
       <tbody>
         <tr *ngFor="let contact of account.contacts" [routerLink]="['/contacts', contact.id]">
-          <td>{{ contact.firstName }}</td>
-          <td>{{ contact.lastName }}</td>
-          <td>{{ contact.website }}</td>
-          <td>{{ contact.telephone }}</td>
-          <td>{{ contact.email }}</td>
+          <td>
+            {{ contact.firstName }}
+          </td>
+          <td>
+            {{ contact.lastName }}
+          </td>
+          <td>
+            {{ contact.website }}
+          </td>
+          <td>
+            {{ contact.telephone }}
+          </td>
+          <td>
+            {{ contact.email }}
+          </td>
         </tr>
       </tbody>
     </table>

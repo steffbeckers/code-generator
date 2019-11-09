@@ -12,9 +12,13 @@
         <th>Due</th>
       </thead>
       <tbody>
-        <tr *ngFor="let todo of todos" [routerLink]="['/todos', todo.id]">
-          <td>{{ todo.title }}</td>
-          <td>{{ todo.dueDate }}</td>
+        <tr *ngFor="let todo of todos" [routerLink]="['/todos', todo.id]" class="cursor--pointer">
+          <td>
+            {{ todo.title }}
+          </td>
+          <td>
+            {{ todo.dueDate }}
+          </td>
         </tr>
       </tbody>
     </table>

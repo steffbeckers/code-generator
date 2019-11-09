@@ -12,9 +12,13 @@
         <th>Body</th>
       </thead>
       <tbody>
-        <tr *ngFor="let note of notes" [routerLink]="['/notes', note.id]">
-          <td>{{ note.title }}</td>
-          <td>{{ note.body }}</td>
+        <tr *ngFor="let note of notes" [routerLink]="['/notes', note.id]" class="cursor--pointer">
+          <td>
+            {{ note.title }}
+          </td>
+          <td>
+            {{ note.body }}
+          </td>
         </tr>
       </tbody>
     </table>

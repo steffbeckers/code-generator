@@ -30,7 +30,6 @@ namespace CodeGenCLI.Templates.Angular
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("table, th, td {\r\n  border: 1px solid #eeeeee;\r\n  text-align: left;\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
