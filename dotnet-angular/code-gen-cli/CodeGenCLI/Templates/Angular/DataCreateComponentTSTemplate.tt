@@ -6,8 +6,8 @@
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Models
 import { <#= model.Name #> } from 'src/app/shared/models/<#= model.Name #>';
@@ -27,6 +27,7 @@ export class <#= model.Name #>CreateComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private <#= model.Name.ToCamelCase() #>Service: <#= model.Name #>Service
   ) {
@@ -38,6 +39,14 @@ export class <#= model.Name #>CreateComponent implements OnInit {
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
       <#= property.Name.ToCamelCase() #>: [''<# if (property.Required) { #>, Validators.required<# } #>],
 <# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+      <#= relation.Name.ToCamelCase() #>Id: [''<# if (relation.Required) { #>, Validators.required<# } #>],
+<# } #>
+    });
+
+    // Patch query params to form from URL
+    this.route.queryParams.subscribe((queryParams) => {
+      this.<#= model.Name.ToCamelCase() #>Form.patchValue(queryParams);
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Models
 import { Contact } from 'src/app/shared/models/Contact';
@@ -20,6 +20,7 @@ export class ContactCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private contactService: ContactService
   ) {
@@ -33,6 +34,12 @@ export class ContactCreateComponent implements OnInit {
       website: [''],
       telephone: [''],
       email: [''],
+      accountId: [''],
+    });
+
+    // Patch query params to form from URL
+    this.route.queryParams.subscribe((queryParams) => {
+      this.contactForm.patchValue(queryParams);
     });
   }
 

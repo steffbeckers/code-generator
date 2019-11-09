@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Models
 import { Account } from 'src/app/shared/models/Account';
@@ -20,6 +20,7 @@ export class AccountCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private accountService: AccountService
   ) {
@@ -32,6 +33,11 @@ export class AccountCreateComponent implements OnInit {
       website: [''],
       telephone: [''],
       email: [''],
+    });
+
+    // Patch query params to form from URL
+    this.route.queryParams.subscribe((queryParams) => {
+      this.accountForm.patchValue(queryParams);
     });
   }
 

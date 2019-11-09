@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Models
 import { Address } from 'src/app/shared/models/Address';
@@ -20,6 +20,7 @@ export class AddressCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private addressService: AddressService
   ) {
@@ -33,6 +34,12 @@ export class AddressCreateComponent implements OnInit {
       postalCode: [''],
       city: [''],
       primary: [''],
+      accountId: [''],
+    });
+
+    // Patch query params to form from URL
+    this.route.queryParams.subscribe((queryParams) => {
+      this.addressForm.patchValue(queryParams);
     });
   }
 

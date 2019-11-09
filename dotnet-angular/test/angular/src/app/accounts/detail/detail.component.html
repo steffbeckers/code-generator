@@ -24,4 +24,54 @@
       <span>{{ account.email }}</span>
     </div>
   </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Addresses</h2>
+    <a routerLink="/addresses/create" [queryParams]="{ accountId: account.id }">Add new Address</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="account.addresses && account.addresses.length === 0">No addresses added yet.</p>
+    <table *ngIf="account.addresses && account.addresses.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Street</th>
+        <th>Number</th>
+        <th>Postal Code</th>
+        <th>City</th>
+        <th>Primary</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let address of account.addresses" [routerLink]="['/addresses', address.id]">
+          <td>{{ address.street }}</td>
+          <td>{{ address.number }}</td>
+          <td>{{ address.postalCode }}</td>
+          <td>{{ address.city }}</td>
+          <td>{{ address.primary }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Contacts</h2>
+    <a routerLink="/contacts/create" [queryParams]="{ accountId: account.id }">Add new Contact</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="account.contacts && account.contacts.length === 0">No contacts added yet.</p>
+    <table *ngIf="account.contacts && account.contacts.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Website</th>
+        <th>Telephone</th>
+        <th>Email</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of account.contacts" [routerLink]="['/contacts', contact.id]">
+          <td>{{ contact.firstName }}</td>
+          <td>{{ contact.lastName }}</td>
+          <td>{{ contact.website }}</td>
+          <td>{{ contact.telephone }}</td>
+          <td>{{ contact.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

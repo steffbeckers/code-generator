@@ -22,11 +22,10 @@
           <td>{{ address.postalCode }}</td>
           <td>{{ address.city }}</td>
           <td>{{ address.primary }}</td>
-          <td>
-            <span *ngIf="address.account">
-              {{ address.account.name }}
-            </span>
+          <td *ngIf="address.account" [routerLink]="['/accounts', address.account.id]">
+            {{ address.account.name }}
           </td>
+          <td *ngIf="!address.account"></td>
         </tr>
       </tbody>
     </table>

@@ -22,11 +22,10 @@
           <td>{{ contact.website }}</td>
           <td>{{ contact.telephone }}</td>
           <td>{{ contact.email }}</td>
-          <td>
-            <span *ngIf="contact.account">
-              {{ contact.account.name }}
-            </span>
+          <td *ngIf="contact.account" [routerLink]="['/accounts', contact.account.id]">
+            {{ contact.account.name }}
           </td>
+          <td *ngIf="!contact.account"></td>
         </tr>
       </tbody>
     </table>

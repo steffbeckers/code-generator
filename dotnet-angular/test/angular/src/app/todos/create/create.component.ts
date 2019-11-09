@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Models
 import { Todo } from 'src/app/shared/models/Todo';
@@ -20,6 +20,7 @@ export class TodoCreateComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private todoService: TodoService
   ) {
@@ -30,6 +31,11 @@ export class TodoCreateComponent implements OnInit {
     this.todoForm = this.fb.group({
       title: ['', Validators.required],
       dueDate: [''],
+    });
+
+    // Patch query params to form from URL
+    this.route.queryParams.subscribe((queryParams) => {
+      this.todoForm.patchValue(queryParams);
     });
   }
 

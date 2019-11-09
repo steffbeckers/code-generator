@@ -29,4 +29,28 @@
       </div>
 <# } #>
   </div>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2><#= !string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's' #></h2>
+    <a routerLink="/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>/create" [queryParams]="{ <#= model.Name.ToCamelCase() #>Id: <#= model.Name.ToCamelCase() #>.id }">Add new <#= relationModel.Name #></a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="<#= model.Name.ToCamelCase() #>.<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #> && <#= model.Name.ToCamelCase() #>.<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>.length === 0">No <#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #> added yet.</p>
+    <table *ngIf="<#= model.Name.ToCamelCase() #>.<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #> && <#= model.Name.ToCamelCase() #>.<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+<# foreach (CodeGenModelProperty property in relationModel.Properties) { #>
+        <th><#= property.DisplayName ?? property.Name #></th>
+<# } #>
+      </thead>
+      <tbody>
+        <tr *ngFor="let <#= relationModel.Name.ToCamelCase() #> of <#= model.Name.ToCamelCase() #>.<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>', <#= relationModel.Name.ToCamelCase() #>.id]">
+<# foreach (CodeGenModelProperty property in relationModel.Properties) { #>
+          <td>{{ <#= relationModel.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</td>
+<# } #>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<# } #>
 </div>

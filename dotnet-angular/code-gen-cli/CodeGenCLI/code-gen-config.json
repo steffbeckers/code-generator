@@ -77,7 +77,7 @@
           //"required": true,
           "model": "Account",
           //"idField": "ParentAccountId", // TODO: Optional override
-          "displayField": "Name"
+          "displayField": "Name" // TODO: Use displayField on Account itself, not defined multiple times then
         }
       ]
     },

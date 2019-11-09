@@ -170,7 +170,7 @@ namespace CodeGenCLI.Templates.Angular
             #line hidden
             
             #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentTSTemplate.tt"
- foreach (CodeGenModelRelation relation in model.Relations) { 
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
             
             #line default
             #line hidden

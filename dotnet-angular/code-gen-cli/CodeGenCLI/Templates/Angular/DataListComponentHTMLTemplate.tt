@@ -28,11 +28,11 @@
           <td>{{ <#= model.Name.ToCamelCase() #>.<#= property.Name.ToCamelCase() #> }}</td>
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-          <td>
-            <span *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>">
-              {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}
-            </span>
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
+          <td *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToLower() #>', <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.id]">
+            {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}
           </td>
+          <td *ngIf="!<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>"></td>
 <# } #>
         </tr>
       </tbody>

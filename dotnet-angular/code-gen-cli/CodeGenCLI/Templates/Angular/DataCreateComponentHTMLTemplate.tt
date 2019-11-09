@@ -18,6 +18,12 @@
         <input formControlName="<#= property.Name.ToCamelCase() #>" placeholder="<#= property.DisplayName ?? property.Name #>"<# if (property.Required) { #> required<# } #> />
       </div>
 <# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold"><#= relation.DisplayName ?? relation.Name #> ID</label>
+        <input formControlName="<#= relation.Name.ToCamelCase() #>Id" placeholder="<#= relation.DisplayName ?? relation.Name #> ID"<# if (relation.Required) { #> required<# } #> />
+      </div>
+<# } #>
     </div>
   </form>
 </div>
