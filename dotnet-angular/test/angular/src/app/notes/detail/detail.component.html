@@ -17,4 +17,8 @@
       <span>{{ note.body }}</span>
     </div>
   </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Accounts</h2>
+    <a routerLink="/accounts/create" [queryParams]="{ noteId: note.id }">Add new Account</a>
+  </div>
 </div>

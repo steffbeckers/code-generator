@@ -245,6 +245,9 @@ namespace CodeGenCLI
                     }
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
+                        // Exclude many-to-many models
+                        if (codeGenModel.ManyToMany) { continue; }
+
                         AngularTemplates.DataServiceTemplate dataServiceTemplate = new AngularTemplates.DataServiceTemplate(Config, codeGenModel);
                         string dataServiceTemplateContent = dataServiceTemplate.TransformText();
 
@@ -307,6 +310,9 @@ namespace CodeGenCLI
                     // Per model
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
+                        // Exclude many-to-many models
+                        if (codeGenModel.ManyToMany) { continue; }
+
                         if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower()))
                         {
                             Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower());

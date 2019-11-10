@@ -95,4 +95,8 @@
       </tbody>
     </table>
   </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Notes</h2>
+    <a routerLink="/notes/create" [queryParams]="{ accountId: account.id }">Add new Note</a>
+  </div>
 </div>

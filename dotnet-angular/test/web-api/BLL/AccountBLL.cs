@@ -12,15 +12,18 @@ namespace Test.API.BLL
     public class AccountBLL
     {
         private readonly AccountRepository accountRepository;
+        private readonly AccountNoteRepository accountNoteRepository;
 
 		/// <summary>
 		/// The constructor of the Account business logic layer.
 		/// </summary>
         public AccountBLL(
-			AccountRepository accountRepository
+			AccountRepository accountRepository,
+			AccountNoteRepository accountNoteRepository
 		)
         {
             this.accountRepository = accountRepository;
+			this.accountNoteRepository = accountNoteRepository;
         }
 
 		/// <summary>
@@ -106,6 +109,37 @@ namespace Test.API.BLL
 			// #-#-#
 
             return account;
+        }
+
+        public async Task<Account> LinkNoteToAccountAsync(AccountNote accountNote)
+        {
+            AccountNote accountNoteLink = this.accountNoteRepository.GetByAccountAndNoteId(accountNote.AccountId, accountNote.NoteId);
+
+            if (accountNoteLink == null)
+            {
+                await this.accountNoteRepository.InsertAsync(accountNote);
+            }
+            else
+            {
+                // TODO: Mapping of fields on many-to-many
+                //accountNoteLink.Field = accountNote.Field;
+
+                await this.accountNoteRepository.UpdateAsync(accountNoteLink);
+            }
+
+            return await this.GetAccountByIdAsync(accountNote.AccountId);
+        }
+
+        public async Task<Account> UnlinkNoteFromAccountAsync(AccountNote accountNote)
+        {
+            AccountNote accountNoteLink = this.accountNoteRepository.GetByAccountAndNoteId(accountNote.AccountId, accountNote.NoteId);
+		
+            if (accountNoteLink != null)
+            {
+                await this.accountNoteRepository.DeleteAsync(accountNoteLink);
+            }
+
+            return await this.GetAccountByIdAsync(accountNote.AccountId);
         }
 
 		/// <summary>

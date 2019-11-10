@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Test.API.Models;
 
@@ -26,14 +27,17 @@ namespace Test.API.DAL.Repositories
 		public async Task<IEnumerable<Note>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Notes
+                .Include(x => x.AccountNote)
+                    .ThenInclude(x => x.Account)
                 .ToListAsync();
         }
 
 		public async Task<Note> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Notes
+                .Include(x => x.AccountNote)
+                    .ThenInclude(x => x.Account)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
-
     }
 }

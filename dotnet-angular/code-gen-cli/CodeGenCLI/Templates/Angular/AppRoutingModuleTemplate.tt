@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-<# foreach (CodeGenModel model in config.Models) { #>
+<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
   {
     path: '<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>',
     loadChildren: './<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>.module#<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's' #>Module',

@@ -9,7 +9,7 @@
             The business logic layer for Accounts.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.#ctor(Test.API.DAL.Repositories.AccountRepository)">
+        <member name="M:Test.API.BLL.AccountBLL.#ctor(Test.API.DAL.Repositories.AccountRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
             <summary>
             The constructor of the Account business logic layer.
             </summary>
@@ -114,7 +114,7 @@
             The business logic layer for Notes.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.NoteBLL.#ctor(Test.API.DAL.Repositories.NoteRepository)">
+        <member name="M:Test.API.BLL.NoteBLL.#ctor(Test.API.DAL.Repositories.NoteRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
             <summary>
             The constructor of the Note business logic layer.
             </summary>
@@ -389,6 +389,16 @@
             The constructor of AutoMapperProfile.
             </summary>
         </member>
+        <member name="T:Test.API.DAL.Repositories.AccountNoteRepository">
+            <summary>
+            The repository for AccountNotes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.AccountNoteRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the AccountNote repository.
+            </summary>
+        </member>
         <member name="T:Test.API.DAL.Repositories.AccountRepository">
             <summary>
             The repository for Accounts in the data access layer.
@@ -479,6 +489,11 @@
             The related Contacts of Account.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Account.AccountNote">
+            <summary>
+            The related Notes of Account.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Account.CreatedOn">
             <summary>
             The date and time of when the record is created
@@ -490,6 +505,51 @@
             </summary>
         </member>
         <member name="P:Test.API.Models.Account.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.AccountNote">
+            <summary>
+            AccountNote model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.Id">
+            <summary>
+            The identifier of AccountNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.AccountId">
+            <summary>
+            The related foreign key AccountId for Account of AccountNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.Account">
+            <summary>
+            The related Account of AccountNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.NoteId">
+            <summary>
+            The related foreign key NoteId for Note of AccountNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.Note">
+            <summary>
+            The related Note of AccountNote.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.AccountNote.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
@@ -634,6 +694,11 @@
             The Body property of Note.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Note.AccountNote">
+            <summary>
+            The related Accounts of Note.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Note.CreatedOn">
             <summary>
             The date and time of when the record is created
@@ -722,6 +787,11 @@
         <member name="P:Test.API.ViewModels.AccountVM.Contacts">
             <summary>
             The related Contacts of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Notes">
+            <summary>
+            The related Notes of Account.
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.AddressVM">
@@ -832,6 +902,11 @@
         <member name="P:Test.API.ViewModels.NoteVM.Body">
             <summary>
             The Body property of Note.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.NoteVM.Accounts">
+            <summary>
+            The related Accounts of Note.
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.TodoVM">

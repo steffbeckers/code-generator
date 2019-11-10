@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
 import { TopNavComponent } from './shared/top-nav/top-nav.component';
 
 // Services
-<# foreach (CodeGenModel model in config.Models) { #>
+<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 import { <#= model.Name #>Service } from './shared/services/<#= model.Name #>Service';
 <# } #>
 
@@ -34,7 +34,7 @@ import { <#= model.Name #>Service } from './shared/services/<#= model.Name #>Ser
     SharedModule
   ],
   providers: [
-<# foreach (CodeGenModel model in config.Models) { #>
+<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
     <#= model.Name #>Service,
 <# } #>
   ],

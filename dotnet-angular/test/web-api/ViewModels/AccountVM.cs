@@ -16,6 +16,9 @@ namespace Test.API.ViewModels
 			//// One-to-many
 			this.Addresses = new List<AddressVM>();
 			this.Contacts = new List<ContactVM>();
+
+			//// Many-to-many
+			this.Notes = new List<NoteVM>();
         }
 
 		// Properties
@@ -58,5 +61,12 @@ namespace Test.API.ViewModels
         /// The related Contacts of Account.
         /// </summary>
 		public IList<ContactVM> Contacts { get; set; }
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Notes of Account.
+        /// </summary>
+		public IList<NoteVM> Notes { get; set; }
     }
 }

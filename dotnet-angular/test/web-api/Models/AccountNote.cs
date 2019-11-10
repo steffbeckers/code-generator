@@ -4,43 +4,46 @@ using System.Collections.Generic;
 namespace Test.API.Models
 {
 	/// <summary>
-    /// Note model
+    /// AccountNote model
     /// </summary>
-    public class Note
+    public class AccountNote
     {
-		public Note()
+		public AccountNote()
         {
             // Relations
-
-			//// Many-to-many
-			this.AccountNote = new List<AccountNote>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Note.
+        /// The identifier of AccountNote.
         /// </summary>
 		public Guid Id { get; set; }
 
-		/// <summary>
-        /// The Title property of Note.
-        /// </summary>
-		public string Title { get; set; }
-
-		/// <summary>
-        /// The Body property of Note.
-        /// </summary>
-		public string Body { get; set; }
-
 		// Relations
 
-		//// Many-to-many
+		//// Many-to-one
+
+	    /// <summary>
+        /// The related foreign key AccountId for Account of AccountNote.
+        /// </summary>
+		public Guid AccountId { get; set; }
 
 		/// <summary>
-        /// The related Accounts of Note.
+        /// The related Account of AccountNote.
         /// </summary>
-		public IList<AccountNote> AccountNote { get; set; }
+		public Account Account { get; set; }
+
+	    /// <summary>
+        /// The related foreign key NoteId for Note of AccountNote.
+        /// </summary>
+		public Guid NoteId { get; set; }
+
+		/// <summary>
+        /// The related Note of AccountNote.
+        /// </summary>
+		public Note Note { get; set; }
+
 
 		// Generic properties
 

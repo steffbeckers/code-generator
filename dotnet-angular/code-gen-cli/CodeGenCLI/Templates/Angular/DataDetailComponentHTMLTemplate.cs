@@ -480,6 +480,60 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
+            
+            #line 68 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { 
+            
+            #line default
+            #line hidden
+            
+            #line 69 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+ CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); 
+            
+            #line default
+            #line hidden
+            this.Write("  <div fxLayout=\"row\" fxLayoutAlign=\"start center\" fxLayoutGap=\"20px\">\r\n    <h2>");
+            
+            #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's'));
+            
+            #line default
+            #line hidden
+            this.Write("</h2>\r\n    <a routerLink=\"/");
+            
+            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("/create\" [queryParams]=\"{ ");
+            
+            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Id: ");
+            
+            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(".id }\">Add new ");
+            
+            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relationModel.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n  </div>\r\n");
+            
+            #line 74 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
             this.Write("</div>\r\n");
             return this.GenerationEnvironment.ToString();
         }

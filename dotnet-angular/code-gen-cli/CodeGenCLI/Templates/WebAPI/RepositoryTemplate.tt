@@ -8,6 +8,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 
@@ -30,6 +31,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
         // Additional functionality and overrides
 
+<# if (!model.ManyToMany) { #>
 		public async Task<IEnumerable<<#= model.Name #>>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
@@ -40,7 +42,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 .Include(x => x.<#= relation.Name #>)
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
-                // TODO: Include many-to-many relation
+                .Include(x => x.<#= relation.Through #>)
+                    .ThenInclude(x => x.<#= relation.Model #>)
 <# } #>
                 .ToListAsync();
         }
@@ -55,11 +58,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 .Include(x => x.<#= relation.Name #>)
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
-                // TODO: Include many-to-many relation
+                .Include(x => x.<#= relation.Through #>)
+                    .ThenInclude(x => x.<#= relation.Model #>)
 <# } #>
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
-
+<# } #>
 <# if (model.ManyToMany) { #>
 <# CodeGenModelRelation manyToManyModel1 = model.Relations.Where(r => r.Required && r.Name == r.Model).First(); #>
 <# CodeGenModelRelation manyToManyModel2 = model.Relations.Where(r => r.Required && r.Name == r.Model && !r.Equals(manyToManyModel1)).First(); #>

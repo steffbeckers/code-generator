@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Test.API.Models;
 
@@ -36,6 +37,5 @@ namespace Test.API.DAL.Repositories
                 .Include(x => x.Account)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
-
     }
 }

@@ -6,7 +6,7 @@
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-<# foreach (CodeGenModel model in config.Models) { #>
+<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
   <a routerLink="/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>" routerLinkActive="bold"><#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's' #></a>
 <# } #>
 </div>

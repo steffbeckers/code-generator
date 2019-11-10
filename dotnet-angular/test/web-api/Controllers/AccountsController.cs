@@ -127,6 +127,42 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Account, AccountVM>(account);
         }
 
+        // PUT: api/Accounts/{accountId}/Notes/{noteId}/Link
+        [HttpPut("{accountId}/Notes/{noteId}/Link")]
+        public async Task<ActionResult<AccountVM>> LinkNoteToAccount([FromRoute] Guid accountId, [FromRoute] Guid noteId)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+			AccountNote accountNoteLink = new AccountNote() {
+				AccountId = accountId,
+				NoteId = noteId
+			};
+
+            return this.mapper.Map<Account, AccountVM>(await this.bll.LinkNoteToAccountAsync(accountNoteLink));
+        }
+
+        // DELETE: api/Accounts/{accountId}/Notes/{noteId}/Link
+        [HttpDelete("{accountId}/Notes/{noteId}/Unlink")]
+        public async Task<ActionResult<AccountVM>> UnlinkNoteFromAccount([FromRoute] Guid accountId, [FromRoute] Guid noteId)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+			AccountNote accountNoteLink = new AccountNote() {
+				AccountId = accountId,
+				NoteId = noteId
+			};
+
+            return this.mapper.Map<Account, AccountVM>(await this.bll.UnlinkNoteFromAccountAsync(accountNoteLink));
+        }
+
         // DELETE: api/Accounts/{id}
 		/// <summary>
 		/// Deletes a specific account.

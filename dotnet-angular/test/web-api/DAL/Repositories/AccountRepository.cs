@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Test.API.Models;
 
@@ -28,6 +29,8 @@ namespace Test.API.DAL.Repositories
             return await this.context.Accounts
                 .Include(x => x.Addresses)
                 .Include(x => x.Contacts)
+                .Include(x => x.AccountNote)
+                    .ThenInclude(x => x.Note)
                 .ToListAsync();
         }
 
@@ -36,8 +39,9 @@ namespace Test.API.DAL.Repositories
             return await this.context.Accounts
                 .Include(x => x.Addresses)
                 .Include(x => x.Contacts)
+                .Include(x => x.AccountNote)
+                    .ThenInclude(x => x.Note)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
-
     }
 }

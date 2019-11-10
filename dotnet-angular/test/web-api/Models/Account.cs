@@ -15,6 +15,9 @@ namespace Test.API.Models
 			//// One-to-many
 			this.Addresses = new List<Address>();
 			this.Contacts = new List<Contact>();
+
+			//// Many-to-many
+			this.AccountNote = new List<AccountNote>();
         }
 
 		// Properties
@@ -56,6 +59,13 @@ namespace Test.API.Models
         /// The related Contacts of Account.
         /// </summary>
 		public IList<Contact> Contacts { get; set; }
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Notes of Account.
+        /// </summary>
+		public IList<AccountNote> AccountNote { get; set; }
 
 		// Generic properties
 

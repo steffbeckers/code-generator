@@ -46,7 +46,7 @@ import { TopNavComponent } from './shared/top-nav/top-nav.component';
 ");
             
             #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
+ foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { 
             
             #line default
             #line hidden
@@ -76,7 +76,7 @@ import { TopNavComponent } from './shared/top-nav/top-nav.component';
                     "   SharedModule\r\n  ],\r\n  providers: [\r\n");
             
             #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\AppModuleTemplate.tt"
- foreach (CodeGenModel model in config.Models) { 
+ foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { 
             
             #line default
             #line hidden

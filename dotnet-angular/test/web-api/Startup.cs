@@ -41,6 +41,7 @@ namespace Test.API
 			services.AddScoped<AddressRepository>();
 			services.AddScoped<NoteRepository>();
 			services.AddScoped<TodoRepository>();
+			services.AddScoped<AccountNoteRepository>();
 
 			// BLLs
 			services.AddScoped<AccountBLL>();
