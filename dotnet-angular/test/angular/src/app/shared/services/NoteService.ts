@@ -37,11 +37,17 @@ export class NoteService {
     return this.http.put<Note>(`${environment.api}/notes/${note.id}`, note);
   }
 
-  // TODO
-  // PUT: api/Notes/{noteId}/Accounts/{accountId}/Link
-  
-  // TODO
-  // DELETE: api/Notes/{noteId}/Accounts/{accountId}/Link
+  // PUT: api/Notes/{noteId}/accounts/{accountId}/link
+  // Links a specific account to note.
+  public linkAccountToNote(noteId: string, accountId: string): Observable<Note> {
+    return this.http.put<Note>(`${environment.api}/notes/${noteId}/accounts/${accountId}/link`, null);
+  }
+
+  // DELETE: api/Notes/{noteId}/accounts/{accountId}/unlink
+  // Unlinks a specific account from note.
+  public unlinkAccountFromNote(noteId: string, accountId: string): Observable<Note> {
+    return this.http.delete<Note>(`${environment.api}/notes/${noteId}/accounts/${accountId}/unlink`);
+  }
 
   // DELETE: api/notes/{id}
   // Deletes a specific note.

@@ -37,11 +37,17 @@ export class AccountService {
     return this.http.put<Account>(`${environment.api}/accounts/${account.id}`, account);
   }
 
-  // TODO
-  // PUT: api/Accounts/{accountId}/Notes/{noteId}/Link
-  
-  // TODO
-  // DELETE: api/Accounts/{accountId}/Notes/{noteId}/Link
+  // PUT: api/Accounts/{accountId}/notes/{noteId}/link
+  // Links a specific note to account.
+  public linkNoteToAccount(accountId: string, noteId: string): Observable<Account> {
+    return this.http.put<Account>(`${environment.api}/accounts/${accountId}/notes/${noteId}/link`, null);
+  }
+
+  // DELETE: api/Accounts/{accountId}/notes/{noteId}/unlink
+  // Unlinks a specific note from account.
+  public unlinkNoteFromAccount(accountId: string, noteId: string): Observable<Account> {
+    return this.http.delete<Account>(`${environment.api}/accounts/${accountId}/notes/${noteId}/unlink`);
+  }
 
   // DELETE: api/accounts/{id}
   // Deletes a specific account.

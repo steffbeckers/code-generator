@@ -444,6 +444,34 @@ namespace CodeGenCLI
 
                         File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.ts", dataCreateComponentTSTemplateContent);
                         Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\create\\create.component.ts");
+
+
+                        ////// Link
+                        if (!Directory.Exists(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link"))
+                        {
+                            Directory.CreateDirectory(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link");
+                        }
+
+                        //////// HTML
+                        AngularTemplates.DataLinkComponentHTMLTemplate dataLinkComponentHTMLTemplate = new AngularTemplates.DataLinkComponentHTMLTemplate(Config, codeGenModel);
+                        string dataLinkComponentHTMLTemplateContent = dataLinkComponentHTMLTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link\\link.component.html", dataLinkComponentHTMLTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link\\link.component.html");
+
+                        //////// SCSS
+                        AngularTemplates.DataLinkComponentSCSSTemplate dataLinkComponentSCSSTemplate = new AngularTemplates.DataLinkComponentSCSSTemplate(Config, codeGenModel);
+                        string dataLinkComponentSCSSTemplateContent = dataLinkComponentSCSSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link\\link.component.scss", dataLinkComponentSCSSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link\\link.component.scss");
+
+                        //////// TS
+                        AngularTemplates.DataLinkComponentTSTemplate dataLinkComponentTSTemplate = new AngularTemplates.DataLinkComponentTSTemplate(Config, codeGenModel);
+                        string dataLinkComponentTSTemplateContent = dataLinkComponentTSTemplate.TransformText();
+
+                        File.WriteAllText(Config.Angular.ProjectPath + "\\src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link\\link.component.ts", dataLinkComponentTSTemplateContent);
+                        Console.WriteLine("src\\app\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s").ToLower() + "\\link\\link.component.ts");
                     }
 
                     // Stop

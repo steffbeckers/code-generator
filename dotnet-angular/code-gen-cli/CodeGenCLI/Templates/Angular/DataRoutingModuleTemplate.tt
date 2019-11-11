@@ -13,11 +13,16 @@ import { <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.
 import { <#= model.Name #>DetailComponent } from './detail/detail.component';
 import { <#= model.Name #>CreateComponent } from './create/create.component';
 import { <#= model.Name #>UpdateComponent } from './update/update.component';
+import { <#= model.Name #>LinkComponent } from './link/link.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: <#= model.Name #>CreateComponent
+  },
+  {
+    path: ':id/link',
+    component: <#= model.Name #>LinkComponent
   },
   {
     path: ':id/edit',

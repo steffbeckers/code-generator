@@ -94,20 +94,24 @@
       "properties": [
         {
           "name": "Street",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         {
           "name": "Number",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         {
           "name": "PostalCode",
           "displayName": "Postal Code",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         {
           "name": "City",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         {
           "name": "Primary",

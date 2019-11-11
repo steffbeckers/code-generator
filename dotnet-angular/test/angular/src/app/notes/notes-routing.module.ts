@@ -6,11 +6,16 @@ import { NotesListComponent } from './list/list.component';
 import { NoteDetailComponent } from './detail/detail.component';
 import { NoteCreateComponent } from './create/create.component';
 import { NoteUpdateComponent } from './update/update.component';
+import { NoteLinkComponent } from './link/link.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: NoteCreateComponent
+  },
+  {
+    path: ':id/link',
+    component: NoteLinkComponent
   },
   {
     path: ':id/edit',

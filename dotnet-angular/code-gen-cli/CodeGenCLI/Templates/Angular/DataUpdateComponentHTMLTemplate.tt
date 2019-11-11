@@ -17,7 +17,11 @@
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold"><#= property.DisplayName ?? property.Name #></label>
+<# if (property.Type == "bool") { #>
+        <input type="checkbox" formControlName="<#= property.Name.ToCamelCase() #>"<# if (property.Required) { #> required<# } #>>
+<# } else { #>
         <input formControlName="<#= property.Name.ToCamelCase() #>" placeholder="<#= property.DisplayName ?? property.Name #>"<# if (property.Required) { #> required<# } #> />
+<# } #>
       </div>
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>

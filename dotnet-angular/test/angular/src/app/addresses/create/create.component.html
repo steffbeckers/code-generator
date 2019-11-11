@@ -7,23 +7,23 @@
     <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">Street</label>
-        <input formControlName="street" placeholder="Street" />
+        <input formControlName="street" placeholder="Street" required />
       </div>
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">Number</label>
-        <input formControlName="number" placeholder="Number" />
+        <input formControlName="number" placeholder="Number" required />
       </div>
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">Postal Code</label>
-        <input formControlName="postalCode" placeholder="Postal Code" />
+        <input formControlName="postalCode" placeholder="Postal Code" required />
       </div>
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">City</label>
-        <input formControlName="city" placeholder="City" />
+        <input formControlName="city" placeholder="City" required />
       </div>
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">Primary</label>
-        <input formControlName="primary" placeholder="Primary" />
+        <input type="checkbox" formControlName="primary">
       </div>
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">Account ID</label>

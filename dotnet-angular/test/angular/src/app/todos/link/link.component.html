@@ -1,0 +1,21 @@
+
+<p *ngIf="!todo">Loading...</p>
+<div *ngIf="todo?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
+    <h1>Todo - {{ todo.title }}</h1>
+    <!-- #-#-# -->
+    <button (click)="deleteTodo()">Delete</button>
+    <button [routerLink]="['/todos', todo.id, 'edit']">Edit</button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Title</label>
+      <span>{{ todo.title }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Due</label>
+      <span>{{ todo.dueDate }}</span>
+    </div>
+  </div>
+</div>

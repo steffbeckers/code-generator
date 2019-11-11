@@ -6,11 +6,16 @@ import { AccountsListComponent } from './list/list.component';
 import { AccountDetailComponent } from './detail/detail.component';
 import { AccountCreateComponent } from './create/create.component';
 import { AccountUpdateComponent } from './update/update.component';
+import { AccountLinkComponent } from './link/link.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: AccountCreateComponent
+  },
+  {
+    path: ':id/link',
+    component: AccountLinkComponent
   },
   {
     path: ':id/edit',

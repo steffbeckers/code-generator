@@ -136,6 +136,18 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataDetailComponentTSTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\Angular\DataLinkComponentSCSSTemplate.tt">
+      <LastGenOutput>DataLinkComponentSCSSTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
+    <None Update="Templates\Angular\DataLinkComponentHTMLTemplate.tt">
+      <LastGenOutput>DataLinkComponentHTMLTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
+    <None Update="Templates\Angular\DataLinkComponentTSTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataLinkComponentTSTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\Angular\DataListComponentHTMLTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataListComponentHTMLTemplate.cs</LastGenOutput>
@@ -274,6 +286,21 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataDetailComponentTSTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataLinkComponentHTMLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataLinkComponentHTMLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataLinkComponentSCSSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataLinkComponentSCSSTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Angular\DataLinkComponentTSTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataLinkComponentTSTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\Angular\DataListComponentHTMLTemplate.cs">
       <DesignTime>True</DesignTime>

@@ -6,11 +6,16 @@ import { TodosListComponent } from './list/list.component';
 import { TodoDetailComponent } from './detail/detail.component';
 import { TodoCreateComponent } from './create/create.component';
 import { TodoUpdateComponent } from './update/update.component';
+import { TodoLinkComponent } from './link/link.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: TodoCreateComponent
+  },
+  {
+    path: ':id/link',
+    component: TodoLinkComponent
   },
   {
     path: ':id/edit',

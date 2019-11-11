@@ -15,6 +15,7 @@ import { <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.
 import { <#= model.Name #>DetailComponent } from '../<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/detail/detail.component';
 import { <#= model.Name #>CreateComponent } from '../<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/create/create.component';
 import { <#= model.Name #>UpdateComponent } from '../<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/update/update.component';
+import { <#= model.Name #>LinkComponent } from '../<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/link/link.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { <#= model.Name #>UpdateComponent } from '../<#= (!string.IsNullOrEmpty(
     <#= model.Name #>DetailComponent,
     <#= model.Name #>CreateComponent,
     <#= model.Name #>UpdateComponent,
+    <#= model.Name #>LinkComponent,
   ],
   imports: [CommonModule, <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>RoutingModule, SharedModule]
 })

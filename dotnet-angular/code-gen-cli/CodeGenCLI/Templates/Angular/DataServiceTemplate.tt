@@ -45,11 +45,17 @@ export class <#= model.Name #>Service {
   }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
-  // TODO
-  // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
-  
-  // TODO
-  // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
+  // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name.ToLower() #>/{<#= relation.Model.ToLower() #>Id}/link
+  // Links a specific <#= relation.Model.ToLower() #> to <#= model.Name.ToLower() #>.
+  public link<#= relation.Model #>To<#= model.Name #>(<#= model.Name.ToLower() #>Id: string, <#= relation.Model.ToLower() #>Id: string): Observable<<#= model.Name #>> {
+    return this.http.put<<#= model.Name #>>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/${<#= model.Name.ToLower() #>Id}/<#= relation.Name.ToLower() #>/${<#= relation.Model.ToLower() #>Id}/link`, null);
+  }
+
+  // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name.ToLower() #>/{<#= relation.Model.ToLower() #>Id}/unlink
+  // Unlinks a specific <#= relation.Model.ToLower() #> from <#= model.Name.ToLower() #>.
+  public unlink<#= relation.Model #>From<#= model.Name #>(<#= model.Name.ToLower() #>Id: string, <#= relation.Model.ToLower() #>Id: string): Observable<<#= model.Name #>> {
+    return this.http.delete<<#= model.Name #>>(`${environment.api}/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/${<#= model.Name.ToLower() #>Id}/<#= relation.Name.ToLower() #>/${<#= relation.Model.ToLower() #>Id}/unlink`);
+  }
 
 <# } #>
   // DELETE: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}

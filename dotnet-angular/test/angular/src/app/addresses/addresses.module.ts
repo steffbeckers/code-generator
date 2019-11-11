@@ -8,6 +8,7 @@ import { AddressesListComponent } from '../addresses/list/list.component';
 import { AddressDetailComponent } from '../addresses/detail/detail.component';
 import { AddressCreateComponent } from '../addresses/create/create.component';
 import { AddressUpdateComponent } from '../addresses/update/update.component';
+import { AddressLinkComponent } from '../addresses/link/link.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AddressUpdateComponent } from '../addresses/update/update.component';
     AddressDetailComponent,
     AddressCreateComponent,
     AddressUpdateComponent,
+    AddressLinkComponent,
   ],
   imports: [CommonModule, AddressesRoutingModule, SharedModule]
 })

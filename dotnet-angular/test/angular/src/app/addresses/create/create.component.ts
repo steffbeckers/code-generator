@@ -29,10 +29,10 @@ export class AddressCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.addressForm = this.fb.group({
-      street: [''],
-      number: [''],
-      postalCode: [''],
-      city: [''],
+      street: ['', Validators.required],
+      number: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      city: ['', Validators.required],
       primary: [''],
       accountId: [''],
     });

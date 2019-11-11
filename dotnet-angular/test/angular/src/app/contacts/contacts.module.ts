@@ -8,6 +8,7 @@ import { ContactsListComponent } from '../contacts/list/list.component';
 import { ContactDetailComponent } from '../contacts/detail/detail.component';
 import { ContactCreateComponent } from '../contacts/create/create.component';
 import { ContactUpdateComponent } from '../contacts/update/update.component';
+import { ContactLinkComponent } from '../contacts/link/link.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ContactUpdateComponent } from '../contacts/update/update.component';
     ContactDetailComponent,
     ContactCreateComponent,
     ContactUpdateComponent,
+    ContactLinkComponent,
   ],
   imports: [CommonModule, ContactsRoutingModule, SharedModule]
 })

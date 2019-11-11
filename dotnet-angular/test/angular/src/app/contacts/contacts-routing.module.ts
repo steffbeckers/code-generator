@@ -6,11 +6,16 @@ import { ContactsListComponent } from './list/list.component';
 import { ContactDetailComponent } from './detail/detail.component';
 import { ContactCreateComponent } from './create/create.component';
 import { ContactUpdateComponent } from './update/update.component';
+import { ContactLinkComponent } from './link/link.component';
 
 const routes: Routes = [
   {
     path: 'create',
     component: ContactCreateComponent
+  },
+  {
+    path: ':id/link',
+    component: ContactLinkComponent
   },
   {
     path: ':id/edit',
