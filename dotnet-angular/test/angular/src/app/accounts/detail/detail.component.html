@@ -7,7 +7,7 @@
     <button (click)="deleteAccount()">Delete</button>
     <button [routerLink]="['/accounts', account.id, 'edit']">Edit</button>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
     <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
       <label class="bold">Name</label>
       <span>{{ account.name }}</span>
@@ -98,5 +98,24 @@
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <h2>Notes</h2>
     <a routerLink="/notes/create" [queryParams]="{ accountId: account.id }">Add new Note</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="account.notes && account.notes.length === 0">No notes added yet.</p>
+    <table *ngIf="account.notes && account.notes.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Title</th>
+        <th>Body</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let note of account.notes" [routerLink]="['/notes', note.id]">
+          <td>
+            {{ note.title }}
+          </td>
+          <td>
+            {{ note.body }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -7,7 +7,7 @@
     <button (click)="deleteNote()">Delete</button>
     <button [routerLink]="['/notes', note.id, 'edit']">Edit</button>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
     <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
       <label class="bold">Title</label>
       <span>{{ note.title }}</span>
@@ -20,5 +20,32 @@
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <h2>Accounts</h2>
     <a routerLink="/accounts/create" [queryParams]="{ noteId: note.id }">Add new Account</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="note.accounts && note.accounts.length === 0">No accounts added yet.</p>
+    <table *ngIf="note.accounts && note.accounts.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Name</th>
+        <th>Website</th>
+        <th>Telephone</th>
+        <th>Email Address</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of note.accounts" [routerLink]="['/accounts', account.id]">
+          <td>
+            {{ account.name }}
+          </td>
+          <td>
+            {{ account.website }}
+          </td>
+          <td>
+            {{ account.telephone }}
+          </td>
+          <td>
+            {{ account.email }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

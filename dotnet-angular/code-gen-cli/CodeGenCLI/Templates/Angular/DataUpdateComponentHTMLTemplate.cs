@@ -109,7 +109,7 @@ namespace CodeGenCLI.Templates.Angular
             #line default
             #line hidden
             this.Write("Form.invalid\">Save and Close</button>\r\n    </div>\r\n    <div fxLayout=\"row wrap\" f" +
-                    "xLayoutAlign=\"start\" fxLayoutGap=\"10px grid\">\r\n");
+                    "xLayoutAlign=\"start\" fxLayoutGap=\"10px\">\r\n");
             
             #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 

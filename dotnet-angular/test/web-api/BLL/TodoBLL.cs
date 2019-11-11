@@ -29,8 +29,8 @@ namespace Test.API.BLL
 		public async Task<IEnumerable<Todo>> GetAllTodosAsync()
         {
 			// #-#-# {83B8AA9F-713A-42FB-ADE1-8A4AA43886C8}
-			// Before retrieval
-			// #-#-#
+            // Before retrieval
+            // #-#-#
 
             return await this.todoRepository.GetWithLinkedEntitiesAsync();
         }
@@ -41,8 +41,8 @@ namespace Test.API.BLL
 		public async Task<Todo> GetTodoByIdAsync(Guid id)
         {
 			// #-#-# {F838CE2A-D0FB-4F8A-A826-0D653DEECB2B}
-			// Before retrieval
-			// #-#-#
+            // Before retrieval
+            // #-#-#
 
             return await this.todoRepository.GetWithLinkedEntitiesByIdAsync(id);
         }
@@ -56,14 +56,14 @@ namespace Test.API.BLL
             todo.Title = todo.Title.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
-			// Before creation
-			// #-#-#
+            // Before creation
+            // #-#-#
 
 			todo = await this.todoRepository.InsertAsync(todo);
 
 			// #-#-# {1972C619-D2F2-48FD-8474-3A69621B1F78}
-			// After creation
-			// #-#-#
+            // After creation
+            // #-#-#
 
             return todo;
         }
@@ -88,14 +88,14 @@ namespace Test.API.BLL
             todo.DueDate = todoUpdate.DueDate;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
-			// Before update
-			// #-#-#
+            // Before update
+            // #-#-#
 
 			todo = await this.todoRepository.UpdateAsync(todo);
 
 			// #-#-# {983B1B6C-14A7-4925-8571-D77447DF0ADA}
-			// After update
-			// #-#-#
+            // After update
+            // #-#-#
 
             return todo;
         }
@@ -106,14 +106,14 @@ namespace Test.API.BLL
         public async Task<Todo> DeleteTodoAsync(Todo todo)
         {
 			// #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
-			// Before deletion
-			// #-#-#
+            // Before deletion
+            // #-#-#
 
             await this.todoRepository.DeleteAsync(todo);
 
 			// #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
-			// After deletion
-			// #-#-#
+            // After deletion
+            // #-#-#
 
             return todo;
         }

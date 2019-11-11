@@ -7,7 +7,7 @@
     <button (click)="deleteContact()">Delete</button>
     <button [routerLink]="['/contacts', contact.id, 'edit']">Edit</button>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
     <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
       <label class="bold">First Name</label>
       <span>{{ contact.firstName }}</span>

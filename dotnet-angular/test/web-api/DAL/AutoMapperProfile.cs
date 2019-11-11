@@ -1,4 +1,5 @@
 using AutoMapper;
+using System.Linq;
 using Test.API.Models;
 using Test.API.ViewModels;
 
@@ -15,7 +16,13 @@ namespace Test.API.DAL
         public AutoMapperProfile()
         {
             // Accounts
-			CreateMap<Account, AccountVM>();
+			CreateMap<Account, AccountVM>()
+                .ForMember(
+                    x => x.Notes,
+                    x => x.MapFrom(
+                        y => y.AccountNote.Select(z => z.Note)
+                    )
+                );
             CreateMap<AccountVM, Account>();
 
             // Contacts
@@ -27,7 +34,13 @@ namespace Test.API.DAL
             CreateMap<AddressVM, Address>();
 
             // Notes
-			CreateMap<Note, NoteVM>();
+			CreateMap<Note, NoteVM>()
+                .ForMember(
+                    x => x.Accounts,
+                    x => x.MapFrom(
+                        y => y.AccountNote.Select(z => z.Account)
+                    )
+                );
             CreateMap<NoteVM, Note>();
 
             // Todos

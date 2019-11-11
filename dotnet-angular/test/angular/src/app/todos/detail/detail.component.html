@@ -7,7 +7,7 @@
     <button (click)="deleteTodo()">Delete</button>
     <button [routerLink]="['/todos', todo.id, 'edit']">Edit</button>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
     <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
       <label class="bold">Title</label>
       <span>{{ todo.title }}</span>

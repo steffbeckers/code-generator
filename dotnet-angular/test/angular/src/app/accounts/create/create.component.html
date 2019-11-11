@@ -4,7 +4,7 @@
       <h1>Add new Account</h1>
       <button (click)="createAccount()" [disabled]="accountForm.invalid">Add</button>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">Name</label>
         <input formControlName="name" placeholder="Name" required />

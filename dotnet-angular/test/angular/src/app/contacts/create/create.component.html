@@ -4,7 +4,7 @@
       <h1>Add new Contact</h1>
       <button (click)="createContact()" [disabled]="contactForm.invalid">Add</button>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold">First Name</label>
         <input formControlName="firstName" placeholder="First Name" required />

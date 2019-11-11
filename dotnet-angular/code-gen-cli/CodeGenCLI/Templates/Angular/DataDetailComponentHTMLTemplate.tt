@@ -14,7 +14,7 @@
     <button (click)="delete<#= model.Name #>()">Delete</button>
     <button [routerLink]="['/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>', <#= model.Name.ToCamelCase() #>.id, 'edit']">Edit</button>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px grid">
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
     <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
       <label class="bold"><#= property.DisplayName ?? property.Name #></label>
@@ -35,7 +35,7 @@
       </div>
 <# } #>
   </div>
-<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many" || r.Type == "many-to-many")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <h2><#= !string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's' #></h2>
@@ -63,13 +63,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
-<# } #>
-<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
-<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <h2><#= !string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's' #></h2>
-    <a routerLink="/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + 's').ToLower() #>/create" [queryParams]="{ <#= model.Name.ToCamelCase() #>Id: <#= model.Name.ToCamelCase() #>.id }">Add new <#= relationModel.Name #></a>
   </div>
 <# } #>
 </div>
