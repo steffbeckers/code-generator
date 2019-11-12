@@ -137,7 +137,7 @@ namespace Test.API.DAL
 		public override int SaveChanges()
         {
             SoftDeleteLogic();
-            TimeStampsLogic();
+            TimestampsLogic();
 
             return base.SaveChanges();
         }
@@ -145,7 +145,7 @@ namespace Test.API.DAL
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {
             SoftDeleteLogic();
-            TimeStampsLogic();
+            TimestampsLogic();
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
@@ -178,7 +178,7 @@ namespace Test.API.DAL
             }
         }
 
-        private void TimeStampsLogic()
+        private void TimestampsLogic()
         {
             foreach (var entry in ChangeTracker.Entries())
             {
