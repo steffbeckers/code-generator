@@ -45,6 +45,7 @@ namespace Test.API.Controllers
         {
             IEnumerable<Contact> contacts = await this.bll.GetAllContactsAsync();
 
+			// Mapping
             return this.mapper.Map<IEnumerable<Contact>, List<ContactVM>>(contacts);
         }
 
@@ -62,6 +63,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
+			// Mapping
             return this.mapper.Map<Contact, ContactVM>(contact);
         }
 
@@ -84,6 +86,7 @@ namespace Test.API.Controllers
 
             contact = await this.bll.CreateContactAsync(contact);
 
+			// Mapping
             return CreatedAtAction(
 				"GetContact",
 				new { id = contact.Id },
@@ -106,26 +109,12 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Retrieve existing contact
-            Contact contact = await this.bll.GetContactByIdAsync(id);
-            if (contact == null)
-            {
-                return NotFound();
-            }
+			// Mapping
+            Contact contact = this.mapper.Map<ContactVM, Contact>(contactVM);
+
+            contact = await this.bll.UpdateContactAsync(contact);
 
 			// Mapping
-            Contact contactUpdate = this.mapper.Map<ContactVM, Contact>(contactVM);
-
-			// Update fields
-            contact.FirstName = contactUpdate.FirstName;
-            contact.LastName = contactUpdate.LastName;
-            contact.Website = contactUpdate.Website;
-            contact.Telephone = contactUpdate.Telephone;
-            contact.Email = contactUpdate.Email;
-            contact.AccountId = contactUpdate.AccountId;
-			
-            contact = await this.bll.UpdateContactAsync(id, contact);
-
 			return this.mapper.Map<Contact, ContactVM>(contact);
         }
 

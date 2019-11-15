@@ -45,6 +45,7 @@ namespace Test.API.Controllers
         {
             IEnumerable<Todo> todos = await this.bll.GetAllTodosAsync();
 
+			// Mapping
             return this.mapper.Map<IEnumerable<Todo>, List<TodoVM>>(todos);
         }
 
@@ -62,6 +63,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
+			// Mapping
             return this.mapper.Map<Todo, TodoVM>(todo);
         }
 
@@ -84,6 +86,7 @@ namespace Test.API.Controllers
 
             todo = await this.bll.CreateTodoAsync(todo);
 
+			// Mapping
             return CreatedAtAction(
 				"GetTodo",
 				new { id = todo.Id },
@@ -106,22 +109,12 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Retrieve existing todo
-            Todo todo = await this.bll.GetTodoByIdAsync(id);
-            if (todo == null)
-            {
-                return NotFound();
-            }
+			// Mapping
+            Todo todo = this.mapper.Map<TodoVM, Todo>(todoVM);
+
+            todo = await this.bll.UpdateTodoAsync(todo);
 
 			// Mapping
-            Todo todoUpdate = this.mapper.Map<TodoVM, Todo>(todoVM);
-
-			// Update fields
-            todo.Title = todoUpdate.Title;
-            todo.DueDate = todoUpdate.DueDate;
-			
-            todo = await this.bll.UpdateTodoAsync(id, todo);
-
 			return this.mapper.Map<Todo, TodoVM>(todo);
         }
 

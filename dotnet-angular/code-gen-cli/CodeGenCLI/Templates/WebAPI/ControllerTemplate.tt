@@ -52,6 +52,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         {
             IEnumerable<<#= model.Name #>> <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower() #> = await this.bll.GetAll<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Async();
 
+			// Mapping
             return this.mapper.Map<IEnumerable<<#= model.Name #>>, List<<#= model.Name #>VM>>(<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower() #>);
         }
 
@@ -69,6 +70,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 return NotFound();
             }
 
+			// Mapping
             return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>);
         }
 
@@ -91,6 +93,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             <#= model.Name.ToLower() #> = await this.bll.Create<#= model.Name #>Async(<#= model.Name.ToLower() #>);
 
+			// Mapping
             return CreatedAtAction(
 				"Get<#= model.Name #>",
 				new { id = <#= model.Name.ToLower() #>.Id },
@@ -113,26 +116,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 return BadRequest(ModelState);
             }
 
-            // Retrieve existing <#= model.Name.ToLower() #>
-            <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.bll.Get<#= model.Name #>ByIdAsync(id);
-            if (<#= model.Name.ToCamelCase() #> == null)
-            {
-                return NotFound();
-            }
+			// Mapping
+            <#= model.Name #> <#= model.Name.ToCamelCase() #> = this.mapper.Map<<#= model.Name #>VM, <#= model.Name #>>(<#= model.Name.ToCamelCase() #>VM);
+
+            <#= model.Name.ToCamelCase() #> = await this.bll.Update<#= model.Name #>Async(<#= model.Name.ToLower() #>);
 
 			// Mapping
-            <#= model.Name #> <#= model.Name.ToCamelCase() #>Update = this.mapper.Map<<#= model.Name #>VM, <#= model.Name #>>(<#= model.Name.ToCamelCase() #>VM);
-
-			// Update fields
-<# foreach (CodeGenModelProperty property in model.Properties) { #>
-            <#= model.Name.ToCamelCase() #>.<#= property.Name #> = <#= model.Name.ToCamelCase() #>Update.<#= property.Name #>;
-<# } #>
-<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-            <#= model.Name.ToCamelCase() #>.<#= relation.Name #>Id = <#= model.Name.ToCamelCase() #>Update.<#= relation.Name #>Id;
-<# } #>
-			
-            <#= model.Name.ToCamelCase() #> = await this.bll.Update<#= model.Name #>Async(id, <#= model.Name.ToLower() #>);
-
 			return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
         }
 

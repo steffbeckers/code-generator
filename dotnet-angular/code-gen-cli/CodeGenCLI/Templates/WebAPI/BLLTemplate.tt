@@ -18,7 +18,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 	/// </summary>
     public class <#= model.Name #>BLL
     {
-        private readonly <#= model.Name #>Repository <#= model.Name.ToLower() #>Repository;
+        private readonly <#= model.Name #>Repository <#= model.Name.ToCamelCase() #>Repository;
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
         private readonly <#= relation.Through #>Repository <#= relation.Through.ToCamelCase() #>Repository;
 <# } #>
@@ -27,14 +27,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// The constructor of the <#= model.Name #> business logic layer.
 		/// </summary>
         public <#= model.Name #>BLL(
-			<#= model.Name #>Repository <#= model.Name.ToLower() #>Repository<#= (model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).ToList().Count() > 0 ? "," : "") #>
+			<#= model.Name #>Repository <#= model.Name.ToCamelCase() #>Repository<#= (model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).ToList().Count() > 0 ? "," : "") #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
 <# CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); #>
 			<#= relation.Through #>Repository <#= relation.Through.ToCamelCase() #>Repository<#= (!relation.Equals(lastModelManyToManyRelation) ? "," : "") #>
 <# } #>
 		)
         {
-            this.<#= model.Name.ToLower() #>Repository = <#= model.Name.ToLower() #>Repository;
+            this.<#= model.Name.ToCamelCase() #>Repository = <#= model.Name.ToCamelCase() #>Repository;
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
 			this.<#= relation.Through.ToCamelCase() #>Repository = <#= relation.Through.ToCamelCase() #>Repository;
 <# } #>
@@ -49,7 +49,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			// Before retrieval
 			// #-#-#
 
-            return await this.<#= model.Name.ToLower() #>Repository.GetWithLinkedEntitiesAsync();
+            return await this.<#= model.Name.ToCamelCase() #>Repository.GetWithLinkedEntitiesAsync();
         }
 
 		/// <summary>
@@ -61,39 +61,39 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			// Before retrieval
 			// #-#-#
 
-            return await this.<#= model.Name.ToLower() #>Repository.GetWithLinkedEntitiesByIdAsync(id);
+            return await this.<#= model.Name.ToCamelCase() #>Repository.GetWithLinkedEntitiesByIdAsync(id);
         }
 
 		/// <summary>
 		/// Creates a new <#= model.Name.ToLower() #> record.
 		/// </summary>
-        public async Task<<#= model.Name #>> Create<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToLower() #>)
+        public async Task<<#= model.Name #>> Create<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToCamelCase() #>)
         {
 			// Trimming strings
 <# foreach (CodeGenModelProperty property in model.Properties.Where(p => p.Type == "string")) { #>
-            <#= model.Name.ToLower() #>.<#= property.Name #> = <#= model.Name.ToLower() #>.<#= property.Name #>.Trim();
+            <#= model.Name.ToCamelCase() #>.<#= property.Name #> = <#= model.Name.ToCamelCase() #>.<#= property.Name #>.Trim();
 <# } #>
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
 			// Before creation
 			// #-#-#
 
-			<#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.InsertAsync(<#= model.Name.ToLower() #>);
+			<#= model.Name.ToCamelCase() #> = await this.<#= model.Name.ToCamelCase() #>Repository.InsertAsync(<#= model.Name.ToCamelCase() #>);
 
 			// #-#-# {1972C619-D2F2-48FD-8474-3A69621B1F78}
 			// After creation
 			// #-#-#
 
-            return <#= model.Name.ToLower() #>;
+            return <#= model.Name.ToCamelCase() #>;
         }
 
 		/// <summary>
 		/// Updates an existing <#= model.Name.ToLower() #> record by Id.
 		/// </summary>
-        public async Task<<#= model.Name #>> Update<#= model.Name #>Async(Guid id, <#= model.Name #> <#= model.Name.ToLower() #>Update)
+        public async Task<<#= model.Name #>> Update<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToCamelCase() #>Update)
         {
             // Retrieve existing
-            <#= model.Name #> <#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.GetByIdAsync(id);
+            <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.<#= model.Name.ToCamelCase() #>Repository.GetByIdAsync(<#= model.Name.ToCamelCase() #>Update.Id);
             if (<#= model.Name.ToLower() #> == null)
             {
                 return null;
@@ -101,28 +101,29 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
 			// Trimming strings
 <# foreach (CodeGenModelProperty property in model.Properties.Where(p => p.Type == "string")) { #>
-            <#= model.Name.ToLower() #>Update.<#= property.Name #> = <#= model.Name.ToLower() #>Update.<#= property.Name #>.Trim();
+            if (!string.IsNullOrEmpty(<#= model.Name.ToCamelCase() #>Update.<#= property.Name #>))
+                <#= model.Name.ToCamelCase() #>Update.<#= property.Name #> = <#= model.Name.ToCamelCase() #>Update.<#= property.Name #>.Trim();
 <# } #>
 
             // Mapping
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
-            <#= model.Name.ToLower() #>.<#= property.Name #> = <#= model.Name.ToLower() #>Update.<#= property.Name #>;
+            <#= model.Name.ToCamelCase() #>.<#= property.Name #> = <#= model.Name.ToCamelCase() #>Update.<#= property.Name #>;
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-            <#= model.Name.ToLower() #>.<#= relation.Name #>Id = <#= model.Name.ToLower() #>Update.<#= relation.Name #>Id;
+            <#= model.Name.ToCamelCase() #>.<#= relation.Name #>Id = <#= model.Name.ToCamelCase() #>Update.<#= relation.Name #>Id;
 <# } #>
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update
 			// #-#-#
 
-			<#= model.Name.ToLower() #> = await this.<#= model.Name.ToLower() #>Repository.UpdateAsync(<#= model.Name.ToLower() #>);
+			<#= model.Name.ToCamelCase() #> = await this.<#= model.Name.ToCamelCase() #>Repository.UpdateAsync(<#= model.Name.ToCamelCase() #>);
 
 			// #-#-# {983B1B6C-14A7-4925-8571-D77447DF0ADA}
 			// After update
 			// #-#-#
 
-            return <#= model.Name.ToLower() #>;
+            return <#= model.Name.ToCamelCase() #>;
         }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
@@ -169,7 +170,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			// Before deletion
 			// #-#-#
 
-            await this.<#= model.Name.ToLower() #>Repository.DeleteAsync(<#= model.Name.ToLower() #>);
+            await this.<#= model.Name.ToCamelCase() #>Repository.DeleteAsync(<#= model.Name.ToLower() #>);
 
 			// #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
 			// After deletion

@@ -77,20 +77,24 @@ namespace Test.API.BLL
 		/// <summary>
 		/// Updates an existing account record by Id.
 		/// </summary>
-        public async Task<Account> UpdateAccountAsync(Guid id, Account accountUpdate)
+        public async Task<Account> UpdateAccountAsync(Account accountUpdate)
         {
             // Retrieve existing
-            Account account = await this.accountRepository.GetByIdAsync(id);
+            Account account = await this.accountRepository.GetByIdAsync(accountUpdate.Id);
             if (account == null)
             {
                 return null;
             }
 
 			// Trimming strings
-            accountUpdate.Name = accountUpdate.Name.Trim();
-            accountUpdate.Website = accountUpdate.Website.Trim();
-            accountUpdate.Telephone = accountUpdate.Telephone.Trim();
-            accountUpdate.Email = accountUpdate.Email.Trim();
+            if (!string.IsNullOrEmpty(accountUpdate.Name))
+                accountUpdate.Name = accountUpdate.Name.Trim();
+            if (!string.IsNullOrEmpty(accountUpdate.Website))
+                accountUpdate.Website = accountUpdate.Website.Trim();
+            if (!string.IsNullOrEmpty(accountUpdate.Telephone))
+                accountUpdate.Telephone = accountUpdate.Telephone.Trim();
+            if (!string.IsNullOrEmpty(accountUpdate.Email))
+                accountUpdate.Email = accountUpdate.Email.Trim();
 
             // Mapping
             account.Name = accountUpdate.Name;

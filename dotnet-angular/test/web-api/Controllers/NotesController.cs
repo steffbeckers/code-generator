@@ -45,6 +45,7 @@ namespace Test.API.Controllers
         {
             IEnumerable<Note> notes = await this.bll.GetAllNotesAsync();
 
+			// Mapping
             return this.mapper.Map<IEnumerable<Note>, List<NoteVM>>(notes);
         }
 
@@ -62,6 +63,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
+			// Mapping
             return this.mapper.Map<Note, NoteVM>(note);
         }
 
@@ -84,6 +86,7 @@ namespace Test.API.Controllers
 
             note = await this.bll.CreateNoteAsync(note);
 
+			// Mapping
             return CreatedAtAction(
 				"GetNote",
 				new { id = note.Id },
@@ -106,22 +109,12 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Retrieve existing note
-            Note note = await this.bll.GetNoteByIdAsync(id);
-            if (note == null)
-            {
-                return NotFound();
-            }
+			// Mapping
+            Note note = this.mapper.Map<NoteVM, Note>(noteVM);
+
+            note = await this.bll.UpdateNoteAsync(note);
 
 			// Mapping
-            Note noteUpdate = this.mapper.Map<NoteVM, Note>(noteVM);
-
-			// Update fields
-            note.Title = noteUpdate.Title;
-            note.Body = noteUpdate.Body;
-			
-            note = await this.bll.UpdateNoteAsync(id, note);
-
 			return this.mapper.Map<Note, NoteVM>(note);
         }
 

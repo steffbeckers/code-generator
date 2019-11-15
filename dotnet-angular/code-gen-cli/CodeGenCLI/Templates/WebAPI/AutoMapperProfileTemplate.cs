@@ -35,23 +35,24 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("using AutoMapper;\r\nusing System.Linq;\r\nusing ");
+            this.Write("using AutoMapper;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System" +
+                    ".Linq;\r\nusing ");
             
-            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 12 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".Models;\r\nusing ");
             
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".ViewModels;\r\n\r\nnamespace ");
             
-            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
@@ -70,128 +71,196 @@ namespace CodeGenCLI.Templates.WebAPI
         {
 ");
             
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  CodeGenModel lastModel = config.Models.Last(); 
             
             #line default
             #line hidden
             
-            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { 
             
             #line default
             #line hidden
             
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  List<CodeGenModel> manyToManysWithModel = manyToManyModels.Where(m => m.Relations.SingleOrDefault(r => r.Model == model.Name) != null).ToList(); 
             
             #line default
             #line hidden
             this.Write("            // ");
             
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\tCreateMap<");
             
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM>()");
             
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((manyToManysWithModel.Count == 0 ? ";" : "")));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  foreach (CodeGenModel manyToManyWithModel in manyToManysWithModel) { 
             
             #line default
             #line hidden
             
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  CodeGenModelRelation manyToManyOtherRelation = manyToManyWithModel.Relations.First(r => r.Model != model.Name); 
             
             #line default
             #line hidden
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  CodeGenModel manyToManyOtherRelationModel = config.Models.First(x => x.Name == manyToManyOtherRelation.Model); 
             
             #line default
             #line hidden
             this.Write("                .ForMember(\r\n                    x => x.");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(manyToManyOtherRelationModel.NamePlural) ? manyToManyOtherRelationModel.NamePlural : manyToManyOtherRelationModel.Name + "s"));
             
             #line default
             #line hidden
             this.Write(",\r\n                    x => x.MapFrom(\r\n                        y => y.");
             
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModel.Name));
             
             #line default
             #line hidden
             this.Write(".Select(z => z.");
             
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyOtherRelation.Model));
             
             #line default
             #line hidden
             this.Write(")\r\n                    )\r\n                );\r\n");
             
-            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("            CreateMap<");
             
-            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("VM, ");
             
-            #line 40 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write(">();\r\n");
+            this.Write(">()");
             
-            #line 41 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
- if (!model.Equals(lastModel)) { 
+            #line 42 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((manyToManysWithModel.Count == 0 ? ";" : "")));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
             #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
- } 
+ foreach (CodeGenModel manyToManyWithModel in manyToManysWithModel) { 
             
             #line default
             #line hidden
             
             #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+ CodeGenModelRelation manyToManyOtherRelation = manyToManyWithModel.Relations.First(r => r.Model != model.Name); 
+            
+            #line default
+            #line hidden
+            
+            #line 45 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+ CodeGenModel manyToManyOtherRelationModel = config.Models.First(x => x.Name == manyToManyOtherRelation.Model); 
+            
+            #line default
+            #line hidden
+            this.Write("                .ForMember(\r\n                    x => x.");
+            
+            #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModel.Name));
+            
+            #line default
+            #line hidden
+            this.Write(",\r\n                    x => x.MapFrom(\r\n                        y => new List<");
+            
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModel.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">() {\r\n                            new ");
+            
+            #line 50 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModel.Name));
+            
+            #line default
+            #line hidden
+            this.Write("()\r\n                            {\r\n                                ");
+            
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyOtherRelation.Model));
+            
+            #line default
+            #line hidden
+            this.Write("Id = (Guid)y.");
+            
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyOtherRelation.Model));
+            
+            #line default
+            #line hidden
+            this.Write("Id\r\n                            }\r\n                        }\r\n                   " +
+                    " )\r\n                );\r\n");
+            
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+ if (!model.Equals(lastModel)) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AutoMapperProfileTemplate.tt"
  } 
             
             #line default

@@ -45,6 +45,7 @@ namespace Test.API.Controllers
         {
             IEnumerable<Account> accounts = await this.bll.GetAllAccountsAsync();
 
+			// Mapping
             return this.mapper.Map<IEnumerable<Account>, List<AccountVM>>(accounts);
         }
 
@@ -62,6 +63,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
+			// Mapping
             return this.mapper.Map<Account, AccountVM>(account);
         }
 
@@ -84,6 +86,7 @@ namespace Test.API.Controllers
 
             account = await this.bll.CreateAccountAsync(account);
 
+			// Mapping
             return CreatedAtAction(
 				"GetAccount",
 				new { id = account.Id },
@@ -106,24 +109,12 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Retrieve existing account
-            Account account = await this.bll.GetAccountByIdAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
+			// Mapping
+            Account account = this.mapper.Map<AccountVM, Account>(accountVM);
+
+            account = await this.bll.UpdateAccountAsync(account);
 
 			// Mapping
-            Account accountUpdate = this.mapper.Map<AccountVM, Account>(accountVM);
-
-			// Update fields
-            account.Name = accountUpdate.Name;
-            account.Website = accountUpdate.Website;
-            account.Telephone = accountUpdate.Telephone;
-            account.Email = accountUpdate.Email;
-			
-            account = await this.bll.UpdateAccountAsync(id, account);
-
 			return this.mapper.Map<Account, AccountVM>(account);
         }
 

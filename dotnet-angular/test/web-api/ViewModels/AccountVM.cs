@@ -64,6 +64,8 @@ namespace Test.API.ViewModels
 
 		//// Many-to-many
 
+        public Guid? NoteId { get; set; }
+
 		/// <summary>
         /// The related Notes of Account.
         /// </summary>

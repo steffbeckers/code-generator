@@ -1,4 +1,6 @@
 using AutoMapper;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Test.API.Models;
 using Test.API.ViewModels;
@@ -23,7 +25,18 @@ namespace Test.API.DAL
                         y => y.AccountNote.Select(z => z.Note)
                     )
                 );
-            CreateMap<AccountVM, Account>();
+            CreateMap<AccountVM, Account>()
+                .ForMember(
+                    x => x.AccountNote,
+                    x => x.MapFrom(
+                        y => new List<AccountNote>() {
+                            new AccountNote()
+                            {
+                                NoteId = (Guid)y.NoteId
+                            }
+                        }
+                    )
+                );
 
             // Contacts
 			CreateMap<Contact, ContactVM>();
@@ -41,7 +54,18 @@ namespace Test.API.DAL
                         y => y.AccountNote.Select(z => z.Account)
                     )
                 );
-            CreateMap<NoteVM, Note>();
+            CreateMap<NoteVM, Note>()
+                .ForMember(
+                    x => x.AccountNote,
+                    x => x.MapFrom(
+                        y => new List<AccountNote>() {
+                            new AccountNote()
+                            {
+                                AccountId = (Guid)y.AccountId
+                            }
+                        }
+                    )
+                );
 
             // Todos
 			CreateMap<Todo, TodoVM>();

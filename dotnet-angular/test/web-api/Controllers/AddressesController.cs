@@ -45,6 +45,7 @@ namespace Test.API.Controllers
         {
             IEnumerable<Address> addresses = await this.bll.GetAllAddressesAsync();
 
+			// Mapping
             return this.mapper.Map<IEnumerable<Address>, List<AddressVM>>(addresses);
         }
 
@@ -62,6 +63,7 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
+			// Mapping
             return this.mapper.Map<Address, AddressVM>(address);
         }
 
@@ -84,6 +86,7 @@ namespace Test.API.Controllers
 
             address = await this.bll.CreateAddressAsync(address);
 
+			// Mapping
             return CreatedAtAction(
 				"GetAddress",
 				new { id = address.Id },
@@ -106,26 +109,12 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Retrieve existing address
-            Address address = await this.bll.GetAddressByIdAsync(id);
-            if (address == null)
-            {
-                return NotFound();
-            }
+			// Mapping
+            Address address = this.mapper.Map<AddressVM, Address>(addressVM);
+
+            address = await this.bll.UpdateAddressAsync(address);
 
 			// Mapping
-            Address addressUpdate = this.mapper.Map<AddressVM, Address>(addressVM);
-
-			// Update fields
-            address.Street = addressUpdate.Street;
-            address.Number = addressUpdate.Number;
-            address.PostalCode = addressUpdate.PostalCode;
-            address.City = addressUpdate.City;
-            address.Primary = addressUpdate.Primary;
-            address.AccountId = addressUpdate.AccountId;
-			
-            address = await this.bll.UpdateAddressAsync(id, address);
-
 			return this.mapper.Map<Address, AddressVM>(address);
         }
 

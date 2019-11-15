@@ -71,17 +71,18 @@ namespace Test.API.BLL
 		/// <summary>
 		/// Updates an existing todo record by Id.
 		/// </summary>
-        public async Task<Todo> UpdateTodoAsync(Guid id, Todo todoUpdate)
+        public async Task<Todo> UpdateTodoAsync(Todo todoUpdate)
         {
             // Retrieve existing
-            Todo todo = await this.todoRepository.GetByIdAsync(id);
+            Todo todo = await this.todoRepository.GetByIdAsync(todoUpdate.Id);
             if (todo == null)
             {
                 return null;
             }
 
 			// Trimming strings
-            todoUpdate.Title = todoUpdate.Title.Trim();
+            if (!string.IsNullOrEmpty(todoUpdate.Title))
+                todoUpdate.Title = todoUpdate.Title.Trim();
 
             // Mapping
             todo.Title = todoUpdate.Title;

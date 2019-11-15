@@ -29,7 +29,7 @@
             Creates a new account record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.UpdateAccountAsync(System.Guid,Test.API.Models.Account)">
+        <member name="M:Test.API.BLL.AccountBLL.UpdateAccountAsync(Test.API.Models.Account)">
             <summary>
             Updates an existing account record by Id.
             </summary>
@@ -64,7 +64,7 @@
             Creates a new address record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AddressBLL.UpdateAddressAsync(System.Guid,Test.API.Models.Address)">
+        <member name="M:Test.API.BLL.AddressBLL.UpdateAddressAsync(Test.API.Models.Address)">
             <summary>
             Updates an existing address record by Id.
             </summary>
@@ -99,7 +99,7 @@
             Creates a new contact record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.UpdateContactAsync(System.Guid,Test.API.Models.Contact)">
+        <member name="M:Test.API.BLL.ContactBLL.UpdateContactAsync(Test.API.Models.Contact)">
             <summary>
             Updates an existing contact record by Id.
             </summary>
@@ -134,7 +134,7 @@
             Creates a new note record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.NoteBLL.UpdateNoteAsync(System.Guid,Test.API.Models.Note)">
+        <member name="M:Test.API.BLL.NoteBLL.UpdateNoteAsync(Test.API.Models.Note)">
             <summary>
             Updates an existing note record by Id.
             </summary>
@@ -169,7 +169,7 @@
             Creates a new todo record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.TodoBLL.UpdateTodoAsync(System.Guid,Test.API.Models.Todo)">
+        <member name="M:Test.API.BLL.TodoBLL.UpdateTodoAsync(Test.API.Models.Todo)">
             <summary>
             Updates an existing todo record by Id.
             </summary>

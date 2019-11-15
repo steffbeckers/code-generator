@@ -6,6 +6,8 @@
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <# List<CodeGenModel> manyToManyModels = config.Models.Where(m => m.ManyToMany).ToList(); #>
 using AutoMapper;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.ViewModels;
@@ -37,7 +39,22 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                     )
                 );
 <# } #>
-            CreateMap<<#= model.Name #>VM, <#= model.Name #>>();
+            CreateMap<<#= model.Name #>VM, <#= model.Name #>>()<#= (manyToManysWithModel.Count == 0 ? ";" : "") #>
+<# foreach (CodeGenModel manyToManyWithModel in manyToManysWithModel) { #>
+<# CodeGenModelRelation manyToManyOtherRelation = manyToManyWithModel.Relations.First(r => r.Model != model.Name); #>
+<# CodeGenModel manyToManyOtherRelationModel = config.Models.First(x => x.Name == manyToManyOtherRelation.Model); #>
+                .ForMember(
+                    x => x.<#= manyToManyWithModel.Name #>,
+                    x => x.MapFrom(
+                        y => new List<<#= manyToManyWithModel.Name #>>() {
+                            new <#= manyToManyWithModel.Name #>()
+                            {
+                                <#= manyToManyOtherRelation.Model #>Id = (Guid)y.<#= manyToManyOtherRelation.Model #>Id
+                            }
+                        }
+                    )
+                );
+<# } #>
 <# if (!model.Equals(lastModel)) { #>
 
 <# } #>

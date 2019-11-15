@@ -75,21 +75,26 @@ namespace Test.API.BLL
 		/// <summary>
 		/// Updates an existing contact record by Id.
 		/// </summary>
-        public async Task<Contact> UpdateContactAsync(Guid id, Contact contactUpdate)
+        public async Task<Contact> UpdateContactAsync(Contact contactUpdate)
         {
             // Retrieve existing
-            Contact contact = await this.contactRepository.GetByIdAsync(id);
+            Contact contact = await this.contactRepository.GetByIdAsync(contactUpdate.Id);
             if (contact == null)
             {
                 return null;
             }
 
 			// Trimming strings
-            contactUpdate.FirstName = contactUpdate.FirstName.Trim();
-            contactUpdate.LastName = contactUpdate.LastName.Trim();
-            contactUpdate.Website = contactUpdate.Website.Trim();
-            contactUpdate.Telephone = contactUpdate.Telephone.Trim();
-            contactUpdate.Email = contactUpdate.Email.Trim();
+            if (!string.IsNullOrEmpty(contactUpdate.FirstName))
+                contactUpdate.FirstName = contactUpdate.FirstName.Trim();
+            if (!string.IsNullOrEmpty(contactUpdate.LastName))
+                contactUpdate.LastName = contactUpdate.LastName.Trim();
+            if (!string.IsNullOrEmpty(contactUpdate.Website))
+                contactUpdate.Website = contactUpdate.Website.Trim();
+            if (!string.IsNullOrEmpty(contactUpdate.Telephone))
+                contactUpdate.Telephone = contactUpdate.Telephone.Trim();
+            if (!string.IsNullOrEmpty(contactUpdate.Email))
+                contactUpdate.Email = contactUpdate.Email.Trim();
 
             // Mapping
             contact.FirstName = contactUpdate.FirstName;

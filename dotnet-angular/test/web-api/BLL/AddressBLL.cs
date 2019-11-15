@@ -74,20 +74,24 @@ namespace Test.API.BLL
 		/// <summary>
 		/// Updates an existing address record by Id.
 		/// </summary>
-        public async Task<Address> UpdateAddressAsync(Guid id, Address addressUpdate)
+        public async Task<Address> UpdateAddressAsync(Address addressUpdate)
         {
             // Retrieve existing
-            Address address = await this.addressRepository.GetByIdAsync(id);
+            Address address = await this.addressRepository.GetByIdAsync(addressUpdate.Id);
             if (address == null)
             {
                 return null;
             }
 
 			// Trimming strings
-            addressUpdate.Street = addressUpdate.Street.Trim();
-            addressUpdate.Number = addressUpdate.Number.Trim();
-            addressUpdate.PostalCode = addressUpdate.PostalCode.Trim();
-            addressUpdate.City = addressUpdate.City.Trim();
+            if (!string.IsNullOrEmpty(addressUpdate.Street))
+                addressUpdate.Street = addressUpdate.Street.Trim();
+            if (!string.IsNullOrEmpty(addressUpdate.Number))
+                addressUpdate.Number = addressUpdate.Number.Trim();
+            if (!string.IsNullOrEmpty(addressUpdate.PostalCode))
+                addressUpdate.PostalCode = addressUpdate.PostalCode.Trim();
+            if (!string.IsNullOrEmpty(addressUpdate.City))
+                addressUpdate.City = addressUpdate.City.Trim();
 
             // Mapping
             address.Street = addressUpdate.Street;

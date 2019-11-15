@@ -97,6 +97,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		//// Many-to-many
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+        public Guid? <#= relation.Model #>Id { get; set; }
+
 		/// <summary>
         /// The related <#= relation.Name #> of <#= model.Name #>.
         /// </summary>

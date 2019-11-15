@@ -75,18 +75,20 @@ namespace Test.API.BLL
 		/// <summary>
 		/// Updates an existing note record by Id.
 		/// </summary>
-        public async Task<Note> UpdateNoteAsync(Guid id, Note noteUpdate)
+        public async Task<Note> UpdateNoteAsync(Note noteUpdate)
         {
             // Retrieve existing
-            Note note = await this.noteRepository.GetByIdAsync(id);
+            Note note = await this.noteRepository.GetByIdAsync(noteUpdate.Id);
             if (note == null)
             {
                 return null;
             }
 
 			// Trimming strings
-            noteUpdate.Title = noteUpdate.Title.Trim();
-            noteUpdate.Body = noteUpdate.Body.Trim();
+            if (!string.IsNullOrEmpty(noteUpdate.Title))
+                noteUpdate.Title = noteUpdate.Title.Trim();
+            if (!string.IsNullOrEmpty(noteUpdate.Body))
+                noteUpdate.Body = noteUpdate.Body.Trim();
 
             // Mapping
             note.Title = noteUpdate.Title;
