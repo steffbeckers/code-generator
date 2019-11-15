@@ -28,6 +28,12 @@
         <input formControlName="<#= relation.Name.ToCamelCase() #>Id" placeholder="<#= relation.DisplayName ?? relation.Name #> ID"<# if (relation.Required) { #> required<# } #> />
       </div>
 <# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold"><#= relation.Model #> ID</label>
+        <input formControlName="<#= relation.Model.ToCamelCase() #>Id" placeholder="<#= relation.Model #> ID"<# if (relation.Required) { #> required<# } #> />
+      </div>
+<# } #>
     </div>
   </form>
 </div>

@@ -14,7 +14,7 @@ const routes: Routes = [
     component: AddressCreateComponent
   },
   {
-    path: ':id/link',
+    path: ':id/link/:model',
     component: AddressLinkComponent
   },
   {

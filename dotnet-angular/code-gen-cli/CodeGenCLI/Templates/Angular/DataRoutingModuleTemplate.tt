@@ -21,7 +21,7 @@ const routes: Routes = [
     component: <#= model.Name #>CreateComponent
   },
   {
-    path: ':id/link',
+    path: ':id/link/:model',
     component: <#= model.Name #>LinkComponent
   },
   {

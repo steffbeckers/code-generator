@@ -31,6 +31,7 @@ export class NoteCreateComponent implements OnInit {
     this.noteForm = this.fb.group({
       title: ['', Validators.required],
       body: [''],
+      accountId: [''],
     });
 
     // Patch query params to form from URL

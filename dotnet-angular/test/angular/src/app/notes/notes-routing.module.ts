@@ -14,7 +14,7 @@ const routes: Routes = [
     component: NoteCreateComponent
   },
   {
-    path: ':id/link',
+    path: ':id/link/:model',
     component: NoteLinkComponent
   },
   {

@@ -541,14 +541,14 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write(".id, \'link\']\" fragment=\"");
+            this.Write(".id, \'link\', \'");
             
             #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relationModel.Name.ToCamelCase()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relationModel.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("\">Link existing ");
+            this.Write("\']\">Link existing ");
             
             #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataDetailComponentHTMLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relationModel.Name));

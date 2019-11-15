@@ -74,7 +74,7 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("CreateComponent\r\n  },\r\n  {\r\n    path: \':id/link\',\r\n    component: ");
+            this.Write("CreateComponent\r\n  },\r\n  {\r\n    path: \':id/link/:model\',\r\n    component: ");
             
             #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataRoutingModuleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));

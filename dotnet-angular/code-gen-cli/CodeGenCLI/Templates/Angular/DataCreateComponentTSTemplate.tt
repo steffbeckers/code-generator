@@ -42,6 +42,9 @@ export class <#= model.Name #>CreateComponent implements OnInit {
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
       <#= relation.Name.ToCamelCase() #>Id: [''<# if (relation.Required) { #>, Validators.required<# } #>],
 <# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+      <#= relation.Model.ToCamelCase() #>Id: [''<# if (relation.Required) { #>, Validators.required<# } #>],
+<# } #>
     });
 
     // Patch query params to form from URL

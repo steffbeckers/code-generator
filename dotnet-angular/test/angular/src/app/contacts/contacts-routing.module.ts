@@ -14,7 +14,7 @@ const routes: Routes = [
     component: ContactCreateComponent
   },
   {
-    path: ':id/link',
+    path: ':id/link/:model',
     component: ContactLinkComponent
   },
   {

@@ -20,7 +20,7 @@
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <h2>Accounts</h2>
     <a routerLink="/accounts/create" [queryParams]="{ noteId: note.id }">Add new Account</a>
-    <a [routerLink]="['/notes', note.id, 'link']" fragment="account">Link existing Account</a>
+    <a [routerLink]="['/notes', note.id, 'link', 'account']">Link existing Account</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
     <p *ngIf="note.accounts && note.accounts.length === 0">No accounts added yet.</p>

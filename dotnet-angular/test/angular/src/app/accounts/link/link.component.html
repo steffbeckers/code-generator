@@ -1,29 +1,60 @@
-
-<p *ngIf="!account">Loading...</p>
-<div *ngIf="account?.id" fxLayout="column" fxLayoutAlign="start">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
-    <h1>Account - {{ account.name }}</h1>
-    <!-- #-#-# -->
-    <button (click)="deleteAccount()">Delete</button>
-    <button [routerLink]="['/accounts', account.id, 'edit']">Edit</button>
+<div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px" fxFlex>
+  <p *ngIf="!account">Loading...</p>
+  <div *ngIf="account?.id" fxLayout="column" fxLayoutAlign="start" fxFlex>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1 [routerLink]="['/accounts', account.id]">
+        Account - {{ account.name }}
+      </h1>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="10px">
+      <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px" fxFlex>
+        <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+          <label class="bold">Name</label>
+          <span>{{ account.name }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+          <label class="bold">Website</label>
+          <span>{{ account.website }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+          <label class="bold">Telephone</label>
+          <span>{{ account.telephone }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+          <label class="bold">Email Address</label>
+          <span>{{ account.email }}</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
-    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
-      <label class="bold">Name</label>
-      <span>{{ account.name }}</span>
+  <p *ngIf="!account">Loading...</p>
+  <div *ngIf="account?.id" fxLayout="column" fxLayoutAlign="start" fxFlex>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Notes</h1>
     </div>
-    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
-      <label class="bold">Website</label>
-      <span>{{ account.website }}</span>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
-      <label class="bold">Telephone</label>
-      <span>{{ account.telephone }}</span>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
-      <label class="bold">Email Address</label>
-      <span>{{ account.email }}</span>
+    <div fxLayout="row" fxLayoutAlign="start">
+      <p *ngIf="!notes">Loading...</p>
+      <p *ngIf="notes && notes.length === 0">No notes added yet.</p>
+      <table *ngIf="notes && notes.length > 0" cellspacing="0" cellpadding="5">
+        <thead>
+          <th>Title</th>
+          <th>Body</th>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let note of notes"
+            [routerLink]="['/accounts', account.id]"
+            class="cursor--pointer"
+          >
+            <td>
+              {{ note.title }}
+            </td>
+            <td>
+              {{ note.body }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

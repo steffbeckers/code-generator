@@ -14,7 +14,7 @@ const routes: Routes = [
     component: AccountCreateComponent
   },
   {
-    path: ':id/link',
+    path: ':id/link/:model',
     component: AccountLinkComponent
   },
   {

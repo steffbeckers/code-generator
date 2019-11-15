@@ -14,7 +14,7 @@ const routes: Routes = [
     component: TodoCreateComponent
   },
   {
-    path: ':id/link',
+    path: ':id/link/:model',
     component: TodoLinkComponent
   },
   {
