@@ -82,7 +82,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		public override int SaveChanges()
         {
             SoftDeleteLogic();
-            TimeStampsLogic();
+            TimestampsLogic();
 
             return base.SaveChanges();
         }
@@ -90,7 +90,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {
             SoftDeleteLogic();
-            TimeStampsLogic();
+            TimestampsLogic();
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
@@ -124,7 +124,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             }
         }
 
-        private void TimeStampsLogic()
+        private void TimestampsLogic()
         {
             foreach (var entry in ChangeTracker.Entries())
             {
