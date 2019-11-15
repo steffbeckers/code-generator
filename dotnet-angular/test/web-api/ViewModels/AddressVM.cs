@@ -24,21 +24,25 @@ namespace Test.API.ViewModels
 		/// <summary>
         /// The Street property of Address.
         /// </summary>
+        [Required]
 		public string Street { get; set; }
 
 		/// <summary>
         /// The Number property of Address.
         /// </summary>
+        [Required]
 		public string Number { get; set; }
 
 		/// <summary>
         /// The PostalCode property of Address.
         /// </summary>
+        [Required]
 		public string PostalCode { get; set; }
 
 		/// <summary>
         /// The City property of Address.
         /// </summary>
+        [Required]
 		public string City { get; set; }
 
 		/// <summary>

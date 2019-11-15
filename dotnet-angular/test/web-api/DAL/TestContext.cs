@@ -81,6 +81,10 @@ namespace Test.API.DAL
 			modelBuilder.Entity<Address>().HasKey(e => e.Id);
 
             // Required properties
+            modelBuilder.Entity<Address>().Property(e => e.Street).IsRequired();
+            modelBuilder.Entity<Address>().Property(e => e.Number).IsRequired();
+            modelBuilder.Entity<Address>().Property(e => e.PostalCode).IsRequired();
+            modelBuilder.Entity<Address>().Property(e => e.City).IsRequired();
 
             #endregion
 
