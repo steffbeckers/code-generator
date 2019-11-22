@@ -27,6 +27,7 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("angular")]
         public CodeGenConfigAngular Angular { get; set; }
 
+        [JsonProperty("models")]
         public IList<CodeGenModel> Models { get; set; }
     }
 }

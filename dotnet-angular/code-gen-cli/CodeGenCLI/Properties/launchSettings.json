@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenCLI": {
       "commandName": "Project",
-      "commandLineArgs": "web-api"
+      "commandLineArgs": "config -db mssql"
     }
   }
 }

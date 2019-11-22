@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Data.SqlClient;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace CodeGenCLI
 {
@@ -28,19 +31,123 @@ namespace CodeGenCLI
                 .Build();
             Config = codeGenConfig.Get<CodeGenConfig>();
 
+            App.Command("config", (generateCommand) => {
+                // Arguments
+                //CommandArgument name = generateCommand.Argument(
+                //    "name",
+                //    "Enter the name of the application"
+                //);
+                //CommandOption greeting = generateCommand.Option(
+                //    "-$|-g |--greeting <greeting>",
+                //    "The greeting to display. The greeting supports"
+                //    + " a format string where {fullname} will be "
+                //    + "substituted with the full name.",
+                //    CommandOptionType.SingleValue);
+                //CommandOption uppercase = generateCommand.Option(
+                //    "-u | --uppercase", "Display the greeting in uppercase.",
+                //    CommandOptionType.NoValue);
+
+                CommandOption databaseType = generateCommand.Option(
+                    "-db |--database-type <type>",
+                    "Database type",
+                    CommandOptionType.SingleValue
+                );
+
+                // Help
+                generateCommand.HelpOption("-h | -? | --help");
+
+                generateCommand.OnExecute(() =>
+                {
+                    Console.WriteLine("### Generating code-gen-config.json ###");
+
+                    // New code-gen-config.json file
+                    CodeGenConfig newCodeGenConfig = new CodeGenConfig() {
+                        // Default values
+                        Name = "Generated",
+                        Override = true
+                    };
+
+                    // Database type
+                    if (databaseType.Values.Count > 0)
+                    {
+                        Console.WriteLine("Scaffolding config based on database schema");
+
+                        // Tables
+                        List<string> databaseTableNames = new List<string>();
+                        Dictionary<string, List<DataColumn>> databaseTableColumns = new Dictionary<string, List<DataColumn>>();
+
+                        if (databaseType.Values[0].ToString() == "mssql")
+                        {
+                            // MS SQL Server
+                            Console.WriteLine("Database type: MS SQL Server");
+
+                            using (SqlConnection databaseConnection = new SqlConnection(Config.WebAPI.DatabaseConnection))
+                            {
+                                // Connect
+                                databaseConnection.Open();
+
+                                // Retrieve table information
+                                DataTable tablesDataTable = databaseConnection.GetSchema("Tables", new string[] { null, null, null, "BASE TABLE" });
+                                foreach (DataRow tablesDataTableDataRow in tablesDataTable.Rows)
+                                {
+                                    databaseTableNames.Add(tablesDataTableDataRow["TABLE_NAME"].ToString());
+                                    databaseTableColumns.Add(tablesDataTableDataRow["TABLE_NAME"].ToString(), new List<DataColumn>());
+                                }
+
+                                // Retrieve column information for each table
+                                foreach (string databaseTableName in databaseTableNames)
+                                {
+                                    DataTable columnsDataTable = databaseConnection.GetSchema("Columns", new string[] { databaseConnection.DataSource, null, databaseTableName });
+                                    foreach (DataColumn columnsDataTableDataColumn in columnsDataTable.Columns)
+                                    {
+                                        databaseTableColumns[databaseTableName].Add(columnsDataTableDataColumn);
+                                    }
+                                }
+                            }
+                        }
+
+                        // Tables
+
+                        // Exclude __EFMigrationsHistory table
+                        databaseTableNames.Remove("__EFMigrationsHistory");
+
+                        Console.WriteLine("Found tables:");
+                        foreach (string databaseTableName in databaseTableNames)
+                        {
+                            Console.WriteLine(databaseTableName);
+
+                            // Add models to config
+                            newCodeGenConfig.Models.Add(new CodeGenModel()
+                            {
+                                Name = databaseTableName,
+                                NamePlural = databaseTableName
+                            });
+                        }
+                    }
+
+                    // Save the new code-gen-config.json
+                    string newCodeGenConfigAsJson = JsonConvert.SerializeObject(newCodeGenConfig, Formatting.Indented);
+                    File.WriteAllText("code-gen-config.g.json", newCodeGenConfigAsJson);
+
+                    // Stop
+                    Console.WriteLine("### DONE ###");
+                    return 0;
+                });
+            });
+
             App.Command("web-api", (generateCommand) => {
                 // Arguments
                 //CommandArgument name = generateCommand.Argument(
                 //    "name",
                 //    "Enter the name of the application"
                 //);
-                //CommandOption greeting = codeGenCommand.Option(
+                //CommandOption greeting = generateCommand.Option(
                 //    "-$|-g |--greeting <greeting>",
                 //    "The greeting to display. The greeting supports"
                 //    + " a format string where {fullname} will be "
                 //    + "substituted with the full name.",
                 //    CommandOptionType.SingleValue);
-                //CommandOption uppercase = codeGenCommand.Option(
+                //CommandOption uppercase = generateCommand.Option(
                 //    "-u | --uppercase", "Display the greeting in uppercase.",
                 //    CommandOptionType.NoValue);
 
@@ -204,13 +311,13 @@ namespace CodeGenCLI
                 //    "name",
                 //    "Enter the name of the application"
                 //);
-                //CommandOption greeting = codeGenCommand.Option(
+                //CommandOption greeting = generateCommand.Option(
                 //    "-$|-g |--greeting <greeting>",
                 //    "The greeting to display. The greeting supports"
                 //    + " a format string where {fullname} will be "
                 //    + "substituted with the full name.",
                 //    CommandOptionType.SingleValue);
-                //CommandOption uppercase = codeGenCommand.Option(
+                //CommandOption uppercase = generateCommand.Option(
                 //    "-u | --uppercase", "Display the greeting in uppercase.",
                 //    CommandOptionType.NoValue);
 

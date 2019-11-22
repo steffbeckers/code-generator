@@ -190,6 +190,7 @@
   ],
   "webAPI": {
     "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
+    "databaseConnection": "Server=localhost;Database=CodeGenCLITest;Trusted_Connection=True;MultipleActiveResultSets=true",
     "namespaceRoot": "Test.API"
   },
   "angular": {

@@ -5,6 +5,9 @@ namespace CodeGenCLI.CodeGenClasses
     [JsonObject("webAPI")]
     public class CodeGenConfigWebAPI
     {
+        [JsonProperty("databaseConnection")]
+        public string DatabaseConnection { get; set; }
+
         [JsonProperty("projectPath")]
         public string ProjectPath { get; set; }
 

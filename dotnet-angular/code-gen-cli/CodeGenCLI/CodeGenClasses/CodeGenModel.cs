@@ -30,7 +30,9 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("manyToMany")]
         public bool ManyToMany { get; set; }
 
+        [JsonProperty("properties")]
         public IList<CodeGenModelProperty> Properties { get; set; }
+        [JsonProperty("relations")]
         public IList<CodeGenModelRelation> Relations { get; set; }
     }
 }
