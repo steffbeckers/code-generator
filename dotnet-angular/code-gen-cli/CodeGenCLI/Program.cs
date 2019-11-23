@@ -63,8 +63,12 @@ namespace CodeGenCLI
                     // New code-gen-config.json file
                     CodeGenConfig newCodeGenConfig = new CodeGenConfig() {
                         // Default values
-                        Name = "Generated",
-                        Override = true
+                        Name = Config.Name ?? "Generated",
+                        Description = Config.Description,
+                        Override = Config.Override,
+                        Models = new List<CodeGenModel>(),
+                        WebAPI = Config.WebAPI ?? new CodeGenConfigWebAPI(),
+                        Angular = Config.Angular ?? new CodeGenConfigAngular()
                     };
 
                     // Database type
