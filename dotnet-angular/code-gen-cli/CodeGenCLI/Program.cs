@@ -11,6 +11,8 @@ using System.Text.RegularExpressions;
 using System.Data.SqlClient;
 using System.Data;
 using Newtonsoft.Json;
+using CodeGenCLI.Extensions;
+using System.Globalization;
 
 namespace CodeGenCLI
 {
@@ -18,6 +20,7 @@ namespace CodeGenCLI
     {
         static CommandLineApplication App { get; set; }
         static CodeGenConfig Config { get; set; }
+        static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
 
         static void Main(string[] args)
         {
@@ -78,7 +81,7 @@ namespace CodeGenCLI
 
                         // Tables
                         List<string> databaseTableNames = new List<string>();
-                        Dictionary<string, List<DataColumn>> databaseTableColumns = new Dictionary<string, List<DataColumn>>();
+                        Dictionary<string, List<DataRow>> databaseTableColumns = new Dictionary<string, List<DataRow>>();
 
                         if (databaseType.Values[0].ToString() == "mssql")
                         {
@@ -92,19 +95,21 @@ namespace CodeGenCLI
 
                                 // Retrieve table information
                                 DataTable tablesDataTable = databaseConnection.GetSchema("Tables", new string[] { null, null, null, "BASE TABLE" });
+
                                 foreach (DataRow tablesDataTableDataRow in tablesDataTable.Rows)
                                 {
                                     databaseTableNames.Add(tablesDataTableDataRow["TABLE_NAME"].ToString());
-                                    databaseTableColumns.Add(tablesDataTableDataRow["TABLE_NAME"].ToString(), new List<DataColumn>());
+                                    databaseTableColumns.Add(tablesDataTableDataRow["TABLE_NAME"].ToString(), new List<DataRow>());
                                 }
 
                                 // Retrieve column information for each table
                                 foreach (string databaseTableName in databaseTableNames)
                                 {
-                                    DataTable columnsDataTable = databaseConnection.GetSchema("Columns", new string[] { databaseConnection.DataSource, null, databaseTableName });
-                                    foreach (DataColumn columnsDataTableDataColumn in columnsDataTable.Columns)
+                                    DataTable columnsDataTable = databaseConnection.GetSchema("Columns", new string[] { null, null, databaseTableName });
+
+                                    foreach (DataRow columnsDataTableDataRow in columnsDataTable.Rows)
                                     {
-                                        databaseTableColumns[databaseTableName].Add(columnsDataTableDataColumn);
+                                        databaseTableColumns[databaseTableName].Add(columnsDataTableDataRow);
                                     }
                                 }
                             }
@@ -120,12 +125,22 @@ namespace CodeGenCLI
                         {
                             Console.WriteLine(databaseTableName);
 
-                            // Add models to config
-                            newCodeGenConfig.Models.Add(new CodeGenModel()
+                            CodeGenModel newCodeGenModel = new CodeGenModel()
                             {
-                                Name = databaseTableName,
-                                NamePlural = databaseTableName
-                            });
+                                Name = TextInfo.ToTitleCase(databaseTableName).ToSingular(),
+                                NamePlural = databaseTableName,
+                                Properties = new List<CodeGenModelProperty>()
+                            };
+
+                            List<CodeGenModelProperty> newCodeGenModelProperties =
+                                databaseTableColumns[databaseTableName].Select(dtc => new CodeGenModelProperty() {
+                                    Name = dtc[3].ToString(),
+                                    Type = dtc[7].ToString().ToCSharpDataType(),
+                                    //Required = dtc[6] // TODO
+                                }).ToList();
+
+                            newCodeGenModel.Properties = newCodeGenModelProperties;
+                            newCodeGenConfig.Models.Add(newCodeGenModel);
                         }
                     }
 
