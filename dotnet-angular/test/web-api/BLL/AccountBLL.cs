@@ -12,6 +12,7 @@ namespace Test.API.BLL
     public class AccountBLL
     {
         private readonly AccountRepository accountRepository;
+        private readonly NoteRepository noteRepository;
         private readonly AccountNoteRepository accountNoteRepository;
 
 		/// <summary>
@@ -19,10 +20,12 @@ namespace Test.API.BLL
 		/// </summary>
         public AccountBLL(
 			AccountRepository accountRepository,
+            NoteRepository noteRepository,
 			AccountNoteRepository accountNoteRepository
 		)
         {
             this.accountRepository = accountRepository;
+            this.noteRepository = noteRepository;
 			this.accountNoteRepository = accountNoteRepository;
         }
 
@@ -55,11 +58,18 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Account> CreateAccountAsync(Account account)
         {
+            // Validation
+            if (account == null) { return null; }
+
 			// Trimming strings
-            account.Name = account.Name.Trim();
-            account.Website = account.Website.Trim();
-            account.Telephone = account.Telephone.Trim();
-            account.Email = account.Email.Trim();
+            if (!string.IsNullOrEmpty(account.Name))
+                account.Name = account.Name.Trim();
+            if (!string.IsNullOrEmpty(account.Website))
+                account.Website = account.Website.Trim();
+            if (!string.IsNullOrEmpty(account.Telephone))
+                account.Telephone = account.Telephone.Trim();
+            if (!string.IsNullOrEmpty(account.Email))
+                account.Email = account.Email.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
             // Before creation
@@ -79,6 +89,9 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Account> UpdateAccountAsync(Account accountUpdate)
         {
+            // Validation
+            if (accountUpdate == null) { return null; }
+
             // Retrieve existing
             Account account = await this.accountRepository.GetByIdAsync(accountUpdate.Id);
             if (account == null)
@@ -117,6 +130,24 @@ namespace Test.API.BLL
 
         public async Task<Account> LinkNoteToAccountAsync(AccountNote accountNote)
         {
+            // Validation
+            if (accountNote == null) { return null; }
+
+            // Check if account exists
+            Account account = await this.accountRepository.GetByIdAsync(accountNote.AccountId);
+            if (account == null)
+            {
+                return null;
+            }
+
+            // Check if note exists
+            Note note = await this.noteRepository.GetByIdAsync(accountNote.NoteId);
+            if (note == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
             AccountNote accountNoteLink = this.accountNoteRepository.GetByAccountAndNoteId(accountNote.AccountId, accountNote.NoteId);
 
             if (accountNoteLink == null)
@@ -136,6 +167,10 @@ namespace Test.API.BLL
 
         public async Task<Account> UnlinkNoteFromAccountAsync(AccountNote accountNote)
         {
+            // Validation
+            if (accountNote == null) { return null; }
+
+            // Retrieve existing link
             AccountNote accountNoteLink = this.accountNoteRepository.GetByAccountAndNoteId(accountNote.AccountId, accountNote.NoteId);
 		
             if (accountNoteLink != null)

@@ -126,9 +126,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
-        // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
-        [HttpPut("{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link")]
-        public async Task<ActionResult<<#= model.Name #>VM>> Link<#= relation.Model #>To<#= model.Name #>([FromRoute] Guid <#= model.Name.ToLower() #>Id, [FromRoute] Guid <#= relation.Model.ToLower() #>Id)
+        // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/<#= relation.Name #>/Link
+        [HttpPut("<#= relation.Name #>/Link")]
+        public async Task<ActionResult<<#= model.Name #>VM>> Link<#= relation.Model #>To<#= model.Name #>([FromBody] <#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
 			// Validation
             if (!ModelState.IsValid)
@@ -136,17 +136,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 return BadRequest(ModelState);
             }
 
-			<#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = new <#= relation.Through #>() {
-				<#= model.Name #>Id = <#= model.Name.ToLower() #>Id,
-				<#= relation.Model #>Id = <#= relation.Model.ToLower() #>Id
-			};
+            <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.bll.Link<#= relation.Model #>To<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>);
 
-            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(await this.bll.Link<#= relation.Model #>To<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>Link));
+            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
         }
 
-        // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Link
-        [HttpDelete("{<#= model.Name.ToLower() #>Id}/<#= relation.Name #>/{<#= relation.Model.ToLower() #>Id}/Unlink")]
-        public async Task<ActionResult<<#= model.Name #>VM>> Unlink<#= relation.Model #>From<#= model.Name #>([FromRoute] Guid <#= model.Name.ToLower() #>Id, [FromRoute] Guid <#= relation.Model.ToLower() #>Id)
+        // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/<#= relation.Name #>/Link
+        [HttpDelete("<#= relation.Name #>/Link")]
+        public async Task<ActionResult<AccountVM>> Unlink<#= relation.Model #>From<#= model.Name #>([FromBody] <#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
 			// Validation
             if (!ModelState.IsValid)
@@ -154,12 +151,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 return BadRequest(ModelState);
             }
 
-			<#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = new <#= relation.Through #>() {
-				<#= model.Name #>Id = <#= model.Name.ToLower() #>Id,
-				<#= relation.Model #>Id = <#= relation.Model.ToLower() #>Id
-			};
+            <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.bll.Unlink<#= relation.Model #>From<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>);
 
-            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(await this.bll.Unlink<#= relation.Model #>From<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>Link));
+            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
         }
 
 <# } #>

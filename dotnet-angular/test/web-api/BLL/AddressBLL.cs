@@ -52,11 +52,18 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Address> CreateAddressAsync(Address address)
         {
+            // Validation
+            if (address == null) { return null; }
+
 			// Trimming strings
-            address.Street = address.Street.Trim();
-            address.Number = address.Number.Trim();
-            address.PostalCode = address.PostalCode.Trim();
-            address.City = address.City.Trim();
+            if (!string.IsNullOrEmpty(address.Street))
+                address.Street = address.Street.Trim();
+            if (!string.IsNullOrEmpty(address.Number))
+                address.Number = address.Number.Trim();
+            if (!string.IsNullOrEmpty(address.PostalCode))
+                address.PostalCode = address.PostalCode.Trim();
+            if (!string.IsNullOrEmpty(address.City))
+                address.City = address.City.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
             // Before creation
@@ -76,6 +83,9 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Address> UpdateAddressAsync(Address addressUpdate)
         {
+            // Validation
+            if (addressUpdate == null) { return null; }
+
             // Retrieve existing
             Address address = await this.addressRepository.GetByIdAsync(addressUpdate.Id);
             if (address == null)

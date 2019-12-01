@@ -12,6 +12,7 @@ namespace Test.API.BLL
     public class NoteBLL
     {
         private readonly NoteRepository noteRepository;
+        private readonly AccountRepository accountRepository;
         private readonly AccountNoteRepository accountNoteRepository;
 
 		/// <summary>
@@ -19,10 +20,12 @@ namespace Test.API.BLL
 		/// </summary>
         public NoteBLL(
 			NoteRepository noteRepository,
+            AccountRepository accountRepository,
 			AccountNoteRepository accountNoteRepository
 		)
         {
             this.noteRepository = noteRepository;
+            this.accountRepository = accountRepository;
 			this.accountNoteRepository = accountNoteRepository;
         }
 
@@ -55,9 +58,14 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Note> CreateNoteAsync(Note note)
         {
+            // Validation
+            if (note == null) { return null; }
+
 			// Trimming strings
-            note.Title = note.Title.Trim();
-            note.Body = note.Body.Trim();
+            if (!string.IsNullOrEmpty(note.Title))
+                note.Title = note.Title.Trim();
+            if (!string.IsNullOrEmpty(note.Body))
+                note.Body = note.Body.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
             // Before creation
@@ -77,6 +85,9 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Note> UpdateNoteAsync(Note noteUpdate)
         {
+            // Validation
+            if (noteUpdate == null) { return null; }
+
             // Retrieve existing
             Note note = await this.noteRepository.GetByIdAsync(noteUpdate.Id);
             if (note == null)
@@ -109,6 +120,24 @@ namespace Test.API.BLL
 
         public async Task<Note> LinkAccountToNoteAsync(AccountNote accountNote)
         {
+            // Validation
+            if (accountNote == null) { return null; }
+
+            // Check if note exists
+            Note note = await this.noteRepository.GetByIdAsync(accountNote.NoteId);
+            if (note == null)
+            {
+                return null;
+            }
+
+            // Check if account exists
+            Account account = await this.accountRepository.GetByIdAsync(accountNote.AccountId);
+            if (account == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
             AccountNote accountNoteLink = this.accountNoteRepository.GetByNoteAndAccountId(accountNote.NoteId, accountNote.AccountId);
 
             if (accountNoteLink == null)
@@ -128,6 +157,10 @@ namespace Test.API.BLL
 
         public async Task<Note> UnlinkAccountFromNoteAsync(AccountNote accountNote)
         {
+            // Validation
+            if (accountNote == null) { return null; }
+
+            // Retrieve existing link
             AccountNote accountNoteLink = this.accountNoteRepository.GetByNoteAndAccountId(accountNote.NoteId, accountNote.AccountId);
 		
             if (accountNoteLink != null)

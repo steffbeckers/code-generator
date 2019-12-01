@@ -20,6 +20,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     {
         private readonly <#= model.Name #>Repository <#= model.Name.ToCamelCase() #>Repository;
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+<# if (relation.Model != model.Name) { #>
+        private readonly <#= relation.Model #>Repository <#= relation.Model.ToCamelCase() #>Repository;
+<# } #>
         private readonly <#= relation.Through #>Repository <#= relation.Through.ToCamelCase() #>Repository;
 <# } #>
 
@@ -30,12 +33,18 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			<#= model.Name #>Repository <#= model.Name.ToCamelCase() #>Repository<#= (model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).ToList().Count() > 0 ? "," : "") #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
 <# CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); #>
+<# if (relation.Model != model.Name) { #>
+            <#= relation.Model #>Repository <#= relation.Model.ToCamelCase() #>Repository,
+<# } #>
 			<#= relation.Through #>Repository <#= relation.Through.ToCamelCase() #>Repository<#= (!relation.Equals(lastModelManyToManyRelation) ? "," : "") #>
 <# } #>
 		)
         {
             this.<#= model.Name.ToCamelCase() #>Repository = <#= model.Name.ToCamelCase() #>Repository;
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+<# if (relation.Model != model.Name) { #>
+            this.<#= relation.Model.ToCamelCase() #>Repository = <#= relation.Model.ToCamelCase() #>Repository;
+<# } #>
 			this.<#= relation.Through.ToCamelCase() #>Repository = <#= relation.Through.ToCamelCase() #>Repository;
 <# } #>
         }
@@ -69,9 +78,13 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// </summary>
         public async Task<<#= model.Name #>> Create<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToCamelCase() #>)
         {
+            // Validation
+            if (<#= model.Name.ToCamelCase() #> == null) { return null; }
+
 			// Trimming strings
 <# foreach (CodeGenModelProperty property in model.Properties.Where(p => p.Type == "string")) { #>
-            <#= model.Name.ToCamelCase() #>.<#= property.Name #> = <#= model.Name.ToCamelCase() #>.<#= property.Name #>.Trim();
+            if (!string.IsNullOrEmpty(<#= model.Name.ToCamelCase() #>.<#= property.Name #>))
+                <#= model.Name.ToCamelCase() #>.<#= property.Name #> = <#= model.Name.ToCamelCase() #>.<#= property.Name #>.Trim();
 <# } #>
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
@@ -92,9 +105,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// </summary>
         public async Task<<#= model.Name #>> Update<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToCamelCase() #>Update)
         {
+            // Validation
+            if (<#= model.Name.ToCamelCase() #>Update == null) { return null; }
+
             // Retrieve existing
             <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.<#= model.Name.ToCamelCase() #>Repository.GetByIdAsync(<#= model.Name.ToCamelCase() #>Update.Id);
-            if (<#= model.Name.ToLower() #> == null)
+            if (<#= model.Name.ToCamelCase() #> == null)
             {
                 return null;
             }
@@ -129,6 +145,24 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
         public async Task<<#= model.Name #>> Link<#= relation.Model #>To<#= model.Name #>Async(<#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
+            // Validation
+            if (<#= relation.Through.ToCamelCase() #> == null) { return null; }
+
+            // Check if <#= model.Name.ToLower() #> exists
+            <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.<#= model.Name.ToCamelCase() #>Repository.GetByIdAsync(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id);
+            if (<#= model.Name.ToCamelCase() #> == null)
+            {
+                return null;
+            }
+
+            // Check if <#= relation.Model.ToLower() #> exists
+            <#= relation.Model #> <#= relation.Model.ToCamelCase() #> = await this.<#= relation.Model.ToCamelCase() #>Repository.GetByIdAsync(<#= relation.Through.ToCamelCase() #>.<#= relation.Model #>Id);
+            if (<#= relation.Model.ToCamelCase() #> == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
             <#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = this.<#= relation.Through.ToCamelCase() #>Repository.GetBy<#= model.Name #>And<#= relation.Model #>Id(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id, <#= relation.Through.ToCamelCase() #>.<#= relation.Model #>Id);
 
             if (<#= relation.Through.ToCamelCase() #>Link == null)
@@ -150,6 +184,10 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
         public async Task<<#= model.Name #>> Unlink<#= relation.Model #>From<#= model.Name #>Async(<#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
+            // Validation
+            if (<#= relation.Through.ToCamelCase() #> == null) { return null; }
+
+            // Retrieve existing link
             <#= relation.Through #> <#= relation.Through.ToCamelCase() #>Link = this.<#= relation.Through.ToCamelCase() #>Repository.GetBy<#= model.Name #>And<#= relation.Model #>Id(<#= relation.Through.ToCamelCase() #>.<#= model.Name #>Id, <#= relation.Through.ToCamelCase() #>.<#= relation.Model #>Id);
 		
             if (<#= relation.Through.ToCamelCase() #>Link != null)

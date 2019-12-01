@@ -52,8 +52,12 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Todo> CreateTodoAsync(Todo todo)
         {
+            // Validation
+            if (todo == null) { return null; }
+
 			// Trimming strings
-            todo.Title = todo.Title.Trim();
+            if (!string.IsNullOrEmpty(todo.Title))
+                todo.Title = todo.Title.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
             // Before creation
@@ -73,6 +77,9 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Todo> UpdateTodoAsync(Todo todoUpdate)
         {
+            // Validation
+            if (todoUpdate == null) { return null; }
+
             // Retrieve existing
             Todo todo = await this.todoRepository.GetByIdAsync(todoUpdate.Id);
             if (todo == null)

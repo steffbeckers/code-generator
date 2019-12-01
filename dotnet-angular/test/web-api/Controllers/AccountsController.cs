@@ -118,9 +118,9 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Account, AccountVM>(account);
         }
 
-        // PUT: api/Accounts/{accountId}/Notes/{noteId}/Link
-        [HttpPut("{accountId}/Notes/{noteId}/Link")]
-        public async Task<ActionResult<AccountVM>> LinkNoteToAccount([FromRoute] Guid accountId, [FromRoute] Guid noteId)
+        // PUT: api/Accounts/Notes/Link
+        [HttpPut("Notes/Link")]
+        public async Task<ActionResult<AccountVM>> LinkNoteToAccount([FromBody] AccountNote accountNote)
         {
 			// Validation
             if (!ModelState.IsValid)
@@ -128,17 +128,14 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-			AccountNote accountNoteLink = new AccountNote() {
-				AccountId = accountId,
-				NoteId = noteId
-			};
+            Account account = await this.bll.LinkNoteToAccountAsync(accountNote);
 
-            return this.mapper.Map<Account, AccountVM>(await this.bll.LinkNoteToAccountAsync(accountNoteLink));
+            return this.mapper.Map<Account, AccountVM>(account);
         }
 
-        // DELETE: api/Accounts/{accountId}/Notes/{noteId}/Link
-        [HttpDelete("{accountId}/Notes/{noteId}/Unlink")]
-        public async Task<ActionResult<AccountVM>> UnlinkNoteFromAccount([FromRoute] Guid accountId, [FromRoute] Guid noteId)
+        // DELETE: api/Accounts/Notes/Link
+        [HttpDelete("Notes/Link")]
+        public async Task<ActionResult<AccountVM>> UnlinkNoteFromAccount([FromBody] AccountNote accountNote)
         {
 			// Validation
             if (!ModelState.IsValid)
@@ -146,12 +143,9 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-			AccountNote accountNoteLink = new AccountNote() {
-				AccountId = accountId,
-				NoteId = noteId
-			};
+            Account account = await this.bll.UnlinkNoteFromAccountAsync(accountNote);
 
-            return this.mapper.Map<Account, AccountVM>(await this.bll.UnlinkNoteFromAccountAsync(accountNoteLink));
+            return this.mapper.Map<Account, AccountVM>(account);
         }
 
         // DELETE: api/Accounts/{id}

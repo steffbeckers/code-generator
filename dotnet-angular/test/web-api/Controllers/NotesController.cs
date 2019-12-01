@@ -118,9 +118,9 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Note, NoteVM>(note);
         }
 
-        // PUT: api/Notes/{noteId}/Accounts/{accountId}/Link
-        [HttpPut("{noteId}/Accounts/{accountId}/Link")]
-        public async Task<ActionResult<NoteVM>> LinkAccountToNote([FromRoute] Guid noteId, [FromRoute] Guid accountId)
+        // PUT: api/Notes/Accounts/Link
+        [HttpPut("Accounts/Link")]
+        public async Task<ActionResult<NoteVM>> LinkAccountToNote([FromBody] AccountNote accountNote)
         {
 			// Validation
             if (!ModelState.IsValid)
@@ -128,17 +128,14 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-			AccountNote accountNoteLink = new AccountNote() {
-				NoteId = noteId,
-				AccountId = accountId
-			};
+            Note note = await this.bll.LinkAccountToNoteAsync(accountNote);
 
-            return this.mapper.Map<Note, NoteVM>(await this.bll.LinkAccountToNoteAsync(accountNoteLink));
+            return this.mapper.Map<Note, NoteVM>(note);
         }
 
-        // DELETE: api/Notes/{noteId}/Accounts/{accountId}/Link
-        [HttpDelete("{noteId}/Accounts/{accountId}/Unlink")]
-        public async Task<ActionResult<NoteVM>> UnlinkAccountFromNote([FromRoute] Guid noteId, [FromRoute] Guid accountId)
+        // DELETE: api/Notes/Accounts/Link
+        [HttpDelete("Accounts/Link")]
+        public async Task<ActionResult<AccountVM>> UnlinkAccountFromNote([FromBody] AccountNote accountNote)
         {
 			// Validation
             if (!ModelState.IsValid)
@@ -146,12 +143,9 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-			AccountNote accountNoteLink = new AccountNote() {
-				NoteId = noteId,
-				AccountId = accountId
-			};
+            Note note = await this.bll.UnlinkAccountFromNoteAsync(accountNote);
 
-            return this.mapper.Map<Note, NoteVM>(await this.bll.UnlinkAccountFromNoteAsync(accountNoteLink));
+            return this.mapper.Map<Note, NoteVM>(note);
         }
 
         // DELETE: api/Notes/{id}

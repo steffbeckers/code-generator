@@ -18,7 +18,7 @@ namespace Test.API.DAL
         public AutoMapperProfile()
         {
             // Accounts
-            CreateMap<Account, AccountVM>()
+			CreateMap<Account, AccountVM>()
                 .ForMember(
                     x => x.Notes,
                     x => x.MapFrom(
@@ -29,20 +29,25 @@ namespace Test.API.DAL
                 .ForMember(
                     x => x.AccountNote,
                     x => x.MapFrom(
-                        y => this.AccountNoteLinks(y)
+                        y => new List<AccountNote>() {
+                            new AccountNote()
+                            {
+                                NoteId = (Guid)y.NoteId
+                            }
+                        }
                     )
                 );
 
             // Contacts
-            CreateMap<Contact, ContactVM>();
+			CreateMap<Contact, ContactVM>();
             CreateMap<ContactVM, Contact>();
 
             // Addresses
-            CreateMap<Address, AddressVM>();
+			CreateMap<Address, AddressVM>();
             CreateMap<AddressVM, Address>();
 
             // Notes
-            CreateMap<Note, NoteVM>()
+			CreateMap<Note, NoteVM>()
                 .ForMember(
                     x => x.Accounts,
                     x => x.MapFrom(
@@ -53,44 +58,19 @@ namespace Test.API.DAL
                 .ForMember(
                     x => x.AccountNote,
                     x => x.MapFrom(
-                        y => this.AccountNoteLinks(y)
+                        y => new List<AccountNote>() {
+                            new AccountNote()
+                            {
+                                AccountId = (Guid)y.AccountId
+                            }
+                        }
                     )
                 );
 
             // Todos
-            CreateMap<Todo, TodoVM>();
+			CreateMap<Todo, TodoVM>();
             CreateMap<TodoVM, Todo>();
 
-        }
-
-        private List<AccountNote> AccountNoteLinks(AccountVM y)
-        {
-            List<AccountNote> links = new List<AccountNote>();
-
-            if (y.NoteId != null)
-            {
-                links.Add(new AccountNote()
-                {
-                    NoteId = (Guid)y.NoteId
-                });
-            }
-
-            return links;
-        }
-
-        private List<AccountNote> AccountNoteLinks(NoteVM y)
-        {
-            List<AccountNote> links = new List<AccountNote>();
-
-            if (y.AccountId != null)
-            {
-                links.Add(new AccountNote()
-                {
-                    AccountId = (Guid)y.AccountId
-                });
-            }
-
-            return links;
         }
     }
 }

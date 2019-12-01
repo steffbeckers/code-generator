@@ -52,12 +52,20 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Contact> CreateContactAsync(Contact contact)
         {
+            // Validation
+            if (contact == null) { return null; }
+
 			// Trimming strings
-            contact.FirstName = contact.FirstName.Trim();
-            contact.LastName = contact.LastName.Trim();
-            contact.Website = contact.Website.Trim();
-            contact.Telephone = contact.Telephone.Trim();
-            contact.Email = contact.Email.Trim();
+            if (!string.IsNullOrEmpty(contact.FirstName))
+                contact.FirstName = contact.FirstName.Trim();
+            if (!string.IsNullOrEmpty(contact.LastName))
+                contact.LastName = contact.LastName.Trim();
+            if (!string.IsNullOrEmpty(contact.Website))
+                contact.Website = contact.Website.Trim();
+            if (!string.IsNullOrEmpty(contact.Telephone))
+                contact.Telephone = contact.Telephone.Trim();
+            if (!string.IsNullOrEmpty(contact.Email))
+                contact.Email = contact.Email.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
             // Before creation
@@ -77,6 +85,9 @@ namespace Test.API.BLL
 		/// </summary>
         public async Task<Contact> UpdateContactAsync(Contact contactUpdate)
         {
+            // Validation
+            if (contactUpdate == null) { return null; }
+
             // Retrieve existing
             Contact contact = await this.contactRepository.GetByIdAsync(contactUpdate.Id);
             if (contact == null)
