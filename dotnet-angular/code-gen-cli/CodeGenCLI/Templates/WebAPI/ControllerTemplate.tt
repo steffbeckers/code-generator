@@ -106,7 +106,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// Updates a specific <#= model.Name.ToLower() #>.
 		/// </summary>
 		/// <param name="id"></param>
-		/// <param name="<#= model.Name.ToLower() #>VM"></param>
+		/// <param name="<#= model.Name.ToCamelCase() #>VM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<<#= model.Name #>VM>> Update<#= model.Name #>([FromRoute] Guid id, [FromBody] <#= model.Name #>VM <#= model.Name.ToCamelCase() #>VM)
         {
@@ -127,6 +127,10 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
         // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/<#= relation.Name #>/Link
+		/// <summary>
+		/// Links a specific <#= relation.Model.ToLower() #> to <#= model.Name.ToLower() #>.
+		/// </summary>
+		/// <param name="<#= relation.Through.ToCamelCase() #>"></param>
         [HttpPut("<#= relation.Name #>/Link")]
         public async Task<ActionResult<<#= model.Name #>VM>> Link<#= relation.Model #>To<#= model.Name #>([FromBody] <#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
@@ -142,8 +146,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
         // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/<#= relation.Name #>/Link
+		/// <summary>
+		/// Unlinks a specific <#= relation.Model.ToLower() #> from <#= model.Name.ToLower() #>.
+		/// </summary>
+		/// <param name="<#= relation.Through.ToCamelCase() #>"></param>
         [HttpDelete("<#= relation.Name #>/Link")]
-        public async Task<ActionResult<AccountVM>> Unlink<#= relation.Model #>From<#= model.Name #>([FromBody] <#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
+        public async Task<ActionResult<<#= model.Name #>VM>> Unlink<#= relation.Model #>From<#= model.Name #>([FromBody] <#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
 			// Validation
             if (!ModelState.IsValid)

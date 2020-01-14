@@ -119,6 +119,10 @@ namespace Test.API.Controllers
         }
 
         // PUT: api/Accounts/Notes/Link
+		/// <summary>
+		/// Links a specific note to account.
+		/// </summary>
+		/// <param name="accountNote"></param>
         [HttpPut("Notes/Link")]
         public async Task<ActionResult<AccountVM>> LinkNoteToAccount([FromBody] AccountNote accountNote)
         {
@@ -134,6 +138,10 @@ namespace Test.API.Controllers
         }
 
         // DELETE: api/Accounts/Notes/Link
+		/// <summary>
+		/// Unlinks a specific note from account.
+		/// </summary>
+		/// <param name="accountNote"></param>
         [HttpDelete("Notes/Link")]
         public async Task<ActionResult<AccountVM>> UnlinkNoteFromAccount([FromBody] AccountNote accountNote)
         {

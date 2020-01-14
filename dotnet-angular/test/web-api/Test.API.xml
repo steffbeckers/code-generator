@@ -9,7 +9,7 @@
             The business logic layer for Accounts.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.#ctor(Test.API.DAL.Repositories.AccountRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
+        <member name="M:Test.API.BLL.AccountBLL.#ctor(Test.API.DAL.Repositories.AccountRepository,Test.API.DAL.Repositories.NoteRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
             <summary>
             The constructor of the Account business logic layer.
             </summary>
@@ -114,7 +114,7 @@
             The business logic layer for Notes.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.NoteBLL.#ctor(Test.API.DAL.Repositories.NoteRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
+        <member name="M:Test.API.BLL.NoteBLL.#ctor(Test.API.DAL.Repositories.NoteRepository,Test.API.DAL.Repositories.AccountRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
             <summary>
             The constructor of the Note business logic layer.
             </summary>
@@ -212,6 +212,18 @@
             </summary>
             <param name="id"></param>
             <param name="accountVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.LinkNoteToAccount(Test.API.Models.AccountNote)">
+            <summary>
+            Links a specific note to account.
+            </summary>
+            <param name="accountNote"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.UnlinkNoteFromAccount(Test.API.Models.AccountNote)">
+            <summary>
+            Unlinks a specific note from account.
+            </summary>
+            <param name="accountNote"></param>
         </member>
         <member name="M:Test.API.Controllers.AccountsController.DeleteAccount(System.Guid)">
             <summary>
@@ -332,6 +344,18 @@
             </summary>
             <param name="id"></param>
             <param name="noteVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.LinkAccountToNote(Test.API.Models.AccountNote)">
+            <summary>
+            Links a specific account to note.
+            </summary>
+            <param name="accountNote"></param>
+        </member>
+        <member name="M:Test.API.Controllers.NotesController.UnlinkAccountFromNote(Test.API.Models.AccountNote)">
+            <summary>
+            Unlinks a specific account from note.
+            </summary>
+            <param name="accountNote"></param>
         </member>
         <member name="M:Test.API.Controllers.NotesController.DeleteNote(System.Guid)">
             <summary>
