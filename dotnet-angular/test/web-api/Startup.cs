@@ -111,9 +111,6 @@ namespace Test.API
                 });
             }
 
-			// Authentication and Authorization
-            app.UseAuthorization();
-
 			// Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger()
@@ -125,8 +122,11 @@ namespace Test.API
                 c.RoutePrefix = string.Empty;
             });
 
-			// MVC
             app.UseRouting();
+
+			// Authentication and Authorization
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

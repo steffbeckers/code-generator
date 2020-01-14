@@ -197,15 +197,14 @@ using ");
                     "Run(async context =>\r\n                    {\r\n                        context.Res" +
                     "ponse.StatusCode = 500;\r\n                        await context.Response.WriteAsy" +
                     "nc(\"An unexpected fault happened. Try again later.\");\r\n                    });\r\n" +
-                    "                });\r\n            }\r\n\r\n\t\t\t// Authentication and Authorization\r\n  " +
-                    "          app.UseAuthorization();\r\n\r\n\t\t\t// Swagger\r\n            // Enable middle" +
-                    "ware to serve generated Swagger as a JSON endpoint.\r\n            app.UseSwagger(" +
-                    ")\r\n            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), \r" +
-                    "\n            // specifying the Swagger JSON endpoint.\r\n            .UseSwaggerUI" +
-                    "(c =>\r\n            {\r\n                c.SwaggerEndpoint(\"./swagger/v1/swagger.js" +
-                    "on\", \"");
+                    "                });\r\n            }\r\n\r\n\t\t\t// Swagger\r\n            // Enable middl" +
+                    "eware to serve generated Swagger as a JSON endpoint.\r\n            app.UseSwagger" +
+                    "()\r\n            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), " +
+                    "\r\n            // specifying the Swagger JSON endpoint.\r\n            .UseSwaggerU" +
+                    "I(c =>\r\n            {\r\n                c.SwaggerEndpoint(\"./swagger/v1/swagger.j" +
+                    "son\", \"");
             
-            #line 125 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 122 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -214,8 +213,11 @@ using ");
                 c.RoutePrefix = string.Empty;
             });
 
-			// MVC
             app.UseRouting();
+
+			// Authentication and Authorization
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -13,6 +13,7 @@ using System.Data;
 using Newtonsoft.Json;
 using CodeGenCLI.Extensions;
 using System.Globalization;
+using System.Threading;
 
 namespace CodeGenCLI
 {
@@ -319,6 +320,7 @@ namespace CodeGenCLI
 
                     // Stop
                     Console.WriteLine("### DONE ###");
+
                     return 0;
                 });
             });
