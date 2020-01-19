@@ -67,5 +67,29 @@
 
             return str;
         }
+
+        public static string ToGraphQL(this string str)
+        {
+            if (!string.IsNullOrEmpty(str) && str.Length > 1)
+            {
+                switch (str)
+                {
+                    case "string":
+                        return "StringGraphType";
+                    case "int":
+                        return "IntGraphType";
+                    case "bool":
+                        return "BooleanGraphType";
+                    case "Guid":
+                        return "IdGraphType";
+                    case "Date":
+                        return "DateGraphType";
+                    case "DateTime":
+                        return "DateTimeGraphType";
+                }
+            }
+
+            return str;
+        }
     }
 }

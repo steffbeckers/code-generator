@@ -340,6 +340,12 @@ namespace CodeGenCLI
 
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "Type.cs", graphQLTypeTemplateContent);
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "Type.cs");
+
+                        WebAPITemplates.GraphQL.Types.InputTypeTemplate graphQLInputTypeTemplate = new WebAPITemplates.GraphQL.Types.InputTypeTemplate(Config, codeGenModel);
+                        string graphQLInputTypeTemplateContent = graphQLInputTypeTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs", graphQLInputTypeTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs");
                     }
 
                     // TODO: Migrations?

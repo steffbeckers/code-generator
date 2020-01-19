@@ -229,6 +229,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>SchemaTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>InputTypeTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\WebAPI\GraphQL\Types\TypeTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TypeTemplate.cs</LastGenOutput>
@@ -419,6 +423,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SchemaTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\GraphQL\Types\InputTypeTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InputTypeTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\GraphQL\Types\TypeTemplate.cs">
       <DesignTime>True</DesignTime>
