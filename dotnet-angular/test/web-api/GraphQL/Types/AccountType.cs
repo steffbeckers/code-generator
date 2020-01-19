@@ -1,4 +1,5 @@
 using GraphQL.Types;
+using System;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
 

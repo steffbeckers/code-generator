@@ -1,4 +1,5 @@
 using GraphQL.Types;
+using System;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
 
@@ -7,6 +8,7 @@ namespace Test.API.GraphQL.Types
     public class ContactType : ObjectGraphType<Contact>
     {
         public ContactType(
+            AccountRepository accountRepository,
 			ContactRepository contactRepository
         )
         {
@@ -17,16 +19,15 @@ namespace Test.API.GraphQL.Types
             Field(x => x.Telephone, nullable: true);
             Field(x => x.Email, nullable: true);
 
-	        /// <summary>
-            /// The related foreign key AccountId for Account of Contact.
-            /// </summary>
-		    //public Guid? AccountId { get; set; }
-
-		    /// <summary>
-            /// The related Account of Contact.
-            /// </summary>
-		    //public Account Account { get; set; }
-
+            Field<AccountType>(
+                "account",
+                resolve: context =>
+                {
+                    if (context.Source.AccountId != null)
+                        return accountRepository.GetById((Guid)context.Source.AccountId);
+                    return null;
+                }
+            );
         }
     }
 }

@@ -6,6 +6,7 @@
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
 using GraphQL.Types;
+using System;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 
@@ -14,7 +15,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     public class <#= model.Name #>Type : ObjectGraphType<<#= model.Name #>>
     {
         public <#= model.Name #>Type(
-<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many" || r.Type == "many-to-one")) { #>
 <# if (relation.Model != model.Name) { #>
             <#= relation.Model #>Repository <#= relation.Model.ToCamelCase() #>Repository,
 <# } #>
@@ -35,16 +36,15 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# } #>
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-	        /// <summary>
-            /// The related foreign key <#= relation.Name #>Id for <#= relation.Name #> of <#= model.Name #>.
-            /// </summary>
-		    //public Guid<#= (relation.Required ? "" : "?") #> <#= relation.Model #>Id { get; set; }
-
-		    /// <summary>
-            /// The related <#= relation.Name #> of <#= model.Name #>.
-            /// </summary>
-		    //public <#= relation.Model #> <#= relation.Name #> { get; set; }
-
+            Field<<#= relation.Model #>Type>(
+                "<#= relation.Name.ToCamelCase() #>",
+                resolve: context =>
+                {
+                    if (context.Source.<#= relation.Model #>Id != null)
+                        return <#= relation.Model.ToCamelCase() #>Repository.GetById((Guid)context.Source.<#= relation.Model #>Id);
+                    return null;
+                }
+            );
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
