@@ -24,6 +24,9 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("displayField")]
         public string DisplayField { get; set; }
 
+        [JsonProperty("sortField")]
+        public string SortField { get; set; }
+
         [JsonProperty("key")]
         public string Key { get; set; }
 

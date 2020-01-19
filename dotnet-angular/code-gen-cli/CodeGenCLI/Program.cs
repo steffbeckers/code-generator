@@ -308,6 +308,40 @@ namespace CodeGenCLI
                     File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + "Startup.cs", startupTemplateContent);
                     Console.WriteLine("Startup.cs");
 
+                    // GraphQL
+                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL")))
+                    {
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL"));
+                    }
+
+                    //// Schema
+                    WebAPITemplates.GraphQL.SchemaTemplate graphQLSchemaTemplate = new WebAPITemplates.GraphQL.SchemaTemplate(Config);
+                    string graphQLSchemaTemplateContent = graphQLSchemaTemplate.TransformText();
+
+                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Schema.cs", graphQLSchemaTemplateContent);
+                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Schema.cs");
+
+                    //// Query
+                    WebAPITemplates.GraphQL.QueryTemplate graphQLQueryTemplate = new WebAPITemplates.GraphQL.QueryTemplate(Config);
+                    string graphQLQueryTemplateContent = graphQLQueryTemplate.TransformText();
+
+                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Query.cs", graphQLQueryTemplateContent);
+                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Query.cs");
+
+                    //// Types
+                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types"))
+                    {
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types");
+                    }
+                    foreach (CodeGenModel codeGenModel in Config.Models)
+                    {
+                        WebAPITemplates.GraphQL.Types.TypeTemplate graphQLTypeTemplate = new WebAPITemplates.GraphQL.Types.TypeTemplate(Config, codeGenModel);
+                        string graphQLTypeTemplateContent = graphQLTypeTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "Type.cs", graphQLTypeTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "Type.cs");
+                    }
+
                     // TODO: Migrations?
                     //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");
                     //removeInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;

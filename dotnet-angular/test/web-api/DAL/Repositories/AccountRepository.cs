@@ -43,5 +43,15 @@ namespace Test.API.DAL.Repositories
                     .ThenInclude(x => x.Note)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public IEnumerable<Note> GetNotesOfAccountById(Guid id)
+        {
+            List<AccountNote> accountNote = this.context.AccountNote
+                .Include(x => x.Note)
+                .Where(x => x.AccountId == id)
+                .ToList();
+
+            return accountNote.Select(x => x.Note).ToList();
+        }
     }
 }

@@ -1,0 +1,67 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
+using GraphQL.Types;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
+
+namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.GraphQL.Types
+{
+    public class <#= model.Name #>Type : ObjectGraphType<<#= model.Name #>>
+    {
+        public <#= model.Name #>Type(
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+<# if (relation.Model != model.Name) { #>
+            <#= relation.Model #>Repository <#= relation.Model.ToCamelCase() #>Repository,
+<# } #>
+<# } #>
+			<#= model.Name #>Repository <#= model.Name.ToCamelCase() #>Repository<#= (model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).ToList().Count() > 0 ? "," : "") #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
+<# CodeGenModelRelation lastModelManyToManyRelation = model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through)).Last(); #>
+<# if (relation.Model != model.Name) { #>
+            <#= relation.Model #>Repository <#= relation.Model.ToCamelCase() #>Repository,
+<# } #>
+			<#= relation.Through #>Repository <#= relation.Through.ToCamelCase() #>Repository<#= (!relation.Equals(lastModelManyToManyRelation) ? "," : "") #>
+<# } #>
+        )
+        {
+            Field(x => x.Id, type: typeof(IdGraphType));
+<# foreach (CodeGenModelProperty property in model.Properties) { #>
+            Field(x => x.<#= property.Name #><#= !property.Required ? ", nullable: true" : "" #>)<#= !string.IsNullOrEmpty(property.Description) ? ".Description(" + property.Description + ")" : "" #>;
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+	        /// <summary>
+            /// The related foreign key <#= relation.Name #>Id for <#= relation.Name #> of <#= model.Name #>.
+            /// </summary>
+		    //public Guid<#= (relation.Required ? "" : "?") #> <#= relation.Model #>Id { get; set; }
+
+		    /// <summary>
+            /// The related <#= relation.Name #> of <#= model.Name #>.
+            /// </summary>
+		    //public <#= relation.Model #> <#= relation.Name #> { get; set; }
+
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
+            Field<ListGraphType<<#= relation.Model #>Type>>(
+                "<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToCamelCase() #>",
+                resolve: context => <#= relation.Model.ToCamelCase() #>Repository.GetBy<#= model.Name #>Id(context.Source.Id)
+            );
+
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
+            Field<ListGraphType<<#= relationModel.Name #>Type>>(
+                "<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToCamelCase() #>",
+                resolve: context => <#= model.Name.ToCamelCase() #>Repository.Get<#= !string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s" #>Of<#= model.Name #>ById(context.Source.Id)
+            );
+
+<# } #>
+        }
+    }
+}

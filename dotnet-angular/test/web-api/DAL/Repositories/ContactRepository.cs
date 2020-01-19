@@ -37,5 +37,12 @@ namespace Test.API.DAL.Repositories
                 .Include(x => x.Account)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public IEnumerable<Contact> GetByAccountId(Guid accountId)
+        {
+            return this.context.Contacts
+                .Where(t => t.AccountId == accountId)
+                .ToList();
+        }
     }
 }

@@ -221,6 +221,18 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DbContextTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\WebAPI\GraphQL\QueryTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>QueryTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebAPI\GraphQL\SchemaTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SchemaTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebAPI\GraphQL\Types\TypeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TypeTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\WebAPI\RepositoryBaseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RepositoryBaseTemplate.cs</LastGenOutput>
@@ -397,6 +409,21 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DbContextTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\GraphQL\QueryTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\GraphQL\SchemaTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SchemaTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\GraphQL\Types\TypeTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TypeTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\ModelTemplate.cs">
       <DesignTime>True</DesignTime>

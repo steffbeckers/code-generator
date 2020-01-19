@@ -5,9 +5,13 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 using AutoMapper;
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +23,7 @@ using System.Reflection;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.GraphQL;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>
 {
@@ -50,6 +55,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 			services.AddScoped<<#= model.Name #>BLL>();
 <# } #>
+
+            // GraphQL
+            services.AddScoped<IDependencyResolver>(s =>
+                new FuncDependencyResolver(s.GetRequiredService));
+            services.AddScoped<<#= config.Name #>Schema>();
+            services.AddGraphQL(options =>
+            {
+                options.ExposeExceptions = true; // TODO: Only in DEV
+            }).AddGraphTypes(ServiceLifetime.Scoped)
+            .AddUserContextBuilder(httpContext => httpContext.User)
+            .AddWebSockets();
 
 			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
@@ -83,6 +99,18 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            // Kestrel
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            // IIS Express
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,6 +139,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                     });
                 });
             }
+
+            // Web sockets
+            app.UseWebSockets();
+
+            // GraphQL
+            app.UseGraphQLWebSockets<<#= config.Name #>Schema>("/graphql");
+            app.UseGraphQL<<#= config.Name #>Schema>();
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
 			// Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.

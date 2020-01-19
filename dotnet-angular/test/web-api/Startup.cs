@@ -1,7 +1,11 @@
 using AutoMapper;
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +17,7 @@ using System.Reflection;
 using Test.API.BLL;
 using Test.API.DAL;
 using Test.API.DAL.Repositories;
+using Test.API.GraphQL;
 
 namespace Test.API
 {
@@ -50,6 +55,17 @@ namespace Test.API
 			services.AddScoped<NoteBLL>();
 			services.AddScoped<TodoBLL>();
 
+            // GraphQL
+            services.AddScoped<IDependencyResolver>(s =>
+                new FuncDependencyResolver(s.GetRequiredService));
+            services.AddScoped<TestSchema>();
+            services.AddGraphQL(options =>
+            {
+                options.ExposeExceptions = true; // TODO: Only in DEV
+            }).AddGraphTypes(ServiceLifetime.Scoped)
+            .AddUserContextBuilder(httpContext => httpContext.User)
+            .AddWebSockets();
+
 			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -82,6 +98,18 @@ namespace Test.API
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            // Kestrel
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            // IIS Express
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,6 +138,14 @@ namespace Test.API
                     });
                 });
             }
+
+            // Web sockets
+            app.UseWebSockets();
+
+            // GraphQL
+            app.UseGraphQLWebSockets<TestSchema>("/graphql");
+            app.UseGraphQL<TestSchema>();
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
 			// Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.

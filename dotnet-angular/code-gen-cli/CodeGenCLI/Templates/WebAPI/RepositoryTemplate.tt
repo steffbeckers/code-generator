@@ -63,6 +63,28 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# } #>
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+
+        public IEnumerable<<#= model.Name #>> GetBy<#= relation.Name #>Id(Guid <#= relation.Name.ToCamelCase() #>Id)
+        {
+            return this.context.<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+                .Where(t => t.<#= relation.Name #>Id == <#= relation.Name.ToCamelCase() #>Id)
+                .ToList();
+        }
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
+
+        public IEnumerable<<#= relationModel.Name #>> Get<#= !string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s" #>Of<#= model.Name #>ById(Guid id)
+        {
+            List<<#= relation.Through #>> <#= relation.Through.ToCamelCase() #> = this.context.<#= relation.Through #>
+                .Include(x => x.<#= relation.Model #>)
+                .Where(x => x.<#= model.Name #>Id == id)
+                .ToList();
+
+            return <#= relation.Through.ToCamelCase() #>.Select(x => x.<#= relation.Model #>).ToList();
+        }
+<# } #>
 <# } #>
 <# if (model.ManyToMany) { #>
 <# CodeGenModelRelation manyToManyModel1 = model.Relations.Where(r => r.Required && r.Name == r.Model).First(); #>

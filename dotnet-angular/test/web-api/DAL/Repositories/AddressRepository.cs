@@ -37,5 +37,12 @@ namespace Test.API.DAL.Repositories
                 .Include(x => x.Account)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public IEnumerable<Address> GetByAccountId(Guid accountId)
+        {
+            return this.context.Addresses
+                .Where(t => t.AccountId == accountId)
+                .ToList();
+        }
     }
 }

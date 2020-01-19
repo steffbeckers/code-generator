@@ -28,5 +28,8 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonProperty("controllersPath")]
         public string ControllersPath { get; set; }
+
+        [JsonProperty("graphQLPath")]
+        public string GraphQLPath { get; set; }
     }
 }
