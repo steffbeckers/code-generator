@@ -23,12 +23,12 @@ namespace Test.API
 {
     public class Startup
     {
+        public IConfiguration configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -38,7 +38,7 @@ namespace Test.API
 
             // Connection to the Test database
             services.AddDbContext<TestContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("TestContext")));
+                options.UseSqlServer(this.configuration.GetConnectionString("TestContext")));
 
             // Repositories
 			services.AddScoped<AccountRepository>();

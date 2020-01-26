@@ -29,12 +29,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 {
     public class Startup
     {
+        public IConfiguration configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -44,7 +44,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             // Connection to the <#= config.Name #> database
             services.AddDbContext<<#= config.Name #>Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("<#= config.Name #>Context")));
+                options.UseSqlServer(this.configuration.GetConnectionString("<#= config.Name #>Context")));
 
             // Repositories
 <# foreach (CodeGenModel model in config.Models) { #>

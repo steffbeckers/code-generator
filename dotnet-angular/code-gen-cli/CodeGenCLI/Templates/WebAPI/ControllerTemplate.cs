@@ -122,7 +122,7 @@ namespace CodeGenCLI.Templates.WebAPI
                     "= mapper;\r\n            this.bll = bll;\r\n        }\r\n\r\n        // GET: api/");
             
             #line 46 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
@@ -193,7 +193,7 @@ namespace CodeGenCLI.Templates.WebAPI
             this.Write(");\r\n        }\r\n\r\n        // GET: api/");
             
             #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
@@ -272,7 +272,7 @@ namespace CodeGenCLI.Templates.WebAPI
             this.Write(");\r\n        }\r\n\r\n        // POST: api/");
             
             #line 77 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
@@ -414,7 +414,7 @@ namespace CodeGenCLI.Templates.WebAPI
             this.Write(")\r\n\t\t\t);\r\n        }\r\n\r\n\t\t// PUT: api/");
             
             #line 104 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
@@ -555,18 +555,18 @@ namespace CodeGenCLI.Templates.WebAPI
             this.Write("        // PUT: api/");
             
             #line 129 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
             this.Write("/");
             
             #line 129 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("/Link\r\n\t\t/// <summary>\r\n\t\t/// Links a specific ");
+            this.Write("/link\r\n\t\t/// <summary>\r\n\t\t/// Links a specific ");
             
             #line 131 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model.ToLower()));
@@ -687,21 +687,21 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write(");\r\n        }\r\n\r\n        // DELETE: api/");
+            this.Write(");\r\n        }\r\n\r\n        // PUT: api/");
             
             #line 148 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden
             this.Write("/");
             
             #line 148 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("/Link\r\n\t\t/// <summary>\r\n\t\t/// Unlinks a specific ");
+            this.Write("/unlink\r\n\t\t/// <summary>\r\n\t\t/// Unlinks a specific ");
             
             #line 150 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model.ToLower()));
@@ -722,14 +722,14 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("\"></param>\r\n        [HttpDelete(\"");
+            this.Write("\"></param>\r\n        [HttpPut(\"");
             
             #line 153 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
-            this.Write("/Link\")]\r\n        public async Task<ActionResult<");
+            this.Write("/Unlink\")]\r\n        public async Task<ActionResult<");
             
             #line 154 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
@@ -832,7 +832,7 @@ namespace CodeGenCLI.Templates.WebAPI
             this.Write("        // DELETE: api/");
             
             #line 168 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture((!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower()));
             
             #line default
             #line hidden

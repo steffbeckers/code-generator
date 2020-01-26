@@ -36,7 +36,7 @@ namespace Test.API.Controllers
             this.bll = bll;
         }
 
-        // GET: api/Accounts
+        // GET: api/accounts
 		/// <summary>
 		/// Retrieves all accounts.
 		/// </summary>
@@ -49,7 +49,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<IEnumerable<Account>, List<AccountVM>>(accounts);
         }
 
-        // GET: api/Accounts/{id}
+        // GET: api/accounts/{id}
 		/// <summary>
 		/// Retrieves a specific account.
 		/// </summary>
@@ -67,7 +67,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<Account, AccountVM>(account);
         }
 
-        // POST: api/Accounts
+        // POST: api/accounts
 		/// <summary>
 		/// Creates a new account.
 		/// </summary>
@@ -94,7 +94,7 @@ namespace Test.API.Controllers
 			);
         }
 
-		// PUT: api/Accounts/{id}
+		// PUT: api/accounts/{id}
 		/// <summary>
 		/// Updates a specific account.
 		/// </summary>
@@ -118,7 +118,7 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Account, AccountVM>(account);
         }
 
-        // PUT: api/Accounts/Notes/Link
+        // PUT: api/accounts/notes/link
 		/// <summary>
 		/// Links a specific note to account.
 		/// </summary>
@@ -137,12 +137,12 @@ namespace Test.API.Controllers
             return this.mapper.Map<Account, AccountVM>(account);
         }
 
-        // DELETE: api/Accounts/Notes/Link
+        // PUT: api/accounts/notes/unlink
 		/// <summary>
 		/// Unlinks a specific note from account.
 		/// </summary>
 		/// <param name="accountNote"></param>
-        [HttpDelete("Notes/Link")]
+        [HttpPut("Notes/Unlink")]
         public async Task<ActionResult<AccountVM>> UnlinkNoteFromAccount([FromBody] AccountNote accountNote)
         {
 			// Validation
@@ -156,7 +156,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<Account, AccountVM>(account);
         }
 
-        // DELETE: api/Accounts/{id}
+        // DELETE: api/accounts/{id}
 		/// <summary>
 		/// Deletes a specific account.
 		/// </summary>

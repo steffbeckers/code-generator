@@ -36,7 +36,7 @@ namespace Test.API.Controllers
             this.bll = bll;
         }
 
-        // GET: api/Addresses
+        // GET: api/addresses
 		/// <summary>
 		/// Retrieves all addresses.
 		/// </summary>
@@ -49,7 +49,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<IEnumerable<Address>, List<AddressVM>>(addresses);
         }
 
-        // GET: api/Addresses/{id}
+        // GET: api/addresses/{id}
 		/// <summary>
 		/// Retrieves a specific address.
 		/// </summary>
@@ -67,7 +67,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<Address, AddressVM>(address);
         }
 
-        // POST: api/Addresses
+        // POST: api/addresses
 		/// <summary>
 		/// Creates a new address.
 		/// </summary>
@@ -94,7 +94,7 @@ namespace Test.API.Controllers
 			);
         }
 
-		// PUT: api/Addresses/{id}
+		// PUT: api/addresses/{id}
 		/// <summary>
 		/// Updates a specific address.
 		/// </summary>
@@ -118,7 +118,7 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Address, AddressVM>(address);
         }
 
-        // DELETE: api/Addresses/{id}
+        // DELETE: api/addresses/{id}
 		/// <summary>
 		/// Deletes a specific address.
 		/// </summary>

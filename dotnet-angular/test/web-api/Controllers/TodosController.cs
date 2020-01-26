@@ -36,7 +36,7 @@ namespace Test.API.Controllers
             this.bll = bll;
         }
 
-        // GET: api/Todos
+        // GET: api/todos
 		/// <summary>
 		/// Retrieves all todos.
 		/// </summary>
@@ -49,7 +49,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<IEnumerable<Todo>, List<TodoVM>>(todos);
         }
 
-        // GET: api/Todos/{id}
+        // GET: api/todos/{id}
 		/// <summary>
 		/// Retrieves a specific todo.
 		/// </summary>
@@ -67,7 +67,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<Todo, TodoVM>(todo);
         }
 
-        // POST: api/Todos
+        // POST: api/todos
 		/// <summary>
 		/// Creates a new todo.
 		/// </summary>
@@ -94,7 +94,7 @@ namespace Test.API.Controllers
 			);
         }
 
-		// PUT: api/Todos/{id}
+		// PUT: api/todos/{id}
 		/// <summary>
 		/// Updates a specific todo.
 		/// </summary>
@@ -118,7 +118,7 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Todo, TodoVM>(todo);
         }
 
-        // DELETE: api/Todos/{id}
+        // DELETE: api/todos/{id}
 		/// <summary>
 		/// Deletes a specific todo.
 		/// </summary>

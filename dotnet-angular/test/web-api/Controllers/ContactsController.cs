@@ -36,7 +36,7 @@ namespace Test.API.Controllers
             this.bll = bll;
         }
 
-        // GET: api/Contacts
+        // GET: api/contacts
 		/// <summary>
 		/// Retrieves all contacts.
 		/// </summary>
@@ -49,7 +49,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<IEnumerable<Contact>, List<ContactVM>>(contacts);
         }
 
-        // GET: api/Contacts/{id}
+        // GET: api/contacts/{id}
 		/// <summary>
 		/// Retrieves a specific contact.
 		/// </summary>
@@ -67,7 +67,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<Contact, ContactVM>(contact);
         }
 
-        // POST: api/Contacts
+        // POST: api/contacts
 		/// <summary>
 		/// Creates a new contact.
 		/// </summary>
@@ -94,7 +94,7 @@ namespace Test.API.Controllers
 			);
         }
 
-		// PUT: api/Contacts/{id}
+		// PUT: api/contacts/{id}
 		/// <summary>
 		/// Updates a specific contact.
 		/// </summary>
@@ -118,7 +118,7 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Contact, ContactVM>(contact);
         }
 
-        // DELETE: api/Contacts/{id}
+        // DELETE: api/contacts/{id}
 		/// <summary>
 		/// Deletes a specific contact.
 		/// </summary>

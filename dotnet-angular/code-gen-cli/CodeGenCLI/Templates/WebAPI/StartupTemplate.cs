@@ -84,12 +84,12 @@ using ");
 {
     public class Startup
     {
+        public IConfiguration configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -111,8 +111,8 @@ using ");
             
             #line default
             #line hidden
-            this.Write("Context>(options =>\r\n                options.UseSqlServer(Configuration.GetConnec" +
-                    "tionString(\"");
+            this.Write("Context>(options =>\r\n                options.UseSqlServer(this.configuration.GetC" +
+                    "onnectionString(\"");
             
             #line 47 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));

@@ -43,7 +43,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             this.bll = bll;
         }
 
-        // GET: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+        // GET: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>
 		/// <summary>
 		/// Retrieves all <#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>.
 		/// </summary>
@@ -56,7 +56,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             return this.mapper.Map<IEnumerable<<#= model.Name #>>, List<<#= model.Name #>VM>>(<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower() #>);
         }
 
-        // GET: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{id}
+        // GET: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
 		/// <summary>
 		/// Retrieves a specific <#= model.Name.ToLower() #>.
 		/// </summary>
@@ -74,7 +74,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>);
         }
 
-        // POST: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+        // POST: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>
 		/// <summary>
 		/// Creates a new <#= model.Name.ToLower() #>.
 		/// </summary>
@@ -101,7 +101,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			);
         }
 
-		// PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{id}
+		// PUT: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
 		/// <summary>
 		/// Updates a specific <#= model.Name.ToLower() #>.
 		/// </summary>
@@ -126,7 +126,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
-        // PUT: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/<#= relation.Name #>/Link
+        // PUT: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/<#= relation.Name.ToLower() #>/link
 		/// <summary>
 		/// Links a specific <#= relation.Model.ToLower() #> to <#= model.Name.ToLower() #>.
 		/// </summary>
@@ -145,12 +145,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
         }
 
-        // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/<#= relation.Name #>/Link
+        // PUT: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/<#= relation.Name.ToLower() #>/unlink
 		/// <summary>
 		/// Unlinks a specific <#= relation.Model.ToLower() #> from <#= model.Name.ToLower() #>.
 		/// </summary>
 		/// <param name="<#= relation.Through.ToCamelCase() #>"></param>
-        [HttpDelete("<#= relation.Name #>/Link")]
+        [HttpPut("<#= relation.Name #>/Unlink")]
         public async Task<ActionResult<<#= model.Name #>VM>> Unlink<#= relation.Model #>From<#= model.Name #>([FromBody] <#= relation.Through #> <#= relation.Through.ToCamelCase() #>)
         {
 			// Validation
@@ -165,7 +165,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
 <# } #>
-        // DELETE: api/<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>/{id}
+        // DELETE: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
 		/// <summary>
 		/// Deletes a specific <#= model.Name.ToLower() #>.
 		/// </summary>

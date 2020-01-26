@@ -36,7 +36,7 @@ namespace Test.API.Controllers
             this.bll = bll;
         }
 
-        // GET: api/Notes
+        // GET: api/notes
 		/// <summary>
 		/// Retrieves all notes.
 		/// </summary>
@@ -49,7 +49,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<IEnumerable<Note>, List<NoteVM>>(notes);
         }
 
-        // GET: api/Notes/{id}
+        // GET: api/notes/{id}
 		/// <summary>
 		/// Retrieves a specific note.
 		/// </summary>
@@ -67,7 +67,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<Note, NoteVM>(note);
         }
 
-        // POST: api/Notes
+        // POST: api/notes
 		/// <summary>
 		/// Creates a new note.
 		/// </summary>
@@ -94,7 +94,7 @@ namespace Test.API.Controllers
 			);
         }
 
-		// PUT: api/Notes/{id}
+		// PUT: api/notes/{id}
 		/// <summary>
 		/// Updates a specific note.
 		/// </summary>
@@ -118,7 +118,7 @@ namespace Test.API.Controllers
 			return this.mapper.Map<Note, NoteVM>(note);
         }
 
-        // PUT: api/Notes/Accounts/Link
+        // PUT: api/notes/accounts/link
 		/// <summary>
 		/// Links a specific account to note.
 		/// </summary>
@@ -137,12 +137,12 @@ namespace Test.API.Controllers
             return this.mapper.Map<Note, NoteVM>(note);
         }
 
-        // DELETE: api/Notes/Accounts/Link
+        // PUT: api/notes/accounts/unlink
 		/// <summary>
 		/// Unlinks a specific account from note.
 		/// </summary>
 		/// <param name="accountNote"></param>
-        [HttpDelete("Accounts/Link")]
+        [HttpPut("Accounts/Unlink")]
         public async Task<ActionResult<NoteVM>> UnlinkAccountFromNote([FromBody] AccountNote accountNote)
         {
 			// Validation
@@ -156,7 +156,7 @@ namespace Test.API.Controllers
             return this.mapper.Map<Note, NoteVM>(note);
         }
 
-        // DELETE: api/Notes/{id}
+        // DELETE: api/notes/{id}
 		/// <summary>
 		/// Deletes a specific note.
 		/// </summary>
