@@ -75,14 +75,13 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
 
-        public IEnumerable<<#= relationModel.Name #>> Get<#= !string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s" #>Of<#= model.Name #>ById(Guid id)
+        public IEnumerable<<#= model.Name #>> GetBy<#= relationModel.Name #>Id(Guid <#= relationModel.Name.ToCamelCase() #>Id)
         {
-            List<<#= relation.Through #>> <#= relation.Through.ToCamelCase() #> = this.context.<#= relation.Through #>
-                .Include(x => x.<#= relation.Model #>)
-                .Where(x => x.<#= model.Name #>Id == id)
+            return this.context.<#= relation.Through #>
+                .Include(x => x.<#= model.Name #>)
+                .Where(x => x.<#= relationModel.Name #>Id == <#= relationModel.Name.ToCamelCase() #>Id)
+                .Select(x => x.<#= model.Name #>)
                 .ToList();
-
-            return <#= relation.Through.ToCamelCase() #>.Select(x => x.<#= relation.Model #>).ToList();
         }
 <# } #>
 <# } #>

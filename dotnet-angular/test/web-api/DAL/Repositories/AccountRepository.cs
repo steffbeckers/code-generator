@@ -44,14 +44,13 @@ namespace Test.API.DAL.Repositories
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public IEnumerable<Note> GetNotesOfAccountById(Guid id)
+        public IEnumerable<Account> GetByNoteId(Guid noteId)
         {
-            List<AccountNote> accountNote = this.context.AccountNote
-                .Include(x => x.Note)
-                .Where(x => x.AccountId == id)
+            return this.context.AccountNote
+                .Include(x => x.Account)
+                .Where(x => x.NoteId == noteId)
+                .Select(x => x.Account)
                 .ToList();
-
-            return accountNote.Select(x => x.Note).ToList();
         }
     }
 }

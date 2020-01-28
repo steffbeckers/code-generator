@@ -361,25 +361,18 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Types
             this.Write("\",\r\n                resolve: context => ");
             
             #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relationModel.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write("Repository.Get");
-            
-            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s"));
-            
-            #line default
-            #line hidden
-            this.Write("Of");
+            this.Write("Repository.GetBy");
             
             #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write("ById(context.Source.Id)\r\n            );\r\n\r\n");
+            this.Write("Id(context.Source.Id)\r\n            );\r\n\r\n");
             
             #line 64 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
  } 

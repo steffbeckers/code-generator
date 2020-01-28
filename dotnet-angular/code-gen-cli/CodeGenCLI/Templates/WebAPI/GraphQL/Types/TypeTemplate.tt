@@ -58,7 +58,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
             Field<ListGraphType<<#= relationModel.Name #>Type>>(
                 "<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToCamelCase() #>",
-                resolve: context => <#= model.Name.ToCamelCase() #>Repository.Get<#= !string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s" #>Of<#= model.Name #>ById(context.Source.Id)
+                resolve: context => <#= relationModel.Name.ToCamelCase() #>Repository.GetBy<#= model.Name #>Id(context.Source.Id)
             );
 
 <# } #>

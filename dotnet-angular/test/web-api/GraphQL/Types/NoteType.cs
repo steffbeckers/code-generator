@@ -19,7 +19,7 @@ namespace Test.API.GraphQL.Types
 
             Field<ListGraphType<AccountType>>(
                 "accounts",
-                resolve: context => noteRepository.GetAccountsOfNoteById(context.Source.Id)
+                resolve: context => accountRepository.GetByNoteId(context.Source.Id)
             );
 
         }
