@@ -14,12 +14,10 @@ namespace Test.API.DAL
         {
         }
 
-		public DbSet<Account> Accounts { get; set; }
-		public DbSet<Contact> Contacts { get; set; }
-		public DbSet<Address> Addresses { get; set; }
-		public DbSet<Note> Notes { get; set; }
-		public DbSet<Todo> Todos { get; set; }
-		public DbSet<AccountNote> AccountNote { get; set; }
+		public DbSet<Product> Products { get; set; }
+		public DbSet<Supplier> Suppliers { get; set; }
+		public DbSet<ProductDetail> ProductDetails { get; set; }
+		public DbSet<ProductSupplier> ProductSupplier { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,104 +34,70 @@ namespace Test.API.DAL
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-			#region Accounts
+			#region Products
 
             // Soft delete query filter
-            modelBuilder.Entity<Account>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<Product>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Account>().ToTable("Accounts");
+			modelBuilder.Entity<Product>().ToTable("Products");
 
 			// Key
-			modelBuilder.Entity<Account>().HasKey(e => e.Id);
+			modelBuilder.Entity<Product>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
+            modelBuilder.Entity<Product>().Property(e => e.Name).IsRequired();
 
             #endregion
 
-			#region Contacts
+			#region Suppliers
 
             // Soft delete query filter
-            modelBuilder.Entity<Contact>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<Supplier>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Contact>().ToTable("Contacts");
+			modelBuilder.Entity<Supplier>().ToTable("Suppliers");
 
 			// Key
-			modelBuilder.Entity<Contact>().HasKey(e => e.Id);
+			modelBuilder.Entity<Supplier>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<Contact>().Property(e => e.FirstName).IsRequired();
-            modelBuilder.Entity<Contact>().Property(e => e.LastName).IsRequired();
+            modelBuilder.Entity<Supplier>().Property(e => e.Name).IsRequired();
 
             #endregion
 
-			#region Addresses
+			#region ProductDetails
 
             // Soft delete query filter
-            modelBuilder.Entity<Address>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<ProductDetail>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Address>().ToTable("Addresses");
+			modelBuilder.Entity<ProductDetail>().ToTable("ProductDetails");
 
 			// Key
-			modelBuilder.Entity<Address>().HasKey(e => e.Id);
+			modelBuilder.Entity<ProductDetail>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<Address>().Property(e => e.Street).IsRequired();
-            modelBuilder.Entity<Address>().Property(e => e.Number).IsRequired();
-            modelBuilder.Entity<Address>().Property(e => e.PostalCode).IsRequired();
-            modelBuilder.Entity<Address>().Property(e => e.City).IsRequired();
+            modelBuilder.Entity<ProductDetail>().Property(e => e.Comment).IsRequired();
+            modelBuilder.Entity<ProductDetail>().Property(e => e.ProductId).IsRequired();
 
             #endregion
 
-			#region Notes
+			#region ProductSupplier
 
             // Soft delete query filter
-            modelBuilder.Entity<Note>().HasQueryFilter(e => e.DeletedOn == null);
+            modelBuilder.Entity<ProductSupplier>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-			modelBuilder.Entity<Note>().ToTable("Notes");
+			modelBuilder.Entity<ProductSupplier>().ToTable("ProductSupplier");
 
 			// Key
-			modelBuilder.Entity<Note>().HasKey(e => e.Id);
+			modelBuilder.Entity<ProductSupplier>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<Note>().Property(e => e.Title).IsRequired();
-
-            #endregion
-
-			#region Todos
-
-            // Soft delete query filter
-            modelBuilder.Entity<Todo>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-			modelBuilder.Entity<Todo>().ToTable("Todos");
-
-			// Key
-			modelBuilder.Entity<Todo>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<Todo>().Property(e => e.Title).IsRequired();
-
-            #endregion
-
-			#region AccountNote
-
-            // Soft delete query filter
-            modelBuilder.Entity<AccountNote>().HasQueryFilter(e => e.DeletedOn == null);
-
-            // Table
-			modelBuilder.Entity<AccountNote>().ToTable("AccountNote");
-
-			// Key
-			modelBuilder.Entity<AccountNote>().HasKey(e => e.Id);
-
-            // Required properties
-            modelBuilder.Entity<AccountNote>().Property(e => e.AccountId).IsRequired();
-            modelBuilder.Entity<AccountNote>().Property(e => e.NoteId).IsRequired();
+            modelBuilder.Entity<ProductSupplier>().Property(e => e.Comment).IsRequired();
+            modelBuilder.Entity<ProductSupplier>().Property(e => e.ProductId).IsRequired();
+            modelBuilder.Entity<ProductSupplier>().Property(e => e.SupplierId).IsRequired();
 
             #endregion
 		}
@@ -160,12 +124,10 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Account) ||
-					entry.Entity.GetType() == typeof(Contact) ||
-					entry.Entity.GetType() == typeof(Address) ||
-					entry.Entity.GetType() == typeof(Note) ||
-					entry.Entity.GetType() == typeof(Todo) ||
-					entry.Entity.GetType() == typeof(AccountNote)
+					entry.Entity.GetType() == typeof(Product) ||
+					entry.Entity.GetType() == typeof(Supplier) ||
+					entry.Entity.GetType() == typeof(ProductDetail) ||
+					entry.Entity.GetType() == typeof(ProductSupplier)
 				)
                 {
                     switch (entry.State)
@@ -188,12 +150,10 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-					entry.Entity.GetType() == typeof(Account) ||
-					entry.Entity.GetType() == typeof(Contact) ||
-					entry.Entity.GetType() == typeof(Address) ||
-					entry.Entity.GetType() == typeof(Note) ||
-					entry.Entity.GetType() == typeof(Todo) ||
-					entry.Entity.GetType() == typeof(AccountNote)
+					entry.Entity.GetType() == typeof(Product) ||
+					entry.Entity.GetType() == typeof(Supplier) ||
+					entry.Entity.GetType() == typeof(ProductDetail) ||
+					entry.Entity.GetType() == typeof(ProductSupplier)
 				)
                 {
                     switch (entry.State)

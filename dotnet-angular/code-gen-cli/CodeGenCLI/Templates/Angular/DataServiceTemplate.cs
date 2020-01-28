@@ -431,7 +431,7 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Id}/link`, null);\r\n  }\r\n\r\n  // DELETE: api/");
+            this.Write("Id}/link`, null);\r\n  }\r\n\r\n  // PUT: api/");
             
             #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
@@ -508,7 +508,7 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("> {\r\n    return this.http.delete<");
+            this.Write("> {\r\n    return this.http.put<");
             
             #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));

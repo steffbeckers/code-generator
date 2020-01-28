@@ -4,190 +4,295 @@
   "override": true,
   "models": [
     {
-      "name": "Account",
-      //"description": "Also; Company or Business", // Optional
-      "displayField": "Name",
-      "sortField": "Name",
+      "name": "Product",
       "properties": [
         {
           "name": "Name",
-          //"description": "", // Optional
           "type": "string",
           "required": true
         },
         {
-          "name": "Website",
+          "name": "Code",
           "type": "string"
         },
         {
-          "name": "Telephone",
-          "type": "string"
+          "name": "Quantity",
+          "type": "int"
         },
         {
-          "name": "Email",
-          "displayName": "Email Address",
-          "type": "string"
+          "name": "Price",
+          "type": "double"
         }
       ],
       "relations": [
         {
-          "name": "Addresses",
+          "name": "Details",
           "type": "one-to-many",
-          "model": "Address"
+          "model": "ProductDetail"
         },
         {
-          "name": "Contacts",
-          "type": "one-to-many",
-          "model": "Contact"
-        },
-        {
-          "name": "Notes",
+          "name": "Suppliers",
           "type": "many-to-many",
-          "model": "Note",
-          "through": "AccountNote"
+          "model": "Supplier",
+          "through": "ProductSupplier"
         }
       ]
     },
     {
-      "name": "Contact",
-      "displayField": "FirstName",
+      "name": "Supplier",
       "properties": [
         {
-          "name": "FirstName",
-          "displayName": "First Name",
+          "name": "Name",
           "type": "string",
           "required": true
         },
         {
-          "name": "LastName",
-          "displayName": "Last Name",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "Website",
-          "type": "string"
-        },
-        {
-          "name": "Telephone",
-          "type": "string"
-        },
-        {
-          "name": "Email",
+          "name": "Phone",
           "type": "string"
         }
       ],
       "relations": [
         {
-          "name": "Account",
-          "type": "many-to-one",
-          //"required": true,
-          "model": "Account",
-          //"idField": "ParentAccountId", // TODO: Optional override
-          "displayField": "Name" // TODO: Use displayField on Account itself, not defined multiple times then
-        }
-      ]
-    },
-    {
-      "name": "Address",
-      "namePlural": "Addresses",
-      "displayField": "Street",
-      "properties": [
-        {
-          "name": "Street",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "Number",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "PostalCode",
-          "displayName": "Postal Code",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "City",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "Primary",
-          "type": "bool"
-        }
-      ],
-      "relations": [
-        {
-          "name": "Account",
-          "type": "many-to-one",
-          //"required": true,
-          "model": "Account",
-          //"idField": "ParentAccountId", // TODO: Optional override
-          "displayField": "Name"
-        }
-      ]
-    },
-    {
-      "name": "Note",
-      "displayField": "Title",
-      "properties": [
-        {
-          "name": "Title",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "Body",
-          "type": "string"
-        }
-      ],
-      "relations": [
-        {
-          "name": "Accounts",
+          "name": "Products",
           "type": "many-to-many",
-          "model": "Account",
-          "through": "AccountNote"
+          "model": "Product",
+          "through": "ProductSupplier"
         }
       ]
     },
     {
-      "name": "Todo",
-      "displayField": "Title",
+      "name": "ProductDetail",
       "properties": [
         {
-          "name": "Title",
+          "name": "Comment",
           "type": "string",
           "required": true
-        },
+        }
+      ],
+      "relations": [
         {
-          "name": "DueDate",
-          "displayName": "Due",
-          "type": "DateTime"
+          "name": "Product",
+          "type": "many-to-one",
+          "required": true,
+          "model": "Product"
         }
       ]
     },
     {
-      "name": "AccountNote",
+      "name": "ProductSupplier",
       "manyToMany": true,
-      "properties": [],
+      "properties": [
+        {
+          "name": "Comment",
+          "type": "string",
+          "required": true
+        }
+      ],
       "relations": [
         {
-          "name": "Account",
+          "name": "Product",
           "type": "many-to-one",
           "required": true,
-          "model": "Account"
+          "model": "Product"
         },
         {
-          "name": "Note",
+          "name": "Supplier",
           "type": "many-to-one",
           "required": true,
-          "model": "Note"
+          "model": "Supplier"
         }
       ]
     }
+    //{
+    //  "name": "Account",
+    //  //"description": "Also; Company or Business", // Optional
+    //  "displayField": "Name",
+    //  "sortField": "Name",
+    //  "properties": [
+    //    {
+    //      "name": "Name",
+    //      //"description": "", // Optional
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "Website",
+    //      "type": "string"
+    //    },
+    //    {
+    //      "name": "Telephone",
+    //      "type": "string"
+    //    },
+    //    {
+    //      "name": "Email",
+    //      "displayName": "Email Address",
+    //      "type": "string"
+    //    }
+    //  ],
+    //  "relations": [
+    //    {
+    //      "name": "Addresses",
+    //      "type": "one-to-many",
+    //      "model": "Address"
+    //    },
+    //    {
+    //      "name": "Contacts",
+    //      "type": "one-to-many",
+    //      "model": "Contact"
+    //    },
+    //    {
+    //      "name": "Notes",
+    //      "type": "many-to-many",
+    //      "model": "Note",
+    //      "through": "AccountNote"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "name": "Contact",
+    //  "displayField": "FirstName",
+    //  "properties": [
+    //    {
+    //      "name": "FirstName",
+    //      "displayName": "First Name",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "LastName",
+    //      "displayName": "Last Name",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "Website",
+    //      "type": "string"
+    //    },
+    //    {
+    //      "name": "Telephone",
+    //      "type": "string"
+    //    },
+    //    {
+    //      "name": "Email",
+    //      "type": "string"
+    //    }
+    //  ],
+    //  "relations": [
+    //    {
+    //      "name": "Account",
+    //      "type": "many-to-one",
+    //      //"required": true,
+    //      "model": "Account",
+    //      //"idField": "ParentAccountId", // TODO: Optional override
+    //      "displayField": "Name" // TODO: Use displayField on Account itself, not defined multiple times then
+    //    }
+    //  ]
+    //},
+    //{
+    //  "name": "Address",
+    //  "namePlural": "Addresses",
+    //  "displayField": "Street",
+    //  "properties": [
+    //    {
+    //      "name": "Street",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "Number",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "PostalCode",
+    //      "displayName": "Postal Code",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "City",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "Primary",
+    //      "type": "bool"
+    //    }
+    //  ],
+    //  "relations": [
+    //    {
+    //      "name": "Account",
+    //      "type": "many-to-one",
+    //      //"required": true,
+    //      "model": "Account",
+    //      //"idField": "ParentAccountId", // TODO: Optional override
+    //      "displayField": "Name"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "name": "Note",
+    //  "displayField": "Title",
+    //  "properties": [
+    //    {
+    //      "name": "Title",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "Body",
+    //      "type": "string"
+    //    }
+    //  ],
+    //  "relations": [
+    //    {
+    //      "name": "Accounts",
+    //      "type": "many-to-many",
+    //      "model": "Account",
+    //      "through": "AccountNote"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "name": "Todo",
+    //  "displayField": "Title",
+    //  "properties": [
+    //    {
+    //      "name": "Title",
+    //      "type": "string",
+    //      "required": true
+    //    },
+    //    {
+    //      "name": "DueDate",
+    //      "displayName": "Due",
+    //      "type": "DateTime"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "name": "AccountNote",
+    //  "manyToMany": true,
+    //  "properties": [
+    //    {
+    //      "name": "SortOrder",
+    //      "type": "int"
+    //    }
+    //  ],
+    //  "relations": [
+    //    {
+    //      "name": "Account",
+    //      "type": "many-to-one",
+    //      "required": true,
+    //      "model": "Account"
+    //    },
+    //    {
+    //      "name": "Note",
+    //      "type": "many-to-one",
+    //      "required": true,
+    //      "model": "Note"
+    //    }
+    //  ]
+    //}
   ],
   "webAPI": {
     "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",

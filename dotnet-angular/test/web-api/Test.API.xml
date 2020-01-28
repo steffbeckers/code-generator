@@ -4,402 +4,252 @@
         <name>Test.API</name>
     </assembly>
     <members>
-        <member name="T:Test.API.BLL.AccountBLL">
+        <member name="T:Test.API.BLL.ProductBLL">
             <summary>
-            The business logic layer for Accounts.
+            The business logic layer for Products.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.#ctor(Test.API.DAL.Repositories.AccountRepository,Test.API.DAL.Repositories.NoteRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
+        <member name="M:Test.API.BLL.ProductBLL.#ctor(Test.API.DAL.Repositories.ProductRepository,Test.API.DAL.Repositories.SupplierRepository,Test.API.DAL.Repositories.ProductSupplierRepository)">
             <summary>
-            The constructor of the Account business logic layer.
+            The constructor of the Product business logic layer.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.GetAllAccountsAsync">
+        <member name="M:Test.API.BLL.ProductBLL.GetAllProductsAsync">
             <summary>
-            Retrieves all accounts.
+            Retrieves all products.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.GetAccountByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.ProductBLL.GetProductByIdAsync(System.Guid)">
             <summary>
-            Retrieves one account by Id.
+            Retrieves one product by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.CreateAccountAsync(Test.API.Models.Account)">
+        <member name="M:Test.API.BLL.ProductBLL.CreateProductAsync(Test.API.Models.Product)">
             <summary>
-            Creates a new account record.
+            Creates a new product record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.UpdateAccountAsync(Test.API.Models.Account)">
+        <member name="M:Test.API.BLL.ProductBLL.UpdateProductAsync(Test.API.Models.Product)">
             <summary>
-            Updates an existing account record by Id.
+            Updates an existing product record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AccountBLL.DeleteAccountAsync(Test.API.Models.Account)">
+        <member name="M:Test.API.BLL.ProductBLL.DeleteProductAsync(Test.API.Models.Product)">
             <summary>
-            Deletes an existing account record by Id.
+            Deletes an existing product record by Id.
             </summary>
         </member>
-        <member name="T:Test.API.BLL.AddressBLL">
+        <member name="T:Test.API.BLL.ProductDetailBLL">
             <summary>
-            The business logic layer for Addresses.
+            The business logic layer for ProductDetails.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AddressBLL.#ctor(Test.API.DAL.Repositories.AddressRepository)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.#ctor(Test.API.DAL.Repositories.ProductDetailRepository)">
             <summary>
-            The constructor of the Address business logic layer.
+            The constructor of the ProductDetail business logic layer.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AddressBLL.GetAllAddressesAsync">
+        <member name="M:Test.API.BLL.ProductDetailBLL.GetAllProductDetailsAsync">
             <summary>
-            Retrieves all addresses.
+            Retrieves all productdetails.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AddressBLL.GetAddressByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.GetProductDetailByIdAsync(System.Guid)">
             <summary>
-            Retrieves one address by Id.
+            Retrieves one productdetail by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AddressBLL.CreateAddressAsync(Test.API.Models.Address)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.CreateProductDetailAsync(Test.API.Models.ProductDetail)">
             <summary>
-            Creates a new address record.
+            Creates a new productdetail record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AddressBLL.UpdateAddressAsync(Test.API.Models.Address)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.UpdateProductDetailAsync(Test.API.Models.ProductDetail)">
             <summary>
-            Updates an existing address record by Id.
+            Updates an existing productdetail record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.AddressBLL.DeleteAddressAsync(Test.API.Models.Address)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.DeleteProductDetailAsync(Test.API.Models.ProductDetail)">
             <summary>
-            Deletes an existing address record by Id.
+            Deletes an existing productdetail record by Id.
             </summary>
         </member>
-        <member name="T:Test.API.BLL.ContactBLL">
+        <member name="T:Test.API.BLL.SupplierBLL">
             <summary>
-            The business logic layer for Contacts.
+            The business logic layer for Suppliers.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.#ctor(Test.API.DAL.Repositories.ContactRepository)">
+        <member name="M:Test.API.BLL.SupplierBLL.#ctor(Test.API.DAL.Repositories.SupplierRepository,Test.API.DAL.Repositories.ProductRepository,Test.API.DAL.Repositories.ProductSupplierRepository)">
             <summary>
-            The constructor of the Contact business logic layer.
+            The constructor of the Supplier business logic layer.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.GetAllContactsAsync">
+        <member name="M:Test.API.BLL.SupplierBLL.GetAllSuppliersAsync">
             <summary>
-            Retrieves all contacts.
+            Retrieves all suppliers.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.GetContactByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.SupplierBLL.GetSupplierByIdAsync(System.Guid)">
             <summary>
-            Retrieves one contact by Id.
+            Retrieves one supplier by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.CreateContactAsync(Test.API.Models.Contact)">
+        <member name="M:Test.API.BLL.SupplierBLL.CreateSupplierAsync(Test.API.Models.Supplier)">
             <summary>
-            Creates a new contact record.
+            Creates a new supplier record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.UpdateContactAsync(Test.API.Models.Contact)">
+        <member name="M:Test.API.BLL.SupplierBLL.UpdateSupplierAsync(Test.API.Models.Supplier)">
             <summary>
-            Updates an existing contact record by Id.
+            Updates an existing supplier record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.DeleteContactAsync(Test.API.Models.Contact)">
+        <member name="M:Test.API.BLL.SupplierBLL.DeleteSupplierAsync(Test.API.Models.Supplier)">
             <summary>
-            Deletes an existing contact record by Id.
+            Deletes an existing supplier record by Id.
             </summary>
         </member>
-        <member name="T:Test.API.BLL.NoteBLL">
+        <member name="T:Test.API.Controllers.ProductDetailsController">
             <summary>
-            The business logic layer for Notes.
+            The ProductDetails controller.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.NoteBLL.#ctor(Test.API.DAL.Repositories.NoteRepository,Test.API.DAL.Repositories.AccountRepository,Test.API.DAL.Repositories.AccountNoteRepository)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ProductDetailsController},AutoMapper.IMapper,Test.API.BLL.ProductDetailBLL)">
             <summary>
-            The constructor of the Note business logic layer.
+            The constructor of the ProductDetails controller.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.NoteBLL.GetAllNotesAsync">
+        <member name="M:Test.API.Controllers.ProductDetailsController.GetProductDetails">
             <summary>
-            Retrieves all notes.
+            Retrieves all productdetails.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.NoteBLL.GetNoteByIdAsync(System.Guid)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.GetProductDetail(System.Guid)">
             <summary>
-            Retrieves one note by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.NoteBLL.CreateNoteAsync(Test.API.Models.Note)">
-            <summary>
-            Creates a new note record.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.NoteBLL.UpdateNoteAsync(Test.API.Models.Note)">
-            <summary>
-            Updates an existing note record by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.NoteBLL.DeleteNoteAsync(Test.API.Models.Note)">
-            <summary>
-            Deletes an existing note record by Id.
-            </summary>
-        </member>
-        <member name="T:Test.API.BLL.TodoBLL">
-            <summary>
-            The business logic layer for Todos.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.TodoBLL.#ctor(Test.API.DAL.Repositories.TodoRepository)">
-            <summary>
-            The constructor of the Todo business logic layer.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.TodoBLL.GetAllTodosAsync">
-            <summary>
-            Retrieves all todos.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.TodoBLL.GetTodoByIdAsync(System.Guid)">
-            <summary>
-            Retrieves one todo by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.TodoBLL.CreateTodoAsync(Test.API.Models.Todo)">
-            <summary>
-            Creates a new todo record.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.TodoBLL.UpdateTodoAsync(Test.API.Models.Todo)">
-            <summary>
-            Updates an existing todo record by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.TodoBLL.DeleteTodoAsync(Test.API.Models.Todo)">
-            <summary>
-            Deletes an existing todo record by Id.
-            </summary>
-        </member>
-        <member name="T:Test.API.Controllers.AccountsController">
-            <summary>
-            The Accounts controller.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.AccountsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AccountsController},AutoMapper.IMapper,Test.API.BLL.AccountBLL)">
-            <summary>
-            The constructor of the Accounts controller.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.AccountsController.GetAccounts">
-            <summary>
-            Retrieves all accounts.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.AccountsController.GetAccount(System.Guid)">
-            <summary>
-            Retrieves a specific account.
+            Retrieves a specific productdetail.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Test.API.Controllers.AccountsController.CreateAccount(Test.API.ViewModels.AccountVM)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.CreateProductDetail(Test.API.ViewModels.ProductDetailVM)">
             <summary>
-            Creates a new account.
+            Creates a new productdetail.
             </summary>
-            <param name="accountVM"></param>
+            <param name="productdetailVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.AccountsController.UpdateAccount(System.Guid,Test.API.ViewModels.AccountVM)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.UpdateProductDetail(System.Guid,Test.API.ViewModels.ProductDetailVM)">
             <summary>
-            Updates a specific account.
+            Updates a specific productdetail.
             </summary>
             <param name="id"></param>
-            <param name="accountVM"></param>
+            <param name="productDetailVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.AccountsController.LinkNoteToAccount(Test.API.Models.AccountNote)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.DeleteProductDetail(System.Guid)">
             <summary>
-            Links a specific note to account.
-            </summary>
-            <param name="accountNote"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AccountsController.UnlinkNoteFromAccount(Test.API.Models.AccountNote)">
-            <summary>
-            Unlinks a specific note from account.
-            </summary>
-            <param name="accountNote"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AccountsController.DeleteAccount(System.Guid)">
-            <summary>
-            Deletes a specific account.
+            Deletes a specific productdetail.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="T:Test.API.Controllers.AddressesController">
+        <member name="T:Test.API.Controllers.ProductsController">
             <summary>
-            The Addresses controller.
+            The Products controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.AddressesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AddressesController},AutoMapper.IMapper,Test.API.BLL.AddressBLL)">
+        <member name="M:Test.API.Controllers.ProductsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ProductsController},AutoMapper.IMapper,Test.API.BLL.ProductBLL)">
             <summary>
-            The constructor of the Addresses controller.
+            The constructor of the Products controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.AddressesController.GetAddresses">
+        <member name="M:Test.API.Controllers.ProductsController.GetProducts">
             <summary>
-            Retrieves all addresses.
+            Retrieves all products.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.AddressesController.GetAddress(System.Guid)">
+        <member name="M:Test.API.Controllers.ProductsController.GetProduct(System.Guid)">
             <summary>
-            Retrieves a specific address.
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.CreateAddress(Test.API.ViewModels.AddressVM)">
-            <summary>
-            Creates a new address.
-            </summary>
-            <param name="addressVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.UpdateAddress(System.Guid,Test.API.ViewModels.AddressVM)">
-            <summary>
-            Updates a specific address.
-            </summary>
-            <param name="id"></param>
-            <param name="addressVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.DeleteAddress(System.Guid)">
-            <summary>
-            Deletes a specific address.
+            Retrieves a specific product.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="T:Test.API.Controllers.ContactsController">
+        <member name="M:Test.API.Controllers.ProductsController.CreateProduct(Test.API.ViewModels.ProductVM)">
             <summary>
-            The Contacts controller.
+            Creates a new product.
             </summary>
+            <param name="productVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.ContactsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ContactsController},AutoMapper.IMapper,Test.API.BLL.ContactBLL)">
+        <member name="M:Test.API.Controllers.ProductsController.UpdateProduct(System.Guid,Test.API.ViewModels.ProductVM)">
             <summary>
-            The constructor of the Contacts controller.
+            Updates a specific product.
             </summary>
+            <param name="id"></param>
+            <param name="productVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.ContactsController.GetContacts">
+        <member name="M:Test.API.Controllers.ProductsController.LinkSupplierToProduct(Test.API.Models.ProductSupplier)">
             <summary>
-            Retrieves all contacts.
+            Links a specific supplier to product.
             </summary>
+            <param name="productSupplier"></param>
         </member>
-        <member name="M:Test.API.Controllers.ContactsController.GetContact(System.Guid)">
+        <member name="M:Test.API.Controllers.ProductsController.UnlinkSupplierFromProduct(Test.API.Models.ProductSupplier)">
             <summary>
-            Retrieves a specific contact.
+            Unlinks a specific supplier from product.
+            </summary>
+            <param name="productSupplier"></param>
+        </member>
+        <member name="M:Test.API.Controllers.ProductsController.DeleteProduct(System.Guid)">
+            <summary>
+            Deletes a specific product.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Test.API.Controllers.ContactsController.CreateContact(Test.API.ViewModels.ContactVM)">
+        <member name="T:Test.API.Controllers.SuppliersController">
             <summary>
-            Creates a new contact.
-            </summary>
-            <param name="contactVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.ContactsController.UpdateContact(System.Guid,Test.API.ViewModels.ContactVM)">
-            <summary>
-            Updates a specific contact.
-            </summary>
-            <param name="id"></param>
-            <param name="contactVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.ContactsController.DeleteContact(System.Guid)">
-            <summary>
-            Deletes a specific contact.
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="T:Test.API.Controllers.NotesController">
-            <summary>
-            The Notes controller.
+            The Suppliers controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.NotesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.NotesController},AutoMapper.IMapper,Test.API.BLL.NoteBLL)">
+        <member name="M:Test.API.Controllers.SuppliersController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.SuppliersController},AutoMapper.IMapper,Test.API.BLL.SupplierBLL)">
             <summary>
-            The constructor of the Notes controller.
+            The constructor of the Suppliers controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.NotesController.GetNotes">
+        <member name="M:Test.API.Controllers.SuppliersController.GetSuppliers">
             <summary>
-            Retrieves all notes.
+            Retrieves all suppliers.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.NotesController.GetNote(System.Guid)">
+        <member name="M:Test.API.Controllers.SuppliersController.GetSupplier(System.Guid)">
             <summary>
-            Retrieves a specific note.
+            Retrieves a specific supplier.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Test.API.Controllers.NotesController.CreateNote(Test.API.ViewModels.NoteVM)">
+        <member name="M:Test.API.Controllers.SuppliersController.CreateSupplier(Test.API.ViewModels.SupplierVM)">
             <summary>
-            Creates a new note.
+            Creates a new supplier.
             </summary>
-            <param name="noteVM"></param>
+            <param name="supplierVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.NotesController.UpdateNote(System.Guid,Test.API.ViewModels.NoteVM)">
+        <member name="M:Test.API.Controllers.SuppliersController.UpdateSupplier(System.Guid,Test.API.ViewModels.SupplierVM)">
             <summary>
-            Updates a specific note.
-            </summary>
-            <param name="id"></param>
-            <param name="noteVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.NotesController.LinkAccountToNote(Test.API.Models.AccountNote)">
-            <summary>
-            Links a specific account to note.
-            </summary>
-            <param name="accountNote"></param>
-        </member>
-        <member name="M:Test.API.Controllers.NotesController.UnlinkAccountFromNote(Test.API.Models.AccountNote)">
-            <summary>
-            Unlinks a specific account from note.
-            </summary>
-            <param name="accountNote"></param>
-        </member>
-        <member name="M:Test.API.Controllers.NotesController.DeleteNote(System.Guid)">
-            <summary>
-            Deletes a specific note.
+            Updates a specific supplier.
             </summary>
             <param name="id"></param>
+            <param name="supplierVM"></param>
         </member>
-        <member name="T:Test.API.Controllers.TodosController">
+        <member name="M:Test.API.Controllers.SuppliersController.LinkProductToSupplier(Test.API.Models.ProductSupplier)">
             <summary>
-            The Todos controller.
+            Links a specific product to supplier.
             </summary>
+            <param name="productSupplier"></param>
         </member>
-        <member name="M:Test.API.Controllers.TodosController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.TodosController},AutoMapper.IMapper,Test.API.BLL.TodoBLL)">
+        <member name="M:Test.API.Controllers.SuppliersController.UnlinkProductFromSupplier(Test.API.Models.ProductSupplier)">
             <summary>
-            The constructor of the Todos controller.
+            Unlinks a specific product from supplier.
             </summary>
+            <param name="productSupplier"></param>
         </member>
-        <member name="M:Test.API.Controllers.TodosController.GetTodos">
+        <member name="M:Test.API.Controllers.SuppliersController.DeleteSupplier(System.Guid)">
             <summary>
-            Retrieves all todos.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.TodosController.GetTodo(System.Guid)">
-            <summary>
-            Retrieves a specific todo.
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="M:Test.API.Controllers.TodosController.CreateTodo(Test.API.ViewModels.TodoVM)">
-            <summary>
-            Creates a new todo.
-            </summary>
-            <param name="todoVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.TodosController.UpdateTodo(System.Guid,Test.API.ViewModels.TodoVM)">
-            <summary>
-            Updates a specific todo.
-            </summary>
-            <param name="id"></param>
-            <param name="todoVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.TodosController.DeleteTodo(System.Guid)">
-            <summary>
-            Deletes a specific todo.
+            Deletes a specific supplier.
             </summary>
             <param name="id"></param>
         </member>
@@ -413,544 +263,319 @@
             The constructor of AutoMapperProfile.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.AccountNoteRepository">
+        <member name="T:Test.API.DAL.Repositories.ProductDetailRepository">
             <summary>
-            The repository for AccountNotes in the data access layer.
+            The repository for ProductDetails in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.AccountNoteRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.ProductDetailRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the AccountNote repository.
+            The constructor of the ProductDetail repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.AccountRepository">
+        <member name="T:Test.API.DAL.Repositories.ProductRepository">
             <summary>
-            The repository for Accounts in the data access layer.
+            The repository for Products in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.AccountRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.ProductRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the Account repository.
+            The constructor of the Product repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.AddressRepository">
+        <member name="T:Test.API.DAL.Repositories.ProductSupplierRepository">
             <summary>
-            The repository for Addresses in the data access layer.
+            The repository for ProductSuppliers in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.AddressRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.ProductSupplierRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the Address repository.
+            The constructor of the ProductSupplier repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.ContactRepository">
+        <member name="T:Test.API.DAL.Repositories.SupplierRepository">
             <summary>
-            The repository for Contacts in the data access layer.
+            The repository for Suppliers in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.ContactRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.SupplierRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the Contact repository.
+            The constructor of the Supplier repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.NoteRepository">
+        <member name="T:Test.API.Models.Product">
             <summary>
-            The repository for Notes in the data access layer.
+            Product model
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.NoteRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="P:Test.API.Models.Product.Id">
             <summary>
-            The constructor of the Note repository.
+            The identifier of Product.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.TodoRepository">
+        <member name="P:Test.API.Models.Product.Name">
             <summary>
-            The repository for Todos in the data access layer.
+            The Name property of Product.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.TodoRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="P:Test.API.Models.Product.Code">
             <summary>
-            The constructor of the Todo repository.
+            The Code property of Product.
             </summary>
         </member>
-        <member name="T:Test.API.Models.Account">
+        <member name="P:Test.API.Models.Product.Quantity">
             <summary>
-            Account model
+            The Quantity property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.Id">
+        <member name="P:Test.API.Models.Product.Price">
             <summary>
-            The identifier of Account.
+            The Price property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.Name">
+        <member name="P:Test.API.Models.Product.Details">
             <summary>
-            The Name property of Account.
+            The related Details of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.Website">
+        <member name="P:Test.API.Models.Product.ProductSupplier">
             <summary>
-            The Website property of Account.
+            The related Suppliers of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.Telephone">
-            <summary>
-            The Telephone property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.Email">
-            <summary>
-            The Email property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.Addresses">
-            <summary>
-            The related Addresses of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.Contacts">
-            <summary>
-            The related Contacts of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.AccountNote">
-            <summary>
-            The related Notes of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.CreatedOn">
+        <member name="P:Test.API.Models.Product.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.ModifiedOn">
+        <member name="P:Test.API.Models.Product.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.DeletedOn">
+        <member name="P:Test.API.Models.Product.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="T:Test.API.Models.AccountNote">
+        <member name="T:Test.API.Models.ProductDetail">
             <summary>
-            AccountNote model
+            ProductDetail model
             </summary>
         </member>
-        <member name="P:Test.API.Models.AccountNote.Id">
+        <member name="P:Test.API.Models.ProductDetail.Id">
             <summary>
-            The identifier of AccountNote.
+            The identifier of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.AccountNote.AccountId">
+        <member name="P:Test.API.Models.ProductDetail.Comment">
             <summary>
-            The related foreign key AccountId for Account of AccountNote.
+            The Comment property of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.AccountNote.Account">
+        <member name="P:Test.API.Models.ProductDetail.ProductId">
             <summary>
-            The related Account of AccountNote.
+            The related foreign key ProductId for Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.AccountNote.NoteId">
+        <member name="P:Test.API.Models.ProductDetail.Product">
             <summary>
-            The related foreign key NoteId for Note of AccountNote.
+            The related Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.AccountNote.Note">
-            <summary>
-            The related Note of AccountNote.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.AccountNote.CreatedOn">
+        <member name="P:Test.API.Models.ProductDetail.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.AccountNote.ModifiedOn">
+        <member name="P:Test.API.Models.ProductDetail.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.AccountNote.DeletedOn">
+        <member name="P:Test.API.Models.ProductDetail.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="T:Test.API.Models.Address">
+        <member name="T:Test.API.Models.ProductSupplier">
             <summary>
-            Address model
+            ProductSupplier model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Id">
+        <member name="P:Test.API.Models.ProductSupplier.Id">
             <summary>
-            The identifier of Address.
+            The identifier of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Street">
+        <member name="P:Test.API.Models.ProductSupplier.Comment">
             <summary>
-            The Street property of Address.
+            The Comment property of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Number">
+        <member name="P:Test.API.Models.ProductSupplier.ProductId">
             <summary>
-            The Number property of Address.
+            The related foreign key ProductId for Product of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.PostalCode">
+        <member name="P:Test.API.Models.ProductSupplier.Product">
             <summary>
-            The PostalCode property of Address.
+            The related Product of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.City">
+        <member name="P:Test.API.Models.ProductSupplier.SupplierId">
             <summary>
-            The City property of Address.
+            The related foreign key SupplierId for Supplier of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Primary">
+        <member name="P:Test.API.Models.ProductSupplier.Supplier">
             <summary>
-            The Primary property of Address.
+            The related Supplier of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.AccountId">
-            <summary>
-            The related foreign key AccountId for Account of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Address.Account">
-            <summary>
-            The related Account of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Address.CreatedOn">
+        <member name="P:Test.API.Models.ProductSupplier.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.ModifiedOn">
+        <member name="P:Test.API.Models.ProductSupplier.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.DeletedOn">
+        <member name="P:Test.API.Models.ProductSupplier.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="T:Test.API.Models.Contact">
+        <member name="T:Test.API.Models.Supplier">
             <summary>
-            Contact model
+            Supplier model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.Id">
+        <member name="P:Test.API.Models.Supplier.Id">
             <summary>
-            The identifier of Contact.
+            The identifier of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.FirstName">
+        <member name="P:Test.API.Models.Supplier.Name">
             <summary>
-            The FirstName property of Contact.
+            The Name property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.LastName">
+        <member name="P:Test.API.Models.Supplier.Phone">
             <summary>
-            The LastName property of Contact.
+            The Phone property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.Website">
+        <member name="P:Test.API.Models.Supplier.ProductSupplier">
             <summary>
-            The Website property of Contact.
+            The related Products of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.Telephone">
-            <summary>
-            The Telephone property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.Email">
-            <summary>
-            The Email property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.AccountId">
-            <summary>
-            The related foreign key AccountId for Account of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.Account">
-            <summary>
-            The related Account of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.CreatedOn">
+        <member name="P:Test.API.Models.Supplier.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.ModifiedOn">
+        <member name="P:Test.API.Models.Supplier.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.DeletedOn">
+        <member name="P:Test.API.Models.Supplier.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="T:Test.API.Models.Note">
+        <member name="T:Test.API.ViewModels.ProductDetailVM">
             <summary>
-            Note model
+            ProductDetail view model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Note.Id">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.Id">
             <summary>
-            The identifier of Note.
+            The identifier of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Note.Title">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.Comment">
             <summary>
-            The Title property of Note.
+            The Comment property of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Note.Body">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ProductId">
             <summary>
-            The Body property of Note.
+            The related foreign key ProductId for Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Note.AccountNote">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.Product">
             <summary>
-            The related Accounts of Note.
+            The related Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Note.CreatedOn">
+        <member name="T:Test.API.ViewModels.ProductVM">
             <summary>
-            The date and time of when the record is created
+            Product view model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Note.ModifiedOn">
+        <member name="P:Test.API.ViewModels.ProductVM.Id">
             <summary>
-            The date and time of when the record is modified
+            The identifier of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Note.DeletedOn">
+        <member name="P:Test.API.ViewModels.ProductVM.Name">
             <summary>
-            The date and time of when the record is (soft) deleted
+            The Name property of Product.
             </summary>
         </member>
-        <member name="T:Test.API.Models.Todo">
+        <member name="P:Test.API.ViewModels.ProductVM.Code">
             <summary>
-            Todo model
+            The Code property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Todo.Id">
+        <member name="P:Test.API.ViewModels.ProductVM.Quantity">
             <summary>
-            The identifier of Todo.
+            The Quantity property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Todo.Title">
+        <member name="P:Test.API.ViewModels.ProductVM.Price">
             <summary>
-            The Title property of Todo.
+            The Price property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Todo.DueDate">
+        <member name="P:Test.API.ViewModels.ProductVM.Details">
             <summary>
-            The DueDate property of Todo.
+            The related Details of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Todo.CreatedOn">
+        <member name="P:Test.API.ViewModels.ProductVM.Suppliers">
             <summary>
-            The date and time of when the record is created
+            The related Suppliers of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Todo.ModifiedOn">
+        <member name="T:Test.API.ViewModels.SupplierVM">
             <summary>
-            The date and time of when the record is modified
+            Supplier view model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Todo.DeletedOn">
+        <member name="P:Test.API.ViewModels.SupplierVM.Id">
             <summary>
-            The date and time of when the record is (soft) deleted
+            The identifier of Supplier.
             </summary>
         </member>
-        <member name="T:Test.API.ViewModels.AccountVM">
+        <member name="P:Test.API.ViewModels.SupplierVM.Name">
             <summary>
-            Account view model
+            The Name property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Id">
+        <member name="P:Test.API.ViewModels.SupplierVM.Phone">
             <summary>
-            The identifier of Account.
+            The Phone property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Name">
+        <member name="P:Test.API.ViewModels.SupplierVM.Products">
             <summary>
-            The Name property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Website">
-            <summary>
-            The Website property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Telephone">
-            <summary>
-            The Telephone property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Email">
-            <summary>
-            The Email property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Addresses">
-            <summary>
-            The related Addresses of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Contacts">
-            <summary>
-            The related Contacts of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Notes">
-            <summary>
-            The related Notes of Account.
-            </summary>
-        </member>
-        <member name="T:Test.API.ViewModels.AddressVM">
-            <summary>
-            Address view model
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Id">
-            <summary>
-            The identifier of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Street">
-            <summary>
-            The Street property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Number">
-            <summary>
-            The Number property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.PostalCode">
-            <summary>
-            The PostalCode property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.City">
-            <summary>
-            The City property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Primary">
-            <summary>
-            The Primary property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.AccountId">
-            <summary>
-            The related foreign key AccountId for Account of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Account">
-            <summary>
-            The related Account of Address.
-            </summary>
-        </member>
-        <member name="T:Test.API.ViewModels.ContactVM">
-            <summary>
-            Contact view model
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Id">
-            <summary>
-            The identifier of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.FirstName">
-            <summary>
-            The FirstName property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.LastName">
-            <summary>
-            The LastName property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Website">
-            <summary>
-            The Website property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Telephone">
-            <summary>
-            The Telephone property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Email">
-            <summary>
-            The Email property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.AccountId">
-            <summary>
-            The related foreign key AccountId for Account of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Account">
-            <summary>
-            The related Account of Contact.
-            </summary>
-        </member>
-        <member name="T:Test.API.ViewModels.NoteVM">
-            <summary>
-            Note view model
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.NoteVM.Id">
-            <summary>
-            The identifier of Note.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.NoteVM.Title">
-            <summary>
-            The Title property of Note.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.NoteVM.Body">
-            <summary>
-            The Body property of Note.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.NoteVM.Accounts">
-            <summary>
-            The related Accounts of Note.
-            </summary>
-        </member>
-        <member name="T:Test.API.ViewModels.TodoVM">
-            <summary>
-            Todo view model
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.TodoVM.Id">
-            <summary>
-            The identifier of Todo.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.TodoVM.Title">
-            <summary>
-            The Title property of Todo.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.TodoVM.DueDate">
-            <summary>
-            The DueDate property of Todo.
+            The related Products of Supplier.
             </summary>
         </member>
     </members>

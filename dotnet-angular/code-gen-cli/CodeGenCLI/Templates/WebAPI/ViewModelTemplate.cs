@@ -433,56 +433,115 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("        public Guid? ");
+            this.Write("\t\t/// <summary>\r\n        /// The related ");
             
-            #line 100 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
-            
-            #line default
-            #line hidden
-            this.Write("Id { get; set; }\r\n\r\n\t\t/// <summary>\r\n        /// The related ");
-            
-            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            #line 101 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
             this.Write(" of ");
             
-            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            #line 101 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(".\r\n        /// </summary>\r\n\t\tpublic IList<");
             
-            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
             
             #line default
             #line hidden
             this.Write("VM> ");
             
-            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
-            this.Write(" { get; set; }\r\n");
+            this.Write(" { get; set; }\r\n\r\n        ////// To create a link with ");
             
-            #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
- } 
+            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
             
             #line default
             #line hidden
+            this.Write(" directly on create of ");
+            
+            #line 105 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".\r\n        public Guid? ");
+            
+            #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            
+            #line default
+            #line hidden
+            this.Write("Id { get; set; }\r\n");
             
             #line 107 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
- } 
+ CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Through); 
             
             #line default
             #line hidden
             
             #line 108 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+ foreach (CodeGenModelProperty relationModelProperty in relationModel.Properties) { 
+            
+            #line default
+            #line hidden
+            this.Write("        public ");
+            
+            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relationModelProperty.Type));
+            
+            #line default
+            #line hidden
+            
+            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((relationModelProperty.Required ? "" : (relationModelProperty.Type == "Guid" || relationModelProperty.Type == "int" ? "?" : ""))));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            
+            #line default
+            #line hidden
+            
+            #line 109 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relationModelProperty.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" { get; set; }\r\n");
+            
+            #line 110 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 111 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 112 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 113 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModelTemplate.tt"
  } 
             
             #line default

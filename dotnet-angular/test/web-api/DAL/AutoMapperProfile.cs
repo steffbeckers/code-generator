@@ -17,59 +17,59 @@ namespace Test.API.DAL
 		/// </summary>
         public AutoMapperProfile()
         {
-            // Accounts
-			CreateMap<Account, AccountVM>()
+            // Products
+			CreateMap<Product, ProductVM>()
                 .ForMember(
-                    x => x.Notes,
+                    x => x.Suppliers,
                     x => x.MapFrom(
-                        y => y.AccountNote.Select(z => z.Note)
+                        y => y.ProductSupplier.Select(z => z.Supplier)
                     )
                 );
-            CreateMap<AccountVM, Account>()
+            CreateMap<ProductVM, Product>()
                 .ForMember(
-                    x => x.AccountNote,
-                    x => x.MapFrom(
-                        y => new List<AccountNote>() {
-                            new AccountNote()
-                            {
-                                NoteId = (Guid)y.NoteId
+                    x => x.ProductSupplier,
+                    x => {
+                        x.PreCondition(z => z.SupplierId != null);
+                        x.MapFrom(
+                            y => new List<ProductSupplier>() {
+                                new ProductSupplier()
+                                {
+                                    SupplierId = (Guid)y.SupplierId,
+                                    Comment = y.SupplierComment
+                                }
                             }
-                        }
-                    )
+                        );
+                    }
                 );
 
-            // Contacts
-			CreateMap<Contact, ContactVM>();
-            CreateMap<ContactVM, Contact>();
-
-            // Addresses
-			CreateMap<Address, AddressVM>();
-            CreateMap<AddressVM, Address>();
-
-            // Notes
-			CreateMap<Note, NoteVM>()
+            // Suppliers
+			CreateMap<Supplier, SupplierVM>()
                 .ForMember(
-                    x => x.Accounts,
+                    x => x.Products,
                     x => x.MapFrom(
-                        y => y.AccountNote.Select(z => z.Account)
+                        y => y.ProductSupplier.Select(z => z.Product)
                     )
                 );
-            CreateMap<NoteVM, Note>()
+            CreateMap<SupplierVM, Supplier>()
                 .ForMember(
-                    x => x.AccountNote,
-                    x => x.MapFrom(
-                        y => new List<AccountNote>() {
-                            new AccountNote()
-                            {
-                                AccountId = (Guid)y.AccountId
+                    x => x.ProductSupplier,
+                    x => {
+                        x.PreCondition(z => z.ProductId != null);
+                        x.MapFrom(
+                            y => new List<ProductSupplier>() {
+                                new ProductSupplier()
+                                {
+                                    ProductId = (Guid)y.ProductId,
+                                    Comment = y.ProductComment
+                                }
                             }
-                        }
-                    )
+                        );
+                    }
                 );
 
-            // Todos
-			CreateMap<Todo, TodoVM>();
-            CreateMap<TodoVM, Todo>();
+            // ProductDetails
+			CreateMap<ProductDetail, ProductDetailVM>();
+            CreateMap<ProductDetailVM, ProductDetail>();
 
         }
     }

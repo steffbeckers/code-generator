@@ -45,14 +45,20 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# CodeGenModel manyToManyOtherRelationModel = config.Models.First(x => x.Name == manyToManyOtherRelation.Model); #>
                 .ForMember(
                     x => x.<#= manyToManyWithModel.Name #>,
-                    x => x.MapFrom(
-                        y => new List<<#= manyToManyWithModel.Name #>>() {
-                            new <#= manyToManyWithModel.Name #>()
-                            {
-                                <#= manyToManyOtherRelation.Model #>Id = (Guid)y.<#= manyToManyOtherRelation.Model #>Id
+                    x => {
+                        x.PreCondition(z => z.<#= manyToManyOtherRelation.Model #>Id != null);
+                        x.MapFrom(
+                            y => new List<<#= manyToManyWithModel.Name #>>() {
+                                new <#= manyToManyWithModel.Name #>()
+                                {
+                                    <#= manyToManyOtherRelation.Model #>Id = (Guid)y.<#= manyToManyOtherRelation.Model #>Id<#= (manyToManyWithModel.Properties.Count > 0 ? "," : "") #>
+<# foreach (CodeGenModelProperty manyToManyWithModelProperty in manyToManyWithModel.Properties) { #>
+                                    <#= manyToManyWithModelProperty.Name #> = y.<#= manyToManyOtherRelation.Model #><#= manyToManyWithModelProperty.Name #>
+<# } #>
+                                }
                             }
-                        }
-                    )
+                        );
+                    }
                 );
 <# } #>
 <# if (!model.Equals(lastModel)) { #>

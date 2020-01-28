@@ -78,6 +78,8 @@
                         return "StringGraphType";
                     case "int":
                         return "IntGraphType";
+                    case "double":
+                        return "FloatGraphType";
                     case "bool":
                         return "BooleanGraphType";
                     case "Guid":

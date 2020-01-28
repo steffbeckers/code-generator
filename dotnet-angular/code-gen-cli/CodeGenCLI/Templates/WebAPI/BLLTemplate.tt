@@ -171,8 +171,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             }
             else
             {
-                // TODO: Mapping of fields on many-to-many
-                //<#= relation.Through.ToCamelCase() #>Link.Field = <#= relation.Through.ToCamelCase() #>.Field;
+                // Mapping of fields on many-to-many
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Through); #>
+<# foreach (CodeGenModelProperty relationModelProperty in relationModel.Properties) { #>
+                <#= relation.Through.ToCamelCase() #>Link.<#= relationModelProperty.Name #> = <#= relation.Through.ToCamelCase() #>.<#= relationModelProperty.Name #>;
+<# } #>
 
                 await this.<#= relation.Through.ToCamelCase() #>Repository.UpdateAsync(<#= relation.Through.ToCamelCase() #>Link);
             }

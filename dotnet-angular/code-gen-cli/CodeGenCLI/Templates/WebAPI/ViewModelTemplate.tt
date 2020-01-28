@@ -97,12 +97,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		//// Many-to-many
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
-        public Guid? <#= relation.Model #>Id { get; set; }
-
 		/// <summary>
         /// The related <#= relation.Name #> of <#= model.Name #>.
         /// </summary>
 		public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
+
+        ////// To create a link with <#= relation.Model #> directly on create of <#= model.Name #>.
+        public Guid? <#= relation.Model #>Id { get; set; }
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Through); #>
+<# foreach (CodeGenModelProperty relationModelProperty in relationModel.Properties) { #>
+        public <#= relationModelProperty.Type #><#= (relationModelProperty.Required ? "" : (relationModelProperty.Type == "Guid" || relationModelProperty.Type == "int" ? "?" : "")) #> <#= relation.Model #><#= relationModelProperty.Name #> { get; set; }
+<# } #>
 <# } #>
 <# } #>
 <# } #>

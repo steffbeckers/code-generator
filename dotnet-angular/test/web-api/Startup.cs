@@ -41,19 +41,15 @@ namespace Test.API
                 options.UseSqlServer(this.configuration.GetConnectionString("TestContext")));
 
             // Repositories
-			services.AddScoped<AccountRepository>();
-			services.AddScoped<ContactRepository>();
-			services.AddScoped<AddressRepository>();
-			services.AddScoped<NoteRepository>();
-			services.AddScoped<TodoRepository>();
-			services.AddScoped<AccountNoteRepository>();
+			services.AddScoped<ProductRepository>();
+			services.AddScoped<SupplierRepository>();
+			services.AddScoped<ProductDetailRepository>();
+			services.AddScoped<ProductSupplierRepository>();
 
 			// BLLs
-			services.AddScoped<AccountBLL>();
-			services.AddScoped<ContactBLL>();
-			services.AddScoped<AddressBLL>();
-			services.AddScoped<NoteBLL>();
-			services.AddScoped<TodoBLL>();
+			services.AddScoped<ProductBLL>();
+			services.AddScoped<SupplierBLL>();
+			services.AddScoped<ProductDetailBLL>();
 
             // GraphQL
             services.AddScoped<IDependencyResolver>(s =>

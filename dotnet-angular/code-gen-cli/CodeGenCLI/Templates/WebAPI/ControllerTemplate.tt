@@ -119,7 +119,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			// Mapping
             <#= model.Name #> <#= model.Name.ToCamelCase() #> = this.mapper.Map<<#= model.Name #>VM, <#= model.Name #>>(<#= model.Name.ToCamelCase() #>VM);
 
-            <#= model.Name.ToCamelCase() #> = await this.bll.Update<#= model.Name #>Async(<#= model.Name.ToLower() #>);
+            <#= model.Name.ToCamelCase() #> = await this.bll.Update<#= model.Name #>Async(<#= model.Name.ToCamelCase() #>);
 
 			// Mapping
 			return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);

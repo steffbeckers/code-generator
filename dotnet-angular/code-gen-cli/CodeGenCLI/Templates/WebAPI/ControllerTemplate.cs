@@ -520,7 +520,7 @@ namespace CodeGenCLI.Templates.WebAPI
             this.Write("Async(");
             
             #line 122 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToLower()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name.ToCamelCase()));
             
             #line default
             #line hidden
