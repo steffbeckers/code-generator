@@ -9,7 +9,7 @@
 <p *ngIf="!<#= model.Name.ToCamelCase() #>">Loading...</p>
 <div *ngIf="<#= model.Name.ToCamelCase() #>?.id" fxLayout="column" fxLayoutAlign="start">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <h1 [routerLink]="['/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>', <#= model.Name.ToCamelCase() #>.id]"><#= model.Name #> - {{ <#= model.Name.ToCamelCase() #>.<#= model.DisplayField.ToCamelCase() #> }}</h1>
+    <h1 [routerLink]="['/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>', <#= model.Name.ToCamelCase() #>.id]"><#= model.Name #> - {{ <#= model.Name.ToCamelCase() #>.<#= !string.IsNullOrEmpty(model.DisplayField) ? model.DisplayField.ToCamelCase() : "id" #> }}</h1>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
