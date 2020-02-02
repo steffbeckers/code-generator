@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using CodeGenCLI.Extensions;
 using System.Globalization;
 using System.Threading;
+using System.Diagnostics;
 
 namespace CodeGenCLI
 {
@@ -177,6 +178,17 @@ namespace CodeGenCLI
                 generateCommand.OnExecute(() =>
                 {
                     Console.WriteLine("### Generating Web API ###");
+
+                    // Git
+                    ProcessStartInfo gitAdd = new ProcessStartInfo("git");
+                    gitAdd.Arguments = "add .";
+                    gitAdd.WorkingDirectory = Config.WebAPI.ProjectPath;
+                    Process.Start(gitAdd).WaitForExit();
+
+                    ProcessStartInfo gitCommitBefore = new ProcessStartInfo("git");
+                    gitCommitBefore.Arguments = "commit -am \"Before generating Web API\"";
+                    gitCommitBefore.WorkingDirectory = Config.WebAPI.ProjectPath;
+                    Process.Start(gitCommitBefore).WaitForExit();
 
                     // Models
                     if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models")))
@@ -354,6 +366,12 @@ namespace CodeGenCLI
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs", graphQLInputTypeTemplateContent);
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs");
                     }
+
+                    // Git
+                    ProcessStartInfo gitStatus = new ProcessStartInfo("git");
+                    gitStatus.Arguments = @"status";
+                    gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
+                    Process.Start(gitStatus).WaitForExit();
 
                     // TODO: Migrations?
                     //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");
