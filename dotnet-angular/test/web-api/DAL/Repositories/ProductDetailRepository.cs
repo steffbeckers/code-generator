@@ -44,5 +44,13 @@ namespace Test.API.DAL.Repositories
                 .Where(t => t.ProductId == productId)
                 .ToList();
         }
+        
+        //// Async test
+        //public async Task<IEnumerable<ProductDetail>> GetByProductIdAsync(Guid productId)
+        //{
+        //    return await this.context.ProductDetails
+        //        .Where(t => t.ProductId == productId)
+        //        .ToListAsync();
+        //}
     }
 }

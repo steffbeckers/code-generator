@@ -22,6 +22,17 @@ namespace Test.API.GraphQL.Types
                 resolve: context => productRepository.GetBySupplierId(context.Source.Id)
             );
 
+            //// Async test
+            //FieldAsync<ListGraphType<ProductType>>(
+            //    "products",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await productRepository.GetBySupplierIdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
+
         }
     }
 }

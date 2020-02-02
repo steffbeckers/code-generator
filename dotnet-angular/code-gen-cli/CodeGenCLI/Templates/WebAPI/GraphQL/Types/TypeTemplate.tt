@@ -45,6 +45,22 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                     return null;
                 }
             );
+
+            //// Async test
+            //FieldAsync<<#= relation.Model #>Type>(
+            //    "<#= relation.Name.ToCamelCase() #>",
+            //    resolve: async context =>
+            //    {
+            //        if (context.Source.<#= relation.Model #>Id != null) {
+            //            return await context.TryAsyncResolve(
+            //                async c => await <#= relation.Model.ToCamelCase() #>Repository.GetByIdAsync((Guid)context.Source.<#= relation.Model #>Id)
+            //            );
+            //        }
+            //        
+            //        return null;
+            //    }
+            //);
+
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
@@ -53,6 +69,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 resolve: context => <#= relation.Model.ToCamelCase() #>Repository.GetBy<#= model.Name #>Id(context.Source.Id)
             );
 
+            //// Async test
+            //FieldAsync<ListGraphType<<#= relationModel.Name #>Type>>(
+            //    "<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToCamelCase() #>",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await <#= relationModel.Name.ToCamelCase() #>Repository.GetBy<#= model.Name #>IdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
+
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
@@ -60,6 +87,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 "<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToCamelCase() #>",
                 resolve: context => <#= relationModel.Name.ToCamelCase() #>Repository.GetBy<#= model.Name #>Id(context.Source.Id)
             );
+
+            //// Async test
+            //FieldAsync<ListGraphType<<#= relationModel.Name #>Type>>(
+            //    "<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToCamelCase() #>",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await <#= relationModel.Name.ToCamelCase() #>Repository.GetBy<#= model.Name #>IdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
 
 <# } #>
         }

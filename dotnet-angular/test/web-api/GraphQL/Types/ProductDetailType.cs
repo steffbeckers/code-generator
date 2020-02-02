@@ -24,6 +24,22 @@ namespace Test.API.GraphQL.Types
                     return null;
                 }
             );
+
+            //// Async test
+            //FieldAsync<ProductType>(
+            //    "product",
+            //    resolve: async context =>
+            //    {
+            //        if (context.Source.ProductId != null) {
+            //            return await context.TryAsyncResolve(
+            //                async c => await productRepository.GetByIdAsync((Guid)context.Source.ProductId)
+            //            );
+            //        }
+            //        
+            //        return null;
+            //    }
+            //);
+
         }
     }
 }

@@ -12,6 +12,10 @@ namespace Test.API.GraphQL.Types
 		    Field<StringGraphType>("code");
 		    Field<IntGraphType>("quantity");
 		    Field<FloatGraphType>("price");
+
+            // To create a link with Supplier directly on create of Product.
+            //Field<IdGraphType>("supplierId");
+            //Field<StringGraphType>("supplierComment");
         }
     }
 }

@@ -71,6 +71,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 .Where(t => t.<#= relation.Name #>Id == <#= relation.Name.ToCamelCase() #>Id)
                 .ToList();
         }
+        
+        //// Async test
+        //public async Task<IEnumerable<<#= model.Name #>>> GetBy<#= relation.Name #>IdAsync(Guid <#= relation.Name.ToCamelCase() #>Id)
+        //{
+        //    return await this.context.<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+        //        .Where(t => t.<#= relation.Name #>Id == <#= relation.Name.ToCamelCase() #>Id)
+        //        .ToListAsync();
+        //}
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
@@ -83,6 +91,16 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 .Select(x => x.<#= model.Name #>)
                 .ToList();
         }
+        
+        //// Async test
+        //public async Task<IEnumerable<<#= model.Name #>>> GetBy<#= relationModel.Name #>IdAsync(Guid <#= relationModel.Name.ToCamelCase() #>Id)
+        //{
+        //    return await this.context.<#= relation.Through #>
+        //        .Include(x => x.<#= model.Name #>)
+        //        .Where(x => x.<#= relationModel.Name #>Id == <#= relationModel.Name.ToCamelCase() #>Id)
+        //        .Select(x => x.<#= model.Name #>)
+        //        .ToListAsync();
+        //}
 <# } #>
 <# } #>
 <# if (model.ManyToMany) { #>

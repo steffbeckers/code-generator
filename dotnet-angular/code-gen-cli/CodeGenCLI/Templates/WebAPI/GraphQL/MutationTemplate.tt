@@ -65,6 +65,45 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 }
             );
 
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
+            FieldAsync<<#= model.Name #>Type>(
+                "link<#= relationModel.Name #>To<#= model.Name #>",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<<#= relation.Through #>InputType>>
+                    {
+                        Name = "<#= relation.Through.ToCamelCase() #>"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    <#= relation.Through #> <#= relation.Through.ToCamelCase() #> = context.GetArgument<<#= relation.Through #>>("<#= relation.Through.ToCamelCase() #>");
+
+                    return await context.TryAsyncResolve(
+                        async c => await <#= model.Name.ToCamelCase() #>BLL.Link<#= relationModel.Name #>To<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>)
+                    );
+                }
+            );
+
+            FieldAsync<<#= model.Name #>Type>(
+                "unlink<#= relationModel.Name #>From<#= model.Name #>",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<<#= relation.Through #>InputType>>
+                    {
+                        Name = "<#= relation.Through.ToCamelCase() #>"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    <#= relation.Through #> <#= relation.Through.ToCamelCase() #> = context.GetArgument<<#= relation.Through #>>("<#= relation.Through.ToCamelCase() #>");
+
+                    return await context.TryAsyncResolve(
+                        async c => await <#= model.Name.ToCamelCase() #>BLL.Unlink<#= relationModel.Name #>From<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>)
+                    );
+                }
+            );
+
+<# } #>
             FieldAsync<<#= model.Name #>Type>(
                 "remove<#= model.Name #>",
                 arguments: new QueryArguments(

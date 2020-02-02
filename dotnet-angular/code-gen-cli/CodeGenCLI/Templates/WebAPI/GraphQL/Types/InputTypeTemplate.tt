@@ -21,6 +21,15 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
 		    Field<<#= (relation.Required ? "NonNullGraphType<" : "") #>IdGraphType<#= (relation.Required ? ">" : "") #>>("<#= relation.Name.ToCamelCase() #>Id");
 <# } #>
+
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
+            // To create a link with <#= relation.Model #> directly on create of <#= model.Name #>.
+            //Field<IdGraphType>("<#= relation.Model.ToCamelCase() #>Id");
+<# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Through); #>
+<# foreach (CodeGenModelProperty relationModelProperty in relationModel.Properties) { #>
+            //Field<<#= (relationModelProperty.Required ? "NonNullGraphType<" : "") #><#= relationModelProperty.Type.ToGraphQL() #><#= (relationModelProperty.Required ? ">" : "") #>>("<#= relation.Model.ToCamelCase() #><#= relationModelProperty.Name #>");
+<# } #>
+<# } #>
         }
     }
 }

@@ -57,6 +57,42 @@ namespace Test.API.GraphQL
             );
 
             FieldAsync<ProductType>(
+                "linkSupplierToProduct",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ProductSupplierInputType>>
+                    {
+                        Name = "productSupplier"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ProductSupplier productSupplier = context.GetArgument<ProductSupplier>("productSupplier");
+
+                    return await context.TryAsyncResolve(
+                        async c => await productBLL.LinkSupplierToProductAsync(productSupplier)
+                    );
+                }
+            );
+
+            FieldAsync<ProductType>(
+                "unlinkSupplierFromProduct",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ProductSupplierInputType>>
+                    {
+                        Name = "productSupplier"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ProductSupplier productSupplier = context.GetArgument<ProductSupplier>("productSupplier");
+
+                    return await context.TryAsyncResolve(
+                        async c => await productBLL.UnlinkSupplierFromProductAsync(productSupplier)
+                    );
+                }
+            );
+
+            FieldAsync<ProductType>(
                 "removeProduct",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>>
@@ -112,6 +148,42 @@ namespace Test.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await supplierBLL.UpdateSupplierAsync(supplier)
+                    );
+                }
+            );
+
+            FieldAsync<SupplierType>(
+                "linkProductToSupplier",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ProductSupplierInputType>>
+                    {
+                        Name = "productSupplier"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ProductSupplier productSupplier = context.GetArgument<ProductSupplier>("productSupplier");
+
+                    return await context.TryAsyncResolve(
+                        async c => await supplierBLL.LinkProductToSupplierAsync(productSupplier)
+                    );
+                }
+            );
+
+            FieldAsync<SupplierType>(
+                "unlinkProductFromSupplier",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ProductSupplierInputType>>
+                    {
+                        Name = "productSupplier"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ProductSupplier productSupplier = context.GetArgument<ProductSupplier>("productSupplier");
+
+                    return await context.TryAsyncResolve(
+                        async c => await supplierBLL.UnlinkProductFromSupplierAsync(productSupplier)
                     );
                 }
             );

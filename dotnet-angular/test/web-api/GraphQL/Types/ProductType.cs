@@ -25,10 +25,32 @@ namespace Test.API.GraphQL.Types
                 resolve: context => productDetailRepository.GetByProductId(context.Source.Id)
             );
 
+            //// Async test
+            //FieldAsync<ListGraphType<ProductDetailType>>(
+            //    "productDetails",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await productDetailRepository.GetByProductIdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
+
             Field<ListGraphType<SupplierType>>(
                 "suppliers",
                 resolve: context => supplierRepository.GetByProductId(context.Source.Id)
             );
+
+            //// Async test
+            //FieldAsync<ListGraphType<SupplierType>>(
+            //    "suppliers",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await supplierRepository.GetByProductIdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
 
         }
     }

@@ -50,5 +50,15 @@ namespace Test.API.DAL.Repositories
                 .Select(x => x.Product)
                 .ToList();
         }
+        
+        //// Async test
+        //public async Task<IEnumerable<Product>> GetBySupplierIdAsync(Guid supplierId)
+        //{
+        //    return await this.context.ProductSupplier
+        //        .Include(x => x.Product)
+        //        .Where(x => x.SupplierId == supplierId)
+        //        .Select(x => x.Product)
+        //        .ToListAsync();
+        //}
     }
 }

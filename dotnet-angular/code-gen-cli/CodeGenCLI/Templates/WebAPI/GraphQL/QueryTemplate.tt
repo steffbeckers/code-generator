@@ -24,15 +24,40 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         {
 <# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 			// <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
+            
             Field<ListGraphType<<#= model.Name #>Type>>(
                 "<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToCamelCase() #>",
                 resolve: context => <#= model.Name.ToCamelCase() #>Repository.Get(null, x => <#= !string.IsNullOrEmpty(model.SortField) ? "x.OrderBy(x => x." + model.SortField + ")" : "x.OrderByDescending(x => x.ModifiedOn)" #>)
             );
+
+            //// Async test
+            //FieldAsync<ListGraphType<<#= model.Name #>Type>>(
+            //    "<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToCamelCase() #>",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await <#= model.Name.ToCamelCase() #>Repository.GetAsync(null, x => <#= !string.IsNullOrEmpty(model.SortField) ? "x.OrderBy(x => x." + model.SortField + ")" : "x.OrderByDescending(x => x.ModifiedOn)" #>)
+            //        );
+            //    }
+            //);
+
             Field<<#= model.Name #>Type>(
                 "<#= model.Name.ToCamelCase() #>",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
                 resolve: context => <#= model.Name.ToCamelCase() #>Repository.GetById(context.GetArgument<Guid>("id"))
             );
+
+            //// Async test
+            //FieldAsync<<#= model.Name #>Type>(
+            //    "<#= model.Name.ToCamelCase() #>",
+            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await <#= model.Name.ToCamelCase() #>Repository.GetByIdAsync(context.GetArgument<Guid>("id"))
+            //        );
+            //    }
+            //);
 
 <# } #>
         }

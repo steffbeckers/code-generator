@@ -10,6 +10,7 @@ namespace Test.API.GraphQL.Types
             Field<IdGraphType>("id");
 		    Field<NonNullGraphType<StringGraphType>>("comment");
 		    Field<NonNullGraphType<IdGraphType>>("productId");
+
         }
     }
 }
