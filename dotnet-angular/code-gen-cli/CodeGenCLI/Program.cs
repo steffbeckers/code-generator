@@ -181,7 +181,7 @@ namespace CodeGenCLI
 
                     // Git
                     ProcessStartInfo gitCommitBefore = new ProcessStartInfo("git");
-                    gitCommitBefore.Arguments = "commit -am \"Before generating Web API on " + DateTime.Now.ToString("s", System.Globalization.CultureInfo.InvariantCulture) + "\"";
+                    gitCommitBefore.Arguments = "commit -am \"Save before generating Web API\"";
                     gitCommitBefore.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitCommitBefore).WaitForExit();
 
