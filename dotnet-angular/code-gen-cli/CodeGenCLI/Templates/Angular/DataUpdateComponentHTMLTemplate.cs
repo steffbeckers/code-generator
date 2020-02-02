@@ -69,7 +69,7 @@ namespace CodeGenCLI.Templates.Angular
             this.Write(".");
             
             #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataUpdateComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.DisplayField.ToCamelCase()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.DisplayField) ? model.DisplayField.ToCamelCase() : "id"));
             
             #line default
             #line hidden
