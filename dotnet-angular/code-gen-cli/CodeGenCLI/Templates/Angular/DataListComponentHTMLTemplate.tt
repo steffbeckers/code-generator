@@ -36,7 +36,7 @@
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
 <# CodeGenModel relationModel = config.Models.Single(m => m.Name == relation.Model); #>
           <td *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToLower() #>', <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.id]">
-            {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}
+            {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= !string.IsNullOrEmpty(model.DisplayField) ? model.DisplayField.ToCamelCase() : "id" #> }}
           </td>
           <td *ngIf="!<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>"></td>
 <# } #>

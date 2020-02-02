@@ -290,7 +290,7 @@ namespace CodeGenCLI.Templates.Angular
             this.Write(".");
             
             #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataListComponentHTMLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.DisplayField.ToCamelCase()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.DisplayField) ? model.DisplayField.ToCamelCase() : "id"));
             
             #line default
             #line hidden
