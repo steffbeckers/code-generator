@@ -41,12 +41,14 @@ namespace Test.API
                 options.UseSqlServer(this.configuration.GetConnectionString("TestContext")));
 
             // Repositories
+			services.AddScoped<AccountRepository>();
 			services.AddScoped<ProductRepository>();
 			services.AddScoped<SupplierRepository>();
 			services.AddScoped<ProductDetailRepository>();
 			services.AddScoped<ProductSupplierRepository>();
 
 			// BLLs
+			services.AddScoped<AccountBLL>();
 			services.AddScoped<ProductBLL>();
 			services.AddScoped<SupplierBLL>();
 			services.AddScoped<ProductDetailBLL>();

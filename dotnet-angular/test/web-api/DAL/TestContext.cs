@@ -14,6 +14,7 @@ namespace Test.API.DAL
         {
         }
 
+		public DbSet<Account> Accounts { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Supplier> Suppliers { get; set; }
 		public DbSet<ProductDetail> ProductDetails { get; set; }
@@ -34,6 +35,22 @@ namespace Test.API.DAL
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+			#region Accounts
+
+            // Soft delete query filter
+            modelBuilder.Entity<Account>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+			modelBuilder.Entity<Account>().ToTable("Accounts");
+
+			// Key
+			modelBuilder.Entity<Account>().HasKey(e => e.Id);
+
+            // Required properties
+            modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
+
+            #endregion
+
 			#region Products
 
             // Soft delete query filter
@@ -123,6 +140,7 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
+					entry.Entity.GetType() == typeof(Account) ||
 					entry.Entity.GetType() == typeof(Product) ||
 					entry.Entity.GetType() == typeof(Supplier) ||
 					entry.Entity.GetType() == typeof(ProductDetail) ||
@@ -149,6 +167,7 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
+					entry.Entity.GetType() == typeof(Account) ||
 					entry.Entity.GetType() == typeof(Product) ||
 					entry.Entity.GetType() == typeof(Supplier) ||
 					entry.Entity.GetType() == typeof(ProductDetail) ||

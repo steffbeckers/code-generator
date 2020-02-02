@@ -17,6 +17,10 @@ namespace Test.API.DAL
 		/// </summary>
         public AutoMapperProfile()
         {
+            // Accounts
+			CreateMap<Account, AccountVM>();
+            CreateMap<AccountVM, Account>();
+
             // Products
 			CreateMap<Product, ProductVM>()
                 .ForMember(

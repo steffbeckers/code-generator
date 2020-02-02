@@ -9,11 +9,48 @@ namespace Test.API.GraphQL
     public class TestQuery : ObjectGraphType
     {
         public TestQuery(
+			AccountRepository accountRepository,
 			ProductRepository productRepository,
 			SupplierRepository supplierRepository,
 			ProductDetailRepository productDetailRepository
         )
         {
+			// Accounts
+            
+            Field<ListGraphType<AccountType>>(
+                "accounts",
+                resolve: context => accountRepository.Get(null, x => x.OrderBy(x => x.Name))
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<AccountType>>(
+            //    "accounts",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await accountRepository.GetAsync(null, x => x.OrderBy(x => x.Name))
+            //        );
+            //    }
+            //);
+
+            Field<AccountType>(
+                "account",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+                resolve: context => accountRepository.GetById(context.GetArgument<Guid>("id"))
+            );
+
+            //// Async test
+            //FieldAsync<AccountType>(
+            //    "account",
+            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await accountRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
+            //        );
+            //    }
+            //);
+
 			// Products
             
             Field<ListGraphType<ProductType>>(

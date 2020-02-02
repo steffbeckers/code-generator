@@ -9,11 +9,72 @@ namespace Test.API.GraphQL
     public class TestMutation : ObjectGraphType
     {
         public TestMutation(
+			AccountBLL accountBLL,
 			ProductBLL productBLL,
 			SupplierBLL supplierBLL,
 			ProductDetailBLL productDetailBLL
         )
         {
+			// Accounts
+            FieldAsync<AccountType>(
+                "createAccount",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<AccountInputType>>
+                    {
+                        Name = "account"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Account account = context.GetArgument<Account>("account");
+
+                    return await context.TryAsyncResolve(
+                        async c => await accountBLL.CreateAccountAsync(account)
+                    );
+                }
+            );
+
+            FieldAsync<AccountType>(
+                "updateAccount",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<AccountInputType>>
+                    {
+                        Name = "account"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    Account account = context.GetArgument<Account>("account");
+
+                    return await context.TryAsyncResolve(
+                        async c => await accountBLL.UpdateAccountAsync(account)
+                    );
+                }
+            );
+
+            FieldAsync<AccountType>(
+                "removeAccount",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await accountBLL.DeleteAccountByIdAsync(id)
+                    );
+                }
+            );
+
 			// Products
             FieldAsync<ProductType>(
                 "createProduct",
