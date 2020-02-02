@@ -106,7 +106,7 @@ export class <#= model.Name #>UpdateComponent implements OnInit {
     }
 
     // Confirmation
-    if (confirm('Are you sure you want to delete <#= model.Name.ToLower() #>: ' + this.<#= model.Name.ToCamelCase() #>.<#= model.DisplayField.ToCamelCase() #> + '?')) {
+    if (confirm('Are you sure you want to delete <#= model.Name.ToLower() #>: ' + this.<#= model.Name.ToCamelCase() #>.<#= !string.IsNullOrEmpty(model.DisplayField) ? model.DisplayField.ToCamelCase() : "id" #> + '?')) {
       this.<#= model.Name.ToCamelCase() #>Service.delete<#= model.Name #>(this.<#= model.Name.ToCamelCase() #>.id).subscribe(
         () => {
           this.router.navigateByUrl('/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + 's').ToLower() #>');
