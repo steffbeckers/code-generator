@@ -47,7 +47,7 @@ namespace Test.API.Models
 	    /// <summary>
         /// The related foreign key ParentAccountId for ParentAccount of Account.
         /// </summary>
-		public Guid? AccountId { get; set; }
+		public Guid? ParentAccountId { get; set; }
 
 		/// <summary>
         /// The related ParentAccount of Account.
