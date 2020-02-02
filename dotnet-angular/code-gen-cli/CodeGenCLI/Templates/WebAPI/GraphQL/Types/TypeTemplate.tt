@@ -40,8 +40,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 "<#= relation.Name.ToCamelCase() #>",
                 resolve: context =>
                 {
-                    if (context.Source.<#= relation.Model #>Id != null)
-                        return <#= relation.Model.ToCamelCase() #>Repository.GetById((Guid)context.Source.<#= relation.Model #>Id);
+                    if (context.Source.<#= relation.Name #>Id != null)
+                        return <#= relation.Model.ToCamelCase() #>Repository.GetById((Guid)context.Source.<#= relation.Name #>Id);
                     return null;
                 }
             );
@@ -51,9 +51,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             //    "<#= relation.Name.ToCamelCase() #>",
             //    resolve: async context =>
             //    {
-            //        if (context.Source.<#= relation.Model #>Id != null) {
+            //        if (context.Source.<#= relation.Name #>Id != null) {
             //            return await context.TryAsyncResolve(
-            //                async c => await <#= relation.Model.ToCamelCase() #>Repository.GetByIdAsync((Guid)context.Source.<#= relation.Model #>Id)
+            //                async c => await <#= relation.Model.ToCamelCase() #>Repository.GetByIdAsync((Guid)context.Source.<#= relation.Name #>Id)
             //            );
             //        }
             //        

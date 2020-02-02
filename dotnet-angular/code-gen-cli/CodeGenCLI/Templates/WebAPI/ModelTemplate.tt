@@ -68,7 +68,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 	    /// <summary>
         /// The related foreign key <#= relation.Name #>Id for <#= relation.Name #> of <#= model.Name #>.
         /// </summary>
-		public Guid<#= (relation.Required ? "" : "?") #> <#= relation.Model #>Id { get; set; }
+		public Guid<#= (relation.Required ? "" : "?") #> <#= relation.Name #>Id { get; set; }
 
 		/// <summary>
         /// The related <#= relation.Name #> of <#= model.Name #>.

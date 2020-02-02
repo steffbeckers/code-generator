@@ -307,7 +307,7 @@ namespace CodeGenCLI.Templates.WebAPI
             this.Write(" ");
             
             #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden

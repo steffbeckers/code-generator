@@ -4,6 +4,38 @@
   "override": true,
   "models": [
     {
+      "name": "Account",
+      "displayField": "Name",
+      "sortField": "Name",
+      "properties": [
+        {
+          "name": "Name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "Website",
+          "type": "string"
+        },
+        {
+          "name": "Telephone",
+          "type": "string"
+        },
+        {
+          "name": "Email",
+          "displayName": "Email Address",
+          "type": "string"
+        }
+      ],
+      "relations": [
+        {
+          "name": "ParentAccount",
+          "type": "many-to-one",
+          "model": "Account"
+        }
+      ]
+    },
+    {
       "name": "Product",
       "properties": [
         {

@@ -260,7 +260,7 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Types
                     "f (context.Source.");
             
             #line 43 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
@@ -274,7 +274,7 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Types
             this.Write("Repository.GetById((Guid)context.Source.");
             
             #line 44 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
@@ -297,7 +297,7 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Types
                     " //        if (context.Source.");
             
             #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
@@ -312,7 +312,7 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Types
             this.Write("Repository.GetByIdAsync((Guid)context.Source.");
             
             #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
             
             #line default
             #line hidden
