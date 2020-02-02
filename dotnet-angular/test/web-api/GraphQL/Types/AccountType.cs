@@ -22,7 +22,7 @@ namespace Test.API.GraphQL.Types
                 resolve: context =>
                 {
                     if (context.Source.AccountId != null)
-                        return accountRepository.GetById((Guid)context.Source.AccountId);
+                        return accountRepository.GetById((Guid)context.Source.ParentAccountId);
                     return null;
                 }
             );
