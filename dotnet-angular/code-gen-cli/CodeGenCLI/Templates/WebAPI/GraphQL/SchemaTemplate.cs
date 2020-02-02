@@ -58,7 +58,7 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL
             
             #line default
             #line hidden
-            this.Write("Query>();\r\n            //Mutation = resolver.Resolve<");
+            this.Write("Query>();\r\n            Mutation = resolver.Resolve<");
             
             #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\SchemaTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));

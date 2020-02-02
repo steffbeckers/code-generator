@@ -8,7 +8,7 @@ namespace Test.API.GraphQL
         public TestSchema(IDependencyResolver resolver) : base(resolver)
         {
             Query = resolver.Resolve<TestQuery>();
-            //Mutation = resolver.Resolve<TestMutation>();
+            Mutation = resolver.Resolve<TestMutation>();
         }
     }
 }

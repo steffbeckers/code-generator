@@ -174,8 +174,21 @@ namespace Test.API.BLL
 		/// <summary>
 		/// Deletes an existing supplier record by Id.
 		/// </summary>
+        public async Task<Supplier> DeleteSupplierByIdAsync(Guid supplierId)
+        {
+            Supplier supplier = await this.supplierRepository.GetByIdAsync(supplierId);
+
+            return await this.DeleteSupplierAsync(supplier);
+        }
+
+		/// <summary>
+		/// Deletes an existing supplier record.
+		/// </summary>
         public async Task<Supplier> DeleteSupplierAsync(Supplier supplier)
         {
+            // Validation
+            if (supplier == null) { return null; }
+
 			// #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
 			// Before deletion
 			// #-#-#

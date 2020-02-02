@@ -14,7 +14,7 @@ namespace Test.API.GraphQL.Types
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
-            Field(x => x.Comment);
+            Field(x => x.Comment, nullable: true);
 
             Field<ProductType>(
                 "product",

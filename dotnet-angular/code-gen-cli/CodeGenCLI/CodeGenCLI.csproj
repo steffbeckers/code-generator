@@ -221,6 +221,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DbContextTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\WebAPI\GraphQL\MutationTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>MutationTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\WebAPI\GraphQL\QueryTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>QueryTemplate.cs</LastGenOutput>
@@ -413,6 +417,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DbContextTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\GraphQL\MutationTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MutationTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\GraphQL\QueryTemplate.cs">
       <DesignTime>True</DesignTime>

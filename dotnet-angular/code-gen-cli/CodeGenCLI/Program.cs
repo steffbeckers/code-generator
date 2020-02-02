@@ -328,6 +328,13 @@ namespace CodeGenCLI
                     File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Query.cs", graphQLQueryTemplateContent);
                     Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Query.cs");
 
+                    //// Mutation
+                    WebAPITemplates.GraphQL.MutationTemplate graphQLMutationTemplate = new WebAPITemplates.GraphQL.MutationTemplate(Config);
+                    string graphQLMutationTemplateContent = graphQLMutationTemplate.TransformText();
+
+                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Mutation.cs", graphQLMutationTemplateContent);
+                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Mutation.cs");
+
                     //// Types
                     if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types"))
                     {

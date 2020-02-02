@@ -95,7 +95,6 @@ namespace Test.API.DAL
 			modelBuilder.Entity<ProductSupplier>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<ProductSupplier>().Property(e => e.Comment).IsRequired();
             modelBuilder.Entity<ProductSupplier>().Property(e => e.ProductId).IsRequired();
             modelBuilder.Entity<ProductSupplier>().Property(e => e.SupplierId).IsRequired();
 

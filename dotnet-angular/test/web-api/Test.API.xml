@@ -34,9 +34,14 @@
             Updates an existing product record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ProductBLL.DeleteProductAsync(Test.API.Models.Product)">
+        <member name="M:Test.API.BLL.ProductBLL.DeleteProductByIdAsync(System.Guid)">
             <summary>
             Deletes an existing product record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProductBLL.DeleteProductAsync(Test.API.Models.Product)">
+            <summary>
+            Deletes an existing product record.
             </summary>
         </member>
         <member name="T:Test.API.BLL.ProductDetailBLL">
@@ -69,9 +74,14 @@
             Updates an existing productdetail record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ProductDetailBLL.DeleteProductDetailAsync(Test.API.Models.ProductDetail)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.DeleteProductDetailByIdAsync(System.Guid)">
             <summary>
             Deletes an existing productdetail record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.ProductDetailBLL.DeleteProductDetailAsync(Test.API.Models.ProductDetail)">
+            <summary>
+            Deletes an existing productdetail record.
             </summary>
         </member>
         <member name="T:Test.API.BLL.SupplierBLL">
@@ -104,9 +114,14 @@
             Updates an existing supplier record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.SupplierBLL.DeleteSupplierAsync(Test.API.Models.Supplier)">
+        <member name="M:Test.API.BLL.SupplierBLL.DeleteSupplierByIdAsync(System.Guid)">
             <summary>
             Deletes an existing supplier record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.SupplierBLL.DeleteSupplierAsync(Test.API.Models.Supplier)">
+            <summary>
+            Deletes an existing supplier record.
             </summary>
         </member>
         <member name="T:Test.API.Controllers.ProductDetailsController">

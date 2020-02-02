@@ -84,8 +84,8 @@
       "properties": [
         {
           "name": "Comment",
-          "type": "string",
-          "required": true
+          "type": "string"
+          //"required": true
         }
       ],
       "relations": [

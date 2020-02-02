@@ -7,7 +7,9 @@ namespace Test.API.GraphQL.Types
         public ProductDetailInputType()
         {
             Name = "productDetailInput";
+            Field<IdGraphType>("id");
 		    Field<NonNullGraphType<StringGraphType>>("comment");
+		    Field<NonNullGraphType<IdGraphType>>("productId");
         }
     }
 }

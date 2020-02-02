@@ -14,8 +14,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public <#= model.Name #>InputType()
         {
             Name = "<#= model.Name.ToCamelCase() #>Input";
+            Field<IdGraphType>("id");
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
 		    Field<<#= (property.Required ? "NonNullGraphType<" : "") #><#= property.Type.ToGraphQL() #><#= (property.Required ? ">" : "") #>>("<#= property.Name.ToCamelCase() #>");
+<# } #>
+<# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
+		    Field<<#= (relation.Required ? "NonNullGraphType<" : "") #>IdGraphType<#= (relation.Required ? ">" : "") #>>("<#= relation.Name.ToCamelCase() #>Id");
 <# } #>
         }
     }

@@ -205,19 +205,32 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 		/// <summary>
 		/// Deletes an existing <#= model.Name.ToLower() #> record by Id.
 		/// </summary>
-        public async Task<<#= model.Name #>> Delete<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToLower() #>)
+        public async Task<<#= model.Name #>> Delete<#= model.Name #>ByIdAsync(Guid <#= model.Name.ToCamelCase() #>Id)
         {
+            <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.<#= model.Name.ToCamelCase() #>Repository.GetByIdAsync(<#= model.Name.ToCamelCase() #>Id);
+
+            return await this.Delete<#= model.Name #>Async(<#= model.Name.ToCamelCase() #>);
+        }
+
+		/// <summary>
+		/// Deletes an existing <#= model.Name.ToLower() #> record.
+		/// </summary>
+        public async Task<<#= model.Name #>> Delete<#= model.Name #>Async(<#= model.Name #> <#= model.Name.ToCamelCase() #>)
+        {
+            // Validation
+            if (<#= model.Name.ToCamelCase() #> == null) { return null; }
+
 			// #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
 			// Before deletion
 			// #-#-#
 
-            await this.<#= model.Name.ToCamelCase() #>Repository.DeleteAsync(<#= model.Name.ToLower() #>);
+            await this.<#= model.Name.ToCamelCase() #>Repository.DeleteAsync(<#= model.Name.ToCamelCase() #>);
 
 			// #-#-# {F09857C0-44E7-4E6C-B3E6-883C0D28E1A6}
 			// After deletion
 			// #-#-#
 
-            return <#= model.Name.ToLower() #>;
+            return <#= model.Name.ToCamelCase() #>;
         }
     }
 }

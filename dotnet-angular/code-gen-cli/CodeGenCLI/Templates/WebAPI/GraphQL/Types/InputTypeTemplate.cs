@@ -58,42 +58,76 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Types
             
             #line default
             #line hidden
-            this.Write("Input\";\r\n");
+            this.Write("Input\";\r\n            Field<IdGraphType>(\"id\");\r\n");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
             
             #line default
             #line hidden
             this.Write("\t\t    Field<");
             
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((property.Required ? "NonNullGraphType<" : "")));
             
             #line default
             #line hidden
             
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Type.ToGraphQL()));
             
             #line default
             #line hidden
             
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((property.Required ? ">" : "")));
             
             #line default
             #line hidden
             this.Write(">(\"");
             
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("\");\r\n");
             
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+ foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t    Field<");
+            
+            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((relation.Required ? "NonNullGraphType<" : "")));
+            
+            #line default
+            #line hidden
+            this.Write("IdGraphType");
+            
+            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((relation.Required ? ">" : "")));
+            
+            #line default
+            #line hidden
+            this.Write(">(\"");
+            
+            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Id\");\r\n");
+            
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\InputTypeTemplate.tt"
  } 
             
             #line default

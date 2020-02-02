@@ -176,8 +176,21 @@ namespace Test.API.BLL
 		/// <summary>
 		/// Deletes an existing product record by Id.
 		/// </summary>
+        public async Task<Product> DeleteProductByIdAsync(Guid productId)
+        {
+            Product product = await this.productRepository.GetByIdAsync(productId);
+
+            return await this.DeleteProductAsync(product);
+        }
+
+		/// <summary>
+		/// Deletes an existing product record.
+		/// </summary>
         public async Task<Product> DeleteProductAsync(Product product)
         {
+            // Validation
+            if (product == null) { return null; }
+
 			// #-#-# {FE1A99E0-482D-455B-A8C1-3C2C11FACA58}
 			// Before deletion
 			// #-#-#

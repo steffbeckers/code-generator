@@ -7,6 +7,7 @@ namespace Test.API.GraphQL.Types
         public SupplierInputType()
         {
             Name = "supplierInput";
+            Field<IdGraphType>("id");
 		    Field<NonNullGraphType<StringGraphType>>("name");
 		    Field<StringGraphType>("phone");
         }

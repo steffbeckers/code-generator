@@ -14,7 +14,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public <#= config.Name #>Schema(IDependencyResolver resolver) : base(resolver)
         {
             Query = resolver.Resolve<<#= config.Name #>Query>();
-            //Mutation = resolver.Resolve<<#= config.Name #>Mutation>();
+            Mutation = resolver.Resolve<<#= config.Name #>Mutation>();
         }
     }
 }
