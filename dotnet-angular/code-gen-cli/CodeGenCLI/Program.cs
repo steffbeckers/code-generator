@@ -416,9 +416,15 @@ namespace CodeGenCLI
                 generateCommand.OnExecute(() =>
                 {
                     // Git
-                    Console.WriteLine("### git commit ###");
+                    Console.WriteLine("### git add . ###");
+                    ProcessStartInfo gitAddBefore = new ProcessStartInfo("git");
+                    gitAddBefore.Arguments = "add .";
+                    gitAddBefore.WorkingDirectory = Config.Angular.ProjectPath;
+                    Process.Start(gitAddBefore).WaitForExit();
+
+                    Console.WriteLine("### git commit -m \"Save before generating Angular\" ###");
                     ProcessStartInfo gitCommitBefore = new ProcessStartInfo("git");
-                    gitCommitBefore.Arguments = "commit -am \"Save before generating Angular\"";
+                    gitCommitBefore.Arguments = "commit -m \"Save before generating Angular\"";
                     gitCommitBefore.WorkingDirectory = Config.Angular.ProjectPath;
                     Process.Start(gitCommitBefore).WaitForExit();
 
