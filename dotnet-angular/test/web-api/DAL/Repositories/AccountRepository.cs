@@ -37,5 +37,20 @@ namespace Test.API.DAL.Repositories
                 .Include(x => x.ParentAccount)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public IEnumerable<Account> GetByParentAccountId(Guid parentAccountId)
+        {
+            return this.context.Accounts
+                .Where(t => t.ParentAccountId == parentAccountId)
+                .ToList();
+        }
+        
+        //// Async test
+        //public async Task<IEnumerable<Account>> GetByParentAccountIdAsync(Guid parentAccountId)
+        //{
+        //    return await this.context.Accounts
+        //        .Where(t => t.ParentAccountId == parentAccountId)
+        //        .ToListAsync();
+        //}
     }
 }

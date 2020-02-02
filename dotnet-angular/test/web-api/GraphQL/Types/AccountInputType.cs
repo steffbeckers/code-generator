@@ -12,6 +12,7 @@ namespace Test.API.GraphQL.Types
 		    Field<StringGraphType>("website");
 		    Field<StringGraphType>("telephone");
 		    Field<StringGraphType>("email");
+		    Field<IdGraphType>("parentAccountId");
 
         }
     }

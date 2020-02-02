@@ -108,6 +108,7 @@ namespace Test.API.BLL
             account.Website = accountUpdate.Website;
             account.Telephone = accountUpdate.Telephone;
             account.Email = accountUpdate.Email;
+            account.ParentAccountId = accountUpdate.ParentAccountId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

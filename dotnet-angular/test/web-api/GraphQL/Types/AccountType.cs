@@ -17,19 +17,28 @@ namespace Test.API.GraphQL.Types
             Field(x => x.Telephone, nullable: true);
             Field(x => x.Email, nullable: true);
 
-            Field<ListGraphType<AccountType>>(
-                "accounts",
-                resolve: context => accountRepository.GetByAccountId(context.Source.Id)
+            Field<AccountType>(
+                "parentAccount",
+                resolve: context =>
+                {
+                    if (context.Source.AccountId != null)
+                        return accountRepository.GetById((Guid)context.Source.AccountId);
+                    return null;
+                }
             );
 
             //// Async test
-            //FieldAsync<ListGraphType<AccountType>>(
-            //    "accounts",
+            //FieldAsync<AccountType>(
+            //    "parentAccount",
             //    resolve: async context =>
             //    {
-            //        return await context.TryAsyncResolve(
-            //            async c => await accountRepository.GetByAccountIdAsync(context.Source.Id)
-            //        );
+            //        if (context.Source.AccountId != null) {
+            //            return await context.TryAsyncResolve(
+            //                async c => await accountRepository.GetByIdAsync((Guid)context.Source.AccountId)
+            //            );
+            //        }
+            //        
+            //        return null;
             //    }
             //);
 

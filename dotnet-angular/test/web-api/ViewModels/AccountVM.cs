@@ -12,9 +12,6 @@ namespace Test.API.ViewModels
 		public AccountVM()
         {
             // Relations
-
-			//// One-to-many
-			this.ParentAccount = new List<AccountVM>();
         }
 
 		// Properties
@@ -47,11 +44,17 @@ namespace Test.API.ViewModels
 
 		// Relations
 
-		//// One-to-many
+		//// Many-to-one
+
+	    /// <summary>
+        /// The related foreign key ParentAccountId for ParentAccount of Account.
+        /// </summary>
+		public Guid? AccountId { get; set; }
 
 		/// <summary>
         /// The related ParentAccount of Account.
         /// </summary>
-		public IList<AccountVM> ParentAccount { get; set; }
+		public AccountVM ParentAccount { get; set; }
+
     }
 }

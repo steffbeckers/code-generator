@@ -11,9 +11,6 @@ namespace Test.API.Models
 		public Account()
         {
             // Relations
-
-			//// One-to-many
-			this.ParentAccount = new List<Account>();
         }
 
 		// Properties
@@ -45,12 +42,18 @@ namespace Test.API.Models
 
 		// Relations
 
-		//// One-to-many
+		//// Many-to-one
+
+	    /// <summary>
+        /// The related foreign key ParentAccountId for ParentAccount of Account.
+        /// </summary>
+		public Guid? AccountId { get; set; }
 
 		/// <summary>
         /// The related ParentAccount of Account.
         /// </summary>
-		public IList<Account> ParentAccount { get; set; }
+		public Account ParentAccount { get; set; }
+
 
 		// Generic properties
 
