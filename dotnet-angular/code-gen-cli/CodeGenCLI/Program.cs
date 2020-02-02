@@ -412,6 +412,14 @@ namespace CodeGenCLI
 
                 generateCommand.OnExecute(() =>
                 {
+                    // Git
+                    Console.WriteLine("### git commit ###");
+                    ProcessStartInfo gitCommitBefore = new ProcessStartInfo("git");
+                    gitCommitBefore.Arguments = "commit -am \"Save before generating Angular\"";
+                    gitCommitBefore.WorkingDirectory = Config.Angular.ProjectPath;
+                    Process.Start(gitCommitBefore).WaitForExit();
+
+                    Console.WriteLine();
                     Console.WriteLine("### Generating Angular ###");
 
                     // Models
@@ -668,11 +676,20 @@ namespace CodeGenCLI
                     }
 
                     // Stop
-                    Console.WriteLine("### DONE ###");
                     Console.WriteLine();
+                    Console.WriteLine("### DONE ###");
 
+                    Console.WriteLine();
                     Console.WriteLine("### Dependencies ###");
                     Console.WriteLine("npm i --save @angular/cdk @angular/flex-layout");
+
+                    // Git
+                    Console.WriteLine();
+                    Console.WriteLine("### git status ###");
+                    ProcessStartInfo gitStatus = new ProcessStartInfo("git");
+                    gitStatus.Arguments = @"status";
+                    gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
+                    Process.Start(gitStatus).WaitForExit();
 
                     return 0;
                 });
