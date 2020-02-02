@@ -4,6 +4,46 @@
         <name>Test.API</name>
     </assembly>
     <members>
+        <member name="T:Test.API.BLL.AccountBLL">
+            <summary>
+            The business logic layer for Accounts.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.#ctor(Test.API.DAL.Repositories.AccountRepository)">
+            <summary>
+            The constructor of the Account business logic layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.GetAllAccountsAsync">
+            <summary>
+            Retrieves all accounts.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.GetAccountByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one account by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.CreateAccountAsync(Test.API.Models.Account)">
+            <summary>
+            Creates a new account record.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.UpdateAccountAsync(Test.API.Models.Account)">
+            <summary>
+            Updates an existing account record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.DeleteAccountByIdAsync(System.Guid)">
+            <summary>
+            Deletes an existing account record by Id.
+            </summary>
+        </member>
+        <member name="M:Test.API.BLL.AccountBLL.DeleteAccountAsync(Test.API.Models.Account)">
+            <summary>
+            Deletes an existing account record.
+            </summary>
+        </member>
         <member name="T:Test.API.BLL.ProductBLL">
             <summary>
             The business logic layer for Products.
@@ -123,6 +163,46 @@
             <summary>
             Deletes an existing supplier record.
             </summary>
+        </member>
+        <member name="T:Test.API.Controllers.AccountsController">
+            <summary>
+            The Accounts controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AccountsController},AutoMapper.IMapper,Test.API.BLL.AccountBLL)">
+            <summary>
+            The constructor of the Accounts controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.GetAccounts">
+            <summary>
+            Retrieves all accounts.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.GetAccount(System.Guid)">
+            <summary>
+            Retrieves a specific account.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.CreateAccount(Test.API.ViewModels.AccountVM)">
+            <summary>
+            Creates a new account.
+            </summary>
+            <param name="accountVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.UpdateAccount(System.Guid,Test.API.ViewModels.AccountVM)">
+            <summary>
+            Updates a specific account.
+            </summary>
+            <param name="id"></param>
+            <param name="accountVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.AccountsController.DeleteAccount(System.Guid)">
+            <summary>
+            Deletes a specific account.
+            </summary>
+            <param name="id"></param>
         </member>
         <member name="T:Test.API.Controllers.ProductDetailsController">
             <summary>
@@ -278,6 +358,16 @@
             The constructor of AutoMapperProfile.
             </summary>
         </member>
+        <member name="T:Test.API.DAL.Repositories.AccountRepository">
+            <summary>
+            The repository for Accounts in the data access layer.
+            </summary>
+        </member>
+        <member name="M:Test.API.DAL.Repositories.AccountRepository.#ctor(Test.API.DAL.TestContext)">
+            <summary>
+            The constructor of the Account repository.
+            </summary>
+        </member>
         <member name="T:Test.API.DAL.Repositories.ProductDetailRepository">
             <summary>
             The repository for ProductDetails in the data access layer.
@@ -316,6 +406,61 @@
         <member name="M:Test.API.DAL.Repositories.SupplierRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
             The constructor of the Supplier repository.
+            </summary>
+        </member>
+        <member name="T:Test.API.Models.Account">
+            <summary>
+            Account model
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Id">
+            <summary>
+            The identifier of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Name">
+            <summary>
+            The Name property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Website">
+            <summary>
+            The Website property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Telephone">
+            <summary>
+            The Telephone property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.Email">
+            <summary>
+            The Email property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.ParentAccountId">
+            <summary>
+            The related foreign key ParentAccountId for ParentAccount of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.ParentAccount">
+            <summary>
+            The related ParentAccount of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
             </summary>
         </member>
         <member name="T:Test.API.Models.Product">
@@ -501,6 +646,46 @@
         <member name="P:Test.API.Models.Supplier.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="T:Test.API.ViewModels.AccountVM">
+            <summary>
+            Account view model
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Id">
+            <summary>
+            The identifier of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Name">
+            <summary>
+            The Name property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Website">
+            <summary>
+            The Website property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Telephone">
+            <summary>
+            The Telephone property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Email">
+            <summary>
+            The Email property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.AccountId">
+            <summary>
+            The related foreign key ParentAccountId for ParentAccount of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.ParentAccount">
+            <summary>
+            The related ParentAccount of Account.
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.ProductDetailVM">

@@ -21,7 +21,7 @@ namespace Test.API.GraphQL.Types
                 "parentAccount",
                 resolve: context =>
                 {
-                    if (context.Source.AccountId != null)
+                    if (context.Source.ParentAccountId != null)
                         return accountRepository.GetById((Guid)context.Source.ParentAccountId);
                     return null;
                 }
@@ -32,7 +32,7 @@ namespace Test.API.GraphQL.Types
             //    "parentAccount",
             //    resolve: async context =>
             //    {
-            //        if (context.Source.AccountId != null) {
+            //        if (context.Source.ParentAccountId != null) {
             //            return await context.TryAsyncResolve(
             //                async c => await accountRepository.GetByIdAsync((Guid)context.Source.ParentAccountId)
             //            );
