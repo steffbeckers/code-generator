@@ -1,0 +1,28 @@
+<div *ngIf="product?.id" fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="productForm" (ngSubmit)="updateProduct()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Product - {{ product.id }}</h1>
+      <button (click)="deleteProduct()">Delete</button>
+      <button (click)="updateProduct()" [disabled]="productForm.invalid">Save</button>
+      <button (click)="updateProduct(true)" [disabled]="productForm.invalid">Save and Close</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Name</label>
+        <input formControlName="name" placeholder="Name" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Code</label>
+        <input formControlName="code" placeholder="Code" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Quantity</label>
+        <input formControlName="quantity" placeholder="Quantity" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Price</label>
+        <input formControlName="price" placeholder="Price" />
+      </div>
+    </div>
+  </form>
+</div>

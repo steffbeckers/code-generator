@@ -1,0 +1,30 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="productForm" (ngSubmit)="createProduct()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Add new Product</h1>
+      <button (click)="createProduct()" [disabled]="productForm.invalid">Add</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Name</label>
+        <input formControlName="name" placeholder="Name" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Code</label>
+        <input formControlName="code" placeholder="Code" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Quantity</label>
+        <input formControlName="quantity" placeholder="Quantity" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Price</label>
+        <input formControlName="price" placeholder="Price" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Supplier ID</label>
+        <input formControlName="supplierId" placeholder="Supplier ID" />
+      </div>
+    </div>
+  </form>
+</div>

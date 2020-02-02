@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1>ProductDetails</h1>
+    <a routerLink="/productdetails/create">Add new ProductDetail</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="!productdetails">Loading...</p>
+    <p *ngIf="productdetails && productdetails.length === 0">No productdetails added yet.</p>
+    <table *ngIf="productdetails && productdetails.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Comment</th>
+        <th>Product</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productDetail of productdetails" [routerLink]="['/productdetails', productDetail.id]" class="cursor--pointer">
+          <td>
+            {{ productDetail.comment }}
+          </td>
+          <td *ngIf="productDetail.product" [routerLink]="['/products', productDetail.product.id]">
+            {{ productDetail.product.id }}
+          </td>
+          <td *ngIf="!productDetail.product"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

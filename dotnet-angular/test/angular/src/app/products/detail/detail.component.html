@@ -1,0 +1,71 @@
+<p *ngIf="!product">Loading...</p>
+<div *ngIf="product?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
+    <h1>Product - {{ product.id }}</h1>
+    <!-- #-#-# -->
+    <button (click)="deleteProduct()">Delete</button>
+    <button [routerLink]="['/products', product.id, 'edit']">Edit</button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Name</label>
+      <span>{{ product.name }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Code</label>
+      <span>{{ product.code }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Quantity</label>
+      <span>{{ product.quantity }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Price</label>
+      <span>{{ product.price }}</span>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>ProductDetails</h2>
+    <a routerLink="/productdetails/create" [queryParams]="{ productId: product.id }">Add new ProductDetail</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="product.productdetails && product.productdetails.length === 0">No productdetails added yet.</p>
+    <table *ngIf="product.productdetails && product.productdetails.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Comment</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productDetail of product.productdetails" [routerLink]="['/productdetails', productDetail.id]">
+          <td>
+            {{ productDetail.comment }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Suppliers</h2>
+    <a routerLink="/suppliers/create" [queryParams]="{ productId: product.id }">Add new Supplier</a>
+    <a [routerLink]="['/products', product.id, 'link', 'supplier']">Link existing Supplier</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="product.suppliers && product.suppliers.length === 0">No suppliers added yet.</p>
+    <table *ngIf="product.suppliers && product.suppliers.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Name</th>
+        <th>Phone</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let supplier of product.suppliers" [routerLink]="['/suppliers', supplier.id]">
+          <td>
+            {{ supplier.name }}
+          </td>
+          <td>
+            {{ supplier.phone }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

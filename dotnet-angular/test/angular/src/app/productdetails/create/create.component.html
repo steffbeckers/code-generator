@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="productDetailForm" (ngSubmit)="createProductDetail()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Add new ProductDetail</h1>
+      <button (click)="createProductDetail()" [disabled]="productDetailForm.invalid">Add</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Comment</label>
+        <input formControlName="comment" placeholder="Comment" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Product ID</label>
+        <input formControlName="productId" placeholder="Product ID" required />
+      </div>
+    </div>
+  </form>
+</div>
