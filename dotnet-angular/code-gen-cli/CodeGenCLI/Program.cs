@@ -184,6 +184,7 @@ namespace CodeGenCLI
                     gitCommitBefore.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitCommitBefore).WaitForExit();
 
+                    Console.WriteLine();
                     Console.WriteLine("### Generating Web API ###");
 
                     // Models
@@ -374,9 +375,11 @@ namespace CodeGenCLI
                     //Process.Start(addInitialMigration).WaitForExit();
 
                     // Stop
+                    Console.WriteLine();
                     Console.WriteLine("### DONE ###");
 
                     // Git
+                    Console.WriteLine();
                     Console.WriteLine("### git status ###");
                     ProcessStartInfo gitStatus = new ProcessStartInfo("git");
                     gitStatus.Arguments = @"status";
