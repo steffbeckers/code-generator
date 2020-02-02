@@ -42,6 +42,22 @@ namespace Test.API.GraphQL.Types
             //    }
             //);
 
+            Field<ListGraphType<AccountType>>(
+                "accounts",
+                resolve: context => accountRepository.GetByAccountId(context.Source.Id)
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<AccountType>>(
+            //    "accounts",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await accountRepository.GetByAccountIdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
+
         }
     }
 }

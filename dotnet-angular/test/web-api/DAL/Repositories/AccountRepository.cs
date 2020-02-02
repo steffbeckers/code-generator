@@ -27,6 +27,7 @@ namespace Test.API.DAL.Repositories
 		public async Task<IEnumerable<Account>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Accounts
+                .Include(x => x.ChildAccounts)
                 .Include(x => x.ParentAccount)
                 .ToListAsync();
         }
@@ -34,6 +35,7 @@ namespace Test.API.DAL.Repositories
 		public async Task<Account> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Accounts
+                .Include(x => x.ChildAccounts)
                 .Include(x => x.ParentAccount)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }

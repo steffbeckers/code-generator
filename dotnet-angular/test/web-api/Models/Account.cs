@@ -11,6 +11,9 @@ namespace Test.API.Models
 		public Account()
         {
             // Relations
+
+			//// One-to-many
+			this.ChildAccounts = new List<Account>();
         }
 
 		// Properties
@@ -54,6 +57,13 @@ namespace Test.API.Models
         /// </summary>
 		public Account ParentAccount { get; set; }
 
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related ChildAccounts of Account.
+        /// </summary>
+		public IList<Account> ChildAccounts { get; set; }
 
 		// Generic properties
 

@@ -12,6 +12,9 @@ namespace Test.API.ViewModels
 		public AccountVM()
         {
             // Relations
+
+			//// One-to-many
+			this.ChildAccounts = new List<AccountVM>();
         }
 
 		// Properties
@@ -56,5 +59,12 @@ namespace Test.API.ViewModels
         /// </summary>
 		public AccountVM ParentAccount { get; set; }
 
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related ChildAccounts of Account.
+        /// </summary>
+		public IList<AccountVM> ChildAccounts { get; set; }
     }
 }
