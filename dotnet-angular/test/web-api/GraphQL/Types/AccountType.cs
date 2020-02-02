@@ -34,7 +34,7 @@ namespace Test.API.GraphQL.Types
             //    {
             //        if (context.Source.AccountId != null) {
             //            return await context.TryAsyncResolve(
-            //                async c => await accountRepository.GetByIdAsync((Guid)context.Source.AccountId)
+            //                async c => await accountRepository.GetByIdAsync((Guid)context.Source.ParentAccountId)
             //            );
             //        }
             //        
