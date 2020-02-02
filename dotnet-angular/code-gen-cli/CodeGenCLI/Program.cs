@@ -181,9 +181,15 @@ namespace CodeGenCLI
                 generateCommand.OnExecute(() =>
                 {
                     // Git
-                    Console.WriteLine("### git commit ###");
+                    Console.WriteLine("### git add . ###");
+                    ProcessStartInfo gitAddBefore = new ProcessStartInfo("git");
+                    gitAddBefore.Arguments = "add .";
+                    gitAddBefore.WorkingDirectory = Config.WebAPI.ProjectPath;
+                    Process.Start(gitAddBefore).WaitForExit();
+
+                    Console.WriteLine("### git commit -m \"Save before generating Web API\" ###");
                     ProcessStartInfo gitCommitBefore = new ProcessStartInfo("git");
-                    gitCommitBefore.Arguments = "commit -am \"Save before generating Web API\"";
+                    gitCommitBefore.Arguments = "commit -m \"Save before generating Web API\"";
                     gitCommitBefore.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitCommitBefore).WaitForExit();
 
