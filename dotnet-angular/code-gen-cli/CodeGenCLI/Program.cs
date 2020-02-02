@@ -180,13 +180,8 @@ namespace CodeGenCLI
                     Console.WriteLine("### Generating Web API ###");
 
                     // Git
-                    ProcessStartInfo gitAdd = new ProcessStartInfo("git");
-                    gitAdd.Arguments = "add .";
-                    gitAdd.WorkingDirectory = Config.WebAPI.ProjectPath;
-                    Process.Start(gitAdd).WaitForExit();
-
                     ProcessStartInfo gitCommitBefore = new ProcessStartInfo("git");
-                    gitCommitBefore.Arguments = "commit -am \"Before generating Web API\"";
+                    gitCommitBefore.Arguments = "commit -am \"Before generating Web API on " + DateTime.Now.ToString() + "\"";
                     gitCommitBefore.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitCommitBefore).WaitForExit();
 
