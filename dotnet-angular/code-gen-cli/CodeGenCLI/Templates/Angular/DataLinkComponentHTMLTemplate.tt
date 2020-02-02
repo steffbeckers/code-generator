@@ -27,7 +27,7 @@
       <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
         <label class="bold"><#= relation.DisplayName ?? relation.Name #></label>
         <span *ngIf="<#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>" [routerLink]="['/<#= (!string.IsNullOrEmpty(relationModel.NamePlural) ? relationModel.NamePlural : relationModel.Name + "s").ToLower() #>', <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.id]" class="cursor--pointer">
-          {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= relation.DisplayField.ToCamelCase() #> }}
+          {{ <#= model.Name.ToCamelCase() #>.<#= relation.Name.ToCamelCase() #>.<#= !string.IsNullOrEmpty(model.DisplayField) ? model.DisplayField.ToCamelCase() : "id" #> }}
         </span>
       </div>
 <# } #>
