@@ -26,7 +26,7 @@ namespace CodeGenCLI
 
         static void Main(string[] args)
         {
-            Console.WriteLine("### CodeGenCLI ###");
+            Console.WriteLine("### CodeGenCLI - " + DateTime.Now.ToString("s", CultureInfo.InvariantCulture) + " ###");
             Console.WriteLine();
 
             // App
