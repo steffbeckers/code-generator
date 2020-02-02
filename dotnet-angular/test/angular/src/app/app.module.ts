@@ -11,11 +11,9 @@ import { AppComponent } from './app.component';
 import { TopNavComponent } from './shared/top-nav/top-nav.component';
 
 // Services
-import { AccountService } from './shared/services/AccountService';
-import { ContactService } from './shared/services/ContactService';
-import { AddressService } from './shared/services/AddressService';
-import { NoteService } from './shared/services/NoteService';
-import { TodoService } from './shared/services/TodoService';
+import { ProductService } from './shared/services/ProductService';
+import { SupplierService } from './shared/services/SupplierService';
+import { ProductDetailService } from './shared/services/ProductDetailService';
 
 @NgModule({
   declarations: [
@@ -29,11 +27,9 @@ import { TodoService } from './shared/services/TodoService';
     SharedModule
   ],
   providers: [
-    AccountService,
-    ContactService,
-    AddressService,
-    NoteService,
-    TodoService,
+    ProductService,
+    SupplierService,
+    ProductDetailService,
   ],
   bootstrap: [AppComponent]
 })

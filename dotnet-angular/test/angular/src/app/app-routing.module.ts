@@ -3,24 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'accounts',
-    loadChildren: './accounts/accounts.module#AccountsModule',
+    path: 'products',
+    loadChildren: './products/products.module#ProductsModule',
   },
   {
-    path: 'contacts',
-    loadChildren: './contacts/contacts.module#ContactsModule',
+    path: 'suppliers',
+    loadChildren: './suppliers/suppliers.module#SuppliersModule',
   },
   {
-    path: 'addresses',
-    loadChildren: './addresses/addresses.module#AddressesModule',
-  },
-  {
-    path: 'notes',
-    loadChildren: './notes/notes.module#NotesModule',
-  },
-  {
-    path: 'todos',
-    loadChildren: './todos/todos.module#TodosModule',
+    path: 'productdetails',
+    loadChildren: './productdetails/productdetails.module#ProductDetailsModule',
   },
   {
     path: '**',

@@ -26,6 +26,9 @@ namespace CodeGenCLI
 
         static void Main(string[] args)
         {
+            Console.WriteLine("### CodeGenCLI ###");
+            Console.WriteLine();
+
             // App
             App = new CommandLineApplication(throwOnUnexpectedArg: false);
 
