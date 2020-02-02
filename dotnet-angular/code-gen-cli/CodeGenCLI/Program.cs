@@ -177,13 +177,14 @@ namespace CodeGenCLI
 
                 generateCommand.OnExecute(() =>
                 {
-                    Console.WriteLine("### Generating Web API ###");
-
                     // Git
+                    Console.WriteLine("### git commit ###");
                     ProcessStartInfo gitCommitBefore = new ProcessStartInfo("git");
                     gitCommitBefore.Arguments = "commit -am \"Save before generating Web API\"";
                     gitCommitBefore.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitCommitBefore).WaitForExit();
+
+                    Console.WriteLine("### Generating Web API ###");
 
                     // Models
                     if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models")))
@@ -362,24 +363,25 @@ namespace CodeGenCLI
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs");
                     }
 
-                    // Git
-                    ProcessStartInfo gitStatus = new ProcessStartInfo("git");
-                    gitStatus.Arguments = @"status";
-                    gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
-                    Process.Start(gitStatus).WaitForExit();
-
                     // TODO: Migrations?
                     //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");
                     //removeInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
-                    //Process.Start(removeInitialMigration);
+                    //Process.Start(removeInitialMigration).WaitForExit();
 
                     //ProcessStartInfo addInitialMigration = new ProcessStartInfo("Add-Migration");
                     //addInitialMigration.Arguments = @"Initial";
                     //addInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
-                    //Process.Start(addInitialMigration);
+                    //Process.Start(addInitialMigration).WaitForExit();
 
                     // Stop
                     Console.WriteLine("### DONE ###");
+
+                    // Git
+                    Console.WriteLine("### git status ###");
+                    ProcessStartInfo gitStatus = new ProcessStartInfo("git");
+                    gitStatus.Arguments = @"status";
+                    gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
+                    Process.Start(gitStatus).WaitForExit();
 
                     return 0;
                 });
