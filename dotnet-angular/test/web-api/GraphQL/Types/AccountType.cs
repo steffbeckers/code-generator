@@ -44,7 +44,7 @@ namespace Test.API.GraphQL.Types
 
             Field<ListGraphType<AccountType>>(
                 "accounts",
-                resolve: context => accountRepository.GetByAccountId(context.Source.Id)
+                resolve: context => accountRepository.GetByChildAccountsId(context.Source.ChildAccountsId)
             );
 
             //// Async test
@@ -53,7 +53,7 @@ namespace Test.API.GraphQL.Types
             //    resolve: async context =>
             //    {
             //        return await context.TryAsyncResolve(
-            //            async c => await accountRepository.GetByAccountIdAsync(context.Source.Id)
+            //            async c => await accountRepository.GetByChildAccountsIdAsync(context.Source.ChildAccountsId)
             //        );
             //    }
             //);

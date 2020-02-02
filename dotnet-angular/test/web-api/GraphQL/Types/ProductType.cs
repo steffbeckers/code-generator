@@ -22,7 +22,7 @@ namespace Test.API.GraphQL.Types
 
             Field<ListGraphType<ProductDetailType>>(
                 "productDetails",
-                resolve: context => productDetailRepository.GetByProductId(context.Source.Id)
+                resolve: context => productDetailRepository.GetByDetailsId(context.Source.DetailsId)
             );
 
             //// Async test
@@ -31,7 +31,7 @@ namespace Test.API.GraphQL.Types
             //    resolve: async context =>
             //    {
             //        return await context.TryAsyncResolve(
-            //            async c => await productDetailRepository.GetByProductIdAsync(context.Source.Id)
+            //            async c => await productDetailRepository.GetByDetailsIdAsync(context.Source.DetailsId)
             //        );
             //    }
             //);
