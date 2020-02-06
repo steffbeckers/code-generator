@@ -373,6 +373,19 @@ namespace CodeGenCLI
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs");
                     }
 
+                    //// Tests
+                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Tests"))
+                    {
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Tests");
+                    }
+
+                    WebAPITemplates.GraphQL.Tests.TestMutationsTemplate graphQLTestMutationsTemplate = new WebAPITemplates.GraphQL.Tests.TestMutationsTemplate(Config);
+                    string graphQLTestMutationsTemplateContent = graphQLTestMutationsTemplate.TransformText();
+
+                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\Tests\\Mutations.txt", graphQLTestMutationsTemplateContent);
+                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\Tests\\Mutations.txt");
+
+
                     // TODO: Migrations?
                     //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");
                     //removeInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
