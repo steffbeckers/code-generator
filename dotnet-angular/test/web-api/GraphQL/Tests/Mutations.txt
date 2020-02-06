@@ -1,3 +1,5 @@
+// Accounts
+
 mutation createAccount($account: accountInput!) {
   createAccount(account: $account) {
     id
@@ -7,6 +9,18 @@ mutation createAccount($account: accountInput!) {
     email
   }
 }
+
+{
+  "account": {
+    "name": ""
+    "website": ""
+    "telephone": ""
+    "email": ""
+  }
+}
+
+
+// Products
 
 mutation createProduct($product: productInput!) {
   createProduct(product: $product) {
@@ -18,6 +32,18 @@ mutation createProduct($product: productInput!) {
   }
 }
 
+{
+  "product": {
+    "name": ""
+    "code": ""
+    "quantity": ""
+    "price": ""
+  }
+}
+
+
+// Suppliers
+
 mutation createSupplier($supplier: supplierInput!) {
   createSupplier(supplier: $supplier) {
     id
@@ -26,6 +52,16 @@ mutation createSupplier($supplier: supplierInput!) {
   }
 }
 
+{
+  "supplier": {
+    "name": ""
+    "phone": ""
+  }
+}
+
+
+// ProductDetails
+
 mutation createProductDetail($productDetail: productDetailInput!) {
   createProductDetail(productDetail: $productDetail) {
     id
@@ -33,10 +69,26 @@ mutation createProductDetail($productDetail: productDetailInput!) {
   }
 }
 
+{
+  "productDetail": {
+    "comment": ""
+  }
+}
+
+
+// ProductSuppliers
+
 mutation createProductSupplier($productSupplier: productSupplierInput!) {
   createProductSupplier(productSupplier: $productSupplier) {
     id
     comment
   }
 }
+
+{
+  "productSupplier": {
+    "comment": ""
+  }
+}
+
 
