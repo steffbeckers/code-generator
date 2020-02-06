@@ -1,0 +1,42 @@
+mutation createAccount($account: accountInput!) {
+  createAccount(account: $account) {
+    id
+    name
+    website
+    telephone
+    email
+  }
+}
+
+mutation createProduct($product: productInput!) {
+  createProduct(product: $product) {
+    id
+    name
+    code
+    quantity
+    price
+  }
+}
+
+mutation createSupplier($supplier: supplierInput!) {
+  createSupplier(supplier: $supplier) {
+    id
+    name
+    phone
+  }
+}
+
+mutation createProductDetail($productDetail: productDetailInput!) {
+  createProductDetail(productDetail: $productDetail) {
+    id
+    comment
+  }
+}
+
+mutation createProductSupplier($productSupplier: productSupplierInput!) {
+  createProductSupplier(productSupplier: $productSupplier) {
+    id
+    comment
+  }
+}
+
