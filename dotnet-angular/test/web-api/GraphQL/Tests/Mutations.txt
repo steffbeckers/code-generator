@@ -12,9 +12,9 @@ mutation createAccount($account: accountInput!) {
 
 {
   "account": {
-    "name": ""
-    "website": ""
-    "telephone": ""
+    "name": "",
+    "website": "",
+    "telephone": "",
     "email": ""
   }
 }
@@ -34,9 +34,9 @@ mutation createProduct($product: productInput!) {
 
 {
   "product": {
-    "name": ""
-    "code": ""
-    "quantity": ""
+    "name": "",
+    "code": "",
+    "quantity": "",
     "price": ""
   }
 }
@@ -54,7 +54,7 @@ mutation createSupplier($supplier: supplierInput!) {
 
 {
   "supplier": {
-    "name": ""
+    "name": "",
     "phone": ""
   }
 }
