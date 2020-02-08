@@ -222,7 +222,11 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLLTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\ControllerTemplate.tt">
+    <None Update="Templates\WebAPI\Controllers\AuthControllerTemplate.tt">
+      <LastGenOutput>AuthControllerTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
+    <None Update="Templates\WebAPI\Controllers\ControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ControllerTemplate.cs</LastGenOutput>
     </None>
@@ -426,7 +430,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>BLLTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\ControllerTemplate.cs">
+    <Compile Update="Templates\WebAPI\Controllers\AuthControllerTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AuthControllerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\Controllers\ControllerTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ControllerTemplate.tt</DependentUpon>

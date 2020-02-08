@@ -196,6 +196,13 @@ namespace CodeGenCLI
                     Console.WriteLine();
                     Console.WriteLine("### Generating Web API ###");
 
+                    // Startup
+                    WebAPITemplates.AppSettingsTemplate appSettingsTemplate = new WebAPITemplates.AppSettingsTemplate(Config);
+                    string appSettingsTemplateContent = appSettingsTemplate.TransformText();
+
+                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + "appsettings.json", appSettingsTemplateContent);
+                    Console.WriteLine("appsettings.json");
+
                     // Models
                     if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models")))
                     {
@@ -312,12 +319,19 @@ namespace CodeGenCLI
                     }
                     foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                     {
-                        WebAPITemplates.ControllerTemplate controllerTemplate = new WebAPITemplates.ControllerTemplate(Config, codeGenModel);
+                        WebAPITemplates.Controllers.ControllerTemplate controllerTemplate = new WebAPITemplates.Controllers.ControllerTemplate(Config, codeGenModel);
                         string controllerTemplateContent = controllerTemplate.TransformText();
 
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs", controllerTemplateContent);
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs");
                     }
+
+                    //// AuthController
+                    WebAPITemplates.Controllers.AuthControllerTemplate authControllerTemplate = new WebAPITemplates.Controllers.AuthControllerTemplate(Config);
+                    string authControllerTemplateContent = authControllerTemplate.TransformText();
+
+                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs", authControllerTemplateContent);
+                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs");
 
                     // Startup
                     WebAPITemplates.StartupTemplate startupTemplate = new WebAPITemplates.StartupTemplate(Config);
