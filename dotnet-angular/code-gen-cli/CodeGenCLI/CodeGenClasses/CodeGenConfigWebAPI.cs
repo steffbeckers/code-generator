@@ -14,6 +14,9 @@ namespace CodeGenCLI.CodeGenClasses
         [JsonProperty("namespaceRoot")]
         public string NamespaceRoot { get; set; }
 
+        [JsonProperty("appSettings")]
+        public string AppSettings { get; set; }
+
         [JsonProperty("modelsPath")]
         public string ModelsPath { get; set; }
 

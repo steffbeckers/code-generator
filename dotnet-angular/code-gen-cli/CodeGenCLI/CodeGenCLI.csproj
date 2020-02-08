@@ -88,6 +88,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TopNavComponentTSTemplate.tt</DependentUpon>
     </None>
+    <None Include="Templates\WebAPI\AppSettingsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -204,6 +209,10 @@
     <None Update="Templates\Angular\TopNavComponentTSTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TopNavComponentTSTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebAPI\AppSettingsTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AppSettingsTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\WebAPI\AutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -401,6 +410,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>TopNavComponentTSTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\AppSettingsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\AutoMapperProfileTemplate.cs">
       <DesignTime>True</DesignTime>
