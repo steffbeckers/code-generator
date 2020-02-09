@@ -41,6 +41,69 @@ namespace Test.API
             services.AddDbContext<TestContext>(options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("TestContext")));
 
+            // Authentication
+            services.AddIdentity<User, IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddEntityFrameworkStores<TestContext>()
+                .AddDefaultTokenProviders();
+            services.AddAuthentication();
+
+            //// Options
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Sign in
+                options.SignIn.RequireConfirmedEmail = false; // ANONYMOUS
+
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 10;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredUniqueChars = 6;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            //// JWT's
+            string key = Encoding.ASCII.GetBytes(Configuration.GetSection("Authentication").GetValue<string>("Secret"));
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateLifetime = true
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        // Allow the access token to be set by query param
+                        if (context.Request.Method.Equals("GET") && context.Request.Query.ContainsKey("access_token"))
+                            context.Token = context.Request.Query["access_token"];
+
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+
             // Repositories
 			services.AddScoped<AccountRepository>();
 			services.AddScoped<ProductRepository>();
