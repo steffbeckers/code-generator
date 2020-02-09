@@ -53,6 +53,21 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             this.mapper = mapper;
         }
 
+        // TODO: Move this function to another layer?
+        private string GenerateJWT(List<Claim> claims)
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"));
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection("Authentication").GetValue<string>("TokenExpiresInMinutes"))),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+        }
+
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -100,22 +115,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                         claims.Add(new Claim(ClaimTypes.Role, role));
                     }
 
-                    // Authentication successful => Generate jwt token
-                    // TODO: This code could be moved to another layer
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"));
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(claims),
-                        Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection("Authentication").GetValue<string>("TokenExpiresInMinutes"))),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)    
-                    };
+                    // Authentication successful => Generate JWT token based on the user's claims
+                    string token = GenerateJWT(claims);
 
                     // Return user with token
                     return Ok(new AuthenticatedVM()
                     {
                         User = mapper.Map<User, UserVM>(currentUser),
-                        Token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor)),
+                        Token = token,
                         RememberMe = model.RememberMe
                     });
                 }
@@ -162,7 +169,6 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
         [HttpPost]
         [Route("register")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] RegisterVM model)
         {
             if (ModelState.IsValid)
@@ -176,7 +182,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                     logger.LogInformation("User created a new account with password.");
 
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
                     await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     // When self registering and login at the same time

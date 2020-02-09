@@ -336,7 +336,7 @@
       "LastName": "Beckers",
       "UserName": "steff",
       "Email": "steff@steffbeckers.eu",
-      "Password": "PASSWORD"
+      "Password": "Steff12345!"
     },
     "PasswordResetURL": "https://test.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}"
   },
