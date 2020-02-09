@@ -108,22 +108,14 @@ namespace Test.API.Controllers
                         claims.Add(new Claim(ClaimTypes.Role, role));
                     }
 
-                    // Authentication successful => Generate jwt token
-                    // TODO: This code could be moved to another layer
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"));
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(claims),
-                        Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection("Authentication").GetValue<string>("TokenExpiresInMinutes"))),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)    
-                    };
+                    // Authentication successful => Generate JWT token based on the user's claims
+                    string token = GenerateJWT(claims);
 
                     // Return user with token
                     return Ok(new AuthenticatedVM()
                     {
                         User = mapper.Map<User, UserVM>(currentUser),
-                        Token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor)),
+                        Token = token,
                         RememberMe = model.RememberMe
                     });
                 }
@@ -212,7 +204,7 @@ namespace Test.API.Controllers
         [HttpGet]
         [Route("confirm-email")]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string userId, [FromQuery] string code)
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
             {
