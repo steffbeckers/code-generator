@@ -162,6 +162,7 @@ namespace Test.API.Controllers
 
         [HttpPost]
         [Route("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterVM model)
         {
             if (ModelState.IsValid)
