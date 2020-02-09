@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using System;
 using System.Threading.Tasks;
+using Test.API.Controllers;
 
 namespace Test.API.Services
 {
