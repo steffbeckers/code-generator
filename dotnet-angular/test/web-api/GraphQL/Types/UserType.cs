@@ -9,11 +9,11 @@ namespace Test.API.GraphQL.Types
         public UserType()
         {
             Field(x => x.Id, type: typeof(IdGraphType));
-            Field(x => x.Username);
+            Field(x => x.UserName);
             Field(x => x.Email);
             Field(x => x.FirstName, nullable: true);
             Field(x => x.LastName, nullable: true);
-            Field(x => x.Roles, nullable: true, type: typeof(ListObjectGraphType));
+            Field(x => x.Roles, nullable: true, type: typeof(ListGraphType<StringGraphType>));
         }
     }
 }
