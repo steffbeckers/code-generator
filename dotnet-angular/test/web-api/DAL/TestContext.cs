@@ -8,7 +8,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Test.API.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Test.API.DAL
 {
