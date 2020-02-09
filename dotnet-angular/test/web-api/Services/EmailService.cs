@@ -1,13 +1,10 @@
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using System;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Test.API.Controllers;
 
 namespace Test.API.Services
 {
@@ -65,9 +62,9 @@ namespace Test.API.Services
             }
         }
 
-        public Task SendEmailConfirmationAsync(string email, string link)
+        public async Task SendEmailConfirmationAsync(string email, string link)
         {
-            return SendEmailAsync(email, "Confirm your email",
+            return await SendEmailAsync(email, "Confirm your email",
                 $"Please confirm your account by clicking this link: <a href='{HtmlEncoder.Default.Encode(link)}'>link</a>");
         }
     }

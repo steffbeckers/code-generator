@@ -18,7 +18,6 @@ using Test.API.BLL;
 using Test.API.DAL;
 using Test.API.DAL.Repositories;
 using Test.API.GraphQL;
-using Test.API.Services;
 
 namespace Test.API
 {
