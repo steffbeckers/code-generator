@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Test.API.ViewModels.Identity;
 
 namespace Test.API.ViewModels
 {
