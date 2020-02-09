@@ -73,9 +73,11 @@ namespace Test.API.Controllers
 
                     // Set claims of user
                     List<Claim> claims = new List<Claim>() {
-                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id),
+                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToUpper()),
                         new Claim(JwtRegisteredClaimNames.UniqueName, currentUser.UserName),
                         new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
+                        new Claim(JwtRegisteredClaimNames.GivenName, currentUser.FirstName),
+                        new Claim(JwtRegisteredClaimNames.FamilyName, currentUser.LastName),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
                     };
                     if (!string.IsNullOrEmpty(currentUser.FirstName))
