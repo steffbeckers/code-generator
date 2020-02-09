@@ -28,6 +28,8 @@ namespace Test.API.DAL.Repositories
         {
             return await this.context.Accounts
                 .Include(x => x.ParentAccount)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.ModifiedByUser)
                 .ToListAsync();
         }
 

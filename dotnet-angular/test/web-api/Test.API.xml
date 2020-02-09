@@ -778,7 +778,7 @@
             The Email property of Account.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AccountVM.AccountId">
+        <member name="P:Test.API.ViewModels.AccountVM.ParentAccountId">
             <summary>
             The related foreign key ParentAccountId for ParentAccount of Account.
             </summary>
@@ -786,6 +786,36 @@
         <member name="P:Test.API.ViewModels.AccountVM.ParentAccount">
             <summary>
             The related ParentAccount of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.ProductDetailVM">
@@ -811,6 +841,36 @@
         <member name="P:Test.API.ViewModels.ProductDetailVM.Product">
             <summary>
             The related Product of ProductDetail.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductDetailVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductDetailVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductDetailVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.ProductVM">
@@ -853,6 +913,36 @@
             The related Suppliers of Product.
             </summary>
         </member>
+        <member name="P:Test.API.ViewModels.ProductVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:Test.API.ViewModels.SupplierVM">
             <summary>
             Supplier view model
@@ -876,6 +966,36 @@
         <member name="P:Test.API.ViewModels.SupplierVM.Products">
             <summary>
             The related Products of Supplier.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.SupplierVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.SupplierVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.SupplierVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.SupplierVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.SupplierVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.SupplierVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
             </summary>
         </member>
     </members>
