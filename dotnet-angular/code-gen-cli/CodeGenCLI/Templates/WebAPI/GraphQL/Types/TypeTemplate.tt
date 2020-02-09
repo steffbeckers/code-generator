@@ -100,6 +100,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             //);
 
 <# } #>
+<# if (config.Authentication.Enabled) { #>
+            Field(x => x.CreatedByUserId, type: typeof(IdGraphType));
+            // TODO: Field(x => x.CreatedByUser, type: typeof(UserType));
+            Field(x => x.ModifiedByUserId, type: typeof(IdGraphType));
+            // TODO: Field(x => x.ModifiedByUser, type: typeof(UserType));
+<# } #>
         }
     }
 }

@@ -83,21 +83,21 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             {
                 e.ToTable("UserRoles");
                 // In case you changed the TKey type
-                // e.HasKey(key => new { key.UserId, key.RoleId });
+                e.HasKey(key => new { key.UserId, key.RoleId });
             });
             modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
             modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
             {
                 e.ToTable("UserLogins");
                 // In case you changed the TKey type
-                //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
             });
             modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
             modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
             {
                 e.ToTable("UserTokens");
                 // In case you changed the TKey type
-                //e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+                e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
             });
 
             #endregion
@@ -130,6 +130,21 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# } #>
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(p => p.Required)) { #>
             modelBuilder.Entity<<#= model.Name #>>().Property(e => e.<#= relation.Model #>Id).IsRequired();
+<# } #>
+<# if (config.Authentication.Enabled) { #>
+
+            // User
+            modelBuilder.Entity<<#= model.Name #>>()
+                .HasOne(a => a.CreatedByUser)
+                .WithOne()
+                .HasForeignKey<<#= model.Name #>>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<<#= model.Name #>>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithOne()
+                .HasForeignKey<<#= model.Name #>>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 <# } #>
 
             #endregion
@@ -243,11 +258,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                         switch (entry.State)
                         {
                             case EntityState.Added:
-                                entry.CurrentValues["CreatedUserId"] = userId;
-                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                entry.CurrentValues["CreatedByUserId"] = userId;
+                                entry.CurrentValues["ModifiedByUserId"] = userId;
                                 break;
                             case EntityState.Modified:
-                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                entry.CurrentValues["ModifiedByUserId"] = userId;
                                 break;
                         }
                     }

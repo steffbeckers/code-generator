@@ -266,6 +266,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\WebAPI\GraphQL\Types\UserTypeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>UserTypeTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\WebAPI\Models\UserModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>UserModelTemplate.cs</LastGenOutput>
@@ -496,6 +500,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>TypeTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\GraphQL\Types\UserTypeTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserTypeTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\Models\ModelTemplate.cs">
       <DesignTime>True</DesignTime>

@@ -428,6 +428,13 @@ namespace CodeGenCLI
 
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\IdentityVM.cs", identityViewModelTemplateContent);
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\IdentityVM.cs");
+
+                        ////// UserType
+                        WebAPITemplates.GraphQL.Types.UserTypeTemplate graphQLUserTypeTemplate = new WebAPITemplates.GraphQL.Types.UserTypeTemplate(Config);
+                        string graphQLUserTypeTemplateContent = graphQLUserTypeTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\UserType.cs", graphQLUserTypeTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\UserType.cs");
                     }
 
                     // TODO: Migrations?

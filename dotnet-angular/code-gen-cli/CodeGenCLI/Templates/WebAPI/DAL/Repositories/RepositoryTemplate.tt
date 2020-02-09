@@ -45,6 +45,10 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 .Include(x => x.<#= relation.Through #>)
                     .ThenInclude(x => x.<#= relation.Model #>)
 <# } #>
+<# if (config.Authentication.Enabled) { #>
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.ModifiedByUser)
+<# } #>
                 .ToListAsync();
         }
 
@@ -61,6 +65,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 .Include(x => x.<#= relation.Through #>)
                     .ThenInclude(x => x.<#= relation.Model #>)
 <# } #>
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>

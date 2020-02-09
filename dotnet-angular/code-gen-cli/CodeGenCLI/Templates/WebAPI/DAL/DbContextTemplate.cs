@@ -240,21 +240,21 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             {
                 e.ToTable(""UserRoles"");
                 // In case you changed the TKey type
-                // e.HasKey(key => new { key.UserId, key.RoleId });
+                e.HasKey(key => new { key.UserId, key.RoleId });
             });
             modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable(""UserClaims""));
             modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
             {
                 e.ToTable(""UserLogins"");
                 // In case you changed the TKey type
-                //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
             });
             modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable(""RoleClaims""));
             modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
             {
                 e.ToTable(""UserTokens"");
                 // In case you changed the TKey type
-                //e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+                e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
             });
 
             #endregion
@@ -437,22 +437,67 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             
             #line default
             #line hidden
+            
+            #line 134 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+ if (config.Authentication.Enabled) { 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            // User\r\n            modelBuilder.Entity<");
+            
+            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">()\r\n                .HasOne(a => a.CreatedByUser)\r\n                .WithOne()\r\n " +
+                    "               .HasForeignKey<");
+            
+            #line 140 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">(a => a.CreatedByUserId)\r\n                .OnDelete(DeleteBehavior.NoAction);\r\n\r" +
+                    "\n            modelBuilder.Entity<");
+            
+            #line 143 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">()\r\n                .HasOne(a => a.ModifiedByUser)\r\n                .WithOne()\r\n" +
+                    "                .HasForeignKey<");
+            
+            #line 146 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">(a => a.ModifiedByUserId)\r\n                .OnDelete(DeleteBehavior.NoAction);\r\n" +
+                    "");
+            
+            #line 148 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
             this.Write("\r\n            #endregion\r\n");
             
-            #line 136 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 151 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 138 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 153 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 139 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 154 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
@@ -460,14 +505,14 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write("\t\t}\r\n\r\n\t\tpublic override int SaveChanges()\r\n        {\r\n            SoftDeleteLogi" +
                     "c();\r\n            TimestampsLogic();\r\n");
             
-            #line 146 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 161 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
             #line hidden
             this.Write("            UserInfoDataLogic();\r\n");
             
-            #line 148 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 163 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
@@ -482,14 +527,14 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             TimestampsLogic();
 ");
             
-            #line 157 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 172 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
             #line hidden
             this.Write("            UserInfoDataLogic();\r\n");
             
-            #line 159 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 174 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
@@ -506,47 +551,47 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
                 if (
 ");
             
-            #line 170 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 185 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
             
             #line default
             #line hidden
             
-            #line 171 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 186 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 172 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 187 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(") ||\r\n");
             
-            #line 173 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 188 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 174 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 189 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 175 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 190 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 176 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 191 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
@@ -575,47 +620,47 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
                 if (
 ");
             
-            #line 199 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 214 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
             
             #line default
             #line hidden
             
-            #line 200 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 215 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 201 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 216 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(") ||\r\n");
             
-            #line 202 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 217 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\tentry.Entity.GetType() == typeof(");
             
-            #line 203 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 218 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 204 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 219 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 205 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 220 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
@@ -637,7 +682,7 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
         }
 ");
             
-            #line 221 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 236 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
@@ -656,47 +701,47 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
                     if (
 ");
             
-            #line 234 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 249 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
             
             #line default
             #line hidden
             
-            #line 235 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 250 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t    entry.Entity.GetType() == typeof(");
             
-            #line 236 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 251 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(") ||\r\n");
             
-            #line 237 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 252 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t    entry.Entity.GetType() == typeof(");
             
-            #line 238 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 253 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 239 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 254 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 240 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 255 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default
@@ -706,11 +751,11 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
                         switch (entry.State)
                         {
                             case EntityState.Added:
-                                entry.CurrentValues[""CreatedUserId""] = userId;
-                                entry.CurrentValues[""ModifiedUserId""] = userId;
+                                entry.CurrentValues[""CreatedByUserId""] = userId;
+                                entry.CurrentValues[""ModifiedByUserId""] = userId;
                                 break;
                             case EntityState.Modified:
-                                entry.CurrentValues[""ModifiedUserId""] = userId;
+                                entry.CurrentValues[""ModifiedByUserId""] = userId;
                                 break;
                         }
                     }
@@ -719,7 +764,7 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
         }
 ");
             
-            #line 257 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            #line 272 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
  } 
             
             #line default

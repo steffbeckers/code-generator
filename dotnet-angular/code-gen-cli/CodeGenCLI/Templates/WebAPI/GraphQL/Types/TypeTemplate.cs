@@ -483,6 +483,23 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Types
             
             #line default
             #line hidden
+            
+            #line 103 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
+ if (config.Authentication.Enabled) { 
+            
+            #line default
+            #line hidden
+            this.Write(@"            Field(x => x.CreatedByUserId, type: typeof(IdGraphType));
+            // TODO: Field(x => x.CreatedByUser, type: typeof(UserType));
+            Field(x => x.ModifiedByUserId, type: typeof(IdGraphType));
+            // TODO: Field(x => x.ModifiedByUser, type: typeof(UserType));
+");
+            
+            #line 108 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Types\TypeTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
             this.Write("        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
