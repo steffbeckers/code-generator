@@ -50,7 +50,6 @@ namespace Test.API
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<TestContext>()
                 .AddDefaultTokenProviders();
-            services.AddAuthentication();
 
             //// Options
             services.Configure<IdentityOptions>(options =>
