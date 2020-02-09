@@ -463,6 +463,26 @@
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
+        <member name="P:Test.API.Models.Account.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Account.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:Test.API.Models.Product">
             <summary>
             Product model
@@ -518,6 +538,26 @@
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
+        <member name="P:Test.API.Models.Product.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Product.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Product.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Product.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:Test.API.Models.ProductDetail">
             <summary>
             ProductDetail model
@@ -556,6 +596,26 @@
         <member name="P:Test.API.Models.ProductDetail.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductDetail.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductDetail.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductDetail.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductDetail.ModifiedByUser">
+            <summary>
+            The user who last modified the record
             </summary>
         </member>
         <member name="T:Test.API.Models.ProductSupplier">
@@ -608,6 +668,26 @@
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
+        <member name="P:Test.API.Models.ProductSupplier.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductSupplier.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductSupplier.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductSupplier.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:Test.API.Models.Supplier">
             <summary>
             Supplier model
@@ -646,6 +726,26 @@
         <member name="P:Test.API.Models.Supplier.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Supplier.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Supplier.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Supplier.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.Supplier.ModifiedByUser">
+            <summary>
+            The user who last modified the record
             </summary>
         </member>
         <member name="T:Test.API.ViewModels.AccountVM">

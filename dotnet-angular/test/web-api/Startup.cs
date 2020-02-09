@@ -48,8 +48,8 @@ namespace Test.API
                 options.UseSqlServer(this.configuration.GetConnectionString("TestContext")));
 
             // Authentication
-            services.AddIdentity<User, IdentityRole>()
-                .AddRoleManager<RoleManager<IdentityRole>>()
+            services.AddIdentity<User, IdentityRole<Guid>>()
+                .AddRoleManager<RoleManager<IdentityRole<Guid>>>()
                 .AddEntityFrameworkStores<TestContext>()
                 .AddDefaultTokenProviders();
 
