@@ -79,6 +79,7 @@ namespace Test.API.Models
         /// </summary>
 		public User ModifiedByUser { get; set; }
 
+		// TODO
 		//public Guid TenantId { get; set; }
     }
 }
