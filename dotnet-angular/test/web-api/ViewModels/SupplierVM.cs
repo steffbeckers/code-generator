@@ -68,7 +68,7 @@ namespace Test.API.ViewModels
 		/// <summary>
         /// The user who created the record
         /// </summary>
-		public User CreatedByUser { get; set; }
+		public UserVM CreatedByUser { get; set; }
 
 		/// <summary>
         /// The Id of the user who last modified the record
@@ -78,7 +78,7 @@ namespace Test.API.ViewModels
 		/// <summary>
         /// The user who last modified the record
         /// </summary>
-		public User ModifiedByUser { get; set; }
+		public UserVM ModifiedByUser { get; set; }
 
     }
 }
