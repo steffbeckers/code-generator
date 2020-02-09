@@ -11,7 +11,16 @@ using Test.API.Models;
 
 namespace Test.API.DAL
 {
-    public class TestContext : IdentityDbContext<User>
+    public class TestContext : IdentityDbContext<
+        User,
+        IdentityRole<Guid>,
+        Guid,
+        IdentityUserClaim<Guid>,
+        IdentityUserRole<Guid>,
+        IdentityUserLogin<Guid>,
+        IdentityRoleClaim<Guid>,
+        IdentityUserToken<Guid>
+    >
 	{
         private readonly IConfiguration configuration;
         private readonly IHttpContextAccessor httpContextAccessor;
