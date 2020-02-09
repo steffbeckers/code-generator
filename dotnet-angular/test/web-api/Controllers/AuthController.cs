@@ -183,7 +183,7 @@ namespace Test.API.Controllers
                     logger.LogInformation("User created a new account with password.");
 
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
                     await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     // When self registering and login at the same time
@@ -212,7 +212,7 @@ namespace Test.API.Controllers
         [HttpGet]
         [Route("confirm-email")]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail([FromQuery] string userId, [FromQuery] string code)
         {
             if (userId == null || code == null)
             {
