@@ -322,11 +322,11 @@ namespace Test.API.DAL
                         switch (entry.State)
                         {
                             case EntityState.Added:
-                                entry.CurrentValues["CreatedUserId"] = userId;
-                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                entry.CurrentValues["CreatedByUserId"] = userId;
+                                entry.CurrentValues["ModifiedByUserId"] = userId;
                                 break;
                             case EntityState.Modified:
-                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                entry.CurrentValues["ModifiedByUserId"] = userId;
                                 break;
                         }
                     }
