@@ -57,9 +57,26 @@ namespace Test.API.Models
         /// </summary>
 		public DateTime? DeletedOn { get; set; }
 
-		// TODO:
-		//public Guid CreatedByUserId { get; set; }
-		//public Guid ModifiedByUserId { get; set; }
+		/// <summary>
+        /// The Id of the user who created the record
+        /// </summary>
+		public Guid CreatedByUserId { get; set; }
+
+		/// <summary>
+        /// The user who created the record
+        /// </summary>
+		public User CreatedByUser { get; set; }
+
+		/// <summary>
+        /// The Id of the user who last modified the record
+        /// </summary>
+		public Guid ModifiedByUserId { get; set; }
+
+		/// <summary>
+        /// The user who last modified the record
+        /// </summary>
+		public User ModifiedByUser { get; set; }
+
 		//public Guid TenantId { get; set; }
     }
 }
