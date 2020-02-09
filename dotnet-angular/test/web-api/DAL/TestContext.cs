@@ -61,19 +61,22 @@ namespace Test.API.DAL
             modelBuilder.Entity<IdentityUserRole<Guid>>(e =>
             {
                 e.ToTable("UserRoles");
-                e.HasKey(key => new { key.UserId, key.RoleId });
+                // In case you changed the TKey type
+                // e.HasKey(key => new { key.UserId, key.RoleId });
             });
             modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
             modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
             {
                 e.ToTable("UserLogins");
-                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+                // In case you changed the TKey type
+                //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
             });
             modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
             modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
             {
                 e.ToTable("UserTokens");
-                e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+                // In case you changed the TKey type
+                //e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
             });
 
             #endregion
