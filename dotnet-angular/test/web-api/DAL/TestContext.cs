@@ -39,23 +39,23 @@ namespace Test.API.DAL
 
             #region Identity
 
-            mb.Entity<User>(e => e.ToTable("Users"));
-            mb.Entity<IdentityRole<Guid>>(e => e.ToTable("Roles"));
-            mb.Entity<IdentityUserRole<Guid>>(e =>
+            modelBuilder.Entity<User>(e => e.ToTable("Users"));
+            modelBuilder.Entity<IdentityRole<Guid>>(e => e.ToTable("Roles"));
+            modelBuilder.Entity<IdentityUserRole<Guid>>(e =>
             {
                 e.ToTable("UserRoles");
                 // In case you changed the TKey type
                 // e.HasKey(key => new { key.UserId, key.RoleId });
             });
-            mb.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
-            mb.Entity<IdentityUserLogin<Guid>>(e =>
+            modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
+            modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
             {
                 e.ToTable("UserLogins");
                 // In case you changed the TKey type
                 //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
             });
-            mb.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
-            mb.Entity<IdentityUserToken<Guid>>(e =>
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
+            modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
             {
                 e.ToTable("UserTokens");
                 // In case you changed the TKey type
