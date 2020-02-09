@@ -2,37 +2,46 @@
 
 namespace CodeGenCLI.CodeGenClasses
 {
-    [JsonObject("webAPI")]
     public class CodeGenConfigWebAPI
     {
-        [JsonProperty("databaseConnection")]
+        [JsonRequired]
         public string DatabaseConnection { get; set; }
-
-        [JsonProperty("projectPath")]
-        public string ProjectPath { get; set; }
-
-        [JsonProperty("namespaceRoot")]
         public string NamespaceRoot { get; set; }
+        public CodeGenConfigWebAPIEmailService EmailService { get; set; }
 
-        [JsonProperty("appSettings")]
-        public string AppSettings { get; set; }
-
-        [JsonProperty("modelsPath")]
+        // Paths
+        [JsonRequired]
+        public string ProjectPath { get; set; }
         public string ModelsPath { get; set; }
-
-        [JsonProperty("viewModelsPath")]
         public string ViewModelsPath { get; set; }
-
-        [JsonProperty("dalPath")]
         public string DALPath { get; set; }
-
-        [JsonProperty("bllPath")]
         public string BLLPath { get; set; }
-
-        [JsonProperty("controllersPath")]
         public string ControllersPath { get; set; }
-
-        [JsonProperty("graphQLPath")]
+        public string ServicesPath { get; set; }
         public string GraphQLPath { get; set; }
+    }
+
+    public class CodeGenConfigWebAPIEmailService
+    {
+        [JsonRequired]
+        public bool Enabled { get; set; }
+
+        [JsonRequired]
+        public string MailServer { get; set; }
+
+        [JsonRequired]
+        public int MailPort { get; set; }
+
+        [JsonRequired]
+        public bool UseSSL { get; set; }
+
+        [JsonRequired]
+        public string SenderName { get; set; }
+
+        [JsonRequired]
+        public string Sender { get; set; }
+
+        [JsonRequired]
+        public string Password { get; set; }
     }
 }

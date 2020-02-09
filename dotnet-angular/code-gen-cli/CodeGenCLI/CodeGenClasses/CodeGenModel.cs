@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace CodeGenCLI.CodeGenClasses
 {
-    [JsonObject("model")]
     public class CodeGenModel
     {
         public CodeGenModel()
@@ -12,30 +11,50 @@ namespace CodeGenCLI.CodeGenClasses
             this.Relations = new List<CodeGenModelRelation>();
         }
 
-        [JsonProperty("name")]
+        [JsonRequired]
         public string Name { get; set; }
-
-        [JsonProperty("namePlural")]
         public string NamePlural { get; set; }
-
-        [JsonProperty("description")]
         public string Description { get; set; }
-
-        [JsonProperty("displayField")]
         public string DisplayField { get; set; }
-
-        [JsonProperty("sortField")]
         public string SortField { get; set; }
-
-        [JsonProperty("key")]
         public string Key { get; set; }
-
-        [JsonProperty("manyToMany")]
         public bool ManyToMany { get; set; }
 
-        [JsonProperty("properties")]
         public IList<CodeGenModelProperty> Properties { get; set; }
-        [JsonProperty("relations")]
         public IList<CodeGenModelRelation> Relations { get; set; }
+    }
+
+    public class CodeGenModelProperty
+    {
+        [JsonRequired]
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public string Description { get; set; }
+
+        [JsonRequired]
+        public string Type { get; set; }
+
+        [JsonRequired]
+        public bool Required { get; set; }
+    }
+
+    public class CodeGenModelRelation
+    {
+        [JsonRequired]
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public string Description { get; set; }
+
+        [JsonRequired]
+        public string Type { get; set; }
+
+        [JsonRequired]
+        public bool Required { get; set; }
+
+        [JsonRequired]
+        public string Model { get; set; }
+        public string IdField { get; set; }
+        public string DisplayField { get; set; }
+        public string Through { get; set; }
     }
 }

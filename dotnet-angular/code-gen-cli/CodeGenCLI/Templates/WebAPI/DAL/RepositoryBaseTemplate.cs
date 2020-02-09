@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace CodeGenCLI.Templates.WebAPI
+namespace CodeGenCLI.Templates.WebAPI.DAL
 {
     using System.Linq;
     using System.Text;
@@ -18,7 +18,7 @@ namespace CodeGenCLI.Templates.WebAPI
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\RepositoryBaseTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\RepositoryBaseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class RepositoryBaseTemplate : RepositoryBaseTemplateBase
     {
@@ -32,7 +32,7 @@ namespace CodeGenCLI.Templates.WebAPI
                     "eric;\r\nusing System.Linq;\r\nusing System.Linq.Expressions;\r\nusing System.Threadin" +
                     "g.Tasks;\r\n\r\nnamespace ");
             
-            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\RepositoryBaseTemplate.tt"
+            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\RepositoryBaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default

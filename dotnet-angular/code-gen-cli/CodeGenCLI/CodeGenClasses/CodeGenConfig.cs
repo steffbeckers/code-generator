@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace CodeGenCLI.CodeGenClasses
 {
-    [JsonObject("config")]
     public class CodeGenConfig
     {
         public CodeGenConfig()
@@ -12,22 +11,12 @@ namespace CodeGenCLI.CodeGenClasses
         }
 
         [JsonRequired]
-        [JsonProperty("name")]
         public string Name { get; set; }
-
-        [JsonProperty("description")]
         public string Description { get; set; }
-
-        [JsonProperty("override")]
         public bool Override { get; set; }
-
-        [JsonProperty("webAPI")]
+        public CodeGenConfigAuthentication Authentication { get; set; }
         public CodeGenConfigWebAPI WebAPI { get; set; }
-
-        [JsonProperty("angular")]
         public CodeGenConfigAngular Angular { get; set; }
-
-        [JsonProperty("models")]
         public IList<CodeGenModel> Models { get; set; }
     }
 }

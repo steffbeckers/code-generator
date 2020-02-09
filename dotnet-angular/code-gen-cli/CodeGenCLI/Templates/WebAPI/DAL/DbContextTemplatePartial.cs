@@ -1,6 +1,6 @@
 ﻿using CodeGenCLI.CodeGenClasses;
 
-namespace CodeGenCLI.Templates.WebAPI
+namespace CodeGenCLI.Templates.WebAPI.DAL
 {
     public partial class DbContextTemplate
     {

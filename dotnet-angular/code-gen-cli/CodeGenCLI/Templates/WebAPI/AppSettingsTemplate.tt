@@ -5,6 +5,33 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 {
+  "ConnectionStrings": {
+    "<#= config.Name #>Context": "<#= config.WebAPI.DatabaseConnection #>"
+  },
+<# if (config.Authentication.Enabled) { #>
+  "Authentication": {
+    "Secret": "<#= config.Authentication.Secret #>",
+    "TokenExpiresInMinutes": "<#= config.Authentication.TokenExpiresInMinutes #>",
+    "Admin": {
+        "FirstName": "<#= config.Authentication.Admin.FirstName #>",
+        "LastName": "<#= config.Authentication.Admin.LastName #>",
+        "Username": "<#= config.Authentication.Admin.Username #>",
+        "Email": "<#= config.Authentication.Admin.Email #>",
+        "Password": "<#= config.Authentication.Admin.Password #>"
+    },
+    "PasswordResetURL": "https://<#= config.Name.ToLower() #>.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}"
+  },
+<# } #>
+<# if (config.WebAPI.EmailService.Enabled) { #>
+  "EmailService": {
+    "MailServer": "<#= config.WebAPI.EmailService.MailServer #>",
+    "MailPort": <#= config.WebAPI.EmailService.MailPort #>,
+    "UseSSL": <#= config.WebAPI.EmailService.UseSSL.ToString().ToLower() #>,
+    "SenderName": "<#= config.WebAPI.EmailService.SenderName #>",
+    "Sender": "<#= config.WebAPI.EmailService.Sender #>",
+    "Password": "<#= config.WebAPI.EmailService.Password #>"
+  },
+<# } #>
   "Logging": {
     "LogLevel": {
       "Default": "Information",
@@ -12,28 +39,5 @@
       "Microsoft.Hosting.Lifetime": "Information"
     }
   },
-  "AllowedHosts": "*",
-  "ConnectionStrings": {
-    "<#= config.Name #>Context": "<#= config.WebAPI.DatabaseConnection #>"
-  },
-  "Authentication": {
-    "Secret": "ecd81ddc42741f570d02de8521f4e3326868a2233b2ff0c6589f5d7c26fb49a7",
-    "TokenExpiresInMinutes": "1440",
-    "Admin": {
-        "FirstName": "Steff",
-        "LastName": "Beckers",
-        "Username": "steff",
-        "Email": "steff@steffbeckers.eu",
-        "Password": "PASSWORD"
-    },
-    "PasswordResetURL": "https://<#= config.Name.ToLower() #>.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}"
-  },
-  "EmailService": {
-    "MailServer": "smtp.gmail.com",
-    "MailPort": 587,
-    "UseSSL": false,
-    "SenderName": "<#= config.Name #>",
-    "Sender": "steff@steffbeckers.eu",
-    "Password": "PASSWORD"
-  }
+  "AllowedHosts": "*"
 }

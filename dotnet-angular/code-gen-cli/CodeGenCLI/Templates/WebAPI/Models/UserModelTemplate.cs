@@ -7,21 +7,20 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace CodeGenCLI.Templates.WebAPI
+namespace CodeGenCLI.Templates.WebAPI.Models
 {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using CodeGenCLI.CodeGenClasses;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Models\UserModelTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class AppSettingsTemplate : AppSettingsTemplateBase
+    public partial class UserModelTemplate : UserModelTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,149 +28,17 @@ namespace CodeGenCLI.Templates.WebAPI
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("{\r\n  \"ConnectionStrings\": {\r\n    \"");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.ComponentModel.Dat" +
+                    "aAnnotations.Schema;\r\nusing Microsoft.AspNetCore.Identity;\r\n\r\nnamespace ");
             
-            #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Context\": \"");
-            
-            #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.DatabaseConnection));
+            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Models\UserModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write("\"\r\n  },\r\n");
-            
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
- if (config.Authentication.Enabled) { 
-            
-            #line default
-            #line hidden
-            this.Write("  \"Authentication\": {\r\n    \"Secret\": \"");
-            
-            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Secret));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"TokenExpiresInMinutes\": \"");
-            
-            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.TokenExpiresInMinutes));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"Admin\": {\r\n        \"FirstName\": \"");
-            
-            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.FirstName));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"LastName\": \"");
-            
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.LastName));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"Username\": \"");
-            
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Username));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"Email\": \"");
-            
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Email));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"Password\": \"");
-            
-            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Password));
-            
-            #line default
-            #line hidden
-            this.Write("\"\r\n    },\r\n    \"PasswordResetURL\": \"https://");
-            
-            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write(".steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{cod" +
-                    "e}}\"\r\n  },\r\n");
-            
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
- if (config.WebAPI.EmailService.Enabled) { 
-            
-            #line default
-            #line hidden
-            this.Write("  \"EmailService\": {\r\n    \"MailServer\": \"");
-            
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailServer));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"MailPort\": ");
-            
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailPort));
-            
-            #line default
-            #line hidden
-            this.Write(",\r\n    \"UseSSL\": ");
-            
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.UseSSL.ToString().ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write(",\r\n    \"SenderName\": \"");
-            
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.SenderName));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"Sender\": \"");
-            
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Sender));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"Password\": \"");
-            
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Password));
-            
-            #line default
-            #line hidden
-            this.Write("\"\r\n  },\r\n");
-            
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("  \"Logging\": {\r\n    \"LogLevel\": {\r\n      \"Default\": \"Information\",\r\n      \"Micros" +
-                    "oft\": \"Warning\",\r\n      \"Microsoft.Hosting.Lifetime\": \"Information\"\r\n    }\r\n  }," +
-                    "\r\n  \"AllowedHosts\": \"*\"\r\n}\r\n");
+            this.Write(".Models\r\n{\r\n    public class User : IdentityUser<Guid>\r\n    {\r\n        public str" +
+                    "ing FirstName { get; set; }\r\n        public string LastName { get; set; }\r\n\r\n   " +
+                    "     [NotMapped]\r\n        public List<string> Roles { get; set; }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -183,7 +50,7 @@ namespace CodeGenCLI.Templates.WebAPI
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class AppSettingsTemplateBase
+    public class UserModelTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

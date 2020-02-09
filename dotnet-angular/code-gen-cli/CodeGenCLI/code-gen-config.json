@@ -1,337 +1,360 @@
 {
-  "name": "Test",
-  "description": "", // Optional
-  "override": true,
-  "models": [
+  "Name": "Test",
+  "DisplayName": "Test App",
+  "Description": "", // Optional
+  "Override": true,
+  "Models": [
     {
-      "name": "Account",
-      "displayField": "Name",
-      "sortField": "Name",
-      "properties": [
+      "Name": "Account",
+      "DisplayField": "Name",
+      "SortField": "Name",
+      "Properties": [
         {
-          "name": "Name",
-          "type": "string",
-          "required": true
+          "Name": "Name",
+          "Type": "string",
+          "Required": true
         },
         {
-          "name": "Website",
-          "type": "string"
+          "Name": "Website",
+          "Type": "string"
         },
         {
-          "name": "Telephone",
-          "type": "string"
+          "Name": "Telephone",
+          "Type": "string"
         },
         {
-          "name": "Email",
-          "displayName": "Email Address",
-          "type": "string"
+          "Name": "Email",
+          "DisplayName": "Email Address",
+          "Type": "string"
         }
       ],
-      "relations": [
+      "Relations": [
         {
-          "name": "ParentAccount",
-          "type": "many-to-one",
-          "model": "Account"
+          "Name": "ParentAccount",
+          "Type": "many-to-one",
+          "Model": "Account"
         }
       ]
     },
     {
-      "name": "Product",
-      "properties": [
+      "Name": "Product",
+      "Properties": [
         {
-          "name": "Name",
-          "type": "string",
-          "required": true
+          "Name": "Name",
+          "Type": "string",
+          "Required": true
         },
         {
-          "name": "Code",
-          "type": "string"
+          "Name": "Code",
+          "Type": "string"
         },
         {
-          "name": "Quantity",
-          "type": "int"
+          "Name": "Quantity",
+          "Type": "int"
         },
         {
-          "name": "Price",
-          "type": "double"
+          "Name": "Price",
+          "Type": "double"
         }
       ],
-      "relations": [
+      "Relations": [
         {
-          "name": "Details",
-          "type": "one-to-many",
-          "model": "ProductDetail"
+          "Name": "Details",
+          "Type": "one-to-many",
+          "Model": "ProductDetail"
         },
         {
-          "name": "Suppliers",
-          "type": "many-to-many",
-          "model": "Supplier",
-          "through": "ProductSupplier"
+          "Name": "Suppliers",
+          "Type": "many-to-many",
+          "Model": "Supplier",
+          "Through": "ProductSupplier"
         }
       ]
     },
     {
-      "name": "Supplier",
-      "properties": [
+      "Name": "Supplier",
+      "Properties": [
         {
-          "name": "Name",
-          "type": "string",
-          "required": true
+          "Name": "Name",
+          "Type": "string",
+          "Required": true
         },
         {
-          "name": "Phone",
-          "type": "string"
+          "Name": "Phone",
+          "Type": "string"
         }
       ],
-      "relations": [
+      "Relations": [
         {
-          "name": "Products",
-          "type": "many-to-many",
-          "model": "Product",
-          "through": "ProductSupplier"
+          "Name": "Products",
+          "Type": "many-to-many",
+          "Model": "Product",
+          "Through": "ProductSupplier"
         }
       ]
     },
     {
-      "name": "ProductDetail",
-      "properties": [
+      "Name": "ProductDetail",
+      "Properties": [
         {
-          "name": "Comment",
-          "type": "string",
-          "required": true
+          "Name": "Comment",
+          "Type": "string",
+          "Required": true
         }
       ],
-      "relations": [
+      "Relations": [
         {
-          "name": "Product",
-          "type": "many-to-one",
-          "required": true,
-          "model": "Product"
+          "Name": "Product",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Product"
         }
       ]
     },
     {
-      "name": "ProductSupplier",
-      "manyToMany": true,
-      "properties": [
+      "Name": "ProductSupplier",
+      "ManyToMany": true,
+      "Properties": [
         {
-          "name": "Comment",
-          "type": "string"
-          //"required": true
+          "Name": "Comment",
+          "Type": "string"
+          //"Required": true
         }
       ],
-      "relations": [
+      "Relations": [
         {
-          "name": "Product",
-          "type": "many-to-one",
-          "required": true,
-          "model": "Product"
+          "Name": "Product",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Product"
         },
         {
-          "name": "Supplier",
-          "type": "many-to-one",
-          "required": true,
-          "model": "Supplier"
+          "Name": "Supplier",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Supplier"
         }
       ]
     }
     //{
-    //  "name": "Account",
-    //  //"description": "Also; Company or Business", // Optional
-    //  "displayField": "Name",
-    //  "sortField": "Name",
-    //  "properties": [
+    //  "Name": "Account",
+    //  //"Description": "Also; Company or Business", // Optional
+    //  "DisplayField": "Name",
+    //  "SortField": "Name",
+    //  "Properties": [
     //    {
-    //      "name": "Name",
-    //      //"description": "", // Optional
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "Name",
+    //      //"Description": "", // Optional
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "Website",
-    //      "type": "string"
+    //      "Name": "Website",
+    //      "Type": "string"
     //    },
     //    {
-    //      "name": "Telephone",
-    //      "type": "string"
+    //      "Name": "Telephone",
+    //      "Type": "string"
     //    },
     //    {
-    //      "name": "Email",
-    //      "displayName": "Email Address",
-    //      "type": "string"
+    //      "Name": "Email",
+    //      "DisplayName": "Email Address",
+    //      "Type": "string"
     //    }
     //  ],
-    //  "relations": [
+    //  "Relations": [
     //    {
-    //      "name": "Addresses",
-    //      "type": "one-to-many",
-    //      "model": "Address"
+    //      "Name": "Addresses",
+    //      "Type": "one-to-many",
+    //      "Model": "Address"
     //    },
     //    {
-    //      "name": "Contacts",
-    //      "type": "one-to-many",
-    //      "model": "Contact"
+    //      "Name": "Contacts",
+    //      "Type": "one-to-many",
+    //      "Model": "Contact"
     //    },
     //    {
-    //      "name": "Notes",
-    //      "type": "many-to-many",
-    //      "model": "Note",
-    //      "through": "AccountNote"
+    //      "Name": "Notes",
+    //      "Type": "many-to-many",
+    //      "Model": "Note",
+    //      "Through": "AccountNote"
     //    }
     //  ]
     //},
     //{
-    //  "name": "Contact",
-    //  "displayField": "FirstName",
-    //  "properties": [
+    //  "Name": "Contact",
+    //  "DisplayField": "FirstName",
+    //  "Properties": [
     //    {
-    //      "name": "FirstName",
-    //      "displayName": "First Name",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "FirstName",
+    //      "DisplayName": "First Name",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "LastName",
-    //      "displayName": "Last Name",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "LastName",
+    //      "DisplayName": "Last Name",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "Website",
-    //      "type": "string"
+    //      "Name": "Website",
+    //      "Type": "string"
     //    },
     //    {
-    //      "name": "Telephone",
-    //      "type": "string"
+    //      "Name": "Telephone",
+    //      "Type": "string"
     //    },
     //    {
-    //      "name": "Email",
-    //      "type": "string"
+    //      "Name": "Email",
+    //      "Type": "string"
     //    }
     //  ],
-    //  "relations": [
+    //  "Relations": [
     //    {
-    //      "name": "Account",
-    //      "type": "many-to-one",
-    //      //"required": true,
-    //      "model": "Account",
-    //      //"idField": "ParentAccountId", // TODO: Optional override
-    //      "displayField": "Name" // TODO: Use displayField on Account itself, not defined multiple times then
+    //      "Name": "Account",
+    //      "Type": "many-to-one",
+    //      //"Required": true,
+    //      "Model": "Account",
+    //      //"IdField": "ParentAccountId", // TODO: Optional override
+    //      "DisplayField": "Name" // TODO: Use DisplayField on Account itself, not defined multiple times then
     //    }
     //  ]
     //},
     //{
-    //  "name": "Address",
-    //  "namePlural": "Addresses",
-    //  "displayField": "Street",
-    //  "properties": [
+    //  "Name": "Address",
+    //  "NamePlural": "Addresses",
+    //  "DisplayField": "Street",
+    //  "Properties": [
     //    {
-    //      "name": "Street",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "Street",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "Number",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "Number",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "PostalCode",
-    //      "displayName": "Postal Code",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "PostalCode",
+    //      "DisplayName": "Postal Code",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "City",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "City",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "Primary",
-    //      "type": "bool"
+    //      "Name": "Primary",
+    //      "Type": "bool"
     //    }
     //  ],
-    //  "relations": [
+    //  "Relations": [
     //    {
-    //      "name": "Account",
-    //      "type": "many-to-one",
-    //      //"required": true,
-    //      "model": "Account",
-    //      //"idField": "ParentAccountId", // TODO: Optional override
-    //      "displayField": "Name"
+    //      "Name": "Account",
+    //      "Type": "many-to-one",
+    //      //"Required": true,
+    //      "Model": "Account",
+    //      //"IdField": "ParentAccountId", // TODO: Optional override
+    //      "DisplayField": "Name"
     //    }
     //  ]
     //},
     //{
-    //  "name": "Note",
-    //  "displayField": "Title",
-    //  "properties": [
+    //  "Name": "Note",
+    //  "DisplayField": "Title",
+    //  "Properties": [
     //    {
-    //      "name": "Title",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "Title",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "Body",
-    //      "type": "string"
+    //      "Name": "Body",
+    //      "Type": "string"
     //    }
     //  ],
-    //  "relations": [
+    //  "Relations": [
     //    {
-    //      "name": "Accounts",
-    //      "type": "many-to-many",
-    //      "model": "Account",
-    //      "through": "AccountNote"
+    //      "Name": "Accounts",
+    //      "Type": "many-to-many",
+    //      "Model": "Account",
+    //      "Through": "AccountNote"
     //    }
     //  ]
     //},
     //{
-    //  "name": "Todo",
-    //  "displayField": "Title",
-    //  "properties": [
+    //  "Name": "Todo",
+    //  "DisplayField": "Title",
+    //  "Properties": [
     //    {
-    //      "name": "Title",
-    //      "type": "string",
-    //      "required": true
+    //      "Name": "Title",
+    //      "Type": "string",
+    //      "Required": true
     //    },
     //    {
-    //      "name": "DueDate",
-    //      "displayName": "Due",
-    //      "type": "DateTime"
+    //      "Name": "DueDate",
+    //      "DisplayName": "Due",
+    //      "Type": "DateTime"
     //    }
     //  ]
     //},
     //{
-    //  "name": "AccountNote",
+    //  "Name": "AccountNote",
     //  "manyToMany": true,
-    //  "properties": [
+    //  "Properties": [
     //    {
-    //      "name": "SortOrder",
-    //      "type": "int"
+    //      "Name": "SortOrder",
+    //      "Type": "int"
     //    }
     //  ],
-    //  "relations": [
+    //  "Relations": [
     //    {
-    //      "name": "Account",
-    //      "type": "many-to-one",
-    //      "required": true,
-    //      "model": "Account"
+    //      "Name": "Account",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "Account"
     //    },
     //    {
-    //      "name": "Note",
-    //      "type": "many-to-one",
-    //      "required": true,
-    //      "model": "Note"
+    //      "Name": "Note",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "Note"
     //    }
     //  ]
     //}
   ],
-  "webAPI": {
-    "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
-    "databaseConnection": "Server=localhost;Database=CodeGenCLITest;Trusted_Connection=True;MultipleActiveResultSets=true",
-    "namespaceRoot": "Test.API"
+  "Authentication": {
+    "Enabled": true,
+    "Secret": "ecd81ddc42741f570d02de8521f4e3326868a2233b2ff0c6589f5d7c26fb49a7",
+    "TokenExpiresInMinutes": "1440",
+    "Admin": {
+      "FirstName": "Steff",
+      "LastName": "Beckers",
+      "UserName": "steff",
+      "Email": "steff@steffbeckers.eu",
+      "Password": "PASSWORD"
+    },
+    "PasswordResetURL": "https://test.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}"
   },
-  "angular": {
-    "projectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\angular"
+  "WebAPI": {
+    "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
+    "DatabaseConnection": "Server=localhost;Database=CodeGenCLITest;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "NamespaceRoot": "Test.API",
+    "EmailService": {
+      "Enabled": true,
+      "MailServer": "smtp.gmail.com",
+      "MailPort": 587,
+      "UseSSL": false,
+      "SenderName": "Test App",
+      "Sender": "steff@steffbeckers.eu",
+      "Password": "PASSWORD"
+    }
+  },
+  "Angular": {
+    "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\angular"
   }
 }

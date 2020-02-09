@@ -210,7 +210,7 @@ namespace CodeGenCLI
                     }
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
-                        WebAPITemplates.ModelTemplate modelTemplate = new WebAPITemplates.ModelTemplate(Config, codeGenModel);
+                        WebAPITemplates.Models.ModelTemplate modelTemplate = new WebAPITemplates.Models.ModelTemplate(Config, codeGenModel);
                         string modelTemplateContent = modelTemplate.TransformText();
 
                         // TODO: For all file writes?
@@ -226,7 +226,7 @@ namespace CodeGenCLI
                     }
                     foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                     {
-                        WebAPITemplates.ViewModelTemplate viewModelTemplate = new WebAPITemplates.ViewModelTemplate(Config, codeGenModel);
+                        WebAPITemplates.ViewModels.ViewModelTemplate viewModelTemplate = new WebAPITemplates.ViewModels.ViewModelTemplate(Config, codeGenModel);
                         string viewModelTemplateContent = viewModelTemplate.TransformText();
 
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\" + codeGenModel.Name + "VM.cs", viewModelTemplateContent);
@@ -240,14 +240,14 @@ namespace CodeGenCLI
                     }
 
                     //// DbContext
-                    WebAPITemplates.DbContextTemplate dbContextTemplate = new WebAPITemplates.DbContextTemplate(Config);
+                    WebAPITemplates.DAL.DbContextTemplate dbContextTemplate = new WebAPITemplates.DAL.DbContextTemplate(Config);
                     string dbContextTemplateContent = dbContextTemplate.TransformText();
 
                     File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + Config.Name + "Context.cs", dbContextTemplateContent);
                     Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + Config.Name + "Context.cs");
 
                     //// AutoMapper
-                    WebAPITemplates.AutoMapperProfileTemplate autoMapperProfileTemplate = new WebAPITemplates.AutoMapperProfileTemplate(Config);
+                    WebAPITemplates.DAL.AutoMapperProfileTemplate autoMapperProfileTemplate = new WebAPITemplates.DAL.AutoMapperProfileTemplate(Config);
                     string autoMapperProfileTemplateContent = autoMapperProfileTemplate.TransformText();
 
                     File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "AutoMapperProfile.cs", autoMapperProfileTemplateContent);
@@ -255,7 +255,7 @@ namespace CodeGenCLI
 
                     //// Repositories
                     ////// Base
-                    WebAPITemplates.RepositoryBaseTemplate repositoryBaseTemplate = new WebAPITemplates.RepositoryBaseTemplate(Config);
+                    WebAPITemplates.DAL.RepositoryBaseTemplate repositoryBaseTemplate = new WebAPITemplates.DAL.RepositoryBaseTemplate(Config);
                     string repositoryBaseTemplateContent = repositoryBaseTemplate.TransformText();
 
                     File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repository.cs", repositoryBaseTemplateContent);
@@ -268,7 +268,7 @@ namespace CodeGenCLI
                     }
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
-                        WebAPITemplates.RepositoryTemplate repositoryTemplate = new WebAPITemplates.RepositoryTemplate(Config, codeGenModel);
+                        WebAPITemplates.DAL.Repositories.RepositoryTemplate repositoryTemplate = new WebAPITemplates.DAL.Repositories.RepositoryTemplate(Config, codeGenModel);
                         string repositoryTemplateContent = repositoryTemplate.TransformText();
 
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL") + "\\" + "Repositories" + "\\" + codeGenModel.Name + "Repository.cs", repositoryTemplateContent);
@@ -295,7 +295,7 @@ namespace CodeGenCLI
                         }
 
                         // Generate tempate
-                        WebAPITemplates.BLLTemplate bllTemplate = new WebAPITemplates.BLLTemplate(Config, codeGenModel);
+                        WebAPITemplates.BLL.BLLTemplate bllTemplate = new WebAPITemplates.BLL.BLLTemplate(Config, codeGenModel);
                         string bllTemplateContent = bllTemplate.TransformText();
 
                         // Replace custom code from existing code
@@ -326,19 +326,25 @@ namespace CodeGenCLI
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs");
                     }
 
-                    //// AuthController
-                    WebAPITemplates.Controllers.AuthControllerTemplate authControllerTemplate = new WebAPITemplates.Controllers.AuthControllerTemplate(Config);
-                    string authControllerTemplateContent = authControllerTemplate.TransformText();
-
-                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs", authControllerTemplateContent);
-                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs");
-
                     // Startup
                     WebAPITemplates.StartupTemplate startupTemplate = new WebAPITemplates.StartupTemplate(Config);
                     string startupTemplateContent = startupTemplate.TransformText();
 
                     File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + "Startup.cs", startupTemplateContent);
                     Console.WriteLine("Startup.cs");
+
+                    // Services
+                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services")))
+                    {
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services"));
+                    }
+
+                    //// EmailService
+                    WebAPITemplates.Services.EmailServiceTemplate emailServiceTemplate = new WebAPITemplates.Services.EmailServiceTemplate(Config);
+                    string emailServiceTemplateContent = emailServiceTemplate.TransformText();
+
+                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services") + "\\EmailService.cs", emailServiceTemplateContent);
+                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services") + "\\EmailService.cs");
 
                     // GraphQL
                     if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL")))
@@ -399,6 +405,30 @@ namespace CodeGenCLI
                     File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\Tests\\Mutations.txt", graphQLTestMutationsTemplateContent);
                     Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\Tests\\Mutations.txt");
 
+                    // Authentication with Identity
+                    if (Config.Authentication.Enabled)
+                    {
+                        //// Auth controller
+                        WebAPITemplates.Controllers.AuthControllerTemplate authControllerTemplate = new WebAPITemplates.Controllers.AuthControllerTemplate(Config);
+                        string authControllerTemplateContent = authControllerTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs", authControllerTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs");
+
+                        //// User model
+                        WebAPITemplates.Models.UserModelTemplate userModelTemplate = new WebAPITemplates.Models.UserModelTemplate(Config);
+                        string userModelTemplateContent = userModelTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\User.cs", userModelTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\User.cs");
+
+                        //// View models
+                        WebAPITemplates.ViewModels.IdentityViewModelTemplate identityViewModelTemplate = new WebAPITemplates.ViewModels.IdentityViewModelTemplate(Config);
+                        string identityViewModelTemplateContent = identityViewModelTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\IdentityVM.cs", identityViewModelTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\IdentityVM.cs");
+                    }
 
                     // TODO: Migrations?
                     //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");

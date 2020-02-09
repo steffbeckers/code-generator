@@ -7,21 +7,22 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace CodeGenCLI.Templates.WebAPI
+namespace CodeGenCLI.Templates.WebAPI.Services
 {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
     using CodeGenCLI.CodeGenClasses;
+    using CodeGenCLI.Extensions;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class AppSettingsTemplate : AppSettingsTemplateBase
+    public partial class EmailServiceTemplate : EmailServiceTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,149 +30,126 @@ namespace CodeGenCLI.Templates.WebAPI
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("{\r\n  \"ConnectionStrings\": {\r\n    \"");
+            this.Write("using MailKit.Net.Smtp;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.Extensi" +
+                    "ons.Configuration;\r\nusing MimeKit;\r\nusing System.Text.Encodings.Web;\r\nusing Syst" +
+                    "em.Threading.Tasks;\r\nusing ");
             
-            #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Context\": \"");
-            
-            #line 9 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.DatabaseConnection));
+            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write("\"\r\n  },\r\n");
+            this.Write(".Controllers;\r\n\r\nnamespace ");
             
-            #line 11 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(@".Services
+{
+    // This class is used by the application to send email for account confirmation and password reset.
+    // For more details see https://go.microsoft.com/fwlink/?LinkID=532713 and https://kenhaggerty.com/articles/article/aspnet-core-22-smtp-emailsender-implementation
+
+    public interface IEmailService
+    {
+        Task SendEmailAsync(string email, string subject, string message);
+");
+            
+            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
             #line hidden
-            this.Write("  \"Authentication\": {\r\n    \"Secret\": \"");
+            this.Write("        Task SendEmailConfirmationAsync(string email, string link);\r\n");
             
-            #line 13 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Secret));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"TokenExpiresInMinutes\": \"");
-            
-            #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.TokenExpiresInMinutes));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"Admin\": {\r\n        \"FirstName\": \"");
-            
-            #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.FirstName));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"LastName\": \"");
-            
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.LastName));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"Username\": \"");
-            
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Username));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"Email\": \"");
-            
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Email));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n        \"Password\": \"");
-            
-            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Password));
-            
-            #line default
-            #line hidden
-            this.Write("\"\r\n    },\r\n    \"PasswordResetURL\": \"https://");
-            
-            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write(".steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{cod" +
-                    "e}}\"\r\n  },\r\n");
-            
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
  } 
             
             #line default
             #line hidden
+            this.Write("    }\r\n\r\n    public class EmailService : IEmailService\r\n    {\r\n        private re" +
+                    "adonly IConfiguration configuration;\r\n\r\n        public EmailService(IConfigurati" +
+                    "on configuration)\r\n        {\r\n            this.configuration = configuration;\r\n " +
+                    "       }\r\n\r\n        public async Task SendEmailAsync(string email, string subjec" +
+                    "t, string message)\r\n        {\r\n            try\r\n            {\r\n                v" +
+                    "ar mimeMessage = new MimeMessage();\r\n                mimeMessage.From.Add(new Ma" +
+                    "ilboxAddress(configuration.GetSection(\"EmailService\").GetValue<string>(\"SenderNa" +
+                    "me\"), configuration.GetSection(\"EmailService\").GetValue<string>(\"Sender\")));\r\n  " +
+                    "              mimeMessage.To.Add(new MailboxAddress(email));\r\n                mi" +
+                    "meMessage.Subject = subject;\r\n                mimeMessage.Body = new TextPart(\"h" +
+                    "tml\")\r\n                {\r\n                    Text = message\r\n                };" +
+                    "\r\n\r\n                using (var client = new SmtpClient())\r\n                {\r\n  " +
+                    "                  // For demo-purposes, accept all SSL certificates (in case the" +
+                    " server supports STARTTLS)\r\n                    client.ServerCertificateValidati" +
+                    "onCallback = (s, c, h, e) => true;\r\n\r\n                    // The third parameter" +
+                    " is useSSL (true if the client should make an SSL-wrapped\r\n                    /" +
+                    "/ connection to the server; otherwise, false).\r\n                    await client" +
+                    ".ConnectAsync(configuration.GetSection(\"EmailService\").GetValue<string>(\"MailSer" +
+                    "ver\"), configuration.GetSection(\"EmailService\").GetValue<int>(\"MailPort\"), confi" +
+                    "guration.GetSection(\"EmailService\").GetValue<bool>(\"UseSSL\"));\r\n\r\n              " +
+                    "      // Note: only needed if the SMTP server requires authentication\r\n         " +
+                    "           await client.AuthenticateAsync(configuration.GetSection(\"EmailService" +
+                    "\").GetValue<string>(\"Sender\"), configuration.GetSection(\"EmailService\").GetValue" +
+                    "<string>(\"Password\"));\r\n\r\n                    await client.SendAsync(mimeMessage" +
+                    ");\r\n\r\n                    await client.DisconnectAsync(true);\r\n                }" +
+                    "\r\n            }\r\n            catch\r\n            {\r\n                throw;\r\n     " +
+                    "       }\r\n        }\r\n");
             
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
- if (config.WebAPI.EmailService.Enabled) { 
-            
-            #line default
-            #line hidden
-            this.Write("  \"EmailService\": {\r\n    \"MailServer\": \"");
-            
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailServer));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"MailPort\": ");
-            
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailPort));
-            
-            #line default
-            #line hidden
-            this.Write(",\r\n    \"UseSSL\": ");
-            
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.UseSSL.ToString().ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write(",\r\n    \"SenderName\": \"");
-            
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.SenderName));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n    \"Sender\": \"");
-            
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Sender));
+            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+ if (config.Authentication.Enabled) { 
             
             #line default
             #line hidden
-            this.Write("\",\r\n    \"Password\": \"");
+            this.Write(@"
+        public Task SendEmailConfirmationAsync(string email, string link)
+        {
+            return SendEmailAsync(email, ""Confirm your email"",
+                $""Please confirm your account by clicking this link: <a href='{HtmlEncoder.Default.Encode(link)}'>link</a>"");
+        }
+");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Password));
-            
-            #line default
-            #line hidden
-            this.Write("\"\r\n  },\r\n");
-            
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("  \"Logging\": {\r\n    \"LogLevel\": {\r\n      \"Default\": \"Information\",\r\n      \"Micros" +
-                    "oft\": \"Warning\",\r\n      \"Microsoft.Hosting.Lifetime\": \"Information\"\r\n    }\r\n  }," +
-                    "\r\n  \"AllowedHosts\": \"*\"\r\n}\r\n");
+            this.Write("    }\r\n");
+            
+            #line 82 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+ if (config.Authentication.Enabled) { 
+            
+            #line default
+            #line hidden
+            this.Write(@"
+    public static class UrlHelperExtensions
+    {
+        public static string EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
+        {
+            return urlHelper.Action(
+                action: nameof(AuthController.ConfirmEmail),
+                controller: ""auth"",
+                values: new { userId, code },
+                protocol: scheme);
+        }
+
+        public static string ResetPasswordLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
+        {
+            return urlHelper.Action(
+                action: nameof(AuthController.ResetPassword),
+                controller: ""auth"",
+                values: new { userId, code },
+                protocol: scheme);
+        }
+    }
+");
+            
+            #line 104 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -183,7 +161,7 @@ namespace CodeGenCLI.Templates.WebAPI
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class AppSettingsTemplateBase
+    public class EmailServiceTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

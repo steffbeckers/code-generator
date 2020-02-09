@@ -4,20 +4,52 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<# if (config.Authentication.Enabled) { #>
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+<# } #>
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL
 {
+<# if (config.Authentication.Enabled) { #>
+    public class TestContext : IdentityDbContext<
+        User,
+        IdentityRole<Guid>,
+        Guid,
+        IdentityUserClaim<Guid>,
+        IdentityUserRole<Guid>,
+        IdentityUserLogin<Guid>,
+        IdentityRoleClaim<Guid>,
+        IdentityUserToken<Guid>
+    >
+<# } else { #>
     public class <#= config.Name #>Context : DbContext
+<# } #>
 	{
-		public <#= config.Name #>Context(DbContextOptions<<#= config.Name #>Context> options) : base(options)
+        private readonly IConfiguration configuration;
+<# if (config.Authentication.Enabled) { #>
+        private readonly IHttpContextAccessor httpContextAccessor;
+<# } #>
+
+		public <#= config.Name #>Context(
+<# if (config.Authentication.Enabled) { #>
+            IHttpContextAccessor httpContextAccessor,
+<# } #>
+            IConfiguration configuration
+        ) : base()
         {
+            this.configuration = configuration;
+<# if (config.Authentication.Enabled) { #>
+            this.httpContextAccessor = httpContextAccessor;
+<# } #>
         }
 
 <# foreach (CodeGenModel model in config.Models) { #>
@@ -30,19 +62,47 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            base.OnConfiguring(optionsBuilder);
+
             if (!optionsBuilder.IsConfigured)
             {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
-                    .Build();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("<#= config.Name #>Context"));
             }
         }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+<# if (config.Authentication.Enabled) { #>
+            base.OnModelCreating(modelBuilder);
+
+            #region Identity
+
+            modelBuilder.Entity<User>(e => e.ToTable("Users"));
+            modelBuilder.Entity<IdentityRole<Guid>>(e => e.ToTable("Roles"));
+            modelBuilder.Entity<IdentityUserRole<Guid>>(e =>
+            {
+                e.ToTable("UserRoles");
+                // In case you changed the TKey type
+                // e.HasKey(key => new { key.UserId, key.RoleId });
+            });
+            modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
+            modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
+            {
+                e.ToTable("UserLogins");
+                // In case you changed the TKey type
+                //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+            });
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
+            modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
+            {
+                e.ToTable("UserTokens");
+                // In case you changed the TKey type
+                //e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+            });
+
+            #endregion
+
+<# } #>
 <# CodeGenModel lastModel = config.Models.Last(); #>
 <# foreach (CodeGenModel model in config.Models) { #>
 <# if (model.ManyToMany) { #>
@@ -83,6 +143,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         {
             SoftDeleteLogic();
             TimestampsLogic();
+<# if (config.Authentication.Enabled) { #>
+            UserInfoDataLogic();
+<# } #>
 
             return base.SaveChanges();
         }
@@ -91,6 +154,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         {
             SoftDeleteLogic();
             TimestampsLogic();
+<# if (config.Authentication.Enabled) { #>
+            UserInfoDataLogic();
+<# } #>
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
@@ -152,5 +218,42 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 }
             }
         }
+<# if (config.Authentication.Enabled) { #>
+
+        private void UserInfoDataLogic()
+        {
+            string userIdString = this.httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdString))
+            {
+                Guid userId = Guid.Parse(userIdString);
+
+                foreach (var entry in ChangeTracker.Entries())
+                {
+                    Type entityType = entry.Entity.GetType();
+                    if (
+<# foreach (CodeGenModel model in config.Models) { #>
+<# if (!model.Equals(lastModel)) { #>
+					    entry.Entity.GetType() == typeof(<#= model.Name #>) ||
+<# } else { #>
+					    entry.Entity.GetType() == typeof(<#= model.Name #>)
+<# } #>
+<# } #>
+                    )
+                    {
+                        switch (entry.State)
+                        {
+                            case EntityState.Added:
+                                entry.CurrentValues["CreatedUserId"] = userId;
+                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                break;
+                            case EntityState.Modified:
+                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+<# } #>
 	}
 }

@@ -214,11 +214,11 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AppSettingsTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\AutoMapperProfileTemplate.tt">
+    <None Update="Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AutoMapperProfileTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\BLLTemplate.tt">
+    <None Update="Templates\WebAPI\BLL\BLLTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLLTemplate.cs</LastGenOutput>
     </None>
@@ -230,7 +230,7 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ControllerTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\DbContextTemplate.tt">
+    <None Update="Templates\WebAPI\DAL\DbContextTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DbContextTemplate.cs</LastGenOutput>
     </None>
@@ -258,23 +258,35 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TypeTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\RepositoryBaseTemplate.tt">
+    <None Update="Templates\WebAPI\DAL\RepositoryBaseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RepositoryBaseTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\RepositoryTemplate.tt">
+    <None Update="Templates\WebAPI\DAL\Repositories\RepositoryTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebAPI\Models\UserModelTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>UserModelTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebAPI\Services\EmailServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EmailServiceTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\WebAPI\StartupTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>StartupTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\ViewModelTemplate.tt">
+    <None Update="Templates\WebAPI\ViewModels\IdentityViewModelTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>IdentityViewModelTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebAPI\ViewModels\ViewModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ViewModelTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\ModelTemplate.tt">
+    <None Update="Templates\WebAPI\Models\ModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ModelTemplate.cs</LastGenOutput>
     </None>
@@ -420,12 +432,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\AutoMapperProfileTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AutoMapperProfileTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\WebAPI\BLLTemplate.cs">
+    <Compile Update="Templates\WebAPI\BLL\BLLTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>BLLTemplate.tt</DependentUpon>
@@ -440,10 +447,25 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ControllerTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\DbContextTemplate.cs">
+    <Compile Update="Templates\WebAPI\DAL\AutoMapperProfileTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AutoMapperProfileTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\DAL\DbContextTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DbContextTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\DAL\Repositories\RepositoryTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RepositoryTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\DAL\RepositoryBaseTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RepositoryBaseTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\GraphQL\MutationTemplate.cs">
       <DesignTime>True</DesignTime>
@@ -475,27 +497,32 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TypeTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\ModelTemplate.cs">
+    <Compile Update="Templates\WebAPI\Models\ModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\RepositoryBaseTemplate.cs">
+    <Compile Update="Templates\WebAPI\Models\UserModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>RepositoryBaseTemplate.tt</DependentUpon>
+      <DependentUpon>UserModelTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\RepositoryTemplate.cs">
+    <Compile Update="Templates\WebAPI\Services\EmailServiceTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>RepositoryTemplate.tt</DependentUpon>
+      <DependentUpon>EmailServiceTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\StartupTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StartupTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\ViewModelTemplate.cs">
+    <Compile Update="Templates\WebAPI\ViewModels\IdentityViewModelTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IdentityViewModelTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\ViewModels\ViewModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ViewModelTemplate.tt</DependentUpon>

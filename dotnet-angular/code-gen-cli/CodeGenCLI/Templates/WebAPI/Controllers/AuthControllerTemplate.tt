@@ -32,7 +32,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        private readonly IEmailSender emailSender;
+        private readonly IEmailService emailService;
         private readonly ILogger logger;
         private readonly IConfiguration configuration;
         private readonly IMapper mapper;
@@ -40,14 +40,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public AuthController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IEmailSender emailSender,
+            IEmailService emailService,
             ILogger<AuthController> logger,
             IConfiguration configuration,
             IMapper mapper)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.emailSender = emailSender;
+            this.emailService = emailService;
             this.logger = logger;
             this.configuration = configuration;
             this.mapper = mapper;
@@ -80,7 +80,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
                     // Set claims of user
                     List<Claim> claims = new List<Claim>() {
-                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id),
+                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToUpper()),
                         new Claim(JwtRegisteredClaimNames.UniqueName, currentUser.UserName),
                         new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
@@ -177,7 +177,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     // When self registering and login at the same time
                     // Need to add/refactor JWT logic if adding
@@ -270,14 +270,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
                 callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
 
-                await emailSender.SendEmailAsync(model.Email, "Reset Password",
+                await emailService.SendEmailAsync(model.Email, "Reset Password",
                    $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
 
                 return Ok();
             }
 
             // If we got this far, something failed
-            return BadRequest();
+            return BadRequest(ModelState);
         }
 
         [HttpPost]

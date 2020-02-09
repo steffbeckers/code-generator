@@ -1,13 +1,13 @@
 ﻿using CodeGenCLI.CodeGenClasses;
 
-namespace CodeGenCLI.Templates.WebAPI
+namespace CodeGenCLI.Templates.WebAPI.Models
 {
-    public partial class ViewModelTemplate
+    public partial class ModelTemplate
     {
         private CodeGenConfig config;
         private CodeGenModel model;
 
-        public ViewModelTemplate(CodeGenConfig config, CodeGenModel model)
+        public ModelTemplate(CodeGenConfig config, CodeGenModel model)
         {
             this.config = config;
             this.model = model;

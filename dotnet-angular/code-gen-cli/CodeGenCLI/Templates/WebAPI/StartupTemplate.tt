@@ -8,22 +8,29 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.GraphQL;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Services;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>
 {
@@ -45,6 +52,69 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // Connection to the <#= config.Name #> database
             services.AddDbContext<<#= config.Name #>Context>(options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("<#= config.Name #>Context")));
+<#    if (config.Authentication.Enabled) { #>
+
+            // Authentication
+            services.AddIdentity<User, IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddEntityFrameworkStores<<#= config.Name #>Context>()
+                .AddDefaultTokenProviders();
+
+            //// Options
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Sign in
+                options.SignIn.RequireConfirmedEmail = false; // ANONYMOUS
+
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 10;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredUniqueChars = 6;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            //// JWT's
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"))),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateLifetime = true
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        // Allow the access token to be set by query param
+                        if (context.Request.Method.Equals("GET") && context.Request.Query.ContainsKey("access_token"))
+                            context.Token = context.Request.Query["access_token"];
+
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+<# } #>
 
             // Repositories
 <# foreach (CodeGenModel model in config.Models) { #>
@@ -54,6 +124,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			// BLLs
 <# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 			services.AddScoped<<#= model.Name #>BLL>();
+<# } #>
+
+            // Services
+<# if (config.WebAPI.EmailService.Enabled) { #>
+            services.AddSingleton<IEmailService, EmailService>();
 <# } #>
 
             // GraphQL
@@ -159,9 +234,12 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 c.RoutePrefix = string.Empty;
             });
 
+            // Authentication
+            app.UseAuthentication();
+
             app.UseRouting();
 
-			// Authentication and Authorization
+			// Authorization
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
