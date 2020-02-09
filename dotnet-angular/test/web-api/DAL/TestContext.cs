@@ -8,6 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Test.API.Models;
+using System.IO;
 
 namespace Test.API.DAL
 {
@@ -25,7 +26,7 @@ namespace Test.API.DAL
         private readonly IConfiguration configuration;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-		public TestContext(
+        public TestContext(
             IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration
         ) : base()
