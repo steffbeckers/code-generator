@@ -62,21 +62,21 @@ namespace Test.API.DAL
             {
                 e.ToTable("UserRoles");
                 // In case you changed the TKey type
-                // e.HasKey(key => new { key.UserId, key.RoleId });
+                e.HasKey(key => new { key.UserId, key.RoleId });
             });
             modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
             modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
             {
                 e.ToTable("UserLogins");
                 // In case you changed the TKey type
-                //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
             });
             modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
             modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
             {
                 e.ToTable("UserTokens");
                 // In case you changed the TKey type
-                //e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+                e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
             });
 
             #endregion
@@ -95,9 +95,22 @@ namespace Test.API.DAL
             // Required properties
             modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
 
+            // User
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.CreatedByUser)
+                .WithOne()
+                .HasForeignKey<Account>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithOne()
+                .HasForeignKey<Account>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             #endregion
 
-			#region Products
+            #region Products
 
             // Soft delete query filter
             modelBuilder.Entity<Product>().HasQueryFilter(e => e.DeletedOn == null);
