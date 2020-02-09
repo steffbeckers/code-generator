@@ -270,7 +270,7 @@ namespace Test.API.Controllers
             }
 
             // If we got this far, something failed
-            return BadRequest();
+            return BadRequest(ModelState);
         }
 
         [HttpPost]

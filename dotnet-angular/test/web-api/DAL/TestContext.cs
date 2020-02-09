@@ -64,6 +64,7 @@ namespace Test.API.DAL
             });
 
             #endregion
+
 			#region Accounts
 
             // Soft delete query filter
