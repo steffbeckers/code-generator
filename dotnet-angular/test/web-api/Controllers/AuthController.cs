@@ -73,11 +73,9 @@ namespace Test.API.Controllers
 
                     // Set claims of user
                     List<Claim> claims = new List<Claim>() {
-                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToUpper()),
+                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id),
                         new Claim(JwtRegisteredClaimNames.UniqueName, currentUser.UserName),
                         new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
-                        new Claim(JwtRegisteredClaimNames.GivenName, currentUser.FirstName),
-                        new Claim(JwtRegisteredClaimNames.FamilyName, currentUser.LastName),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
                     };
                     if (!string.IsNullOrEmpty(currentUser.FirstName))
@@ -96,12 +94,14 @@ namespace Test.API.Controllers
                     }
 
                     // Authentication successful => Generate jwt token
+                    // TODO: This code could be moved to another layer
                     var tokenHandler = new JwtSecurityTokenHandler();
+                    var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"));
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(claims),
                         Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection("Authentication").GetValue<string>("TokenExpiresInMinutes"))),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"))), SecurityAlgorithms.HmacSha256Signature)    
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)    
                     };
 
                     // Return user with token
@@ -169,7 +169,7 @@ namespace Test.API.Controllers
                     logger.LogInformation("User created a new account with password.");
 
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     // When self registering and login at the same time
