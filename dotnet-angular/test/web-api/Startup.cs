@@ -53,6 +53,9 @@ namespace Test.API
 			services.AddScoped<SupplierBLL>();
 			services.AddScoped<ProductDetailBLL>();
 
+            // Services
+            services.AddSingleton<IEmailService, EmailService>();
+
             // GraphQL
             services.AddScoped<IDependencyResolver>(s =>
                 new FuncDependencyResolver(s.GetRequiredService));

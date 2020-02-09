@@ -25,7 +25,7 @@ namespace Test.API.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        private readonly IEmailSender emailSender;
+        private readonly IEmailService emailService;
         private readonly ILogger logger;
         private readonly IConfiguration configuration;
         private readonly IMapper mapper;
@@ -33,14 +33,14 @@ namespace Test.API.Controllers
         public AuthController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IEmailSender emailSender,
+            IEmailService emailService,
             ILogger<AuthController> logger,
             IConfiguration configuration,
             IMapper mapper)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.emailSender = emailSender;
+            this.emailService = emailService;
             this.logger = logger;
             this.configuration = configuration;
             this.mapper = mapper;
@@ -170,7 +170,7 @@ namespace Test.API.Controllers
 
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     // When self registering and login at the same time
                     // Need to add/refactor JWT logic if adding
@@ -263,7 +263,7 @@ namespace Test.API.Controllers
                 callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
                 callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
 
-                await emailSender.SendEmailAsync(model.Email, "Reset Password",
+                await emailService.SendEmailAsync(model.Email, "Reset Password",
                    $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
 
                 return Ok();
