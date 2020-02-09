@@ -236,6 +236,7 @@ namespace Test.API.DAL
 					    entry.Entity.GetType() == typeof(Supplier) ||
 					    entry.Entity.GetType() == typeof(ProductDetail) ||
 					    entry.Entity.GetType() == typeof(ProductSupplier)
+                    )
                     {
                         switch (entry.State)
                         {
