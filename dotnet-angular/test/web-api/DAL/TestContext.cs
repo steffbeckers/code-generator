@@ -110,7 +110,7 @@ namespace Test.API.DAL
 
             #endregion
 
-            #region Products
+			#region Products
 
             // Soft delete query filter
             modelBuilder.Entity<Product>().HasQueryFilter(e => e.DeletedOn == null);
@@ -123,6 +123,19 @@ namespace Test.API.DAL
 
             // Required properties
             modelBuilder.Entity<Product>().Property(e => e.Name).IsRequired();
+
+            // User
+            modelBuilder.Entity<Product>()
+                .HasOne(a => a.CreatedByUser)
+                .WithOne()
+                .HasForeignKey<Product>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Product>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithOne()
+                .HasForeignKey<Product>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 
@@ -139,6 +152,19 @@ namespace Test.API.DAL
 
             // Required properties
             modelBuilder.Entity<Supplier>().Property(e => e.Name).IsRequired();
+
+            // User
+            modelBuilder.Entity<Supplier>()
+                .HasOne(a => a.CreatedByUser)
+                .WithOne()
+                .HasForeignKey<Supplier>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Supplier>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithOne()
+                .HasForeignKey<Supplier>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 
@@ -157,6 +183,19 @@ namespace Test.API.DAL
             modelBuilder.Entity<ProductDetail>().Property(e => e.Comment).IsRequired();
             modelBuilder.Entity<ProductDetail>().Property(e => e.ProductId).IsRequired();
 
+            // User
+            modelBuilder.Entity<ProductDetail>()
+                .HasOne(a => a.CreatedByUser)
+                .WithOne()
+                .HasForeignKey<ProductDetail>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductDetail>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithOne()
+                .HasForeignKey<ProductDetail>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             #endregion
 
 			#region ProductSupplier
@@ -173,6 +212,19 @@ namespace Test.API.DAL
             // Required properties
             modelBuilder.Entity<ProductSupplier>().Property(e => e.ProductId).IsRequired();
             modelBuilder.Entity<ProductSupplier>().Property(e => e.SupplierId).IsRequired();
+
+            // User
+            modelBuilder.Entity<ProductSupplier>()
+                .HasOne(a => a.CreatedByUser)
+                .WithOne()
+                .HasForeignKey<ProductSupplier>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductSupplier>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithOne()
+                .HasForeignKey<ProductSupplier>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 		}
