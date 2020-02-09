@@ -35,6 +35,34 @@ namespace Test.API.DAL
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            #region Identity
+
+            mb.Entity<User>(e => e.ToTable("Users"));
+            mb.Entity<IdentityRole<Guid>>(e => e.ToTable("Roles"));
+            mb.Entity<IdentityUserRole<Guid>>(e =>
+            {
+                e.ToTable("UserRoles");
+                // In case you changed the TKey type
+                // e.HasKey(key => new { key.UserId, key.RoleId });
+            });
+            mb.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
+            mb.Entity<IdentityUserLogin<Guid>>(e =>
+            {
+                e.ToTable("UserLogins");
+                // In case you changed the TKey type
+                //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+            });
+            mb.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
+            mb.Entity<IdentityUserToken<Guid>>(e =>
+            {
+                e.ToTable("UserTokens");
+                // In case you changed the TKey type
+                //e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+            });
+
+            #endregion
 			#region Accounts
 
             // Soft delete query filter
