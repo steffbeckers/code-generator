@@ -75,6 +75,9 @@ namespace Test.API.DAL
 			CreateMap<ProductDetail, ProductDetailVM>();
             CreateMap<ProductDetailVM, ProductDetail>();
 
+            // Users
+			CreateMap<User, UserVM>();
+            CreateMap<UserVM, User>();
         }
     }
 }

@@ -109,13 +109,21 @@ namespace Test.API.Controllers
                     }
 
                     // Authentication successful => Generate jwt token
-                    string token = GenerateJWT(claims);
+                    // TODO: This code could be moved to another layer
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"));
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(claims),
+                        Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection("Authentication").GetValue<string>("TokenExpiresInMinutes"))),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)    
+                    };
 
                     // Return user with token
                     return Ok(new AuthenticatedVM()
                     {
                         User = mapper.Map<User, UserVM>(currentUser),
-                        Token = token,
+                        Token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor)),
                         RememberMe = model.RememberMe
                     });
                 }
