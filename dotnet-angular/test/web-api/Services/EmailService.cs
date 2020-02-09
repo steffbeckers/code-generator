@@ -14,6 +14,7 @@ namespace Test.API.Services
     public interface IEmailService
     {
         Task SendEmailAsync(string email, string subject, string message);
+        Task SendEmailConfirmationAsync(string email, string link);
     }
 
     public class EmailService : IEmailService
