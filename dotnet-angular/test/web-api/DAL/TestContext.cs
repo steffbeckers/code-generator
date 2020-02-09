@@ -8,7 +8,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Test.API.Models;
-using System.IO;
 
 namespace Test.API.DAL
 {
@@ -26,7 +25,7 @@ namespace Test.API.DAL
         private readonly IConfiguration configuration;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public TestContext(
+		public TestContext(
             IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration
         ) : base()
@@ -62,22 +61,19 @@ namespace Test.API.DAL
             modelBuilder.Entity<IdentityUserRole<Guid>>(e =>
             {
                 e.ToTable("UserRoles");
-                // In case you changed the TKey type
-                // e.HasKey(key => new { key.UserId, key.RoleId });
+                e.HasKey(key => new { key.UserId, key.RoleId });
             });
             modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
             modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
             {
                 e.ToTable("UserLogins");
-                // In case you changed the TKey type
-                //e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
             });
             modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
             modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
             {
                 e.ToTable("UserTokens");
-                // In case you changed the TKey type
-                //e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+                e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
             });
 
             #endregion
