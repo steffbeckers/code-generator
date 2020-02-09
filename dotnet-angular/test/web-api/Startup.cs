@@ -18,6 +18,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Test.API.BLL;
 using Test.API.DAL;
 using Test.API.DAL.Repositories;
