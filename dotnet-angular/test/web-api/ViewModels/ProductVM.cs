@@ -81,11 +81,6 @@ namespace Test.API.ViewModels
 		public DateTime ModifiedOn { get; set; }
 
 		/// <summary>
-        /// The date and time of when the record is (soft) deleted
-        /// </summary>
-		public DateTime? DeletedOn { get; set; }
-
-		/// <summary>
         /// The Id of the user who created the record
         /// </summary>
 		public Guid CreatedByUserId { get; set; }
