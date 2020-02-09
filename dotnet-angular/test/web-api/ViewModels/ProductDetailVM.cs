@@ -41,7 +41,6 @@ namespace Test.API.ViewModels
         /// </summary>
 		public ProductVM Product { get; set; }
 
-
 		// Generic properties
 
 		/// <summary>
