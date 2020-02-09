@@ -152,6 +152,7 @@ namespace Test.API.DAL
         {
             SoftDeleteLogic();
             TimestampsLogic();
+            UserInfoDataLogic();
 
             return base.SaveChanges();
         }
@@ -160,6 +161,7 @@ namespace Test.API.DAL
         {
             SoftDeleteLogic();
             TimestampsLogic();
+            UserInfoDataLogic();
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
@@ -213,6 +215,38 @@ namespace Test.API.DAL
                         case EntityState.Modified:
                             entry.CurrentValues["ModifiedOn"] = DateTime.Now;
                             break;
+                    }
+                }
+            }
+        }
+
+        private void UserInfoDataLogic()
+        {
+            string userIdString = this.httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdString))
+            {
+                Guid userId = Guid.Parse(userIdString);
+
+                foreach (var entry in ChangeTracker.Entries())
+                {
+                    Type entityType = entry.Entity.GetType();
+                    if (
+					    entry.Entity.GetType() == typeof(Account) ||
+					    entry.Entity.GetType() == typeof(Product) ||
+					    entry.Entity.GetType() == typeof(Supplier) ||
+					    entry.Entity.GetType() == typeof(ProductDetail) ||
+					    entry.Entity.GetType() == typeof(ProductSupplier)
+                    {
+                        switch (entry.State)
+                        {
+                            case EntityState.Added:
+                                entry.CurrentValues["CreatedUserId"] = userId;
+                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                break;
+                            case EntityState.Modified:
+                                entry.CurrentValues["ModifiedUserId"] = userId;
+                                break;
+                        }
                     }
                 }
             }
