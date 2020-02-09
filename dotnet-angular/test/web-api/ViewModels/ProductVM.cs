@@ -67,6 +67,7 @@ namespace Test.API.ViewModels
         ////// To create a link with Supplier directly on create of Product.
         public Guid? SupplierId { get; set; }
         public string SupplierComment { get; set; }
+
 		// Generic properties
 
 		/// <summary>
