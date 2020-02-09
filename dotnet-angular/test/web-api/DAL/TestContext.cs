@@ -12,8 +12,16 @@ namespace Test.API.DAL
 {
     public class TestContext : DbContext
 	{
-		public TestContext(DbContextOptions<TestContext> options) : base(options)
+        private readonly IConfiguration configuration;
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+		public TestContext(
+            IHttpContextAccessor httpContextAccessor,
+            IConfiguration configuration
+        ) : base()
         {
+            this.configuration = configuration;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
 		public DbSet<Account> Accounts { get; set; }
