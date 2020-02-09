@@ -225,9 +225,12 @@ namespace Test.API
                 c.RoutePrefix = string.Empty;
             });
 
+            // Authentication
+            app.UseAuthentication();
+
             app.UseRouting();
 
-			// Authentication and Authorization
+			// Authorization
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
