@@ -32,6 +32,9 @@ namespace Test.API.Controllers
         private readonly SignInManager<User> signInManager;
         private readonly IEmailService emailService;
 
+        /// <summary>
+		/// The constructor of the Auth controller.
+		/// </summary>
         public AuthController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
