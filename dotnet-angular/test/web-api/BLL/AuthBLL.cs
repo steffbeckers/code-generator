@@ -59,7 +59,9 @@ namespace Test.API.BLL
             // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
             if (user == null)
             {
-                loginResultVM.Errors.Add("invalid");
+                logger.LogWarning("User not found during login", loginVM.EmailOrUsername);
+
+                loginResultVM.Error = "invalid";
                 return loginResultVM;
             }
 
@@ -114,12 +116,13 @@ namespace Test.API.BLL
             //}
             if (signInResult.IsLockedOut)
             {
-                // Authenticated by password
-                logger.LogWarning("User is locked out", user);
+                // INFO: This is possible to split some code
+                //return RedirectToAction(nameof(Lockout));
 
+                logger.LogWarning("User is locked out.");
                 return Unauthorized("locked-out");
             }
-            if (signInResult.IsNotAllowed)
+            else if (signInResult.IsNotAllowed)
             {
                 logger.LogWarning("User is not allowed to login.");
                 return Unauthorized("not-allowed");
