@@ -107,12 +107,13 @@ namespace Test.API.BLL
                 string token = this.GenerateJWT(claims);
 
                 // Return user with token
-                return new LoginResultVM() {
-                    Authenticated = {
-                        User = mapper.Map<User, UserVM>(user),
-                        Token = token
-                    }
+                loginResultVM.Authenticated = new AuthenticatedVM()
+                {
+                    User = mapper.Map<User, UserVM>(user),
+                    Token = token
                 };
+
+                return loginResultVM;
             }
 
             // Failed
