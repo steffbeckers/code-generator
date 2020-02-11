@@ -23,6 +23,7 @@ namespace Test.API.BLL
     {
         private readonly IConfiguration configuration;
         private readonly ILogger logger;
+        private readonly IMapper mapper;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IEmailService emailService;
@@ -30,6 +31,7 @@ namespace Test.API.BLL
         public AuthBLL(
             IConfiguration configuration,
             ILogger<AuthBLL> logger,
+            IMapper mapper,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IEmailService emailService
@@ -37,6 +39,7 @@ namespace Test.API.BLL
         {
             this.configuration = configuration;
             this.logger = logger;
+            this.mapper = mapper;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailService = emailService;
