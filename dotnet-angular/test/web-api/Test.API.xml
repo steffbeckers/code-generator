@@ -209,7 +209,7 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Test.API.Controllers.AuthController.#ctor(Microsoft.AspNetCore.Identity.UserManager{Test.API.Models.User},Microsoft.AspNetCore.Identity.SignInManager{Test.API.Models.User},Test.API.Services.IEmailService,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AuthController},AutoMapper.IMapper,Test.API.BLL.AuthBLL)">
+        <member name="M:Test.API.Controllers.AuthController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AuthController},AutoMapper.IMapper,Test.API.BLL.AuthBLL)">
             <summary>
             The constructor of the Auth controller.
             </summary>

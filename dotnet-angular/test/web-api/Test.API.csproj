@@ -9,15 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200209202747_Identity.cs" />
-    <Compile Remove="Migrations\20200209202747_Identity.Designer.cs" />
-    <Compile Remove="Migrations\20200209203007_Identity.cs" />
-    <Compile Remove="Migrations\20200209203007_Identity.Designer.cs" />
-    <Compile Remove="Migrations\20200209204715_Identity.cs" />
-    <Compile Remove="Migrations\20200209204715_Identity.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
