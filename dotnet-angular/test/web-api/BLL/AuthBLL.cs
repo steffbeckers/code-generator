@@ -68,44 +68,43 @@ namespace Test.API.BLL
             if (signInResult.Succeeded)
             {
                 // Authenticated by password
-
                 logger.LogInformation("User logged in", user);
 
                 // Retrieve roles of user
-                currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
+                user.Roles = (List<string>)await userManager.GetRolesAsync(user);
 
                 // Set claims of user
                 List<Claim> claims = new List<Claim>() {
-                    new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToUpper()),
-                    new Claim(JwtRegisteredClaimNames.UniqueName, currentUser.UserName),
-                    new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
+                    new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
                 };
-                if (!string.IsNullOrEmpty(currentUser.FirstName))
+                if (!string.IsNullOrEmpty(user.FirstName))
                 {
-                    claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, currentUser.FirstName));
+                    claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));
                 }
-                if (!string.IsNullOrEmpty(currentUser.LastName))
+                if (!string.IsNullOrEmpty(user.LastName))
                 {
-                    claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, currentUser.LastName));
+                    claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));
                 }
 
                 // Add roles as claims
-                foreach (var role in currentUser.Roles)
+                foreach (var role in user.Roles)
                 {
                     claims.Add(new Claim(ClaimTypes.Role, role));
                 }
 
                 // Authentication successful => Generate JWT token based on the user's claims
-                string token = this.bll.GenerateJWT(claims);
+                string token = this.GenerateJWT(claims);
 
                 // Return user with token
-                return Ok(new AuthenticatedVM()
-                {
-                    User = mapper.Map<User, UserVM>(currentUser),
-                    Token = token,
-                    RememberMe = model.RememberMe
-                });
+                return new LoginResultVM() {
+                    Authenticated = {
+                        User = mapper.Map<User, UserVM>(currentUser),
+                        Token = token
+                    }
+                };
             }
             //if (result.RequiresTwoFactor)
             //{
