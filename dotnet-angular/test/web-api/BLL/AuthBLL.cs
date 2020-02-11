@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
+using Test.API.ViewModels.Identity;
 
 namespace Test.API.BLL
 {
@@ -26,6 +28,10 @@ namespace Test.API.BLL
         {
             this.configuration = configuration;
             this.logger = logger;
+        }
+
+        public async Task<LoginResultVM> Login(LoginVM loginVM) {
+
         }
 
         public string GenerateJWT(List<Claim> claims)
