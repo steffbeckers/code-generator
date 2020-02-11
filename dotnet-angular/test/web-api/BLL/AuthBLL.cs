@@ -42,12 +42,14 @@ namespace Test.API.BLL
         }
 
         public async Task<LoginResultVM> Login(LoginVM loginVM) {
-            LoginResultVM loginResultVM = new LoginResultVM();
-
             // Validation
             if (loginVM == null) {
                 return null;
             }
+
+            LoginResultVM loginResultVM = new LoginResultVM() {
+                RememberMe = loginVM.RememberMe
+            };
 
             // Retrieve user by email or username
             User user = await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOrUsername);
@@ -60,7 +62,7 @@ namespace Test.API.BLL
             }
 
             // Log the user in by password
-            var result = await signInManager.PasswordSignInAsync(currentUser, model.Password, model.RememberMe, lockoutOnFailure: true);
+            var result = await signInManager.PasswordSignInAsync(currentUser, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
             if (result.Succeeded)
             {
                 logger.LogInformation("User " + currentUser.Id + " logged in.");
