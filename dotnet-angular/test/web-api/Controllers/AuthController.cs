@@ -58,7 +58,7 @@ namespace Test.API.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<AuthenticatedVM>> Login([FromBody] LoginVM model)
+        public async Task<ActionResult<AuthenticatedVM>> Login([FromBody] LoginVM loginVM)
         {
             // Validation
             if (!ModelState.IsValid)
