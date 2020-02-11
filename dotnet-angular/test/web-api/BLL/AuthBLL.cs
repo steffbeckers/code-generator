@@ -11,6 +11,18 @@ namespace Test.API.BLL
 	/// </summary>
     public class AuthBLL
     {
+        private readonly IConfiguration configuration;
+        private readonly ILogger logger;
+
+        public AuthBLL(
+            IConfiguration configuration,
+            ILogger<AuthBLL> logger
+        )
+        {
+            this.configuration = configuration;
+            this.logger = logger;
+        }
+
         private string GenerateJWT(List<Claim> claims)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
