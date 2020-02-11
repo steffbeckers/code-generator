@@ -60,7 +60,7 @@ namespace Test.API.Controllers
 
             LoginResultVM loginResultVM = await this.bll.Login(loginVM);
 
-            // Error
+            // On error
             if (!string.IsNullOrEmpty(loginResultVM.Error)) {
                 return BadRequest(loginResultVM);
             }
