@@ -22,14 +22,15 @@ namespace Test.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
-        private readonly IEmailService emailService;
-
         private readonly IConfiguration configuration;
         private readonly ILogger logger;
         private readonly IMapper mapper;
         private readonly AuthBLL bll;
+
+        // TODO: Move to bll
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+        private readonly IEmailService emailService;
 
         public AuthController(
             UserManager<User> userManager,
@@ -40,13 +41,15 @@ namespace Test.API.Controllers
             IMapper mapper,
             AuthBLL bll)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.emailService = emailService;
             this.configuration = configuration;
             this.logger = logger;
             this.mapper = mapper;
             this.bll = bll;
+
+            // TODO: Move to bll
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.emailService = emailService;
         }
 
         [HttpPost]
