@@ -109,7 +109,7 @@ namespace Test.API.BLL
                 // Return user with token
                 return new LoginResultVM() {
                     Authenticated = {
-                        User = this.mapper.Map<User, UserVM>(user),
+                        User = mapper.Map<User, UserVM>(user),
                         Token = token
                     }
                 };
