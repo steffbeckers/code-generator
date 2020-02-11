@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
+using Test.API.ViewModels.Identity;
 using Test.API.Services;
 using Test.API.ViewModels.Identity;
 
@@ -22,6 +22,9 @@ namespace Test.API.BLL
     {
         private readonly IConfiguration configuration;
         private readonly ILogger logger;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+        private readonly IEmailService emailService;
 
         public AuthBLL(
             IConfiguration configuration,
