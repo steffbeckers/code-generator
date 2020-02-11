@@ -47,6 +47,7 @@ namespace Test.API.BLL
                 return null;
             }
 
+            // Result
             LoginResultVM loginResultVM = new LoginResultVM() {
                 RememberMe = loginVM.RememberMe
             };
@@ -62,8 +63,8 @@ namespace Test.API.BLL
             }
 
             // Log the user in by password
-            var result = await signInManager.PasswordSignInAsync(currentUser, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
-            if (result.Succeeded)
+            SignInResult signInResult = await signInManager.PasswordSignInAsync(currentUser, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
+            if (signInResult.Succeeded)
             {
                 logger.LogInformation("User " + currentUser.Id + " logged in.");
 
