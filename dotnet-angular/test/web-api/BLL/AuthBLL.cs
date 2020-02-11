@@ -50,13 +50,15 @@ namespace Test.API.BLL
             }
 
             // Retrieve user by email or username
-            User currentUser = await userManager.FindByEmailAsync(model.EmailOrUsername) ?? await userManager.FindByNameAsync(model.EmailOrUsername);
+            User user = await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOrUsername);
         
             // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
-            if (currentUser == null)
+            if (user == null)
             {
                 loginResultVM.Errors.Add("invalid");
             }
+
+            return loginResultVM;
         }
 
         public string GenerateJWT(List<Claim> claims)
