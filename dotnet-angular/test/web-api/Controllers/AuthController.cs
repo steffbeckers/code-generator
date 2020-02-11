@@ -58,7 +58,7 @@ namespace Test.API.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<AuthenticatedVM>> Login([FromBody] LoginVM loginVM)
+        public async Task<ActionResult<AuthenticatedVM>> Login([FromBody] LoginVM model)
         {
             // Validation
             if (!ModelState.IsValid)
@@ -66,8 +66,10 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
+            LoginResultVM loginResultVM = await this.bll.Login(loginVM);
+
             // Retrieve user by email or username
-            User currentUser = await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOrUsername);
+            User currentUser = await userManager.FindByEmailAsync(model.EmailOrUsername) ?? await userManager.FindByNameAsync(model.EmailOrUsername);
 
             // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
             if (currentUser == null)
@@ -76,8 +78,8 @@ namespace Test.API.Controllers
             }
 
             // Log the user in by password
-            Microsoft.AspNetCore.Identity.SignInResult signInResult = await signInManager.PasswordSignInAsync(currentUser, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
-            if (signInResult.Succeeded)
+            var result = await signInManager.PasswordSignInAsync(currentUser, model.Password, model.RememberMe, lockoutOnFailure: true);
+            if (result.Succeeded)
             {
                 logger.LogInformation("User " + currentUser.Id + " logged in.");
 
@@ -114,7 +116,7 @@ namespace Test.API.Controllers
                 {
                     User = mapper.Map<User, UserVM>(currentUser),
                     Token = token,
-                    RememberMe = loginVM.RememberMe
+                    RememberMe = model.RememberMe
                 });
             }
             //if (result.RequiresTwoFactor)
@@ -122,7 +124,7 @@ namespace Test.API.Controllers
             //    logger.LogInformation("Requires two factor.");
             //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
             //}
-            if (signInResult.IsLockedOut)
+            if (result.IsLockedOut)
             {
                 // INFO: This is possible to split some code
                 //return RedirectToAction(nameof(Lockout));
@@ -130,7 +132,7 @@ namespace Test.API.Controllers
                 logger.LogWarning("User is locked out.");
                 return Unauthorized("locked-out");
             }
-            if (signInResult.IsNotAllowed)
+            if (result.IsNotAllowed)
             {
                 logger.LogWarning("User is not allowed to login.");
                 return Unauthorized("not-allowed");

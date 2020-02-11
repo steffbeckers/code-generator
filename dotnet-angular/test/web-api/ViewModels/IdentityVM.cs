@@ -31,7 +31,7 @@ namespace Test.API.ViewModels.Identity
         public string[] Errors { get; set; }
     }
 
-    public class AuthenticatedVM
+	public class AuthenticatedVM
     {
         public UserVM User { get; set; }
         public string Token { get; set; }
