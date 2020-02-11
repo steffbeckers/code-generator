@@ -33,7 +33,7 @@ namespace Test.API.ViewModels.Identity
 
         public AuthenticatedVM Authenticated { get; set; }
         public bool RememberMe { get; set; }
-        public IEnumerable<string> Errors { get; set; }
+        public IList<string> Errors { get; set; }
     }
 
 	public class AuthenticatedVM
