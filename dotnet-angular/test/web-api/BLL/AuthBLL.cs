@@ -132,7 +132,7 @@ namespace Test.API.BLL
             }
             else
             {
-                logger.LogWarning("Invalid login");
+                logger.LogWarning("User login is invalid", user);
 
                 loginResultVM.Error = "invalid";
             }
