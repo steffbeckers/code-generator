@@ -42,6 +42,8 @@ namespace Test.API.BLL
         }
 
         public async Task<LoginResultVM> Login(LoginVM loginVM) {
+            LoginResultVM loginResultVM = new LoginResultVM();
+
             // Validation
             if (loginVM == null) {
                 return null;
@@ -49,6 +51,12 @@ namespace Test.API.BLL
 
             // Retrieve user by email or username
             User currentUser = await userManager.FindByEmailAsync(model.EmailOrUsername) ?? await userManager.FindByNameAsync(model.EmailOrUsername);
+        
+            // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
+            if (currentUser == null)
+            {
+                loginResultVM.Errors.Add("invalid");
+            }
         }
 
         public string GenerateJWT(List<Claim> claims)

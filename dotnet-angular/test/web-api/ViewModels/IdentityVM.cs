@@ -26,9 +26,14 @@ namespace Test.API.ViewModels.Identity
 
     public class LoginResultVM
     {
+        public LoginResultVM()
+        {
+            this.Errors = new List<string>();
+        }
+
         public AuthenticatedVM Authenticated { get; set; }
         public bool RememberMe { get; set; }
-        public string[] Errors { get; set; }
+        public IEnumerable<string> Errors { get; set; }
     }
 
 	public class AuthenticatedVM
