@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
+using Test.API.Services;
 using Test.API.ViewModels.Identity;
 
 namespace Test.API.BLL
@@ -23,15 +25,21 @@ namespace Test.API.BLL
 
         public AuthBLL(
             IConfiguration configuration,
-            ILogger<AuthBLL> logger
+            ILogger<AuthBLL> logger,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IEmailService emailService
         )
         {
             this.configuration = configuration;
             this.logger = logger;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.emailService = emailService;
         }
 
         public async Task<LoginResultVM> Login(LoginVM loginVM) {
-
+            
         }
 
         public string GenerateJWT(List<Claim> claims)

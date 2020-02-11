@@ -36,9 +36,6 @@ namespace Test.API.Controllers
 		/// The constructor of the Auth controller.
 		/// </summary>
         public AuthController(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            IEmailService emailService,
             IConfiguration configuration,
             ILogger<AuthController> logger,
             IMapper mapper,
@@ -48,11 +45,6 @@ namespace Test.API.Controllers
             this.logger = logger;
             this.mapper = mapper;
             this.bll = bll;
-
-            // TODO: Move to bll
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.emailService = emailService;
         }
 
         [HttpPost]
