@@ -58,88 +58,88 @@ namespace Test.API.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginVM model)
+        public async Task<ActionResult<AuthenticatedVM>> Login([FromBody] LoginVM loginVM)
         {
-            if (ModelState.IsValid)
+            // Validation
+            if (!ModelState.IsValid)
             {
-                // Retrieve user by email or username
-                User currentUser = await userManager.FindByEmailAsync(model.EmailOrUsername) ?? await userManager.FindByNameAsync(model.EmailOrUsername);
-
-                // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
-                if (currentUser == null)
-                {
-                    return Unauthorized("invalid");
-                }
-
-                // Log the user in by password
-                var result = await signInManager.PasswordSignInAsync(currentUser, model.Password, model.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
-                {
-                    logger.LogInformation("User " + currentUser.Id + " logged in.");
-
-                    // Retrieve roles of user
-                    currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
-
-                    // Set claims of user
-                    List<Claim> claims = new List<Claim>() {
-                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToUpper()),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, currentUser.UserName),
-                        new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
-                    };
-                    if (!string.IsNullOrEmpty(currentUser.FirstName))
-                    {
-                        claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, currentUser.FirstName));
-                    }
-                    if (!string.IsNullOrEmpty(currentUser.LastName))
-                    {
-                        claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, currentUser.LastName));
-                    }
-
-                    // Add roles as claims
-                    foreach (var role in currentUser.Roles)
-                    {
-                        claims.Add(new Claim(ClaimTypes.Role, role));
-                    }
-
-                    // Authentication successful => Generate JWT token based on the user's claims
-                    string token = this.bll.GenerateJWT(claims);
-
-                    // Return user with token
-                    return Ok(new AuthenticatedVM()
-                    {
-                        User = mapper.Map<User, UserVM>(currentUser),
-                        Token = token,
-                        RememberMe = model.RememberMe
-                    });
-                }
-                //if (result.RequiresTwoFactor)
-                //{
-                //    logger.LogInformation("Requires two factor.");
-                //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                //}
-                if (result.IsLockedOut)
-                {
-                    // INFO: This is possible to split some code
-                    //return RedirectToAction(nameof(Lockout));
-
-                    logger.LogWarning("User is locked out.");
-                    return Unauthorized("locked-out");
-                }
-                if (result.IsNotAllowed)
-                {
-                    logger.LogWarning("User is not allowed to login.");
-                    return Unauthorized("not-allowed");
-                }
-                else
-                {
-                    logger.LogWarning("Invalid login attempt.");
-                    return Unauthorized("invalid");
-                }
+                return BadRequest(ModelState);
             }
 
-            // If we got this far, something failed
-            return BadRequest();
+            // Retrieve user by email or username
+            User currentUser = await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOrUsername);
+
+            // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
+            if (currentUser == null)
+            {
+                return Unauthorized("invalid");
+            }
+
+            // Log the user in by password
+            Microsoft.AspNetCore.Identity.SignInResult signInResult = await signInManager.PasswordSignInAsync(currentUser, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
+            if (signInResult.Succeeded)
+            {
+                logger.LogInformation("User " + currentUser.Id + " logged in.");
+
+                // Retrieve roles of user
+                currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
+
+                // Set claims of user
+                List<Claim> claims = new List<Claim>() {
+                    new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToUpper()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, currentUser.UserName),
+                    new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
+                };
+                if (!string.IsNullOrEmpty(currentUser.FirstName))
+                {
+                    claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, currentUser.FirstName));
+                }
+                if (!string.IsNullOrEmpty(currentUser.LastName))
+                {
+                    claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, currentUser.LastName));
+                }
+
+                // Add roles as claims
+                foreach (var role in currentUser.Roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
+
+                // Authentication successful => Generate JWT token based on the user's claims
+                string token = this.bll.GenerateJWT(claims);
+
+                // Return user with token
+                return Ok(new AuthenticatedVM()
+                {
+                    User = mapper.Map<User, UserVM>(currentUser),
+                    Token = token,
+                    RememberMe = loginVM.RememberMe
+                });
+            }
+            //if (result.RequiresTwoFactor)
+            //{
+            //    logger.LogInformation("Requires two factor.");
+            //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+            //}
+            if (signInResult.IsLockedOut)
+            {
+                // INFO: This is possible to split some code
+                //return RedirectToAction(nameof(Lockout));
+
+                logger.LogWarning("User is locked out.");
+                return Unauthorized("locked-out");
+            }
+            if (signInResult.IsNotAllowed)
+            {
+                logger.LogWarning("User is not allowed to login.");
+                return Unauthorized("not-allowed");
+            }
+            else
+            {
+                logger.LogWarning("Invalid login attempt.");
+                return Unauthorized("invalid");
+            }
         }
 
         [HttpGet]
