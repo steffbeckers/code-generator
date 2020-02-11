@@ -42,7 +42,13 @@ namespace Test.API.BLL
         }
 
         public async Task<LoginResultVM> Login(LoginVM loginVM) {
-            
+            // Validation
+            if (loginVM == null) {
+                return null;
+            }
+
+            // Retrieve user by email or username
+            User currentUser = await userManager.FindByEmailAsync(model.EmailOrUsername) ?? await userManager.FindByNameAsync(model.EmailOrUsername);
         }
 
         public string GenerateJWT(List<Claim> claims)
