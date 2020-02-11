@@ -56,7 +56,10 @@ namespace Test.API.BLL
             if (user == null)
             {
                 loginResultVM.Errors.Add("invalid");
+                return loginResultVM;
             }
+
+            
 
             return loginResultVM;
         }
