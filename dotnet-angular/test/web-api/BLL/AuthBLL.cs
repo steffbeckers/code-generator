@@ -68,6 +68,7 @@ namespace Test.API.BLL
             // Log the user in by password
             SignInResult signInResult = await signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
             
+            // Success
             if (signInResult.Succeeded)
             {
                 // Authenticated by password
@@ -109,28 +110,31 @@ namespace Test.API.BLL
                     }
                 };
             }
+
+            // Failed
             //if (signInResult.RequiresTwoFactor)
             //{
-            //    logger.LogInformation("Requires two factor.");
+            //    logger.LogInformation("User requires two factor auth", user);
+            //
             //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
             //}
             if (signInResult.IsLockedOut)
             {
-                // INFO: This is possible to split some code
-                //return RedirectToAction(nameof(Lockout));
-
-                logger.LogWarning("User is locked out.");
-                return Unauthorized("locked-out");
+                logger.LogWarning("User is locked out", user);
+                
+                loginResultVM.Error = "locked-out";
             }
-            else if (signInResult.IsNotAllowed)
+            if (signInResult.IsNotAllowed)
             {
-                logger.LogWarning("User is not allowed to login.");
-                return Unauthorized("not-allowed");
+                logger.LogWarning("User is not allowed to login", user);
+
+                loginResultVM.Error = "not-allowed";
             }
             else
             {
-                logger.LogWarning("Invalid login attempt.");
-                return Unauthorized("invalid");
+                logger.LogWarning("Invalid login");
+
+                loginResultVM.Error = "invalid";
             }
 
             return loginResultVM;
