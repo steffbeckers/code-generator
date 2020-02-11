@@ -69,7 +69,7 @@ namespace Test.API.BLL
             {
                 // Authenticated by password
 
-                logger.LogInformation("User login", user);
+                logger.LogInformation("User logged in", user);
 
                 // Retrieve roles of user
                 currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
