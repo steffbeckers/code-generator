@@ -13,6 +13,7 @@ using Test.API.ViewModels.Identity;
 using Test.API.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Globalization;
+using AutoMapper;
 
 namespace Test.API.BLL
 {
