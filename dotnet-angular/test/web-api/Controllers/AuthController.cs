@@ -66,11 +66,6 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
- 
-
-
-
-
             LoginResultVM loginResultVM = await this.bll.Login(loginVM);
 
             // Retrieve user by email or username
