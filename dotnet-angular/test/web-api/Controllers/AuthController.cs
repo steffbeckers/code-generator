@@ -109,7 +109,7 @@ namespace Test.API.Controllers
                     }
 
                     // Authentication successful => Generate JWT token based on the user's claims
-                    string token = GenerateJWT(claims);
+                    string token = this.bll.GenerateJWT(claims);
 
                     // Return user with token
                     return Ok(new AuthenticatedVM()
