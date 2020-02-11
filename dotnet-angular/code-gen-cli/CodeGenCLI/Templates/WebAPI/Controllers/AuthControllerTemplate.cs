@@ -57,177 +57,127 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-
-namespace ");
+using ");
             
-            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Controllers\AuthControllerTemplate.tt"
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Controllers\AuthControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".BLL;\r\n\r\nnamespace ");
+            
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Controllers\AuthControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".Controllers\r\n{\r\n    [Authorize]\r\n    [Route(\"api/[controller]\")]\r\n    [ApiContro" +
                     "ller]\r\n    public class AuthController : ControllerBase\r\n    {\r\n        private " +
-                    "readonly UserManager<User> userManager;\r\n        private readonly SignInManager<" +
-                    "User> signInManager;\r\n        private readonly IEmailService emailService;\r\n    " +
-                    "    private readonly ILogger logger;\r\n        private readonly IConfiguration co" +
-                    "nfiguration;\r\n        private readonly IMapper mapper;\r\n\r\n        public AuthCon" +
-                    "troller(\r\n            UserManager<User> userManager,\r\n            SignInManager<" +
-                    "User> signInManager,\r\n            IEmailService emailService,\r\n            ILogg" +
-                    "er<AuthController> logger,\r\n            IConfiguration configuration,\r\n         " +
-                    "   IMapper mapper)\r\n        {\r\n            this.userManager = userManager;\r\n    " +
-                    "        this.signInManager = signInManager;\r\n            this.emailService = ema" +
-                    "ilService;\r\n            this.logger = logger;\r\n            this.configuration = " +
-                    "configuration;\r\n            this.mapper = mapper;\r\n        }\r\n\r\n        // TODO:" +
-                    " Move this function to another layer?\r\n        private string GenerateJWT(List<C" +
-                    "laim> claims)\r\n        {\r\n            JwtSecurityTokenHandler tokenHandler = new" +
-                    " JwtSecurityTokenHandler();\r\n            var key = Encoding.ASCII.GetBytes(confi" +
-                    "guration.GetSection(\"Authentication\").GetValue<string>(\"Secret\"));\r\n            " +
-                    "SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor\r\n         " +
-                    "   {\r\n                Subject = new ClaimsIdentity(claims),\r\n                Exp" +
-                    "ires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection(\"Authent" +
-                    "ication\").GetValue<string>(\"TokenExpiresInMinutes\"))),\r\n                SigningC" +
-                    "redentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgor" +
-                    "ithms.HmacSha256Signature)\r\n            };\r\n\r\n            return tokenHandler.Wr" +
-                    "iteToken(tokenHandler.CreateToken(tokenDescriptor));\r\n        }\r\n\r\n        [Http" +
-                    "Post]\r\n        [Route(\"login\")]\r\n        [AllowAnonymous]\r\n        public async " +
-                    "Task<IActionResult> Login([FromBody] LoginVM model)\r\n        {\r\n            if (" +
-                    "ModelState.IsValid)\r\n            {\r\n                // Retrieve user by email or" +
-                    " username\r\n                User currentUser = await userManager.FindByEmailAsync" +
-                    "(model.EmailOrUsername) ?? await userManager.FindByNameAsync(model.EmailOrUserna" +
-                    "me);\r\n\r\n                // If no user is found by email or username, just return" +
-                    " unauthorized and give nothing away of existing user info\r\n                if (c" +
-                    "urrentUser == null)\r\n                {\r\n                    return Unauthorized(" +
-                    "\"invalid\");\r\n                }\r\n\r\n                // Log the user in by password" +
-                    "\r\n                var result = await signInManager.PasswordSignInAsync(currentUs" +
-                    "er, model.Password, model.RememberMe, lockoutOnFailure: true);\r\n                " +
-                    "if (result.Succeeded)\r\n                {\r\n                    logger.LogInformat" +
-                    "ion(\"User \" + currentUser.Id + \" logged in.\");\r\n\r\n                    // Retriev" +
-                    "e roles of user\r\n                    currentUser.Roles = (List<string>)await use" +
-                    "rManager.GetRolesAsync(currentUser);\r\n\r\n                    // Set claims of use" +
-                    "r\r\n                    List<Claim> claims = new List<Claim>() {\r\n               " +
-                    "         new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToU" +
-                    "pper()),\r\n                        new Claim(JwtRegisteredClaimNames.UniqueName, " +
-                    "currentUser.UserName),\r\n                        new Claim(JwtRegisteredClaimName" +
-                    "s.Email, currentUser.Email),\r\n                        new Claim(JwtRegisteredCla" +
-                    "imNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))\r\n            " +
-                    "        };\r\n                    if (!string.IsNullOrEmpty(currentUser.FirstName)" +
-                    ")\r\n                    {\r\n                        claims.Add(new Claim(JwtRegist" +
-                    "eredClaimNames.GivenName, currentUser.FirstName));\r\n                    }\r\n     " +
-                    "               if (!string.IsNullOrEmpty(currentUser.LastName))\r\n               " +
-                    "     {\r\n                        claims.Add(new Claim(JwtRegisteredClaimNames.Fam" +
-                    "ilyName, currentUser.LastName));\r\n                    }\r\n\r\n                    /" +
-                    "/ Add roles as claims\r\n                    foreach (var role in currentUser.Role" +
-                    "s)\r\n                    {\r\n                        claims.Add(new Claim(ClaimTyp" +
-                    "es.Role, role));\r\n                    }\r\n\r\n                    // Authentication" +
-                    " successful => Generate JWT token based on the user\'s claims\r\n                  " +
-                    "  string token = GenerateJWT(claims);\r\n\r\n                    // Return user with" +
-                    " token\r\n                    return Ok(new AuthenticatedVM()\r\n                   " +
-                    " {\r\n                        User = mapper.Map<User, UserVM>(currentUser),\r\n     " +
-                    "                   Token = token,\r\n                        RememberMe = model.Re" +
-                    "memberMe\r\n                    });\r\n                }\r\n                //if (resu" +
-                    "lt.RequiresTwoFactor)\r\n                //{\r\n                //    logger.LogInfo" +
-                    "rmation(\"Requires two factor.\");\r\n                //    return RedirectToAction(" +
-                    "nameof(LoginWith2fa), new { returnUrl, model.RememberMe });\r\n                //}" +
-                    "\r\n                if (result.IsLockedOut)\r\n                {\r\n                  " +
-                    "  // INFO: This is possible to split some code\r\n                    //return Red" +
-                    "irectToAction(nameof(Lockout));\r\n\r\n                    logger.LogWarning(\"User i" +
-                    "s locked out.\");\r\n                    return Unauthorized(\"locked-out\");\r\n      " +
-                    "          }\r\n                if (result.IsNotAllowed)\r\n                {\r\n      " +
-                    "              logger.LogWarning(\"User is not allowed to login.\");\r\n             " +
-                    "       return Unauthorized(\"not-allowed\");\r\n                }\r\n                e" +
-                    "lse\r\n                {\r\n                    logger.LogWarning(\"Invalid login att" +
-                    "empt.\");\r\n                    return Unauthorized(\"invalid\");\r\n                }" +
-                    "\r\n            }\r\n\r\n            // If we got this far, something failed\r\n        " +
-                    "    return BadRequest();\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"me\")]\r" +
-                    "\n        public async Task<IActionResult> Me()\r\n        {\r\n            User curr" +
-                    "entUser = await userManager.GetUserAsync(User);\r\n\r\n            // Retrieve roles" +
-                    " of user\r\n            currentUser.Roles = (List<string>)await userManager.GetRol" +
-                    "esAsync(currentUser);\r\n\r\n            return Ok(mapper.Map<User, UserVM>(currentU" +
-                    "ser));\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"register\")]\r\n        [A" +
-                    "llowAnonymous]\r\n        public async Task<IActionResult> Register([FromBody] Reg" +
-                    "isterVM model)\r\n        {\r\n            if (ModelState.IsValid)\r\n            {\r\n " +
-                    "               var user = new User { UserName = model.Username, Email = model.Em" +
-                    "ail };\r\n\r\n                var result = await userManager.CreateAsync(user, model" +
-                    ".Password);\r\n\r\n                if (result.Succeeded)\r\n                {\r\n       " +
-                    "             logger.LogInformation(\"User created a new account with password.\");" +
-                    "\r\n\r\n                    var code = await userManager.GenerateEmailConfirmationTo" +
-                    "kenAsync(user);\r\n                    var callbackUrl = Url.EmailConfirmationLink" +
-                    "(user.Id.ToString().ToUpper(), code, Request.Scheme);\r\n                    await" +
-                    " emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);\r\n\r\n         " +
-                    "           // When self registering and login at the same time\r\n                " +
-                    "    // Need to add/refactor JWT logic if adding\r\n                    //await sig" +
-                    "nInManager.SignInAsync(user, isPersistent: false);\r\n\r\n                    return" +
-                    " Ok();\r\n                }\r\n\r\n                AddErrors(result);\r\n            }\r\n" +
-                    "\r\n            // If we got this far, something failed\r\n            return BadReq" +
-                    "uest(ModelState);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"logout\")]\r\n  " +
-                    "      public async Task<IActionResult> Logout()\r\n        {\r\n            await si" +
-                    "gnInManager.SignOutAsync();\r\n\r\n            return Ok();\r\n        }\r\n\r\n        [H" +
-                    "ttpGet]\r\n        [Route(\"confirm-email\")]\r\n        [AllowAnonymous]\r\n        pub" +
-                    "lic async Task<IActionResult> ConfirmEmail(string userId, string code)\r\n        " +
-                    "{\r\n            if (userId == null || code == null)\r\n            {\r\n             " +
-                    "   return BadRequest(ModelState);\r\n            }\r\n\r\n            var user = await" +
-                    " userManager.FindByIdAsync(userId);\r\n            if (user == null)\r\n            " +
-                    "{\r\n                throw new ApplicationException($\"Unable to load user with ID " +
-                    "\'{userId}\'.\");\r\n            }\r\n\r\n            var result = await userManager.Conf" +
-                    "irmEmailAsync(user, code);\r\n            if (result.Succeeded)\r\n            {\r\n  " +
-                    "              return Ok();\r\n            }\r\n\r\n            AddErrors(result);\r\n\r\n " +
-                    "           // If we got this far, something failed\r\n            return BadReques" +
-                    "t(ModelState);\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"forgot-password" +
-                    "\")]\r\n        [AllowAnonymous]\r\n        public async Task<IActionResult> ForgotPa" +
-                    "ssword([FromBody] ForgotPasswordVM model)\r\n        {\r\n            if (ModelState" +
-                    ".IsValid)\r\n            {\r\n                var user = await userManager.FindByEma" +
-                    "ilAsync(model.Email);\r\n                if (user == null)\r\n                {\r\n   " +
+                    "readonly IConfiguration configuration;\r\n        private readonly ILogger logger;" +
+                    "\r\n        private readonly IMapper mapper;\r\n        private readonly AuthBLL bll" +
+                    ";\r\n\r\n        // TODO: Move to bll\r\n        private readonly UserManager<User> us" +
+                    "erManager;\r\n        private readonly SignInManager<User> signInManager;\r\n       " +
+                    " private readonly IEmailService emailService;\r\n\r\n        /// <summary>\r\n\t\t/// Th" +
+                    "e constructor of the Auth controller.\r\n\t\t/// </summary>\r\n        public AuthCont" +
+                    "roller(\r\n            IConfiguration configuration,\r\n            ILogger<AuthCont" +
+                    "roller> logger,\r\n            IMapper mapper,\r\n            AuthBLL bll)\r\n        " +
+                    "{\r\n            this.configuration = configuration;\r\n            this.logger = lo" +
+                    "gger;\r\n            this.mapper = mapper;\r\n            this.bll = bll;\r\n        }" +
+                    "\r\n\r\n        [HttpPost]\r\n        [Route(\"login\")]\r\n        [AllowAnonymous]\r\n    " +
+                    "    public async Task<ActionResult<LoginResultVM>> Login([FromBody] LoginVM logi" +
+                    "nVM)\r\n        {\r\n            // Validation\r\n            if (!ModelState.IsValid)" +
+                    "\r\n            {\r\n                return BadRequest(ModelState);\r\n            }\r\n" +
+                    "\r\n            LoginResultVM loginResultVM = await this.bll.Login(loginVM);\r\n\r\n  " +
+                    "          // On error\r\n            if (!string.IsNullOrEmpty(loginResultVM.Error" +
+                    ")) {\r\n                return BadRequest(loginResultVM);\r\n            }\r\n\r\n      " +
+                    "      return Ok(loginResultVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(" +
+                    "\"me\")]\r\n        public async Task<IActionResult> Me()\r\n        {\r\n            Us" +
+                    "er currentUser = await userManager.GetUserAsync(User);\r\n\r\n            // Retriev" +
+                    "e roles of user\r\n            currentUser.Roles = (List<string>)await userManager" +
+                    ".GetRolesAsync(currentUser);\r\n\r\n            return Ok(mapper.Map<User, UserVM>(c" +
+                    "urrentUser));\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"register\")]\r\n   " +
+                    "     [AllowAnonymous]\r\n        public async Task<IActionResult> Register([FromBo" +
+                    "dy] RegisterVM model)\r\n        {\r\n            if (ModelState.IsValid)\r\n         " +
+                    "   {\r\n                var user = new User { UserName = model.Username, Email = m" +
+                    "odel.Email };\r\n\r\n                var result = await userManager.CreateAsync(user" +
+                    ", model.Password);\r\n\r\n                if (result.Succeeded)\r\n                {\r\n" +
+                    "                    logger.LogInformation(\"User created a new account with passw" +
+                    "ord.\");\r\n\r\n                    var code = await userManager.GenerateEmailConfirm" +
+                    "ationTokenAsync(user);\r\n                    var callbackUrl = Url.EmailConfirmat" +
+                    "ionLink(user.Id.ToString().ToUpper(), code, Request.Scheme);\r\n                  " +
+                    "  await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);\r\n\r\n  " +
+                    "                  // When self registering and login at the same time\r\n         " +
+                    "           // Need to add/refactor JWT logic if adding\r\n                    //aw" +
+                    "ait signInManager.SignInAsync(user, isPersistent: false);\r\n\r\n                   " +
+                    " return Ok();\r\n                }\r\n\r\n                AddErrors(result);\r\n        " +
+                    "    }\r\n\r\n            // If we got this far, something failed\r\n            return" +
+                    " BadRequest(ModelState);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"logout" +
+                    "\")]\r\n        public async Task<IActionResult> Logout()\r\n        {\r\n            a" +
+                    "wait signInManager.SignOutAsync();\r\n\r\n            return Ok();\r\n        }\r\n\r\n   " +
+                    "     [HttpGet]\r\n        [Route(\"confirm-email\")]\r\n        [AllowAnonymous]\r\n    " +
+                    "    public async Task<IActionResult> ConfirmEmail(string userId, string code)\r\n " +
+                    "       {\r\n            if (userId == null || code == null)\r\n            {\r\n      " +
+                    "          return BadRequest(ModelState);\r\n            }\r\n\r\n            var user " +
+                    "= await userManager.FindByIdAsync(userId);\r\n            if (user == null)\r\n     " +
+                    "       {\r\n                throw new ApplicationException($\"Unable to load user w" +
+                    "ith ID \'{userId}\'.\");\r\n            }\r\n\r\n            var result = await userManag" +
+                    "er.ConfirmEmailAsync(user, code);\r\n            if (result.Succeeded)\r\n          " +
+                    "  {\r\n                return Ok();\r\n            }\r\n\r\n            AddErrors(result" +
+                    ");\r\n\r\n            // If we got this far, something failed\r\n            return Ba" +
+                    "dRequest(ModelState);\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"forgot-p" +
+                    "assword\")]\r\n        [AllowAnonymous]\r\n        public async Task<IActionResult> F" +
+                    "orgotPassword([FromBody] ForgotPasswordVM model)\r\n        {\r\n            if (Mod" +
+                    "elState.IsValid)\r\n            {\r\n                var user = await userManager.Fi" +
+                    "ndByEmailAsync(model.Email);\r\n                if (user == null)\r\n               " +
+                    " {\r\n                    //// Don\'t reveal that the user does not exist\r\n        " +
+                    "            //return Ok();\r\n\r\n                    // For CRM purposes\r\n         " +
+                    "           return NotFound(\"email-not-found\");\r\n                }\r\n\r\n           " +
+                    "     // Check if email is confirmed, if required in Startup settings\r\n          " +
+                    "      // In startup: options.SignIn.RequireConfirmedEmail = true;\r\n             " +
+                    "   if (!(await userManager.IsEmailConfirmedAsync(user)))\r\n                {\r\n   " +
                     "                 //// Don\'t reveal that the user does not exist\r\n               " +
-                    "     //return Ok();\r\n\r\n                    // For CRM purposes\r\n                " +
-                    "    return NotFound(\"email-not-found\");\r\n                }\r\n\r\n                //" +
-                    " Check if email is confirmed, if required in Startup settings\r\n                /" +
-                    "/ In startup: options.SignIn.RequireConfirmedEmail = true;\r\n                if (" +
-                    "!(await userManager.IsEmailConfirmedAsync(user)))\r\n                {\r\n          " +
-                    "          //// Don\'t reveal that the user does not exist\r\n                    //" +
-                    "return Ok();\r\n\r\n                    // OR\r\n\r\n                    return NotFound" +
-                    "(\"email-not-confirmed\");\r\n                }\r\n\r\n                // For more infor" +
-                    "mation on how to enable account confirmation and password reset please\r\n        " +
-                    "        // visit https://go.microsoft.com/fwlink/?LinkID=532713\r\n\r\n             " +
-                    "   var code = await userManager.GeneratePasswordResetTokenAsync(user);\r\n\r\n      " +
-                    "          //var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Reque" +
-                    "st.Scheme);\r\n                var callbackUrl = configuration.GetSection(\"EmailSe" +
-                    "ttings\").GetValue<string>(\"PasswordResetURL\");\r\n                callbackUrl = ca" +
-                    "llbackUrl.Replace(\"{{userId}}\", user.Id.ToString().ToLower());\r\n                " +
-                    "callbackUrl = callbackUrl.Replace(\"{{userEmail}}\", user.Email.ToString().ToLower" +
-                    "());\r\n                callbackUrl = callbackUrl.Replace(\"{{code}}\", Uri.EscapeDa" +
-                    "taString(code));\r\n\r\n                await emailService.SendEmailAsync(model.Emai" +
-                    "l, \"Reset Password\",\r\n                   $\"Please reset your password by clickin" +
-                    "g here: <a href=\'{callbackUrl}\'>link</a>\");\r\n\r\n                return Ok();\r\n   " +
-                    "         }\r\n\r\n            // If we got this far, something failed\r\n            r" +
-                    "eturn BadRequest(ModelState);\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"" +
-                    "reset-password\")]\r\n        [AllowAnonymous]\r\n        public async Task<IActionRe" +
-                    "sult> ResetPassword([FromBody] ResetPasswordVM model)\r\n        {\r\n            if" +
-                    " (ModelState.IsValid)\r\n            {\r\n                var user = await userManag" +
-                    "er.FindByIdAsync(model.Id);\r\n                if (user == null)\r\n                " +
-                    "{\r\n                    //return BadRequest();\r\n\r\n                    // OR\r\n\r\n  " +
-                    "                  // For CRM purposes\r\n                    return NotFound(\"user" +
-                    "-not-found\");\r\n                }\r\n                if (user.Email != model.Email)" +
-                    "\r\n                {\r\n                    //return BadRequest();\r\n\r\n             " +
-                    "       // OR\r\n\r\n                    // For CRM purposes\r\n                    ret" +
-                    "urn BadRequest(\"email-does-not-match\");\r\n                }\r\n\r\n                va" +
-                    "r result = await userManager.ResetPasswordAsync(user, model.Code, model.Password" +
-                    ");\r\n                if (result.Succeeded)\r\n                {\r\n                  " +
-                    "  // TODO: Maybe log the user in automatically? Need to add/refactor JWT logic i" +
-                    "f adding\r\n                    //await signInManager.SignInAsync(user, isPersiste" +
-                    "nt: false);\r\n\r\n                    return Ok();\r\n                }\r\n\r\n          " +
-                    "      AddErrors(result);\r\n            }\r\n\r\n            return BadRequest(ModelSt" +
-                    "ate);\r\n        }\r\n\r\n        #region Helpers\r\n\r\n        private void AddErrors(Id" +
-                    "entityResult result)\r\n        {\r\n            foreach (var error in result.Errors" +
-                    ")\r\n            {\r\n                ModelState.AddModelError(string.Empty, error.D" +
-                    "escription);\r\n            }\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
+                    "     //return Ok();\r\n\r\n                    // OR\r\n\r\n                    return N" +
+                    "otFound(\"email-not-confirmed\");\r\n                }\r\n\r\n                // For mor" +
+                    "e information on how to enable account confirmation and password reset please\r\n " +
+                    "               // visit https://go.microsoft.com/fwlink/?LinkID=532713\r\n\r\n      " +
+                    "          var code = await userManager.GeneratePasswordResetTokenAsync(user);\r\n\r" +
+                    "\n                //var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code" +
+                    ", Request.Scheme);\r\n                var callbackUrl = configuration.GetSection(\"" +
+                    "EmailSettings\").GetValue<string>(\"PasswordResetURL\");\r\n                callbackU" +
+                    "rl = callbackUrl.Replace(\"{{userId}}\", user.Id.ToString().ToLower());\r\n         " +
+                    "       callbackUrl = callbackUrl.Replace(\"{{userEmail}}\", user.Email.ToString()." +
+                    "ToLower());\r\n                callbackUrl = callbackUrl.Replace(\"{{code}}\", Uri.E" +
+                    "scapeDataString(code));\r\n\r\n                await emailService.SendEmailAsync(mod" +
+                    "el.Email, \"Reset Password\",\r\n                   $\"Please reset your password by " +
+                    "clicking here: <a href=\'{callbackUrl}\'>link</a>\");\r\n\r\n                return Ok(" +
+                    ");\r\n            }\r\n\r\n            // If we got this far, something failed\r\n      " +
+                    "      return BadRequest(ModelState);\r\n        }\r\n\r\n        [HttpPost]\r\n        [" +
+                    "Route(\"reset-password\")]\r\n        [AllowAnonymous]\r\n        public async Task<IA" +
+                    "ctionResult> ResetPassword([FromBody] ResetPasswordVM model)\r\n        {\r\n       " +
+                    "     if (ModelState.IsValid)\r\n            {\r\n                var user = await us" +
+                    "erManager.FindByIdAsync(model.Id);\r\n                if (user == null)\r\n         " +
+                    "       {\r\n                    //return BadRequest();\r\n\r\n                    // O" +
+                    "R\r\n\r\n                    // For CRM purposes\r\n                    return NotFoun" +
+                    "d(\"user-not-found\");\r\n                }\r\n                if (user.Email != model" +
+                    ".Email)\r\n                {\r\n                    //return BadRequest();\r\n\r\n      " +
+                    "              // OR\r\n\r\n                    // For CRM purposes\r\n                " +
+                    "    return BadRequest(\"email-does-not-match\");\r\n                }\r\n\r\n           " +
+                    "     var result = await userManager.ResetPasswordAsync(user, model.Code, model.P" +
+                    "assword);\r\n                if (result.Succeeded)\r\n                {\r\n           " +
+                    "         // TODO: Maybe log the user in automatically? Need to add/refactor JWT " +
+                    "logic if adding\r\n                    //await signInManager.SignInAsync(user, isP" +
+                    "ersistent: false);\r\n\r\n                    return Ok();\r\n                }\r\n\r\n   " +
+                    "             AddErrors(result);\r\n            }\r\n\r\n            return BadRequest(" +
+                    "ModelState);\r\n        }\r\n\r\n        #region Helpers\r\n\r\n        private void AddEr" +
+                    "rors(IdentityResult result)\r\n        {\r\n            foreach (var error in result" +
+                    ".Errors)\r\n            {\r\n                ModelState.AddModelError(string.Empty, " +
+                    "error.Description);\r\n            }\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

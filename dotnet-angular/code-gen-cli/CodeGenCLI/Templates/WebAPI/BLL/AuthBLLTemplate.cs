@@ -7,20 +7,22 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace CodeGenCLI.Templates.WebAPI.ViewModels
+namespace CodeGenCLI.Templates.WebAPI.BLL
 {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using CodeGenCLI.CodeGenClasses;
+    using CodeGenCLI.Extensions;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\IdentityViewModelTemplate.tt"
+    #line 1 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class IdentityViewModelTemplate : IdentityViewModelTemplateBase
+    public partial class AuthBLLTemplate : AuthBLLTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,44 +30,110 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.ComponentModel.Dat" +
-                    "aAnnotations;\r\n\r\nnamespace ");
+            this.Write(@"using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using ");
             
-            #line 10 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\IdentityViewModelTemplate.tt"
+            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".ViewModels.Identity\r\n{\r\n    public class UserVM\r\n    {\r\n        public Guid Id {" +
-                    " get; set; }\r\n        public string Username { get; set; }\r\n        public strin" +
-                    "g Email { get; set; }\r\n        public string FirstName { get; set; }\r\n        pu" +
-                    "blic string LastName { get; set; }\r\n        public string[] Roles { get; set; }\r" +
-                    "\n    }\r\n\r\n    public class LoginVM\r\n    {\r\n        [Required]\r\n        public st" +
-                    "ring EmailOrUsername { get; set; }\r\n\r\n        [Required]\r\n        public string " +
-                    "Password { get; set; }\r\n        public bool RememberMe { get; set; }\r\n    }\r\n\r\n " +
-                    "   public class LoginResultVM\r\n    {\r\n        public AuthenticatedVM Authenticat" +
-                    "ed { get; set; }\r\n        public bool RememberMe { get; set; }\r\n        public s" +
-                    "tring Error { get; set; }\r\n    }\r\n\r\n\tpublic class AuthenticatedVM\r\n    {\r\n      " +
-                    "  public UserVM User { get; set; }\r\n        public string Token { get; set; }\r\n " +
-                    "   }\r\n\r\n    public class RegisterVM\r\n    {\r\n        [Required]\r\n        public s" +
-                    "tring Username { get; set; }\r\n\r\n        [Required]\r\n        [EmailAddress]\r\n    " +
-                    "    public string Email { get; set; }\r\n\r\n        [Required]\r\n        [StringLeng" +
-                    "th(100, ErrorMessage = \"The {0} must be at least {2} and at max {1} characters l" +
-                    "ong.\", MinimumLength = 10)]\r\n        [DataType(DataType.Password)]\r\n        publ" +
-                    "ic string Password { get; set; }\r\n\r\n        [DataType(DataType.Password)]\r\n     " +
-                    "   [Compare(\"Password\", ErrorMessage = \"The password and confirmation password d" +
-                    "o not match.\")]\r\n        public string ConfirmPassword { get; set; }\r\n    }\r\n\r\n " +
-                    "   public class ForgotPasswordVM\r\n    {\r\n        [Required]\r\n        [EmailAddre" +
-                    "ss]\r\n        public string Email { get; set; }\r\n    }\r\n\r\n    public class ResetP" +
-                    "asswordVM\r\n    {\r\n        [Required]\r\n        public string Id { get; set; }\r\n\r\n" +
-                    "        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; s" +
-                    "et; }\r\n\r\n        [Required]\r\n        public string Code { get; set; }\r\n\r\n       " +
-                    " [Required]\r\n        [StringLength(100, ErrorMessage = \"The {0} must be at least" +
-                    " {2} and at max {1} characters long.\", MinimumLength = 10)]\r\n        [DataType(D" +
-                    "ataType.Password)]\r\n        public string Password { get; set; }\r\n\r\n        [Req" +
-                    "uired]\r\n        [DataType(DataType.Password)]\r\n        [Compare(\"Password\", Erro" +
-                    "rMessage = \"The password and confirmation password do not match.\")]\r\n        pub" +
-                    "lic string PasswordConfirm { get; set; }\r\n    }\r\n}\r\n");
+            this.Write(".DAL.Repositories;\r\nusing ");
+            
+            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Models;\r\nusing Test.API.ViewModels.Identity;\r\nusing Test.API.Services;\r\nusing Mi" +
+                    "crosoft.AspNetCore.Identity;\r\nusing System.Globalization;\r\nusing AutoMapper;\r\n\r\n" +
+                    "namespace ");
+            
+            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".BLL\r\n{\r\n\t/// <summary>\r\n\t/// The business logic layer for authentication.\r\n\t/// " +
+                    "</summary>\r\n    public class AuthBLL\r\n    {\r\n        private readonly IConfigura" +
+                    "tion configuration;\r\n        private readonly ILogger logger;\r\n        private r" +
+                    "eadonly IMapper mapper;\r\n        private readonly UserManager<User> userManager;" +
+                    "\r\n        private readonly SignInManager<User> signInManager;\r\n        private r" +
+                    "eadonly IEmailService emailService;\r\n\r\n        public AuthBLL(\r\n            ICon" +
+                    "figuration configuration,\r\n            ILogger<AuthBLL> logger,\r\n            IMa" +
+                    "pper mapper,\r\n            UserManager<User> userManager,\r\n            SignInMana" +
+                    "ger<User> signInManager,\r\n            IEmailService emailService\r\n        )\r\n   " +
+                    "     {\r\n            this.configuration = configuration;\r\n            this.logger" +
+                    " = logger;\r\n            this.mapper = mapper;\r\n            this.userManager = us" +
+                    "erManager;\r\n            this.signInManager = signInManager;\r\n            this.em" +
+                    "ailService = emailService;\r\n        }\r\n\r\n        public async Task<LoginResultVM" +
+                    "> Login(LoginVM loginVM) {\r\n            // Validation\r\n            if (loginVM =" +
+                    "= null) {\r\n                return null;\r\n            }\r\n\r\n            // Result\r" +
+                    "\n            LoginResultVM loginResultVM = new LoginResultVM() {\r\n              " +
+                    "  RememberMe = loginVM.RememberMe\r\n            };\r\n\r\n            // Retrieve use" +
+                    "r by email or username\r\n            User user = await userManager.FindByEmailAsy" +
+                    "nc(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOr" +
+                    "Username);\r\n        \r\n            // If no user is found by email or username, j" +
+                    "ust return unauthorized and give nothing away of existing user info\r\n           " +
+                    " if (user == null)\r\n            {\r\n                logger.LogWarning(\"User not f" +
+                    "ound during login\", loginVM.EmailOrUsername);\r\n\r\n                loginResultVM.E" +
+                    "rror = \"invalid\";\r\n                return loginResultVM;\r\n            }\r\n\r\n     " +
+                    "       // Log the user in by password\r\n            SignInResult signInResult = a" +
+                    "wait signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberM" +
+                    "e, lockoutOnFailure: true);\r\n            \r\n            // Success\r\n            i" +
+                    "f (signInResult.Succeeded)\r\n            {\r\n                // Authenticated by p" +
+                    "assword\r\n                logger.LogInformation(\"User logged in\", user);\r\n\r\n     " +
+                    "           // Retrieve roles of user\r\n                user.Roles = (List<string>" +
+                    ")await userManager.GetRolesAsync(user);\r\n\r\n                // Set claims of user" +
+                    "\r\n                List<Claim> claims = new List<Claim>() {\r\n                    " +
+                    "new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n      " +
+                    "              new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),\r\n   " +
+                    "                 new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n        " +
+                    "            new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(Cult" +
+                    "ureInfo.CurrentCulture))\r\n                };\r\n                if (!string.IsNull" +
+                    "OrEmpty(user.FirstName))\r\n                {\r\n                    claims.Add(new " +
+                    "Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));\r\n                }\r\n " +
+                    "               if (!string.IsNullOrEmpty(user.LastName))\r\n                {\r\n   " +
+                    "                 claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.L" +
+                    "astName));\r\n                }\r\n\r\n                // Add roles as claims\r\n       " +
+                    "         foreach (var role in user.Roles)\r\n                {\r\n                  " +
+                    "  claims.Add(new Claim(ClaimTypes.Role, role));\r\n                }\r\n\r\n          " +
+                    "      // Authentication successful => Generate JWT token based on the user\'s cla" +
+                    "ims\r\n                string token = this.GenerateJWT(claims);\r\n\r\n               " +
+                    " // Return user with token\r\n                loginResultVM.Authenticated = new Au" +
+                    "thenticatedVM()\r\n                {\r\n                    User = mapper.Map<User, " +
+                    "UserVM>(user),\r\n                    Token = token\r\n                };\r\n\r\n       " +
+                    "         return loginResultVM;\r\n            }\r\n\r\n            // Failed\r\n        " +
+                    "    //if (signInResult.RequiresTwoFactor)\r\n            //{\r\n            //    lo" +
+                    "gger.LogInformation(\"User requires two factor auth\", user);\r\n            //\r\n   " +
+                    "         //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, mo" +
+                    "del.RememberMe });\r\n            //}\r\n            if (signInResult.IsLockedOut)\r\n" +
+                    "            {\r\n                logger.LogWarning(\"User is locked out\", user);\r\n " +
+                    "               \r\n                loginResultVM.Error = \"locked-out\";\r\n          " +
+                    "  }\r\n            else if (signInResult.IsNotAllowed)\r\n            {\r\n           " +
+                    "     logger.LogWarning(\"User is not allowed to login\", user);\r\n\r\n               " +
+                    " loginResultVM.Error = \"not-allowed\";\r\n            }\r\n            else\r\n        " +
+                    "    {\r\n                logger.LogWarning(\"User login is invalid\", user);\r\n\r\n    " +
+                    "            loginResultVM.Error = \"invalid\";\r\n            }\r\n\r\n            retur" +
+                    "n loginResultVM;\r\n        }\r\n\r\n        public string GenerateJWT(List<Claim> cla" +
+                    "ims)\r\n        {\r\n            JwtSecurityTokenHandler tokenHandler = new JwtSecur" +
+                    "ityTokenHandler();\r\n            var key = Encoding.ASCII.GetBytes(configuration." +
+                    "GetSection(\"Authentication\").GetValue<string>(\"Secret\"));\r\n            SecurityT" +
+                    "okenDescriptor tokenDescriptor = new SecurityTokenDescriptor\r\n            {\r\n   " +
+                    "             Subject = new ClaimsIdentity(claims),\r\n                Expires = Da" +
+                    "teTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection(\"Authentication\")" +
+                    ".GetValue<string>(\"TokenExpiresInMinutes\"))),\r\n                SigningCredential" +
+                    "s = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Hma" +
+                    "cSha256Signature)\r\n            };\r\n\r\n            return tokenHandler.WriteToken(" +
+                    "tokenHandler.CreateToken(tokenDescriptor));\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -77,7 +145,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class IdentityViewModelTemplateBase
+    public class AuthBLLTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

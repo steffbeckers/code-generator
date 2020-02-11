@@ -214,6 +214,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AppSettingsTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\WebAPI\BLL\AuthBLLTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AuthBLLTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AutoMapperProfileTemplate.cs</LastGenOutput>
@@ -435,6 +439,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\BLL\AuthBLLTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AuthBLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\BLL\BLLTemplate.cs">
       <DesignTime>True</DesignTime>

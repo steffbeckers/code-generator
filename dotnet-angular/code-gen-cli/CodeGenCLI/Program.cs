@@ -408,13 +408,6 @@ namespace CodeGenCLI
                     // Authentication with Identity
                     if (Config.Authentication.Enabled)
                     {
-                        //// Auth controller
-                        WebAPITemplates.Controllers.AuthControllerTemplate authControllerTemplate = new WebAPITemplates.Controllers.AuthControllerTemplate(Config);
-                        string authControllerTemplateContent = authControllerTemplate.TransformText();
-
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs", authControllerTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs");
-
                         //// User model
                         WebAPITemplates.Models.UserModelTemplate userModelTemplate = new WebAPITemplates.Models.UserModelTemplate(Config);
                         string userModelTemplateContent = userModelTemplate.TransformText();
@@ -435,6 +428,20 @@ namespace CodeGenCLI
 
                         File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\UserType.cs", graphQLUserTypeTemplateContent);
                         Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\UserType.cs");
+
+                        //// Auth BLL
+                        WebAPITemplates.BLL.AuthBLLTemplate authBLLTemplate = new WebAPITemplates.BLL.AuthBLLTemplate(Config);
+                        string authBLLTemplateContent = authBLLTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\AuthBLL.cs", authBLLTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.BLLPath : "BLL") + "\\AuthBLL.cs");
+
+                        //// Auth controller
+                        WebAPITemplates.Controllers.AuthControllerTemplate authControllerTemplate = new WebAPITemplates.Controllers.AuthControllerTemplate(Config);
+                        string authControllerTemplateContent = authControllerTemplate.TransformText();
+
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs", authControllerTemplateContent);
+                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs");
                     }
 
                     // TODO: Migrations?

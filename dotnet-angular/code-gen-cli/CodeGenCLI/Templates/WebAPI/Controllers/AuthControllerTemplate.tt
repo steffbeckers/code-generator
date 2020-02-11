@@ -14,14 +14,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Controllers
 {
@@ -30,129 +29,50 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IConfiguration configuration;
+        private readonly ILogger logger;
+        private readonly IMapper mapper;
+        private readonly AuthBLL bll;
+
+        // TODO: Move to bll
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IEmailService emailService;
-        private readonly ILogger logger;
-        private readonly IConfiguration configuration;
-        private readonly IMapper mapper;
 
+        /// <summary>
+		/// The constructor of the Auth controller.
+		/// </summary>
         public AuthController(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            IEmailService emailService,
-            ILogger<AuthController> logger,
             IConfiguration configuration,
-            IMapper mapper)
+            ILogger<AuthController> logger,
+            IMapper mapper,
+            AuthBLL bll)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.emailService = emailService;
-            this.logger = logger;
             this.configuration = configuration;
+            this.logger = logger;
             this.mapper = mapper;
-        }
-
-        // TODO: Move this function to another layer?
-        private string GenerateJWT(List<Claim> claims)
-        {
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"));
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection("Authentication").GetValue<string>("TokenExpiresInMinutes"))),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+            this.bll = bll;
         }
 
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginVM model)
+        public async Task<ActionResult<LoginResultVM>> Login([FromBody] LoginVM loginVM)
         {
-            if (ModelState.IsValid)
+            // Validation
+            if (!ModelState.IsValid)
             {
-                // Retrieve user by email or username
-                User currentUser = await userManager.FindByEmailAsync(model.EmailOrUsername) ?? await userManager.FindByNameAsync(model.EmailOrUsername);
-
-                // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
-                if (currentUser == null)
-                {
-                    return Unauthorized("invalid");
-                }
-
-                // Log the user in by password
-                var result = await signInManager.PasswordSignInAsync(currentUser, model.Password, model.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
-                {
-                    logger.LogInformation("User " + currentUser.Id + " logged in.");
-
-                    // Retrieve roles of user
-                    currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
-
-                    // Set claims of user
-                    List<Claim> claims = new List<Claim>() {
-                        new Claim(JwtRegisteredClaimNames.NameId, currentUser.Id.ToString().ToUpper()),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, currentUser.UserName),
-                        new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
-                    };
-                    if (!string.IsNullOrEmpty(currentUser.FirstName))
-                    {
-                        claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, currentUser.FirstName));
-                    }
-                    if (!string.IsNullOrEmpty(currentUser.LastName))
-                    {
-                        claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, currentUser.LastName));
-                    }
-
-                    // Add roles as claims
-                    foreach (var role in currentUser.Roles)
-                    {
-                        claims.Add(new Claim(ClaimTypes.Role, role));
-                    }
-
-                    // Authentication successful => Generate JWT token based on the user's claims
-                    string token = GenerateJWT(claims);
-
-                    // Return user with token
-                    return Ok(new AuthenticatedVM()
-                    {
-                        User = mapper.Map<User, UserVM>(currentUser),
-                        Token = token,
-                        RememberMe = model.RememberMe
-                    });
-                }
-                //if (result.RequiresTwoFactor)
-                //{
-                //    logger.LogInformation("Requires two factor.");
-                //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                //}
-                if (result.IsLockedOut)
-                {
-                    // INFO: This is possible to split some code
-                    //return RedirectToAction(nameof(Lockout));
-
-                    logger.LogWarning("User is locked out.");
-                    return Unauthorized("locked-out");
-                }
-                if (result.IsNotAllowed)
-                {
-                    logger.LogWarning("User is not allowed to login.");
-                    return Unauthorized("not-allowed");
-                }
-                else
-                {
-                    logger.LogWarning("Invalid login attempt.");
-                    return Unauthorized("invalid");
-                }
+                return BadRequest(ModelState);
             }
 
-            // If we got this far, something failed
-            return BadRequest();
+            LoginResultVM loginResultVM = await this.bll.Login(loginVM);
+
+            // On error
+            if (!string.IsNullOrEmpty(loginResultVM.Error)) {
+                return BadRequest(loginResultVM);
+            }
+
+            return Ok(loginResultVM);
         }
 
         [HttpGet]

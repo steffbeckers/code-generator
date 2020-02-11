@@ -126,6 +126,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 			services.AddScoped<<#= model.Name #>BLL>();
 <# } #>
+<# if (config.Authentication.Enabled) { #>
+            services.AddScoped<AuthBLL>();
+<# } #>
 
             // Services
 <# if (config.WebAPI.EmailService.Enabled) { #>
