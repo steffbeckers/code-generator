@@ -28,7 +28,7 @@ namespace Test.API.BLL
             this.logger = logger;
         }
 
-        private string GenerateJWT(List<Claim> claims)
+        public string GenerateJWT(List<Claim> claims)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication").GetValue<string>("Secret"));
