@@ -129,7 +129,7 @@ namespace Test.API.BLL
                 
                 loginResultVM.Error = "locked-out";
             }
-            if (signInResult.IsNotAllowed)
+            else if (signInResult.IsNotAllowed)
             {
                 logger.LogWarning("User is not allowed to login", user);
 
