@@ -11,7 +11,7 @@ using Test.API.DAL.Repositories;
 using Test.API.Models;
 using Test.API.ViewModels.Identity;
 using Test.API.Services;
-using Test.API.ViewModels.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Test.API.BLL
 {
