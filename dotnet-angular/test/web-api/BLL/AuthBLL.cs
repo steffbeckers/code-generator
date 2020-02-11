@@ -107,20 +107,19 @@ namespace Test.API.BLL
                     }
                 };
             }
-            //if (result.RequiresTwoFactor)
+            //if (signInResult.RequiresTwoFactor)
             //{
             //    logger.LogInformation("Requires two factor.");
             //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
             //}
-            if (result.IsLockedOut)
+            if (signInResult.IsLockedOut)
             {
-                // INFO: This is possible to split some code
-                //return RedirectToAction(nameof(Lockout));
+                // Authenticated by password
+                logger.LogWarning("User is locked out", user);
 
-                logger.LogWarning("User is locked out.");
                 return Unauthorized("locked-out");
             }
-            if (result.IsNotAllowed)
+            if (signInResult.IsNotAllowed)
             {
                 logger.LogWarning("User is not allowed to login.");
                 return Unauthorized("not-allowed");
