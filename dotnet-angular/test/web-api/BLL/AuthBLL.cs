@@ -63,10 +63,13 @@ namespace Test.API.BLL
             }
 
             // Log the user in by password
-            SignInResult signInResult = await signInManager.PasswordSignInAsync(currentUser, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
+            SignInResult signInResult = await signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
+            
             if (signInResult.Succeeded)
             {
-                logger.LogInformation("User " + currentUser.Id + " logged in.");
+                // Authenticated by password
+
+                logger.LogInformation("User " + user.Id + " logged in.");
 
                 // Retrieve roles of user
                 currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
