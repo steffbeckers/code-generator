@@ -121,6 +121,7 @@ namespace Test.API
 			services.AddScoped<ProductBLL>();
 			services.AddScoped<SupplierBLL>();
 			services.AddScoped<ProductDetailBLL>();
+            services.AddScoped<AuthBLL>();
 
             // Services
             services.AddSingleton<IEmailService, EmailService>();
