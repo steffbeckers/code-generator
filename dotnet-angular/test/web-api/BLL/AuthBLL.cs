@@ -14,6 +14,7 @@ using Test.API.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Globalization;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 
 namespace Test.API.BLL
 {
@@ -25,6 +26,7 @@ namespace Test.API.BLL
         private readonly IConfiguration configuration;
         private readonly ILogger logger;
         private readonly IMapper mapper;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IEmailService emailService;
@@ -33,6 +35,7 @@ namespace Test.API.BLL
             IConfiguration configuration,
             ILogger<AuthBLL> logger,
             IMapper mapper,
+            IHttpContextAccessor httpContextAccessor,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IEmailService emailService
@@ -41,6 +44,7 @@ namespace Test.API.BLL
             this.configuration = configuration;
             this.logger = logger;
             this.mapper = mapper;
+            this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailService = emailService;
@@ -147,7 +151,7 @@ namespace Test.API.BLL
 
         public async Task<User> Me()
         {
-            User currentUser = await userManager.GetUserAsync(HttpContext.User);
+            User currentUser = await userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
 
             // Retrieve roles of user
             currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
