@@ -27,11 +27,6 @@ namespace Test.API.Controllers
         private readonly IMapper mapper;
         private readonly AuthBLL bll;
 
-        // TODO: Move to bll
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
-        private readonly IEmailService emailService;
-
         /// <summary>
 		/// The constructor of the Auth controller.
 		/// </summary>
@@ -39,7 +34,8 @@ namespace Test.API.Controllers
             IConfiguration configuration,
             ILogger<AuthController> logger,
             IMapper mapper,
-            AuthBLL bll)
+            AuthBLL bll
+        )
         {
             this.configuration = configuration;
             this.logger = logger;
