@@ -278,6 +278,8 @@ namespace Test.API
             {
                 endpoints.MapControllers();
             });
+
+            // TODO: Add default admin user with function here?
         }
     }
 
