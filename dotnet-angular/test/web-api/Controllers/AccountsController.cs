@@ -46,7 +46,7 @@ namespace Test.API.Controllers
             IEnumerable<Account> accounts = await this.bll.GetAllAccountsAsync();
 
 			// Mapping
-            return this.mapper.Map<IEnumerable<Account>, List<AccountVM>>(accounts);
+            return Ok(this.mapper.Map<IEnumerable<Account>, List<AccountVM>>(accounts));
         }
 
         // GET: api/accounts/{id}
@@ -64,7 +64,7 @@ namespace Test.API.Controllers
             }
 
 			// Mapping
-            return this.mapper.Map<Account, AccountVM>(account);
+            return Ok(this.mapper.Map<Account, AccountVM>(account));
         }
 
         // POST: api/accounts
@@ -115,7 +115,7 @@ namespace Test.API.Controllers
             account = await this.bll.UpdateAccountAsync(account);
 
 			// Mapping
-			return this.mapper.Map<Account, AccountVM>(account);
+			return Ok(this.mapper.Map<Account, AccountVM>(account));
         }
 
         // DELETE: api/accounts/{id}
@@ -135,7 +135,8 @@ namespace Test.API.Controllers
 
             await this.bll.DeleteAccountAsync(account);
 
-            return this.mapper.Map<Account, AccountVM>(account);
+            // Mapping
+            return Ok(this.mapper.Map<Account, AccountVM>(account));
         }
     }
 }

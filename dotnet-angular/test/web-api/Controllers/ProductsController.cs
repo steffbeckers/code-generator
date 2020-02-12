@@ -46,7 +46,7 @@ namespace Test.API.Controllers
             IEnumerable<Product> products = await this.bll.GetAllProductsAsync();
 
 			// Mapping
-            return this.mapper.Map<IEnumerable<Product>, List<ProductVM>>(products);
+            return Ok(this.mapper.Map<IEnumerable<Product>, List<ProductVM>>(products));
         }
 
         // GET: api/products/{id}
@@ -64,7 +64,7 @@ namespace Test.API.Controllers
             }
 
 			// Mapping
-            return this.mapper.Map<Product, ProductVM>(product);
+            return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
 
         // POST: api/products
@@ -115,7 +115,7 @@ namespace Test.API.Controllers
             product = await this.bll.UpdateProductAsync(product);
 
 			// Mapping
-			return this.mapper.Map<Product, ProductVM>(product);
+			return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
 
         // PUT: api/products/suppliers/link
@@ -134,7 +134,8 @@ namespace Test.API.Controllers
 
             Product product = await this.bll.LinkSupplierToProductAsync(productSupplier);
 
-            return this.mapper.Map<Product, ProductVM>(product);
+            // Mapping
+            return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
 
         // PUT: api/products/suppliers/unlink
@@ -153,7 +154,8 @@ namespace Test.API.Controllers
 
             Product product = await this.bll.UnlinkSupplierFromProductAsync(productSupplier);
 
-            return this.mapper.Map<Product, ProductVM>(product);
+            // Mapping
+            return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
 
         // DELETE: api/products/{id}
@@ -173,7 +175,8 @@ namespace Test.API.Controllers
 
             await this.bll.DeleteProductAsync(product);
 
-            return this.mapper.Map<Product, ProductVM>(product);
+            // Mapping
+            return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
     }
 }

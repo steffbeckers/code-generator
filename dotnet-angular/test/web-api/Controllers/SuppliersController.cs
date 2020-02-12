@@ -46,7 +46,7 @@ namespace Test.API.Controllers
             IEnumerable<Supplier> suppliers = await this.bll.GetAllSuppliersAsync();
 
 			// Mapping
-            return this.mapper.Map<IEnumerable<Supplier>, List<SupplierVM>>(suppliers);
+            return Ok(this.mapper.Map<IEnumerable<Supplier>, List<SupplierVM>>(suppliers));
         }
 
         // GET: api/suppliers/{id}
@@ -64,7 +64,7 @@ namespace Test.API.Controllers
             }
 
 			// Mapping
-            return this.mapper.Map<Supplier, SupplierVM>(supplier);
+            return Ok(this.mapper.Map<Supplier, SupplierVM>(supplier));
         }
 
         // POST: api/suppliers
@@ -115,7 +115,7 @@ namespace Test.API.Controllers
             supplier = await this.bll.UpdateSupplierAsync(supplier);
 
 			// Mapping
-			return this.mapper.Map<Supplier, SupplierVM>(supplier);
+			return Ok(this.mapper.Map<Supplier, SupplierVM>(supplier));
         }
 
         // PUT: api/suppliers/products/link
@@ -134,7 +134,8 @@ namespace Test.API.Controllers
 
             Supplier supplier = await this.bll.LinkProductToSupplierAsync(productSupplier);
 
-            return this.mapper.Map<Supplier, SupplierVM>(supplier);
+            // Mapping
+            return Ok(this.mapper.Map<Supplier, SupplierVM>(supplier));
         }
 
         // PUT: api/suppliers/products/unlink
@@ -153,7 +154,8 @@ namespace Test.API.Controllers
 
             Supplier supplier = await this.bll.UnlinkProductFromSupplierAsync(productSupplier);
 
-            return this.mapper.Map<Supplier, SupplierVM>(supplier);
+            // Mapping
+            return Ok(this.mapper.Map<Supplier, SupplierVM>(supplier));
         }
 
         // DELETE: api/suppliers/{id}
@@ -173,7 +175,8 @@ namespace Test.API.Controllers
 
             await this.bll.DeleteSupplierAsync(supplier);
 
-            return this.mapper.Map<Supplier, SupplierVM>(supplier);
+            // Mapping
+            return Ok(this.mapper.Map<Supplier, SupplierVM>(supplier));
         }
     }
 }

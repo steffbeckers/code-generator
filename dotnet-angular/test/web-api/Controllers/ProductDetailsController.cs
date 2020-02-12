@@ -46,7 +46,7 @@ namespace Test.API.Controllers
             IEnumerable<ProductDetail> productdetails = await this.bll.GetAllProductDetailsAsync();
 
 			// Mapping
-            return this.mapper.Map<IEnumerable<ProductDetail>, List<ProductDetailVM>>(productdetails);
+            return Ok(this.mapper.Map<IEnumerable<ProductDetail>, List<ProductDetailVM>>(productdetails));
         }
 
         // GET: api/productdetails/{id}
@@ -64,7 +64,7 @@ namespace Test.API.Controllers
             }
 
 			// Mapping
-            return this.mapper.Map<ProductDetail, ProductDetailVM>(productdetail);
+            return Ok(this.mapper.Map<ProductDetail, ProductDetailVM>(productdetail));
         }
 
         // POST: api/productdetails
@@ -115,7 +115,7 @@ namespace Test.API.Controllers
             productDetail = await this.bll.UpdateProductDetailAsync(productDetail);
 
 			// Mapping
-			return this.mapper.Map<ProductDetail, ProductDetailVM>(productDetail);
+			return Ok(this.mapper.Map<ProductDetail, ProductDetailVM>(productDetail));
         }
 
         // DELETE: api/productdetails/{id}
@@ -135,7 +135,8 @@ namespace Test.API.Controllers
 
             await this.bll.DeleteProductDetailAsync(productdetail);
 
-            return this.mapper.Map<ProductDetail, ProductDetailVM>(productdetail);
+            // Mapping
+            return Ok(this.mapper.Map<ProductDetail, ProductDetailVM>(productdetail));
         }
     }
 }

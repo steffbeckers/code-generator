@@ -145,6 +145,16 @@ namespace Test.API.BLL
             return loginResultVM;
         }
 
+        public async Task<User> Me()
+        {
+            User currentUser = await userManager.GetUserAsync(HttpContext.User);
+
+            // Retrieve roles of user
+            currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
+
+            return currentUser;
+        }
+
         public string GenerateJWT(List<Claim> claims)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();

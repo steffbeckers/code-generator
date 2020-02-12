@@ -66,12 +66,9 @@ namespace Test.API.Controllers
 
         [HttpGet]
         [Route("me")]
-        public async Task<IActionResult> Me()
+        public async Task<ActionResult<UserVM>> Me()
         {
-            User currentUser = await userManager.GetUserAsync(User);
-
-            // Retrieve roles of user
-            currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
+            User currentUser = await this.bll.Me();
 
             return Ok(mapper.Map<User, UserVM>(currentUser));
         }
