@@ -54,14 +54,9 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            LoginResultVM loginResultVM = await this.bll.Login(loginVM);
+            AuthenticatedVM authenticatedVM = await this.bll.Login(loginVM);
 
-            // On error
-            if (!string.IsNullOrEmpty(loginResultVM.Error)) {
-                return BadRequest(loginResultVM);
-            }
-
-            return Ok(loginResultVM);
+            return Ok(authenticatedVM);
         }
 
         [HttpGet]

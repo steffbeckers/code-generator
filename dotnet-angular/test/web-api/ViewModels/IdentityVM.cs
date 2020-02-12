@@ -24,17 +24,11 @@ namespace Test.API.ViewModels.Identity
         public bool RememberMe { get; set; }
     }
 
-    public class LoginResultVM
-    {
-        public AuthenticatedVM Authenticated { get; set; }
-        public bool RememberMe { get; set; }
-        public string Error { get; set; }
-    }
-
 	public class AuthenticatedVM
     {
         public UserVM User { get; set; }
         public string Token { get; set; }
+        public bool RememberMe { get; set; }
     }
 
     public class RegisterVM
