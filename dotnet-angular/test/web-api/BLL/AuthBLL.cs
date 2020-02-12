@@ -50,14 +50,14 @@ namespace Test.API.BLL
             this.emailService = emailService;
         }
 
-        public async Task<LoginResultVM> Login(LoginVM loginVM) {
+        public async Task<AuthenticatedVM> Login(LoginVM loginVM) {
             // Validation
             if (loginVM == null) {
                 return null;
             }
 
             // Result
-            LoginResultVM loginResultVM = new LoginResultVM() {
+            AuthenticatedVM authenticatedVM = new AuthenticatedVM() {
                 RememberMe = loginVM.RememberMe
             };
 
@@ -69,8 +69,7 @@ namespace Test.API.BLL
             {
                 logger.LogWarning("User not found during login", loginVM.EmailOrUsername);
 
-                loginResultVM.Error = "invalid";
-                return loginResultVM;
+                throw new Exception("invalid");
             }
 
             // Log the user in by password
@@ -111,13 +110,13 @@ namespace Test.API.BLL
                 string token = this.GenerateJWT(claims);
 
                 // Return user with token
-                loginResultVM.Authenticated = new AuthenticatedVM()
+                authenticatedVM = new AuthenticatedVM()
                 {
                     User = mapper.Map<User, UserVM>(user),
                     Token = token
                 };
 
-                return loginResultVM;
+                return authenticatedVM;
             }
 
             // Failed
@@ -125,28 +124,28 @@ namespace Test.API.BLL
             //{
             //    logger.LogInformation("User requires two factor auth", user);
             //
-            //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+            //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, loginVM.RememberMe });
             //}
             if (signInResult.IsLockedOut)
             {
                 logger.LogWarning("User is locked out", user);
                 
-                loginResultVM.Error = "locked-out";
+                throw new Exception("locked-out");
             }
             else if (signInResult.IsNotAllowed)
             {
                 logger.LogWarning("User is not allowed to login", user);
 
-                loginResultVM.Error = "not-allowed";
+                throw new Exception("not-allowed");
             }
             else
             {
                 logger.LogWarning("User login is invalid", user);
 
-                loginResultVM.Error = "invalid";
+                throw new Exception("invalid");
             }
 
-            return loginResultVM;
+            return authenticatedVM;
         }
 
         public async Task<User> Me()
