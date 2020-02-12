@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Test.API.DAL
+namespace Test.API.Framework
 {
     interface IRepository<TEntity> where TEntity : class
     {
