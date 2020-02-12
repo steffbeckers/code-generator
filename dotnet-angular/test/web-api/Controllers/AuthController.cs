@@ -115,11 +115,11 @@ namespace Test.API.Controllers
             //return Ok();
         //}
 //
-        //[HttpGet]
-        //[Route("confirm-email")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        //{
+        [HttpGet]
+        [Route("confirm-email")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
             //if (userId == null || code == null)
             //{
                 //return BadRequest(ModelState);
@@ -141,7 +141,7 @@ namespace Test.API.Controllers
 //
             //// If we got this far, something failed
             //return BadRequest(ModelState);
-        //}
+        }
 //
         //[HttpPost]
         //[Route("forgot-password")]
@@ -193,11 +193,11 @@ namespace Test.API.Controllers
             //return BadRequest(ModelState);
         //}
 //
-        //[HttpPost]
-        //[Route("reset-password")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordVM model)
-        //{
+        [HttpPost]
+        [Route("reset-password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordVM model)
+        {
             //if (ModelState.IsValid)
             //{
                 //var user = await userManager.FindByIdAsync(model.Id);
@@ -232,8 +232,8 @@ namespace Test.API.Controllers
                 //AddErrors(result);
             //}
 //
-            //return BadRequest(ModelState);
-        //}
+            return BadRequest(ModelState);
+        }
 //
         //#region Helpers
 //
