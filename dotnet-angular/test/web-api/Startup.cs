@@ -14,9 +14,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -224,21 +226,22 @@ namespace Test.API
                     .AllowAnyHeader();
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler(appBuilder =>
-                {
-                    appBuilder.Run(async context =>
-                    {
-                        context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
-                    });
-                });
-            }
+            //// Error handling
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler(appBuilder =>
+            //    {
+            //        appBuilder.Run(async context =>
+            //        {
+            //            context.Response.StatusCode = 500;
+            //            await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
+            //        });
+            //    });
+            //}
 
             // Web sockets
             app.UseWebSockets();
@@ -301,9 +304,6 @@ namespace Test.API
         private static Task HandleException(HttpContext context, Exception ex)
         {
             HttpStatusCode code = HttpStatusCode.InternalServerError; // 500 if unexpected
-
-            // Specify different custom exceptions here
-            if (ex is CustomException) code = HttpStatusCode.BadRequest;
 
             string result = JsonConvert.SerializeObject(new { error = ex.Message });
 
