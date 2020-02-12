@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Test.API.Framework;
 using Test.API.Models;
 
 namespace Test.API.DAL.Repositories
