@@ -224,12 +224,12 @@ namespace Test.API
                     .AllowAnyHeader();
             });
 
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
                 app.UseExceptionHandler(appBuilder =>
                 {
                     appBuilder.Run(async context =>
@@ -238,7 +238,7 @@ namespace Test.API
                         await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
                     });
                 });
-            //}
+            }
 
             // Web sockets
             app.UseWebSockets();
@@ -262,6 +262,9 @@ namespace Test.API
             // Authentication
             app.UseAuthentication();
 
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
             app.UseRouting();
 
 			// Authorization
@@ -271,6 +274,43 @@ namespace Test.API
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+
+    public class ErrorHandlingMiddleware
+    {
+        private readonly RequestDelegate next;
+
+        public ErrorHandlingMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            try
+            {
+                await next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleException(context, ex);
+            }
+        }
+
+        private static Task HandleException(HttpContext context, Exception ex)
+        {
+            HttpStatusCode code = HttpStatusCode.InternalServerError; // 500 if unexpected
+
+            // Specify different custom exceptions here
+            if (ex is CustomException) code = HttpStatusCode.BadRequest;
+
+            string result = JsonConvert.SerializeObject(new { error = ex.Message });
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)code;
+
+            return context.Response.WriteAsync(result);
         }
     }
 }
