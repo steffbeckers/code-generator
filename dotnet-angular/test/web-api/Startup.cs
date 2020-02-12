@@ -308,7 +308,7 @@ namespace Test.API
             // Specify different custom exceptions here
             //if (ex is CustomException) code = HttpStatusCode.BadRequest;
 
-            string result = JsonConvert.SerializeObject(new { message = ex.Message });
+            string result = JsonConvert.SerializeObject(new { error = ex.Message });
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
