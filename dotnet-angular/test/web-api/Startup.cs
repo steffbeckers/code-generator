@@ -109,6 +109,9 @@ namespace Test.API
                 };
             });
 
+            // HttpContext
+            services.AddHttpContextAccessor();
+
             // Repositories
 			services.AddScoped<AccountRepository>();
 			services.AddScoped<ProductRepository>();
