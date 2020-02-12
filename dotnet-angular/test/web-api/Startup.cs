@@ -28,6 +28,7 @@ using Test.API.DAL.Repositories;
 using Test.API.GraphQL;
 using Test.API.Models;
 using Test.API.Services;
+using Test.API.Framework.Exceptions;
 
 namespace Test.API
 {
@@ -306,7 +307,7 @@ namespace Test.API
             HttpStatusCode code = HttpStatusCode.InternalServerError; // 500 if unexpected
 
             // Specify different custom exceptions here
-            //if (ex is CustomException) code = HttpStatusCode.BadRequest;
+            if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;
 
             string result = JsonConvert.SerializeObject(new { error = ex.Message });
 
