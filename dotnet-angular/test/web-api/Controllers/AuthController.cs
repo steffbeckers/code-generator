@@ -140,7 +140,7 @@ namespace Test.API.Controllers
             //AddErrors(result);
 //
             //// If we got this far, something failed
-            //return BadRequest(ModelState);
+            return BadRequest(ModelState);
         }
 //
         //[HttpPost]
