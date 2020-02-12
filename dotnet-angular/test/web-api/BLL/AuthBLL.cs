@@ -138,14 +138,10 @@ namespace Test.API.BLL
 
                 throw new Exception("not-allowed");
             }
-            else
-            {
-                logger.LogWarning("User login is invalid", user);
 
-                throw new Exception("invalid");
-            }
+            logger.LogWarning("User login is invalid", user);
 
-            return authenticatedVM;
+            throw new Exception("invalid");
         }
 
         public async Task<User> Me()

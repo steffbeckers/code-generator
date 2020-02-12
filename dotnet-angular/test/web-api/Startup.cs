@@ -224,12 +224,12 @@ namespace Test.API
                     .AllowAnyHeader();
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
                 app.UseExceptionHandler(appBuilder =>
                 {
                     appBuilder.Run(async context =>
@@ -238,7 +238,7 @@ namespace Test.API
                         await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
                     });
                 });
-            }
+            //}
 
             // Web sockets
             app.UseWebSockets();
