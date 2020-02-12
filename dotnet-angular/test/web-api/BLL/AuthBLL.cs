@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Globalization;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Test.API.Framework.Exceptions;
 
 namespace Test.API.BLL
 {
@@ -69,7 +70,7 @@ namespace Test.API.BLL
             {
                 logger.LogWarning("User not found during login", loginVM.EmailOrUsername);
 
-                throw new Exception("invalid");
+                throw new LoginFailedException("invalid");
             }
 
             // Log the user in by password
@@ -130,18 +131,18 @@ namespace Test.API.BLL
             {
                 logger.LogWarning("User is locked out", user);
                 
-                throw new Exception("locked-out");
+                throw new LoginFailedException("locked-out");
             }
             else if (signInResult.IsNotAllowed)
             {
                 logger.LogWarning("User is not allowed to login", user);
 
-                throw new Exception("not-allowed");
+                throw new LoginFailedException("not-allowed");
             }
 
             logger.LogWarning("User login is invalid", user);
 
-            throw new Exception("invalid");
+            throw new LoginFailedException("invalid");
         }
 
         public async Task<User> Me()
