@@ -238,6 +238,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DbContextTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\WebAPI\Framework\ExceptionsTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ExceptionsTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\WebAPI\GraphQL\MutationTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>MutationTemplate.cs</LastGenOutput>
@@ -262,9 +266,9 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TypeTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\DAL\RepositoryBaseTemplate.tt">
+    <None Update="Templates\WebAPI\Framework\RepositoryTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>RepositoryBaseTemplate.cs</LastGenOutput>
+      <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\WebAPI\DAL\Repositories\RepositoryTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -475,10 +479,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\DAL\RepositoryBaseTemplate.cs">
+    <Compile Update="Templates\WebAPI\Framework\ExceptionsTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>RepositoryBaseTemplate.tt</DependentUpon>
+      <DependentUpon>ExceptionsTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\WebAPI\Framework\RepositoryTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RepositoryTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\WebAPI\GraphQL\MutationTemplate.cs">
       <DesignTime>True</DesignTime>

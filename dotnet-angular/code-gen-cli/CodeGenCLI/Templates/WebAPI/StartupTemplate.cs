@@ -45,57 +45,66 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ");
-            
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".BLL;\r\nusing ");
-            
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".DAL;\r\nusing ");
             
             #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".DAL.Repositories;\r\nusing ");
+            this.Write(".BLL;\r\nusing ");
             
             #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".GraphQL;\r\nusing ");
+            this.Write(".DAL;\r\nusing ");
             
             #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".Models;\r\nusing ");
+            this.Write(".DAL.Repositories;\r\nusing ");
             
             #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".Services;\r\n\r\nnamespace ");
+            this.Write(".GraphQL;\r\nusing ");
+            
+            #line 35 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Models;\r\nusing ");
             
             #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Services;\r\nusing ");
+            
+            #line 37 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Framework.Exceptions;\r\n\r\nnamespace ");
+            
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
@@ -119,14 +128,14 @@ using ");
 
             // Connection to the ");
             
-            #line 53 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
             this.Write(" database\r\n            services.AddDbContext<");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -134,14 +143,14 @@ using ");
             this.Write("Context>(options =>\r\n                options.UseSqlServer(this.configuration.GetC" +
                     "onnectionString(\"");
             
-            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
             this.Write("Context\")));\r\n");
             
-            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
     if (config.Authentication.Enabled) { 
             
             #line default
@@ -150,7 +159,7 @@ using ");
                     "ole<Guid>>()\r\n                .AddRoleManager<RoleManager<IdentityRole<Guid>>>()" +
                     "\r\n                .AddEntityFrameworkStores<");
             
-            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 64 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -188,76 +197,77 @@ using ");
                     "n\"];\r\n\r\n                        return Task.CompletedTask;\r\n                    " +
                     "}\r\n                };\r\n            });\r\n");
             
-            #line 118 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 121 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n            // Repositories\r\n");
+            this.Write("\r\n            // HttpContext\r\n            services.AddHttpContextAccessor();\r\n\r\n " +
+                    "           // Repositories\r\n");
             
-            #line 121 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 127 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  foreach (CodeGenModel model in config.Models) { 
             
             #line default
             #line hidden
             this.Write("\t\t\tservices.AddScoped<");
             
-            #line 122 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("Repository>();\r\n");
             
-            #line 123 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 129 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t// BLLs\r\n");
             
-            #line 126 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 132 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\tservices.AddScoped<");
             
-            #line 127 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 133 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
             this.Write("BLL>();\r\n");
             
-            #line 128 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 134 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 129 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 135 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
             #line hidden
             this.Write("            services.AddScoped<AuthBLL>();\r\n");
             
-            #line 131 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 137 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n            // Services\r\n");
             
-            #line 134 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 140 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  if (config.WebAPI.EmailService.Enabled) { 
             
             #line default
             #line hidden
             this.Write("            services.AddSingleton<IEmailService, EmailService>();\r\n");
             
-            #line 136 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 142 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default
@@ -266,7 +276,7 @@ using ");
                     ">\r\n                new FuncDependencyResolver(s.GetRequiredService));\r\n         " +
                     "   services.AddScoped<");
             
-            #line 141 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 147 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -304,14 +314,14 @@ using ");
                 {
                     Title = """);
             
-            #line 172 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 178 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
             this.Write(" Web API\",\r\n                    Version = \"v1\"\r\n                });\r\n");
             
-            #line 175 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 181 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
@@ -345,7 +355,7 @@ using ");
                 });
 ");
             
-            #line 203 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 209 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default
@@ -363,24 +373,25 @@ using ");
                     "igure(IApplicationBuilder app, IWebHostEnvironment env)\r\n        {\r\n\t\t    // COR" +
                     "S\r\n            app.UseCors(options =>\r\n\t\t\t{\r\n                options.AllowAnyOri" +
                     "gin()\r\n                    .AllowAnyMethod()\r\n                    .AllowAnyHeade" +
-                    "r();\r\n            });\r\n\r\n            if (env.IsDevelopment())\r\n            {\r\n  " +
-                    "              app.UseDeveloperExceptionPage();\r\n            }\r\n            else\r" +
-                    "\n            {\r\n                app.UseExceptionHandler(appBuilder =>\r\n         " +
-                    "       {\r\n                    appBuilder.Run(async context =>\r\n                 " +
-                    "   {\r\n                        context.Response.StatusCode = 500;\r\n              " +
-                    "          await context.Response.WriteAsync(\"An unexpected fault happened. Try a" +
-                    "gain later.\");\r\n                    });\r\n                });\r\n            }\r\n\r\n " +
-                    "           // Web sockets\r\n            app.UseWebSockets();\r\n\r\n            // Gr" +
-                    "aphQL\r\n            app.UseGraphQLWebSockets<");
+                    "r();\r\n            });\r\n\r\n            //// Error handling\r\n            //if (env." +
+                    "IsDevelopment())\r\n            //{\r\n            //    app.UseDeveloperExceptionPa" +
+                    "ge();\r\n            //}\r\n            //else\r\n            //{\r\n            //    a" +
+                    "pp.UseExceptionHandler(appBuilder =>\r\n            //    {\r\n            //       " +
+                    " appBuilder.Run(async context =>\r\n            //        {\r\n            //       " +
+                    "     context.Response.StatusCode = 500;\r\n            //            await context" +
+                    ".Response.WriteAsync(\"An unexpected fault happened. Try again later.\");\r\n       " +
+                    "     //        });\r\n            //    });\r\n            //}\r\n\r\n            // Web" +
+                    " sockets\r\n            app.UseWebSockets();\r\n\r\n            // GraphQL\r\n          " +
+                    "  app.UseGraphQLWebSockets<");
             
-            #line 255 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 262 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
             #line hidden
             this.Write("Schema>(\"/graphql\");\r\n            app.UseGraphQL<");
             
-            #line 256 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 263 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -397,7 +408,7 @@ using ");
             {
                 c.SwaggerEndpoint(""./swagger/v1/swagger.json"", """);
             
-            #line 266 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 273 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
             
             #line default
@@ -409,6 +420,9 @@ using ");
             // Authentication
             app.UseAuthentication();
 
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
             app.UseRouting();
 
 			// Authorization
@@ -418,6 +432,71 @@ using ");
             {
                 endpoints.MapControllers();
             });
+
+");
+            
+            #line 293 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+ if (config.Authentication.Enabled) { 
+            
+            #line default
+            #line hidden
+            this.Write("            // TODO: Add default admin user with function here?\r\n");
+            
+            #line 295 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write(@"        }
+    }
+
+    public class ErrorHandlingMiddleware
+    {
+        private readonly RequestDelegate next;
+
+        public ErrorHandlingMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            try
+            {
+                await next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleException(context, ex);
+            }
+        }
+
+        private static Task HandleException(HttpContext context, Exception ex)
+        {
+            HttpStatusCode code = HttpStatusCode.InternalServerError; // 500 if unexpected
+
+            // Specify different custom exceptions here
+");
+            
+            #line 325 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+ if (config.Authentication.Enabled) { 
+            
+            #line default
+            #line hidden
+            this.Write("            if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;\r\n");
+            
+            #line 327 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write(@"
+            string result = JsonConvert.SerializeObject(new { error = ex.Message });
+
+            context.Response.ContentType = ""application/json"";
+            context.Response.StatusCode = (int)code;
+
+            return context.Response.WriteAsync(result);
         }
     }
 }

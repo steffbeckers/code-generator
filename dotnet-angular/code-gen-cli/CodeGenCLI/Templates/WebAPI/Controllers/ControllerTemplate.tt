@@ -53,7 +53,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             IEnumerable<<#= model.Name #>> <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower() #> = await this.bll.GetAll<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>Async();
 
 			// Mapping
-            return this.mapper.Map<IEnumerable<<#= model.Name #>>, List<<#= model.Name #>VM>>(<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower() #>);
+            return Ok(this.mapper.Map<IEnumerable<<#= model.Name #>>, List<<#= model.Name #>VM>>(<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural.ToLower() : (model.Name + "s").ToLower() #>));
         }
 
         // GET: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/{id}
@@ -71,7 +71,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             }
 
 			// Mapping
-            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>);
+            return Ok(this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>));
         }
 
         // POST: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>
@@ -122,7 +122,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             <#= model.Name.ToCamelCase() #> = await this.bll.Update<#= model.Name #>Async(<#= model.Name.ToCamelCase() #>);
 
 			// Mapping
-			return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
+			return Ok(this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>));
         }
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many" && !string.IsNullOrEmpty(r.Through))) { #>
@@ -142,7 +142,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.bll.Link<#= relation.Model #>To<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>);
 
-            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
+            // Mapping
+            return Ok(this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>));
         }
 
         // PUT: api/<#= (!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s").ToLower() #>/<#= relation.Name.ToLower() #>/unlink
@@ -161,7 +162,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             <#= model.Name #> <#= model.Name.ToCamelCase() #> = await this.bll.Unlink<#= relation.Model #>From<#= model.Name #>Async(<#= relation.Through.ToCamelCase() #>);
 
-            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>);
+            // Mapping
+            return Ok(this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToCamelCase() #>));
         }
 
 <# } #>
@@ -182,7 +184,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             await this.bll.Delete<#= model.Name #>Async(<#= model.Name.ToLower() #>);
 
-            return this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>);
+            // Mapping
+            return Ok(this.mapper.Map<<#= model.Name #>, <#= model.Name #>VM>(<#= model.Name.ToLower() #>));
         }
     }
 }

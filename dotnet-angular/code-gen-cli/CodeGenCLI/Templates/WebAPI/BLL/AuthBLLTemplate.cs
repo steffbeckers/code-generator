@@ -53,11 +53,31 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Models;\r\nusing Test.API.ViewModels.Identity;\r\nusing Test.API.Services;\r\nusing Mi" +
-                    "crosoft.AspNetCore.Identity;\r\nusing System.Globalization;\r\nusing AutoMapper;\r\n\r\n" +
-                    "namespace ");
+            this.Write(".Models;\r\nusing ");
+            
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".ViewModels.Identity;\r\nusing ");
+            
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Services;\r\nusing Microsoft.AspNetCore.Identity;\r\nusing System.Globalization;\r\nus" +
+                    "ing AutoMapper;\r\nusing Microsoft.AspNetCore.Http;\r\nusing ");
             
             #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Framework.Exceptions;\r\n\r\nnamespace ");
+            
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
@@ -65,75 +85,81 @@ using ");
             this.Write(".BLL\r\n{\r\n\t/// <summary>\r\n\t/// The business logic layer for authentication.\r\n\t/// " +
                     "</summary>\r\n    public class AuthBLL\r\n    {\r\n        private readonly IConfigura" +
                     "tion configuration;\r\n        private readonly ILogger logger;\r\n        private r" +
-                    "eadonly IMapper mapper;\r\n        private readonly UserManager<User> userManager;" +
-                    "\r\n        private readonly SignInManager<User> signInManager;\r\n        private r" +
-                    "eadonly IEmailService emailService;\r\n\r\n        public AuthBLL(\r\n            ICon" +
-                    "figuration configuration,\r\n            ILogger<AuthBLL> logger,\r\n            IMa" +
-                    "pper mapper,\r\n            UserManager<User> userManager,\r\n            SignInMana" +
-                    "ger<User> signInManager,\r\n            IEmailService emailService\r\n        )\r\n   " +
-                    "     {\r\n            this.configuration = configuration;\r\n            this.logger" +
-                    " = logger;\r\n            this.mapper = mapper;\r\n            this.userManager = us" +
-                    "erManager;\r\n            this.signInManager = signInManager;\r\n            this.em" +
-                    "ailService = emailService;\r\n        }\r\n\r\n        public async Task<LoginResultVM" +
-                    "> Login(LoginVM loginVM) {\r\n            // Validation\r\n            if (loginVM =" +
-                    "= null) {\r\n                return null;\r\n            }\r\n\r\n            // Result\r" +
-                    "\n            LoginResultVM loginResultVM = new LoginResultVM() {\r\n              " +
-                    "  RememberMe = loginVM.RememberMe\r\n            };\r\n\r\n            // Retrieve use" +
-                    "r by email or username\r\n            User user = await userManager.FindByEmailAsy" +
-                    "nc(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOr" +
-                    "Username);\r\n        \r\n            // If no user is found by email or username, j" +
-                    "ust return unauthorized and give nothing away of existing user info\r\n           " +
-                    " if (user == null)\r\n            {\r\n                logger.LogWarning(\"User not f" +
-                    "ound during login\", loginVM.EmailOrUsername);\r\n\r\n                loginResultVM.E" +
-                    "rror = \"invalid\";\r\n                return loginResultVM;\r\n            }\r\n\r\n     " +
-                    "       // Log the user in by password\r\n            SignInResult signInResult = a" +
-                    "wait signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberM" +
-                    "e, lockoutOnFailure: true);\r\n            \r\n            // Success\r\n            i" +
-                    "f (signInResult.Succeeded)\r\n            {\r\n                // Authenticated by p" +
-                    "assword\r\n                logger.LogInformation(\"User logged in\", user);\r\n\r\n     " +
-                    "           // Retrieve roles of user\r\n                user.Roles = (List<string>" +
-                    ")await userManager.GetRolesAsync(user);\r\n\r\n                // Set claims of user" +
-                    "\r\n                List<Claim> claims = new List<Claim>() {\r\n                    " +
-                    "new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n      " +
-                    "              new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),\r\n   " +
-                    "                 new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n        " +
-                    "            new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(Cult" +
-                    "ureInfo.CurrentCulture))\r\n                };\r\n                if (!string.IsNull" +
-                    "OrEmpty(user.FirstName))\r\n                {\r\n                    claims.Add(new " +
-                    "Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));\r\n                }\r\n " +
-                    "               if (!string.IsNullOrEmpty(user.LastName))\r\n                {\r\n   " +
-                    "                 claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.L" +
-                    "astName));\r\n                }\r\n\r\n                // Add roles as claims\r\n       " +
-                    "         foreach (var role in user.Roles)\r\n                {\r\n                  " +
-                    "  claims.Add(new Claim(ClaimTypes.Role, role));\r\n                }\r\n\r\n          " +
-                    "      // Authentication successful => Generate JWT token based on the user\'s cla" +
-                    "ims\r\n                string token = this.GenerateJWT(claims);\r\n\r\n               " +
-                    " // Return user with token\r\n                loginResultVM.Authenticated = new Au" +
-                    "thenticatedVM()\r\n                {\r\n                    User = mapper.Map<User, " +
-                    "UserVM>(user),\r\n                    Token = token\r\n                };\r\n\r\n       " +
-                    "         return loginResultVM;\r\n            }\r\n\r\n            // Failed\r\n        " +
-                    "    //if (signInResult.RequiresTwoFactor)\r\n            //{\r\n            //    lo" +
-                    "gger.LogInformation(\"User requires two factor auth\", user);\r\n            //\r\n   " +
-                    "         //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, mo" +
-                    "del.RememberMe });\r\n            //}\r\n            if (signInResult.IsLockedOut)\r\n" +
-                    "            {\r\n                logger.LogWarning(\"User is locked out\", user);\r\n " +
-                    "               \r\n                loginResultVM.Error = \"locked-out\";\r\n          " +
-                    "  }\r\n            else if (signInResult.IsNotAllowed)\r\n            {\r\n           " +
-                    "     logger.LogWarning(\"User is not allowed to login\", user);\r\n\r\n               " +
-                    " loginResultVM.Error = \"not-allowed\";\r\n            }\r\n            else\r\n        " +
-                    "    {\r\n                logger.LogWarning(\"User login is invalid\", user);\r\n\r\n    " +
-                    "            loginResultVM.Error = \"invalid\";\r\n            }\r\n\r\n            retur" +
-                    "n loginResultVM;\r\n        }\r\n\r\n        public string GenerateJWT(List<Claim> cla" +
-                    "ims)\r\n        {\r\n            JwtSecurityTokenHandler tokenHandler = new JwtSecur" +
-                    "ityTokenHandler();\r\n            var key = Encoding.ASCII.GetBytes(configuration." +
-                    "GetSection(\"Authentication\").GetValue<string>(\"Secret\"));\r\n            SecurityT" +
-                    "okenDescriptor tokenDescriptor = new SecurityTokenDescriptor\r\n            {\r\n   " +
-                    "             Subject = new ClaimsIdentity(claims),\r\n                Expires = Da" +
-                    "teTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection(\"Authentication\")" +
-                    ".GetValue<string>(\"TokenExpiresInMinutes\"))),\r\n                SigningCredential" +
-                    "s = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Hma" +
-                    "cSha256Signature)\r\n            };\r\n\r\n            return tokenHandler.WriteToken(" +
-                    "tokenHandler.CreateToken(tokenDescriptor));\r\n        }\r\n    }\r\n}");
+                    "eadonly IMapper mapper;\r\n        private readonly IHttpContextAccessor httpConte" +
+                    "xtAccessor;\r\n        private readonly UserManager<User> userManager;\r\n        pr" +
+                    "ivate readonly SignInManager<User> signInManager;\r\n        private readonly IEma" +
+                    "ilService emailService;\r\n\r\n        public AuthBLL(\r\n            IConfiguration c" +
+                    "onfiguration,\r\n            ILogger<AuthBLL> logger,\r\n            IMapper mapper," +
+                    "\r\n            IHttpContextAccessor httpContextAccessor,\r\n            UserManager" +
+                    "<User> userManager,\r\n            SignInManager<User> signInManager,\r\n           " +
+                    " IEmailService emailService\r\n        )\r\n        {\r\n            this.configuratio" +
+                    "n = configuration;\r\n            this.logger = logger;\r\n            this.mapper =" +
+                    " mapper;\r\n            this.httpContextAccessor = httpContextAccessor;\r\n         " +
+                    "   this.userManager = userManager;\r\n            this.signInManager = signInManag" +
+                    "er;\r\n            this.emailService = emailService;\r\n        }\r\n\r\n        public " +
+                    "async Task<AuthenticatedVM> Login(LoginVM loginVM) {\r\n            // Validation\r" +
+                    "\n            if (loginVM == null) {\r\n                return null;\r\n            }" +
+                    "\r\n\r\n            // Result\r\n            AuthenticatedVM authenticatedVM = new Aut" +
+                    "henticatedVM() {\r\n                RememberMe = loginVM.RememberMe\r\n            }" +
+                    ";\r\n\r\n            // Retrieve user by email or username\r\n            User user = " +
+                    "await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager" +
+                    ".FindByNameAsync(loginVM.EmailOrUsername);\r\n        \r\n            // If no user " +
+                    "is found by email or username, just return unauthorized and give nothing away of" +
+                    " existing user info\r\n            if (user == null)\r\n            {\r\n             " +
+                    "   logger.LogWarning(\"User not found during login\", loginVM.EmailOrUsername);\r\n\r" +
+                    "\n                throw new LoginFailedException(\"invalid\");\r\n            }\r\n\r\n  " +
+                    "          // Log the user in by password\r\n            SignInResult signInResult " +
+                    "= await signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.Rememb" +
+                    "erMe, lockoutOnFailure: true);\r\n            \r\n            // Success\r\n          " +
+                    "  if (signInResult.Succeeded)\r\n            {\r\n                // Authenticated b" +
+                    "y password\r\n                logger.LogInformation(\"User logged in\", user);\r\n\r\n  " +
+                    "              // Retrieve roles of user\r\n                user.Roles = (List<stri" +
+                    "ng>)await userManager.GetRolesAsync(user);\r\n\r\n                // Set claims of u" +
+                    "ser\r\n                List<Claim> claims = new List<Claim>() {\r\n                 " +
+                    "   new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n   " +
+                    "                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),\r\n" +
+                    "                    new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n     " +
+                    "               new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(C" +
+                    "ultureInfo.CurrentCulture))\r\n                };\r\n                if (!string.IsN" +
+                    "ullOrEmpty(user.FirstName))\r\n                {\r\n                    claims.Add(n" +
+                    "ew Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));\r\n                }" +
+                    "\r\n                if (!string.IsNullOrEmpty(user.LastName))\r\n                {\r\n" +
+                    "                    claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, use" +
+                    "r.LastName));\r\n                }\r\n\r\n                // Add roles as claims\r\n    " +
+                    "            foreach (var role in user.Roles)\r\n                {\r\n               " +
+                    "     claims.Add(new Claim(ClaimTypes.Role, role));\r\n                }\r\n\r\n       " +
+                    "         // Authentication successful => Generate JWT token based on the user\'s " +
+                    "claims\r\n                string token = this.GenerateJWT(claims);\r\n\r\n            " +
+                    "    // Return user with token\r\n                authenticatedVM = new Authenticat" +
+                    "edVM()\r\n                {\r\n                    User = mapper.Map<User, UserVM>(u" +
+                    "ser),\r\n                    Token = token\r\n                };\r\n\r\n                " +
+                    "return authenticatedVM;\r\n            }\r\n\r\n            // Failed\r\n            //i" +
+                    "f (signInResult.RequiresTwoFactor)\r\n            //{\r\n            //    logger.Lo" +
+                    "gInformation(\"User requires two factor auth\", user);\r\n            //\r\n          " +
+                    "  //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, loginVM.R" +
+                    "ememberMe });\r\n            //}\r\n            if (signInResult.IsLockedOut)\r\n     " +
+                    "       {\r\n                logger.LogWarning(\"User is locked out\", user);\r\n      " +
+                    "          \r\n                throw new LoginFailedException(\"locked-out\");\r\n     " +
+                    "       }\r\n            else if (signInResult.IsNotAllowed)\r\n            {\r\n      " +
+                    "          logger.LogWarning(\"User is not allowed to login\", user);\r\n\r\n          " +
+                    "      throw new LoginFailedException(\"not-allowed\");\r\n            }\r\n\r\n         " +
+                    "   logger.LogWarning(\"User login is invalid\", user);\r\n\r\n            throw new Lo" +
+                    "ginFailedException(\"invalid\");\r\n        }\r\n\r\n        public async Task<User> Me(" +
+                    ")\r\n        {\r\n            User currentUser = await userManager.GetUserAsync(this" +
+                    ".httpContextAccessor.HttpContext.User);\r\n\r\n            // Retrieve roles of user" +
+                    "\r\n            currentUser.Roles = (List<string>)await userManager.GetRolesAsync(" +
+                    "currentUser);\r\n\r\n            return currentUser;\r\n        }\r\n\r\n        public st" +
+                    "ring GenerateJWT(List<Claim> claims)\r\n        {\r\n            JwtSecurityTokenHan" +
+                    "dler tokenHandler = new JwtSecurityTokenHandler();\r\n            var key = Encodi" +
+                    "ng.ASCII.GetBytes(configuration.GetSection(\"Authentication\").GetValue<string>(\"S" +
+                    "ecret\"));\r\n            SecurityTokenDescriptor tokenDescriptor = new SecurityTok" +
+                    "enDescriptor\r\n            {\r\n                Subject = new ClaimsIdentity(claims" +
+                    "),\r\n                Expires = DateTime.UtcNow.AddMinutes(double.Parse(configurat" +
+                    "ion.GetSection(\"Authentication\").GetValue<string>(\"TokenExpiresInMinutes\"))),\r\n " +
+                    "               SigningCredentials = new SigningCredentials(new SymmetricSecurity" +
+                    "Key(key), SecurityAlgorithms.HmacSha256Signature)\r\n            };\r\n\r\n           " +
+                    " return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));\r\n   " +
+                    "     }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -16,11 +16,13 @@ using System.Text;
 using System.Threading.Tasks;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
-using Test.API.ViewModels.Identity;
-using Test.API.Services;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.ViewModels.Identity;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Globalization;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Framework.Exceptions;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL
 {
@@ -32,6 +34,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         private readonly IConfiguration configuration;
         private readonly ILogger logger;
         private readonly IMapper mapper;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IEmailService emailService;
@@ -40,6 +43,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             IConfiguration configuration,
             ILogger<AuthBLL> logger,
             IMapper mapper,
+            IHttpContextAccessor httpContextAccessor,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IEmailService emailService
@@ -48,19 +52,20 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             this.configuration = configuration;
             this.logger = logger;
             this.mapper = mapper;
+            this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailService = emailService;
         }
 
-        public async Task<LoginResultVM> Login(LoginVM loginVM) {
+        public async Task<AuthenticatedVM> Login(LoginVM loginVM) {
             // Validation
             if (loginVM == null) {
                 return null;
             }
 
             // Result
-            LoginResultVM loginResultVM = new LoginResultVM() {
+            AuthenticatedVM authenticatedVM = new AuthenticatedVM() {
                 RememberMe = loginVM.RememberMe
             };
 
@@ -72,8 +77,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             {
                 logger.LogWarning("User not found during login", loginVM.EmailOrUsername);
 
-                loginResultVM.Error = "invalid";
-                return loginResultVM;
+                throw new LoginFailedException("invalid");
             }
 
             // Log the user in by password
@@ -114,13 +118,13 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 string token = this.GenerateJWT(claims);
 
                 // Return user with token
-                loginResultVM.Authenticated = new AuthenticatedVM()
+                authenticatedVM = new AuthenticatedVM()
                 {
                     User = mapper.Map<User, UserVM>(user),
                     Token = token
                 };
 
-                return loginResultVM;
+                return authenticatedVM;
             }
 
             // Failed
@@ -128,28 +132,34 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             //{
             //    logger.LogInformation("User requires two factor auth", user);
             //
-            //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+            //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, loginVM.RememberMe });
             //}
             if (signInResult.IsLockedOut)
             {
                 logger.LogWarning("User is locked out", user);
                 
-                loginResultVM.Error = "locked-out";
+                throw new LoginFailedException("locked-out");
             }
             else if (signInResult.IsNotAllowed)
             {
                 logger.LogWarning("User is not allowed to login", user);
 
-                loginResultVM.Error = "not-allowed";
-            }
-            else
-            {
-                logger.LogWarning("User login is invalid", user);
-
-                loginResultVM.Error = "invalid";
+                throw new LoginFailedException("not-allowed");
             }
 
-            return loginResultVM;
+            logger.LogWarning("User login is invalid", user);
+
+            throw new LoginFailedException("invalid");
+        }
+
+        public async Task<User> Me()
+        {
+            User currentUser = await userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
+
+            // Retrieve roles of user
+            currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
+
+            return currentUser;
         }
 
         public string GenerateJWT(List<Claim> claims)

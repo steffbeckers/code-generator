@@ -12,6 +12,7 @@ namespace CodeGenCLI.CodeGenClasses
         // Paths
         [JsonRequired]
         public string ProjectPath { get; set; }
+        public string FrameworkPath { get; set; }
         public string ModelsPath { get; set; }
         public string ViewModelsPath { get; set; }
         public string DALPath { get; set; }

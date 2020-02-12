@@ -20,9 +20,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +34,7 @@ using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.Nam
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.GraphQL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Services;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Framework.Exceptions;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>
 {
@@ -116,6 +119,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 };
             });
 <# } #>
+
+            // HttpContext
+            services.AddHttpContextAccessor();
 
             // Repositories
 <# foreach (CodeGenModel model in config.Models) { #>
@@ -232,21 +238,22 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                     .AllowAnyHeader();
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler(appBuilder =>
-                {
-                    appBuilder.Run(async context =>
-                    {
-                        context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
-                    });
-                });
-            }
+            //// Error handling
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler(appBuilder =>
+            //    {
+            //        appBuilder.Run(async context =>
+            //        {
+            //            context.Response.StatusCode = 500;
+            //            await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
+            //        });
+            //    });
+            //}
 
             // Web sockets
             app.UseWebSockets();
@@ -270,6 +277,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // Authentication
             app.UseAuthentication();
 
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
             app.UseRouting();
 
 			// Authorization
@@ -279,6 +289,49 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             {
                 endpoints.MapControllers();
             });
+
+<# if (config.Authentication.Enabled) { #>
+            // TODO: Add default admin user with function here?
+<# } #>
+        }
+    }
+
+    public class ErrorHandlingMiddleware
+    {
+        private readonly RequestDelegate next;
+
+        public ErrorHandlingMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            try
+            {
+                await next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleException(context, ex);
+            }
+        }
+
+        private static Task HandleException(HttpContext context, Exception ex)
+        {
+            HttpStatusCode code = HttpStatusCode.InternalServerError; // 500 if unexpected
+
+            // Specify different custom exceptions here
+<# if (config.Authentication.Enabled) { #>
+            if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;
+<# } #>
+
+            string result = JsonConvert.SerializeObject(new { error = ex.Message });
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)code;
+
+            return context.Response.WriteAsync(result);
         }
     }
 }
