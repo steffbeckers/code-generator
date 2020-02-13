@@ -6,6 +6,7 @@
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,6 +21,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 	/// <summary>
 	/// The <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #> controller.
 	/// </summary>
+<# if (config.Authentication.Enabled) { #>
+    [Authorize]
+<# } #>
     [Route("api/[controller]")]
     [ApiController]
 	[Produces("application/json")]
