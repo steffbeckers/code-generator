@@ -13,6 +13,7 @@ namespace Test.API.Controllers
 	/// <summary>
 	/// The Suppliers controller.
 	/// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 	[Produces("application/json")]

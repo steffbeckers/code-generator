@@ -13,6 +13,7 @@ namespace Test.API.Controllers
 	/// <summary>
 	/// The Accounts controller.
 	/// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 	[Produces("application/json")]
