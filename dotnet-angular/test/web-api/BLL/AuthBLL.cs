@@ -181,12 +181,13 @@ namespace Test.API.BLL
                 if (configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation")) {
                     string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    var callbackUrl = configuration.GetSection("Authentication").GetValue<string>("PasswordResetURL");
+                    string callbackUrl = configuration.GetSection("Authentication").GetValue<string>("PasswordResetURL");
                     callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToLower());
                     callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
                     callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
 
                     await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
+                }
 
                 // When self registering and login at the same time
                 // Need to add/refactor JWT logic if adding
