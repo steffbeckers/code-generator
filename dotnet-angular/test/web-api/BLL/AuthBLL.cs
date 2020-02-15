@@ -171,7 +171,7 @@ namespace Test.API.BLL
                 LastName = registerVM.LastName
             };
 
-            var result = await userManager.CreateAsync(user, registerVM.Password);
+            IdentityResult result = await userManager.CreateAsync(user, registerVM.Password);
 
             if (result.Succeeded)
             {
