@@ -188,10 +188,28 @@ namespace Test.API.BLL
 
                     await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
                 }
+                else {
+                    // Set claims of user
+                    List<Claim> claims = new List<Claim>() {
+                        new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),
+                        new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
+                    };
+                    if (!string.IsNullOrEmpty(user.FirstName))
+                    {
+                        claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));
+                    }
+                    if (!string.IsNullOrEmpty(user.LastName))
+                    {
+                        claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));
+                    }
 
-                // When self registering and login at the same time
-                // Need to add/refactor JWT logic if adding
-                //await signInManager.SignInAsync(user, isPersistent: false);
+                    // Registration successful, no email confirmation required => Generate JWT token based on the user's claims
+                    string token = this.GenerateJWT(claims);
+
+                    registeredVM.Token = token;
+                }
 
                 registeredVM.User = mapper.Map<User, UserVM>(user);
 
