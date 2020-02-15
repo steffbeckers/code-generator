@@ -104,7 +104,7 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            EmailConfirmedVM emailConfirmedVM = await this.bll.ConfirmEmail(emailConfirmedVM);
+            EmailConfirmedVM emailConfirmedVM = await this.bll.ConfirmEmail(id, code);
 
             return Ok(emailConfirmedVM);
 

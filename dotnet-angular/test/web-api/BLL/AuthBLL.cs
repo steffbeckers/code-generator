@@ -226,6 +226,20 @@ namespace Test.API.BLL
             await signInManager.SignOutAsync();
         }
 
+        public async Task<EmailConfirmedVM> ConfirmEmail(string userId, string code)
+        {
+            // Validation
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))
+            {
+                return null;
+            }
+
+            // Result
+            EmailConfirmedVM emailConfirmedVM = new EmailConfirmedVM();
+
+            return emailConfirmedVM;
+        }
+
         public string GenerateJWT(List<Claim> claims)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
