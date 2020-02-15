@@ -9,5 +9,10 @@ namespace Test.API.Framework.Exceptions
         public LoginFailedException(string message) : base(message) {}
     }
 
+    public class RegistrationFailedException : Exception
+    {
+        public RegistrationFailedException(string message) : base(message) {}
+    }
+
     #endregion
 }
