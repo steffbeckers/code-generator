@@ -227,7 +227,15 @@ namespace CodeGenCLI
                     {
                         Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.DALPath + "\\Repositories"); // Also generate the Repositories directory
                         Console.WriteLine(Config.WebAPI.DALPath);
-                        Console.WriteLine(Config.WebAPI.DALPath + "\\Repositories");
+                        Console.WriteLine(Config.WebAPI.DALPath + "\\Repositories"); // Also generate the Repositories directory
+                    }
+
+                    // Services
+                    Config.WebAPI.ServicesPath = !string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services";
+                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.ServicesPath))
+                    {
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.ServicesPath);
+                        Console.WriteLine(Config.WebAPI.ServicesPath);
                     }
 
                     // BLL
@@ -252,6 +260,17 @@ namespace CodeGenCLI
                     {
                         Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.ViewModelsPath);
                         Console.WriteLine(Config.WebAPI.ViewModelsPath);
+                    }
+
+                    // GraphQL
+                    Config.WebAPI.GraphQLPath = !string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL";
+                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.GraphQLPath))
+                    {
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.GraphQLPath + "\\Types"); // Also generate the Types directory
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.GraphQLPath + "\\Tests"); // Also generate the Types directory
+                        Console.WriteLine(Config.WebAPI.GraphQLPath);
+                        Console.WriteLine(Config.WebAPI.GraphQLPath + "\\Types"); // Also generate the Types directory
+                        Console.WriteLine(Config.WebAPI.GraphQLPath + "\\Tests"); // Also generate the Types directory
                     }
 
                     #endregion
@@ -296,7 +315,8 @@ namespace CodeGenCLI
 
                     #endregion
 
-                    // Models
+                    #region Models
+
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
                         string modelPath = Config.WebAPI.ModelsPath + "\\" + codeGenModel.Name + ".cs";
@@ -307,7 +327,10 @@ namespace CodeGenCLI
                         }
                     }
 
-                    // ViewModels
+                    #endregion
+
+                    #region ViewModels
+
                     foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                     {
                         string viewModelPath = Config.WebAPI.ViewModelsPath + "\\" + codeGenModel.Name + "VM.cs";
@@ -318,9 +341,11 @@ namespace CodeGenCLI
                         }
                     }
 
+                    #endregion
+
                     #region DAL
 
-                    //// DbContext
+                    // DbContext
                     string dalDbContextPath = Config.WebAPI.DALPath + "\\" + Config.Name + "Context.cs";
                     if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + dalDbContextPath) || Config.Override)
                     {
@@ -328,7 +353,7 @@ namespace CodeGenCLI
                         Console.WriteLine(dalDbContextPath);
                     }
 
-                    //// AutoMapper
+                    // AutoMapper
                     string dalAutoMapperPath = Config.WebAPI.DALPath + "\\AutoMapperProfile.cs";
                     if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + dalAutoMapperPath) || Config.Override)
                     {
@@ -349,7 +374,7 @@ namespace CodeGenCLI
 
                     #endregion
 
-                    // BLL
+                    #region BLL
                     foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                     {
                         // Existing code
@@ -365,8 +390,7 @@ namespace CodeGenCLI
                         }
 
                         // Generate tempate
-                        WebAPITemplates.BLL.BLLTemplate bllTemplate = new WebAPITemplates.BLL.BLLTemplate(Config, codeGenModel);
-                        string bllTemplateContent = bllTemplate.TransformText();
+                        string bllTemplateContent = new WebAPITemplates.BLL.BLLTemplate(Config, codeGenModel).TransformText();
 
                         // Replace custom code from existing code
                         MatchCollection bllCodeRegionMatches = Regex.Matches(bllTemplateContent, @"#-#-#(.+?)#-#-#", RegexOptions.Singleline);
@@ -382,148 +406,174 @@ namespace CodeGenCLI
                         Console.WriteLine(Config.WebAPI.BLLPath + "\\" + codeGenModel.Name + "BLL.cs");
                     }
 
-                    // Controllers
+                    #endregion
+
+                    #region Controllers
+
                     foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                     {
-                        WebAPITemplates.Controllers.ControllerTemplate controllerTemplate = new WebAPITemplates.Controllers.ControllerTemplate(Config, codeGenModel);
-                        string controllerTemplateContent = controllerTemplate.TransformText();
-
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs", controllerTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs");
+                        string controllerPath = Config.WebAPI.ControllersPath + "\\" + (!string.IsNullOrEmpty(codeGenModel.NamePlural) ? codeGenModel.NamePlural : codeGenModel.Name + "s") + "Controller.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + controllerPath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + controllerPath, new WebAPITemplates.Controllers.ControllerTemplate(Config, codeGenModel).TransformText());
+                            Console.WriteLine(controllerPath);
+                        }
                     }
 
-                    // Services
-                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services")))
+                    #endregion
+
+                    #region Services
+
+                    // EmailService
+                    string emailServicePath = Config.WebAPI.ServicesPath + "\\EmailService.cs";
+                    if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + emailServicePath) || Config.Override)
                     {
-                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services"));
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + emailServicePath, new WebAPITemplates.Services.EmailServiceTemplate(Config).TransformText());
+                        Console.WriteLine(emailServicePath);
                     }
 
-                    //// EmailService
-                    WebAPITemplates.Services.EmailServiceTemplate emailServiceTemplate = new WebAPITemplates.Services.EmailServiceTemplate(Config);
-                    string emailServiceTemplateContent = emailServiceTemplate.TransformText();
+                    #endregion
 
-                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services") + "\\EmailService.cs", emailServiceTemplateContent);
-                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ServicesPath) ? Config.WebAPI.ServicesPath : "Services") + "\\EmailService.cs");
+                    #region GraphQL
 
-                    // GraphQL
-                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL")))
+                    // Schema
+                    string graphQLSchemaPath = Config.WebAPI.GraphQLPath + "\\" + Config.Name + "Schema.cs";
+                    if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + graphQLSchemaPath) || Config.Override)
                     {
-                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL"));
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + graphQLSchemaPath, new WebAPITemplates.GraphQL.SchemaTemplate(Config).TransformText());
+                        Console.WriteLine(graphQLSchemaPath);
                     }
 
-                    //// Schema
-                    WebAPITemplates.GraphQL.SchemaTemplate graphQLSchemaTemplate = new WebAPITemplates.GraphQL.SchemaTemplate(Config);
-                    string graphQLSchemaTemplateContent = graphQLSchemaTemplate.TransformText();
-
-                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Schema.cs", graphQLSchemaTemplateContent);
-                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Schema.cs");
-
-                    //// Query
-                    WebAPITemplates.GraphQL.QueryTemplate graphQLQueryTemplate = new WebAPITemplates.GraphQL.QueryTemplate(Config);
-                    string graphQLQueryTemplateContent = graphQLQueryTemplate.TransformText();
-
-                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Query.cs", graphQLQueryTemplateContent);
-                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Query.cs");
-
-                    //// Mutation
-                    WebAPITemplates.GraphQL.MutationTemplate graphQLMutationTemplate = new WebAPITemplates.GraphQL.MutationTemplate(Config);
-                    string graphQLMutationTemplateContent = graphQLMutationTemplate.TransformText();
-
-                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Mutation.cs", graphQLMutationTemplateContent);
-                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + Config.Name + "Mutation.cs");
-
-                    //// Types
-                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types"))
+                    // Query
+                    string graphQLQueryPath = Config.WebAPI.GraphQLPath + "\\" + Config.Name + "Query.cs";
+                    if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + graphQLQueryPath) || Config.Override)
                     {
-                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types");
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + graphQLQueryPath, new WebAPITemplates.GraphQL.QueryTemplate(Config).TransformText());
+                        Console.WriteLine(graphQLQueryPath);
                     }
+
+                    // Mutation
+                    string graphQLMutationPath = Config.WebAPI.GraphQLPath + "\\" + Config.Name + "Mutation.cs";
+                    if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + graphQLMutationPath) || Config.Override)
+                    {
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + graphQLMutationPath, new WebAPITemplates.GraphQL.MutationTemplate(Config).TransformText());
+                        Console.WriteLine(graphQLMutationPath);
+                    }
+
+                    // Types
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
-                        WebAPITemplates.GraphQL.Types.TypeTemplate graphQLTypeTemplate = new WebAPITemplates.GraphQL.Types.TypeTemplate(Config, codeGenModel);
-                        string graphQLTypeTemplateContent = graphQLTypeTemplate.TransformText();
+                        string graphQLTypePath = Config.WebAPI.GraphQLPath + "\\Types\\" + codeGenModel.Name + "Type.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + graphQLTypePath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + graphQLTypePath, new WebAPITemplates.GraphQL.Types.TypeTemplate(Config, codeGenModel).TransformText());
+                            Console.WriteLine(graphQLTypePath);
+                        }
 
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "Type.cs", graphQLTypeTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "Type.cs");
-
-                        WebAPITemplates.GraphQL.Types.InputTypeTemplate graphQLInputTypeTemplate = new WebAPITemplates.GraphQL.Types.InputTypeTemplate(Config, codeGenModel);
-                        string graphQLInputTypeTemplateContent = graphQLInputTypeTemplate.TransformText();
-
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs", graphQLInputTypeTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\" + codeGenModel.Name + "InputType.cs");
+                        string graphQLInputTypePath = Config.WebAPI.GraphQLPath + "\\Types\\" + codeGenModel.Name + "InputType.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + graphQLInputTypePath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + graphQLInputTypePath, new WebAPITemplates.GraphQL.Types.InputTypeTemplate(Config, codeGenModel).TransformText());
+                            Console.WriteLine(graphQLInputTypePath);
+                        }
                     }
 
-                    //// Tests
-                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Tests"))
+                    // Tests
+                    string graphQLTestsPath = Config.WebAPI.GraphQLPath + "\\Tests\\Mutations.txt";
+                    if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + graphQLTestsPath) || Config.Override)
                     {
-                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Tests");
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + graphQLTestsPath, new WebAPITemplates.GraphQL.Tests.TestMutationsTemplate(Config).TransformText());
+                        Console.WriteLine(graphQLTestsPath);
                     }
 
-                    WebAPITemplates.GraphQL.Tests.TestMutationsTemplate graphQLTestMutationsTemplate = new WebAPITemplates.GraphQL.Tests.TestMutationsTemplate(Config);
-                    string graphQLTestMutationsTemplateContent = graphQLTestMutationsTemplate.TransformText();
+                    #endregion
 
-                    File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\Tests\\Mutations.txt", graphQLTestMutationsTemplateContent);
-                    Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\Tests\\Mutations.txt");
+                    #region Authentication with Identity
 
-                    // Authentication with Identity
                     if (Config.Authentication.Enabled)
                     {
-                        //// User model
-                        WebAPITemplates.Models.UserModelTemplate userModelTemplate = new WebAPITemplates.Models.UserModelTemplate(Config);
-                        string userModelTemplateContent = userModelTemplate.TransformText();
+                        // User model
+                        string userModelPath = Config.WebAPI.ModelsPath + "\\User.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + userModelPath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + userModelPath, new WebAPITemplates.Models.UserModelTemplate(Config).TransformText());
+                            Console.WriteLine(userModelPath);
+                        }
 
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\User.cs", userModelTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ModelsPath) ? Config.WebAPI.ModelsPath : "Models") + "\\User.cs");
+                        // View models
+                        string identityViewModelPath = Config.WebAPI.ViewModelsPath + "\\IdentityVM.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + identityViewModelPath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + identityViewModelPath, new WebAPITemplates.ViewModels.IdentityViewModelTemplate(Config).TransformText());
+                            Console.WriteLine(identityViewModelPath);
+                        }
 
-                        //// View models
-                        WebAPITemplates.ViewModels.IdentityViewModelTemplate identityViewModelTemplate = new WebAPITemplates.ViewModels.IdentityViewModelTemplate(Config);
-                        string identityViewModelTemplateContent = identityViewModelTemplate.TransformText();
+                        // UserType
+                        string graphQLUserTypePath = Config.WebAPI.GraphQLPath + "\\Types\\UserType.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + graphQLUserTypePath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + graphQLUserTypePath, new WebAPITemplates.GraphQL.Types.UserTypeTemplate(Config).TransformText());
+                            Console.WriteLine(graphQLUserTypePath);
+                        }
 
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\IdentityVM.cs", identityViewModelTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ViewModelsPath) ? Config.WebAPI.ViewModelsPath : "ViewModels") + "\\IdentityVM.cs");
+                        // Auth BLL
+                        string authBLLPath = Config.WebAPI.BLLPath + "\\AuthBLL.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + authBLLPath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + authBLLPath, new WebAPITemplates.BLL.AuthBLLTemplate(Config).TransformText());
+                            Console.WriteLine(authBLLPath);
+                        }
 
-                        ////// UserType
-                        WebAPITemplates.GraphQL.Types.UserTypeTemplate graphQLUserTypeTemplate = new WebAPITemplates.GraphQL.Types.UserTypeTemplate(Config);
-                        string graphQLUserTypeTemplateContent = graphQLUserTypeTemplate.TransformText();
-
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\UserType.cs", graphQLUserTypeTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.GraphQLPath) ? Config.WebAPI.GraphQLPath : "GraphQL") + "\\" + "Types" + "\\UserType.cs");
-
-                        //// Auth BLL
-                        WebAPITemplates.BLL.AuthBLLTemplate authBLLTemplate = new WebAPITemplates.BLL.AuthBLLTemplate(Config);
-                        string authBLLTemplateContent = authBLLTemplate.TransformText();
-
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\AuthBLL.cs", authBLLTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.BLLPath : "BLL") + "\\AuthBLL.cs");
-
-                        //// Auth controller
-                        WebAPITemplates.Controllers.AuthControllerTemplate authControllerTemplate = new WebAPITemplates.Controllers.AuthControllerTemplate(Config);
-                        string authControllerTemplateContent = authControllerTemplate.TransformText();
-
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs", authControllerTemplateContent);
-                        Console.WriteLine((!string.IsNullOrEmpty(Config.WebAPI.ControllersPath) ? Config.WebAPI.ControllersPath : "Controllers") + "\\AuthController.cs");
+                        // Auth controller
+                        string authControllerPath = Config.WebAPI.ControllersPath + "\\AuthController.cs";
+                        if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + authControllerPath) || Config.Override)
+                        {
+                            File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + authControllerPath, new WebAPITemplates.Controllers.AuthControllerTemplate(Config).TransformText());
+                            Console.WriteLine(authControllerPath);
+                        }
                     }
 
-                    // TODO: Migrations?
-                    //ProcessStartInfo removeInitialMigration = new ProcessStartInfo("Remove-Migration");
-                    //removeInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
-                    //Process.Start(removeInitialMigration).WaitForExit();
+                    #endregion
 
-                    //ProcessStartInfo addInitialMigration = new ProcessStartInfo("Add-Migration");
-                    //addInitialMigration.Arguments = @"Initial";
-                    //addInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
-                    //Process.Start(addInitialMigration).WaitForExit();
+                    #region Git
 
-                    // Stop
-                    Console.WriteLine();
-                    Console.WriteLine("### DONE ###");
-
-                    // Git
                     Console.WriteLine();
                     Console.WriteLine("### git status ###");
                     ProcessStartInfo gitStatus = new ProcessStartInfo("git");
                     gitStatus.Arguments = @"status";
                     gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitStatus).WaitForExit();
+
+                    #endregion;
+
+                    // Stop generation
+                    Console.WriteLine();
+                    Console.WriteLine("### DONE ###");
+
+                    #region Migrations
+
+                    Console.WriteLine();
+                    Console.WriteLine("Add migration? y/N");
+                    if (Console.ReadKey().KeyChar.ToString().Equals("y", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine();
+                        Console.Write("Name: ");
+                        string migrationName = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(migrationName))
+                            migrationName = migrationName.Replace(" ", "").Trim();
+
+                        ProcessStartInfo addInitialMigration = new ProcessStartInfo("dotnet");
+                        addInitialMigration.Arguments = @"ef migrations add " + (!string.IsNullOrEmpty(migrationName) ? migrationName : Guid.NewGuid().ToString().Replace("-", "").ToUpper());
+                        addInitialMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
+                        Process.Start(addInitialMigration).WaitForExit();
+
+                        ProcessStartInfo updateDatabaseMigration = new ProcessStartInfo("dotnet");
+                        updateDatabaseMigration.Arguments = @"ef database update";
+                        updateDatabaseMigration.WorkingDirectory = Config.WebAPI.ProjectPath;
+                        Process.Start(updateDatabaseMigration).WaitForExit();
+                    }
+
+                    #endregion
 
                     return 0;
                 });

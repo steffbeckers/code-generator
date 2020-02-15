@@ -55,6 +55,10 @@
         {
           "Name": "Price",
           "Type": "double"
+        },
+        {
+          "Name": "Active",
+          "Type": "bool"
         }
       ],
       "Relations": [
