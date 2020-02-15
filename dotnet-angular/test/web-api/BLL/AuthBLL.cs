@@ -177,8 +177,8 @@ namespace Test.API.BLL
             {
                 logger.LogInformation("User created a new account with password.");
 
-                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
+                string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+
                 await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
 
                 // When self registering and login at the same time
