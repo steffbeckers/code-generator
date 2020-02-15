@@ -96,7 +96,7 @@ namespace Test.API.Controllers
         [HttpGet]
         [Route("confirm-email")]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string id, [FromQuery] string code)
+        public async Task<ActionResult<EmailConfirmedVM>> ConfirmEmail([FromQuery] string id, [FromQuery] string code)
         {
             // Validation
             if (!ModelState.IsValid || string.IsNullOrEmpty(id) || string.IsNullOrEmpty(code))
@@ -104,20 +104,24 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-            }
+            EmailConfirmedVM emailConfirmedVM = await this.bll.ConfirmEmail(emailConfirmedVM);
 
-            var result = await userManager.ConfirmEmailAsync(user, code);
-            if (result.Succeeded)
-            {
-                return Ok();
-            }
+            return Ok(emailConfirmedVM);
 
-            // If we got this far, something failed
-            return BadRequest(ModelState);
+            //var user = await userManager.FindByIdAsync(userId);
+            //if (user == null)
+            //{
+                //throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+            //}
+
+            //var result = await userManager.ConfirmEmailAsync(user, code);
+            //if (result.Succeeded)
+            //{
+                //return Ok();
+            //}
+
+            //// If we got this far, something failed
+            //return BadRequest(ModelState);
         }
 
         //[HttpPost]
