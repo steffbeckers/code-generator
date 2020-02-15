@@ -145,6 +145,42 @@ namespace Test.API.BLL
             throw new LoginFailedException("invalid");
         }
 
+        public async Task<RegisteredVM> Register(RegisterVM registerVM) {
+            // Validation
+            if (loginVM == null) {
+                return null;
+            }
+
+            // Result
+            RegisteredVM registeredVM = new RegisteredVM();
+
+            User user = new User {
+                UserName = registerVM.Username,
+                Email = registerVM.Email,
+                FirstName = registerVM.FirstName,
+                LastName = registerVM.LastName
+            };
+
+            var result = await userManager.CreateAsync(user, registerVM.Password);
+
+            if (result.Succeeded)
+            {
+                logger.LogInformation("User created a new account with password.");
+
+                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
+                await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                // When self registering and login at the same time
+                // Need to add/refactor JWT logic if adding
+                //await signInManager.SignInAsync(user, isPersistent: false);
+
+                registeredVM.User = user;
+
+                return registeredVM;
+            }
+        }
+
         public async Task<User> Me()
         {
             User currentUser = await userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);

@@ -71,7 +71,7 @@ namespace Test.API.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterVM model)
+        public async Task<IActionResult> Register([FromBody] RegisterVM registerVM)
         {
             // Validation
             if (!ModelState.IsValid)
@@ -79,30 +79,9 @@ namespace Test.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (ModelState.IsValid)
-            {
-                var user = new User { UserName = model.Username, Email = model.Email };
+            RegisteredVM registeredVM = await this.bll.Register(registerVM);
 
-                var result = await userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    logger.LogInformation("User created a new account with password.");
-
-                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
-                    await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    // When self registering and login at the same time
-                    // Need to add/refactor JWT logic if adding
-                    //await signInManager.SignInAsync(user, isPersistent: false);
-
-                    return Ok();
-                }
-            }
-
-            // If we got this far, something failed
-            return BadRequest(ModelState);
+            return Ok(registeredVM);
         }
 
         [HttpGet]
