@@ -53,6 +53,11 @@ namespace Test.API.ViewModels.Identity
         public string LastName { get; set; }
     }
 
+	public class RegisteredVM
+    {
+        public UserVM User { get; set; }
+    }
+
     public class ForgotPasswordVM
     {
         [Required]
