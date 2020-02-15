@@ -177,7 +177,7 @@ namespace Test.API.BLL
             {
                 logger.LogInformation("User created a new account with password.");
 
-                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
                 await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
 
@@ -189,6 +189,10 @@ namespace Test.API.BLL
 
                 return registeredVM;
             }
+
+            logger.LogWarning("User registration is invalid", user);
+
+            throw new RegistrationFailedException("invalid");
         }
 
         public async Task Logout()
