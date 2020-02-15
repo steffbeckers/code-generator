@@ -46,6 +46,11 @@ namespace Test.API.Models
         /// </summary>
 		public double Price { get; set; }
 
+		/// <summary>
+        /// The Active property of Product.
+        /// </summary>
+		public bool Active { get; set; }
+
 		// Relations
 
 		//// One-to-many

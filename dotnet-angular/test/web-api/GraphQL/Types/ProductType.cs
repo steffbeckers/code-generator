@@ -19,6 +19,7 @@ namespace Test.API.GraphQL.Types
             Field(x => x.Code, nullable: true);
             Field(x => x.Quantity, nullable: true);
             Field(x => x.Price, nullable: true);
+            Field(x => x.Active, nullable: true);
 
             Field<ListGraphType<ProductDetailType>>(
                 "productDetails",

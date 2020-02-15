@@ -29,6 +29,7 @@ mutation createProduct($product: productInput!) {
     code
     quantity
     price
+    active
   }
 }
 
@@ -37,7 +38,8 @@ mutation createProduct($product: productInput!) {
     "name": "",
     "code": "",
     "quantity": "",
-    "price": ""
+    "price": "",
+    "active": ""
   }
 }
 

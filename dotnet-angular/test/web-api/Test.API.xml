@@ -523,6 +523,11 @@
             The Price property of Product.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Product.Active">
+            <summary>
+            The Active property of Product.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Product.Details">
             <summary>
             The related Details of Product.
@@ -911,6 +916,11 @@
         <member name="P:Test.API.ViewModels.ProductVM.Price">
             <summary>
             The Price property of Product.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.ProductVM.Active">
+            <summary>
+            The Active property of Product.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.ProductVM.Details">

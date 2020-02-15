@@ -106,6 +106,7 @@ namespace Test.API.BLL
             product.Code = productUpdate.Code;
             product.Quantity = productUpdate.Quantity;
             product.Price = productUpdate.Price;
+            product.Active = productUpdate.Active;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update
