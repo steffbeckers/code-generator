@@ -145,6 +145,16 @@ namespace Test.API.BLL
             throw new LoginFailedException("invalid");
         }
 
+        public async Task<User> Me()
+        {
+            User currentUser = await userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
+
+            // Retrieve roles of user
+            currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
+
+            return currentUser;
+        }
+
         public async Task<RegisteredVM> Register(RegisterVM registerVM) {
             // Validation
             if (loginVM == null) {
@@ -181,14 +191,9 @@ namespace Test.API.BLL
             }
         }
 
-        public async Task<User> Me()
+        public async Task Logout()
         {
-            User currentUser = await userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
-
-            // Retrieve roles of user
-            currentUser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);
-
-            return currentUser;
+            await signInManager.SignOutAsync();
         }
 
         public string GenerateJWT(List<Claim> claims)

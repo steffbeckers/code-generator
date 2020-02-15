@@ -88,7 +88,7 @@ namespace Test.API.Controllers
         [Route("logout")]
         public async Task<IActionResult> Logout()
         {
-            await signInManager.SignOutAsync();
+            await this.bll.Logout();
 
             return Ok();
         }
