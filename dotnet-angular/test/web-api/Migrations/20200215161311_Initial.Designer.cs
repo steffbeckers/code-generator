@@ -10,7 +10,7 @@ using Test.API.DAL;
 namespace Test.API.Migrations
 {
     [DbContext(typeof(TestContext))]
-    [Migration("20200215161158_Initial")]
+    [Migration("20200215161311_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
