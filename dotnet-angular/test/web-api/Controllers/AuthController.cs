@@ -151,9 +151,8 @@ namespace Test.API.Controllers
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
 
-                var code = await userManager.GeneratePasswordResetTokenAsync(user);
+                string code = await userManager.GeneratePasswordResetTokenAsync(user);
 
-                //var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
                 var callbackUrl = configuration.GetSection("EmailSettings").GetValue<string>("PasswordResetURL");
                 callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToLower());
                 callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
