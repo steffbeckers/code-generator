@@ -71,7 +71,7 @@ namespace Test.API.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterVM registerVM)
+        public async Task<ActionResult<RegisteredVM>> Register([FromBody] RegisterVM registerVM)
         {
             // Validation
             if (!ModelState.IsValid)
