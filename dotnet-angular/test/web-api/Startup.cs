@@ -310,6 +310,7 @@ namespace Test.API
 
             // Specify different custom exceptions here
             if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;
+            if (ex is RegistrationFailedException) code = HttpStatusCode.BadRequest;
 
             string result = JsonConvert.SerializeObject(new { error = ex.Message });
 
