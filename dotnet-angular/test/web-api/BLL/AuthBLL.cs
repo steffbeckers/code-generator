@@ -157,7 +157,7 @@ namespace Test.API.BLL
 
         public async Task<RegisteredVM> Register(RegisterVM registerVM) {
             // Validation
-            if (loginVM == null) {
+            if (registerVM == null) {
                 return null;
             }
 
@@ -179,7 +179,7 @@ namespace Test.API.BLL
 
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
-                await emailService.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
 
                 // When self registering and login at the same time
                 // Need to add/refactor JWT logic if adding
