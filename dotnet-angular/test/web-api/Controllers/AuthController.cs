@@ -93,31 +93,32 @@ namespace Test.API.Controllers
             return Ok();
         }
 
-        //[HttpGet]
-        //[Route("confirm-email")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        //{
-        //    if (userId == null || code == null)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpGet]
+        [Route("confirm-email")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] string id, [FromQuery] string code)
+        {
+            // Validation
+            if (!ModelState.IsValid || string.IsNullOrEmpty(id) || string.IsNullOrEmpty(code))
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var user = await userManager.FindByIdAsync(userId);
-        //    if (user == null)
-        //    {
-        //        throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-        //    }
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+            }
 
-        //    var result = await userManager.ConfirmEmailAsync(user, code);
-        //    if (result.Succeeded)
-        //    {
-        //        return Ok();
-        //    }
+            var result = await userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
 
-        //    // If we got this far, something failed
-        //    return BadRequest(ModelState);
-        //}
+            // If we got this far, something failed
+            return BadRequest(ModelState);
+        }
 
         //[HttpPost]
         //[Route("forgot-password")]
