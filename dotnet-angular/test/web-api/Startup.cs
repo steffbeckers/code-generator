@@ -61,7 +61,7 @@ namespace Test.API
             services.Configure<IdentityOptions>(options =>
             {
                 // Sign in
-                options.SignIn.RequireConfirmedEmail = false; // ANONYMOUS
+                options.SignIn.RequireConfirmedEmail = true;
 
                 // Password settings
                 options.Password.RequireDigit = true;

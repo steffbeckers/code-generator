@@ -177,7 +177,7 @@ namespace Test.API.BLL
             {
                 logger.LogInformation("User created a new account with password.");
 
-                string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString().ToUpper(), code, Request.Scheme);
                 await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
 
