@@ -8,8 +8,11 @@ namespace CodeGenCLI.CodeGenClasses
         public bool Enabled { get; set; }
         public string Secret { get; set; }
         public string TokenExpiresInMinutes { get; set; }
+        [JsonRequired]
+        public bool EmailConfirmation { get; set; }
+        public string ConfirmEmailURL { get; set; }
+        public string ResetPasswordURL { get; set; }
         public CodeGenConfigAuthenticationAdmin Admin { get; set; }
-        public string PasswordResetURL { get; set; }
     }
 
     public class CodeGenConfigAuthenticationAdmin

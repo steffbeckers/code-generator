@@ -167,35 +167,36 @@ using ");
             this.Write("Context>()\r\n                .AddDefaultTokenProviders();\r\n\r\n            //// Opti" +
                     "ons\r\n            services.Configure<IdentityOptions>(options =>\r\n            {\r\n" +
                     "                // Sign in\r\n                options.SignIn.RequireConfirmedEmail" +
-                    " = false; // ANONYMOUS\r\n\r\n                // Password settings\r\n                " +
-                    "options.Password.RequireDigit = true;\r\n                options.Password.Required" +
-                    "Length = 10;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n" +
-                    "                options.Password.RequireUppercase = true;\r\n                optio" +
-                    "ns.Password.RequireLowercase = true;\r\n                options.Password.RequiredU" +
-                    "niqueChars = 6;\r\n\r\n                // Lockout settings\r\n                options." +
-                    "Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);\r\n                opti" +
-                    "ons.Lockout.MaxFailedAccessAttempts = 10;\r\n                options.Lockout.Allow" +
-                    "edForNewUsers = true;\r\n\r\n                // User settings\r\n                optio" +
-                    "ns.User.RequireUniqueEmail = true;\r\n            });\r\n\r\n            //// JWT\'s\r\n " +
-                    "           services.AddAuthentication(options =>\r\n            {\r\n               " +
-                    " options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;\r\n  " +
-                    "              options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationS" +
-                    "cheme;\r\n            })\r\n            .AddJwtBearer(options =>\r\n            {\r\n   " +
-                    "             options.RequireHttpsMetadata = false;\r\n                options.Save" +
-                    "Token = true;\r\n                options.TokenValidationParameters = new TokenVali" +
-                    "dationParameters\r\n                {\r\n                    ValidateIssuerSigningKe" +
-                    "y = true,\r\n                    IssuerSigningKey = new SymmetricSecurityKey(Encod" +
-                    "ing.ASCII.GetBytes(configuration.GetSection(\"Authentication\").GetValue<string>(\"" +
-                    "Secret\"))),\r\n                    ValidateIssuer = false,\r\n                    Va" +
-                    "lidateAudience = false,\r\n                    ClockSkew = TimeSpan.Zero,\r\n       " +
-                    "             ValidateLifetime = true\r\n                };\r\n                option" +
-                    "s.Events = new JwtBearerEvents\r\n                {\r\n                    OnMessage" +
-                    "Received = context =>\r\n                    {\r\n                        // Allow t" +
-                    "he access token to be set by query param\r\n                        if (context.Re" +
-                    "quest.Method.Equals(\"GET\") && context.Request.Query.ContainsKey(\"access_token\"))" +
-                    "\r\n                            context.Token = context.Request.Query[\"access_toke" +
-                    "n\"];\r\n\r\n                        return Task.CompletedTask;\r\n                    " +
-                    "}\r\n                };\r\n            });\r\n");
+                    " = this.configuration.GetSection(\"Authentication\").GetValue<bool>(\"EmailConfirma" +
+                    "tion\");\r\n\r\n                // Password settings\r\n                options.Passwor" +
+                    "d.RequireDigit = true;\r\n                options.Password.RequiredLength = 10;\r\n " +
+                    "               options.Password.RequireNonAlphanumeric = false;\r\n               " +
+                    " options.Password.RequireUppercase = true;\r\n                options.Password.Req" +
+                    "uireLowercase = true;\r\n                options.Password.RequiredUniqueChars = 6;" +
+                    "\r\n\r\n                // Lockout settings\r\n                options.Lockout.Default" +
+                    "LockoutTimeSpan = TimeSpan.FromMinutes(30);\r\n                options.Lockout.Max" +
+                    "FailedAccessAttempts = 10;\r\n                options.Lockout.AllowedForNewUsers =" +
+                    " true;\r\n\r\n                // User settings\r\n                options.User.Require" +
+                    "UniqueEmail = true;\r\n            });\r\n\r\n            //// JWT\'s\r\n            serv" +
+                    "ices.AddAuthentication(options =>\r\n            {\r\n                options.Defaul" +
+                    "tAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;\r\n                o" +
+                    "ptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;\r\n       " +
+                    "     })\r\n            .AddJwtBearer(options =>\r\n            {\r\n                op" +
+                    "tions.RequireHttpsMetadata = false;\r\n                options.SaveToken = true;\r\n" +
+                    "                options.TokenValidationParameters = new TokenValidationParameter" +
+                    "s\r\n                {\r\n                    ValidateIssuerSigningKey = true,\r\n    " +
+                    "                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBy" +
+                    "tes(configuration.GetSection(\"Authentication\").GetValue<string>(\"Secret\"))),\r\n  " +
+                    "                  ValidateIssuer = false,\r\n                    ValidateAudience " +
+                    "= false,\r\n                    ClockSkew = TimeSpan.Zero,\r\n                    Va" +
+                    "lidateLifetime = true\r\n                };\r\n                options.Events = new " +
+                    "JwtBearerEvents\r\n                {\r\n                    OnMessageReceived = cont" +
+                    "ext =>\r\n                    {\r\n                        // Allow the access token" +
+                    " to be set by query param\r\n                        if (context.Request.Method.Eq" +
+                    "uals(\"GET\") && context.Request.Query.ContainsKey(\"access_token\"))\r\n             " +
+                    "               context.Token = context.Request.Query[\"access_token\"];\r\n\r\n       " +
+                    "                 return Task.CompletedTask;\r\n                    }\r\n            " +
+                    "    };\r\n            });\r\n");
             
             #line 121 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
@@ -483,9 +484,11 @@ using ");
             
             #line default
             #line hidden
-            this.Write("            if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;\r\n");
+            this.Write("            if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;\r\n  " +
+                    "          if (ex is RegistrationFailedException) code = HttpStatusCode.BadReques" +
+                    "t;\r\n");
             
-            #line 327 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 328 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default

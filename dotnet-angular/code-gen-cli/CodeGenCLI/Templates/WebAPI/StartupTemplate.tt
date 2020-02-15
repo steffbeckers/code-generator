@@ -68,7 +68,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             services.Configure<IdentityOptions>(options =>
             {
                 // Sign in
-                options.SignIn.RequireConfirmedEmail = false; // ANONYMOUS
+                options.SignIn.RequireConfirmedEmail = this.configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation");
 
                 // Password settings
                 options.Password.RequireDigit = true;
@@ -324,6 +324,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // Specify different custom exceptions here
 <# if (config.Authentication.Enabled) { #>
             if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;
+            if (ex is RegistrationFailedException) code = HttpStatusCode.BadRequest;
 <# } #>
 
             string result = JsonConvert.SerializeObject(new { error = ex.Message });

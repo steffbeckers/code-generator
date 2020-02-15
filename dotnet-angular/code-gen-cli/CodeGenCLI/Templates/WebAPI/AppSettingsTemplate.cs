@@ -64,107 +64,120 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("\",\r\n    \"Admin\": {\r\n        \"FirstName\": \"");
+            this.Write("\",\r\n    \"EmailConfirmation\": ");
+            
+            #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.EmailConfirmation.ToString().ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(",\r\n    \"ConfirmEmailURL\": \"");
             
             #line 16 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.ConfirmEmailURL));
+            
+            #line default
+            #line hidden
+            this.Write("\",\r\n    \"ResetPasswordURL\": \"");
+            
+            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.ResetPasswordURL));
+            
+            #line default
+            #line hidden
+            this.Write("\",\r\n    \"Admin\": {\r\n        \"FirstName\": \"");
+            
+            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.FirstName));
             
             #line default
             #line hidden
             this.Write("\",\r\n        \"LastName\": \"");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.LastName));
             
             #line default
             #line hidden
             this.Write("\",\r\n        \"Username\": \"");
             
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Username));
             
             #line default
             #line hidden
             this.Write("\",\r\n        \"Email\": \"");
             
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Email));
             
             #line default
             #line hidden
             this.Write("\",\r\n        \"Password\": \"");
             
-            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Password));
             
             #line default
             #line hidden
-            this.Write("\"\r\n    },\r\n    \"PasswordResetURL\": \"https://");
+            this.Write("\"\r\n    },\r\n  },\r\n");
             
-            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write(".steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{cod" +
-                    "e}}\"\r\n  },\r\n");
-            
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
  if (config.WebAPI.EmailService.Enabled) { 
             
             #line default
             #line hidden
             this.Write("  \"EmailService\": {\r\n    \"MailServer\": \"");
             
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailServer));
             
             #line default
             #line hidden
             this.Write("\",\r\n    \"MailPort\": ");
             
-            #line 28 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailPort));
             
             #line default
             #line hidden
             this.Write(",\r\n    \"UseSSL\": ");
             
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.UseSSL.ToString().ToLower()));
             
             #line default
             #line hidden
             this.Write(",\r\n    \"SenderName\": \"");
             
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.SenderName));
             
             #line default
             #line hidden
             this.Write("\",\r\n    \"Sender\": \"");
             
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Sender));
             
             #line default
             #line hidden
             this.Write("\",\r\n    \"Password\": \"");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Password));
             
             #line default
             #line hidden
             this.Write("\"\r\n  },\r\n");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
  } 
             
             #line default

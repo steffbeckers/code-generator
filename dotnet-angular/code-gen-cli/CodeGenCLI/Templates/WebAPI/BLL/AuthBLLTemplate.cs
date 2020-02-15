@@ -148,18 +148,57 @@ using ");
                     ")\r\n        {\r\n            User currentUser = await userManager.GetUserAsync(this" +
                     ".httpContextAccessor.HttpContext.User);\r\n\r\n            // Retrieve roles of user" +
                     "\r\n            currentUser.Roles = (List<string>)await userManager.GetRolesAsync(" +
-                    "currentUser);\r\n\r\n            return currentUser;\r\n        }\r\n\r\n        public st" +
-                    "ring GenerateJWT(List<Claim> claims)\r\n        {\r\n            JwtSecurityTokenHan" +
-                    "dler tokenHandler = new JwtSecurityTokenHandler();\r\n            var key = Encodi" +
-                    "ng.ASCII.GetBytes(configuration.GetSection(\"Authentication\").GetValue<string>(\"S" +
-                    "ecret\"));\r\n            SecurityTokenDescriptor tokenDescriptor = new SecurityTok" +
-                    "enDescriptor\r\n            {\r\n                Subject = new ClaimsIdentity(claims" +
-                    "),\r\n                Expires = DateTime.UtcNow.AddMinutes(double.Parse(configurat" +
-                    "ion.GetSection(\"Authentication\").GetValue<string>(\"TokenExpiresInMinutes\"))),\r\n " +
-                    "               SigningCredentials = new SigningCredentials(new SymmetricSecurity" +
-                    "Key(key), SecurityAlgorithms.HmacSha256Signature)\r\n            };\r\n\r\n           " +
-                    " return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));\r\n   " +
-                    "     }\r\n    }\r\n}");
+                    "currentUser);\r\n\r\n            return currentUser;\r\n        }\r\n\r\n        public as" +
+                    "ync Task<RegisteredVM> Register(RegisterVM registerVM) {\r\n            // Validat" +
+                    "ion\r\n            if (registerVM == null) {\r\n                return null;\r\n      " +
+                    "      }\r\n\r\n            // Result\r\n            RegisteredVM registeredVM = new Re" +
+                    "gisteredVM();\r\n\r\n            User user = new User {\r\n                UserName = " +
+                    "registerVM.Username,\r\n                Email = registerVM.Email,\r\n               " +
+                    " FirstName = registerVM.FirstName,\r\n                LastName = registerVM.LastNa" +
+                    "me\r\n            };\r\n\r\n            IdentityResult result = await userManager.Crea" +
+                    "teAsync(user, registerVM.Password);\r\n\r\n            if (result.Succeeded)\r\n      " +
+                    "      {\r\n                logger.LogInformation(\"User created a new account with " +
+                    "password.\");\r\n\r\n                // Email confirmation\r\n                if (confi" +
+                    "guration.GetSection(\"Authentication\").GetValue<bool>(\"EmailConfirmation\")) {\r\n  " +
+                    "                  string code = await userManager.GenerateEmailConfirmationToken" +
+                    "Async(user);\r\n\r\n                    string callbackUrl = configuration.GetSectio" +
+                    "n(\"Authentication\").GetValue<string>(\"PasswordResetURL\");\r\n                    c" +
+                    "allbackUrl = callbackUrl.Replace(\"{{userId}}\", user.Id.ToString().ToLower());\r\n " +
+                    "                   callbackUrl = callbackUrl.Replace(\"{{userEmail}}\", user.Email" +
+                    ".ToString().ToLower());\r\n                    callbackUrl = callbackUrl.Replace(\"" +
+                    "{{code}}\", Uri.EscapeDataString(code));\r\n\r\n                    await emailServic" +
+                    "e.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);\r\n                }\r" +
+                    "\n                else {\r\n                    // Set claims of user\r\n            " +
+                    "        List<Claim> claims = new List<Claim>() {\r\n                        new Cl" +
+                    "aim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n            " +
+                    "            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),\r\n     " +
+                    "                   new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n      " +
+                    "                  new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToStrin" +
+                    "g(CultureInfo.CurrentCulture))\r\n                    };\r\n                    if (" +
+                    "!string.IsNullOrEmpty(user.FirstName))\r\n                    {\r\n                 " +
+                    "       claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));" +
+                    "\r\n                    }\r\n                    if (!string.IsNullOrEmpty(user.Last" +
+                    "Name))\r\n                    {\r\n                        claims.Add(new Claim(JwtR" +
+                    "egisteredClaimNames.FamilyName, user.LastName));\r\n                    }\r\n\r\n     " +
+                    "               // Registration successful, no email confirmation required => Gen" +
+                    "erate JWT token based on the user\'s claims\r\n                    string token = t" +
+                    "his.GenerateJWT(claims);\r\n\r\n                    registeredVM.Token = token;\r\n   " +
+                    "             }\r\n\r\n                registeredVM.User = mapper.Map<User, UserVM>(u" +
+                    "ser);\r\n\r\n                return registeredVM;\r\n            }\r\n\r\n            logg" +
+                    "er.LogWarning(\"User registration is invalid\", user);\r\n\r\n            throw new Re" +
+                    "gistrationFailedException(\"invalid\");\r\n        }\r\n\r\n        public async Task Lo" +
+                    "gout()\r\n        {\r\n            await signInManager.SignOutAsync();\r\n        }\r\n\r" +
+                    "\n        public string GenerateJWT(List<Claim> claims)\r\n        {\r\n            J" +
+                    "wtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();\r\n          " +
+                    "  var key = Encoding.ASCII.GetBytes(configuration.GetSection(\"Authentication\").G" +
+                    "etValue<string>(\"Secret\"));\r\n            SecurityTokenDescriptor tokenDescriptor" +
+                    " = new SecurityTokenDescriptor\r\n            {\r\n                Subject = new Cla" +
+                    "imsIdentity(claims),\r\n                Expires = DateTime.UtcNow.AddMinutes(doubl" +
+                    "e.Parse(configuration.GetSection(\"Authentication\").GetValue<string>(\"TokenExpire" +
+                    "sInMinutes\"))),\r\n                SigningCredentials = new SigningCredentials(new" +
+                    " SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)\r\n           " +
+                    " };\r\n\r\n            return tokenHandler.WriteToken(tokenHandler.CreateToken(token" +
+                    "Descriptor));\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

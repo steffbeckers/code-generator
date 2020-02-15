@@ -52,18 +52,21 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
                     "racters long.\", MinimumLength = 10)]\r\n        [DataType(DataType.Password)]\r\n   " +
                     "     public string Password { get; set; }\r\n\r\n        [DataType(DataType.Password" +
                     ")]\r\n        [Compare(\"Password\", ErrorMessage = \"The password and confirmation p" +
-                    "assword do not match.\")]\r\n        public string ConfirmPassword { get; set; }\r\n " +
-                    "   }\r\n\r\n    public class ForgotPasswordVM\r\n    {\r\n        [Required]\r\n        [E" +
-                    "mailAddress]\r\n        public string Email { get; set; }\r\n    }\r\n\r\n    public cla" +
-                    "ss ResetPasswordVM\r\n    {\r\n        [Required]\r\n        public string Id { get; s" +
-                    "et; }\r\n\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email" +
-                    " { get; set; }\r\n\r\n        [Required]\r\n        public string Code { get; set; }\r\n" +
-                    "\r\n        [Required]\r\n        [StringLength(100, ErrorMessage = \"The {0} must be" +
-                    " at least {2} and at max {1} characters long.\", MinimumLength = 10)]\r\n        [D" +
-                    "ataType(DataType.Password)]\r\n        public string Password { get; set; }\r\n\r\n   " +
-                    "     [Required]\r\n        [DataType(DataType.Password)]\r\n        [Compare(\"Passwo" +
-                    "rd\", ErrorMessage = \"The password and confirmation password do not match.\")]\r\n  " +
-                    "      public string PasswordConfirm { get; set; }\r\n    }\r\n}\r\n");
+                    "assword do not match.\")]\r\n        public string ConfirmPassword { get; set; }\r\n\r" +
+                    "\n        public string FirstName { get; set; }\r\n        public string LastName {" +
+                    " get; set; }\r\n    }\r\n\r\n\tpublic class RegisteredVM\r\n    {\r\n        public UserVM " +
+                    "User { get; set; }\r\n        public string Token { get; set; }\r\n    }\r\n\r\n    publ" +
+                    "ic class ForgotPasswordVM\r\n    {\r\n        [Required]\r\n        [EmailAddress]\r\n  " +
+                    "      public string Email { get; set; }\r\n    }\r\n\r\n    public class ResetPassword" +
+                    "VM\r\n    {\r\n        [Required]\r\n        public string Id { get; set; }\r\n\r\n       " +
+                    " [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n" +
+                    "\r\n        [Required]\r\n        public string Code { get; set; }\r\n\r\n        [Requi" +
+                    "red]\r\n        [StringLength(100, ErrorMessage = \"The {0} must be at least {2} an" +
+                    "d at max {1} characters long.\", MinimumLength = 10)]\r\n        [DataType(DataType" +
+                    ".Password)]\r\n        public string Password { get; set; }\r\n\r\n        [Required]\r" +
+                    "\n        [DataType(DataType.Password)]\r\n        [Compare(\"Password\", ErrorMessag" +
+                    "e = \"The password and confirmation password do not match.\")]\r\n        public str" +
+                    "ing PasswordConfirm { get; set; }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

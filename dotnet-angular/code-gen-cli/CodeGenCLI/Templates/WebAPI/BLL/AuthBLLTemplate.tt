@@ -162,6 +162,77 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             return currentUser;
         }
 
+        public async Task<RegisteredVM> Register(RegisterVM registerVM) {
+            // Validation
+            if (registerVM == null) {
+                return null;
+            }
+
+            // Result
+            RegisteredVM registeredVM = new RegisteredVM();
+
+            User user = new User {
+                UserName = registerVM.Username,
+                Email = registerVM.Email,
+                FirstName = registerVM.FirstName,
+                LastName = registerVM.LastName
+            };
+
+            IdentityResult result = await userManager.CreateAsync(user, registerVM.Password);
+
+            if (result.Succeeded)
+            {
+                logger.LogInformation("User created a new account with password.");
+
+                // Email confirmation
+                if (configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation")) {
+                    string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    string callbackUrl = configuration.GetSection("Authentication").GetValue<string>("PasswordResetURL");
+                    callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToLower());
+                    callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
+                    callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
+
+                    await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
+                }
+                else {
+                    // Set claims of user
+                    List<Claim> claims = new List<Claim>() {
+                        new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),
+                        new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
+                    };
+                    if (!string.IsNullOrEmpty(user.FirstName))
+                    {
+                        claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));
+                    }
+                    if (!string.IsNullOrEmpty(user.LastName))
+                    {
+                        claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));
+                    }
+
+                    // Registration successful, no email confirmation required => Generate JWT token based on the user's claims
+                    string token = this.GenerateJWT(claims);
+
+                    registeredVM.Token = token;
+                }
+
+                registeredVM.User = mapper.Map<User, UserVM>(user);
+
+                return registeredVM;
+            }
+
+            logger.LogWarning("User registration is invalid", user);
+
+            throw new RegistrationFailedException("invalid");
+        }
+
+        public async Task Logout()
+        {
+            await signInManager.SignOutAsync();
+        }
+
         public string GenerateJWT(List<Claim> claims)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();

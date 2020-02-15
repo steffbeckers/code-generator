@@ -42,11 +42,22 @@ namespace CodeGenCLI.Templates.WebAPI.Framework
             
             #line default
             #line hidden
-            this.Write("    # region Authentication\r\n\r\n    public class LoginFailedException : Exception\r" +
-                    "\n    {\r\n        public LoginFailedException(string message) : base(message) {}\r\n" +
-                    "    }\r\n\r\n    #endregion\r\n");
+            this.Write(@"    # region Authentication
+
+    public class LoginFailedException : Exception
+    {
+        public LoginFailedException(string message) : base(message) {}
+    }
+
+    public class RegistrationFailedException : Exception
+    {
+        public RegistrationFailedException(string message) : base(message) {}
+    }
+
+    #endregion
+");
             
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Framework\ExceptionsTemplate.tt"
+            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Framework\ExceptionsTemplate.tt"
  } 
             
             #line default

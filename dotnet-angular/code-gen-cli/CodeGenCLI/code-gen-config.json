@@ -335,14 +335,16 @@
     "Enabled": true,
     "Secret": "ecd81ddc42741f570d02de8521f4e3326868a2233b2ff0c6589f5d7c26fb49a7",
     "TokenExpiresInMinutes": "1440",
+    "EmailConfirmation": false,
+    "ConfirmEmailURL": "https://test.steffbeckers.eu/auth/confirm-email?id={{userId}}&email={{userEmail}}&code={{code}}",
+    "ResetPasswordURL": "https://test.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}",
     "Admin": {
       "FirstName": "Steff",
       "LastName": "Beckers",
       "UserName": "admin",
       "Email": "admin@steffbeckers.eu",
       "Password": "Steff12345!"
-    },
-    "PasswordResetURL": "https://test.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}"
+    }
   },
   "WebAPI": {
     "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
