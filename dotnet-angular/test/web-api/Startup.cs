@@ -61,7 +61,7 @@ namespace Test.API
             services.Configure<IdentityOptions>(options =>
             {
                 // Sign in
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = this.configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation");
 
                 // Password settings
                 options.Password.RequireDigit = true;
