@@ -68,25 +68,4 @@ namespace Test.API.Services
                 $"Please confirm your account by clicking this link: <a href='{HtmlEncoder.Default.Encode(link)}'>link</a>");
         }
     }
-
-    public static class UrlHelperExtensions
-    {
-        public static string EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
-        {
-            return urlHelper.Action(
-                action: nameof(AuthController.ConfirmEmail),
-                controller: "auth",
-                values: new { userId, code },
-                protocol: scheme);
-        }
-
-        public static string ResetPasswordLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
-        {
-            return urlHelper.Action(
-                action: nameof(AuthController.ResetPassword),
-                controller: "auth",
-                values: new { userId, code },
-                protocol: scheme);
-        }
-    }
 }
