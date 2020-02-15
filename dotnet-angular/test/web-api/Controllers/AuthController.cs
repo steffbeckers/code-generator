@@ -73,6 +73,12 @@ namespace Test.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterVM model)
         {
+            // Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = model.Username, Email = model.Email };
