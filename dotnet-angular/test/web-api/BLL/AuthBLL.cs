@@ -185,7 +185,7 @@ namespace Test.API.BLL
                 // Need to add/refactor JWT logic if adding
                 //await signInManager.SignInAsync(user, isPersistent: false);
 
-                registeredVM.User = user;
+                registeredVM.User = mapper.Map<User, UserVM>(user);
 
                 return registeredVM;
             }
