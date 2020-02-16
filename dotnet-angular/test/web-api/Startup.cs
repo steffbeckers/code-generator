@@ -25,10 +25,10 @@ using System.Threading.Tasks;
 using Test.API.BLL;
 using Test.API.DAL;
 using Test.API.DAL.Repositories;
+using Test.API.Framework.Exceptions;
 using Test.API.GraphQL;
 using Test.API.Models;
 using Test.API.Services;
-using Test.API.Framework.Exceptions;
 
 namespace Test.API
 {
