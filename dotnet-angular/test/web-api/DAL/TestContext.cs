@@ -95,18 +95,18 @@ namespace Test.API.DAL
             // Required properties
             modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
 
-            //// User
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.CreatedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.CreatedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            // User
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.CreatedByUser)
+                .WithMany()
+                .HasForeignKey<Account>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.ModifiedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.ModifiedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithMany()
+                .HasForeignKey<Account>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
 
@@ -124,18 +124,18 @@ namespace Test.API.DAL
             // Required properties
             modelBuilder.Entity<Product>().Property(e => e.Name).IsRequired();
 
-            //// User
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.CreatedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.CreatedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            // User
+            modelBuilder.Entity<Product>()
+                .HasOne(a => a.CreatedByUser)
+                .WithMany()
+                .HasForeignKey<Product>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.ModifiedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.ModifiedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Product>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithMany()
+                .HasForeignKey<Product>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
 
@@ -153,18 +153,18 @@ namespace Test.API.DAL
             // Required properties
             modelBuilder.Entity<Supplier>().Property(e => e.Name).IsRequired();
 
-            //// User
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.CreatedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.CreatedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            // User
+            modelBuilder.Entity<Supplier>()
+                .HasOne(a => a.CreatedByUser)
+                .WithMany()
+                .HasForeignKey<Supplier>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.ModifiedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.ModifiedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Supplier>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithMany()
+                .HasForeignKey<Supplier>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
 
@@ -183,18 +183,18 @@ namespace Test.API.DAL
             modelBuilder.Entity<ProductDetail>().Property(e => e.Comment).IsRequired();
             modelBuilder.Entity<ProductDetail>().Property(e => e.ProductId).IsRequired();
 
-            //// User
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.CreatedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.CreatedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            // User
+            modelBuilder.Entity<ProductDetail>()
+                .HasOne(a => a.CreatedByUser)
+                .WithMany()
+                .HasForeignKey<ProductDetail>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.ModifiedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.ModifiedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProductDetail>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithMany()
+                .HasForeignKey<ProductDetail>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
 
@@ -213,18 +213,18 @@ namespace Test.API.DAL
             modelBuilder.Entity<ProductSupplier>().Property(e => e.ProductId).IsRequired();
             modelBuilder.Entity<ProductSupplier>().Property(e => e.SupplierId).IsRequired();
 
-            //// User
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.CreatedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.CreatedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            // User
+            modelBuilder.Entity<ProductSupplier>()
+                .HasOne(a => a.CreatedByUser)
+                .WithMany()
+                .HasForeignKey<ProductSupplier>(a => a.CreatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(a => a.ModifiedByUser)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.ModifiedByUserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProductSupplier>()
+                .HasOne(a => a.ModifiedByUser)
+                .WithMany()
+                .HasForeignKey<ProductSupplier>(a => a.ModifiedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
 		}
