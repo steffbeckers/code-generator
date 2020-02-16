@@ -260,6 +260,11 @@ namespace Test.API.BLL
             throw new ConfirmEmailFailedException("invalid");
         }
 
+        public async Task ForgotPassword(ForgotPasswordVM forgotPasswordVM)
+        {
+            
+        }
+
         public string GenerateJWT(List<Claim> claims)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
