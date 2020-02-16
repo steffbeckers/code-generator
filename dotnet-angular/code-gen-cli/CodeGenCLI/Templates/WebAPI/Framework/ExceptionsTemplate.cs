@@ -54,10 +54,25 @@ namespace CodeGenCLI.Templates.WebAPI.Framework
         public RegistrationFailedException(string message) : base(message) {}
     }
 
+    public class ConfirmEmailFailedException : Exception
+    {
+        public ConfirmEmailFailedException(string message) : base(message) {}
+    }
+
+    public class ForgotPasswordFailedException : Exception
+    {
+        public ForgotPasswordFailedException(string message) : base(message) {}
+    }
+
+    public class ResetPasswordFailedException : Exception
+    {
+        public ResetPasswordFailedException(string message) : base(message) {}
+    }
+
     #endregion
 ");
             
-            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Framework\ExceptionsTemplate.tt"
+            #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Framework\ExceptionsTemplate.tt"
  } 
             
             #line default

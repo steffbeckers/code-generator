@@ -175,6 +175,12 @@ namespace CodeGenCLI
                 //    "-u | --uppercase", "Display the greeting in uppercase.",
                 //    CommandOptionType.NoValue);
 
+                CommandOption addMigration = generateCommand.Option(
+                    "-am |--add-migration",
+                    "Add migration",
+                    CommandOptionType.NoValue
+                );
+
                 // Help
                 generateCommand.HelpOption("-h | -? | --help");
 
@@ -553,10 +559,13 @@ namespace CodeGenCLI
                     #region Migrations
 
                     Console.WriteLine();
-                    Console.WriteLine("Add migration? y/N");
-                    if (Console.ReadKey().KeyChar.ToString().Equals("y", StringComparison.OrdinalIgnoreCase))
+
+                    //Console.WriteLine("Add migration? y/N");
+
+                    //if (Console.ReadKey().KeyChar.ToString().Equals("y", StringComparison.OrdinalIgnoreCase))
+                    if (addMigration.HasValue())
                     {
-                        Console.WriteLine();
+                        Console.WriteLine("### Adding migration ###");
                         Console.Write("Name: ");
                         string migrationName = Console.ReadLine();
                         if (!string.IsNullOrEmpty(migrationName))

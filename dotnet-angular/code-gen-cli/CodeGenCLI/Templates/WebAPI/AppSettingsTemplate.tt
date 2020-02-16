@@ -21,7 +21,7 @@
         "Username": "<#= config.Authentication.Admin.Username #>",
         "Email": "<#= config.Authentication.Admin.Email #>",
         "Password": "<#= config.Authentication.Admin.Password #>"
-    },
+    }
   },
 <# } #>
 <# if (config.WebAPI.EmailService.Enabled) { #>

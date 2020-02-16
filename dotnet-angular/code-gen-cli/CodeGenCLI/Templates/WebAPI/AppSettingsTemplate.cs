@@ -120,7 +120,7 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("\"\r\n    },\r\n  },\r\n");
+            this.Write("\"\r\n    }\r\n  },\r\n");
             
             #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
  } 

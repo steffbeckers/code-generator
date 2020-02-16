@@ -38,35 +38,39 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             #line hidden
             this.Write(".ViewModels.Identity\r\n{\r\n    public class UserVM\r\n    {\r\n        public Guid Id {" +
                     " get; set; }\r\n        public string Username { get; set; }\r\n        public strin" +
-                    "g Email { get; set; }\r\n        public string FirstName { get; set; }\r\n        pu" +
-                    "blic string LastName { get; set; }\r\n        public string[] Roles { get; set; }\r" +
-                    "\n    }\r\n\r\n    public class LoginVM\r\n    {\r\n        [Required]\r\n        public st" +
-                    "ring EmailOrUsername { get; set; }\r\n\r\n        [Required]\r\n        public string " +
-                    "Password { get; set; }\r\n        public bool RememberMe { get; set; }\r\n    }\r\n\r\n\t" +
-                    "public class AuthenticatedVM\r\n    {\r\n        public UserVM User { get; set; }\r\n " +
-                    "       public string Token { get; set; }\r\n        public bool RememberMe { get; " +
-                    "set; }\r\n    }\r\n\r\n    public class RegisterVM\r\n    {\r\n        [Required]\r\n       " +
-                    " public string Username { get; set; }\r\n\r\n        [Required]\r\n        [EmailAddre" +
-                    "ss]\r\n        public string Email { get; set; }\r\n\r\n        [Required]\r\n        [S" +
-                    "tringLength(100, ErrorMessage = \"The {0} must be at least {2} and at max {1} cha" +
-                    "racters long.\", MinimumLength = 10)]\r\n        [DataType(DataType.Password)]\r\n   " +
-                    "     public string Password { get; set; }\r\n\r\n        [DataType(DataType.Password" +
-                    ")]\r\n        [Compare(\"Password\", ErrorMessage = \"The password and confirmation p" +
-                    "assword do not match.\")]\r\n        public string ConfirmPassword { get; set; }\r\n\r" +
-                    "\n        public string FirstName { get; set; }\r\n        public string LastName {" +
-                    " get; set; }\r\n    }\r\n\r\n\tpublic class RegisteredVM\r\n    {\r\n        public UserVM " +
-                    "User { get; set; }\r\n        public string Token { get; set; }\r\n    }\r\n\r\n    publ" +
-                    "ic class ForgotPasswordVM\r\n    {\r\n        [Required]\r\n        [EmailAddress]\r\n  " +
-                    "      public string Email { get; set; }\r\n    }\r\n\r\n    public class ResetPassword" +
-                    "VM\r\n    {\r\n        [Required]\r\n        public string Id { get; set; }\r\n\r\n       " +
-                    " [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n" +
-                    "\r\n        [Required]\r\n        public string Code { get; set; }\r\n\r\n        [Requi" +
-                    "red]\r\n        [StringLength(100, ErrorMessage = \"The {0} must be at least {2} an" +
-                    "d at max {1} characters long.\", MinimumLength = 10)]\r\n        [DataType(DataType" +
-                    ".Password)]\r\n        public string Password { get; set; }\r\n\r\n        [Required]\r" +
-                    "\n        [DataType(DataType.Password)]\r\n        [Compare(\"Password\", ErrorMessag" +
-                    "e = \"The password and confirmation password do not match.\")]\r\n        public str" +
-                    "ing PasswordConfirm { get; set; }\r\n    }\r\n}\r\n");
+                    "g Email { get; set; }\r\n        public string[] Roles { get; set; }\r\n        \r\n  " +
+                    "      // TODO: Custom fields\r\n        public string FirstName { get; set; }\r\n   " +
+                    "     public string LastName { get; set; }\r\n    }\r\n\r\n    public class LoginVM\r\n  " +
+                    "  {\r\n        [Required]\r\n        public string EmailOrUsername { get; set; }\r\n\r\n" +
+                    "        [Required]\r\n        public string Password { get; set; }\r\n        public" +
+                    " bool RememberMe { get; set; }\r\n    }\r\n\r\n\tpublic class AuthenticatedVM\r\n    {\r\n " +
+                    "       public UserVM User { get; set; }\r\n        public string Token { get; set;" +
+                    " }\r\n        public bool RememberMe { get; set; }\r\n    }\r\n\r\n    public class Regi" +
+                    "sterVM\r\n    {\r\n        [Required]\r\n        public string Username { get; set; }\r" +
+                    "\n\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get" +
+                    "; set; }\r\n\r\n        [Required]\r\n        [StringLength(100, ErrorMessage = \"The {" +
+                    "0} must be at least {2} and at max {1} characters long.\", MinimumLength = 10)]\r\n" +
+                    "        [DataType(DataType.Password)]\r\n        public string Password { get; set" +
+                    "; }\r\n\r\n        [DataType(DataType.Password)]\r\n        [Compare(\"Password\", Error" +
+                    "Message = \"The password and confirmation password do not match.\")]\r\n        publ" +
+                    "ic string ConfirmPassword { get; set; }\r\n\r\n        // TODO: Custom fields\r\n     " +
+                    "   public string FirstName { get; set; }\r\n        public string LastName { get; " +
+                    "set; }\r\n    }\r\n\r\n\tpublic class RegisteredVM\r\n    {\r\n        public UserVM User {" +
+                    " get; set; }\r\n        public string Token { get; set; }\r\n    }\r\n\r\n\tpublic class " +
+                    "EmailConfirmedVM\r\n    {\r\n        public UserVM User { get; set; }\r\n        publi" +
+                    "c string Token { get; set; }\r\n    }\r\n\r\n    public class ForgotPasswordVM\r\n    {\r" +
+                    "\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; " +
+                    "set; }\r\n    }\r\n\r\n    public class ResetPasswordVM\r\n    {\r\n        [Required]\r\n  " +
+                    "      public string Id { get; set; }\r\n\r\n        [Required]\r\n        [EmailAddres" +
+                    "s]\r\n        public string Email { get; set; }\r\n\r\n        [Required]\r\n        pub" +
+                    "lic string Code { get; set; }\r\n\r\n        [Required]\r\n        [StringLength(100, " +
+                    "ErrorMessage = \"The {0} must be at least {2} and at max {1} characters long.\", M" +
+                    "inimumLength = 10)]\r\n        [DataType(DataType.Password)]\r\n        public strin" +
+                    "g Password { get; set; }\r\n\r\n        [Required]\r\n        [DataType(DataType.Passw" +
+                    "ord)]\r\n        [Compare(\"Password\", ErrorMessage = \"The password and confirmatio" +
+                    "n password do not match.\")]\r\n        public string PasswordConfirm { get; set; }" +
+                    "\r\n    }\r\n\r\n\tpublic class PasswordResettedVM\r\n    {\r\n        public UserVM User {" +
+                    " get; set; }\r\n        public string Token { get; set; }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

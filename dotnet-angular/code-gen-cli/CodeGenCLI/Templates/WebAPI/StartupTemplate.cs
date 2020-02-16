@@ -484,11 +484,14 @@ using ");
             
             #line default
             #line hidden
-            this.Write("            if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;\r\n  " +
-                    "          if (ex is RegistrationFailedException) code = HttpStatusCode.BadReques" +
-                    "t;\r\n");
+            this.Write(@"            if (ex is LoginFailedException) code = HttpStatusCode.BadRequest;
+            if (ex is RegistrationFailedException) code = HttpStatusCode.BadRequest;
+            if (ex is ConfirmEmailFailedException) code = HttpStatusCode.BadRequest;
+            if (ex is ForgotPasswordFailedException) code = HttpStatusCode.BadRequest;
+            if (ex is ResetPasswordFailedException) code = HttpStatusCode.BadRequest;
+");
             
-            #line 328 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 331 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default

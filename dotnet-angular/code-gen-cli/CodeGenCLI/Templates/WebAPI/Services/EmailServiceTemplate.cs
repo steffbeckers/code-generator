@@ -61,9 +61,10 @@ namespace CodeGenCLI.Templates.WebAPI.Services
             
             #line default
             #line hidden
-            this.Write("        Task SendEmailConfirmationAsync(string email, string link);\r\n");
+            this.Write("        Task SendEmailConfirmationAsync(string email, string link);\r\n        Task" +
+                    " SendPasswordResetAsync(string email, string link);\r\n");
             
-            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
  } 
             
             #line default
@@ -96,7 +97,7 @@ namespace CodeGenCLI.Templates.WebAPI.Services
                     "\r\n            }\r\n            catch\r\n            {\r\n                throw;\r\n     " +
                     "       }\r\n        }\r\n");
             
-            #line 73 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+            #line 74 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
@@ -105,11 +106,17 @@ namespace CodeGenCLI.Templates.WebAPI.Services
         public Task SendEmailConfirmationAsync(string email, string link)
         {
             return SendEmailAsync(email, ""Confirm your email"",
-                $""Please confirm your account by clicking this link: <a href='{HtmlEncoder.Default.Encode(link)}'>link</a>"");
+                $""<p>Please confirm your account by clicking this link:</p><a href='{HtmlEncoder.Default.Encode(link)}'>{link}</a>"");
+        }
+
+        public Task SendPasswordResetAsync(string email, string link)
+        {
+            return SendEmailAsync(email, ""Reset your password"",
+                $""<p>Please reset your password by clicking this link:</p><a href='{HtmlEncoder.Default.Encode(link)}'>{link}</a>"");
         }
 ");
             
-            #line 80 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
+            #line 87 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\Services\EmailServiceTemplate.tt"
  } 
             
             #line default

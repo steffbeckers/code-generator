@@ -92,73 +92,37 @@ using ");
                     "Validation\r\n            if (!ModelState.IsValid)\r\n            {\r\n               " +
                     " return BadRequest(ModelState);\r\n            }\r\n\r\n            AuthenticatedVM au" +
                     "thenticatedVM = await this.bll.Login(loginVM);\r\n\r\n            return Ok(authenti" +
-                    "catedVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"me\")]\r\n        public" +
-                    " async Task<ActionResult<UserVM>> Me()\r\n        {\r\n            User currentUser " +
-                    "= await this.bll.Me();\r\n\r\n            return Ok(mapper.Map<User, UserVM>(current" +
-                    "User));\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"register\")]\r\n        [" +
-                    "AllowAnonymous]\r\n        public async Task<ActionResult<RegisteredVM>> Register(" +
-                    "[FromBody] RegisterVM registerVM)\r\n        {\r\n            // Validation\r\n       " +
-                    "     if (!ModelState.IsValid)\r\n            {\r\n                return BadRequest(" +
-                    "ModelState);\r\n            }\r\n\r\n            RegisteredVM registeredVM = await thi" +
-                    "s.bll.Register(registerVM);\r\n\r\n            return Ok(registeredVM);\r\n        }\r\n" +
-                    "\r\n        [HttpGet]\r\n        [Route(\"logout\")]\r\n        public async Task<IActio" +
-                    "nResult> Logout()\r\n        {\r\n            await this.bll.Logout();\r\n\r\n          " +
-                    "  return Ok();\r\n        }\r\n\r\n        //[HttpGet]\r\n        //[Route(\"confirm-emai" +
-                    "l\")]\r\n        //[AllowAnonymous]\r\n        //public async Task<IActionResult> Con" +
-                    "firmEmail(string userId, string code)\r\n        //{\r\n        //    if (userId == " +
-                    "null || code == null)\r\n        //    {\r\n        //        return BadRequest(Mode" +
-                    "lState);\r\n        //    }\r\n\r\n        //    var user = await userManager.FindById" +
-                    "Async(userId);\r\n        //    if (user == null)\r\n        //    {\r\n        //    " +
-                    "    throw new ApplicationException($\"Unable to load user with ID \'{userId}\'.\");\r" +
-                    "\n        //    }\r\n\r\n        //    var result = await userManager.ConfirmEmailAsy" +
-                    "nc(user, code);\r\n        //    if (result.Succeeded)\r\n        //    {\r\n        /" +
-                    "/        return Ok();\r\n        //    }\r\n\r\n        //    // If we got this far, s" +
-                    "omething failed\r\n        //    return BadRequest(ModelState);\r\n        //}\r\n\r\n  " +
-                    "      //[HttpPost]\r\n        //[Route(\"forgot-password\")]\r\n        //[AllowAnonym" +
-                    "ous]\r\n        //public async Task<IActionResult> ForgotPassword([FromBody] Forgo" +
-                    "tPasswordVM model)\r\n        //{\r\n        //    if (ModelState.IsValid)\r\n        " +
-                    "//    {\r\n        //        var user = await userManager.FindByEmailAsync(model.E" +
-                    "mail);\r\n        //        if (user == null)\r\n        //        {\r\n        //    " +
-                    "        //// Don\'t reveal that the user does not exist\r\n        //            //" +
-                    "return Ok();\r\n\r\n        //            // For CRM purposes\r\n        //           " +
-                    " return NotFound(\"email-not-found\");\r\n        //        }\r\n\r\n        //        /" +
-                    "/ Check if email is confirmed, if required in Startup settings\r\n        //      " +
-                    "  // In startup: options.SignIn.RequireConfirmedEmail = true;\r\n        //       " +
-                    " if (!(await userManager.IsEmailConfirmedAsync(user)))\r\n        //        {\r\n   " +
-                    "     //            //// Don\'t reveal that the user does not exist\r\n        //   " +
-                    "         //return Ok();\r\n\r\n        //            // OR\r\n\r\n        //            " +
-                    "return NotFound(\"email-not-confirmed\");\r\n        //        }\r\n\r\n        //      " +
-                    "  // For more information on how to enable account confirmation and password res" +
-                    "et please\r\n        //        // visit https://go.microsoft.com/fwlink/?LinkID=53" +
-                    "2713\r\n\r\n        //        string code = await userManager.GeneratePasswordResetT" +
-                    "okenAsync(user);\r\n\r\n        //        var callbackUrl = configuration.GetSection" +
-                    "(\"EmailSettings\").GetValue<string>(\"PasswordResetURL\");\r\n        //        callb" +
-                    "ackUrl = callbackUrl.Replace(\"{{userId}}\", user.Id.ToString().ToLower());\r\n     " +
-                    "   //        callbackUrl = callbackUrl.Replace(\"{{userEmail}}\", user.Email.ToStr" +
-                    "ing().ToLower());\r\n        //        callbackUrl = callbackUrl.Replace(\"{{code}}" +
-                    "\", Uri.EscapeDataString(code));\r\n\r\n        //        await emailService.SendEmai" +
-                    "lAsync(model.Email, \"Reset Password\",\r\n        //           $\"Please reset your " +
-                    "password by clicking here: <a href=\'{callbackUrl}\'>link</a>\");\r\n\r\n        //    " +
-                    "    return Ok();\r\n        //    }\r\n\r\n        //    // If we got this far, someth" +
-                    "ing failed\r\n        //    return BadRequest(ModelState);\r\n        //}\r\n\r\n       " +
-                    " //[HttpPost]\r\n        //[Route(\"reset-password\")]\r\n        //[AllowAnonymous]\r\n" +
-                    "        //public async Task<IActionResult> ResetPassword([FromBody] ResetPasswor" +
-                    "dVM model)\r\n        //{\r\n        //    if (ModelState.IsValid)\r\n        //    {\r" +
-                    "\n        //        var user = await userManager.FindByIdAsync(model.Id);\r\n      " +
-                    "  //        if (user == null)\r\n        //        {\r\n        //            //retu" +
-                    "rn BadRequest();\r\n\r\n        //            // OR\r\n\r\n        //            // For " +
-                    "CRM purposes\r\n        //            return NotFound(\"user-not-found\");\r\n        " +
-                    "//        }\r\n        //        if (user.Email != model.Email)\r\n        //       " +
-                    " {\r\n        //            //return BadRequest();\r\n\r\n        //            // OR\r" +
-                    "\n\r\n        //            // For CRM purposes\r\n        //            return BadRe" +
-                    "quest(\"email-does-not-match\");\r\n        //        }\r\n\r\n        //        var res" +
-                    "ult = await userManager.ResetPasswordAsync(user, model.Code, model.Password);\r\n " +
-                    "       //        if (result.Succeeded)\r\n        //        {\r\n        //         " +
-                    "   // TODO: Maybe log the user in automatically? Need to add/refactor JWT logic " +
-                    "if adding\r\n        //            //await signInManager.SignInAsync(user, isPersi" +
-                    "stent: false);\r\n\r\n        //            return Ok();\r\n        //        }\r\n     " +
-                    "   //    }\r\n\r\n        //    return BadRequest(ModelState);\r\n        //}\r\n    }\r\n" +
-                    "}\r\n");
+                    "catedVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"logout\")]\r\n        pu" +
+                    "blic async Task<IActionResult> Logout()\r\n        {\r\n            await this.bll.L" +
+                    "ogout();\r\n\r\n            return Ok();\r\n        }\r\n\r\n        [HttpGet]\r\n        [R" +
+                    "oute(\"me\")]\r\n        public async Task<ActionResult<UserVM>> Me()\r\n        {\r\n  " +
+                    "          User currentUser = await this.bll.Me();\r\n\r\n            return Ok(mappe" +
+                    "r.Map<User, UserVM>(currentUser));\r\n        }\r\n\r\n        [HttpPost]\r\n        [Ro" +
+                    "ute(\"register\")]\r\n        [AllowAnonymous]\r\n        public async Task<ActionResu" +
+                    "lt<RegisteredVM>> Register([FromBody] RegisterVM registerVM)\r\n        {\r\n       " +
+                    "     // Validation\r\n            if (!ModelState.IsValid)\r\n            {\r\n       " +
+                    "         return BadRequest(ModelState);\r\n            }\r\n\r\n            Registered" +
+                    "VM registeredVM = await this.bll.Register(registerVM);\r\n\r\n            return Ok(" +
+                    "registeredVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"confirm-email\")]" +
+                    "\r\n        [AllowAnonymous]\r\n        public async Task<ActionResult<EmailConfirme" +
+                    "dVM>> ConfirmEmail([FromQuery] string id, [FromQuery] string code)\r\n        {\r\n " +
+                    "           // Validation\r\n            if (!ModelState.IsValid || string.IsNullOr" +
+                    "Empty(id) || string.IsNullOrEmpty(code))\r\n            {\r\n                return " +
+                    "BadRequest(ModelState);\r\n            }\r\n\r\n            EmailConfirmedVM emailConf" +
+                    "irmedVM = await this.bll.ConfirmEmail(id, code);\r\n\r\n            return Ok(emailC" +
+                    "onfirmedVM);\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"forgot-password\")" +
+                    "]\r\n        [AllowAnonymous]\r\n        public async Task<IActionResult> ForgotPass" +
+                    "word([FromBody] ForgotPasswordVM forgotPasswordVM)\r\n        {\r\n            // Va" +
+                    "lidation\r\n            if (!ModelState.IsValid)\r\n            {\r\n                r" +
+                    "eturn BadRequest(ModelState);\r\n            }\r\n\r\n            await this.bll.Forgo" +
+                    "tPassword(forgotPasswordVM);\r\n\r\n            return Ok();\r\n        }\r\n\r\n        [" +
+                    "HttpPost]\r\n        [Route(\"reset-password\")]\r\n        [AllowAnonymous]\r\n        " +
+                    "public async Task<ActionResult<PasswordResettedVM>> ResetPassword([FromBody] Res" +
+                    "etPasswordVM resetPasswordVM)\r\n        {\r\n            // Validation\r\n           " +
+                    " if (!ModelState.IsValid)\r\n            {\r\n                return BadRequest(Mode" +
+                    "lState);\r\n            }\r\n\r\n            PasswordResettedVM passwordResettedVM = a" +
+                    "wait this.bll.ResetPassword(resetPasswordVM);\r\n\r\n            return Ok(passwordR" +
+                    "esettedVM);\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

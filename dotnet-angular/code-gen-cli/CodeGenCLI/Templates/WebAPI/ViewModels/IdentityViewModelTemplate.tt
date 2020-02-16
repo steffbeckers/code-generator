@@ -14,9 +14,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public Guid Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public string[] Roles { get; set; }
+        
+        // TODO: Custom fields
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string[] Roles { get; set; }
     }
 
     public class LoginVM
@@ -54,11 +56,18 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        // TODO: Custom fields
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
 
 	public class RegisteredVM
+    {
+        public UserVM User { get; set; }
+        public string Token { get; set; }
+    }
+
+	public class EmailConfirmedVM
     {
         public UserVM User { get; set; }
         public string Token { get; set; }
@@ -92,5 +101,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string PasswordConfirm { get; set; }
+    }
+
+	public class PasswordResettedVM
+    {
+        public UserVM User { get; set; }
+        public string Token { get; set; }
     }
 }
