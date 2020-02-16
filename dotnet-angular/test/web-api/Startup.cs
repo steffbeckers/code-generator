@@ -142,12 +142,12 @@ namespace Test.API
                 options.ExposeExceptions = true; // TODO: Only in DEV?
             })
             .AddGraphTypes(ServiceLifetime.Scoped)
-            .AddGraphQLAuthorization(options =>
-            {
-                options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
-                //var policy = new AuthorizationPolicyBuilder()
-                //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
-            })
+            //.AddGraphQLAuthorization(options =>
+            //{
+            //    options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
+            //    //var policy = new AuthorizationPolicyBuilder()
+            //    //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
+            //})
             .AddUserContextBuilder(httpContext => httpContext.User)
             .AddWebSockets();
 
