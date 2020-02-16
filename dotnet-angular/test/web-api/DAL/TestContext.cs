@@ -100,14 +100,14 @@ namespace Test.API.DAL
                 .HasOne(x => x.CreatedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<Account>(x => x.CreatedByUserId)
+                .HasForeignKey<Account>(x => x.CreatedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Account>()
                 .HasOne(x => x.ModifiedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<Account>(x => x.ModifiedByUserId)
+                .HasForeignKey<Account>(x => x.ModifiedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
@@ -131,14 +131,14 @@ namespace Test.API.DAL
                 .HasOne(x => x.CreatedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<Product>(x => x.CreatedByUserId)
+                .HasForeignKey<Product>(x => x.CreatedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Product>()
                 .HasOne(x => x.ModifiedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<Product>(x => x.ModifiedByUserId)
+                .HasForeignKey<Product>(x => x.ModifiedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
@@ -162,14 +162,14 @@ namespace Test.API.DAL
                 .HasOne(x => x.CreatedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<Supplier>(x => x.CreatedByUserId)
+                .HasForeignKey<Supplier>(x => x.CreatedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Supplier>()
                 .HasOne(x => x.ModifiedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<Supplier>(x => x.ModifiedByUserId)
+                .HasForeignKey<Supplier>(x => x.ModifiedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
@@ -194,14 +194,14 @@ namespace Test.API.DAL
                 .HasOne(x => x.CreatedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<ProductDetail>(x => x.CreatedByUserId)
+                .HasForeignKey<ProductDetail>(x => x.CreatedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ProductDetail>()
                 .HasOne(x => x.ModifiedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<ProductDetail>(x => x.ModifiedByUserId)
+                .HasForeignKey<ProductDetail>(x => x.ModifiedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
@@ -226,14 +226,14 @@ namespace Test.API.DAL
                 .HasOne(x => x.CreatedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<ProductSupplier>(x => x.CreatedByUserId)
+                .HasForeignKey<ProductSupplier>(x => x.CreatedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ProductSupplier>()
                 .HasOne(x => x.ModifiedByUser)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey<ProductSupplier>(x => x.ModifiedByUserId)
+                .HasForeignKey<ProductSupplier>(x => x.ModifiedByUserId);
             //    .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
