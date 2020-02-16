@@ -64,8 +64,6 @@ namespace Test.API.BLL
 
             // Retrieve user by email or username
             User user = await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOrUsername);
-        
-            // If no user is found by email or username, just return unauthorized and give nothing away of existing user info
             if (user == null)
             {
                 logger.LogWarning("User not found during login", loginVM.EmailOrUsername);
@@ -232,7 +230,25 @@ namespace Test.API.BLL
             // Result
             EmailConfirmedVM emailConfirmedVM = new EmailConfirmedVM();
 
-            return emailConfirmedVM;
+            User user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                logger.LogWarning("User not found during email confirmation", userId);
+
+                throw new ConfirmEmailFailedException("invalid");
+            }
+
+            IdentityResult result = await userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+            {
+                emailConfirmedVM.User = mapper.Map<User, UserVM>(user);
+
+                return emailConfirmedVM;
+            }
+
+            logger.LogWarning("Email confirmation is invalid", user);
+
+            throw new ConfirmEmailFailedException("invalid");
         }
 
         public async Task Logout()

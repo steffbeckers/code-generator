@@ -14,5 +14,10 @@ namespace Test.API.Framework.Exceptions
         public RegistrationFailedException(string message) : base(message) {}
     }
 
+    public class ConfirmEmailFailedException : Exception
+    {
+        public ConfirmEmailFailedException(string message) : base(message) {}
+    }
+
     #endregion
 }
