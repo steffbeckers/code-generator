@@ -186,7 +186,7 @@ namespace Test.API.BLL
                 if (configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation")) {
                     string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    string callbackUrl = configuration.GetSection("Authentication").GetValue<string>("PasswordResetURL");
+                    string callbackUrl = configuration.GetSection("Authentication").GetValue<string>("ConfirmEmailURL");
                     callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToUpper());
                     callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
                     callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
