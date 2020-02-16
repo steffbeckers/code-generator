@@ -141,7 +141,7 @@ namespace Test.API
             services.AddGraphQL(options =>
             {
                 options.EnableMetrics = true;
-                options.ExposeExceptions = true; // TODO: Only in DEV
+                options.ExposeExceptions = environment.IsDevelopment();
             })
             .AddGraphTypes(ServiceLifetime.Scoped)
             .AddGraphQLAuthorization(options =>
