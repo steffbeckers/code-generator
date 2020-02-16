@@ -135,15 +135,13 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             // User
             modelBuilder.Entity<<#= model.Name #>>()
-                .HasOne(a => a.CreatedByUser)
-                .WithOne()
-                .HasForeignKey<<#= model.Name #>>(a => a.CreatedByUserId)
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<<#= model.Name #>>()
-                .HasOne(a => a.ModifiedByUser)
-                .WithOne()
-                .HasForeignKey<<#= model.Name #>>(a => a.ModifiedByUserId)
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
 <# } #>
 
