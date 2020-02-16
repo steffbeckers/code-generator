@@ -114,48 +114,48 @@ namespace Test.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordVM model)
         {
-            if (ModelState.IsValid)
+            // Validation
+            if (!ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(model.Email);
-                if (user == null)
-                {
-                    //// Don't reveal that the user does not exist
-                    //return Ok();
-
-                    // For CRM purposes
-                    return NotFound("email-not-found");
-                }
-
-                // Check if email is confirmed, if required in Startup settings
-                // In startup: options.SignIn.RequireConfirmedEmail = true;
-                if (!(await userManager.IsEmailConfirmedAsync(user)))
-                {
-                    //// Don't reveal that the user does not exist
-                    //return Ok();
-
-                    // OR
-
-                    return NotFound("email-not-confirmed");
-                }
-
-                // For more information on how to enable account confirmation and password reset please
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
-
-                string code = await userManager.GeneratePasswordResetTokenAsync(user);
-
-                var callbackUrl = configuration.GetSection("EmailSettings").GetValue<string>("PasswordResetURL");
-                callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToLower());
-                callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
-                callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
-
-                await emailService.SendEmailAsync(model.Email, "Reset Password",
-                   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
-
-                return Ok();
+                return BadRequest(ModelState);
             }
 
-            // If we got this far, something failed
-            return BadRequest(ModelState);
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                //// Don't reveal that the user does not exist
+                //return Ok();
+
+                // For CRM purposes
+                return NotFound("email-not-found");
+            }
+
+            // Check if email is confirmed, if required in Startup settings
+            // In startup: options.SignIn.RequireConfirmedEmail = true;
+            if (!(await userManager.IsEmailConfirmedAsync(user)))
+            {
+                //// Don't reveal that the user does not exist
+                //return Ok();
+
+                // OR
+
+                return NotFound("email-not-confirmed");
+            }
+
+            // For more information on how to enable account confirmation and password reset please
+            // visit https://go.microsoft.com/fwlink/?LinkID=532713
+
+            string code = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            var callbackUrl = configuration.GetSection("EmailSettings").GetValue<string>("PasswordResetURL");
+            callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToLower());
+            callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
+            callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
+
+            await emailService.SendEmailAsync(model.Email, "Reset Password",
+                $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+
+            return Ok();
         }
 
         //[HttpPost]

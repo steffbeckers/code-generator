@@ -90,6 +90,8 @@ namespace Test.API.BLL
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
                 };
+
+                // TODO: Custom fields
                 if (!string.IsNullOrEmpty(user.FirstName))
                 {
                     claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));
@@ -199,6 +201,8 @@ namespace Test.API.BLL
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
                     };
+
+                    // TODO: Custom fields
                     if (!string.IsNullOrEmpty(user.FirstName))
                     {
                         claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));
