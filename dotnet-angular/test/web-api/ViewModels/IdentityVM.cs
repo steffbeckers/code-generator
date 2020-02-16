@@ -96,4 +96,10 @@ namespace Test.API.ViewModels.Identity
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string PasswordConfirm { get; set; }
     }
+
+	public class PasswordResettedVM
+    {
+        public UserVM User { get; set; }
+        public string Token { get; set; }
+    }
 }
