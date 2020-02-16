@@ -107,21 +107,6 @@ namespace Test.API.Controllers
             EmailConfirmedVM emailConfirmedVM = await this.bll.ConfirmEmail(id, code);
 
             return Ok(emailConfirmedVM);
-
-            //var user = await userManager.FindByIdAsync(userId);
-            //if (user == null)
-            //{
-                //throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-            //}
-
-            //var result = await userManager.ConfirmEmailAsync(user, code);
-            //if (result.Succeeded)
-            //{
-                //return Ok();
-            //}
-
-            //// If we got this far, something failed
-            //return BadRequest(ModelState);
         }
 
         //[HttpPost]
