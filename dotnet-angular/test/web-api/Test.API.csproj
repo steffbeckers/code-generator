@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200215161311_Initial.cs" />
+    <Compile Remove="Migrations\20200215161311_Initial.Designer.cs" />
     <Compile Remove="Migrations\20200215161545_Generatedb69212732f4f48eb8cfb49c050aadf7f.cs" />
     <Compile Remove="Migrations\20200215161545_Generatedb69212732f4f48eb8cfb49c050aadf7f.Designer.cs" />
     <Compile Remove="Migrations\20200215161732_Generated4F4420FDDE3E43A7989F58BD5FC3265E.cs" />
