@@ -128,41 +128,17 @@ namespace Test.API.Controllers
         [HttpPost]
         [Route("reset-password")]
         [AllowAnonymous]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordVM model)
+        public async Task<ActionResult<PasswordResettedVM>> ResetPassword([FromBody] ResetPasswordVM resetPasswordVM)
         {
-            if (ModelState.IsValid)
+            // Validation
+            if (!ModelState.IsValid)
             {
-                var user = await userManager.FindByIdAsync(model.Id);
-                if (user == null)
-                {
-                    //return BadRequest();
-
-                    // OR
-
-                    // For CRM purposes
-                    return NotFound("user-not-found");
-                }
-                if (user.Email != model.Email)
-                {
-                    //return BadRequest();
-
-                    // OR
-
-                    // For CRM purposes
-                    return BadRequest("email-does-not-match");
-                }
-
-                var result = await userManager.ResetPasswordAsync(user, model.Code, model.Password);
-                if (result.Succeeded)
-                {
-                    // TODO: Maybe log the user in automatically? Need to add/refactor JWT logic if adding
-                    //await signInManager.SignInAsync(user, isPersistent: false);
-
-                    return Ok();
-                }
+                return BadRequest(ModelState);
             }
 
-            return BadRequest(ModelState);
+            PasswordResettedVM passwordResettedVM = await this.bll.ResetPassword(resetPasswordVM);
+
+            return Ok(passwordResettedVM);
         }
     }
 }

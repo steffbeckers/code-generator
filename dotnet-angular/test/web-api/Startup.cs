@@ -313,6 +313,7 @@ namespace Test.API
             if (ex is RegistrationFailedException) code = HttpStatusCode.BadRequest;
             if (ex is ConfirmEmailFailedException) code = HttpStatusCode.BadRequest;
             if (ex is ForgotPasswordFailedException) code = HttpStatusCode.BadRequest;
+            if (ex is ResetPasswordFailedException) code = HttpStatusCode.BadRequest;
 
             string result = JsonConvert.SerializeObject(new { error = ex.Message });
 

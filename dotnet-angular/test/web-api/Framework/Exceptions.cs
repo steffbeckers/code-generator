@@ -24,5 +24,10 @@ namespace Test.API.Framework.Exceptions
         public ForgotPasswordFailedException(string message) : base(message) {}
     }
 
+    public class ResetPasswordFailedException : Exception
+    {
+        public ResetPasswordFailedException(string message) : base(message) {}
+    }
+
     #endregion
 }

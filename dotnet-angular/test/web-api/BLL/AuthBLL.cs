@@ -290,6 +290,65 @@ namespace Test.API.BLL
                 $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
         }
 
+        public async Task<PasswordResettedVM> ResetPassword(ResetPasswordVM resetPasswordVM) {
+            // Validation
+            if (resetPasswordVM == null) {
+                throw new ResetPasswordFailedException("invalid");
+            }
+
+            // Result
+            PasswordResettedVM passwordResettedVM = new PasswordResettedVM();
+
+            // Retrieve user by email
+            User user = await userManager.FindByIdAsync(resetPasswordVM.Id);
+            if (user == null)
+            {
+                logger.LogWarning("User not found during reset password", resetPasswordVM.Id);
+
+                throw new ResetPasswordFailedException("invalid");
+            }
+            
+            // Validate email address
+            if (user.Email != resetPasswordVM.Email)
+            {
+                throw new ResetPasswordFailedException("invalid");
+            }
+
+            IdentityResult result = await userManager.ResetPasswordAsync(user, resetPasswordVM.Code, resetPasswordVM.Password);
+            if (result.Succeeded)
+            {
+                // Set claims of user
+                List<Claim> claims = new List<Claim>() {
+                    new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
+                };
+
+                // TODO: Custom fields
+                if (!string.IsNullOrEmpty(user.FirstName))
+                {
+                    claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));
+                }
+                if (!string.IsNullOrEmpty(user.LastName))
+                {
+                    claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));
+                }
+
+                // Registration successful, no email confirmation required => Generate JWT token based on the user's claims
+                string token = this.GenerateJWT(claims);
+
+                passwordResettedVM.Token = token;
+                passwordResettedVM.User = mapper.Map<User, UserVM>(user);
+
+                return passwordResettedVM;
+            }
+            
+            logger.LogWarning("Reset password is invalid", user);
+
+            throw new ResetPasswordFailedException("invalid");
+        }
+
         public string GenerateJWT(List<Claim> claims)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
