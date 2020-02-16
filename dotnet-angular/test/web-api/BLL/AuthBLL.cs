@@ -281,7 +281,8 @@ namespace Test.API.BLL
 
             string code = await userManager.GeneratePasswordResetTokenAsync(user);
 
-            logger.LogInformation("Password reset code", code);
+            logger.LogInformation("Password reset code:");
+            logger.LogInformation(code);
 
             var callbackUrl = configuration.GetSection("Authentication").GetValue<string>("ResetPasswordURL");
             callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToUpper());
