@@ -97,15 +97,15 @@ namespace Test.API.DAL
 
             // User
             modelBuilder.Entity<Account>()
-                .HasOne(a => a.CreatedByUser)
+                .HasOne(x => x.CreatedByUser)
                 .WithMany()
-                .HasForeignKey<Account>(a => a.CreatedByUserId)
+                .HasForeignKey(x => x.CreatedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Account>()
-                .HasOne(a => a.ModifiedByUser)
+                .HasOne(x => x.ModifiedByUser)
                 .WithMany()
-                .HasForeignKey<Account>(a => a.ModifiedByUserId)
+                .HasForeignKey(x => x.ModifiedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
@@ -126,15 +126,15 @@ namespace Test.API.DAL
 
             // User
             modelBuilder.Entity<Product>()
-                .HasOne(a => a.CreatedByUser)
+                .HasOne(x => x.CreatedByUser)
                 .WithMany()
-                .HasForeignKey<Product>(a => a.CreatedByUserId)
+                .HasForeignKey(x => x.CreatedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Product>()
-                .HasOne(a => a.ModifiedByUser)
+                .HasOne(x => x.ModifiedByUser)
                 .WithMany()
-                .HasForeignKey<Product>(a => a.ModifiedByUserId)
+                .HasForeignKey(x => x.ModifiedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
@@ -155,15 +155,15 @@ namespace Test.API.DAL
 
             // User
             modelBuilder.Entity<Supplier>()
-                .HasOne(a => a.CreatedByUser)
+                .HasOne(x => x.CreatedByUser)
                 .WithMany()
-                .HasForeignKey<Supplier>(a => a.CreatedByUserId)
+                .HasForeignKey(x => x.CreatedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Supplier>()
-                .HasOne(a => a.ModifiedByUser)
+                .HasOne(x => x.ModifiedByUser)
                 .WithMany()
-                .HasForeignKey<Supplier>(a => a.ModifiedByUserId)
+                .HasForeignKey(x => x.ModifiedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
@@ -185,15 +185,15 @@ namespace Test.API.DAL
 
             // User
             modelBuilder.Entity<ProductDetail>()
-                .HasOne(a => a.CreatedByUser)
+                .HasOne(x => x.CreatedByUser)
                 .WithMany()
-                .HasForeignKey<ProductDetail>(a => a.CreatedByUserId)
+                .HasForeignKey(x => x.CreatedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ProductDetail>()
-                .HasOne(a => a.ModifiedByUser)
+                .HasOne(x => x.ModifiedByUser)
                 .WithMany()
-                .HasForeignKey<ProductDetail>(a => a.ModifiedByUserId)
+                .HasForeignKey(x => x.ModifiedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
@@ -215,15 +215,15 @@ namespace Test.API.DAL
 
             // User
             modelBuilder.Entity<ProductSupplier>()
-                .HasOne(a => a.CreatedByUser)
+                .HasOne(x => x.CreatedByUser)
                 .WithMany()
-                .HasForeignKey<ProductSupplier>(a => a.CreatedByUserId)
+                .HasForeignKey(x => x.CreatedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ProductSupplier>()
-                .HasOne(a => a.ModifiedByUser)
+                .HasOne(x => x.ModifiedByUser)
                 .WithMany()
-                .HasForeignKey<ProductSupplier>(a => a.ModifiedByUserId)
+                .HasForeignKey(x => x.ModifiedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
