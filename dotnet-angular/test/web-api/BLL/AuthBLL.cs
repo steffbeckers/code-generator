@@ -250,6 +250,28 @@ namespace Test.API.BLL
             IdentityResult result = await userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
             {
+                // Set claims of user
+                List<Claim> claims = new List<Claim>() {
+                    new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))
+                };
+
+                // TODO: Custom fields
+                if (!string.IsNullOrEmpty(user.FirstName))
+                {
+                    claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));
+                }
+                if (!string.IsNullOrEmpty(user.LastName))
+                {
+                    claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));
+                }
+
+                // Registration successful, no email confirmation required => Generate JWT token based on the user's claims
+                string token = this.GenerateJWT(claims);
+
+                emailConfirmedVM.Token = token;
                 emailConfirmedVM.User = mapper.Map<User, UserVM>(user);
 
                 return emailConfirmedVM;

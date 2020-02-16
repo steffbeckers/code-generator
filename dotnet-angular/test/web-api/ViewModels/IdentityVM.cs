@@ -65,6 +65,7 @@ namespace Test.API.ViewModels.Identity
 	public class EmailConfirmedVM
     {
         public UserVM User { get; set; }
+        public string Token { get; set; }
     }
 
     public class ForgotPasswordVM
