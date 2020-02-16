@@ -264,7 +264,7 @@ namespace Test.API.BLL
         {
             // Validation
             if (forgotPasswordVM == null) {
-                return null;
+                throw new ForgotPasswordFailedException("invalid");
             }
 
             // Retrieve user by email
