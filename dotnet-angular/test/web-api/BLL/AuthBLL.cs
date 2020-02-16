@@ -143,6 +143,11 @@ namespace Test.API.BLL
             throw new LoginFailedException("invalid");
         }
 
+        public async Task Logout()
+        {
+            await signInManager.SignOutAsync();
+        }
+
         public async Task<User> Me()
         {
             User currentUser = await userManager.GetUserAsync(this.httpContextAccessor.HttpContext.User);
@@ -249,11 +254,6 @@ namespace Test.API.BLL
             logger.LogWarning("Email confirmation is invalid", user);
 
             throw new ConfirmEmailFailedException("invalid");
-        }
-
-        public async Task Logout()
-        {
-            await signInManager.SignOutAsync();
         }
 
         public string GenerateJWT(List<Claim> claims)
