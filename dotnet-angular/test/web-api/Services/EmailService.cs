@@ -65,7 +65,13 @@ namespace Test.API.Services
         public Task SendEmailConfirmationAsync(string email, string link)
         {
             return SendEmailAsync(email, "Confirm your email",
-                $"Please confirm your account by clicking this link: <a href='{HtmlEncoder.Default.Encode(link)}'>link</a>");
+                $"<p>Please confirm your account by clicking this link:</p><br /><a href='{HtmlEncoder.Default.Encode(link)}'>{link}</a>");
+        }
+
+        public Task SendPasswordResetAsync(string email, string link)
+        {
+            return SendEmailAsync(email, "Reset your password",
+                $"<p>Please reset your password by clicking this link:</p><br /><a href='{HtmlEncoder.Default.Encode(link)}'>{link}</a>");
         }
     }
 }
