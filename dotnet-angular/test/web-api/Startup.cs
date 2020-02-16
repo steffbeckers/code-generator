@@ -25,10 +25,10 @@ using System.Threading.Tasks;
 using Test.API.BLL;
 using Test.API.DAL;
 using Test.API.DAL.Repositories;
-using Test.API.Framework.Exceptions;
 using Test.API.GraphQL;
 using Test.API.Models;
 using Test.API.Services;
+using Test.API.Framework.Exceptions;
 
 namespace Test.API
 {
@@ -44,7 +44,7 @@ namespace Test.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services, IHostEnvironment environment)
         {
-            // CORS
+		    // CORS
             services.AddCors();
 
             // Connection to the Test database
@@ -116,17 +116,17 @@ namespace Test.API
             services.AddHttpContextAccessor();
 
             // Repositories
-            services.AddScoped<AccountRepository>();
-            services.AddScoped<ProductRepository>();
-            services.AddScoped<SupplierRepository>();
-            services.AddScoped<ProductDetailRepository>();
-            services.AddScoped<ProductSupplierRepository>();
+			services.AddScoped<AccountRepository>();
+			services.AddScoped<ProductRepository>();
+			services.AddScoped<SupplierRepository>();
+			services.AddScoped<ProductDetailRepository>();
+			services.AddScoped<ProductSupplierRepository>();
 
-            // BLLs
-            services.AddScoped<AccountBLL>();
-            services.AddScoped<ProductBLL>();
-            services.AddScoped<SupplierBLL>();
-            services.AddScoped<ProductDetailBLL>();
+			// BLLs
+			services.AddScoped<AccountBLL>();
+			services.AddScoped<ProductBLL>();
+			services.AddScoped<SupplierBLL>();
+			services.AddScoped<ProductDetailBLL>();
             services.AddScoped<AuthBLL>();
 
             // Services
@@ -151,7 +151,7 @@ namespace Test.API
             .AddUserContextBuilder(httpContext => httpContext.User)
             .AddWebSockets();
 
-            // AutoMapper
+			// AutoMapper
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutoMapperProfile());
@@ -159,18 +159,17 @@ namespace Test.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            // MVC
+			// MVC
             services.AddControllers()
-                .AddNewtonsoftJson(options =>
-                {
+                .AddNewtonsoftJson(options => {
                     options.SerializerSettings.MaxDepth = 5;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
             );
 
-            // Swagger
-            // Register the Swagger generator, defining 1 or more Swagger documents
+			// Swagger
+			// Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -228,9 +227,9 @@ namespace Test.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // CORS
+		    // CORS
             app.UseCors(options =>
-            {
+			{
                 options.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
@@ -261,7 +260,7 @@ namespace Test.API
 
             app.UseRouting();
 
-            // Authorization
+			// Authorization
             app.UseAuthorization();
 
             // Web sockets
@@ -272,7 +271,7 @@ namespace Test.API
             app.UseGraphQL<TestSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
-            // Swagger
+			// Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger()
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
