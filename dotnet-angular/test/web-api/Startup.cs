@@ -139,17 +139,16 @@ namespace Test.API
             services.AddGraphQL(options =>
             {
                 options.EnableMetrics = true;
-                options.ExposeExceptions = true; // TODO: Only in DEV?
+                options.ExposeExceptions = true; // TODO: Only in DEV
             })
             .AddGraphTypes(ServiceLifetime.Scoped)
             .AddGraphQLAuthorization(options =>
             {
                 options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
                 //var policy = new AuthorizationPolicyBuilder()
-                //options.AddPolicy("Authorized", p => p.RequireClaim(ClaimTypes.Name, "Tom"));
+                //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
             })
             .AddUserContextBuilder(httpContext => httpContext.User)
-            
             .AddWebSockets();
 
 			// AutoMapper
