@@ -1,4 +1,5 @@
 using GraphQL.Types;
+using GraphQL.Server.Authorization.AspNetCore;
 using Test.API.DAL.Repositories;
 using Test.API.GraphQL.Types;
 using System;
