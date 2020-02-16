@@ -254,6 +254,17 @@ namespace Test.API
             //    });
             //}
 
+            // Authentication
+            app.UseAuthentication();
+
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
+            app.UseRouting();
+
+			// Authorization
+            app.UseAuthorization();
+
             // Web sockets
             app.UseWebSockets();
 
@@ -272,17 +283,6 @@ namespace Test.API
                 c.SwaggerEndpoint("./swagger/v1/swagger.json", "Test Web API V1");
                 c.RoutePrefix = string.Empty;
             });
-
-            // Authentication
-            app.UseAuthentication();
-
-            // Error handling
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-
-            app.UseRouting();
-
-			// Authorization
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
