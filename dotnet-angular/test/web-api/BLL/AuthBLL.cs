@@ -221,11 +221,6 @@ namespace Test.API.BLL
             throw new RegistrationFailedException("invalid");
         }
 
-        public async Task Logout()
-        {
-            await signInManager.SignOutAsync();
-        }
-
         public async Task<EmailConfirmedVM> ConfirmEmail(string userId, string code)
         {
             // Validation
@@ -238,6 +233,11 @@ namespace Test.API.BLL
             EmailConfirmedVM emailConfirmedVM = new EmailConfirmedVM();
 
             return emailConfirmedVM;
+        }
+
+        public async Task Logout()
+        {
+            await signInManager.SignOutAsync();
         }
 
         public string GenerateJWT(List<Claim> claims)
