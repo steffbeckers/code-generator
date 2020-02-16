@@ -142,6 +142,7 @@ namespace Test.API
                 options.ExposeExceptions = true; // TODO: Only in DEV?
             })
             .AddGraphTypes(ServiceLifetime.Scoped)
+            // TODO
             //.AddGraphQLAuthorization(options =>
             //{
             //    options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
