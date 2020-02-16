@@ -125,44 +125,44 @@ namespace Test.API.Controllers
             return Ok();
         }
 
-        //[HttpPost]
-        //[Route("reset-password")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordVM model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await userManager.FindByIdAsync(model.Id);
-        //        if (user == null)
-        //        {
-        //            //return BadRequest();
+        [HttpPost]
+        [Route("reset-password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByIdAsync(model.Id);
+                if (user == null)
+                {
+                    //return BadRequest();
 
-        //            // OR
+                    // OR
 
-        //            // For CRM purposes
-        //            return NotFound("user-not-found");
-        //        }
-        //        if (user.Email != model.Email)
-        //        {
-        //            //return BadRequest();
+                    // For CRM purposes
+                    return NotFound("user-not-found");
+                }
+                if (user.Email != model.Email)
+                {
+                    //return BadRequest();
 
-        //            // OR
+                    // OR
 
-        //            // For CRM purposes
-        //            return BadRequest("email-does-not-match");
-        //        }
+                    // For CRM purposes
+                    return BadRequest("email-does-not-match");
+                }
 
-        //        var result = await userManager.ResetPasswordAsync(user, model.Code, model.Password);
-        //        if (result.Succeeded)
-        //        {
-        //            // TODO: Maybe log the user in automatically? Need to add/refactor JWT logic if adding
-        //            //await signInManager.SignInAsync(user, isPersistent: false);
+                var result = await userManager.ResetPasswordAsync(user, model.Code, model.Password);
+                if (result.Succeeded)
+                {
+                    // TODO: Maybe log the user in automatically? Need to add/refactor JWT logic if adding
+                    //await signInManager.SignInAsync(user, isPersistent: false);
 
-        //            return Ok();
-        //        }
-        //    }
+                    return Ok();
+                }
+            }
 
-        //    return BadRequest(ModelState);
-        //}
+            return BadRequest(ModelState);
+        }
     }
 }
