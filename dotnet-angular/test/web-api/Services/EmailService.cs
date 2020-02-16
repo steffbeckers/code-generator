@@ -15,6 +15,7 @@ namespace Test.API.Services
     {
         Task SendEmailAsync(string email, string subject, string message);
         Task SendEmailConfirmationAsync(string email, string link);
+        Task SendPasswordResetAsync(string email, string link);
     }
 
     public class EmailService : IEmailService
