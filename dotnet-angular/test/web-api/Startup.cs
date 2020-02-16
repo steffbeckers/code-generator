@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
@@ -29,16 +28,19 @@ using Test.API.GraphQL;
 using Test.API.Models;
 using Test.API.Services;
 using Test.API.Framework.Exceptions;
+using Microsoft.Extensions.Hosting;
 
 namespace Test.API
 {
     public class Startup
     {
         public IConfiguration configuration { get; }
+        public IHostEnvironment environment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
             this.configuration = configuration;
+            this.environment = environment;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -139,7 +141,7 @@ namespace Test.API
             services.AddGraphQL(options =>
             {
                 options.EnableMetrics = true;
-                options.ExposeExceptions = true; // TODO: Only in DEV
+                options.ExposeExceptions = environment.IsDevelopment();
             })
             .AddGraphTypes(ServiceLifetime.Scoped)
             .AddGraphQLAuthorization(options =>
