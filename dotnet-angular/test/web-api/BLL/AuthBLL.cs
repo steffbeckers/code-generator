@@ -311,7 +311,7 @@ namespace Test.API.BLL
             // Validate email address
             if (user.Email != resetPasswordVM.Email)
             {
-                throw new ResetPasswordFailedException("invalid");
+                throw new ResetPasswordFailedException("invalid-email");
             }
 
             IdentityResult result = await userManager.ResetPasswordAsync(user, resetPasswordVM.Code, resetPasswordVM.Password);
