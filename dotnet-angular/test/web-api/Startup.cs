@@ -138,9 +138,18 @@ namespace Test.API
             services.AddScoped<TestSchema>();
             services.AddGraphQL(options =>
             {
-                options.ExposeExceptions = true; // TODO: Only in DEV
-            }).AddGraphTypes(ServiceLifetime.Scoped)
+                options.EnableMetrics = true;
+                options.ExposeExceptions = true; // TODO: Only in DEV?
+            })
+            .AddGraphTypes(ServiceLifetime.Scoped)
+            .AddGraphQLAuthorization(options =>
+            {
+                options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
+                //var policy = new AuthorizationPolicyBuilder()
+                //options.AddPolicy("Authorized", p => p.RequireClaim(ClaimTypes.Name, "Tom"));
+            })
             .AddUserContextBuilder(httpContext => httpContext.User)
+            
             .AddWebSockets();
 
 			// AutoMapper
@@ -155,8 +164,8 @@ namespace Test.API
             services.AddControllers()
                 .AddNewtonsoftJson(options => {
                     options.SerializerSettings.MaxDepth = 5;
-                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
             );
 

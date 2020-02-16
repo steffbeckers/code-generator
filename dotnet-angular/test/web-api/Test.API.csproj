@@ -37,11 +37,14 @@
     <Compile Remove="Migrations\20200216220756_UserId5.Designer.cs" />
     <Compile Remove="Migrations\20200216221908_Initial.cs" />
     <Compile Remove="Migrations\20200216221908_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200216222813_Initial2.cs" />
+    <Compile Remove="Migrations\20200216222813_Initial2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
+    <PackageReference Include="GraphQL.Server.Authorization.AspNetCore" Version="3.4.0" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
     <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.4.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
