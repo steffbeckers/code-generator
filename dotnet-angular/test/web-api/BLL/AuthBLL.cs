@@ -262,7 +262,32 @@ namespace Test.API.BLL
 
         public async Task ForgotPassword(ForgotPasswordVM forgotPasswordVM)
         {
-            
+            // Validation
+            if (forgotPasswordVM == null) {
+                return null;
+            }
+
+            // Retrieve user by email
+            User user = await userManager.FindByEmailAsync(forgotPasswordVM.Email);
+            if (user == null)
+            {
+                logger.LogWarning("User not found during forgot password", forgotPasswordVM.Email);
+
+                throw new ForgotPasswordFailedException("invalid");
+            }
+
+            // For more information on how to enable account confirmation and password reset please
+            // visit https://go.microsoft.com/fwlink/?LinkID=532713
+
+            string code = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            var callbackUrl = configuration.GetSection("EmailSettings").GetValue<string>("PasswordResetURL");
+            callbackUrl = callbackUrl.Replace("{{userId}}", user.Id.ToString().ToLower());
+            callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
+            callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
+
+            await emailService.SendEmailAsync(forgotPasswordVM.Email, "Reset Password",
+                $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
         }
 
         public string GenerateJWT(List<Claim> claims)

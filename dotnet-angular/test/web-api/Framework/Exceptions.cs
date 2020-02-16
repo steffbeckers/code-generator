@@ -19,5 +19,10 @@ namespace Test.API.Framework.Exceptions
         public ConfirmEmailFailedException(string message) : base(message) {}
     }
 
+    public class ForgotPasswordFailedException : Exception
+    {
+        public ForgotPasswordFailedException(string message) : base(message) {}
+    }
+
     #endregion
 }
