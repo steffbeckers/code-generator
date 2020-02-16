@@ -92,14 +92,12 @@ namespace Test.API.Migrations
                         name: "FK_Accounts_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Accounts_Users_ModifiedByUserId",
                         column: x => x.ModifiedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Accounts_Accounts_ParentAccountId",
                         column: x => x.ParentAccountId,
@@ -131,14 +129,12 @@ namespace Test.API.Migrations
                         name: "FK_Products_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Users_ModifiedByUserId",
                         column: x => x.ModifiedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -161,14 +157,12 @@ namespace Test.API.Migrations
                         name: "FK_Suppliers_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Suppliers_Users_ModifiedByUserId",
                         column: x => x.ModifiedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -276,14 +270,12 @@ namespace Test.API.Migrations
                         name: "FK_ProductDetails_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ProductDetails_Users_ModifiedByUserId",
                         column: x => x.ModifiedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ProductDetails_Products_ProductId",
                         column: x => x.ProductId,
@@ -313,14 +305,12 @@ namespace Test.API.Migrations
                         name: "FK_ProductSupplier_Users_CreatedByUserId",
                         column: x => x.CreatedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ProductSupplier_Users_ModifiedByUserId",
                         column: x => x.ModifiedByUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ProductSupplier_Products_ProductId",
                         column: x => x.ProductId,

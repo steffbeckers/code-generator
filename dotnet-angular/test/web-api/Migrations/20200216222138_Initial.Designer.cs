@@ -10,7 +10,7 @@ using Test.API.DAL;
 namespace Test.API.Migrations
 {
     [DbContext(typeof(TestContext))]
-    [Migration("20200216221908_Initial")]
+    [Migration("20200216222138_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -491,13 +491,13 @@ namespace Test.API.Migrations
                     b.HasOne("Test.API.Models.User", "CreatedByUser")
                         .WithMany()
                         .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.User", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.Account", "ParentAccount")
@@ -510,13 +510,13 @@ namespace Test.API.Migrations
                     b.HasOne("Test.API.Models.User", "CreatedByUser")
                         .WithMany()
                         .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.User", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -525,13 +525,13 @@ namespace Test.API.Migrations
                     b.HasOne("Test.API.Models.User", "CreatedByUser")
                         .WithMany()
                         .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.User", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.Product", "Product")
@@ -546,13 +546,13 @@ namespace Test.API.Migrations
                     b.HasOne("Test.API.Models.User", "CreatedByUser")
                         .WithMany()
                         .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.User", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.Product", "Product")
@@ -573,13 +573,13 @@ namespace Test.API.Migrations
                     b.HasOne("Test.API.Models.User", "CreatedByUser")
                         .WithMany()
                         .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Test.API.Models.User", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
