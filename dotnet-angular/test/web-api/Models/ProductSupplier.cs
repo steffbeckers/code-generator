@@ -70,7 +70,7 @@ namespace Test.API.Models
 		/// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+		public Guid? CreatedByUserId { get; set; }
 
 		/// <summary>
         /// The user who created the record
@@ -80,7 +80,7 @@ namespace Test.API.Models
 		/// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+		public Guid? ModifiedByUserId { get; set; }
 
 		/// <summary>
         /// The user who last modified the record
