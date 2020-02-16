@@ -67,7 +67,6 @@ namespace Test.API.Models
 		/// <summary>
         /// The user who created the record
         /// </summary>
-		//[ForeignKey("CreatedByUserId")]
 		public User CreatedByUser { get; set; }
 
 		/// <summary>
@@ -78,7 +77,6 @@ namespace Test.API.Models
 		/// <summary>
         /// The user who last modified the record
         /// </summary>
-		//[ForeignKey("ModifiedByUserId")]
 		public User ModifiedByUser { get; set; }
 
 		// TODO: Multi-tenancy
