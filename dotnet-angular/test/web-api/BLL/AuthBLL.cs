@@ -286,7 +286,7 @@ namespace Test.API.BLL
             callbackUrl = callbackUrl.Replace("{{userEmail}}", user.Email.ToString().ToLower());
             callbackUrl = callbackUrl.Replace("{{code}}", Uri.EscapeDataString(code));
 
-            _ = emailService.SendPasswordResetAsync(forgotPasswordVM.Email, callbackUrl);
+            await emailService.SendPasswordResetAsync(forgotPasswordVM.Email, callbackUrl);
         }
 
         public async Task<PasswordResettedVM> ResetPassword(ResetPasswordVM resetPasswordVM) {
