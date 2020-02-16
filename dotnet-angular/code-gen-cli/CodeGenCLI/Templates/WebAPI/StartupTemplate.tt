@@ -31,10 +31,10 @@ using System.Threading.Tasks;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Framework.Exceptions;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.GraphQL;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Services;
-using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Framework.Exceptions;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>
 {
@@ -147,8 +147,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             services.AddScoped<<#= config.Name #>Schema>();
             services.AddGraphQL(options =>
             {
-                options.ExposeExceptions = true; // TODO: Only in DEV
-            }).AddGraphTypes(ServiceLifetime.Scoped)
+                options.EnableMetrics = true;
+                options.ExposeExceptions = true; // TODO: Only in DEV?
+            })
+            .AddGraphTypes(ServiceLifetime.Scoped)
+            // TODO
+            //.AddGraphQLAuthorization(options =>
+            //{
+            //    options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
+            //    //var policy = new AuthorizationPolicyBuilder()
+            //    //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
+            //})
             .AddUserContextBuilder(httpContext => httpContext.User)
             .AddWebSockets();
 
@@ -164,8 +173,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             services.AddControllers()
                 .AddNewtonsoftJson(options => {
                     options.SerializerSettings.MaxDepth = 5;
-                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
             );
 
@@ -255,6 +264,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             //    });
             //}
 
+            // Authentication
+            app.UseAuthentication();
+
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
+            app.UseRouting();
+
+			// Authorization
+            app.UseAuthorization();
+
             // Web sockets
             app.UseWebSockets();
 
@@ -273,17 +293,6 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 c.SwaggerEndpoint("./swagger/v1/swagger.json", "<#= config.Name #> Web API V1");
                 c.RoutePrefix = string.Empty;
             });
-
-            // Authentication
-            app.UseAuthentication();
-
-            // Error handling
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-
-            app.UseRouting();
-
-			// Authorization
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
