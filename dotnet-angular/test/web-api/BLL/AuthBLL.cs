@@ -268,7 +268,7 @@ namespace Test.API.BLL
                     claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));
                 }
 
-                // Registration successful, no email confirmation required => Generate JWT token based on the user's claims
+                // Email confirmation successful => Generate JWT token based on the user's claims
                 string token = this.GenerateJWT(claims);
 
                 emailConfirmedVM.Token = token;
