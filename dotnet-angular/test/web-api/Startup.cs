@@ -312,7 +312,7 @@ namespace Test.API
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             // Roles
-            Task<IdentityRole> adminRole = roleManager.FindByNameAsync("Admin");
+            Task<IdentityRole<Guid>> adminRole = roleManager.FindByNameAsync("Admin");
             adminRole.Wait();
             if (adminRole.Result == null)
             {
@@ -326,7 +326,7 @@ namespace Test.API
                 createAdminRole.Wait();
             }
 
-            Task<IdentityRole> salesRole = roleManager.FindByNameAsync("Sales");
+            Task<IdentityRole<Guid>> salesRole = roleManager.FindByNameAsync("Sales");
             salesRole.Wait();
             if (salesRole.Result == null)
             {
