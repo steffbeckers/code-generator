@@ -344,21 +344,20 @@ namespace Test.API
             // Check if the Admin user exists and create it if not
             // Add to the Admin role
 
-            Task<User> adminUser = userManager.FindByNameAsync(Configuration.GetSection("Admin").GetValue<string>("Username"));
+            Task<User> adminUser = userManager.FindByNameAsync(configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Username"));
             adminUser.Wait();
             if (adminUser.Result == null)
             {
                 User newAdminUser = new User()
                 {
-                    Email = Configuration.GetSection("Admin").GetValue<string>("Email"),
-                    UserName = Configuration.GetSection("Admin").GetValue<string>("Username"),
-                    FirstName = Configuration.GetSection("Admin").GetValue<string>("FirstName"),
-                    LastName = Configuration.GetSection("Admin").GetValue<string>("LastName"),
-                    EmailConfirmed = true,
-                    LockoutEnabled = false
+                    Email = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Email"),
+                    UserName = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Username"),
+                    FirstName = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("FirstName"),
+                    LastName = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("LastName"),
+                    EmailConfirmed = true
                 };
 
-                Task<IdentityResult> newUser = userManager.CreateAsync(newAdminUser, Configuration.GetSection("Admin").GetValue<string>("Password"));
+                Task<IdentityResult> newUser = userManager.CreateAsync(newAdminUser, configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Password"));
                 newUser.Wait();
                 if (newUser.Result.Succeeded)
                 {
