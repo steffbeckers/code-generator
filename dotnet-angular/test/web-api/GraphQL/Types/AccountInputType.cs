@@ -8,11 +8,11 @@ namespace Test.API.GraphQL.Types
         {
             Name = "accountInput";
             Field<IdGraphType>("id");
-            Field<NonNullGraphType<StringGraphType>>("name");
-            Field<StringGraphType>("website");
-            Field<StringGraphType>("telephone");
-            Field<StringGraphType>("email");
-            Field<IdGraphType>("parentAccountId");
+		    Field<NonNullGraphType<StringGraphType>>("name");
+		    Field<StringGraphType>("website");
+		    Field<StringGraphType>("telephone");
+		    Field<StringGraphType>("email");
+		    Field<IdGraphType>("parentAccountId");
 
         }
     }

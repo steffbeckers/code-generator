@@ -18,9 +18,9 @@ using Test.API.ViewModels.Identity;
 
 namespace Test.API.BLL
 {
-    /// <summary>
-    /// The business logic layer for authentication.
-    /// </summary>
+	/// <summary>
+	/// The business logic layer for authentication.
+	/// </summary>
     public class AuthBLL
     {
         private readonly IConfiguration configuration;
@@ -50,17 +50,14 @@ namespace Test.API.BLL
             this.emailService = emailService;
         }
 
-        public async Task<AuthenticatedVM> Login(LoginVM loginVM)
-        {
+        public async Task<AuthenticatedVM> Login(LoginVM loginVM) {
             // Validation
-            if (loginVM == null)
-            {
+            if (loginVM == null) {
                 return null;
             }
 
             // Result
-            AuthenticatedVM authenticatedVM = new AuthenticatedVM()
-            {
+            AuthenticatedVM authenticatedVM = new AuthenticatedVM() {
                 RememberMe = loginVM.RememberMe
             };
 
@@ -75,7 +72,7 @@ namespace Test.API.BLL
 
             // Log the user in by password
             SignInResult signInResult = await signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
-
+            
             // Success
             if (signInResult.Succeeded)
             {
@@ -129,7 +126,7 @@ namespace Test.API.BLL
             if (signInResult.IsLockedOut)
             {
                 logger.LogWarning("User is locked out", user);
-
+                
                 throw new LoginFailedException("locked-out");
             }
             else if (signInResult.IsNotAllowed)
@@ -159,19 +156,16 @@ namespace Test.API.BLL
             return currentUser;
         }
 
-        public async Task<RegisteredVM> Register(RegisterVM registerVM)
-        {
+        public async Task<RegisteredVM> Register(RegisterVM registerVM) {
             // Validation
-            if (registerVM == null)
-            {
+            if (registerVM == null) {
                 return null;
             }
 
             // Result
             RegisteredVM registeredVM = new RegisteredVM();
 
-            User user = new User
-            {
+            User user = new User {
                 UserName = registerVM.Username,
                 Email = registerVM.Email,
                 FirstName = registerVM.FirstName,
@@ -185,8 +179,7 @@ namespace Test.API.BLL
                 logger.LogInformation("User created a new account with password.");
 
                 // Email confirmation
-                if (configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation"))
-                {
+                if (configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation")) {
                     string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     string callbackUrl = configuration.GetSection("Authentication").GetValue<string>("ConfirmEmailURL");
@@ -196,8 +189,7 @@ namespace Test.API.BLL
 
                     await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
                 }
-                else
-                {
+                else {
                     // Set claims of user
                     List<Claim> claims = new List<Claim>() {
                         new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),
@@ -289,8 +281,7 @@ namespace Test.API.BLL
         public async Task ForgotPassword(ForgotPasswordVM forgotPasswordVM)
         {
             // Validation
-            if (forgotPasswordVM == null)
-            {
+            if (forgotPasswordVM == null) {
                 throw new ForgotPasswordFailedException("invalid");
             }
 
@@ -319,11 +310,9 @@ namespace Test.API.BLL
             await emailService.SendPasswordResetAsync(forgotPasswordVM.Email, callbackUrl);
         }
 
-        public async Task<PasswordResettedVM> ResetPassword(ResetPasswordVM resetPasswordVM)
-        {
+        public async Task<PasswordResettedVM> ResetPassword(ResetPasswordVM resetPasswordVM) {
             // Validation
-            if (resetPasswordVM == null)
-            {
+            if (resetPasswordVM == null) {
                 throw new ResetPasswordFailedException("invalid");
             }
 
@@ -338,7 +327,7 @@ namespace Test.API.BLL
 
                 throw new ResetPasswordFailedException("invalid");
             }
-
+            
             // Validate email address
             if (user.Email != resetPasswordVM.Email)
             {
@@ -374,7 +363,7 @@ namespace Test.API.BLL
 
                 return passwordResettedVM;
             }
-
+            
             logger.LogWarning("Reset password is invalid", user);
 
             throw new ResetPasswordFailedException("invalid");
