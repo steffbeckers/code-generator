@@ -296,9 +296,9 @@ namespace Test.API
 
         private void UpdateDatabase(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                using (var context = serviceScope.ServiceProvider.GetService<TestContext>())
+                using (TestContext context = serviceScope.ServiceProvider.GetService<TestContext>())
                 {
                     context.Database.Migrate();
                 }
