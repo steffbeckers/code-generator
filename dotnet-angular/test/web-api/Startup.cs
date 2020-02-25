@@ -291,7 +291,8 @@ namespace Test.API
                 endpoints.MapControllers();
             });
 
-            // TODO: Add default admin user with function here?
+            // Authentication / Authorization
+            CreateRolesAndAdminUser(serviceProvider);
         }
 
         private void UpdateDatabase(IApplicationBuilder app)
@@ -301,6 +302,68 @@ namespace Test.API
                 using (TestContext context = serviceScope.ServiceProvider.GetService<TestContext>())
                 {
                     context.Database.Migrate();
+                }
+            }
+        }
+
+        private void CreateRolesAndAdminUser(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            // Roles
+
+            Task<IdentityRole> adminRole = roleManager.FindByNameAsync("Admin");
+            adminRole.Wait();
+            if (adminRole.Result == null)
+            {
+                IdentityRole newAdminRole = new IdentityRole()
+                {
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+                };
+
+                var createAdminRole = roleManager.CreateAsync(newAdminRole);
+                createAdminRole.Wait();
+            }
+
+            Task<IdentityRole> salesRole = roleManager.FindByNameAsync("Sales");
+            salesRole.Wait();
+            if (salesRole.Result == null)
+            {
+                IdentityRole newSalesRole = new IdentityRole()
+                {
+                    Name = "Sales",
+                    NormalizedName = "SALES"
+                };
+
+                var createSalesRole = roleManager.CreateAsync(newSalesRole);
+                createSalesRole.Wait();
+            }
+
+            // Check if the Admin user exists and create it if not
+            // Add to the Admin role
+
+            Task<User> adminUser = userManager.FindByNameAsync(Configuration.GetSection("Admin").GetValue<string>("Username"));
+            adminUser.Wait();
+            if (adminUser.Result == null)
+            {
+                User newAdminUser = new User()
+                {
+                    Email = Configuration.GetSection("Admin").GetValue<string>("Email"),
+                    UserName = Configuration.GetSection("Admin").GetValue<string>("Username"),
+                    FirstName = Configuration.GetSection("Admin").GetValue<string>("FirstName"),
+                    LastName = Configuration.GetSection("Admin").GetValue<string>("LastName"),
+                    EmailConfirmed = true,
+                    LockoutEnabled = false
+                };
+
+                Task<IdentityResult> newUser = userManager.CreateAsync(newAdminUser, Configuration.GetSection("Admin").GetValue<string>("Password"));
+                newUser.Wait();
+                if (newUser.Result.Succeeded)
+                {
+                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(newAdminUser, "Admin");
+                    newUserRole.Wait();
                 }
             }
         }
