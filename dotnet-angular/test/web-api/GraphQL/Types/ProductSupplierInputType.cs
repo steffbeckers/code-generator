@@ -8,9 +8,9 @@ namespace Test.API.GraphQL.Types
         {
             Name = "productSupplierInput";
             Field<IdGraphType>("id");
-            Field<StringGraphType>("comment");
-            Field<NonNullGraphType<IdGraphType>>("productId");
-            Field<NonNullGraphType<IdGraphType>>("supplierId");
+		    Field<StringGraphType>("comment");
+		    Field<NonNullGraphType<IdGraphType>>("productId");
+		    Field<NonNullGraphType<IdGraphType>>("supplierId");
 
         }
     }
