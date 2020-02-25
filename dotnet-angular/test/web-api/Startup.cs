@@ -253,6 +253,9 @@ namespace Test.API
             //    });
             //}
 
+            // Update database migrations on startup
+            UpdateDatabase(app);
+
             // Authentication
             app.UseAuthentication();
 
@@ -289,6 +292,17 @@ namespace Test.API
             });
 
             // TODO: Add default admin user with function here?
+        }
+
+        private void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<TestContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 
