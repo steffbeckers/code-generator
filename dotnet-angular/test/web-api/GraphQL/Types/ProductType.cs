@@ -1,5 +1,4 @@
 using GraphQL.Types;
-using System;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
 
@@ -9,9 +8,9 @@ namespace Test.API.GraphQL.Types
     {
         public ProductType(
             ProductDetailRepository productDetailRepository,
-			ProductRepository productRepository,
+            ProductRepository productRepository,
             SupplierRepository supplierRepository,
-			ProductSupplierRepository productSupplierRepository
+            ProductSupplierRepository productSupplierRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));

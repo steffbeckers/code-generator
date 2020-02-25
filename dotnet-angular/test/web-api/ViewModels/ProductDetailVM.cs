@@ -1,79 +1,78 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Test.API.ViewModels.Identity;
 
 namespace Test.API.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// ProductDetail view model
     /// </summary>
     public class ProductDetailVM
     {
-		public ProductDetailVM()
+        public ProductDetailVM()
         {
             // Relations
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of ProductDetail.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Comment property of ProductDetail.
         /// </summary>
         [Required]
-		public string Comment { get; set; }
+        public string Comment { get; set; }
 
-		// Relations
+        // Relations
 
-		//// Many-to-one
+        //// Many-to-one
 
-	    /// <summary>
+        /// <summary>
         /// The related foreign key ProductId for Product of ProductDetail.
         /// </summary>
-		public Guid ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related Product of ProductDetail.
         /// </summary>
-		public ProductVM Product { get; set; }
+        public ProductVM Product { get; set; }
 
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
     }
 }

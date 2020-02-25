@@ -8,16 +8,16 @@ using Test.API.Models;
 
 namespace Test.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for Accounts in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for Accounts in the data access layer.
+    /// </summary>
     public class AccountRepository : Repository<Account>
     {
         private new readonly TestContext context;
 
-		/// <summary>
-		/// The constructor of the Account repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Account repository.
+        /// </summary>
         public AccountRepository(TestContext context) : base(context)
         {
             this.context = context;
@@ -25,7 +25,7 @@ namespace Test.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<Account>> GetWithLinkedEntitiesAsync()
+        public async Task<IEnumerable<Account>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Accounts
                 .Include(x => x.ParentAccount)
@@ -34,7 +34,7 @@ namespace Test.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<Account> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<Account> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Accounts
                 .Include(x => x.ParentAccount)
@@ -49,7 +49,7 @@ namespace Test.API.DAL.Repositories
                 .Where(t => t.ParentAccountId == parentAccountId)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Account>> GetByParentAccountIdAsync(Guid parentAccountId)
         //{

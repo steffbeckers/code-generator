@@ -8,16 +8,16 @@ using Test.API.Models;
 
 namespace Test.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for Products in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for Products in the data access layer.
+    /// </summary>
     public class ProductRepository : Repository<Product>
     {
         private new readonly TestContext context;
 
-		/// <summary>
-		/// The constructor of the Product repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Product repository.
+        /// </summary>
         public ProductRepository(TestContext context) : base(context)
         {
             this.context = context;
@@ -25,7 +25,7 @@ namespace Test.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<Product>> GetWithLinkedEntitiesAsync()
+        public async Task<IEnumerable<Product>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Products
                 .Include(x => x.Details)
@@ -36,7 +36,7 @@ namespace Test.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<Product> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<Product> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Products
                 .Include(x => x.Details)
@@ -55,7 +55,7 @@ namespace Test.API.DAL.Repositories
                 .Select(x => x.Product)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Product>> GetBySupplierIdAsync(Guid supplierId)
         //{

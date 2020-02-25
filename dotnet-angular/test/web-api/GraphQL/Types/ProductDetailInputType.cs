@@ -8,8 +8,8 @@ namespace Test.API.GraphQL.Types
         {
             Name = "productDetailInput";
             Field<IdGraphType>("id");
-		    Field<NonNullGraphType<StringGraphType>>("comment");
-		    Field<NonNullGraphType<IdGraphType>>("productId");
+            Field<NonNullGraphType<StringGraphType>>("comment");
+            Field<NonNullGraphType<IdGraphType>>("productId");
 
         }
     }

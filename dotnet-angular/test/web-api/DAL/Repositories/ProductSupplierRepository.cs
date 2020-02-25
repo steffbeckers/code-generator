@@ -1,23 +1,20 @@
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Test.API.Framework;
 using Test.API.Models;
 
 namespace Test.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for ProductSuppliers in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for ProductSuppliers in the data access layer.
+    /// </summary>
     public class ProductSupplierRepository : Repository<ProductSupplier>
     {
         private new readonly TestContext context;
 
-		/// <summary>
-		/// The constructor of the ProductSupplier repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the ProductSupplier repository.
+        /// </summary>
         public ProductSupplierRepository(TestContext context) : base(context)
         {
             this.context = context;
@@ -32,7 +29,7 @@ namespace Test.API.DAL.Repositories
                 .SingleOrDefault();
         }
 
-		public ProductSupplier GetBySupplierAndProductId(Guid supplierId, Guid productId)
+        public ProductSupplier GetBySupplierAndProductId(Guid supplierId, Guid productId)
         {
             return this.context.ProductSupplier
                 .Where(x => x.SupplierId == supplierId && x.ProductId == productId)
