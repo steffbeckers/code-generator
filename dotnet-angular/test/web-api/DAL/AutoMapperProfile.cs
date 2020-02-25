@@ -8,22 +8,22 @@ using Test.API.ViewModels.Identity;
 
 namespace Test.API.DAL
 {
-    /// <summary>
-    /// Profile for mapping models to/from view models with AutoMapper.
-    /// </summary>
+	/// <summary>
+	/// Profile for mapping models to/from view models with AutoMapper.
+	/// </summary>
     public class AutoMapperProfile : Profile
     {
-        /// <summary>
-        /// The constructor of AutoMapperProfile.
-        /// </summary>
+		/// <summary>
+		/// The constructor of AutoMapperProfile.
+		/// </summary>
         public AutoMapperProfile()
         {
             // Accounts
-            CreateMap<Account, AccountVM>();
+			CreateMap<Account, AccountVM>();
             CreateMap<AccountVM, Account>();
 
             // Products
-            CreateMap<Product, ProductVM>()
+			CreateMap<Product, ProductVM>()
                 .ForMember(
                     x => x.Suppliers,
                     x => x.MapFrom(
@@ -33,8 +33,7 @@ namespace Test.API.DAL
             CreateMap<ProductVM, Product>()
                 .ForMember(
                     x => x.ProductSupplier,
-                    x =>
-                    {
+                    x => {
                         x.PreCondition(z => z.SupplierId != null);
                         x.MapFrom(
                             y => new List<ProductSupplier>() {
@@ -49,7 +48,7 @@ namespace Test.API.DAL
                 );
 
             // Suppliers
-            CreateMap<Supplier, SupplierVM>()
+			CreateMap<Supplier, SupplierVM>()
                 .ForMember(
                     x => x.Products,
                     x => x.MapFrom(
@@ -59,8 +58,7 @@ namespace Test.API.DAL
             CreateMap<SupplierVM, Supplier>()
                 .ForMember(
                     x => x.ProductSupplier,
-                    x =>
-                    {
+                    x => {
                         x.PreCondition(z => z.ProductId != null);
                         x.MapFrom(
                             y => new List<ProductSupplier>() {
@@ -75,11 +73,11 @@ namespace Test.API.DAL
                 );
 
             // ProductDetails
-            CreateMap<ProductDetail, ProductDetailVM>();
+			CreateMap<ProductDetail, ProductDetailVM>();
             CreateMap<ProductDetailVM, ProductDetail>();
 
             // Users
-            CreateMap<User, UserVM>();
+			CreateMap<User, UserVM>();
             CreateMap<UserVM, User>();
         }
     }

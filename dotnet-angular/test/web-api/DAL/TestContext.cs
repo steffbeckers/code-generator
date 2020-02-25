@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Test.API.Models;
@@ -21,11 +21,11 @@ namespace Test.API.DAL
         IdentityRoleClaim<Guid>,
         IdentityUserToken<Guid>
     >
-    {
+	{
         private readonly IConfiguration configuration;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public TestContext(
+		public TestContext(
             IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration
         ) : base()
@@ -34,13 +34,13 @@ namespace Test.API.DAL
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<ProductDetail> ProductDetails { get; set; }
-        public DbSet<ProductSupplier> ProductSupplier { get; set; }
+		public DbSet<Account> Accounts { get; set; }
+		public DbSet<Product> Products { get; set; }
+		public DbSet<Supplier> Suppliers { get; set; }
+		public DbSet<ProductDetail> ProductDetails { get; set; }
+		public DbSet<ProductSupplier> ProductSupplier { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
@@ -50,7 +50,7 @@ namespace Test.API.DAL
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
@@ -69,7 +69,7 @@ namespace Test.API.DAL
             {
                 e.ToTable("UserLogins");
                 // In case you changed the TKey type
-                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });
+                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
             });
             modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
             modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
@@ -81,16 +81,16 @@ namespace Test.API.DAL
 
             #endregion
 
-            #region Accounts
+			#region Accounts
 
             // Soft delete query filter
             modelBuilder.Entity<Account>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Account>().ToTable("Accounts");
+			modelBuilder.Entity<Account>().ToTable("Accounts");
 
-            // Key
-            modelBuilder.Entity<Account>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<Account>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
@@ -108,16 +108,16 @@ namespace Test.API.DAL
 
             #endregion
 
-            #region Products
+			#region Products
 
             // Soft delete query filter
             modelBuilder.Entity<Product>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Product>().ToTable("Products");
+			modelBuilder.Entity<Product>().ToTable("Products");
 
-            // Key
-            modelBuilder.Entity<Product>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<Product>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Product>().Property(e => e.Name).IsRequired();
@@ -135,16 +135,16 @@ namespace Test.API.DAL
 
             #endregion
 
-            #region Suppliers
+			#region Suppliers
 
             // Soft delete query filter
             modelBuilder.Entity<Supplier>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<Supplier>().ToTable("Suppliers");
+			modelBuilder.Entity<Supplier>().ToTable("Suppliers");
 
-            // Key
-            modelBuilder.Entity<Supplier>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<Supplier>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<Supplier>().Property(e => e.Name).IsRequired();
@@ -162,16 +162,16 @@ namespace Test.API.DAL
 
             #endregion
 
-            #region ProductDetails
+			#region ProductDetails
 
             // Soft delete query filter
             modelBuilder.Entity<ProductDetail>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<ProductDetail>().ToTable("ProductDetails");
+			modelBuilder.Entity<ProductDetail>().ToTable("ProductDetails");
 
-            // Key
-            modelBuilder.Entity<ProductDetail>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<ProductDetail>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<ProductDetail>().Property(e => e.Comment).IsRequired();
@@ -190,16 +190,16 @@ namespace Test.API.DAL
 
             #endregion
 
-            #region ProductSupplier
+			#region ProductSupplier
 
             // Soft delete query filter
             modelBuilder.Entity<ProductSupplier>().HasQueryFilter(e => e.DeletedOn == null);
 
             // Table
-            modelBuilder.Entity<ProductSupplier>().ToTable("ProductSupplier");
+			modelBuilder.Entity<ProductSupplier>().ToTable("ProductSupplier");
 
-            // Key
-            modelBuilder.Entity<ProductSupplier>().HasKey(e => e.Id);
+			// Key
+			modelBuilder.Entity<ProductSupplier>().HasKey(e => e.Id);
 
             // Required properties
             modelBuilder.Entity<ProductSupplier>().Property(e => e.ProductId).IsRequired();
@@ -217,9 +217,9 @@ namespace Test.API.DAL
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
-        }
+		}
 
-        public override int SaveChanges()
+		public override int SaveChanges()
         {
             SoftDeleteLogic();
             TimestampsLogic();
@@ -243,12 +243,12 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-                    entry.Entity.GetType() == typeof(Account) ||
-                    entry.Entity.GetType() == typeof(Product) ||
-                    entry.Entity.GetType() == typeof(Supplier) ||
-                    entry.Entity.GetType() == typeof(ProductDetail) ||
-                    entry.Entity.GetType() == typeof(ProductSupplier)
-                )
+					entry.Entity.GetType() == typeof(Account) ||
+					entry.Entity.GetType() == typeof(Product) ||
+					entry.Entity.GetType() == typeof(Supplier) ||
+					entry.Entity.GetType() == typeof(ProductDetail) ||
+					entry.Entity.GetType() == typeof(ProductSupplier)
+				)
                 {
                     switch (entry.State)
                     {
@@ -270,12 +270,12 @@ namespace Test.API.DAL
             {
                 // Models that have soft delete
                 if (
-                    entry.Entity.GetType() == typeof(Account) ||
-                    entry.Entity.GetType() == typeof(Product) ||
-                    entry.Entity.GetType() == typeof(Supplier) ||
-                    entry.Entity.GetType() == typeof(ProductDetail) ||
-                    entry.Entity.GetType() == typeof(ProductSupplier)
-                )
+					entry.Entity.GetType() == typeof(Account) ||
+					entry.Entity.GetType() == typeof(Product) ||
+					entry.Entity.GetType() == typeof(Supplier) ||
+					entry.Entity.GetType() == typeof(ProductDetail) ||
+					entry.Entity.GetType() == typeof(ProductSupplier)
+				)
                 {
                     switch (entry.State)
                     {
@@ -302,11 +302,11 @@ namespace Test.API.DAL
                 {
                     Type entityType = entry.Entity.GetType();
                     if (
-                        entry.Entity.GetType() == typeof(Account) ||
-                        entry.Entity.GetType() == typeof(Product) ||
-                        entry.Entity.GetType() == typeof(Supplier) ||
-                        entry.Entity.GetType() == typeof(ProductDetail) ||
-                        entry.Entity.GetType() == typeof(ProductSupplier)
+					    entry.Entity.GetType() == typeof(Account) ||
+					    entry.Entity.GetType() == typeof(Product) ||
+					    entry.Entity.GetType() == typeof(Supplier) ||
+					    entry.Entity.GetType() == typeof(ProductDetail) ||
+					    entry.Entity.GetType() == typeof(ProductSupplier)
                     )
                     {
                         switch (entry.State)
@@ -323,5 +323,5 @@ namespace Test.API.DAL
                 }
             }
         }
-    }
+	}
 }
