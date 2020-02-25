@@ -316,7 +316,7 @@ namespace Test.API
             adminRole.Wait();
             if (adminRole.Result == null)
             {
-                IdentityRole newAdminRole = new IdentityRole()
+                IdentityRole<Guid> newAdminRole = new IdentityRole<Guid>()
                 {
                     Name = "Admin",
                     NormalizedName = "ADMIN"
@@ -330,7 +330,7 @@ namespace Test.API
             salesRole.Wait();
             if (salesRole.Result == null)
             {
-                IdentityRole newSalesRole = new IdentityRole()
+                IdentityRole<Guid> newSalesRole = new IdentityRole<Guid>()
                 {
                     Name = "Sales",
                     NormalizedName = "SALES"
