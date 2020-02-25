@@ -10,7 +10,7 @@ namespace Test.API.GraphQL.Types
         public ProductSupplierType(
             ProductRepository productRepository,
             SupplierRepository supplierRepository,
-            ProductSupplierRepository productSupplierRepository
+			ProductSupplierRepository productSupplierRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
