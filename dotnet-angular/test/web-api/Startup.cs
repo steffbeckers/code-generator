@@ -308,7 +308,7 @@ namespace Test.API
 
         private void CreateRolesAndAdminUser(IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             // Roles
