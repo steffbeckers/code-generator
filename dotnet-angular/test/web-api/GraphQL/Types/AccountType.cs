@@ -8,7 +8,7 @@ namespace Test.API.GraphQL.Types
     public class AccountType : ObjectGraphType<Account>
     {
         public AccountType(
-			AccountRepository accountRepository
+            AccountRepository accountRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));

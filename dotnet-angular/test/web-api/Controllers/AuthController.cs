@@ -1,19 +1,12 @@
 using AutoMapper;
-using Test.API.Models;
-using Test.API.Services;
-using Test.API.ViewModels.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Test.API.BLL;
+using Test.API.Models;
+using Test.API.ViewModels.Identity;
 
 namespace Test.API.Controllers
 {
