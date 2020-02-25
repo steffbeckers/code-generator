@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Test.API.ViewModels.Identity
@@ -10,7 +9,7 @@ namespace Test.API.ViewModels.Identity
         public string Username { get; set; }
         public string Email { get; set; }
         public string[] Roles { get; set; }
-        
+
         // TODO: Custom fields
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -26,7 +25,7 @@ namespace Test.API.ViewModels.Identity
         public bool RememberMe { get; set; }
     }
 
-	public class AuthenticatedVM
+    public class AuthenticatedVM
     {
         public UserVM User { get; set; }
         public string Token { get; set; }
@@ -56,13 +55,13 @@ namespace Test.API.ViewModels.Identity
         public string LastName { get; set; }
     }
 
-	public class RegisteredVM
+    public class RegisteredVM
     {
         public UserVM User { get; set; }
         public string Token { get; set; }
     }
 
-	public class EmailConfirmedVM
+    public class EmailConfirmedVM
     {
         public UserVM User { get; set; }
         public string Token { get; set; }
@@ -98,7 +97,7 @@ namespace Test.API.ViewModels.Identity
         public string PasswordConfirm { get; set; }
     }
 
-	public class PasswordResettedVM
+    public class PasswordResettedVM
     {
         public UserVM User { get; set; }
         public string Token { get; set; }
