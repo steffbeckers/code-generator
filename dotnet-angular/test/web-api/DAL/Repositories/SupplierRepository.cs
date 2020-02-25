@@ -8,16 +8,16 @@ using Test.API.Models;
 
 namespace Test.API.DAL.Repositories
 {
-	/// <summary>
-	/// The repository for Suppliers in the data access layer.
-	/// </summary>
+    /// <summary>
+    /// The repository for Suppliers in the data access layer.
+    /// </summary>
     public class SupplierRepository : Repository<Supplier>
     {
         private new readonly TestContext context;
 
-		/// <summary>
-		/// The constructor of the Supplier repository.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Supplier repository.
+        /// </summary>
         public SupplierRepository(TestContext context) : base(context)
         {
             this.context = context;
@@ -25,7 +25,7 @@ namespace Test.API.DAL.Repositories
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<Supplier>> GetWithLinkedEntitiesAsync()
+        public async Task<IEnumerable<Supplier>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Suppliers
                 .Include(x => x.ProductSupplier)
@@ -35,7 +35,7 @@ namespace Test.API.DAL.Repositories
                 .ToListAsync();
         }
 
-		public async Task<Supplier> GetWithLinkedEntitiesByIdAsync(Guid id)
+        public async Task<Supplier> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Suppliers
                 .Include(x => x.ProductSupplier)
@@ -53,7 +53,7 @@ namespace Test.API.DAL.Repositories
                 .Select(x => x.Supplier)
                 .ToList();
         }
-        
+
         //// Async test
         //public async Task<IEnumerable<Supplier>> GetByProductIdAsync(Guid productId)
         //{

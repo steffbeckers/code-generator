@@ -11,51 +11,51 @@ using Test.API.ViewModels;
 
 namespace Test.API.Controllers
 {
-	/// <summary>
-	/// The Products controller.
-	/// </summary>
+    /// <summary>
+    /// The Products controller.
+    /// </summary>
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class ProductsController : ControllerBase
     {
         private readonly ILogger<ProductsController> logger;
         private readonly IMapper mapper;
         private readonly ProductBLL bll;
 
-		/// <summary>
-		/// The constructor of the Products controller.
-		/// </summary>
+        /// <summary>
+        /// The constructor of the Products controller.
+        /// </summary>
         public ProductsController(
             ILogger<ProductsController> logger,
-			IMapper mapper,
+            IMapper mapper,
             ProductBLL bll
         )
         {
             this.logger = logger;
-			this.mapper = mapper;
+            this.mapper = mapper;
             this.bll = bll;
         }
 
         // GET: api/products
-		/// <summary>
-		/// Retrieves all products.
-		/// </summary>
+        /// <summary>
+        /// Retrieves all products.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductVM>>> GetProducts()
         {
             IEnumerable<Product> products = await this.bll.GetAllProductsAsync();
 
-			// Mapping
+            // Mapping
             return Ok(this.mapper.Map<IEnumerable<Product>, List<ProductVM>>(products));
         }
 
         // GET: api/products/{id}
-		/// <summary>
-		/// Retrieves a specific product.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific product.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductVM>> GetProduct([FromRoute] Guid id)
         {
@@ -65,19 +65,19 @@ namespace Test.API.Controllers
                 return NotFound();
             }
 
-			// Mapping
+            // Mapping
             return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
 
         // POST: api/products
-		/// <summary>
-		/// Creates a new product.
-		/// </summary>
-		/// <param name="productVM"></param>
+        /// <summary>
+        /// Creates a new product.
+        /// </summary>
+        /// <param name="productVM"></param>
         [HttpPost]
         public async Task<ActionResult<ProductVM>> CreateProduct([FromBody] ProductVM productVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -88,47 +88,47 @@ namespace Test.API.Controllers
 
             product = await this.bll.CreateProductAsync(product);
 
-			// Mapping
+            // Mapping
             return CreatedAtAction(
-				"GetProduct",
-				new { id = product.Id },
-				this.mapper.Map<Product, ProductVM>(product)
-			);
+                "GetProduct",
+                new { id = product.Id },
+                this.mapper.Map<Product, ProductVM>(product)
+            );
         }
 
-		// PUT: api/products/{id}
-		/// <summary>
-		/// Updates a specific product.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="productVM"></param>
+        // PUT: api/products/{id}
+        /// <summary>
+        /// Updates a specific product.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="productVM"></param>
         [HttpPut("{id}")]
         public async Task<ActionResult<ProductVM>> UpdateProduct([FromRoute] Guid id, [FromBody] ProductVM productVM)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid || id != productVM.Id)
             {
                 return BadRequest(ModelState);
             }
 
-			// Mapping
+            // Mapping
             Product product = this.mapper.Map<ProductVM, Product>(productVM);
 
             product = await this.bll.UpdateProductAsync(product);
 
-			// Mapping
-			return Ok(this.mapper.Map<Product, ProductVM>(product));
+            // Mapping
+            return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
 
         // PUT: api/products/suppliers/link
-		/// <summary>
-		/// Links a specific supplier to product.
-		/// </summary>
-		/// <param name="productSupplier"></param>
+        /// <summary>
+        /// Links a specific supplier to product.
+        /// </summary>
+        /// <param name="productSupplier"></param>
         [HttpPut("Suppliers/Link")]
         public async Task<ActionResult<ProductVM>> LinkSupplierToProduct([FromBody] ProductSupplier productSupplier)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -141,14 +141,14 @@ namespace Test.API.Controllers
         }
 
         // PUT: api/products/suppliers/unlink
-		/// <summary>
-		/// Unlinks a specific supplier from product.
-		/// </summary>
-		/// <param name="productSupplier"></param>
+        /// <summary>
+        /// Unlinks a specific supplier from product.
+        /// </summary>
+        /// <param name="productSupplier"></param>
         [HttpPut("Suppliers/Unlink")]
         public async Task<ActionResult<ProductVM>> UnlinkSupplierFromProduct([FromBody] ProductSupplier productSupplier)
         {
-			// Validation
+            // Validation
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -161,10 +161,10 @@ namespace Test.API.Controllers
         }
 
         // DELETE: api/products/{id}
-		/// <summary>
-		/// Deletes a specific product.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Deletes a specific product.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public async Task<ActionResult<ProductVM>> DeleteProduct([FromRoute] Guid id)
         {
