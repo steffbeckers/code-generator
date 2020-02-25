@@ -312,7 +312,6 @@ namespace Test.API
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             // Roles
-
             Task<IdentityRole> adminRole = roleManager.FindByNameAsync("Admin");
             adminRole.Wait();
             if (adminRole.Result == null)
