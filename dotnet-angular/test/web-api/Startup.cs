@@ -308,8 +308,8 @@ namespace Test.API
 
         private void CreateRolesAndAdminUser(IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            RoleManager<IdentityRole<Guid>> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+            UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             // Roles
             Task<IdentityRole<Guid>> adminRole = roleManager.FindByNameAsync("Admin");
@@ -322,7 +322,7 @@ namespace Test.API
                     NormalizedName = "ADMIN"
                 };
 
-                var createAdminRole = roleManager.CreateAsync(newAdminRole);
+                Task<IdentityResult> createAdminRole = roleManager.CreateAsync(newAdminRole);
                 createAdminRole.Wait();
             }
 
@@ -336,7 +336,7 @@ namespace Test.API
                     NormalizedName = "SALES"
                 };
 
-                var createSalesRole = roleManager.CreateAsync(newSalesRole);
+                Task<IdentityResult> createSalesRole = roleManager.CreateAsync(newSalesRole);
                 createSalesRole.Wait();
             }
 
