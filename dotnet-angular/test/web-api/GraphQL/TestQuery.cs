@@ -1,25 +1,25 @@
-using GraphQL.Server.Authorization.AspNetCore;
 using GraphQL.Types;
-using System;
-using System.Linq;
+using GraphQL.Server.Authorization.AspNetCore;
 using Test.API.DAL.Repositories;
 using Test.API.GraphQL.Types;
+using System;
+using System.Linq;
 
 namespace Test.API.GraphQL
 {
     public class TestQuery : ObjectGraphType
     {
         public TestQuery(
-            AccountRepository accountRepository,
-            ProductRepository productRepository,
-            SupplierRepository supplierRepository,
-            ProductDetailRepository productDetailRepository
+			AccountRepository accountRepository,
+			ProductRepository productRepository,
+			SupplierRepository supplierRepository,
+			ProductDetailRepository productDetailRepository
         )
         {
             this.AuthorizeWith("Authorized");
 
-            // Accounts
-
+			// Accounts
+            
             Field<ListGraphType<AccountType>>(
                 "accounts",
                 resolve: context => accountRepository.Get(null, x => x.OrderBy(x => x.Name))
@@ -54,8 +54,8 @@ namespace Test.API.GraphQL
             //    }
             //);
 
-            // Products
-
+			// Products
+            
             Field<ListGraphType<ProductType>>(
                 "products",
                 resolve: context => productRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -90,8 +90,8 @@ namespace Test.API.GraphQL
             //    }
             //);
 
-            // Suppliers
-
+			// Suppliers
+            
             Field<ListGraphType<SupplierType>>(
                 "suppliers",
                 resolve: context => supplierRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
@@ -126,8 +126,8 @@ namespace Test.API.GraphQL
             //    }
             //);
 
-            // ProductDetails
-
+			// ProductDetails
+            
             Field<ListGraphType<ProductDetailType>>(
                 "productDetails",
                 resolve: context => productDetailRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))

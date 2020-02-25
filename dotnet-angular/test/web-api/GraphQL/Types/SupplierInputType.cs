@@ -8,8 +8,8 @@ namespace Test.API.GraphQL.Types
         {
             Name = "supplierInput";
             Field<IdGraphType>("id");
-            Field<NonNullGraphType<StringGraphType>>("name");
-            Field<StringGraphType>("phone");
+		    Field<NonNullGraphType<StringGraphType>>("name");
+		    Field<StringGraphType>("phone");
 
             // To create a link with Product directly on create of Supplier.
             //Field<IdGraphType>("productId");

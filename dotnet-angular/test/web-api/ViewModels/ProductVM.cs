@@ -5,106 +5,106 @@ using Test.API.ViewModels.Identity;
 
 namespace Test.API.ViewModels
 {
-    /// <summary>
+	/// <summary>
     /// Product view model
     /// </summary>
     public class ProductVM
     {
-        public ProductVM()
+		public ProductVM()
         {
             // Relations
 
-            //// One-to-many
-            this.Details = new List<ProductDetailVM>();
+			//// One-to-many
+			this.Details = new List<ProductDetailVM>();
 
-            //// Many-to-many
-            this.Suppliers = new List<SupplierVM>();
+			//// Many-to-many
+			this.Suppliers = new List<SupplierVM>();
         }
 
-        // Properties
+		// Properties
 
-        /// <summary>
+		/// <summary>
         /// The identifier of Product.
         /// </summary>
-        public Guid Id { get; set; }
+		public Guid Id { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Name property of Product.
         /// </summary>
         [Required]
-        public string Name { get; set; }
+		public string Name { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Code property of Product.
         /// </summary>
-        public string Code { get; set; }
+		public string Code { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Quantity property of Product.
         /// </summary>
-        public int? Quantity { get; set; }
+		public int? Quantity { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Price property of Product.
         /// </summary>
-        public double Price { get; set; }
+		public double Price { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Active property of Product.
         /// </summary>
-        public bool Active { get; set; }
+		public bool Active { get; set; }
 
-        // Relations
+		// Relations
 
-        //// One-to-many
+		//// One-to-many
 
-        /// <summary>
+		/// <summary>
         /// The related Details of Product.
         /// </summary>
-        public IList<ProductDetailVM> Details { get; set; }
+		public IList<ProductDetailVM> Details { get; set; }
 
-        //// Many-to-many
+		//// Many-to-many
 
-        /// <summary>
+		/// <summary>
         /// The related Suppliers of Product.
         /// </summary>
-        public IList<SupplierVM> Suppliers { get; set; }
+		public IList<SupplierVM> Suppliers { get; set; }
 
         ////// To create a link with Supplier directly on create of Product.
         public Guid? SupplierId { get; set; }
         public string SupplierComment { get; set; }
 
-        // Generic properties
+		// Generic properties
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is created
         /// </summary>
-        public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-        public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Id of the user who created the record
         /// </summary>
-        public Guid CreatedByUserId { get; set; }
+		public Guid CreatedByUserId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The user who created the record
         /// </summary>
-        public UserVM CreatedByUser { get; set; }
+		public UserVM CreatedByUser { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-        public Guid ModifiedByUserId { get; set; }
+		public Guid ModifiedByUserId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The user who last modified the record
         /// </summary>
-        public UserVM ModifiedByUser { get; set; }
+		public UserVM ModifiedByUser { get; set; }
 
     }
 }
