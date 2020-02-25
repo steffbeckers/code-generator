@@ -48,7 +48,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# CodeGenModel manyToManyOtherRelationModel = config.Models.First(x => x.Name == manyToManyOtherRelation.Model); #>
                 .ForMember(
                     x => x.<#= manyToManyWithModel.Name #>,
-                    x => {
+                    x =>
+                    {
                         x.PreCondition(z => z.<#= manyToManyOtherRelation.Model #>Id != null);
                         x.MapFrom(
                             y => new List<<#= manyToManyWithModel.Name #>>() {

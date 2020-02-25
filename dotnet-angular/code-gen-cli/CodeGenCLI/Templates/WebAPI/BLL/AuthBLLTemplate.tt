@@ -5,24 +5,23 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL.Repositories;
-using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
-using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.ViewModels.Identity;
-using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Services;
-using Microsoft.AspNetCore.Identity;
-using System.Globalization;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Framework.Exceptions;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Models;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.Services;
+using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.ViewModels.Identity;
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL
 {
@@ -58,14 +57,17 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             this.emailService = emailService;
         }
 
-        public async Task<AuthenticatedVM> Login(LoginVM loginVM) {
+        public async Task<AuthenticatedVM> Login(LoginVM loginVM)
+        {
             // Validation
-            if (loginVM == null) {
+            if (loginVM == null)
+            {
                 return null;
             }
 
             // Result
-            AuthenticatedVM authenticatedVM = new AuthenticatedVM() {
+            AuthenticatedVM authenticatedVM = new AuthenticatedVM()
+            {
                 RememberMe = loginVM.RememberMe
             };
 
@@ -164,16 +166,19 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             return currentUser;
         }
 
-        public async Task<RegisteredVM> Register(RegisterVM registerVM) {
+        public async Task<RegisteredVM> Register(RegisterVM registerVM)
+        {
             // Validation
-            if (registerVM == null) {
+            if (registerVM == null)
+            {
                 return null;
             }
 
             // Result
             RegisteredVM registeredVM = new RegisteredVM();
 
-            User user = new User {
+            User user = new User()
+            {
                 UserName = registerVM.Username,
                 Email = registerVM.Email,
                 FirstName = registerVM.FirstName,
@@ -187,7 +192,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 logger.LogInformation("User created a new account with password.");
 
                 // Email confirmation
-                if (configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation")) {
+                if (configuration.GetSection("Authentication").GetValue<bool>("EmailConfirmation"))
+                {
                     string code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     string callbackUrl = configuration.GetSection("Authentication").GetValue<string>("ConfirmEmailURL");
@@ -197,7 +203,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
                     await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl);
                 }
-                else {
+                else
+                {
                     // Set claims of user
                     List<Claim> claims = new List<Claim>() {
                         new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),
@@ -289,7 +296,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         public async Task ForgotPassword(ForgotPasswordVM forgotPasswordVM)
         {
             // Validation
-            if (forgotPasswordVM == null) {
+            if (forgotPasswordVM == null)
+            {
                 throw new ForgotPasswordFailedException("invalid");
             }
 
@@ -318,9 +326,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             await emailService.SendPasswordResetAsync(forgotPasswordVM.Email, callbackUrl);
         }
 
-        public async Task<PasswordResettedVM> ResetPassword(ResetPasswordVM resetPasswordVM) {
+        public async Task<PasswordResettedVM> ResetPassword(ResetPasswordVM resetPasswordVM)
+        {
             // Validation
-            if (resetPasswordVM == null) {
+            if (resetPasswordVM == null)
+            {
                 throw new ResetPasswordFailedException("invalid");
             }
 

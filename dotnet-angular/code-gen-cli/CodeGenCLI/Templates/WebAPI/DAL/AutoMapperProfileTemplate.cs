@@ -231,9 +231,10 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             
             #line default
             #line hidden
-            this.Write(",\r\n                    x => {\r\n                        x.PreCondition(z => z.");
+            this.Write(",\r\n                    x =>\r\n                    {\r\n                        x.Pre" +
+                    "Condition(z => z.");
             
-            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 53 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyOtherRelation.Model));
             
             #line default
@@ -241,69 +242,69 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write("Id != null);\r\n                        x.MapFrom(\r\n                            y =" +
                     "> new List<");
             
-            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModel.Name));
             
             #line default
             #line hidden
             this.Write(">() {\r\n                                new ");
             
-            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModel.Name));
             
             #line default
             #line hidden
             this.Write("()\r\n                                {\r\n                                    ");
             
-            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyOtherRelation.Model));
             
             #line default
             #line hidden
             this.Write("Id = (Guid)y.");
             
-            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyOtherRelation.Model));
             
             #line default
             #line hidden
             this.Write("Id");
             
-            #line 57 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((manyToManyWithModel.Properties.Count > 0 ? "," : "")));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
  foreach (CodeGenModelProperty manyToManyWithModelProperty in manyToManyWithModel.Properties) { 
             
             #line default
             #line hidden
             this.Write("                                    ");
             
-            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModelProperty.Name));
             
             #line default
             #line hidden
             this.Write(" = y.");
             
-            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyOtherRelation.Model));
             
             #line default
             #line hidden
             
-            #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(manyToManyWithModelProperty.Name));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 61 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
  } 
             
             #line default
@@ -311,24 +312,18 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write("                                }\r\n                            }\r\n               " +
                     "         );\r\n                    }\r\n                );\r\n");
             
-            #line 66 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 67 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 67 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 68 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
  if (!model.Equals(lastModel)) { 
             
             #line default
             #line hidden
             this.Write("\r\n");
-            
-            #line 69 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
             
             #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
  } 
@@ -337,6 +332,12 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             #line hidden
             
             #line 71 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 72 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
  if (config.Authentication.Enabled) { 
             
             #line default
@@ -344,7 +345,7 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write("            // Users\r\n\t\t\tCreateMap<User, UserVM>();\r\n            CreateMap<UserVM" +
                     ", User>();\r\n");
             
-            #line 75 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
+            #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
  } 
             
             #line default

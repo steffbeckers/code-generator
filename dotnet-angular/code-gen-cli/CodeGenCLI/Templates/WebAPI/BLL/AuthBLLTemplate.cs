@@ -30,54 +30,50 @@ namespace CodeGenCLI.Templates.WebAPI.BLL
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"using Microsoft.Extensions.Configuration;
+            this.Write(@"using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using ");
             
-            #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".DAL.Repositories;\r\nusing ");
+            this.Write(".Framework.Exceptions;\r\nusing ");
             
-            #line 18 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
             this.Write(".Models;\r\nusing ");
             
-            #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".ViewModels.Identity;\r\nusing ");
+            this.Write(".Services;\r\nusing ");
             
-            #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
             #line hidden
-            this.Write(".Services;\r\nusing Microsoft.AspNetCore.Identity;\r\nusing System.Globalization;\r\nus" +
-                    "ing AutoMapper;\r\nusing Microsoft.AspNetCore.Http;\r\nusing ");
+            this.Write(".ViewModels.Identity;\r\n\r\nnamespace ");
             
-            #line 25 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
-            
-            #line default
-            #line hidden
-            this.Write(".Framework.Exceptions;\r\n\r\nnamespace ");
-            
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
+            #line 26 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\BLL\AuthBLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name));
             
             #line default
@@ -97,184 +93,186 @@ using ");
                     " mapper;\r\n            this.httpContextAccessor = httpContextAccessor;\r\n         " +
                     "   this.userManager = userManager;\r\n            this.signInManager = signInManag" +
                     "er;\r\n            this.emailService = emailService;\r\n        }\r\n\r\n        public " +
-                    "async Task<AuthenticatedVM> Login(LoginVM loginVM) {\r\n            // Validation\r" +
-                    "\n            if (loginVM == null) {\r\n                return null;\r\n            }" +
-                    "\r\n\r\n            // Result\r\n            AuthenticatedVM authenticatedVM = new Aut" +
-                    "henticatedVM() {\r\n                RememberMe = loginVM.RememberMe\r\n            }" +
-                    ";\r\n\r\n            // Retrieve user by email or username\r\n            User user = " +
-                    "await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager" +
-                    ".FindByNameAsync(loginVM.EmailOrUsername);\r\n            if (user == null)\r\n     " +
-                    "       {\r\n                logger.LogWarning(\"User not found during login\", login" +
-                    "VM.EmailOrUsername);\r\n\r\n                throw new LoginFailedException(\"invalid\"" +
-                    ");\r\n            }\r\n\r\n            // Log the user in by password\r\n            Sig" +
-                    "nInResult signInResult = await signInManager.PasswordSignInAsync(user, loginVM.P" +
-                    "assword, loginVM.RememberMe, lockoutOnFailure: true);\r\n            \r\n           " +
-                    " // Success\r\n            if (signInResult.Succeeded)\r\n            {\r\n           " +
-                    "     // Authenticated by password\r\n                logger.LogInformation(\"User l" +
-                    "ogged in\", user);\r\n\r\n                // Retrieve roles of user\r\n                " +
-                    "user.Roles = (List<string>)await userManager.GetRolesAsync(user);\r\n\r\n           " +
-                    "     // Set claims of user\r\n                List<Claim> claims = new List<Claim>" +
-                    "() {\r\n                    new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToSt" +
-                    "ring().ToUpper()),\r\n                    new Claim(JwtRegisteredClaimNames.Unique" +
-                    "Name, user.UserName),\r\n                    new Claim(JwtRegisteredClaimNames.Ema" +
-                    "il, user.Email),\r\n                    new Claim(JwtRegisteredClaimNames.Iat, Dat" +
-                    "eTime.UtcNow.ToString(CultureInfo.CurrentCulture))\r\n                };\r\n\r\n      " +
-                    "          // TODO: Custom fields\r\n                if (!string.IsNullOrEmpty(user" +
-                    ".FirstName))\r\n                {\r\n                    claims.Add(new Claim(JwtReg" +
-                    "isteredClaimNames.GivenName, user.FirstName));\r\n                }\r\n             " +
-                    "   if (!string.IsNullOrEmpty(user.LastName))\r\n                {\r\n               " +
-                    "     claims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));\r\n" +
-                    "                }\r\n\r\n                // Add roles as claims\r\n                for" +
-                    "each (var role in user.Roles)\r\n                {\r\n                    claims.Add" +
-                    "(new Claim(ClaimTypes.Role, role));\r\n                }\r\n\r\n                // Aut" +
-                    "hentication successful => Generate JWT token based on the user\'s claims\r\n       " +
-                    "         string token = this.GenerateJWT(claims);\r\n\r\n                // Return u" +
-                    "ser with token\r\n                authenticatedVM.User = mapper.Map<User, UserVM>(" +
-                    "user);\r\n                authenticatedVM.Token = token;\r\n\r\n                return" +
-                    " authenticatedVM;\r\n            }\r\n\r\n            // Failed\r\n            //if (sig" +
-                    "nInResult.RequiresTwoFactor)\r\n            //{\r\n            //    logger.LogInfor" +
-                    "mation(\"User requires two factor auth\", user);\r\n            //\r\n            //  " +
-                    "  return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, loginVM.Remembe" +
-                    "rMe });\r\n            //}\r\n            if (signInResult.IsLockedOut)\r\n           " +
-                    " {\r\n                logger.LogWarning(\"User is locked out\", user);\r\n            " +
-                    "    \r\n                throw new LoginFailedException(\"locked-out\");\r\n           " +
-                    " }\r\n            else if (signInResult.IsNotAllowed)\r\n            {\r\n            " +
-                    "    logger.LogWarning(\"User is not allowed to login\", user);\r\n\r\n                " +
-                    "throw new LoginFailedException(\"not-allowed\");\r\n            }\r\n\r\n            log" +
-                    "ger.LogWarning(\"User login is invalid\", user);\r\n\r\n            throw new LoginFai" +
-                    "ledException(\"invalid\");\r\n        }\r\n\r\n        public async Task Logout()\r\n     " +
-                    "   {\r\n            await signInManager.SignOutAsync();\r\n        }\r\n\r\n        publ" +
-                    "ic async Task<User> Me()\r\n        {\r\n            User currentUser = await userMa" +
-                    "nager.GetUserAsync(this.httpContextAccessor.HttpContext.User);\r\n\r\n            //" +
-                    " Retrieve roles of user\r\n            currentUser.Roles = (List<string>)await use" +
-                    "rManager.GetRolesAsync(currentUser);\r\n\r\n            return currentUser;\r\n       " +
-                    " }\r\n\r\n        public async Task<RegisteredVM> Register(RegisterVM registerVM) {\r" +
-                    "\n            // Validation\r\n            if (registerVM == null) {\r\n             " +
-                    "   return null;\r\n            }\r\n\r\n            // Result\r\n            RegisteredV" +
-                    "M registeredVM = new RegisteredVM();\r\n\r\n            User user = new User {\r\n    " +
-                    "            UserName = registerVM.Username,\r\n                Email = registerVM." +
-                    "Email,\r\n                FirstName = registerVM.FirstName,\r\n                LastN" +
-                    "ame = registerVM.LastName\r\n            };\r\n\r\n            IdentityResult result =" +
-                    " await userManager.CreateAsync(user, registerVM.Password);\r\n\r\n            if (re" +
-                    "sult.Succeeded)\r\n            {\r\n                logger.LogInformation(\"User crea" +
-                    "ted a new account with password.\");\r\n\r\n                // Email confirmation\r\n  " +
-                    "              if (configuration.GetSection(\"Authentication\").GetValue<bool>(\"Ema" +
-                    "ilConfirmation\")) {\r\n                    string code = await userManager.Generat" +
-                    "eEmailConfirmationTokenAsync(user);\r\n\r\n                    string callbackUrl = " +
-                    "configuration.GetSection(\"Authentication\").GetValue<string>(\"ConfirmEmailURL\");\r" +
-                    "\n                    callbackUrl = callbackUrl.Replace(\"{{userId}}\", user.Id.ToS" +
-                    "tring().ToUpper());\r\n                    callbackUrl = callbackUrl.Replace(\"{{us" +
-                    "erEmail}}\", user.Email.ToString().ToLower());\r\n                    callbackUrl =" +
-                    " callbackUrl.Replace(\"{{code}}\", Uri.EscapeDataString(code));\r\n\r\n               " +
-                    "     await emailService.SendEmailConfirmationAsync(registerVM.Email, callbackUrl" +
-                    ");\r\n                }\r\n                else {\r\n                    // Set claims" +
-                    " of user\r\n                    List<Claim> claims = new List<Claim>() {\r\n        " +
-                    "                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToU" +
-                    "pper()),\r\n                        new Claim(JwtRegisteredClaimNames.UniqueName, " +
-                    "user.UserName),\r\n                        new Claim(JwtRegisteredClaimNames.Email" +
-                    ", user.Email),\r\n                        new Claim(JwtRegisteredClaimNames.Iat, D" +
-                    "ateTime.UtcNow.ToString(CultureInfo.CurrentCulture))\r\n                    };\r\n\r\n" +
-                    "                    // TODO: Custom fields\r\n                    if (!string.IsNu" +
-                    "llOrEmpty(user.FirstName))\r\n                    {\r\n                        claim" +
-                    "s.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));\r\n          " +
-                    "          }\r\n                    if (!string.IsNullOrEmpty(user.LastName))\r\n    " +
-                    "                {\r\n                        claims.Add(new Claim(JwtRegisteredCla" +
-                    "imNames.FamilyName, user.LastName));\r\n                    }\r\n\r\n                 " +
-                    "   // Registration successful, no email confirmation required => Generate JWT to" +
-                    "ken based on the user\'s claims\r\n                    string token = this.Generate" +
-                    "JWT(claims);\r\n\r\n                    registeredVM.Token = token;\r\n               " +
-                    " }\r\n\r\n                registeredVM.User = mapper.Map<User, UserVM>(user);\r\n\r\n   " +
-                    "             return registeredVM;\r\n            }\r\n\r\n            logger.LogWarnin" +
-                    "g(\"User registration is invalid\", user);\r\n\r\n            throw new RegistrationFa" +
-                    "iledException(\"invalid\");\r\n        }\r\n\r\n        public async Task<EmailConfirmed" +
-                    "VM> ConfirmEmail(string userId, string code)\r\n        {\r\n            // Validati" +
-                    "on\r\n            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))\r" +
-                    "\n            {\r\n                return null;\r\n            }\r\n\r\n            // Re" +
-                    "sult\r\n            EmailConfirmedVM emailConfirmedVM = new EmailConfirmedVM();\r\n\r" +
-                    "\n            User user = await userManager.FindByIdAsync(userId);\r\n            i" +
-                    "f (user == null)\r\n            {\r\n                logger.LogWarning(\"User not fou" +
-                    "nd during email confirmation\", userId);\r\n\r\n                throw new ConfirmEmai" +
-                    "lFailedException(\"invalid\");\r\n            }\r\n\r\n            IdentityResult result" +
-                    " = await userManager.ConfirmEmailAsync(user, code);\r\n            if (result.Succ" +
-                    "eeded)\r\n            {\r\n                // Set claims of user\r\n                Li" +
-                    "st<Claim> claims = new List<Claim>() {\r\n                    new Claim(JwtRegiste" +
-                    "redClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n                    new Cl" +
-                    "aim(JwtRegisteredClaimNames.UniqueName, user.UserName),\r\n                    new" +
-                    " Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                    new Clai" +
-                    "m(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCultu" +
-                    "re))\r\n                };\r\n\r\n                // TODO: Custom fields\r\n            " +
-                    "    if (!string.IsNullOrEmpty(user.FirstName))\r\n                {\r\n             " +
-                    "       claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName));" +
-                    "\r\n                }\r\n                if (!string.IsNullOrEmpty(user.LastName))\r\n" +
-                    "                {\r\n                    claims.Add(new Claim(JwtRegisteredClaimNa" +
-                    "mes.FamilyName, user.LastName));\r\n                }\r\n\r\n                // Email " +
-                    "confirmation successful => Generate JWT token based on the user\'s claims\r\n      " +
-                    "          string token = this.GenerateJWT(claims);\r\n\r\n                emailConfi" +
-                    "rmedVM.Token = token;\r\n                emailConfirmedVM.User = mapper.Map<User, " +
-                    "UserVM>(user);\r\n\r\n                return emailConfirmedVM;\r\n            }\r\n\r\n   " +
-                    "         logger.LogWarning(\"Email confirmation is invalid\", user);\r\n\r\n          " +
-                    "  throw new ConfirmEmailFailedException(\"invalid\");\r\n        }\r\n\r\n        public" +
-                    " async Task ForgotPassword(ForgotPasswordVM forgotPasswordVM)\r\n        {\r\n      " +
-                    "      // Validation\r\n            if (forgotPasswordVM == null) {\r\n              " +
-                    "  throw new ForgotPasswordFailedException(\"invalid\");\r\n            }\r\n\r\n        " +
-                    "    // Retrieve user by email\r\n            User user = await userManager.FindByE" +
-                    "mailAsync(forgotPasswordVM.Email);\r\n            if (user == null)\r\n            {" +
-                    "\r\n                logger.LogWarning(\"User not found during forgot password\", for" +
-                    "gotPasswordVM.Email);\r\n\r\n                throw new ForgotPasswordFailedException" +
-                    "(\"invalid\");\r\n            }\r\n\r\n            // For more information on how to ena" +
-                    "ble account confirmation and password reset please\r\n            // visit https:/" +
-                    "/go.microsoft.com/fwlink/?LinkID=532713\r\n\r\n            string code = await userM" +
-                    "anager.GeneratePasswordResetTokenAsync(user);\r\n\r\n            logger.LogInformati" +
-                    "on(\"Password reset code:\");\r\n            logger.LogInformation(code);\r\n\r\n       " +
-                    "     var callbackUrl = configuration.GetSection(\"Authentication\").GetValue<strin" +
-                    "g>(\"ResetPasswordURL\");\r\n            callbackUrl = callbackUrl.Replace(\"{{userId" +
-                    "}}\", user.Id.ToString().ToUpper());\r\n            callbackUrl = callbackUrl.Repla" +
-                    "ce(\"{{userEmail}}\", user.Email.ToString().ToLower());\r\n            callbackUrl =" +
-                    " callbackUrl.Replace(\"{{code}}\", Uri.EscapeDataString(code));\r\n\r\n            awa" +
-                    "it emailService.SendPasswordResetAsync(forgotPasswordVM.Email, callbackUrl);\r\n  " +
-                    "      }\r\n\r\n        public async Task<PasswordResettedVM> ResetPassword(ResetPass" +
-                    "wordVM resetPasswordVM) {\r\n            // Validation\r\n            if (resetPassw" +
-                    "ordVM == null) {\r\n                throw new ResetPasswordFailedException(\"invali" +
-                    "d\");\r\n            }\r\n\r\n            // Result\r\n            PasswordResettedVM pas" +
-                    "swordResettedVM = new PasswordResettedVM();\r\n\r\n            // Retrieve user by e" +
-                    "mail\r\n            User user = await userManager.FindByIdAsync(resetPasswordVM.Id" +
-                    ");\r\n            if (user == null)\r\n            {\r\n                logger.LogWarn" +
-                    "ing(\"User not found during reset password\", resetPasswordVM.Id);\r\n\r\n            " +
-                    "    throw new ResetPasswordFailedException(\"invalid\");\r\n            }\r\n         " +
-                    "   \r\n            // Validate email address\r\n            if (user.Email != resetP" +
-                    "asswordVM.Email)\r\n            {\r\n                throw new ResetPasswordFailedEx" +
-                    "ception(\"invalid-email\");\r\n            }\r\n\r\n            IdentityResult result = " +
-                    "await userManager.ResetPasswordAsync(user, resetPasswordVM.Code, resetPasswordVM" +
-                    ".Password);\r\n            if (result.Succeeded)\r\n            {\r\n                /" +
-                    "/ Set claims of user\r\n                List<Claim> claims = new List<Claim>() {\r\n" +
-                    "                    new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()" +
-                    ".ToUpper()),\r\n                    new Claim(JwtRegisteredClaimNames.UniqueName, " +
-                    "user.UserName),\r\n                    new Claim(JwtRegisteredClaimNames.Email, us" +
-                    "er.Email),\r\n                    new Claim(JwtRegisteredClaimNames.Iat, DateTime." +
-                    "UtcNow.ToString(CultureInfo.CurrentCulture))\r\n                };\r\n\r\n            " +
-                    "    // TODO: Custom fields\r\n                if (!string.IsNullOrEmpty(user.First" +
-                    "Name))\r\n                {\r\n                    claims.Add(new Claim(JwtRegistere" +
-                    "dClaimNames.GivenName, user.FirstName));\r\n                }\r\n                if " +
-                    "(!string.IsNullOrEmpty(user.LastName))\r\n                {\r\n                    c" +
-                    "laims.Add(new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));\r\n      " +
-                    "          }\r\n\r\n                // Registration successful, no email confirmation" +
-                    " required => Generate JWT token based on the user\'s claims\r\n                stri" +
-                    "ng token = this.GenerateJWT(claims);\r\n\r\n                passwordResettedVM.Token" +
-                    " = token;\r\n                passwordResettedVM.User = mapper.Map<User, UserVM>(us" +
-                    "er);\r\n\r\n                return passwordResettedVM;\r\n            }\r\n            \r" +
-                    "\n            logger.LogWarning(\"Reset password is invalid\", user);\r\n\r\n          " +
-                    "  throw new ResetPasswordFailedException(\"invalid\");\r\n        }\r\n\r\n        publi" +
-                    "c string GenerateJWT(List<Claim> claims)\r\n        {\r\n            JwtSecurityToke" +
-                    "nHandler tokenHandler = new JwtSecurityTokenHandler();\r\n            var key = En" +
-                    "coding.ASCII.GetBytes(configuration.GetSection(\"Authentication\").GetValue<string" +
-                    ">(\"Secret\"));\r\n            SecurityTokenDescriptor tokenDescriptor = new Securit" +
-                    "yTokenDescriptor\r\n            {\r\n                Subject = new ClaimsIdentity(cl" +
-                    "aims),\r\n                Expires = DateTime.UtcNow.AddMinutes(double.Parse(config" +
-                    "uration.GetSection(\"Authentication\").GetValue<string>(\"TokenExpiresInMinutes\")))" +
-                    ",\r\n                SigningCredentials = new SigningCredentials(new SymmetricSecu" +
-                    "rityKey(key), SecurityAlgorithms.HmacSha256Signature)\r\n            };\r\n\r\n       " +
-                    "     return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));\r" +
-                    "\n        }\r\n    }\r\n}");
+                    "async Task<AuthenticatedVM> Login(LoginVM loginVM)\r\n        {\r\n            // Va" +
+                    "lidation\r\n            if (loginVM == null)\r\n            {\r\n                retur" +
+                    "n null;\r\n            }\r\n\r\n            // Result\r\n            AuthenticatedVM aut" +
+                    "henticatedVM = new AuthenticatedVM()\r\n            {\r\n                RememberMe " +
+                    "= loginVM.RememberMe\r\n            };\r\n\r\n            // Retrieve user by email or" +
+                    " username\r\n            User user = await userManager.FindByEmailAsync(loginVM.Em" +
+                    "ailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOrUsername);\r\n " +
+                    "           if (user == null)\r\n            {\r\n                logger.LogWarning(\"" +
+                    "User not found during login\", loginVM.EmailOrUsername);\r\n\r\n                throw" +
+                    " new LoginFailedException(\"invalid\");\r\n            }\r\n\r\n            // Log the u" +
+                    "ser in by password\r\n            SignInResult signInResult = await signInManager." +
+                    "PasswordSignInAsync(user, loginVM.Password, loginVM.RememberMe, lockoutOnFailure" +
+                    ": true);\r\n            \r\n            // Success\r\n            if (signInResult.Suc" +
+                    "ceeded)\r\n            {\r\n                // Authenticated by password\r\n          " +
+                    "      logger.LogInformation(\"User logged in\", user);\r\n\r\n                // Retri" +
+                    "eve roles of user\r\n                user.Roles = (List<string>)await userManager." +
+                    "GetRolesAsync(user);\r\n\r\n                // Set claims of user\r\n                L" +
+                    "ist<Claim> claims = new List<Claim>() {\r\n                    new Claim(JwtRegist" +
+                    "eredClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n                    new C" +
+                    "laim(JwtRegisteredClaimNames.UniqueName, user.UserName),\r\n                    ne" +
+                    "w Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                    new Cla" +
+                    "im(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCult" +
+                    "ure))\r\n                };\r\n\r\n                // TODO: Custom fields\r\n           " +
+                    "     if (!string.IsNullOrEmpty(user.FirstName))\r\n                {\r\n            " +
+                    "        claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName))" +
+                    ";\r\n                }\r\n                if (!string.IsNullOrEmpty(user.LastName))\r" +
+                    "\n                {\r\n                    claims.Add(new Claim(JwtRegisteredClaimN" +
+                    "ames.FamilyName, user.LastName));\r\n                }\r\n\r\n                // Add r" +
+                    "oles as claims\r\n                foreach (var role in user.Roles)\r\n              " +
+                    "  {\r\n                    claims.Add(new Claim(ClaimTypes.Role, role));\r\n        " +
+                    "        }\r\n\r\n                // Authentication successful => Generate JWT token " +
+                    "based on the user\'s claims\r\n                string token = this.GenerateJWT(clai" +
+                    "ms);\r\n\r\n                // Return user with token\r\n                authenticated" +
+                    "VM.User = mapper.Map<User, UserVM>(user);\r\n                authenticatedVM.Token" +
+                    " = token;\r\n\r\n                return authenticatedVM;\r\n            }\r\n\r\n         " +
+                    "   // Failed\r\n            //if (signInResult.RequiresTwoFactor)\r\n            //{" +
+                    "\r\n            //    logger.LogInformation(\"User requires two factor auth\", user)" +
+                    ";\r\n            //\r\n            //    return RedirectToAction(nameof(LoginWith2fa" +
+                    "), new { returnUrl, loginVM.RememberMe });\r\n            //}\r\n            if (sig" +
+                    "nInResult.IsLockedOut)\r\n            {\r\n                logger.LogWarning(\"User i" +
+                    "s locked out\", user);\r\n                \r\n                throw new LoginFailedEx" +
+                    "ception(\"locked-out\");\r\n            }\r\n            else if (signInResult.IsNotAl" +
+                    "lowed)\r\n            {\r\n                logger.LogWarning(\"User is not allowed to" +
+                    " login\", user);\r\n\r\n                throw new LoginFailedException(\"not-allowed\")" +
+                    ";\r\n            }\r\n\r\n            logger.LogWarning(\"User login is invalid\", user)" +
+                    ";\r\n\r\n            throw new LoginFailedException(\"invalid\");\r\n        }\r\n\r\n      " +
+                    "  public async Task Logout()\r\n        {\r\n            await signInManager.SignOut" +
+                    "Async();\r\n        }\r\n\r\n        public async Task<User> Me()\r\n        {\r\n        " +
+                    "    User currentUser = await userManager.GetUserAsync(this.httpContextAccessor.H" +
+                    "ttpContext.User);\r\n\r\n            // Retrieve roles of user\r\n            currentU" +
+                    "ser.Roles = (List<string>)await userManager.GetRolesAsync(currentUser);\r\n\r\n     " +
+                    "       return currentUser;\r\n        }\r\n\r\n        public async Task<RegisteredVM>" +
+                    " Register(RegisterVM registerVM)\r\n        {\r\n            // Validation\r\n        " +
+                    "    if (registerVM == null)\r\n            {\r\n                return null;\r\n      " +
+                    "      }\r\n\r\n            // Result\r\n            RegisteredVM registeredVM = new Re" +
+                    "gisteredVM();\r\n\r\n            User user = new User()\r\n            {\r\n            " +
+                    "    UserName = registerVM.Username,\r\n                Email = registerVM.Email,\r\n" +
+                    "                FirstName = registerVM.FirstName,\r\n                LastName = re" +
+                    "gisterVM.LastName\r\n            };\r\n\r\n            IdentityResult result = await u" +
+                    "serManager.CreateAsync(user, registerVM.Password);\r\n\r\n            if (result.Suc" +
+                    "ceeded)\r\n            {\r\n                logger.LogInformation(\"User created a ne" +
+                    "w account with password.\");\r\n\r\n                // Email confirmation\r\n          " +
+                    "      if (configuration.GetSection(\"Authentication\").GetValue<bool>(\"EmailConfir" +
+                    "mation\"))\r\n                {\r\n                    string code = await userManage" +
+                    "r.GenerateEmailConfirmationTokenAsync(user);\r\n\r\n                    string callb" +
+                    "ackUrl = configuration.GetSection(\"Authentication\").GetValue<string>(\"ConfirmEma" +
+                    "ilURL\");\r\n                    callbackUrl = callbackUrl.Replace(\"{{userId}}\", us" +
+                    "er.Id.ToString().ToUpper());\r\n                    callbackUrl = callbackUrl.Repl" +
+                    "ace(\"{{userEmail}}\", user.Email.ToString().ToLower());\r\n                    call" +
+                    "backUrl = callbackUrl.Replace(\"{{code}}\", Uri.EscapeDataString(code));\r\n\r\n      " +
+                    "              await emailService.SendEmailConfirmationAsync(registerVM.Email, ca" +
+                    "llbackUrl);\r\n                }\r\n                else\r\n                {\r\n       " +
+                    "             // Set claims of user\r\n                    List<Claim> claims = new" +
+                    " List<Claim>() {\r\n                        new Claim(JwtRegisteredClaimNames.Name" +
+                    "Id, user.Id.ToString().ToUpper()),\r\n                        new Claim(JwtRegiste" +
+                    "redClaimNames.UniqueName, user.UserName),\r\n                        new Claim(Jwt" +
+                    "RegisteredClaimNames.Email, user.Email),\r\n                        new Claim(JwtR" +
+                    "egisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.CurrentCulture))\r\n" +
+                    "                    };\r\n\r\n                    // TODO: Custom fields\r\n          " +
+                    "          if (!string.IsNullOrEmpty(user.FirstName))\r\n                    {\r\n   " +
+                    "                     claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, use" +
+                    "r.FirstName));\r\n                    }\r\n                    if (!string.IsNullOrE" +
+                    "mpty(user.LastName))\r\n                    {\r\n                        claims.Add(" +
+                    "new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));\r\n                " +
+                    "    }\r\n\r\n                    // Registration successful, no email confirmation r" +
+                    "equired => Generate JWT token based on the user\'s claims\r\n                    st" +
+                    "ring token = this.GenerateJWT(claims);\r\n\r\n                    registeredVM.Token" +
+                    " = token;\r\n                }\r\n\r\n                registeredVM.User = mapper.Map<U" +
+                    "ser, UserVM>(user);\r\n\r\n                return registeredVM;\r\n            }\r\n\r\n  " +
+                    "          logger.LogWarning(\"User registration is invalid\", user);\r\n\r\n          " +
+                    "  throw new RegistrationFailedException(\"invalid\");\r\n        }\r\n\r\n        public" +
+                    " async Task<EmailConfirmedVM> ConfirmEmail(string userId, string code)\r\n        " +
+                    "{\r\n            // Validation\r\n            if (string.IsNullOrEmpty(userId) || st" +
+                    "ring.IsNullOrEmpty(code))\r\n            {\r\n                return null;\r\n        " +
+                    "    }\r\n\r\n            // Result\r\n            EmailConfirmedVM emailConfirmedVM = " +
+                    "new EmailConfirmedVM();\r\n\r\n            User user = await userManager.FindByIdAsy" +
+                    "nc(userId);\r\n            if (user == null)\r\n            {\r\n                logge" +
+                    "r.LogWarning(\"User not found during email confirmation\", userId);\r\n\r\n           " +
+                    "     throw new ConfirmEmailFailedException(\"invalid\");\r\n            }\r\n\r\n       " +
+                    "     IdentityResult result = await userManager.ConfirmEmailAsync(user, code);\r\n " +
+                    "           if (result.Succeeded)\r\n            {\r\n                // Set claims o" +
+                    "f user\r\n                List<Claim> claims = new List<Claim>() {\r\n              " +
+                    "      new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n" +
+                    "                    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)" +
+                    ",\r\n                    new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n  " +
+                    "                  new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToStrin" +
+                    "g(CultureInfo.CurrentCulture))\r\n                };\r\n\r\n                // TODO: C" +
+                    "ustom fields\r\n                if (!string.IsNullOrEmpty(user.FirstName))\r\n      " +
+                    "          {\r\n                    claims.Add(new Claim(JwtRegisteredClaimNames.Gi" +
+                    "venName, user.FirstName));\r\n                }\r\n                if (!string.IsNul" +
+                    "lOrEmpty(user.LastName))\r\n                {\r\n                    claims.Add(new " +
+                    "Claim(JwtRegisteredClaimNames.FamilyName, user.LastName));\r\n                }\r\n\r" +
+                    "\n                // Email confirmation successful => Generate JWT token based on" +
+                    " the user\'s claims\r\n                string token = this.GenerateJWT(claims);\r\n\r\n" +
+                    "                emailConfirmedVM.Token = token;\r\n                emailConfirmedV" +
+                    "M.User = mapper.Map<User, UserVM>(user);\r\n\r\n                return emailConfirme" +
+                    "dVM;\r\n            }\r\n\r\n            logger.LogWarning(\"Email confirmation is inva" +
+                    "lid\", user);\r\n\r\n            throw new ConfirmEmailFailedException(\"invalid\");\r\n " +
+                    "       }\r\n\r\n        public async Task ForgotPassword(ForgotPasswordVM forgotPass" +
+                    "wordVM)\r\n        {\r\n            // Validation\r\n            if (forgotPasswordVM " +
+                    "== null)\r\n            {\r\n                throw new ForgotPasswordFailedException" +
+                    "(\"invalid\");\r\n            }\r\n\r\n            // Retrieve user by email\r\n          " +
+                    "  User user = await userManager.FindByEmailAsync(forgotPasswordVM.Email);\r\n     " +
+                    "       if (user == null)\r\n            {\r\n                logger.LogWarning(\"User" +
+                    " not found during forgot password\", forgotPasswordVM.Email);\r\n\r\n                " +
+                    "throw new ForgotPasswordFailedException(\"invalid\");\r\n            }\r\n\r\n          " +
+                    "  // For more information on how to enable account confirmation and password res" +
+                    "et please\r\n            // visit https://go.microsoft.com/fwlink/?LinkID=532713\r\n" +
+                    "\r\n            string code = await userManager.GeneratePasswordResetTokenAsync(us" +
+                    "er);\r\n\r\n            logger.LogInformation(\"Password reset code:\");\r\n            " +
+                    "logger.LogInformation(code);\r\n\r\n            var callbackUrl = configuration.GetS" +
+                    "ection(\"Authentication\").GetValue<string>(\"ResetPasswordURL\");\r\n            call" +
+                    "backUrl = callbackUrl.Replace(\"{{userId}}\", user.Id.ToString().ToUpper());\r\n    " +
+                    "        callbackUrl = callbackUrl.Replace(\"{{userEmail}}\", user.Email.ToString()" +
+                    ".ToLower());\r\n            callbackUrl = callbackUrl.Replace(\"{{code}}\", Uri.Esca" +
+                    "peDataString(code));\r\n\r\n            await emailService.SendPasswordResetAsync(fo" +
+                    "rgotPasswordVM.Email, callbackUrl);\r\n        }\r\n\r\n        public async Task<Pass" +
+                    "wordResettedVM> ResetPassword(ResetPasswordVM resetPasswordVM)\r\n        {\r\n     " +
+                    "       // Validation\r\n            if (resetPasswordVM == null)\r\n            {\r\n " +
+                    "               throw new ResetPasswordFailedException(\"invalid\");\r\n            }" +
+                    "\r\n\r\n            // Result\r\n            PasswordResettedVM passwordResettedVM = n" +
+                    "ew PasswordResettedVM();\r\n\r\n            // Retrieve user by email\r\n            U" +
+                    "ser user = await userManager.FindByIdAsync(resetPasswordVM.Id);\r\n            if " +
+                    "(user == null)\r\n            {\r\n                logger.LogWarning(\"User not found" +
+                    " during reset password\", resetPasswordVM.Id);\r\n\r\n                throw new Reset" +
+                    "PasswordFailedException(\"invalid\");\r\n            }\r\n            \r\n            //" +
+                    " Validate email address\r\n            if (user.Email != resetPasswordVM.Email)\r\n " +
+                    "           {\r\n                throw new ResetPasswordFailedException(\"invalid-em" +
+                    "ail\");\r\n            }\r\n\r\n            IdentityResult result = await userManager.R" +
+                    "esetPasswordAsync(user, resetPasswordVM.Code, resetPasswordVM.Password);\r\n      " +
+                    "      if (result.Succeeded)\r\n            {\r\n                // Set claims of use" +
+                    "r\r\n                List<Claim> claims = new List<Claim>() {\r\n                   " +
+                    " new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString().ToUpper()),\r\n     " +
+                    "               new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),\r\n  " +
+                    "                  new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n       " +
+                    "             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(Cul" +
+                    "tureInfo.CurrentCulture))\r\n                };\r\n\r\n                // TODO: Custom" +
+                    " fields\r\n                if (!string.IsNullOrEmpty(user.FirstName))\r\n           " +
+                    "     {\r\n                    claims.Add(new Claim(JwtRegisteredClaimNames.GivenNa" +
+                    "me, user.FirstName));\r\n                }\r\n                if (!string.IsNullOrEm" +
+                    "pty(user.LastName))\r\n                {\r\n                    claims.Add(new Claim" +
+                    "(JwtRegisteredClaimNames.FamilyName, user.LastName));\r\n                }\r\n\r\n    " +
+                    "            // Registration successful, no email confirmation required => Genera" +
+                    "te JWT token based on the user\'s claims\r\n                string token = this.Gen" +
+                    "erateJWT(claims);\r\n\r\n                passwordResettedVM.Token = token;\r\n        " +
+                    "        passwordResettedVM.User = mapper.Map<User, UserVM>(user);\r\n\r\n           " +
+                    "     return passwordResettedVM;\r\n            }\r\n            \r\n            logger" +
+                    ".LogWarning(\"Reset password is invalid\", user);\r\n\r\n            throw new ResetPa" +
+                    "sswordFailedException(\"invalid\");\r\n        }\r\n\r\n        public string GenerateJW" +
+                    "T(List<Claim> claims)\r\n        {\r\n            JwtSecurityTokenHandler tokenHandl" +
+                    "er = new JwtSecurityTokenHandler();\r\n            var key = Encoding.ASCII.GetByt" +
+                    "es(configuration.GetSection(\"Authentication\").GetValue<string>(\"Secret\"));\r\n    " +
+                    "        SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor\r\n " +
+                    "           {\r\n                Subject = new ClaimsIdentity(claims),\r\n           " +
+                    "     Expires = DateTime.UtcNow.AddMinutes(double.Parse(configuration.GetSection(" +
+                    "\"Authentication\").GetValue<string>(\"TokenExpiresInMinutes\"))),\r\n                " +
+                    "SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), Secur" +
+                    "ityAlgorithms.HmacSha256Signature)\r\n            };\r\n\r\n            return tokenHa" +
+                    "ndler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));\r\n        }\r\n    }\r\n" +
+                    "}");
             return this.GenerationEnvironment.ToString();
         }
     }
