@@ -16,11 +16,11 @@
     "ConfirmEmailURL": "<#= config.Authentication.ConfirmEmailURL #>",
     "ResetPasswordURL": "<#= config.Authentication.ResetPasswordURL #>",
     "Admin": {
-        "FirstName": "<#= config.Authentication.Admin.FirstName #>",
-        "LastName": "<#= config.Authentication.Admin.LastName #>",
-        "Username": "<#= config.Authentication.Admin.Username #>",
-        "Email": "<#= config.Authentication.Admin.Email #>",
-        "Password": "<#= config.Authentication.Admin.Password #>"
+      "FirstName": "<#= config.Authentication.Admin.FirstName #>",
+      "LastName": "<#= config.Authentication.Admin.LastName #>",
+      "Username": "<#= config.Authentication.Admin.Username #>",
+      "Email": "<#= config.Authentication.Admin.Email #>",
+      "Password": "<#= config.Authentication.Admin.Password #>"
     }
   },
 <# } #>

@@ -85,35 +85,35 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("\",\r\n    \"Admin\": {\r\n        \"FirstName\": \"");
+            this.Write("\",\r\n    \"Admin\": {\r\n      \"FirstName\": \"");
             
             #line 19 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.FirstName));
             
             #line default
             #line hidden
-            this.Write("\",\r\n        \"LastName\": \"");
+            this.Write("\",\r\n      \"LastName\": \"");
             
             #line 20 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.LastName));
             
             #line default
             #line hidden
-            this.Write("\",\r\n        \"Username\": \"");
+            this.Write("\",\r\n      \"Username\": \"");
             
             #line 21 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Username));
             
             #line default
             #line hidden
-            this.Write("\",\r\n        \"Email\": \"");
+            this.Write("\",\r\n      \"Email\": \"");
             
             #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Email));
             
             #line default
             #line hidden
-            this.Write("\",\r\n        \"Password\": \"");
+            this.Write("\",\r\n      \"Password\": \"");
             
             #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.Admin.Password));

@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
+<#@ import namespace="CodeGenCLI.Extensions" #>
 using AutoMapper;
 using GraphQL;
 using GraphQL.Server;
@@ -237,7 +238,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
 		    // CORS
             app.UseCors(options =>
@@ -263,6 +264,9 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             //        });
             //    });
             //}
+
+            // Update database migrations on startup
+            UpdateDatabase(app);
 
             // Authentication
             app.UseAuthentication();
@@ -300,10 +304,85 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             });
 
 <# if (config.Authentication.Enabled) { #>
-            // TODO: Add default admin user with function here?
+            // Authentication / Authorization
+            CreateRolesAndAdminUser(serviceProvider);
 <# } #>
         }
+
+        private void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (<#= config.Name #>Context context = serviceScope.ServiceProvider.GetService<<#= config.Name #>Context>())
+                {
+                    context.Database.Migrate();
+                }
+            }
+        }
+
+<# if (config.Authentication.Enabled) { #>
+        private void CreateRolesAndAdminUser(IServiceProvider serviceProvider)
+        {
+            RoleManager<IdentityRole<Guid>> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+            UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            // Roles
+            Task<IdentityRole<Guid>> adminRole = roleManager.FindByNameAsync("Admin");
+            adminRole.Wait();
+            if (adminRole.Result == null)
+            {
+                IdentityRole<Guid> newAdminRole = new IdentityRole<Guid>()
+                {
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+                };
+
+                Task<IdentityResult> createAdminRole = roleManager.CreateAsync(newAdminRole);
+                createAdminRole.Wait();
+            }
+<# foreach (string role in config.Authentication.OtherRoles) { #>
+
+            Task<IdentityRole<Guid>> <#= role.ToLower() #>Role = roleManager.FindByNameAsync("<#= role #>");
+            <#= role.ToLower() #>Role.Wait();
+            if (<#= role.ToLower() #>Role.Result == null)
+            {
+                IdentityRole<Guid> new<#= role #>Role = new IdentityRole<Guid>()
+                {
+                    Name = "<#= role #>",
+                    NormalizedName = "<#= role.ToUpper() #>"
+                };
+
+                Task<IdentityResult> create<#= role #>Role = roleManager.CreateAsync(new<#= role #>Role);
+                create<#= role #>Role.Wait();
+            }
+<# } #>
+
+            // Default admin user
+            Task<User> adminUser = userManager.FindByNameAsync(configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Username"));
+            adminUser.Wait();
+            if (adminUser.Result == null)
+            {
+                User newAdminUser = new User()
+                {
+                    Email = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Email"),
+                    UserName = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Username"),
+                    FirstName = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("FirstName"),
+                    LastName = configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("LastName"),
+                    EmailConfirmed = true
+                };
+
+                Task<IdentityResult> newUser = userManager.CreateAsync(newAdminUser, configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Password"));
+                newUser.Wait();
+                if (newUser.Result.Succeeded)
+                {
+                    // Add to the Admin role
+                    Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(newAdminUser, "Admin");
+                    newUserRole.Wait();
+                }
+            }
+        }
     }
+<# } #>
 
     public class ErrorHandlingMiddleware
     {

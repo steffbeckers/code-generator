@@ -344,7 +344,8 @@
       "UserName": "admin",
       "Email": "admin@steffbeckers.eu",
       "Password": "Steff12345!"
-    }
+    },
+    "OtherRoles": [ "IT", "Sales", "HR", "CEO" ]
   },
   "WebAPI": {
     "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",

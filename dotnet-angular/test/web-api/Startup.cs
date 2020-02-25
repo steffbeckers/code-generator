@@ -326,9 +326,9 @@ namespace Test.API
                 createAdminRole.Wait();
             }
 
-            Task<IdentityRole<Guid>> iTRole = roleManager.FindByNameAsync("IT");
-            iTRole.Wait();
-            if (iTRole.Result == null)
+            Task<IdentityRole<Guid>> itRole = roleManager.FindByNameAsync("IT");
+            itRole.Wait();
+            if (itRole.Result == null)
             {
                 IdentityRole<Guid> newITRole = new IdentityRole<Guid>()
                 {
@@ -354,9 +354,9 @@ namespace Test.API
                 createSalesRole.Wait();
             }
 
-            Task<IdentityRole<Guid>> hRRole = roleManager.FindByNameAsync("HR");
-            hRRole.Wait();
-            if (hRRole.Result == null)
+            Task<IdentityRole<Guid>> hrRole = roleManager.FindByNameAsync("HR");
+            hrRole.Wait();
+            if (hrRole.Result == null)
             {
                 IdentityRole<Guid> newHRRole = new IdentityRole<Guid>()
                 {
@@ -368,9 +368,9 @@ namespace Test.API
                 createHRRole.Wait();
             }
 
-            Task<IdentityRole<Guid>> cEORole = roleManager.FindByNameAsync("CEO");
-            cEORole.Wait();
-            if (cEORole.Result == null)
+            Task<IdentityRole<Guid>> ceoRole = roleManager.FindByNameAsync("CEO");
+            ceoRole.Wait();
+            if (ceoRole.Result == null)
             {
                 IdentityRole<Guid> newCEORole = new IdentityRole<Guid>()
                 {
