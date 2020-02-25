@@ -111,11 +111,8 @@ namespace Test.API.BLL
                 string token = this.GenerateJWT(claims);
 
                 // Return user with token
-                authenticatedVM = new AuthenticatedVM()
-                {
-                    User = mapper.Map<User, UserVM>(user),
-                    Token = token
-                };
+                authenticatedVM.User = mapper.Map<User, UserVM>(user);
+                authenticatedVM.Token = token;
 
                 return authenticatedVM;
             }
