@@ -1,97 +1,98 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
-    /// <summary>
+	/// <summary>
     /// Account model
     /// </summary>
     public class Account
     {
-        public Account()
+		public Account()
         {
             // Relations
         }
 
-        // Properties
+		// Properties
 
-        /// <summary>
+		/// <summary>
         /// The identifier of Account.
         /// </summary>
-        public Guid Id { get; set; }
+		public Guid Id { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Name property of Account.
         /// </summary>
-        public string Name { get; set; }
+		public string Name { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Website property of Account.
         /// </summary>
-        public string Website { get; set; }
+		public string Website { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Telephone property of Account.
         /// </summary>
-        public string Telephone { get; set; }
+		public string Telephone { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Email property of Account.
         /// </summary>
-        public string Email { get; set; }
+		public string Email { get; set; }
 
-        // Relations
+		// Relations
 
-        //// Many-to-one
+		//// Many-to-one
 
-        /// <summary>
+	    /// <summary>
         /// The related foreign key ParentAccountId for ParentAccount of Account.
         /// </summary>
-        public Guid? ParentAccountId { get; set; }
+		public Guid? ParentAccountId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The related ParentAccount of Account.
         /// </summary>
-        public Account ParentAccount { get; set; }
+		public Account ParentAccount { get; set; }
 
 
-        // Generic properties
+		// Generic properties
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is created
         /// </summary>
-        public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-        public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-        public DateTime? DeletedOn { get; set; }
+		public DateTime? DeletedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Id of the user who created the record
         /// </summary>
-        public Guid CreatedByUserId { get; set; }
+		public Guid CreatedByUserId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The user who created the record
         /// </summary>
-        public User CreatedByUser { get; set; }
+		public User CreatedByUser { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-        public Guid ModifiedByUserId { get; set; }
+		public Guid ModifiedByUserId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The user who last modified the record
         /// </summary>
-        public User ModifiedByUser { get; set; }
+		public User ModifiedByUser { get; set; }
 
-        // TODO: Multi-tenancy
-        //public Guid TenantId { get; set; }
+		// TODO: Multi-tenancy
+		//public Guid TenantId { get; set; }
     }
 }

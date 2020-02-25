@@ -1,4 +1,5 @@
 using GraphQL.Types;
+using System;
 using Test.API.Models;
 
 namespace Test.API.GraphQL.Types

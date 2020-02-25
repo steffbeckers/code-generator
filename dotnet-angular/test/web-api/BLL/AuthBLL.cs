@@ -18,9 +18,9 @@ using Test.API.ViewModels.Identity;
 
 namespace Test.API.BLL
 {
-    /// <summary>
-    /// The business logic layer for authentication.
-    /// </summary>
+	/// <summary>
+	/// The business logic layer for authentication.
+	/// </summary>
     public class AuthBLL
     {
         private readonly IConfiguration configuration;
@@ -75,7 +75,7 @@ namespace Test.API.BLL
 
             // Log the user in by password
             SignInResult signInResult = await signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
-
+            
             // Success
             if (signInResult.Succeeded)
             {
@@ -129,7 +129,7 @@ namespace Test.API.BLL
             if (signInResult.IsLockedOut)
             {
                 logger.LogWarning("User is locked out", user);
-
+                
                 throw new LoginFailedException("locked-out");
             }
             else if (signInResult.IsNotAllowed)
@@ -338,7 +338,7 @@ namespace Test.API.BLL
 
                 throw new ResetPasswordFailedException("invalid");
             }
-
+            
             // Validate email address
             if (user.Email != resetPasswordVM.Email)
             {
@@ -374,7 +374,7 @@ namespace Test.API.BLL
 
                 return passwordResettedVM;
             }
-
+            
             logger.LogWarning("Reset password is invalid", user);
 
             throw new ResetPasswordFailedException("invalid");

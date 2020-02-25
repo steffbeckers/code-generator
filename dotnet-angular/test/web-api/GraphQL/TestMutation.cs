@@ -9,13 +9,13 @@ namespace Test.API.GraphQL
     public class TestMutation : ObjectGraphType
     {
         public TestMutation(
-            AccountBLL accountBLL,
-            ProductBLL productBLL,
-            SupplierBLL supplierBLL,
-            ProductDetailBLL productDetailBLL
+			AccountBLL accountBLL,
+			ProductBLL productBLL,
+			SupplierBLL supplierBLL,
+			ProductDetailBLL productDetailBLL
         )
         {
-            // Accounts
+			// Accounts
             FieldAsync<AccountType>(
                 "createAccount",
                 arguments: new QueryArguments(
@@ -75,7 +75,7 @@ namespace Test.API.GraphQL
                 }
             );
 
-            // Products
+			// Products
             FieldAsync<ProductType>(
                 "createProduct",
                 arguments: new QueryArguments(
@@ -171,7 +171,7 @@ namespace Test.API.GraphQL
                 }
             );
 
-            // Suppliers
+			// Suppliers
             FieldAsync<SupplierType>(
                 "createSupplier",
                 arguments: new QueryArguments(
@@ -267,7 +267,7 @@ namespace Test.API.GraphQL
                 }
             );
 
-            // ProductDetails
+			// ProductDetails
             FieldAsync<ProductDetailType>(
                 "createProductDetail",
                 arguments: new QueryArguments(

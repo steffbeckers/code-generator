@@ -1,92 +1,93 @@
 using System;
+using System.Collections.Generic;
 
 namespace Test.API.Models
 {
-    /// <summary>
+	/// <summary>
     /// ProductSupplier model
     /// </summary>
     public class ProductSupplier
     {
-        public ProductSupplier()
+		public ProductSupplier()
         {
             // Relations
         }
 
-        // Properties
+		// Properties
 
-        /// <summary>
+		/// <summary>
         /// The identifier of ProductSupplier.
         /// </summary>
-        public Guid Id { get; set; }
+		public Guid Id { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Comment property of ProductSupplier.
         /// </summary>
-        public string Comment { get; set; }
+		public string Comment { get; set; }
 
-        // Relations
+		// Relations
 
-        //// Many-to-one
+		//// Many-to-one
 
-        /// <summary>
+	    /// <summary>
         /// The related foreign key ProductId for Product of ProductSupplier.
         /// </summary>
-        public Guid ProductId { get; set; }
+		public Guid ProductId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The related Product of ProductSupplier.
         /// </summary>
-        public Product Product { get; set; }
+		public Product Product { get; set; }
 
-        /// <summary>
+	    /// <summary>
         /// The related foreign key SupplierId for Supplier of ProductSupplier.
         /// </summary>
-        public Guid SupplierId { get; set; }
+		public Guid SupplierId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The related Supplier of ProductSupplier.
         /// </summary>
-        public Supplier Supplier { get; set; }
+		public Supplier Supplier { get; set; }
 
 
-        // Generic properties
+		// Generic properties
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is created
         /// </summary>
-        public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-        public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The date and time of when the record is (soft) deleted
         /// </summary>
-        public DateTime? DeletedOn { get; set; }
+		public DateTime? DeletedOn { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Id of the user who created the record
         /// </summary>
-        public Guid CreatedByUserId { get; set; }
+		public Guid CreatedByUserId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The user who created the record
         /// </summary>
-        public User CreatedByUser { get; set; }
+		public User CreatedByUser { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-        public Guid ModifiedByUserId { get; set; }
+		public Guid ModifiedByUserId { get; set; }
 
-        /// <summary>
+		/// <summary>
         /// The user who last modified the record
         /// </summary>
-        public User ModifiedByUser { get; set; }
+		public User ModifiedByUser { get; set; }
 
-        // TODO: Multi-tenancy
-        //public Guid TenantId { get; set; }
+		// TODO: Multi-tenancy
+		//public Guid TenantId { get; set; }
     }
 }
