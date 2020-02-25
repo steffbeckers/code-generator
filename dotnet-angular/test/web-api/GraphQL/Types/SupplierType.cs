@@ -1,5 +1,4 @@
 using GraphQL.Types;
-using System;
 using Test.API.DAL.Repositories;
 using Test.API.Models;
 
@@ -8,9 +7,9 @@ namespace Test.API.GraphQL.Types
     public class SupplierType : ObjectGraphType<Supplier>
     {
         public SupplierType(
-			SupplierRepository supplierRepository,
+            SupplierRepository supplierRepository,
             ProductRepository productRepository,
-			ProductSupplierRepository productSupplierRepository
+            ProductSupplierRepository productSupplierRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
