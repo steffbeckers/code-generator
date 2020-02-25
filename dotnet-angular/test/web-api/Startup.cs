@@ -341,9 +341,7 @@ namespace Test.API
                 createSalesRole.Wait();
             }
 
-            // Check if the Admin user exists and create it if not
-            // Add to the Admin role
-
+            // Default admin user
             Task<User> adminUser = userManager.FindByNameAsync(configuration.GetSection("Authentication").GetSection("Admin").GetValue<string>("Username"));
             adminUser.Wait();
             if (adminUser.Result == null)
@@ -361,6 +359,7 @@ namespace Test.API
                 newUser.Wait();
                 if (newUser.Result.Succeeded)
                 {
+                    // Add to the Admin role
                     Task<IdentityResult> newUserRole = userManager.AddToRoleAsync(newAdminUser, "Admin");
                     newUserRole.Wait();
                 }
