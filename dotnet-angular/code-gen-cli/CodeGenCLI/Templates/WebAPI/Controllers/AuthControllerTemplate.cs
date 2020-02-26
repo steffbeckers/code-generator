@@ -64,48 +64,48 @@ namespace CodeGenCLI.Templates.WebAPI.Controllers
                     "ller]\r\n    public class AuthController : ControllerBase\r\n    {\r\n        private " +
                     "readonly IConfiguration configuration;\r\n        private readonly ILogger logger;" +
                     "\r\n        private readonly IMapper mapper;\r\n        private readonly AuthBLL bll" +
-                    ";\r\n\r\n        /// <summary>\r\n\t\t/// The constructor of the Auth controller.\r\n\t\t///" +
-                    " </summary>\r\n        public AuthController(\r\n            IConfiguration configur" +
-                    "ation,\r\n            ILogger<AuthController> logger,\r\n            IMapper mapper," +
-                    "\r\n            AuthBLL bll\r\n        )\r\n        {\r\n            this.configuration " +
-                    "= configuration;\r\n            this.logger = logger;\r\n            this.mapper = m" +
-                    "apper;\r\n            this.bll = bll;\r\n        }\r\n\r\n        [HttpPost]\r\n        [R" +
-                    "oute(\"login\")]\r\n        [AllowAnonymous]\r\n        public async Task<ActionResult" +
-                    "<AuthenticatedVM>> Login([FromBody] LoginVM loginVM)\r\n        {\r\n            // " +
-                    "Validation\r\n            if (!ModelState.IsValid)\r\n            {\r\n               " +
-                    " return BadRequest(ModelState);\r\n            }\r\n\r\n            AuthenticatedVM au" +
-                    "thenticatedVM = await this.bll.Login(loginVM);\r\n\r\n            return Ok(authenti" +
-                    "catedVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"logout\")]\r\n        pu" +
-                    "blic async Task<IActionResult> Logout()\r\n        {\r\n            await this.bll.L" +
-                    "ogout();\r\n\r\n            return Ok();\r\n        }\r\n\r\n        [HttpGet]\r\n        [R" +
-                    "oute(\"me\")]\r\n        public async Task<ActionResult<UserVM>> Me()\r\n        {\r\n  " +
-                    "          User currentUser = await this.bll.Me();\r\n\r\n            return Ok(mappe" +
-                    "r.Map<User, UserVM>(currentUser));\r\n        }\r\n\r\n        [HttpPost]\r\n        [Ro" +
-                    "ute(\"register\")]\r\n        [AllowAnonymous]\r\n        public async Task<ActionResu" +
-                    "lt<RegisteredVM>> Register([FromBody] RegisterVM registerVM)\r\n        {\r\n       " +
-                    "     // Validation\r\n            if (!ModelState.IsValid)\r\n            {\r\n       " +
-                    "         return BadRequest(ModelState);\r\n            }\r\n\r\n            Registered" +
-                    "VM registeredVM = await this.bll.Register(registerVM);\r\n\r\n            return Ok(" +
-                    "registeredVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"confirm-email\")]" +
-                    "\r\n        [AllowAnonymous]\r\n        public async Task<ActionResult<EmailConfirme" +
-                    "dVM>> ConfirmEmail([FromQuery] string id, [FromQuery] string code)\r\n        {\r\n " +
-                    "           // Validation\r\n            if (!ModelState.IsValid || string.IsNullOr" +
-                    "Empty(id) || string.IsNullOrEmpty(code))\r\n            {\r\n                return " +
-                    "BadRequest(ModelState);\r\n            }\r\n\r\n            EmailConfirmedVM emailConf" +
-                    "irmedVM = await this.bll.ConfirmEmail(id, code);\r\n\r\n            return Ok(emailC" +
-                    "onfirmedVM);\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"forgot-password\")" +
-                    "]\r\n        [AllowAnonymous]\r\n        public async Task<IActionResult> ForgotPass" +
-                    "word([FromBody] ForgotPasswordVM forgotPasswordVM)\r\n        {\r\n            // Va" +
-                    "lidation\r\n            if (!ModelState.IsValid)\r\n            {\r\n                r" +
-                    "eturn BadRequest(ModelState);\r\n            }\r\n\r\n            await this.bll.Forgo" +
-                    "tPassword(forgotPasswordVM);\r\n\r\n            return Ok();\r\n        }\r\n\r\n        [" +
-                    "HttpPost]\r\n        [Route(\"reset-password\")]\r\n        [AllowAnonymous]\r\n        " +
-                    "public async Task<ActionResult<PasswordResettedVM>> ResetPassword([FromBody] Res" +
-                    "etPasswordVM resetPasswordVM)\r\n        {\r\n            // Validation\r\n           " +
-                    " if (!ModelState.IsValid)\r\n            {\r\n                return BadRequest(Mode" +
-                    "lState);\r\n            }\r\n\r\n            PasswordResettedVM passwordResettedVM = a" +
-                    "wait this.bll.ResetPassword(resetPasswordVM);\r\n\r\n            return Ok(passwordR" +
-                    "esettedVM);\r\n        }\r\n    }\r\n}\r\n");
+                    ";\r\n\r\n        /// <summary>\r\n        /// The constructor of the Auth controller.\r" +
+                    "\n        /// </summary>\r\n        public AuthController(\r\n            IConfigurat" +
+                    "ion configuration,\r\n            ILogger<AuthController> logger,\r\n            IMa" +
+                    "pper mapper,\r\n            AuthBLL bll\r\n        )\r\n        {\r\n            this.co" +
+                    "nfiguration = configuration;\r\n            this.logger = logger;\r\n            thi" +
+                    "s.mapper = mapper;\r\n            this.bll = bll;\r\n        }\r\n\r\n        [HttpPost]" +
+                    "\r\n        [Route(\"login\")]\r\n        [AllowAnonymous]\r\n        public async Task<" +
+                    "ActionResult<AuthenticatedVM>> Login([FromBody] LoginVM loginVM)\r\n        {\r\n   " +
+                    "         // Validation\r\n            if (!ModelState.IsValid)\r\n            {\r\n   " +
+                    "             return BadRequest(ModelState);\r\n            }\r\n\r\n            Authen" +
+                    "ticatedVM authenticatedVM = await this.bll.Login(loginVM);\r\n\r\n            return" +
+                    " Ok(authenticatedVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"logout\")]" +
+                    "\r\n        public async Task<IActionResult> Logout()\r\n        {\r\n            awai" +
+                    "t this.bll.Logout();\r\n\r\n            return Ok();\r\n        }\r\n\r\n        [HttpGet]" +
+                    "\r\n        [Route(\"me\")]\r\n        public async Task<ActionResult<UserVM>> Me()\r\n " +
+                    "       {\r\n            User currentUser = await this.bll.Me();\r\n\r\n            ret" +
+                    "urn Ok(mapper.Map<User, UserVM>(currentUser));\r\n        }\r\n\r\n        [HttpPost]\r" +
+                    "\n        [Route(\"register\")]\r\n        [AllowAnonymous]\r\n        public async Tas" +
+                    "k<ActionResult<RegisteredVM>> Register([FromBody] RegisterVM registerVM)\r\n      " +
+                    "  {\r\n            // Validation\r\n            if (!ModelState.IsValid)\r\n          " +
+                    "  {\r\n                return BadRequest(ModelState);\r\n            }\r\n\r\n          " +
+                    "  RegisteredVM registeredVM = await this.bll.Register(registerVM);\r\n\r\n          " +
+                    "  return Ok(registeredVM);\r\n        }\r\n\r\n        [HttpGet]\r\n        [Route(\"conf" +
+                    "irm-email\")]\r\n        [AllowAnonymous]\r\n        public async Task<ActionResult<E" +
+                    "mailConfirmedVM>> ConfirmEmail([FromQuery] string id, [FromQuery] string code)\r\n" +
+                    "        {\r\n            // Validation\r\n            if (!ModelState.IsValid || str" +
+                    "ing.IsNullOrEmpty(id) || string.IsNullOrEmpty(code))\r\n            {\r\n           " +
+                    "     return BadRequest(ModelState);\r\n            }\r\n\r\n            EmailConfirmed" +
+                    "VM emailConfirmedVM = await this.bll.ConfirmEmail(id, code);\r\n\r\n            retu" +
+                    "rn Ok(emailConfirmedVM);\r\n        }\r\n\r\n        [HttpPost]\r\n        [Route(\"forgo" +
+                    "t-password\")]\r\n        [AllowAnonymous]\r\n        public async Task<IActionResult" +
+                    "> ForgotPassword([FromBody] ForgotPasswordVM forgotPasswordVM)\r\n        {\r\n     " +
+                    "       // Validation\r\n            if (!ModelState.IsValid)\r\n            {\r\n     " +
+                    "           return BadRequest(ModelState);\r\n            }\r\n\r\n            await th" +
+                    "is.bll.ForgotPassword(forgotPasswordVM);\r\n\r\n            return Ok();\r\n        }\r" +
+                    "\n\r\n        [HttpPost]\r\n        [Route(\"reset-password\")]\r\n        [AllowAnonymou" +
+                    "s]\r\n        public async Task<ActionResult<PasswordResettedVM>> ResetPassword([F" +
+                    "romBody] ResetPasswordVM resetPasswordVM)\r\n        {\r\n            // Validation\r" +
+                    "\n            if (!ModelState.IsValid)\r\n            {\r\n                return Bad" +
+                    "Request(ModelState);\r\n            }\r\n\r\n            PasswordResettedVM passwordRe" +
+                    "settedVM = await this.bll.ResetPassword(resetPasswordVM);\r\n\r\n            return " +
+                    "Ok(passwordResettedVM);\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

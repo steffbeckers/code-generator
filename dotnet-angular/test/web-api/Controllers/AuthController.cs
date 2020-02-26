@@ -21,8 +21,8 @@ namespace Test.API.Controllers
         private readonly AuthBLL bll;
 
         /// <summary>
-		/// The constructor of the Auth controller.
-		/// </summary>
+        /// The constructor of the Auth controller.
+        /// </summary>
         public AuthController(
             IConfiguration configuration,
             ILogger<AuthController> logger,
