@@ -64,6 +64,8 @@ namespace Test.API.BLL
                 account.Telephone = account.Telephone.Trim();
             if (!string.IsNullOrEmpty(account.Email))
                 account.Email = account.Email.Trim();
+            if (!string.IsNullOrEmpty(account.Test))
+                account.Test = account.Test.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
             // Before creation
@@ -102,12 +104,15 @@ namespace Test.API.BLL
                 accountUpdate.Telephone = accountUpdate.Telephone.Trim();
             if (!string.IsNullOrEmpty(accountUpdate.Email))
                 accountUpdate.Email = accountUpdate.Email.Trim();
+            if (!string.IsNullOrEmpty(accountUpdate.Test))
+                accountUpdate.Test = accountUpdate.Test.Trim();
 
             // Mapping
             account.Name = accountUpdate.Name;
             account.Website = accountUpdate.Website;
             account.Telephone = accountUpdate.Telephone;
             account.Email = accountUpdate.Email;
+            account.Test = accountUpdate.Test;
             account.ParentAccountId = accountUpdate.ParentAccountId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
