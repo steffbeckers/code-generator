@@ -10,7 +10,6 @@ using Test.API.ViewModels.Identity;
 
 // #-#-#
 // Test Steff
-// Yeah, keep this
 // #-#-#
 
 namespace Test.API.Controllers
