@@ -552,10 +552,41 @@ namespace CodeGenCLI
 
                     Console.WriteLine();
                     Console.WriteLine("### git checkout -p ###");
-                    ProcessStartInfo gitCheckoutP = new ProcessStartInfo("git");
-                    gitCheckoutP.Arguments = @"checkout -p";
-                    gitCheckoutP.WorkingDirectory = Config.WebAPI.ProjectPath;
-                    Process.Start(gitCheckoutP).WaitForExit();
+                    Process gitCheckoutP = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "git",
+                            Arguments = "checkout -p",
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            CreateNoWindow = true
+                        }
+                    };
+                    gitCheckoutP.Start();
+                    gitCheckoutP.WaitForExit();
+                    string currentBlock = string.Empty;
+                    while (!gitCheckoutP.StandardOutput.EndOfStream)
+                    {
+                        string line = gitCheckoutP.StandardOutput.ReadLine();
+
+                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                        {
+                            if (currentBlock.Contains("#-#-#"))
+                            {
+                                gitCheckoutP.StandardInput.WriteLine("y");
+                                currentBlock = string.Empty;
+                            }
+                            else
+                            {
+                                gitCheckoutP.StandardInput.WriteLine("n");
+                            }
+                        }
+                        else
+                        {
+                            currentBlock += line;
+                        }
+                    }
 
                     #endregion;
 

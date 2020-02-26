@@ -26,6 +26,10 @@
           "Name": "Email",
           "DisplayName": "Email Address",
           "Type": "string"
+        },
+        {
+          "Name": "Comment",
+          "Type": "string"
         }
       ],
       "Relations": [
