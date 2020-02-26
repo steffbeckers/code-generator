@@ -8,11 +8,6 @@ using Test.API.BLL;
 using Test.API.Models;
 using Test.API.ViewModels.Identity;
 
-// #-#-#
-// Test
-// Stefffff
-// #-#-#
-
 namespace Test.API.Controllers
 {
     [Authorize]
