@@ -8,11 +8,6 @@ using Test.API.BLL;
 using Test.API.Models;
 using Test.API.ViewModels.Identity;
 
-// #-#-#
-// Test Steff
-// Yeah, keep this
-// #-#-#
-
 namespace Test.API.Controllers
 {
     [Authorize]
@@ -26,8 +21,8 @@ namespace Test.API.Controllers
         private readonly AuthBLL bll;
 
         /// <summary>
-        /// The constructor of the Auth controller.
-        /// </summary>
+		/// The constructor of the Auth controller.
+		/// </summary>
         public AuthController(
             IConfiguration configuration,
             ILogger<AuthController> logger,
