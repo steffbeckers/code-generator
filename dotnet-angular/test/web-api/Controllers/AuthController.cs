@@ -8,6 +8,11 @@ using Test.API.BLL;
 using Test.API.Models;
 using Test.API.ViewModels.Identity;
 
+// #-#-#
+// Test Steff
+// Yeah, keep this
+// #-#-#
+
 namespace Test.API.Controllers
 {
     [Authorize]
@@ -35,6 +40,11 @@ namespace Test.API.Controllers
             this.mapper = mapper;
             this.bll = bll;
         }
+
+        // #-#-#
+        // Test Steff
+        // Yeah, keep this
+        // #-#-#
 
         [HttpPost]
         [Route("login")]
