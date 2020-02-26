@@ -552,6 +552,7 @@ namespace CodeGenCLI
 
                     Console.WriteLine();
                     Console.WriteLine("### git checkout -p ###");
+
                     Process gitCheckoutP = new Process
                     {
                         StartInfo = new ProcessStartInfo
@@ -561,11 +562,13 @@ namespace CodeGenCLI
                             WorkingDirectory = Config.WebAPI.ProjectPath,
                             UseShellExecute = false,
                             RedirectStandardOutput = true,
+                            RedirectStandardInput = true,
                             CreateNoWindow = true
                         }
                     };
+
                     gitCheckoutP.Start();
-                    gitCheckoutP.WaitForExit();
+
                     string currentBlock = string.Empty;
                     while (!gitCheckoutP.StandardOutput.EndOfStream)
                     {
@@ -585,9 +588,12 @@ namespace CodeGenCLI
                         }
                         else
                         {
-                            currentBlock += line;
+                            currentBlock += line + Environment.NewLine;
                         }
                     }
+
+                    gitCheckoutP.WaitForExit();
+                    gitCheckoutP.Close();
 
                     #endregion;
 
