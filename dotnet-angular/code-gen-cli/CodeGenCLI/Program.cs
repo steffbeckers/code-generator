@@ -558,6 +558,7 @@ namespace CodeGenCLI
                         {
                             FileName = "git",
                             Arguments = "checkout -p",
+                            WorkingDirectory = Config.WebAPI.ProjectPath,
                             UseShellExecute = false,
                             RedirectStandardOutput = true,
                             CreateNoWindow = true
