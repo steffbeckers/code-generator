@@ -7,7 +7,6 @@ mutation createAccount($account: accountInput!) {
     website
     telephone
     email
-    comment
   }
 }
 
@@ -16,8 +15,7 @@ mutation createAccount($account: accountInput!) {
     "name": "",
     "website": "",
     "telephone": "",
-    "email": "",
-    "comment": ""
+    "email": ""
   }
 }
 
