@@ -550,6 +550,13 @@ namespace CodeGenCLI
                     gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitStatus).WaitForExit();
 
+                    Console.WriteLine();
+                    Console.WriteLine("### git checkout -p ###");
+                    ProcessStartInfo gitCheckoutP = new ProcessStartInfo("git");
+                    gitCheckoutP.Arguments = @"checkout -p";
+                    gitCheckoutP.WorkingDirectory = Config.WebAPI.ProjectPath;
+                    Process.Start(gitCheckoutP).WaitForExit();
+
                     #endregion;
 
                     // Stop generation
