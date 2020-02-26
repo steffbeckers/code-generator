@@ -15,11 +15,6 @@ namespace Test.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        // #-#-#
-        // Test Steff
-        // Yeah, keep this
-        // #-#-#
-
         private readonly IConfiguration configuration;
         private readonly ILogger logger;
         private readonly IMapper mapper;
