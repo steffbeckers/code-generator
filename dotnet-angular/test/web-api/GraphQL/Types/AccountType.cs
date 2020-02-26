@@ -16,6 +16,7 @@ namespace Test.API.GraphQL.Types
             Field(x => x.Website, nullable: true);
             Field(x => x.Telephone, nullable: true);
             Field(x => x.Email, nullable: true);
+            Field(x => x.Comment, nullable: true);
 
             Field<AccountType>(
                 "parentAccount",

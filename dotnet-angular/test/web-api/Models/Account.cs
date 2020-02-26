@@ -40,6 +40,11 @@ namespace Test.API.Models
         /// </summary>
 		public string Email { get; set; }
 
+		/// <summary>
+        /// The Comment property of Account.
+        /// </summary>
+		public string Comment { get; set; }
+
 		// Relations
 
 		//// Many-to-one
