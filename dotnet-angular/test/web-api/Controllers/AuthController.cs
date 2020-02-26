@@ -10,11 +10,6 @@ using Test.API.ViewModels.Identity;
 
 namespace Test.API.Controllers
 {
-    // #-#-#
-    // Test Steff
-    // Yeah, keep this
-    // #-#-#
-
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
