@@ -13,10 +13,6 @@ namespace Test.API.BLL
     {
         private readonly AccountRepository accountRepository;
 
-        // #-#-#
-        // Test
-        // #-#-#
-
         /// <summary>
         /// The constructor of the Account business logic layer.
         /// </summary>
