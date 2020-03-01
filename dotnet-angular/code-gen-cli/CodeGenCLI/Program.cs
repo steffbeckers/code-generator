@@ -591,32 +591,36 @@ namespace CodeGenCLI
                         }
                     }).Start();
 
-                    while (gitCheckoutP.StandardOutput.Peek() > -1)
+                    new Thread(() =>
                     {
-                        Thread.Sleep(100);
-
-                        string line = gitCheckoutP.StandardOutput.ReadLine();
-
-                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                        while (gitCheckoutP.StandardOutput.Peek() > -1)
                         {
-                            if (currentHunk.Contains("#-#-#"))
+                            Thread.Sleep(100);
+
+                            string line = gitCheckoutP.StandardOutput.ReadLine();
+
+                            if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
                             {
-                                undoHunk = true;
-                                currentHunk = string.Empty;
+                                if (currentHunk.Contains("#-#-#"))
+                                {
+                                    undoHunk = true;
+                                    currentHunk = string.Empty;
+                                }
+                                else
+                                {
+                                    acceptHunk = true;
+                                    currentHunk = string.Empty;
+                                }
                             }
                             else
                             {
-                                acceptHunk = true;
-                                currentHunk = string.Empty;
+                                currentHunk += line + Environment.NewLine;
                             }
                         }
-                        else
-                        {
-                            currentHunk += line + Environment.NewLine;
-                        }
-                    }
 
-                    watchingOutput = false;
+                        watchingOutput = false;
+                    }).Start();
+
                     gitCheckoutP.WaitForExit();
                     gitCheckoutP.Close();
 
