@@ -550,51 +550,63 @@ namespace CodeGenCLI
                     gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitStatus).WaitForExit();
 
-                    //Console.WriteLine();
-                    //Console.WriteLine("### git checkout -p ###");
+                    Console.WriteLine();
+                    Console.WriteLine("### git checkout -p ###");
 
-                    //Process gitCheckoutP = new Process
-                    //{
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "git",
-                    //        Arguments = "checkout -p",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        UseShellExecute = false,
-                    //        RedirectStandardOutput = true,
-                    //        //RedirectStandardInput = true,
-                    //        CreateNoWindow = true
-                    //    }
-                    //};
+                    Process gitCheckoutP = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "git",
+                            Arguments = "checkout -p",
+                            WorkingDirectory = Config.WebAPI.ProjectPath,
+                            RedirectStandardOutput = true,
+                            RedirectStandardInput = true,
+                            CreateNoWindow = true,
+                            UseShellExecute = false
+                        }
+                    };
 
-                    //gitCheckoutP.Start();
+                    gitCheckoutP.Start();
 
-                    //string currentBlock = string.Empty;
-                    //while (!gitCheckoutP.StandardOutput.EndOfStream)
-                    //{
-                    //    Thread.Sleep(100);
+                    bool watchingOutput = true;
+                    string currentHunk = string.Empty;
+                    bool undoHunk = false;
 
-                    //    string line = gitCheckoutP.StandardOutput.ReadLine();
+                    // Read output
+                    new Thread(() => {
+                        while (!gitCheckoutP.StandardOutput.EndOfStream)
+                        {
+                            Thread.Sleep(100);
 
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
-                    //    {
-                    //        if (currentBlock.Contains("#-#-#"))
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteAsync("y");
-                    //            currentBlock = string.Empty;
-                    //        }
-                    //        else
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteAsync("n");
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        currentBlock += line + Environment.NewLine;
-                    //    }
-                    //}
+                            string line = gitCheckoutP.StandardOutput.ReadLine();
 
-                    //gitCheckoutP.Close();
+                            if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                            {
+                                if (currentHunk.Contains("#-#-#"))
+                                {
+                                    undoHunk = true;
+                                    currentHunk = string.Empty;
+                                    Thread.Sleep(500);
+                                }
+                            }
+                            else
+                            {
+                                currentHunk += line + Environment.NewLine;
+                            }
+                        }
+
+                        watchingOutput = false;
+                        gitCheckoutP.Close();
+                    }).Start();
+
+                    while (watchingOutput)
+                    {
+                        if (undoHunk)
+                        {
+                            gitCheckoutP.StandardInput.WriteLine("y");
+                        }
+                    }
 
                     #endregion;
 
