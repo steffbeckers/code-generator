@@ -608,6 +608,8 @@ namespace CodeGenCLI
                     {
                         while (watchingOutput)
                         {
+                            Thread.Sleep(100);
+
                             if (undoHunk)
                             {
                                 gitCheckoutP.StandardInput.WriteLine("y");
