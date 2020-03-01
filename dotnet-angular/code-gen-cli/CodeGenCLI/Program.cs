@@ -578,15 +578,15 @@ namespace CodeGenCLI
                     {
                         while (watchingOutput)
                         {
-                            Thread.Sleep(50);
-
                             if (undoHunk)
                             {
                                 gitCheckoutP.StandardInput.WriteLine("y");
+                                undoHunk = false;
                             }
                             else if (acceptHunk)
                             {
                                 gitCheckoutP.StandardInput.WriteLine("n");
+                                acceptHunk = false;
                             }
                         }
                     }).Start();
