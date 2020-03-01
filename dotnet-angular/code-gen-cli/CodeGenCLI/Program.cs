@@ -560,7 +560,7 @@ namespace CodeGenCLI
                             FileName = "git",
                             Arguments = "checkout -p",
                             WorkingDirectory = Config.WebAPI.ProjectPath,
-                            RedirectStandardOutput = true,
+                            RedirectStandardOutput = false,
                             RedirectStandardInput = false,
                             CreateNoWindow = true,
                             UseShellExecute = false
@@ -569,7 +569,7 @@ namespace CodeGenCLI
 
                     gitCheckoutP.Start();
 
-                    string output = gitCheckoutP.StandardOutput.ReadToEnd();
+                    //string output = gitCheckoutP.StandardOutput.ReadToEnd();
 
                     //bool watchingOutput = true;
                     //string currentHunk = string.Empty;
@@ -622,7 +622,6 @@ namespace CodeGenCLI
 
                     //watchingOutput = false;
                     gitCheckoutP.WaitForExit();
-                    gitCheckoutP.Close();
 
                     #endregion;
 
