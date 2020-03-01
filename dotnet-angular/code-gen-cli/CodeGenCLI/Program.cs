@@ -572,6 +572,7 @@ namespace CodeGenCLI
                     bool watchingOutput = true;
                     string currentHunk = string.Empty;
                     bool undoHunk = false;
+                    bool acceptHunk = false;
 
                     new Thread(() =>
                     {
@@ -582,6 +583,10 @@ namespace CodeGenCLI
                             if (undoHunk)
                             {
                                 gitCheckoutP.StandardInput.WriteLine("y");
+                            }
+                            else if (acceptHunk)
+                            {
+                                gitCheckoutP.StandardInput.WriteLine("n");
                             }
                         }
                     }).Start();
@@ -597,6 +602,11 @@ namespace CodeGenCLI
                             if (currentHunk.Contains("#-#-#"))
                             {
                                 undoHunk = true;
+                                currentHunk = string.Empty;
+                            }
+                            else
+                            {
+                                acceptHunk = true;
                                 currentHunk = string.Empty;
                             }
                         }
