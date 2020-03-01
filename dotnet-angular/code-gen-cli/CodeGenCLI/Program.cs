@@ -550,24 +550,24 @@ namespace CodeGenCLI
                     gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitStatus).WaitForExit();
 
-                    Console.WriteLine();
-                    Console.WriteLine("### git checkout -p ###");
+                    //Console.WriteLine();
+                    //Console.WriteLine("### git checkout -p ###");
 
-                    Process gitCheckoutP = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "git",
-                            Arguments = "checkout -p",
-                            WorkingDirectory = Config.WebAPI.ProjectPath,
-                            RedirectStandardOutput = false,
-                            RedirectStandardInput = false,
-                            CreateNoWindow = true,
-                            UseShellExecute = false
-                        }
-                    };
+                    //Process gitCheckoutP = new Process
+                    //{
+                    //    StartInfo = new ProcessStartInfo
+                    //    {
+                    //        FileName = "git",
+                    //        Arguments = "checkout -p",
+                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
+                    //        RedirectStandardOutput = false,
+                    //        RedirectStandardInput = false,
+                    //        CreateNoWindow = true,
+                    //        UseShellExecute = false
+                    //    }
+                    //};
 
-                    gitCheckoutP.Start();
+                    //gitCheckoutP.Start();
 
                     //string output = gitCheckoutP.StandardOutput.ReadToEnd();
 
@@ -621,7 +621,7 @@ namespace CodeGenCLI
                     //}
 
                     //watchingOutput = false;
-                    gitCheckoutP.WaitForExit();
+                    //gitCheckoutP.WaitForExit();
 
                     #endregion;
 
