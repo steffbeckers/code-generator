@@ -552,78 +552,83 @@ namespace CodeGenCLI
                     Process.Start(gitStatus).WaitForExit();
 
 
-                    Console.WriteLine();
-                    Console.WriteLine("### git checkout -p ###");
+                    //Console.WriteLine();
+                    //Console.WriteLine("### git checkout -p ###");
 
-                    Process gitCheckoutP = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "git",
-                            Arguments = "checkout -p",
-                            WorkingDirectory = Config.WebAPI.ProjectPath,
-                            RedirectStandardOutput = true,
-                            RedirectStandardInput = true,
-                            CreateNoWindow = true,
-                            UseShellExecute = false
-                        }
-                    };
+                    //Process gitCheckoutP = new Process
+                    //{
+                    //    StartInfo = new ProcessStartInfo
+                    //    {
+                    //        FileName = "git",
+                    //        Arguments = "checkout -p",
+                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
+                    //        RedirectStandardOutput = true,
+                    //        RedirectStandardInput = true,
+                    //        CreateNoWindow = true,
+                    //        UseShellExecute = false
+                    //    }
+                    //};
 
-                    gitCheckoutP.Start();
+                    //gitCheckoutP.Start();
 
 
-                    bool watchingOutput = true;
-                    string currentHunk = string.Empty;
-                    bool undoHunk = false;
-                    bool acceptHunk = false;
+                    //bool watchingOutput = true;
+                    //string currentHunk = string.Empty;
+                    //bool undoHunk = false;
+                    //bool acceptHunk = false;
 
-                    var outputTask = Task.Run(() =>
-                    {
-                        string line;
-                        while ((line = gitCheckoutP.StandardOutput.ReadLine()) != null)
-                        {
-                            if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
-                            {
-                                if (currentHunk.Contains("#-#-#"))
-                                {
-                                    undoHunk = true;
-                                    currentHunk = string.Empty;
-                                }
-                                else
-                                {
-                                    acceptHunk = true;
-                                    currentHunk = string.Empty;
-                                }
-                            }
-                            else
-                            {
-                                currentHunk += line + Environment.NewLine;
-                            }
-                        }
+                    //var outputTask = Task.Run(() =>
+                    //{
+                    //    while (gitCheckoutP.StandardOutput.Peek() > -1)
+                    //    {
+                    //        Thread.Sleep(200);
 
-                        watchingOutput = false;
-                    });
+                    //        string line = gitCheckoutP.StandardOutput.ReadLine();
 
-                    var inputTask = Task.Run(() =>
-                    {
-                        while (watchingOutput)
-                        {
-                            Thread.Sleep(100);
+                    //        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                    //        {
+                    //            if (currentHunk.Contains("#-#-#"))
+                    //            {
+                    //                undoHunk = true;
+                    //                currentHunk = string.Empty;
+                    //            }
+                    //            else
+                    //            {
+                    //                acceptHunk = true;
+                    //                currentHunk = string.Empty;
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            currentHunk += line + Environment.NewLine;
+                    //        }
+                    //    }
 
-                            if (undoHunk)
-                            {
-                                gitCheckoutP.StandardInput.WriteLine("y");
-                                undoHunk = false;
-                            }
-                            if (acceptHunk)
-                            {
-                                gitCheckoutP.StandardInput.WriteLine("n");
-                                acceptHunk = false;
-                            }
-                        }
-                    });
+                    //    watchingOutput = false;
+                    //});
 
-                    Task.WaitAll(outputTask, inputTask);
+                    //var inputTask = Task.Run(() =>
+                    //{
+                    //    while (watchingOutput)
+                    //    {
+                    //        Thread.Sleep(50);
+
+                    //        if (undoHunk)
+                    //        {
+                    //            gitCheckoutP.StandardInput.WriteLine("y");
+                    //            undoHunk = false;
+                    //        }
+                    //        if (acceptHunk)
+                    //        {
+                    //            gitCheckoutP.StandardInput.WriteLine("n");
+                    //            acceptHunk = false;
+                    //        }
+                    //    }
+                    //});
+
+                    //Task.WaitAll(outputTask, inputTask);
+
+                    //gitCheckoutP.WaitForExit();
 
 
                     //string line;
@@ -705,9 +710,7 @@ namespace CodeGenCLI
                     //}
 
                     //watchingOutput = false;
-
-
-                    gitCheckoutP.WaitForExit();
+                    //gitCheckoutP.WaitForExit();
 
                     #endregion;
 
