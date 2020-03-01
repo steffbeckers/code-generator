@@ -568,6 +568,7 @@ namespace CodeGenCLI
                     };
 
                     gitCheckoutP.Start();
+                    gitCheckoutP.WaitForExit();
 
                     bool watchingOutput = true;
                     string currentHunk = string.Empty;
@@ -591,37 +592,32 @@ namespace CodeGenCLI
                         }
                     }).Start();
 
-                    new Thread(() =>
+                    while (gitCheckoutP.StandardOutput.Peek() > -1)
                     {
-                        while (gitCheckoutP.StandardOutput.Peek() > -1)
+                        Thread.Sleep(100);
+
+                        string line = gitCheckoutP.StandardOutput.ReadLine();
+
+                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
                         {
-                            Thread.Sleep(100);
-
-                            string line = gitCheckoutP.StandardOutput.ReadLine();
-
-                            if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                            if (currentHunk.Contains("#-#-#"))
                             {
-                                if (currentHunk.Contains("#-#-#"))
-                                {
-                                    undoHunk = true;
-                                    currentHunk = string.Empty;
-                                }
-                                else
-                                {
-                                    acceptHunk = true;
-                                    currentHunk = string.Empty;
-                                }
+                                undoHunk = true;
+                                currentHunk = string.Empty;
                             }
                             else
                             {
-                                currentHunk += line + Environment.NewLine;
+                                acceptHunk = true;
+                                currentHunk = string.Empty;
                             }
                         }
+                        else
+                        {
+                            currentHunk += line + Environment.NewLine;
+                        }
+                    }
 
-                        watchingOutput = false;
-                    }).Start();
-
-                    gitCheckoutP.WaitForExit();
+                    watchingOutput = false;
                     gitCheckoutP.Close();
 
                     #endregion;
