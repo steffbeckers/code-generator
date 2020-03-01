@@ -583,7 +583,7 @@ namespace CodeGenCLI
                                 gitCheckoutP.StandardInput.WriteLine("y");
                                 undoHunk = false;
                             }
-                            else if (acceptHunk)
+                            if (acceptHunk)
                             {
                                 gitCheckoutP.StandardInput.WriteLine("n");
                                 acceptHunk = false;
