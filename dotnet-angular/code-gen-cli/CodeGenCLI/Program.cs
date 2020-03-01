@@ -561,7 +561,7 @@ namespace CodeGenCLI
                             Arguments = "checkout -p",
                             WorkingDirectory = Config.WebAPI.ProjectPath,
                             RedirectStandardOutput = true,
-                            RedirectStandardInput = true,
+                            RedirectStandardInput = false,
                             CreateNoWindow = true,
                             UseShellExecute = false
                         }
@@ -573,40 +573,42 @@ namespace CodeGenCLI
                     string currentHunk = string.Empty;
                     bool undoHunk = false;
 
-                    // Read output
-                    new Thread(() => {
-                        while (!gitCheckoutP.StandardOutput.EndOfStream)
+                    new Thread(() =>
+                    {
+                        while (watchingOutput)
                         {
-                            Thread.Sleep(100);
+                            Thread.Sleep(50);
 
-                            string line = gitCheckoutP.StandardOutput.ReadLine();
-
-                            if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                            if (undoHunk)
                             {
-                                if (currentHunk.Contains("#-#-#"))
-                                {
-                                    undoHunk = true;
-                                    currentHunk = string.Empty;
-                                    Thread.Sleep(500);
-                                }
-                            }
-                            else
-                            {
-                                currentHunk += line + Environment.NewLine;
+                                gitCheckoutP.StandardInput.WriteLine("y");
                             }
                         }
-
-                        watchingOutput = false;
-                        gitCheckoutP.Close();
                     }).Start();
 
-                    while (watchingOutput)
+                    while (gitCheckoutP.StandardOutput.Peek() > -1)
                     {
-                        if (undoHunk)
+                        Thread.Sleep(100);
+
+                        string line = gitCheckoutP.StandardOutput.ReadLine();
+
+                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
                         {
-                            gitCheckoutP.StandardInput.WriteLine("y");
+                            if (currentHunk.Contains("#-#-#"))
+                            {
+                                undoHunk = true;
+                                currentHunk = string.Empty;
+                            }
+                        }
+                        else
+                        {
+                            currentHunk += line + Environment.NewLine;
                         }
                     }
+
+                    watchingOutput = false;
+                    gitCheckoutP.WaitForExit();
+                    gitCheckoutP.Close();
 
                     #endregion;
 
