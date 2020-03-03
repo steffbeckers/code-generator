@@ -58,8 +58,6 @@ namespace Test.API.Controllers
         {
             await this.bll.Logout();
 
-            // TEST
-
             return Ok();
         }
 
