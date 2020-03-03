@@ -6,7 +6,7 @@ git diff > $diff
 
 patch=`mktemp`
 
-gawk -v pat="$1" '
+gawk -v pat="/$1/" '
 function hh(){
   if(keep && n > 0){
     for(i=0;i<n;i++){
