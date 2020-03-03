@@ -553,6 +553,25 @@ namespace CodeGenCLI
 
 
                     //Console.WriteLine();
+                    //Console.WriteLine("### git diff > code-gen-patching.txt ###");
+
+                    //Process gitDiffOut = new Process
+                    //{
+                    //    StartInfo = new ProcessStartInfo
+                    //    {
+                    //        FileName = "git",
+                    //        Arguments = "diff > " + Config.WebAPI.ProjectPath + "code-gen-patching.txt",
+                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
+                    //        CreateNoWindow = true,
+                    //        UseShellExecute = false
+                    //    }
+                    //};
+
+                    //gitDiffOut.Start();
+                    //gitDiffOut.WaitForExit();
+
+
+                    //Console.WriteLine();
                     //Console.WriteLine("### git checkout -p ###");
 
                     //Process gitCheckoutP = new Process
