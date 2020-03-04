@@ -129,17 +129,20 @@ namespace Test.API
             });
 
             // Repositories
+			services.AddScoped<CountryRepository>();
+			services.AddScoped<RelationTypeRepository>();
+			services.AddScoped<AddressRepository>();
+			services.AddScoped<ContactRepository>();
 			services.AddScoped<AccountRepository>();
-			services.AddScoped<ProductRepository>();
-			services.AddScoped<SupplierRepository>();
-			services.AddScoped<ProductDetailRepository>();
-			services.AddScoped<ProductSupplierRepository>();
+			services.AddScoped<WorkOrderRepository>();
 
 			// BLLs
+			services.AddScoped<CountryBLL>();
+			services.AddScoped<RelationTypeBLL>();
+			services.AddScoped<AddressBLL>();
+			services.AddScoped<ContactBLL>();
 			services.AddScoped<AccountBLL>();
-			services.AddScoped<ProductBLL>();
-			services.AddScoped<SupplierBLL>();
-			services.AddScoped<ProductDetailBLL>();
+			services.AddScoped<WorkOrderBLL>();
             services.AddScoped<AuthBLL>();
 
             // Services
