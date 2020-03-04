@@ -1,3 +1,4 @@
+using GraphQL.Server.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
 using Test.API.BLL;
@@ -15,7 +16,9 @@ namespace Test.API.GraphQL
 			ProductDetailBLL productDetailBLL
         )
         {
-			// Accounts
+            this.AuthorizeWith("Authorized");
+
+            // Accounts
             FieldAsync<AccountType>(
                 "createAccount",
                 arguments: new QueryArguments(
