@@ -1,0 +1,160 @@
+// Countries
+
+mutation createCountry($country: countryInput!) {
+  createCountry(country: $country) {
+    id
+    id
+    name
+  }
+}
+
+{
+  "country": {
+    "id": "",
+    "name": ""
+  }
+}
+
+
+// RelationTypes
+
+mutation createRelationType($relationType: relationTypeInput!) {
+  createRelationType(relationType: $relationType) {
+    id
+    id
+    name
+  }
+}
+
+{
+  "relationType": {
+    "id": "",
+    "name": ""
+  }
+}
+
+
+// Addresses
+
+mutation createAddress($address: addressInput!) {
+  createAddress(address: $address) {
+    id
+    id
+    street
+    number
+    city
+    state
+    postalCode
+    latitude
+    longitude
+    countryId
+  }
+}
+
+{
+  "address": {
+    "id": "",
+    "street": "",
+    "number": "",
+    "city": "",
+    "state": "",
+    "postalCode": "",
+    "latitude": "",
+    "longitude": "",
+    "countryId": ""
+  }
+}
+
+
+// Contacts
+
+mutation createContact($contact: contactInput!) {
+  createContact(contact: $contact) {
+    id
+    lastName
+    accountId
+    id
+    firstName
+    jobTitle
+    email
+    telephone
+    mobilePhone
+    gender
+  }
+}
+
+{
+  "contact": {
+    "lastName": "",
+    "accountId": "",
+    "id": "",
+    "firstName": "",
+    "jobTitle": "",
+    "email": "",
+    "telephone": "",
+    "mobilePhone": "",
+    "gender": ""
+  }
+}
+
+
+// Accounts
+
+mutation createAccount($account: accountInput!) {
+  createAccount(account: $account) {
+    id
+    id
+    name
+    email
+    telephone
+    fax
+    website
+    vATNumber
+    description
+    addressId
+    parentAccountId
+    billingAccountId
+    relationTypeId
+    primaryContactId
+  }
+}
+
+{
+  "account": {
+    "id": "",
+    "name": "",
+    "email": "",
+    "telephone": "",
+    "fax": "",
+    "website": "",
+    "vATNumber": "",
+    "description": "",
+    "addressId": "",
+    "parentAccountId": "",
+    "billingAccountId": "",
+    "relationTypeId": "",
+    "primaryContactId": ""
+  }
+}
+
+
+// WorkOrders
+
+mutation createWorkOrder($workOrder: workOrderInput!) {
+  createWorkOrder(workOrder: $workOrder) {
+    id
+    id
+    date
+    accountId
+  }
+}
+
+{
+  "workOrder": {
+    "id": "",
+    "date": "",
+    "accountId": ""
+  }
+}
+
+
