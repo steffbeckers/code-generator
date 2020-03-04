@@ -20,11 +20,6 @@ namespace Test.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Id property of RelationType.
-        /// </summary>
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The Name property of RelationType.
         /// </summary>
 		public string Name { get; set; }

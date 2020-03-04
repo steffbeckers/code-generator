@@ -118,7 +118,6 @@ namespace Test.API.BLL
             // Mapping
             contact.LastName = contactUpdate.LastName;
             contact.AccountId = contactUpdate.AccountId;
-            contact.Id = contactUpdate.Id;
             contact.FirstName = contactUpdate.FirstName;
             contact.JobTitle = contactUpdate.JobTitle;
             contact.Email = contactUpdate.Email;

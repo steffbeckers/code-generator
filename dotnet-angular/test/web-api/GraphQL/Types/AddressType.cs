@@ -12,7 +12,6 @@ namespace Test.API.GraphQL.Types
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
-            Field(x => x.Id);
             Field(x => x.Street, nullable: true);
             Field(x => x.Number, nullable: true);
             Field(x => x.City, nullable: true);

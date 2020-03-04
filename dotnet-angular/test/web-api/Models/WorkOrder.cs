@@ -20,11 +20,6 @@ namespace Test.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Id property of WorkOrder.
-        /// </summary>
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The Date property of WorkOrder.
         /// </summary>
 		public DateTime Date { get; set; }

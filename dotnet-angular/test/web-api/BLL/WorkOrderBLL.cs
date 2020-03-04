@@ -88,7 +88,6 @@ namespace Test.API.BLL
 			// Trimming strings
 
             // Mapping
-            workOrder.Id = workOrderUpdate.Id;
             workOrder.Date = workOrderUpdate.Date;
             workOrder.AccountId = workOrderUpdate.AccountId;
 

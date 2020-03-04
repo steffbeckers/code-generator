@@ -20,11 +20,6 @@ namespace Test.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Id property of Account.
-        /// </summary>
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The Name property of Account.
         /// </summary>
 		public string Name { get; set; }

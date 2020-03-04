@@ -20,11 +20,6 @@ namespace Test.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Id property of Address.
-        /// </summary>
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The Street property of Address.
         /// </summary>
 		public string Street { get; set; }

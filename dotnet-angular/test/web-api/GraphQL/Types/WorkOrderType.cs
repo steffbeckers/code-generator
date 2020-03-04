@@ -12,7 +12,6 @@ namespace Test.API.GraphQL.Types
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
-            Field(x => x.Id);
             Field(x => x.Date);
             Field(x => x.AccountId);
 

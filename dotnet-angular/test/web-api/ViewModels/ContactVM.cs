@@ -34,12 +34,6 @@ namespace Test.API.ViewModels
 		public Guid AccountId { get; set; }
 
 		/// <summary>
-        /// The Id property of Contact.
-        /// </summary>
-        [Required]
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The FirstName property of Contact.
         /// </summary>
 		public string FirstName { get; set; }

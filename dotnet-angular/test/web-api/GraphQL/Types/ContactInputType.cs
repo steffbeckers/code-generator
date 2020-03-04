@@ -10,7 +10,6 @@ namespace Test.API.GraphQL.Types
             Field<IdGraphType>("id");
 		    Field<NonNullGraphType<StringGraphType>>("lastName");
 		    Field<NonNullGraphType<IdGraphType>>("accountId");
-		    Field<NonNullGraphType<IdGraphType>>("id");
 		    Field<StringGraphType>("firstName");
 		    Field<StringGraphType>("jobTitle");
 		    Field<StringGraphType>("email");

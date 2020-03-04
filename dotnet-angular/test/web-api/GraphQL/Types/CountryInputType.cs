@@ -8,7 +8,6 @@ namespace Test.API.GraphQL.Types
         {
             Name = "countryInput";
             Field<IdGraphType>("id");
-		    Field<NonNullGraphType<IdGraphType>>("id");
 		    Field<NonNullGraphType<StringGraphType>>("name");
 
         }

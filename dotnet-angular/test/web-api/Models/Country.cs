@@ -20,11 +20,6 @@ namespace Test.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Id property of Country.
-        /// </summary>
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The Name property of Country.
         /// </summary>
 		public string Name { get; set; }

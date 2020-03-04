@@ -94,7 +94,6 @@ namespace Test.API.DAL
 			modelBuilder.Entity<Country>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<Country>().Property(e => e.Id).IsRequired();
             modelBuilder.Entity<Country>().Property(e => e.Name).IsRequired();
 
             // User
@@ -122,7 +121,6 @@ namespace Test.API.DAL
 			modelBuilder.Entity<RelationType>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<RelationType>().Property(e => e.Id).IsRequired();
             modelBuilder.Entity<RelationType>().Property(e => e.Name).IsRequired();
 
             // User
@@ -150,7 +148,6 @@ namespace Test.API.DAL
 			modelBuilder.Entity<Address>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<Address>().Property(e => e.Id).IsRequired();
 
             // User
             modelBuilder.Entity<Address>()
@@ -179,7 +176,6 @@ namespace Test.API.DAL
             // Required properties
             modelBuilder.Entity<Contact>().Property(e => e.LastName).IsRequired();
             modelBuilder.Entity<Contact>().Property(e => e.AccountId).IsRequired();
-            modelBuilder.Entity<Contact>().Property(e => e.Id).IsRequired();
 
             // User
             modelBuilder.Entity<Contact>()
@@ -206,7 +202,6 @@ namespace Test.API.DAL
 			modelBuilder.Entity<Account>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<Account>().Property(e => e.Id).IsRequired();
             modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
 
             // User
@@ -234,7 +229,6 @@ namespace Test.API.DAL
 			modelBuilder.Entity<WorkOrder>().HasKey(e => e.Id);
 
             // Required properties
-            modelBuilder.Entity<WorkOrder>().Property(e => e.Id).IsRequired();
             modelBuilder.Entity<WorkOrder>().Property(e => e.Date).IsRequired();
             modelBuilder.Entity<WorkOrder>().Property(e => e.AccountId).IsRequired();
 

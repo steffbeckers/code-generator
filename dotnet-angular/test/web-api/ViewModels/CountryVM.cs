@@ -22,12 +22,6 @@ namespace Test.API.ViewModels
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Id property of Country.
-        /// </summary>
-        [Required]
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The Name property of Country.
         /// </summary>
         [Required]

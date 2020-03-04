@@ -3,14 +3,12 @@
 mutation createCountry($country: countryInput!) {
   createCountry(country: $country) {
     id
-    id
     name
   }
 }
 
 {
   "country": {
-    "id": "",
     "name": ""
   }
 }
@@ -21,14 +19,12 @@ mutation createCountry($country: countryInput!) {
 mutation createRelationType($relationType: relationTypeInput!) {
   createRelationType(relationType: $relationType) {
     id
-    id
     name
   }
 }
 
 {
   "relationType": {
-    "id": "",
     "name": ""
   }
 }
@@ -38,7 +34,6 @@ mutation createRelationType($relationType: relationTypeInput!) {
 
 mutation createAddress($address: addressInput!) {
   createAddress(address: $address) {
-    id
     id
     street
     number
@@ -53,7 +48,6 @@ mutation createAddress($address: addressInput!) {
 
 {
   "address": {
-    "id": "",
     "street": "",
     "number": "",
     "city": "",
@@ -73,7 +67,6 @@ mutation createContact($contact: contactInput!) {
     id
     lastName
     accountId
-    id
     firstName
     jobTitle
     email
@@ -87,7 +80,6 @@ mutation createContact($contact: contactInput!) {
   "contact": {
     "lastName": "",
     "accountId": "",
-    "id": "",
     "firstName": "",
     "jobTitle": "",
     "email": "",
@@ -102,7 +94,6 @@ mutation createContact($contact: contactInput!) {
 
 mutation createAccount($account: accountInput!) {
   createAccount(account: $account) {
-    id
     id
     name
     email
@@ -121,7 +112,6 @@ mutation createAccount($account: accountInput!) {
 
 {
   "account": {
-    "id": "",
     "name": "",
     "email": "",
     "telephone": "",
@@ -143,7 +133,6 @@ mutation createAccount($account: accountInput!) {
 mutation createWorkOrder($workOrder: workOrderInput!) {
   createWorkOrder(workOrder: $workOrder) {
     id
-    id
     date
     accountId
   }
@@ -151,7 +140,6 @@ mutation createWorkOrder($workOrder: workOrderInput!) {
 
 {
   "workOrder": {
-    "id": "",
     "date": "",
     "accountId": ""
   }

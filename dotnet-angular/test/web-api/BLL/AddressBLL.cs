@@ -108,7 +108,6 @@ namespace Test.API.BLL
                 addressUpdate.PostalCode = addressUpdate.PostalCode.Trim();
 
             // Mapping
-            address.Id = addressUpdate.Id;
             address.Street = addressUpdate.Street;
             address.Number = addressUpdate.Number;
             address.City = addressUpdate.City;

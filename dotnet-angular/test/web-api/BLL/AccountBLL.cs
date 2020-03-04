@@ -116,7 +116,6 @@ namespace Test.API.BLL
                 accountUpdate.Description = accountUpdate.Description.Trim();
 
             // Mapping
-            account.Id = accountUpdate.Id;
             account.Name = accountUpdate.Name;
             account.Email = accountUpdate.Email;
             account.Telephone = accountUpdate.Telephone;

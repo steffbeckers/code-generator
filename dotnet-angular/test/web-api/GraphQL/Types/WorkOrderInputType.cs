@@ -8,7 +8,6 @@ namespace Test.API.GraphQL.Types
         {
             Name = "workOrderInput";
             Field<IdGraphType>("id");
-		    Field<NonNullGraphType<IdGraphType>>("id");
 		    Field<NonNullGraphType<DateTimeGraphType>>("date");
 		    Field<NonNullGraphType<IdGraphType>>("accountId");
 

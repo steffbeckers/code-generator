@@ -22,12 +22,6 @@ namespace Test.API.ViewModels
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Id property of RelationType.
-        /// </summary>
-        [Required]
-		public Guid Id { get; set; }
-
-		/// <summary>
         /// The Name property of RelationType.
         /// </summary>
         [Required]

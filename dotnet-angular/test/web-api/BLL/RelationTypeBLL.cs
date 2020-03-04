@@ -92,7 +92,6 @@ namespace Test.API.BLL
                 relationTypeUpdate.Name = relationTypeUpdate.Name.Trim();
 
             // Mapping
-            relationType.Id = relationTypeUpdate.Id;
             relationType.Name = relationTypeUpdate.Name;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}

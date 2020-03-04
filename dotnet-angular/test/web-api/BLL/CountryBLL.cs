@@ -92,7 +92,6 @@ namespace Test.API.BLL
                 countryUpdate.Name = countryUpdate.Name.Trim();
 
             // Mapping
-            country.Id = countryUpdate.Id;
             country.Name = countryUpdate.Name;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
