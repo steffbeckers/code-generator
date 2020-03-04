@@ -117,8 +117,16 @@ namespace Test.API
             // HttpContext
             services.AddHttpContextAccessor();
 
+            // Authorization
+            services.AddTransient<IValidationRule, AuthorizationValidationRule>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
+                //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
+            });
+
             // Repositories
-			services.AddScoped<AccountRepository>();
+            services.AddScoped<AccountRepository>();
 			services.AddScoped<ProductRepository>();
 			services.AddScoped<SupplierRepository>();
 			services.AddScoped<ProductDetailRepository>();
@@ -144,13 +152,11 @@ namespace Test.API
                 options.ExposeExceptions = true; // TODO: Only in DEV?
             })
             .AddGraphTypes(ServiceLifetime.Scoped)
-            // TODO
-            //.AddGraphQLAuthorization(options =>
-            //{
-            //    options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
-            //    //var policy = new AuthorizationPolicyBuilder()
-            //    //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
-            //})
+            .AddGraphQLAuthorization(options =>
+            {
+                options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
+                //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
+            })
             .AddUserContextBuilder(httpContext => httpContext.User)
             .AddWebSockets();
 
