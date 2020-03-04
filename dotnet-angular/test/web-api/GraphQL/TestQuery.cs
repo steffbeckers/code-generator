@@ -16,14 +16,12 @@ namespace Test.API.GraphQL
 			ProductDetailRepository productDetailRepository
         )
         {
-            this.AuthorizeWith("Authorized");
-
 			// Accounts
             
             Field<ListGraphType<AccountType>>(
                 "accounts",
                 resolve: context => accountRepository.Get(null, x => x.OrderBy(x => x.Name))
-            );
+            ).AuthorizeWith("Authorized");
 
             //// Async test
             //FieldAsync<ListGraphType<AccountType>>(
