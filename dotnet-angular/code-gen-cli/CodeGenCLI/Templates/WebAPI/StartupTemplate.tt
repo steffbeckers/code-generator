@@ -8,7 +8,12 @@
 using AutoMapper;
 using GraphQL;
 using GraphQL.Server;
+using GraphQL.Server.Authorization.AspNetCore;
+using GraphQL.Server.Ui.Altair;
+using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
+using GraphQL.Server.Ui.Voyager;
+using GraphQL.Validation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -124,6 +129,16 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // HttpContext
             services.AddHttpContextAccessor();
 
+<# if (config.Authentication.Enabled) { #>
+            // Authorization
+            services.AddTransient<IValidationRule, AuthorizationValidationRule>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
+                //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
+            });
+
+<# } #>
             // Repositories
 <# foreach (CodeGenModel model in config.Models) { #>
 			services.AddScoped<<#= model.Name #>Repository>();
@@ -152,14 +167,14 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 options.ExposeExceptions = true; // TODO: Only in DEV?
             })
             .AddGraphTypes(ServiceLifetime.Scoped)
-            // TODO
+<# if (config.Authentication.Enabled) { #>
             //.AddGraphQLAuthorization(options =>
             //{
             //    options.AddPolicy("Authorized", p => p.RequireAuthenticatedUser());
-            //    //var policy = new AuthorizationPolicyBuilder()
             //    //options.AddPolicy("SteffOnly", p => p.RequireClaim(ClaimTypes.Name, "steff"));
             //})
             .AddUserContextBuilder(httpContext => httpContext.User)
+<# } #>
             .AddWebSockets();
 
 			// AutoMapper
@@ -284,8 +299,15 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             // GraphQL
             app.UseGraphQLWebSockets<<#= config.Name #>Schema>("/graphql");
-            app.UseGraphQL<<#= config.Name #>Schema>();
+            app.UseGraphQL<<#= config.Name #>Schema>("/graphql");
+            app.UseGraphiQLServer(new GraphiQLOptions
+            {
+                GraphiQLPath = "/ui/graphiql",
+                GraphQLEndPoint = "/graphql"
+            });
+            app.UseGraphQLAltair(new GraphQLAltairOptions());
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
 
 			// Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.

@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
+using GraphQL.Server.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
 using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.BLL;
@@ -22,6 +23,10 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# } #>
         )
         {
+<# if (config.Authentication.Enabled) { #>
+            this.AuthorizeWith("Authorized");
+
+<# } #>
 <# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 			// <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
             FieldAsync<<#= model.Name #>Type>(
