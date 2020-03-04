@@ -1,4 +1,3 @@
-using GraphQL.Server.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
 using Test.API.BLL;
@@ -18,7 +17,7 @@ namespace Test.API.GraphQL
         {
             this.AuthorizeWith("Authorized");
 
-            // Accounts
+			// Accounts
             FieldAsync<AccountType>(
                 "createAccount",
                 arguments: new QueryArguments(
