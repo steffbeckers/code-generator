@@ -2,7 +2,10 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Authorization.AspNetCore;
+using GraphQL.Server.Ui.Altair;
+using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
+using GraphQL.Server.Ui.Voyager;
 using GraphQL.Validation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -280,8 +283,15 @@ namespace Test.API
 
             // GraphQL
             app.UseGraphQLWebSockets<TestSchema>("/graphql");
-            app.UseGraphQL<TestSchema>();
+            app.UseGraphQL<TestSchema>("/graphql");
+            app.UseGraphiQLServer(new GraphiQLOptions
+            {
+                GraphiQLPath = "/ui/graphiql",
+                GraphQLEndPoint = "/graphql"
+            });
+            app.UseGraphQLAltair(new GraphQLAltairOptions());
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
 
 			// Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.
