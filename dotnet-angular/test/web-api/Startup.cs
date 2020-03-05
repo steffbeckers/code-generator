@@ -219,6 +219,7 @@ namespace Test.API
             }
         }
 
+    }
 
     public class ErrorHandlingMiddleware
     {
