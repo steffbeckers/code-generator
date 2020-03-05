@@ -403,8 +403,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 }
             }
         }
-    }
 <# } #>
+    }
 
     public class ErrorHandlingMiddleware
     {

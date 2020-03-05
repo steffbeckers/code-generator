@@ -332,7 +332,7 @@
     //}
   ],
   "Authentication": {
-    "Enabled": true,
+    "Enabled": false,
     "Secret": "ecd81ddc42741f570d02de8521f4e3326868a2233b2ff0c6589f5d7c26fb49a7",
     "TokenExpiresInMinutes": "1440",
     "EmailConfirmation": true,

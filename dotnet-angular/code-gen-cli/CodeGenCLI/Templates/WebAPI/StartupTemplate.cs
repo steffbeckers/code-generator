@@ -644,15 +644,15 @@ using ");
                 }
             }
         }
-    }
 ");
             
-            #line 407 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
+            #line 406 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write(@"
+            this.Write(@"    }
+
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate next;
