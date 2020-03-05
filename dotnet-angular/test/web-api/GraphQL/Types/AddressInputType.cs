@@ -13,8 +13,8 @@ namespace Test.API.GraphQL.Types
 		    Field<StringGraphType>("city");
 		    Field<StringGraphType>("state");
 		    Field<StringGraphType>("postalCode");
-		    Field<decimal>("latitude");
-		    Field<decimal>("longitude");
+		    Field<FloatGraphType>("latitude");
+		    Field<FloatGraphType>("longitude");
 		    Field<IdGraphType>("countryId");
 
         }
