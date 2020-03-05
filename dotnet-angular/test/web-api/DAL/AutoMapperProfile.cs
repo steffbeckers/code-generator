@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Test.API.Models;
 using Test.API.ViewModels;
+using Test.API.ViewModels.Identity;
 
 namespace Test.API.DAL
 {
@@ -77,6 +78,9 @@ namespace Test.API.DAL
 			CreateMap<ProductDetail, ProductDetailVM>();
             CreateMap<ProductDetailVM, ProductDetail>();
 
+            // Users
+			CreateMap<User, UserVM>();
+            CreateMap<UserVM, User>();
         }
     }
 }

@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -7,15 +11,27 @@ using Test.API.Models;
 
 namespace Test.API.DAL
 {
-    public class TestContext : DbContext
+    public class TestContext : IdentityDbContext<
+        User,
+        IdentityRole<Guid>,
+        Guid,
+        IdentityUserClaim<Guid>,
+        IdentityUserRole<Guid>,
+        IdentityUserLogin<Guid>,
+        IdentityRoleClaim<Guid>,
+        IdentityUserToken<Guid>
+    >
 	{
         private readonly IConfiguration configuration;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
 		public TestContext(
+            IHttpContextAccessor httpContextAccessor,
             IConfiguration configuration
         ) : base()
         {
             this.configuration = configuration;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
 		public DbSet<Account> Accounts { get; set; }
@@ -36,6 +52,35 @@ namespace Test.API.DAL
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            #region Identity
+
+            modelBuilder.Entity<User>(e => e.ToTable("Users"));
+            modelBuilder.Entity<IdentityRole<Guid>>(e => e.ToTable("Roles"));
+            modelBuilder.Entity<IdentityUserRole<Guid>>(e =>
+            {
+                e.ToTable("UserRoles");
+                // In case you changed the TKey type
+                e.HasKey(key => new { key.UserId, key.RoleId });
+            });
+            modelBuilder.Entity<IdentityUserClaim<Guid>>(e => e.ToTable("UserClaims"));
+            modelBuilder.Entity<IdentityUserLogin<Guid>>(e =>
+            {
+                e.ToTable("UserLogins");
+                // In case you changed the TKey type
+                e.HasKey(key => new { key.ProviderKey, key.LoginProvider });       
+            });
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>(e => e.ToTable("RoleClaims"));
+            modelBuilder.Entity<IdentityUserToken<Guid>>(e =>
+            {
+                e.ToTable("UserTokens");
+                // In case you changed the TKey type
+                e.HasKey(key => new { key.UserId, key.LoginProvider, key.Name });
+            });
+
+            #endregion
+
 			#region Accounts
 
             // Soft delete query filter
@@ -49,6 +94,17 @@ namespace Test.API.DAL
 
             // Required properties
             modelBuilder.Entity<Account>().Property(e => e.Name).IsRequired();
+
+            // User
+            modelBuilder.Entity<Account>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Account>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 
@@ -66,6 +122,17 @@ namespace Test.API.DAL
             // Required properties
             modelBuilder.Entity<Product>().Property(e => e.Name).IsRequired();
 
+            // User
+            modelBuilder.Entity<Product>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Product>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
             #endregion
 
 			#region Suppliers
@@ -81,6 +148,17 @@ namespace Test.API.DAL
 
             // Required properties
             modelBuilder.Entity<Supplier>().Property(e => e.Name).IsRequired();
+
+            // User
+            modelBuilder.Entity<Supplier>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Supplier>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 
@@ -99,6 +177,17 @@ namespace Test.API.DAL
             modelBuilder.Entity<ProductDetail>().Property(e => e.Comment).IsRequired();
             modelBuilder.Entity<ProductDetail>().Property(e => e.ProductId).IsRequired();
 
+            // User
+            modelBuilder.Entity<ProductDetail>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductDetail>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
             #endregion
 
 			#region ProductSupplier
@@ -116,6 +205,17 @@ namespace Test.API.DAL
             modelBuilder.Entity<ProductSupplier>().Property(e => e.ProductId).IsRequired();
             modelBuilder.Entity<ProductSupplier>().Property(e => e.SupplierId).IsRequired();
 
+            // User
+            modelBuilder.Entity<ProductSupplier>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductSupplier>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
             #endregion
 		}
 
@@ -123,6 +223,7 @@ namespace Test.API.DAL
         {
             SoftDeleteLogic();
             TimestampsLogic();
+            UserInfoDataLogic();
 
             return base.SaveChanges();
         }
@@ -131,6 +232,7 @@ namespace Test.API.DAL
         {
             SoftDeleteLogic();
             TimestampsLogic();
+            UserInfoDataLogic();
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
@@ -184,6 +286,39 @@ namespace Test.API.DAL
                         case EntityState.Modified:
                             entry.CurrentValues["ModifiedOn"] = DateTime.Now;
                             break;
+                    }
+                }
+            }
+        }
+
+        private void UserInfoDataLogic()
+        {
+            string userIdString = this.httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdString))
+            {
+                Guid userId = Guid.Parse(userIdString);
+
+                foreach (var entry in ChangeTracker.Entries())
+                {
+                    Type entityType = entry.Entity.GetType();
+                    if (
+					    entry.Entity.GetType() == typeof(Account) ||
+					    entry.Entity.GetType() == typeof(Product) ||
+					    entry.Entity.GetType() == typeof(Supplier) ||
+					    entry.Entity.GetType() == typeof(ProductDetail) ||
+					    entry.Entity.GetType() == typeof(ProductSupplier)
+                    )
+                    {
+                        switch (entry.State)
+                        {
+                            case EntityState.Added:
+                                entry.CurrentValues["CreatedByUserId"] = userId;
+                                entry.CurrentValues["ModifiedByUserId"] = userId;
+                                break;
+                            case EntityState.Modified:
+                                entry.CurrentValues["ModifiedByUserId"] = userId;
+                                break;
+                        }
                     }
                 }
             }

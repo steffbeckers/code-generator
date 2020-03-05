@@ -16,6 +16,8 @@ namespace Test.API.GraphQL
 			ProductDetailBLL productDetailBLL
         )
         {
+            this.AuthorizeWith("Authorized");
+
 			// Accounts
             FieldAsync<AccountType>(
                 "createAccount",

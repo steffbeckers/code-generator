@@ -14,6 +14,8 @@ namespace Test.API.Services
     public interface IEmailService
     {
         Task SendEmailAsync(string email, string subject, string message);
+        Task SendEmailConfirmationAsync(string email, string link);
+        Task SendPasswordResetAsync(string email, string link);
     }
 
     public class EmailService : IEmailService
@@ -59,6 +61,18 @@ namespace Test.API.Services
             {
                 throw;
             }
+        }
+
+        public Task SendEmailConfirmationAsync(string email, string link)
+        {
+            return SendEmailAsync(email, "Confirm your email",
+                $"<p>Please confirm your account by clicking this link:</p><a href='{HtmlEncoder.Default.Encode(link)}'>{link}</a>");
+        }
+
+        public Task SendPasswordResetAsync(string email, string link)
+        {
+            return SendEmailAsync(email, "Reset your password",
+                $"<p>Please reset your password by clicking this link:</p><a href='{HtmlEncoder.Default.Encode(link)}'>{link}</a>");
         }
     }
 }

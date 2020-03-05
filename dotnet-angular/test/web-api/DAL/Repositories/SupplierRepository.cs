@@ -30,6 +30,8 @@ namespace Test.API.DAL.Repositories
             return await this.context.Suppliers
                 .Include(x => x.ProductSupplier)
                     .ThenInclude(x => x.Product)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.ModifiedByUser)
                 .ToListAsync();
         }
 
@@ -38,6 +40,8 @@ namespace Test.API.DAL.Repositories
             return await this.context.Suppliers
                 .Include(x => x.ProductSupplier)
                     .ThenInclude(x => x.Product)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 

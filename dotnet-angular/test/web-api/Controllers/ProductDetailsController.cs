@@ -14,6 +14,7 @@ namespace Test.API.Controllers
 	/// <summary>
 	/// The ProductDetails controller.
 	/// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 	[Produces("application/json")]

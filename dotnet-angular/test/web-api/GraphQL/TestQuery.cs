@@ -16,6 +16,8 @@ namespace Test.API.GraphQL
 			ProductDetailRepository productDetailRepository
         )
         {
+            this.AuthorizeWith("Authorized");
+
 			// Accounts
             
             Field<ListGraphType<AccountType>>(

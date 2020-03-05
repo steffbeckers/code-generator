@@ -31,6 +31,8 @@ namespace Test.API.DAL.Repositories
                 .Include(x => x.Details)
                 .Include(x => x.ProductSupplier)
                     .ThenInclude(x => x.Supplier)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.ModifiedByUser)
                 .ToListAsync();
         }
 
@@ -40,6 +42,8 @@ namespace Test.API.DAL.Repositories
                 .Include(x => x.Details)
                 .Include(x => x.ProductSupplier)
                     .ThenInclude(x => x.Supplier)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 

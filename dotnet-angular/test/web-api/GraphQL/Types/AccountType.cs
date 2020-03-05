@@ -42,6 +42,10 @@ namespace Test.API.GraphQL.Types
             //    }
             //);
 
+            Field(x => x.CreatedByUserId, type: typeof(IdGraphType));
+            // TODO: Field(x => x.CreatedByUser, type: typeof(UserType));
+            Field(x => x.ModifiedByUserId, type: typeof(IdGraphType));
+            // TODO: Field(x => x.ModifiedByUser, type: typeof(UserType));
         }
     }
 }
