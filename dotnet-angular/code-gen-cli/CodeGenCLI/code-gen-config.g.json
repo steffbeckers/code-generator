@@ -1,0 +1,386 @@
+{
+  "Name": "Test",
+  "Description": "",
+  "Override": true,
+  "Authentication": {
+    "Enabled": true,
+    "Secret": "ecd81ddc42741f570d02de8521f4e3326868a2233b2ff0c6589f5d7c26fb49a7",
+    "TokenExpiresInMinutes": "1440",
+    "EmailConfirmation": true,
+    "ConfirmEmailURL": "http://localhost:5000/api/auth/confirm-email?id={{userId}}&email={{userEmail}}&code={{code}}",
+    "ResetPasswordURL": "https://test.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}",
+    "Admin": {
+      "FirstName": "Steff",
+      "LastName": "Beckers",
+      "Username": "admin",
+      "Email": "admin@steffbeckers.eu",
+      "Password": "Steff12345!"
+    },
+    "OtherRoles": [ "IT", "Sales", "HR", "CEO" ]
+  },
+  "WebAPI": {
+    "DatabaseConnection": "Server=localhost;Database=Test;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "NamespaceRoot": "Test.API",
+    "EmailService": {
+      "Enabled": true,
+      "MailServer": "smtp.gmail.com",
+      "MailPort": 587,
+      "UseSSL": false,
+      "SenderName": "Test App",
+      "Sender": "steff@steffbeckers.eu",
+      "Password": "PASSWORD"
+    },
+    "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
+    "FrameworkPath": null,
+    "ModelsPath": null,
+    "ViewModelsPath": null,
+    "DALPath": null,
+    "BLLPath": null,
+    "ControllersPath": null,
+    "ServicesPath": null,
+    "GraphQLPath": null
+  },
+  "Angular": {
+    "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\angular",
+    "ModelsPath": null,
+    "ModelsPathForTypeScript": null,
+    "ServicesPath": null,
+    "ServicesPathForTypeScript": null
+  },
+  "Models": [
+    {
+      "Name": "Country",
+      "NamePlural": "Countries",
+      "Description": null,
+      "DisplayField": null,
+      "SortField": null,
+      "DatabaseTableName": "Countries",
+      "DatabaseKey": null,
+      "ManyToMany": false,
+      "Properties": [
+        {
+          "Name": "Name",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": true,
+          "DatabaseFieldName": "Name"
+        }
+      ],
+      "Relations": []
+    },
+    {
+      "Name": "RelationType",
+      "NamePlural": "RelationTypes",
+      "Description": null,
+      "DisplayField": null,
+      "SortField": null,
+      "DatabaseTableName": "RelationTypes",
+      "DatabaseKey": null,
+      "ManyToMany": false,
+      "Properties": [
+        {
+          "Name": "Name",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": true,
+          "DatabaseFieldName": "Name"
+        }
+      ],
+      "Relations": []
+    },
+    {
+      "Name": "Address",
+      "NamePlural": "Addresses",
+      "Description": null,
+      "DisplayField": null,
+      "SortField": null,
+      "DatabaseTableName": "Addresses",
+      "DatabaseKey": null,
+      "ManyToMany": false,
+      "Properties": [
+        {
+          "Name": "Street",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Street"
+        },
+        {
+          "Name": "Number",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Number"
+        },
+        {
+          "Name": "City",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "City"
+        },
+        {
+          "Name": "State",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "State"
+        },
+        {
+          "Name": "PostalCode",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "PostalCode"
+        },
+        {
+          "Name": "Latitude",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "double",
+          "Required": false,
+          "DatabaseFieldName": "Latitude"
+        },
+        {
+          "Name": "Longitude",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "double",
+          "Required": false,
+          "DatabaseFieldName": "Longitude"
+        },
+        {
+          "Name": "CountryId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": false,
+          "DatabaseFieldName": "CountryId"
+        }
+      ],
+      "Relations": []
+    },
+    {
+      "Name": "Contact",
+      "NamePlural": "Contacts",
+      "Description": null,
+      "DisplayField": null,
+      "SortField": null,
+      "DatabaseTableName": "Contacts",
+      "DatabaseKey": null,
+      "ManyToMany": false,
+      "Properties": [
+        {
+          "Name": "LastName",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": true,
+          "DatabaseFieldName": "LastName"
+        },
+        {
+          "Name": "AccountId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": true,
+          "DatabaseFieldName": "AccountId"
+        },
+        {
+          "Name": "FirstName",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "FirstName"
+        },
+        {
+          "Name": "JobTitle",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "JobTitle"
+        },
+        {
+          "Name": "Email",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Email"
+        },
+        {
+          "Name": "Telephone",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Telephone"
+        },
+        {
+          "Name": "MobilePhone",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "MobilePhone"
+        },
+        {
+          "Name": "Gender",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Gender"
+        }
+      ],
+      "Relations": []
+    },
+    {
+      "Name": "Account",
+      "NamePlural": "Accounts",
+      "Description": null,
+      "DisplayField": null,
+      "SortField": null,
+      "DatabaseTableName": "Accounts",
+      "DatabaseKey": null,
+      "ManyToMany": false,
+      "Properties": [
+        {
+          "Name": "Name",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": true,
+          "DatabaseFieldName": "Name"
+        },
+        {
+          "Name": "Email",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Email"
+        },
+        {
+          "Name": "Telephone",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Telephone"
+        },
+        {
+          "Name": "Fax",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Fax"
+        },
+        {
+          "Name": "Website",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Website"
+        },
+        {
+          "Name": "VATNumber",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "VATNumber"
+        },
+        {
+          "Name": "Description",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "string",
+          "Required": false,
+          "DatabaseFieldName": "Description"
+        },
+        {
+          "Name": "AddressId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": false,
+          "DatabaseFieldName": "AddressId"
+        },
+        {
+          "Name": "ParentAccountId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": false,
+          "DatabaseFieldName": "ParentAccountId"
+        },
+        {
+          "Name": "BillingAccountId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": false,
+          "DatabaseFieldName": "BillingAccountId"
+        },
+        {
+          "Name": "RelationTypeId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": false,
+          "DatabaseFieldName": "RelationTypeId"
+        },
+        {
+          "Name": "PrimaryContactId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": false,
+          "DatabaseFieldName": "PrimaryContactId"
+        }
+      ],
+      "Relations": []
+    },
+    {
+      "Name": "WorkOrder",
+      "NamePlural": "WorkOrders",
+      "Description": null,
+      "DisplayField": null,
+      "SortField": null,
+      "DatabaseTableName": "WorkOrders",
+      "DatabaseKey": null,
+      "ManyToMany": false,
+      "Properties": [
+        {
+          "Name": "Date",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "DateTime",
+          "Required": true,
+          "DatabaseFieldName": "Date"
+        },
+        {
+          "Name": "AccountId",
+          "DisplayName": null,
+          "Description": null,
+          "Type": "Guid",
+          "Required": true,
+          "DatabaseFieldName": "AccountId"
+        }
+      ],
+      "Relations": []
+    }
+  ]
+}

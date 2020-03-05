@@ -44,6 +44,8 @@
                         return "DateTime";
                     case "bit":
                         return "bool";
+                    case "decimal":
+                        return "double";
                 }
             }
 
@@ -78,6 +80,7 @@
                         return "StringGraphType";
                     case "int":
                         return "IntGraphType";
+                    case "float":
                     case "double":
                         return "FloatGraphType";
                     case "bool":

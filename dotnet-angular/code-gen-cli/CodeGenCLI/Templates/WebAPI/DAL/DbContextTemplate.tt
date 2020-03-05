@@ -116,13 +116,13 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 
             // Table
 <# if (model.ManyToMany) { #>
-			modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= model.Name #>");
+			modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= !string.IsNullOrEmpty(model.DatabaseTableName) ? model.DatabaseTableName : model.Name #>");
 <# } else { #>
-			modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>");
+			modelBuilder.Entity<<#= model.Name #>>().ToTable("<#= !string.IsNullOrEmpty(model.DatabaseTableName) ? model.DatabaseTableName : !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>");
 <# } #>
 
 			// Key
-			modelBuilder.Entity<<#= model.Name #>>().HasKey(e => e.<#= !string.IsNullOrEmpty(model.Key) ? model.Key : "Id" #>);
+			modelBuilder.Entity<<#= model.Name #>>().HasKey(e => e.<#= !string.IsNullOrEmpty(model.DatabaseKey) ? model.DatabaseKey : "Id" #>);
 
             // Required properties
 <# foreach (CodeGenModelProperty property in model.Properties.Where(p => p.Required)) { #>

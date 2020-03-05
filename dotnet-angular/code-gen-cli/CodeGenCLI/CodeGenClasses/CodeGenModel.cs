@@ -17,7 +17,8 @@ namespace CodeGenCLI.CodeGenClasses
         public string Description { get; set; }
         public string DisplayField { get; set; }
         public string SortField { get; set; }
-        public string Key { get; set; }
+        public string DatabaseTableName { get; set; }
+        public string DatabaseKey { get; set; }
         public bool ManyToMany { get; set; }
 
         public IList<CodeGenModelProperty> Properties { get; set; }
@@ -36,6 +37,8 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonRequired]
         public bool Required { get; set; }
+
+        public string DatabaseFieldName { get; set; }
     }
 
     public class CodeGenModelRelation
@@ -53,8 +56,6 @@ namespace CodeGenCLI.CodeGenClasses
 
         [JsonRequired]
         public string Model { get; set; }
-        public string IdField { get; set; }
-        public string DisplayField { get; set; }
         public string Through { get; set; }
     }
 }

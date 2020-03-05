@@ -107,6 +107,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="code-gen-config.g.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="code-gen-config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -336,7 +336,7 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write(">().ToTable(\"");
             
             #line 119 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.DatabaseTableName) ? model.DatabaseTableName : model.Name));
             
             #line default
             #line hidden
@@ -357,7 +357,7 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write(">().ToTable(\"");
             
             #line 121 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.DatabaseTableName) ? model.DatabaseTableName : !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s"));
             
             #line default
             #line hidden
@@ -378,7 +378,7 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write(">().HasKey(e => e.");
             
             #line 125 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.Key) ? model.Key : "Id"));
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(model.DatabaseKey) ? model.DatabaseKey : "Id"));
             
             #line default
             #line hidden

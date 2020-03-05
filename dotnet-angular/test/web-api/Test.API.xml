@@ -44,209 +44,129 @@
             Deletes an existing account record.
             </summary>
         </member>
-        <member name="T:Test.API.BLL.AddressBLL">
-            <summary>
-            The business logic layer for Addresses.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.AddressBLL.#ctor(Test.API.DAL.Repositories.AddressRepository)">
-            <summary>
-            The constructor of the Address business logic layer.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.AddressBLL.GetAllAddressesAsync">
-            <summary>
-            Retrieves all addresses.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.AddressBLL.GetAddressByIdAsync(System.Guid)">
-            <summary>
-            Retrieves one address by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.AddressBLL.CreateAddressAsync(Test.API.Models.Address)">
-            <summary>
-            Creates a new address record.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.AddressBLL.UpdateAddressAsync(Test.API.Models.Address)">
-            <summary>
-            Updates an existing address record by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.AddressBLL.DeleteAddressByIdAsync(System.Guid)">
-            <summary>
-            Deletes an existing address record by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.AddressBLL.DeleteAddressAsync(Test.API.Models.Address)">
-            <summary>
-            Deletes an existing address record.
-            </summary>
-        </member>
         <member name="T:Test.API.BLL.AuthBLL">
             <summary>
             The business logic layer for authentication.
             </summary>
         </member>
-        <member name="T:Test.API.BLL.ContactBLL">
+        <member name="T:Test.API.BLL.ProductBLL">
             <summary>
-            The business logic layer for Contacts.
+            The business logic layer for Products.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.#ctor(Test.API.DAL.Repositories.ContactRepository)">
+        <member name="M:Test.API.BLL.ProductBLL.#ctor(Test.API.DAL.Repositories.ProductRepository,Test.API.DAL.Repositories.SupplierRepository,Test.API.DAL.Repositories.ProductSupplierRepository)">
             <summary>
-            The constructor of the Contact business logic layer.
+            The constructor of the Product business logic layer.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.GetAllContactsAsync">
+        <member name="M:Test.API.BLL.ProductBLL.GetAllProductsAsync">
             <summary>
-            Retrieves all contacts.
+            Retrieves all products.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.GetContactByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.ProductBLL.GetProductByIdAsync(System.Guid)">
             <summary>
-            Retrieves one contact by Id.
+            Retrieves one product by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.CreateContactAsync(Test.API.Models.Contact)">
+        <member name="M:Test.API.BLL.ProductBLL.CreateProductAsync(Test.API.Models.Product)">
             <summary>
-            Creates a new contact record.
+            Creates a new product record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.UpdateContactAsync(Test.API.Models.Contact)">
+        <member name="M:Test.API.BLL.ProductBLL.UpdateProductAsync(Test.API.Models.Product)">
             <summary>
-            Updates an existing contact record by Id.
+            Updates an existing product record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.DeleteContactByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.ProductBLL.DeleteProductByIdAsync(System.Guid)">
             <summary>
-            Deletes an existing contact record by Id.
+            Deletes an existing product record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.ContactBLL.DeleteContactAsync(Test.API.Models.Contact)">
+        <member name="M:Test.API.BLL.ProductBLL.DeleteProductAsync(Test.API.Models.Product)">
             <summary>
-            Deletes an existing contact record.
+            Deletes an existing product record.
             </summary>
         </member>
-        <member name="T:Test.API.BLL.CountryBLL">
+        <member name="T:Test.API.BLL.ProductDetailBLL">
             <summary>
-            The business logic layer for Countries.
+            The business logic layer for ProductDetails.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.CountryBLL.#ctor(Test.API.DAL.Repositories.CountryRepository)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.#ctor(Test.API.DAL.Repositories.ProductDetailRepository)">
             <summary>
-            The constructor of the Country business logic layer.
+            The constructor of the ProductDetail business logic layer.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.CountryBLL.GetAllCountriesAsync">
+        <member name="M:Test.API.BLL.ProductDetailBLL.GetAllProductDetailsAsync">
             <summary>
-            Retrieves all countries.
+            Retrieves all productdetails.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.CountryBLL.GetCountryByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.GetProductDetailByIdAsync(System.Guid)">
             <summary>
-            Retrieves one country by Id.
+            Retrieves one productdetail by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.CountryBLL.CreateCountryAsync(Test.API.Models.Country)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.CreateProductDetailAsync(Test.API.Models.ProductDetail)">
             <summary>
-            Creates a new country record.
+            Creates a new productdetail record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.CountryBLL.UpdateCountryAsync(Test.API.Models.Country)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.UpdateProductDetailAsync(Test.API.Models.ProductDetail)">
             <summary>
-            Updates an existing country record by Id.
+            Updates an existing productdetail record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.CountryBLL.DeleteCountryByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.DeleteProductDetailByIdAsync(System.Guid)">
             <summary>
-            Deletes an existing country record by Id.
+            Deletes an existing productdetail record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.CountryBLL.DeleteCountryAsync(Test.API.Models.Country)">
+        <member name="M:Test.API.BLL.ProductDetailBLL.DeleteProductDetailAsync(Test.API.Models.ProductDetail)">
             <summary>
-            Deletes an existing country record.
+            Deletes an existing productdetail record.
             </summary>
         </member>
-        <member name="T:Test.API.BLL.RelationTypeBLL">
+        <member name="T:Test.API.BLL.SupplierBLL">
             <summary>
-            The business logic layer for RelationTypes.
+            The business logic layer for Suppliers.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.RelationTypeBLL.#ctor(Test.API.DAL.Repositories.RelationTypeRepository)">
+        <member name="M:Test.API.BLL.SupplierBLL.#ctor(Test.API.DAL.Repositories.SupplierRepository,Test.API.DAL.Repositories.ProductRepository,Test.API.DAL.Repositories.ProductSupplierRepository)">
             <summary>
-            The constructor of the RelationType business logic layer.
+            The constructor of the Supplier business logic layer.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.RelationTypeBLL.GetAllRelationTypesAsync">
+        <member name="M:Test.API.BLL.SupplierBLL.GetAllSuppliersAsync">
             <summary>
-            Retrieves all relationtypes.
+            Retrieves all suppliers.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.RelationTypeBLL.GetRelationTypeByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.SupplierBLL.GetSupplierByIdAsync(System.Guid)">
             <summary>
-            Retrieves one relationtype by Id.
+            Retrieves one supplier by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.RelationTypeBLL.CreateRelationTypeAsync(Test.API.Models.RelationType)">
+        <member name="M:Test.API.BLL.SupplierBLL.CreateSupplierAsync(Test.API.Models.Supplier)">
             <summary>
-            Creates a new relationtype record.
+            Creates a new supplier record.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.RelationTypeBLL.UpdateRelationTypeAsync(Test.API.Models.RelationType)">
+        <member name="M:Test.API.BLL.SupplierBLL.UpdateSupplierAsync(Test.API.Models.Supplier)">
             <summary>
-            Updates an existing relationtype record by Id.
+            Updates an existing supplier record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.RelationTypeBLL.DeleteRelationTypeByIdAsync(System.Guid)">
+        <member name="M:Test.API.BLL.SupplierBLL.DeleteSupplierByIdAsync(System.Guid)">
             <summary>
-            Deletes an existing relationtype record by Id.
+            Deletes an existing supplier record by Id.
             </summary>
         </member>
-        <member name="M:Test.API.BLL.RelationTypeBLL.DeleteRelationTypeAsync(Test.API.Models.RelationType)">
+        <member name="M:Test.API.BLL.SupplierBLL.DeleteSupplierAsync(Test.API.Models.Supplier)">
             <summary>
-            Deletes an existing relationtype record.
-            </summary>
-        </member>
-        <member name="T:Test.API.BLL.WorkOrderBLL">
-            <summary>
-            The business logic layer for WorkOrders.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.WorkOrderBLL.#ctor(Test.API.DAL.Repositories.WorkOrderRepository)">
-            <summary>
-            The constructor of the WorkOrder business logic layer.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.WorkOrderBLL.GetAllWorkOrdersAsync">
-            <summary>
-            Retrieves all workorders.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.WorkOrderBLL.GetWorkOrderByIdAsync(System.Guid)">
-            <summary>
-            Retrieves one workorder by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.WorkOrderBLL.CreateWorkOrderAsync(Test.API.Models.WorkOrder)">
-            <summary>
-            Creates a new workorder record.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.WorkOrderBLL.UpdateWorkOrderAsync(Test.API.Models.WorkOrder)">
-            <summary>
-            Updates an existing workorder record by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.WorkOrderBLL.DeleteWorkOrderByIdAsync(System.Guid)">
-            <summary>
-            Deletes an existing workorder record by Id.
-            </summary>
-        </member>
-        <member name="M:Test.API.BLL.WorkOrderBLL.DeleteWorkOrderAsync(Test.API.Models.WorkOrder)">
-            <summary>
-            Deletes an existing workorder record.
+            Deletes an existing supplier record.
             </summary>
         </member>
         <member name="T:Test.API.Controllers.AccountsController">
@@ -289,208 +209,152 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="T:Test.API.Controllers.AddressesController">
-            <summary>
-            The Addresses controller.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AddressesController},AutoMapper.IMapper,Test.API.BLL.AddressBLL)">
-            <summary>
-            The constructor of the Addresses controller.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.GetAddresses">
-            <summary>
-            Retrieves all addresses.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.GetAddress(System.Guid)">
-            <summary>
-            Retrieves a specific address.
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.CreateAddress(Test.API.ViewModels.AddressVM)">
-            <summary>
-            Creates a new address.
-            </summary>
-            <param name="addressVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.UpdateAddress(System.Guid,Test.API.ViewModels.AddressVM)">
-            <summary>
-            Updates a specific address.
-            </summary>
-            <param name="id"></param>
-            <param name="addressVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.AddressesController.DeleteAddress(System.Guid)">
-            <summary>
-            Deletes a specific address.
-            </summary>
-            <param name="id"></param>
-        </member>
         <member name="M:Test.API.Controllers.AuthController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.AuthController},AutoMapper.IMapper,Test.API.BLL.AuthBLL)">
             <summary>
             The constructor of the Auth controller.
             </summary>
         </member>
-        <member name="T:Test.API.Controllers.ContactsController">
+        <member name="T:Test.API.Controllers.ProductDetailsController">
             <summary>
-            The Contacts controller.
+            The ProductDetails controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.ContactsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ContactsController},AutoMapper.IMapper,Test.API.BLL.ContactBLL)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ProductDetailsController},AutoMapper.IMapper,Test.API.BLL.ProductDetailBLL)">
             <summary>
-            The constructor of the Contacts controller.
+            The constructor of the ProductDetails controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.ContactsController.GetContacts">
+        <member name="M:Test.API.Controllers.ProductDetailsController.GetProductDetails">
             <summary>
-            Retrieves all contacts.
+            Retrieves all productdetails.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.ContactsController.GetContact(System.Guid)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.GetProductDetail(System.Guid)">
             <summary>
-            Retrieves a specific contact.
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="M:Test.API.Controllers.ContactsController.CreateContact(Test.API.ViewModels.ContactVM)">
-            <summary>
-            Creates a new contact.
-            </summary>
-            <param name="contactVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.ContactsController.UpdateContact(System.Guid,Test.API.ViewModels.ContactVM)">
-            <summary>
-            Updates a specific contact.
-            </summary>
-            <param name="id"></param>
-            <param name="contactVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.ContactsController.DeleteContact(System.Guid)">
-            <summary>
-            Deletes a specific contact.
+            Retrieves a specific productdetail.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="T:Test.API.Controllers.CountriesController">
+        <member name="M:Test.API.Controllers.ProductDetailsController.CreateProductDetail(Test.API.ViewModels.ProductDetailVM)">
             <summary>
-            The Countries controller.
+            Creates a new productdetail.
             </summary>
+            <param name="productdetailVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.CountriesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.CountriesController},AutoMapper.IMapper,Test.API.BLL.CountryBLL)">
+        <member name="M:Test.API.Controllers.ProductDetailsController.UpdateProductDetail(System.Guid,Test.API.ViewModels.ProductDetailVM)">
             <summary>
-            The constructor of the Countries controller.
+            Updates a specific productdetail.
             </summary>
+            <param name="id"></param>
+            <param name="productDetailVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.CountriesController.GetCountries">
+        <member name="M:Test.API.Controllers.ProductDetailsController.DeleteProductDetail(System.Guid)">
             <summary>
-            Retrieves all countries.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.CountriesController.GetCountry(System.Guid)">
-            <summary>
-            Retrieves a specific country.
+            Deletes a specific productdetail.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Test.API.Controllers.CountriesController.CreateCountry(Test.API.ViewModels.CountryVM)">
+        <member name="T:Test.API.Controllers.ProductsController">
             <summary>
-            Creates a new country.
-            </summary>
-            <param name="countryVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.CountriesController.UpdateCountry(System.Guid,Test.API.ViewModels.CountryVM)">
-            <summary>
-            Updates a specific country.
-            </summary>
-            <param name="id"></param>
-            <param name="countryVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.CountriesController.DeleteCountry(System.Guid)">
-            <summary>
-            Deletes a specific country.
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="T:Test.API.Controllers.RelationTypesController">
-            <summary>
-            The RelationTypes controller.
+            The Products controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.RelationTypesController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.RelationTypesController},AutoMapper.IMapper,Test.API.BLL.RelationTypeBLL)">
+        <member name="M:Test.API.Controllers.ProductsController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.ProductsController},AutoMapper.IMapper,Test.API.BLL.ProductBLL)">
             <summary>
-            The constructor of the RelationTypes controller.
+            The constructor of the Products controller.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.RelationTypesController.GetRelationTypes">
+        <member name="M:Test.API.Controllers.ProductsController.GetProducts">
             <summary>
-            Retrieves all relationtypes.
+            Retrieves all products.
             </summary>
         </member>
-        <member name="M:Test.API.Controllers.RelationTypesController.GetRelationType(System.Guid)">
+        <member name="M:Test.API.Controllers.ProductsController.GetProduct(System.Guid)">
             <summary>
-            Retrieves a specific relationtype.
+            Retrieves a specific product.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Test.API.Controllers.RelationTypesController.CreateRelationType(Test.API.ViewModels.RelationTypeVM)">
+        <member name="M:Test.API.Controllers.ProductsController.CreateProduct(Test.API.ViewModels.ProductVM)">
             <summary>
-            Creates a new relationtype.
+            Creates a new product.
             </summary>
-            <param name="relationtypeVM"></param>
+            <param name="productVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.RelationTypesController.UpdateRelationType(System.Guid,Test.API.ViewModels.RelationTypeVM)">
+        <member name="M:Test.API.Controllers.ProductsController.UpdateProduct(System.Guid,Test.API.ViewModels.ProductVM)">
             <summary>
-            Updates a specific relationtype.
-            </summary>
-            <param name="id"></param>
-            <param name="relationTypeVM"></param>
-        </member>
-        <member name="M:Test.API.Controllers.RelationTypesController.DeleteRelationType(System.Guid)">
-            <summary>
-            Deletes a specific relationtype.
+            Updates a specific product.
             </summary>
             <param name="id"></param>
+            <param name="productVM"></param>
         </member>
-        <member name="T:Test.API.Controllers.WorkOrdersController">
+        <member name="M:Test.API.Controllers.ProductsController.LinkSupplierToProduct(Test.API.Models.ProductSupplier)">
             <summary>
-            The WorkOrders controller.
+            Links a specific supplier to product.
             </summary>
+            <param name="productSupplier"></param>
         </member>
-        <member name="M:Test.API.Controllers.WorkOrdersController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.WorkOrdersController},AutoMapper.IMapper,Test.API.BLL.WorkOrderBLL)">
+        <member name="M:Test.API.Controllers.ProductsController.UnlinkSupplierFromProduct(Test.API.Models.ProductSupplier)">
             <summary>
-            The constructor of the WorkOrders controller.
+            Unlinks a specific supplier from product.
             </summary>
+            <param name="productSupplier"></param>
         </member>
-        <member name="M:Test.API.Controllers.WorkOrdersController.GetWorkOrders">
+        <member name="M:Test.API.Controllers.ProductsController.DeleteProduct(System.Guid)">
             <summary>
-            Retrieves all workorders.
-            </summary>
-        </member>
-        <member name="M:Test.API.Controllers.WorkOrdersController.GetWorkOrder(System.Guid)">
-            <summary>
-            Retrieves a specific workorder.
+            Deletes a specific product.
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Test.API.Controllers.WorkOrdersController.CreateWorkOrder(Test.API.ViewModels.WorkOrderVM)">
+        <member name="T:Test.API.Controllers.SuppliersController">
             <summary>
-            Creates a new workorder.
+            The Suppliers controller.
             </summary>
-            <param name="workorderVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.WorkOrdersController.UpdateWorkOrder(System.Guid,Test.API.ViewModels.WorkOrderVM)">
+        <member name="M:Test.API.Controllers.SuppliersController.#ctor(Microsoft.Extensions.Logging.ILogger{Test.API.Controllers.SuppliersController},AutoMapper.IMapper,Test.API.BLL.SupplierBLL)">
             <summary>
-            Updates a specific workorder.
+            The constructor of the Suppliers controller.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.SuppliersController.GetSuppliers">
+            <summary>
+            Retrieves all suppliers.
+            </summary>
+        </member>
+        <member name="M:Test.API.Controllers.SuppliersController.GetSupplier(System.Guid)">
+            <summary>
+            Retrieves a specific supplier.
             </summary>
             <param name="id"></param>
-            <param name="workOrderVM"></param>
         </member>
-        <member name="M:Test.API.Controllers.WorkOrdersController.DeleteWorkOrder(System.Guid)">
+        <member name="M:Test.API.Controllers.SuppliersController.CreateSupplier(Test.API.ViewModels.SupplierVM)">
             <summary>
-            Deletes a specific workorder.
+            Creates a new supplier.
+            </summary>
+            <param name="supplierVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.SuppliersController.UpdateSupplier(System.Guid,Test.API.ViewModels.SupplierVM)">
+            <summary>
+            Updates a specific supplier.
+            </summary>
+            <param name="id"></param>
+            <param name="supplierVM"></param>
+        </member>
+        <member name="M:Test.API.Controllers.SuppliersController.LinkProductToSupplier(Test.API.Models.ProductSupplier)">
+            <summary>
+            Links a specific product to supplier.
+            </summary>
+            <param name="productSupplier"></param>
+        </member>
+        <member name="M:Test.API.Controllers.SuppliersController.UnlinkProductFromSupplier(Test.API.Models.ProductSupplier)">
+            <summary>
+            Unlinks a specific product from supplier.
+            </summary>
+            <param name="productSupplier"></param>
+        </member>
+        <member name="M:Test.API.Controllers.SuppliersController.DeleteSupplier(System.Guid)">
+            <summary>
+            Deletes a specific supplier.
             </summary>
             <param name="id"></param>
         </member>
@@ -514,54 +378,44 @@
             The constructor of the Account repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.AddressRepository">
+        <member name="T:Test.API.DAL.Repositories.ProductDetailRepository">
             <summary>
-            The repository for Addresses in the data access layer.
+            The repository for ProductDetails in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.AddressRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.ProductDetailRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the Address repository.
+            The constructor of the ProductDetail repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.ContactRepository">
+        <member name="T:Test.API.DAL.Repositories.ProductRepository">
             <summary>
-            The repository for Contacts in the data access layer.
+            The repository for Products in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.ContactRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.ProductRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the Contact repository.
+            The constructor of the Product repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.CountryRepository">
+        <member name="T:Test.API.DAL.Repositories.ProductSupplierRepository">
             <summary>
-            The repository for Countries in the data access layer.
+            The repository for ProductSuppliers in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.CountryRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.ProductSupplierRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the Country repository.
+            The constructor of the ProductSupplier repository.
             </summary>
         </member>
-        <member name="T:Test.API.DAL.Repositories.RelationTypeRepository">
+        <member name="T:Test.API.DAL.Repositories.SupplierRepository">
             <summary>
-            The repository for RelationTypes in the data access layer.
+            The repository for Suppliers in the data access layer.
             </summary>
         </member>
-        <member name="M:Test.API.DAL.Repositories.RelationTypeRepository.#ctor(Test.API.DAL.TestContext)">
+        <member name="M:Test.API.DAL.Repositories.SupplierRepository.#ctor(Test.API.DAL.TestContext)">
             <summary>
-            The constructor of the RelationType repository.
-            </summary>
-        </member>
-        <member name="T:Test.API.DAL.Repositories.WorkOrderRepository">
-            <summary>
-            The repository for WorkOrders in the data access layer.
-            </summary>
-        </member>
-        <member name="M:Test.API.DAL.Repositories.WorkOrderRepository.#ctor(Test.API.DAL.TestContext)">
-            <summary>
-            The constructor of the WorkOrder repository.
+            The constructor of the Supplier repository.
             </summary>
         </member>
         <member name="T:Test.API.Models.Account">
@@ -579,9 +433,9 @@
             The Name property of Account.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.Email">
+        <member name="P:Test.API.Models.Account.Website">
             <summary>
-            The Email property of Account.
+            The Website property of Account.
             </summary>
         </member>
         <member name="P:Test.API.Models.Account.Telephone">
@@ -589,49 +443,19 @@
             The Telephone property of Account.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.Fax">
+        <member name="P:Test.API.Models.Account.Email">
             <summary>
-            The Fax property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.Website">
-            <summary>
-            The Website property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.VATNumber">
-            <summary>
-            The VATNumber property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.Description">
-            <summary>
-            The Description property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.AddressId">
-            <summary>
-            The AddressId property of Account.
+            The Email property of Account.
             </summary>
         </member>
         <member name="P:Test.API.Models.Account.ParentAccountId">
             <summary>
-            The ParentAccountId property of Account.
+            The related foreign key ParentAccountId for ParentAccount of Account.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Account.BillingAccountId">
+        <member name="P:Test.API.Models.Account.ParentAccount">
             <summary>
-            The BillingAccountId property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.RelationTypeId">
-            <summary>
-            The RelationTypeId property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Account.PrimaryContactId">
-            <summary>
-            The PrimaryContactId property of Account.
+            The related ParentAccount of Account.
             </summary>
         </member>
         <member name="P:Test.API.Models.Account.CreatedOn">
@@ -669,327 +493,272 @@
             The user who last modified the record
             </summary>
         </member>
-        <member name="T:Test.API.Models.Address">
+        <member name="T:Test.API.Models.Product">
             <summary>
-            Address model
+            Product model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Id">
+        <member name="P:Test.API.Models.Product.Id">
             <summary>
-            The identifier of Address.
+            The identifier of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Street">
+        <member name="P:Test.API.Models.Product.Name">
             <summary>
-            The Street property of Address.
+            The Name property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Number">
+        <member name="P:Test.API.Models.Product.Code">
             <summary>
-            The Number property of Address.
+            The Code property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.City">
+        <member name="P:Test.API.Models.Product.Quantity">
             <summary>
-            The City property of Address.
+            The Quantity property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.State">
+        <member name="P:Test.API.Models.Product.Price">
             <summary>
-            The State property of Address.
+            The Price property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.PostalCode">
+        <member name="P:Test.API.Models.Product.Active">
             <summary>
-            The PostalCode property of Address.
+            The Active property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Latitude">
+        <member name="P:Test.API.Models.Product.Details">
             <summary>
-            The Latitude property of Address.
+            The related Details of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.Longitude">
+        <member name="P:Test.API.Models.Product.ProductSupplier">
             <summary>
-            The Longitude property of Address.
+            The related Suppliers of Product.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.CountryId">
-            <summary>
-            The CountryId property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Address.CreatedOn">
+        <member name="P:Test.API.Models.Product.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.ModifiedOn">
+        <member name="P:Test.API.Models.Product.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.DeletedOn">
+        <member name="P:Test.API.Models.Product.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.CreatedByUserId">
+        <member name="P:Test.API.Models.Product.CreatedByUserId">
             <summary>
             The Id of the user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.CreatedByUser">
+        <member name="P:Test.API.Models.Product.CreatedByUser">
             <summary>
             The user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.ModifiedByUserId">
+        <member name="P:Test.API.Models.Product.ModifiedByUserId">
             <summary>
             The Id of the user who last modified the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Address.ModifiedByUser">
+        <member name="P:Test.API.Models.Product.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
         </member>
-        <member name="T:Test.API.Models.Contact">
+        <member name="T:Test.API.Models.ProductDetail">
             <summary>
-            Contact model
+            ProductDetail model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.Id">
+        <member name="P:Test.API.Models.ProductDetail.Id">
             <summary>
-            The identifier of Contact.
+            The identifier of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.LastName">
+        <member name="P:Test.API.Models.ProductDetail.Comment">
             <summary>
-            The LastName property of Contact.
+            The Comment property of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.AccountId">
+        <member name="P:Test.API.Models.ProductDetail.ProductId">
             <summary>
-            The AccountId property of Contact.
+            The related foreign key ProductId for Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.FirstName">
+        <member name="P:Test.API.Models.ProductDetail.Product">
             <summary>
-            The FirstName property of Contact.
+            The related Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.JobTitle">
-            <summary>
-            The JobTitle property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.Email">
-            <summary>
-            The Email property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.Telephone">
-            <summary>
-            The Telephone property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.MobilePhone">
-            <summary>
-            The MobilePhone property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.Gender">
-            <summary>
-            The Gender property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Contact.CreatedOn">
+        <member name="P:Test.API.Models.ProductDetail.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.ModifiedOn">
+        <member name="P:Test.API.Models.ProductDetail.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.DeletedOn">
+        <member name="P:Test.API.Models.ProductDetail.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.CreatedByUserId">
+        <member name="P:Test.API.Models.ProductDetail.CreatedByUserId">
             <summary>
             The Id of the user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.CreatedByUser">
+        <member name="P:Test.API.Models.ProductDetail.CreatedByUser">
             <summary>
             The user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.ModifiedByUserId">
+        <member name="P:Test.API.Models.ProductDetail.ModifiedByUserId">
             <summary>
             The Id of the user who last modified the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Contact.ModifiedByUser">
+        <member name="P:Test.API.Models.ProductDetail.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
         </member>
-        <member name="T:Test.API.Models.Country">
+        <member name="T:Test.API.Models.ProductSupplier">
             <summary>
-            Country model
+            ProductSupplier model
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.Id">
+        <member name="P:Test.API.Models.ProductSupplier.Id">
             <summary>
-            The identifier of Country.
+            The identifier of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.Name">
+        <member name="P:Test.API.Models.ProductSupplier.Comment">
             <summary>
-            The Name property of Country.
+            The Comment property of ProductSupplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.CreatedOn">
+        <member name="P:Test.API.Models.ProductSupplier.ProductId">
+            <summary>
+            The related foreign key ProductId for Product of ProductSupplier.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductSupplier.Product">
+            <summary>
+            The related Product of ProductSupplier.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductSupplier.SupplierId">
+            <summary>
+            The related foreign key SupplierId for Supplier of ProductSupplier.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductSupplier.Supplier">
+            <summary>
+            The related Supplier of ProductSupplier.
+            </summary>
+        </member>
+        <member name="P:Test.API.Models.ProductSupplier.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.ModifiedOn">
+        <member name="P:Test.API.Models.ProductSupplier.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.DeletedOn">
+        <member name="P:Test.API.Models.ProductSupplier.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.CreatedByUserId">
+        <member name="P:Test.API.Models.ProductSupplier.CreatedByUserId">
             <summary>
             The Id of the user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.CreatedByUser">
+        <member name="P:Test.API.Models.ProductSupplier.CreatedByUser">
             <summary>
             The user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.ModifiedByUserId">
+        <member name="P:Test.API.Models.ProductSupplier.ModifiedByUserId">
             <summary>
             The Id of the user who last modified the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.Country.ModifiedByUser">
+        <member name="P:Test.API.Models.ProductSupplier.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
         </member>
-        <member name="T:Test.API.Models.RelationType">
+        <member name="T:Test.API.Models.Supplier">
             <summary>
-            RelationType model
+            Supplier model
             </summary>
         </member>
-        <member name="P:Test.API.Models.RelationType.Id">
+        <member name="P:Test.API.Models.Supplier.Id">
             <summary>
-            The identifier of RelationType.
+            The identifier of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.RelationType.Name">
+        <member name="P:Test.API.Models.Supplier.Name">
             <summary>
-            The Name property of RelationType.
+            The Name property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.RelationType.CreatedOn">
+        <member name="P:Test.API.Models.Supplier.Phone">
             <summary>
-            The date and time of when the record is created
+            The Phone property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.RelationType.ModifiedOn">
+        <member name="P:Test.API.Models.Supplier.ProductSupplier">
             <summary>
-            The date and time of when the record is modified
+            The related Products of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.Models.RelationType.DeletedOn">
-            <summary>
-            The date and time of when the record is (soft) deleted
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.RelationType.CreatedByUserId">
-            <summary>
-            The Id of the user who created the record
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.RelationType.CreatedByUser">
-            <summary>
-            The user who created the record
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.RelationType.ModifiedByUserId">
-            <summary>
-            The Id of the user who last modified the record
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.RelationType.ModifiedByUser">
-            <summary>
-            The user who last modified the record
-            </summary>
-        </member>
-        <member name="T:Test.API.Models.WorkOrder">
-            <summary>
-            WorkOrder model
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.WorkOrder.Id">
-            <summary>
-            The identifier of WorkOrder.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.WorkOrder.Date">
-            <summary>
-            The Date property of WorkOrder.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.WorkOrder.AccountId">
-            <summary>
-            The AccountId property of WorkOrder.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.WorkOrder.CreatedOn">
+        <member name="P:Test.API.Models.Supplier.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.Models.WorkOrder.ModifiedOn">
+        <member name="P:Test.API.Models.Supplier.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.Models.WorkOrder.DeletedOn">
+        <member name="P:Test.API.Models.Supplier.DeletedOn">
             <summary>
             The date and time of when the record is (soft) deleted
             </summary>
         </member>
-        <member name="P:Test.API.Models.WorkOrder.CreatedByUserId">
+        <member name="P:Test.API.Models.Supplier.CreatedByUserId">
             <summary>
             The Id of the user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.WorkOrder.CreatedByUser">
+        <member name="P:Test.API.Models.Supplier.CreatedByUser">
             <summary>
             The user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.WorkOrder.ModifiedByUserId">
+        <member name="P:Test.API.Models.Supplier.ModifiedByUserId">
             <summary>
             The Id of the user who last modified the record
             </summary>
         </member>
-        <member name="P:Test.API.Models.WorkOrder.ModifiedByUser">
+        <member name="P:Test.API.Models.Supplier.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
@@ -1009,9 +778,9 @@
             The Name property of Account.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Email">
+        <member name="P:Test.API.ViewModels.AccountVM.Website">
             <summary>
-            The Email property of Account.
+            The Website property of Account.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.AccountVM.Telephone">
@@ -1019,49 +788,19 @@
             The Telephone property of Account.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Fax">
+        <member name="P:Test.API.ViewModels.AccountVM.Email">
             <summary>
-            The Fax property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Website">
-            <summary>
-            The Website property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.VATNumber">
-            <summary>
-            The VATNumber property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.Description">
-            <summary>
-            The Description property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.AddressId">
-            <summary>
-            The AddressId property of Account.
+            The Email property of Account.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.AccountVM.ParentAccountId">
             <summary>
-            The ParentAccountId property of Account.
+            The related foreign key ParentAccountId for ParentAccount of Account.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AccountVM.BillingAccountId">
+        <member name="P:Test.API.ViewModels.AccountVM.ParentAccount">
             <summary>
-            The BillingAccountId property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.RelationTypeId">
-            <summary>
-            The RelationTypeId property of Account.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AccountVM.PrimaryContactId">
-            <summary>
-            The PrimaryContactId property of Account.
+            The related ParentAccount of Account.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.AccountVM.CreatedOn">
@@ -1094,302 +833,187 @@
             The user who last modified the record
             </summary>
         </member>
-        <member name="T:Test.API.ViewModels.AddressVM">
+        <member name="T:Test.API.ViewModels.ProductDetailVM">
             <summary>
-            Address view model
+            ProductDetail view model
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Id">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.Id">
             <summary>
-            The identifier of Address.
+            The identifier of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Street">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.Comment">
             <summary>
-            The Street property of Address.
+            The Comment property of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Number">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ProductId">
             <summary>
-            The Number property of Address.
+            The related foreign key ProductId for Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.City">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.Product">
             <summary>
-            The City property of Address.
+            The related Product of ProductDetail.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.State">
-            <summary>
-            The State property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.PostalCode">
-            <summary>
-            The PostalCode property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Latitude">
-            <summary>
-            The Latitude property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.Longitude">
-            <summary>
-            The Longitude property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.CountryId">
-            <summary>
-            The CountryId property of Address.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.AddressVM.CreatedOn">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.ModifiedOn">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.CreatedByUserId">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.CreatedByUserId">
             <summary>
             The Id of the user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.CreatedByUser">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.CreatedByUser">
             <summary>
             The user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.ModifiedByUserId">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ModifiedByUserId">
             <summary>
             The Id of the user who last modified the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.AddressVM.ModifiedByUser">
+        <member name="P:Test.API.ViewModels.ProductDetailVM.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
         </member>
-        <member name="T:Test.API.ViewModels.ContactVM">
+        <member name="T:Test.API.ViewModels.ProductVM">
             <summary>
-            Contact view model
+            Product view model
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Id">
+        <member name="P:Test.API.ViewModels.ProductVM.Id">
             <summary>
-            The identifier of Contact.
+            The identifier of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.LastName">
+        <member name="P:Test.API.ViewModels.ProductVM.Name">
             <summary>
-            The LastName property of Contact.
+            The Name property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.AccountId">
+        <member name="P:Test.API.ViewModels.ProductVM.Code">
             <summary>
-            The AccountId property of Contact.
+            The Code property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.FirstName">
+        <member name="P:Test.API.ViewModels.ProductVM.Quantity">
             <summary>
-            The FirstName property of Contact.
+            The Quantity property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.JobTitle">
+        <member name="P:Test.API.ViewModels.ProductVM.Price">
             <summary>
-            The JobTitle property of Contact.
+            The Price property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Email">
+        <member name="P:Test.API.ViewModels.ProductVM.Active">
             <summary>
-            The Email property of Contact.
+            The Active property of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Telephone">
+        <member name="P:Test.API.ViewModels.ProductVM.Details">
             <summary>
-            The Telephone property of Contact.
+            The related Details of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.MobilePhone">
+        <member name="P:Test.API.ViewModels.ProductVM.Suppliers">
             <summary>
-            The MobilePhone property of Contact.
+            The related Suppliers of Product.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.Gender">
-            <summary>
-            The Gender property of Contact.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.ContactVM.CreatedOn">
+        <member name="P:Test.API.ViewModels.ProductVM.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.ModifiedOn">
+        <member name="P:Test.API.ViewModels.ProductVM.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.CreatedByUserId">
+        <member name="P:Test.API.ViewModels.ProductVM.CreatedByUserId">
             <summary>
             The Id of the user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.CreatedByUser">
+        <member name="P:Test.API.ViewModels.ProductVM.CreatedByUser">
             <summary>
             The user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.ModifiedByUserId">
+        <member name="P:Test.API.ViewModels.ProductVM.ModifiedByUserId">
             <summary>
             The Id of the user who last modified the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.ContactVM.ModifiedByUser">
+        <member name="P:Test.API.ViewModels.ProductVM.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
         </member>
-        <member name="T:Test.API.ViewModels.CountryVM">
+        <member name="T:Test.API.ViewModels.SupplierVM">
             <summary>
-            Country view model
+            Supplier view model
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.CountryVM.Id">
+        <member name="P:Test.API.ViewModels.SupplierVM.Id">
             <summary>
-            The identifier of Country.
+            The identifier of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.CountryVM.Name">
+        <member name="P:Test.API.ViewModels.SupplierVM.Name">
             <summary>
-            The Name property of Country.
+            The Name property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.CountryVM.CreatedOn">
+        <member name="P:Test.API.ViewModels.SupplierVM.Phone">
             <summary>
-            The date and time of when the record is created
+            The Phone property of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.CountryVM.ModifiedOn">
+        <member name="P:Test.API.ViewModels.SupplierVM.Products">
             <summary>
-            The date and time of when the record is modified
+            The related Products of Supplier.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.CountryVM.CreatedByUserId">
-            <summary>
-            The Id of the user who created the record
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.CountryVM.CreatedByUser">
-            <summary>
-            The user who created the record
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.CountryVM.ModifiedByUserId">
-            <summary>
-            The Id of the user who last modified the record
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.CountryVM.ModifiedByUser">
-            <summary>
-            The user who last modified the record
-            </summary>
-        </member>
-        <member name="T:Test.API.ViewModels.RelationTypeVM">
-            <summary>
-            RelationType view model
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.Id">
-            <summary>
-            The identifier of RelationType.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.Name">
-            <summary>
-            The Name property of RelationType.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.CreatedOn">
+        <member name="P:Test.API.ViewModels.SupplierVM.CreatedOn">
             <summary>
             The date and time of when the record is created
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.ModifiedOn">
+        <member name="P:Test.API.ViewModels.SupplierVM.ModifiedOn">
             <summary>
             The date and time of when the record is modified
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.CreatedByUserId">
+        <member name="P:Test.API.ViewModels.SupplierVM.CreatedByUserId">
             <summary>
             The Id of the user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.CreatedByUser">
+        <member name="P:Test.API.ViewModels.SupplierVM.CreatedByUser">
             <summary>
             The user who created the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.ModifiedByUserId">
+        <member name="P:Test.API.ViewModels.SupplierVM.ModifiedByUserId">
             <summary>
             The Id of the user who last modified the record
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.RelationTypeVM.ModifiedByUser">
-            <summary>
-            The user who last modified the record
-            </summary>
-        </member>
-        <member name="T:Test.API.ViewModels.WorkOrderVM">
-            <summary>
-            WorkOrder view model
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.Id">
-            <summary>
-            The identifier of WorkOrder.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.Date">
-            <summary>
-            The Date property of WorkOrder.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.AccountId">
-            <summary>
-            The AccountId property of WorkOrder.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.CreatedOn">
-            <summary>
-            The date and time of when the record is created
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.ModifiedOn">
-            <summary>
-            The date and time of when the record is modified
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.CreatedByUserId">
-            <summary>
-            The Id of the user who created the record
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.CreatedByUser">
-            <summary>
-            The user who created the record
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.ModifiedByUserId">
-            <summary>
-            The Id of the user who last modified the record
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.WorkOrderVM.ModifiedByUser">
+        <member name="P:Test.API.ViewModels.SupplierVM.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>

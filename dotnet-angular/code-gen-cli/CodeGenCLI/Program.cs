@@ -75,6 +75,7 @@ namespace CodeGenCLI
                         Name = Config.Name ?? "Generated",
                         Description = Config.Description,
                         Override = Config.Override,
+                        Authentication = Config.Authentication ?? new CodeGenConfigAuthentication(),
                         Models = new List<CodeGenModel>(),
                         WebAPI = Config.WebAPI ?? new CodeGenConfigWebAPI(),
                         Angular = Config.Angular ?? new CodeGenConfigAngular()
@@ -134,7 +135,8 @@ namespace CodeGenCLI
                             CodeGenModel newCodeGenModel = new CodeGenModel()
                             {
                                 Name = TextInfo.ToTitleCase(databaseTableName).ToSingular(),
-                                NamePlural = databaseTableName,
+                                NamePlural = TextInfo.ToTitleCase(databaseTableName),
+                                DatabaseTableName = databaseTableName,
                                 Properties = new List<CodeGenModelProperty>()
                             };
 
@@ -142,7 +144,8 @@ namespace CodeGenCLI
                                 databaseTableColumns[databaseTableName].Select(dtc => new CodeGenModelProperty() {
                                     Name = dtc[3].ToString(),
                                     Type = dtc[7].ToString().ToCSharpDataType(),
-                                    //Required = dtc[6] // TODO
+                                    Required = dtc[6].ToString() == "NO",
+                                    DatabaseFieldName = dtc[3].ToString(),
                                 }).ToList();
 
                             newCodeGenModel.Properties = newCodeGenModelProperties;
