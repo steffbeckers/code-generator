@@ -129,17 +129,19 @@ namespace Test.API
             });
 
             // Repositories
-			services.AddScoped<AccountRepository>();
 			services.AddScoped<ProductRepository>();
-			services.AddScoped<SupplierRepository>();
-			services.AddScoped<ProductDetailRepository>();
-			services.AddScoped<ProductSupplierRepository>();
+			services.AddScoped<CartRepository>();
+			services.AddScoped<CartProductRepository>();
+			services.AddScoped<OrderRepository>();
+			services.AddScoped<OrderStateRepository>();
+			services.AddScoped<AddressRepository>();
 
 			// BLLs
-			services.AddScoped<AccountBLL>();
 			services.AddScoped<ProductBLL>();
-			services.AddScoped<SupplierBLL>();
-			services.AddScoped<ProductDetailBLL>();
+			services.AddScoped<CartBLL>();
+			services.AddScoped<OrderBLL>();
+			services.AddScoped<OrderStateBLL>();
+			services.AddScoped<AddressBLL>();
             services.AddScoped<AuthBLL>();
 
             // Services
@@ -342,62 +344,6 @@ namespace Test.API
 
                 Task<IdentityResult> createAdminRole = roleManager.CreateAsync(newAdminRole);
                 createAdminRole.Wait();
-            }
-
-            Task<IdentityRole<Guid>> itRole = roleManager.FindByNameAsync("IT");
-            itRole.Wait();
-            if (itRole.Result == null)
-            {
-                IdentityRole<Guid> newITRole = new IdentityRole<Guid>()
-                {
-                    Name = "IT",
-                    NormalizedName = "IT"
-                };
-
-                Task<IdentityResult> createITRole = roleManager.CreateAsync(newITRole);
-                createITRole.Wait();
-            }
-
-            Task<IdentityRole<Guid>> salesRole = roleManager.FindByNameAsync("Sales");
-            salesRole.Wait();
-            if (salesRole.Result == null)
-            {
-                IdentityRole<Guid> newSalesRole = new IdentityRole<Guid>()
-                {
-                    Name = "Sales",
-                    NormalizedName = "SALES"
-                };
-
-                Task<IdentityResult> createSalesRole = roleManager.CreateAsync(newSalesRole);
-                createSalesRole.Wait();
-            }
-
-            Task<IdentityRole<Guid>> hrRole = roleManager.FindByNameAsync("HR");
-            hrRole.Wait();
-            if (hrRole.Result == null)
-            {
-                IdentityRole<Guid> newHRRole = new IdentityRole<Guid>()
-                {
-                    Name = "HR",
-                    NormalizedName = "HR"
-                };
-
-                Task<IdentityResult> createHRRole = roleManager.CreateAsync(newHRRole);
-                createHRRole.Wait();
-            }
-
-            Task<IdentityRole<Guid>> ceoRole = roleManager.FindByNameAsync("CEO");
-            ceoRole.Wait();
-            if (ceoRole.Result == null)
-            {
-                IdentityRole<Guid> newCEORole = new IdentityRole<Guid>()
-                {
-                    Name = "CEO",
-                    NormalizedName = "CEO"
-                };
-
-                Task<IdentityResult> createCEORole = roleManager.CreateAsync(newCEORole);
-                createCEORole.Wait();
             }
 
             // Default admin user
