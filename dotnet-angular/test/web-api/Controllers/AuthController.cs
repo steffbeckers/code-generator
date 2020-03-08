@@ -20,6 +20,10 @@ namespace Test.API.Controllers
         private readonly IMapper mapper;
         private readonly AuthBLL bll;
 
+        // #-#-#
+        // TEST
+        // #-#-#
+
         /// <summary>
         /// The constructor of the Auth controller.
         /// </summary>
