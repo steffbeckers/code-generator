@@ -65,8 +65,9 @@ namespace Test.API.BLL
             if (!string.IsNullOrEmpty(account.Email))
                 account.Email = account.Email.Trim();
 
-			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
-			// Before creation
+            // #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
+            // Before creation
+            account.Name = "Test";
 			// #-#-#
 
 			account = await this.accountRepository.InsertAsync(account);
