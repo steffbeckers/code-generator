@@ -37,7 +37,7 @@ namespace Test.API.DAL
                                 new CartProduct()
                                 {
                                     CartId = (Guid)y.CartId,
-                                    Quantity = y.CartQuantity
+                                    Quantity = y.CartQuantity,
                                     Price = y.CartPrice
                                 }
                             }
@@ -64,7 +64,7 @@ namespace Test.API.DAL
                                 new CartProduct()
                                 {
                                     ProductId = (Guid)y.ProductId,
-                                    Quantity = y.ProductQuantity
+                                    Quantity = y.ProductQuantity,
                                     Price = y.ProductPrice
                                 }
                             }

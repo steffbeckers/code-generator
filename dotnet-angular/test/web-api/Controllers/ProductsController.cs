@@ -120,6 +120,46 @@ namespace Test.API.Controllers
 			return Ok(this.mapper.Map<Product, ProductVM>(product));
         }
 
+        // PUT: api/products/carts/link
+		/// <summary>
+		/// Links a specific cart to product.
+		/// </summary>
+		/// <param name="cartProduct"></param>
+        [HttpPut("Carts/Link")]
+        public async Task<ActionResult<ProductVM>> LinkCartToProduct([FromBody] CartProduct cartProduct)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Product product = await this.bll.LinkCartToProductAsync(cartProduct);
+
+            // Mapping
+            return Ok(this.mapper.Map<Product, ProductVM>(product));
+        }
+
+        // PUT: api/products/carts/unlink
+		/// <summary>
+		/// Unlinks a specific cart from product.
+		/// </summary>
+		/// <param name="cartProduct"></param>
+        [HttpPut("Carts/Unlink")]
+        public async Task<ActionResult<ProductVM>> UnlinkCartFromProduct([FromBody] CartProduct cartProduct)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Product product = await this.bll.UnlinkCartFromProductAsync(cartProduct);
+
+            // Mapping
+            return Ok(this.mapper.Map<Product, ProductVM>(product));
+        }
+
         // DELETE: api/products/{id}
 		/// <summary>
 		/// Deletes a specific product.

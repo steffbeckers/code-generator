@@ -62,6 +62,42 @@ namespace Test.API.GraphQL
             );
 
             FieldAsync<ProductType>(
+                "linkCartToProduct",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<CartProductInputType>>
+                    {
+                        Name = "cartProduct"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    CartProduct cartProduct = context.GetArgument<CartProduct>("cartProduct");
+
+                    return await context.TryAsyncResolve(
+                        async c => await productBLL.LinkCartToProductAsync(cartProduct)
+                    );
+                }
+            );
+
+            FieldAsync<ProductType>(
+                "unlinkCartFromProduct",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<CartProductInputType>>
+                    {
+                        Name = "cartProduct"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    CartProduct cartProduct = context.GetArgument<CartProduct>("cartProduct");
+
+                    return await context.TryAsyncResolve(
+                        async c => await productBLL.UnlinkCartFromProductAsync(cartProduct)
+                    );
+                }
+            );
+
+            FieldAsync<ProductType>(
                 "removeProduct",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>>

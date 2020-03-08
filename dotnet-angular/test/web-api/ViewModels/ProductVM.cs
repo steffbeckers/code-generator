@@ -12,6 +12,10 @@ namespace Test.API.ViewModels
     {
 		public ProductVM()
         {
+            // Relations
+
+			//// Many-to-many
+			this.Carts = new List<CartVM>();
         }
 
 		// Properties
@@ -37,6 +41,19 @@ namespace Test.API.ViewModels
         /// </summary>
 		public double Price { get; set; }
 
+		// Relations
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Carts of Product.
+        /// </summary>
+		public IList<CartVM> Carts { get; set; }
+
+        ////// To create a link with Cart directly on create of Product.
+        public Guid? CartId { get; set; }
+        public int CartQuantity { get; set; }
+        public double CartPrice { get; set; }
 
 		// Generic properties
 

@@ -177,9 +177,6 @@ namespace Test.API.DAL
 			// Key
 			modelBuilder.Entity<Order>().HasKey(e => e.Id);
 
-            // Required properties
-            modelBuilder.Entity<Order>().Property(e => e.OrderStateId).IsRequired();
-
             // User
             modelBuilder.Entity<Order>()
                 .HasOne(x => x.CreatedByUser)

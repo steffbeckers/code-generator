@@ -12,15 +12,21 @@ namespace Test.API.BLL
     public class ProductBLL
     {
         private readonly ProductRepository productRepository;
+        private readonly CartRepository cartRepository;
+        private readonly CartProductRepository cartProductRepository;
 
 		/// <summary>
 		/// The constructor of the Product business logic layer.
 		/// </summary>
         public ProductBLL(
-			ProductRepository productRepository
+			ProductRepository productRepository,
+            CartRepository cartRepository,
+			CartProductRepository cartProductRepository
 		)
         {
             this.productRepository = productRepository;
+            this.cartRepository = cartRepository;
+			this.cartProductRepository = cartProductRepository;
         }
 
 		/// <summary>
@@ -111,6 +117,60 @@ namespace Test.API.BLL
 			// #-#-#
 
             return product;
+        }
+
+        public async Task<Product> LinkCartToProductAsync(CartProduct cartProduct)
+        {
+            // Validation
+            if (cartProduct == null) { return null; }
+
+            // Check if product exists
+            Product product = await this.productRepository.GetByIdAsync(cartProduct.ProductId);
+            if (product == null)
+            {
+                return null;
+            }
+
+            // Check if cart exists
+            Cart cart = await this.cartRepository.GetByIdAsync(cartProduct.CartId);
+            if (cart == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
+            CartProduct cartProductLink = this.cartProductRepository.GetByProductAndCartId(cartProduct.ProductId, cartProduct.CartId);
+
+            if (cartProductLink == null)
+            {
+                await this.cartProductRepository.InsertAsync(cartProduct);
+            }
+            else
+            {
+                // Mapping of fields on many-to-many
+                cartProductLink.Quantity = cartProduct.Quantity;
+                cartProductLink.Price = cartProduct.Price;
+
+                await this.cartProductRepository.UpdateAsync(cartProductLink);
+            }
+
+            return await this.GetProductByIdAsync(cartProduct.ProductId);
+        }
+
+        public async Task<Product> UnlinkCartFromProductAsync(CartProduct cartProduct)
+        {
+            // Validation
+            if (cartProduct == null) { return null; }
+
+            // Retrieve existing link
+            CartProduct cartProductLink = this.cartProductRepository.GetByProductAndCartId(cartProduct.ProductId, cartProduct.CartId);
+		
+            if (cartProductLink != null)
+            {
+                await this.cartProductRepository.DeleteAsync(cartProductLink);
+            }
+
+            return await this.GetProductByIdAsync(cartProduct.ProductId);
         }
 
 		/// <summary>

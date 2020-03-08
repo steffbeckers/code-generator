@@ -10,6 +10,10 @@ namespace Test.API.Models
     {
 		public Product()
         {
+            // Relations
+
+			//// Many-to-many
+			this.CartProduct = new List<CartProduct>();
         }
 
 		// Properties
@@ -34,6 +38,14 @@ namespace Test.API.Models
         /// </summary>
 		public double Price { get; set; }
 
+		// Relations
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Carts of Product.
+        /// </summary>
+		public IList<CartProduct> CartProduct { get; set; }
 
 		// Generic properties
 
