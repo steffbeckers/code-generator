@@ -574,25 +574,52 @@ namespace CodeGenCLI
                     //gitDiffOut.WaitForExit();
 
 
-                    //Console.WriteLine();
-                    //Console.WriteLine("### git checkout -p ###");
+                    Console.WriteLine();
+                    Console.WriteLine("### git checkout -p ###");
 
-                    //Process gitCheckoutP = new Process
-                    //{
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "git",
-                    //        Arguments = "checkout -p",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        RedirectStandardOutput = true,
-                    //        RedirectStandardInput = true,
-                    //        CreateNoWindow = true,
-                    //        UseShellExecute = false
-                    //    }
-                    //};
+                    Process gitCheckoutP = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "git",
+                            Arguments = "checkout -p",
+                            WorkingDirectory = Config.WebAPI.ProjectPath,
+                            RedirectStandardOutput = true,
+                            //RedirectStandardInput = true,
+                            CreateNoWindow = true,
+                            UseShellExecute = false
+                        }
+                    };
 
-                    //gitCheckoutP.Start();
+                    gitCheckoutP.Start();
 
+                    string line;
+                    string currentHunk = string.Empty;
+
+                    while ((line = gitCheckoutP.StandardOutput.ReadLine()) != null)
+                    {
+                        Console.WriteLine(line);
+
+                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                        {
+                            if (currentHunk.Contains("#-#-#"))
+                            {
+                                gitCheckoutP.StandardInput.WriteLine("y");
+                                currentHunk = string.Empty;
+                            }
+                            else
+                            {
+                                gitCheckoutP.StandardInput.WriteLine("n");
+                                currentHunk = string.Empty;
+                            }
+                        }
+                        else
+                        {
+                            currentHunk += line + Environment.NewLine;
+                        }
+                    }
+
+                    gitCheckoutP.WaitForExit();
 
                     //bool watchingOutput = true;
                     //string currentHunk = string.Empty;
