@@ -10,6 +10,10 @@ namespace Test.API.Models
     {
 		public Order()
         {
+            // Relations
+
+			//// One-to-many
+			this.OrderState = new List<OrderState>();
         }
 
 		// Properties
@@ -34,6 +38,14 @@ namespace Test.API.Models
         /// </summary>
 		public double TotalPrice { get; set; }
 
+		// Relations
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related OrderState of Order.
+        /// </summary>
+		public IList<OrderState> OrderState { get; set; }
 
 		// Generic properties
 

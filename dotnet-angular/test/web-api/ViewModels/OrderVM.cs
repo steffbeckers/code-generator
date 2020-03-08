@@ -12,6 +12,10 @@ namespace Test.API.ViewModels
     {
 		public OrderVM()
         {
+            // Relations
+
+			//// One-to-many
+			this.OrderState = new List<OrderStateVM>();
         }
 
 		// Properties
@@ -36,6 +40,14 @@ namespace Test.API.ViewModels
         /// </summary>
 		public double TotalPrice { get; set; }
 
+		// Relations
+
+		//// One-to-many
+
+		/// <summary>
+        /// The related OrderState of Order.
+        /// </summary>
+		public IList<OrderStateVM> OrderState { get; set; }
 
 		// Generic properties
 

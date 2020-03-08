@@ -28,6 +28,7 @@ namespace Test.API.DAL.Repositories
 		public async Task<IEnumerable<Order>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Orders
+                .Include(x => x.OrderState)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .ToListAsync();
@@ -36,6 +37,7 @@ namespace Test.API.DAL.Repositories
 		public async Task<Order> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Orders
+                .Include(x => x.OrderState)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
