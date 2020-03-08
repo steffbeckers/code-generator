@@ -433,6 +433,11 @@
             The Name property of Account.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Account.Description">
+            <summary>
+            The Description property of Account.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Account.Website">
             <summary>
             The Website property of Account.
@@ -776,6 +781,11 @@
         <member name="P:Test.API.ViewModels.AccountVM.Name">
             <summary>
             The Name property of Account.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.AccountVM.Description">
+            <summary>
+            The Description property of Account.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.AccountVM.Website">
