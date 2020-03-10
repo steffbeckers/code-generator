@@ -13,7 +13,7 @@ namespace Test.API.Models
             // Relations
 
 			//// One-to-many
-			this.Order = new List<Order>();
+			this.Orders = new List<Order>();
         }
 
 		// Properties
@@ -38,9 +38,9 @@ namespace Test.API.Models
 		//// One-to-many
 
 		/// <summary>
-        /// The related Order of OrderState.
+        /// The related Orders of OrderState.
         /// </summary>
-		public IList<Order> Order { get; set; }
+		public IList<Order> Orders { get; set; }
 
 		// Generic properties
 
