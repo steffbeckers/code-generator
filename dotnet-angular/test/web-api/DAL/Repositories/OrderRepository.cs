@@ -42,5 +42,20 @@ namespace Test.API.DAL.Repositories
                 .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public IEnumerable<Order> GetByOrderStateId(Guid orderStateId)
+        {
+            return this.context.Orders
+                .Where(t => t.OrderStateId == orderStateId)
+                .ToList();
+        }
+        
+        //// Async test
+        //public async Task<IEnumerable<Order>> GetByOrderStateIdAsync(Guid orderStateId)
+        //{
+        //    return await this.context.Orders
+        //        .Where(t => t.OrderStateId == orderStateId)
+        //        .ToListAsync();
+        //}
     }
 }

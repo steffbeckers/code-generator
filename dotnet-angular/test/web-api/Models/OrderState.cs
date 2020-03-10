@@ -11,6 +11,9 @@ namespace Test.API.Models
 		public OrderState()
         {
             // Relations
+
+			//// One-to-many
+			this.Order = new List<Order>();
         }
 
 		// Properties
@@ -32,18 +35,12 @@ namespace Test.API.Models
 
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key OrderId for Order of OrderState.
-        /// </summary>
-		public Guid OrderId { get; set; }
+		//// One-to-many
 
 		/// <summary>
         /// The related Order of OrderState.
         /// </summary>
-		public Order Order { get; set; }
-
+		public IList<Order> Order { get; set; }
 
 		// Generic properties
 

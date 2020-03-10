@@ -98,7 +98,6 @@ namespace Test.API.BLL
             // Mapping
             orderState.Name = orderStateUpdate.Name;
             orderState.DisplayName = orderStateUpdate.DisplayName;
-            orderState.OrderId = orderStateUpdate.OrderId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

@@ -11,6 +11,7 @@ namespace Test.API.GraphQL.Types
 		    Field<StringGraphType>("number");
 		    Field<StringGraphType>("description");
 		    Field<FloatGraphType>("totalPrice");
+		    Field<NonNullGraphType<IdGraphType>>("orderStateId");
 
         }
     }

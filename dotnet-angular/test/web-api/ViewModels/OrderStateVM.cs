@@ -13,6 +13,9 @@ namespace Test.API.ViewModels
 		public OrderStateVM()
         {
             // Relations
+
+			//// One-to-many
+			this.Order = new List<OrderVM>();
         }
 
 		// Properties
@@ -35,18 +38,12 @@ namespace Test.API.ViewModels
 
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key OrderId for Order of OrderState.
-        /// </summary>
-		public Guid OrderId { get; set; }
+		//// One-to-many
 
 		/// <summary>
         /// The related Order of OrderState.
         /// </summary>
-		public OrderVM Order { get; set; }
-
+		public IList<OrderVM> Order { get; set; }
 
 		// Generic properties
 

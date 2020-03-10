@@ -99,6 +99,7 @@ namespace Test.API.BLL
             order.Number = orderUpdate.Number;
             order.Description = orderUpdate.Description;
             order.TotalPrice = orderUpdate.TotalPrice;
+            order.OrderStateId = orderUpdate.OrderStateId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

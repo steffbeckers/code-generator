@@ -16,28 +16,19 @@ namespace Test.API.GraphQL.Types
             Field(x => x.Name);
             Field(x => x.DisplayName, nullable: true);
 
-            Field<OrderType>(
-                "order",
-                resolve: context =>
-                {
-                    if (context.Source.OrderId != null)
-                        return orderRepository.GetById((Guid)context.Source.OrderId);
-                    return null;
-                }
+            Field<ListGraphType<OrderType>>(
+                "orders",
+                resolve: context => orderRepository.GetByOrderStateId(context.Source.Id)
             );
 
             //// Async test
-            //FieldAsync<OrderType>(
-            //    "order",
+            //FieldAsync<ListGraphType<OrderType>>(
+            //    "orders",
             //    resolve: async context =>
             //    {
-            //        if (context.Source.OrderId != null) {
-            //            return await context.TryAsyncResolve(
-            //                async c => await orderRepository.GetByIdAsync((Guid)context.Source.OrderId)
-            //            );
-            //        }
-            //        
-            //        return null;
+            //        return await context.TryAsyncResolve(
+            //            async c => await orderRepository.GetByOrderStateIdAsync(context.Source.Id)
+            //        );
             //    }
             //);
 
