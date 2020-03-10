@@ -206,7 +206,6 @@ namespace Test.API.DAL
 
             // Required properties
             modelBuilder.Entity<OrderState>().Property(e => e.Name).IsRequired();
-            modelBuilder.Entity<OrderState>().Property(e => e.OrderId).IsRequired();
 
             // User
             modelBuilder.Entity<OrderState>()

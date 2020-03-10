@@ -593,16 +593,6 @@
             The Name property of Cart.
             </summary>
         </member>
-        <member name="P:Test.API.Models.Cart.UserId">
-            <summary>
-            The related foreign key UserId for User of Cart.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.Cart.User">
-            <summary>
-            The related User of Cart.
-            </summary>
-        </member>
         <member name="P:Test.API.Models.Cart.CartProduct">
             <summary>
             The related Products of Cart.
@@ -743,6 +733,11 @@
             The TotalPrice property of Order.
             </summary>
         </member>
+        <member name="P:Test.API.Models.Order.OrderStateId">
+            <summary>
+            The related foreign key OrderStateId for OrderState of Order.
+            </summary>
+        </member>
         <member name="P:Test.API.Models.Order.OrderState">
             <summary>
             The related OrderState of Order.
@@ -803,14 +798,9 @@
             The DisplayName property of OrderState.
             </summary>
         </member>
-        <member name="P:Test.API.Models.OrderState.OrderId">
+        <member name="P:Test.API.Models.OrderState.Orders">
             <summary>
-            The related foreign key OrderId for Order of OrderState.
-            </summary>
-        </member>
-        <member name="P:Test.API.Models.OrderState.Order">
-            <summary>
-            The related Order of OrderState.
+            The related Orders of OrderState.
             </summary>
         </member>
         <member name="P:Test.API.Models.OrderState.CreatedOn">
@@ -993,16 +983,6 @@
             The Name property of Cart.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.CartVM.UserId">
-            <summary>
-            The related foreign key UserId for User of Cart.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.CartVM.User">
-            <summary>
-            The related User of Cart.
-            </summary>
-        </member>
         <member name="P:Test.API.ViewModels.CartVM.Products">
             <summary>
             The related Products of Cart.
@@ -1058,14 +1038,9 @@
             The DisplayName property of OrderState.
             </summary>
         </member>
-        <member name="P:Test.API.ViewModels.OrderStateVM.OrderId">
+        <member name="P:Test.API.ViewModels.OrderStateVM.Orders">
             <summary>
-            The related foreign key OrderId for Order of OrderState.
-            </summary>
-        </member>
-        <member name="P:Test.API.ViewModels.OrderStateVM.Order">
-            <summary>
-            The related Order of OrderState.
+            The related Orders of OrderState.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.OrderStateVM.CreatedOn">
@@ -1121,6 +1096,11 @@
         <member name="P:Test.API.ViewModels.OrderVM.TotalPrice">
             <summary>
             The TotalPrice property of Order.
+            </summary>
+        </member>
+        <member name="P:Test.API.ViewModels.OrderVM.OrderStateId">
+            <summary>
+            The related foreign key OrderStateId for OrderState of Order.
             </summary>
         </member>
         <member name="P:Test.API.ViewModels.OrderVM.OrderState">
