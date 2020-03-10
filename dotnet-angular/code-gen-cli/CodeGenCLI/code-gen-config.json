@@ -5,38 +5,6 @@
   "Override": true,
   "Models": [
     {
-      "Name": "Account",
-      "DisplayField": "Name",
-      "SortField": "Name",
-      "Properties": [
-        {
-          "Name": "Name",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "Website",
-          "Type": "string"
-        },
-        {
-          "Name": "Telephone",
-          "Type": "string"
-        },
-        {
-          "Name": "Email",
-          "DisplayName": "Email Address",
-          "Type": "string"
-        }
-      ],
-      "Relations": [
-        {
-          "Name": "ParentAccount",
-          "Type": "many-to-one",
-          "Model": "Account"
-        }
-      ]
-    },
-    {
       "Name": "Product",
       "Properties": [
         {
@@ -45,47 +13,30 @@
           "Required": true
         },
         {
-          "Name": "Code",
+          "Name": "Description",
           "Type": "string"
-        },
-        {
-          "Name": "Quantity",
-          "Type": "int"
         },
         {
           "Name": "Price",
           "Type": "double"
-        },
-        {
-          "Name": "Active",
-          "Type": "bool"
         }
       ],
       "Relations": [
         {
-          "Name": "Details",
-          "Type": "one-to-many",
-          "Model": "ProductDetail"
-        },
-        {
-          "Name": "Suppliers",
+          "Name": "Carts",
           "Type": "many-to-many",
-          "Model": "Supplier",
-          "Through": "ProductSupplier"
+          "Model": "Cart",
+          "Through": "CartProduct"
         }
       ]
     },
     {
-      "Name": "Supplier",
+      "Name": "Cart",
       "Properties": [
         {
           "Name": "Name",
           "Type": "string",
           "Required": true
-        },
-        {
-          "Name": "Phone",
-          "Type": "string"
         }
       ],
       "Relations": [
@@ -93,21 +44,33 @@
           "Name": "Products",
           "Type": "many-to-many",
           "Model": "Product",
-          "Through": "ProductSupplier"
+          "Through": "CartProduct"
         }
       ]
     },
     {
-      "Name": "ProductDetail",
+      "Name": "CartProduct",
+      "ManyToMany": true,
       "Properties": [
         {
-          "Name": "Comment",
-          "Type": "string",
+          "Name": "Quantity",
+          "Type": "int",
+          "Required": true
+        },
+        {
+          "Name": "Price",
+          "Type": "double",
           "Required": true
         }
       ],
       "Relations": [
         {
+          "Name": "Cart",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Cart"
+        },
+        {
           "Name": "Product",
           "Type": "many-to-one",
           "Required": true,
@@ -116,30 +79,223 @@
       ]
     },
     {
-      "Name": "ProductSupplier",
-      "ManyToMany": true,
+      "Name": "Order",
       "Properties": [
         {
-          "Name": "Comment",
+          "Name": "Number",
           "Type": "string"
-          //"Required": true
+        },
+        {
+          "Name": "Description",
+          "Type": "string"
+        },
+        {
+          "Name": "TotalPrice",
+          "Type": "double"
         }
       ],
       "Relations": [
         {
-          "Name": "Product",
+          "Name": "OrderState",
           "Type": "many-to-one",
           "Required": true,
-          "Model": "Product"
-        },
-        {
-          "Name": "Supplier",
-          "Type": "many-to-one",
-          "Required": true,
-          "Model": "Supplier"
+          "Model": "OrderState"
         }
       ]
+    },
+    {
+      "Name": "OrderState",
+      "Properties": [
+        {
+          "Name": "Name",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "DisplayName",
+          "Type": "string"
+        }
+      ],
+      "Relations": [
+        {
+          "Name": "Orders",
+          "Type": "one-to-many",
+          "Model": "Order"
+        }
+      ]
+    },
+    {
+      "Name": "Address",
+      "NamePlural": "Addresses",
+      "Properties": [
+        {
+          "Name": "Street",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "Number",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "PostalCode",
+          "DisplayName": "Postal Code",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "City",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "Primary",
+          "Type": "bool"
+        }
+      ],
+      "Relations": []
     }
+    //{
+    //  "Name": "Account",
+    //  "DisplayField": "Name",
+    //  "SortField": "Name",
+    //  "Properties": [
+    //    {
+    //      "Name": "Name",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Description",
+    //      "Type": "string"
+    //    },
+    //    {
+    //      "Name": "Website",
+    //      "Type": "string"
+    //    },
+    //    {
+    //      "Name": "Telephone",
+    //      "Type": "string"
+    //    },
+    //    {
+    //      "Name": "Email",
+    //      "DisplayName": "Email Address",
+    //      "Type": "string"
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "ParentAccount",
+    //      "Type": "many-to-one",
+    //      "Model": "Account"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "Product",
+    //  "Properties": [
+    //    {
+    //      "Name": "Name",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Code",
+    //      "Type": "string"
+    //    },
+    //    {
+    //      "Name": "Quantity",
+    //      "Type": "int"
+    //    },
+    //    {
+    //      "Name": "Price",
+    //      "Type": "double"
+    //    },
+    //    {
+    //      "Name": "Active",
+    //      "Type": "bool"
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Details",
+    //      "Type": "one-to-many",
+    //      "Model": "ProductDetail"
+    //    },
+    //    {
+    //      "Name": "Suppliers",
+    //      "Type": "many-to-many",
+    //      "Model": "Supplier",
+    //      "Through": "ProductSupplier"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "Supplier",
+    //  "Properties": [
+    //    {
+    //      "Name": "Name",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Phone",
+    //      "Type": "string"
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Products",
+    //      "Type": "many-to-many",
+    //      "Model": "Product",
+    //      "Through": "ProductSupplier"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "ProductDetail",
+    //  "Properties": [
+    //    {
+    //      "Name": "Comment",
+    //      "Type": "string",
+    //      "Required": true
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Product",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "Product"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "ProductSupplier",
+    //  "ManyToMany": true,
+    //  "Properties": [
+    //    {
+    //      "Name": "Comment",
+    //      "Type": "string"
+    //      //"Required": true
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Product",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "Product"
+    //    },
+    //    {
+    //      "Name": "Supplier",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "Supplier"
+    //    }
+    //  ]
+    //}
     //{
     //  "Name": "Account",
     //  //"Description": "Also; Company or Business", // Optional
@@ -344,8 +500,8 @@
       "UserName": "admin",
       "Email": "admin@steffbeckers.eu",
       "Password": "Steff12345!"
-    },
-    "OtherRoles": [ "IT", "Sales", "HR", "CEO" ]
+    } //,
+    //"OtherRoles": [ "IT", "Sales", "HR", "CEO" ]
   },
   "WebAPI": {
     "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
