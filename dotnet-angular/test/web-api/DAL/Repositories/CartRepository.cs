@@ -28,7 +28,6 @@ namespace Test.API.DAL.Repositories
 		public async Task<IEnumerable<Cart>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Carts
-                .Include(x => x.User)
                 .Include(x => x.CartProduct)
                     .ThenInclude(x => x.Product)
                 .Include(x => x.CreatedByUser)
@@ -39,28 +38,12 @@ namespace Test.API.DAL.Repositories
 		public async Task<Cart> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Carts
-                .Include(x => x.User)
                 .Include(x => x.CartProduct)
                     .ThenInclude(x => x.Product)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
-
-        public IEnumerable<Cart> GetByUserId(Guid userId)
-        {
-            return this.context.Carts
-                .Where(t => t.UserId == userId)
-                .ToList();
-        }
-        
-        //// Async test
-        //public async Task<IEnumerable<Cart>> GetByUserIdAsync(Guid userId)
-        //{
-        //    return await this.context.Carts
-        //        .Where(t => t.UserId == userId)
-        //        .ToListAsync();
-        //}
 
         public IEnumerable<Cart> GetByProductId(Guid productId)
         {

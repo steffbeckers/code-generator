@@ -33,19 +33,6 @@ namespace Test.API.ViewModels
 
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key UserId for User of Cart.
-        /// </summary>
-		public Guid? UserId { get; set; }
-
-		/// <summary>
-        /// The related User of Cart.
-        /// </summary>
-		public UserVM User { get; set; }
-
-
 		//// Many-to-many
 
 		/// <summary>

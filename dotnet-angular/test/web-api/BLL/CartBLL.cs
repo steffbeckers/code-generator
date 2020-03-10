@@ -99,7 +99,6 @@ namespace Test.API.BLL
 
             // Mapping
             cart.Name = cartUpdate.Name;
-            cart.UserId = cartUpdate.UserId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

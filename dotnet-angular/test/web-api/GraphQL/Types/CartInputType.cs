@@ -9,7 +9,6 @@ namespace Test.API.GraphQL.Types
             Name = "cartInput";
             Field<IdGraphType>("id");
 		    Field<NonNullGraphType<StringGraphType>>("name");
-		    Field<IdGraphType>("userId");
 
             // To create a link with Product directly on create of Cart.
             //Field<IdGraphType>("productId");

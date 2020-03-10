@@ -8,7 +8,6 @@ namespace Test.API.GraphQL.Types
     public class CartType : ObjectGraphType<Cart>
     {
         public CartType(
-            UserRepository userRepository,
 			CartRepository cartRepository,
             ProductRepository productRepository,
 			CartProductRepository cartProductRepository
@@ -16,31 +15,6 @@ namespace Test.API.GraphQL.Types
         {
             Field(x => x.Id, type: typeof(IdGraphType));
             Field(x => x.Name);
-
-            Field<UserType>(
-                "user",
-                resolve: context =>
-                {
-                    if (context.Source.UserId != null)
-                        return userRepository.GetById((Guid)context.Source.UserId);
-                    return null;
-                }
-            );
-
-            //// Async test
-            //FieldAsync<UserType>(
-            //    "user",
-            //    resolve: async context =>
-            //    {
-            //        if (context.Source.UserId != null) {
-            //            return await context.TryAsyncResolve(
-            //                async c => await userRepository.GetByIdAsync((Guid)context.Source.UserId)
-            //            );
-            //        }
-            //        
-            //        return null;
-            //    }
-            //);
 
             Field<ListGraphType<ProductType>>(
                 "products",
