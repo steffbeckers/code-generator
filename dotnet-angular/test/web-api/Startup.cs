@@ -293,7 +293,7 @@ namespace RJM.API
             // specifying the Swagger JSON endpoint.
             .UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("./swagger/v1/swagger.json", "RJM Web API V1");
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "Resume Job Matcher Web API V1");
                 c.RoutePrefix = string.Empty;
             });
 
