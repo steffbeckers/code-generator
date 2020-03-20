@@ -14,7 +14,7 @@ namespace RJM.API.GraphQL.Types
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
-            Field(x => x.Job Title, nullable: true);
+            Field(x => x.JobTitle, nullable: true);
             Field(x => x.Description, nullable: true);
 
             Field<ListGraphType<SkillType>>(

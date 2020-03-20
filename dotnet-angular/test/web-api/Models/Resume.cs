@@ -24,9 +24,9 @@ namespace RJM.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Job Title property of Resume.
+        /// The JobTitle property of Resume.
         /// </summary>
-		public string Job Title { get; set; }
+		public string JobTitle { get; set; }
 
 		/// <summary>
         /// The Description property of Resume.

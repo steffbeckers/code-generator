@@ -3,14 +3,14 @@
 mutation createResume($resume: resumeInput!) {
   createResume(resume: $resume) {
     id
-    job Title
+    jobTitle
     description
   }
 }
 
 {
   "resume": {
-    "job Title": "",
+    "jobTitle": "",
     "description": ""
   }
 }

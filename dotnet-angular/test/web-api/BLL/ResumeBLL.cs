@@ -62,8 +62,8 @@ namespace RJM.API.BLL
             if (resume == null) { return null; }
 
 			// Trimming strings
-            if (!string.IsNullOrEmpty(resume.Job Title))
-                resume.Job Title = resume.Job Title.Trim();
+            if (!string.IsNullOrEmpty(resume.JobTitle))
+                resume.JobTitle = resume.JobTitle.Trim();
             if (!string.IsNullOrEmpty(resume.Description))
                 resume.Description = resume.Description.Trim();
 
@@ -96,13 +96,13 @@ namespace RJM.API.BLL
             }
 
 			// Trimming strings
-            if (!string.IsNullOrEmpty(resumeUpdate.Job Title))
-                resumeUpdate.Job Title = resumeUpdate.Job Title.Trim();
+            if (!string.IsNullOrEmpty(resumeUpdate.JobTitle))
+                resumeUpdate.JobTitle = resumeUpdate.JobTitle.Trim();
             if (!string.IsNullOrEmpty(resumeUpdate.Description))
                 resumeUpdate.Description = resumeUpdate.Description.Trim();
 
             // Mapping
-            resume.Job Title = resumeUpdate.Job Title;
+            resume.JobTitle = resumeUpdate.JobTitle;
             resume.Description = resumeUpdate.Description;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}

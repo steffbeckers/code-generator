@@ -9,12 +9,52 @@
             The business logic layer for authentication.
             </summary>
         </member>
+        <member name="T:RJM.API.BLL.ResumeBLL">
+            <summary>
+            The business logic layer for Resumes.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.SkillRepository,RJM.API.DAL.Repositories.ResumeSkillRepository)">
+            <summary>
+            The constructor of the Resume business logic layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.GetAllResumesAsync">
+            <summary>
+            Retrieves all resumes.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.GetResumeByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one resume by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.CreateResumeAsync(RJM.API.Models.Resume)">
+            <summary>
+            Creates a new resume record.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.UpdateResumeAsync(RJM.API.Models.Resume)">
+            <summary>
+            Updates an existing resume record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.DeleteResumeByIdAsync(System.Guid)">
+            <summary>
+            Deletes an existing resume record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeBLL.DeleteResumeAsync(RJM.API.Models.Resume)">
+            <summary>
+            Deletes an existing resume record.
+            </summary>
+        </member>
         <member name="T:RJM.API.BLL.SkillBLL">
             <summary>
             The business logic layer for Skills.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.SkillBLL.#ctor(RJM.API.DAL.Repositories.SkillRepository)">
+        <member name="M:RJM.API.BLL.SkillBLL.#ctor(RJM.API.DAL.Repositories.SkillRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.ResumeSkillRepository)">
             <summary>
             The constructor of the Skill business logic layer.
             </summary>
@@ -54,6 +94,58 @@
             The constructor of the Auth controller.
             </summary>
         </member>
+        <member name="T:RJM.API.Controllers.ResumesController">
+            <summary>
+            The Resumes controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.#ctor(Microsoft.Extensions.Logging.ILogger{RJM.API.Controllers.ResumesController},AutoMapper.IMapper,RJM.API.BLL.ResumeBLL)">
+            <summary>
+            The constructor of the Resumes controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.GetResumes">
+            <summary>
+            Retrieves all resumes.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.GetResume(System.Guid)">
+            <summary>
+            Retrieves a specific resume.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.CreateResume(RJM.API.ViewModels.ResumeVM)">
+            <summary>
+            Creates a new resume.
+            </summary>
+            <param name="resumeVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.UpdateResume(System.Guid,RJM.API.ViewModels.ResumeVM)">
+            <summary>
+            Updates a specific resume.
+            </summary>
+            <param name="id"></param>
+            <param name="resumeVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.LinkSkillToResume(RJM.API.Models.ResumeSkill)">
+            <summary>
+            Links a specific skill to resume.
+            </summary>
+            <param name="resumeSkill"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.UnlinkSkillFromResume(RJM.API.Models.ResumeSkill)">
+            <summary>
+            Unlinks a specific skill from resume.
+            </summary>
+            <param name="resumeSkill"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.DeleteResume(System.Guid)">
+            <summary>
+            Deletes a specific resume.
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="T:RJM.API.Controllers.SkillsController">
             <summary>
             The Skills controller.
@@ -88,6 +180,18 @@
             <param name="id"></param>
             <param name="skillVM"></param>
         </member>
+        <member name="M:RJM.API.Controllers.SkillsController.LinkResumeToSkill(RJM.API.Models.ResumeSkill)">
+            <summary>
+            Links a specific resume to skill.
+            </summary>
+            <param name="resumeSkill"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillsController.UnlinkResumeFromSkill(RJM.API.Models.ResumeSkill)">
+            <summary>
+            Unlinks a specific resume from skill.
+            </summary>
+            <param name="resumeSkill"></param>
+        </member>
         <member name="M:RJM.API.Controllers.SkillsController.DeleteSkill(System.Guid)">
             <summary>
             Deletes a specific skill.
@@ -104,6 +208,26 @@
             The constructor of AutoMapperProfile.
             </summary>
         </member>
+        <member name="T:RJM.API.DAL.Repositories.ResumeRepository">
+            <summary>
+            The repository for Resumes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.Repositories.ResumeRepository.#ctor(RJM.API.DAL.RJMContext)">
+            <summary>
+            The constructor of the Resume repository.
+            </summary>
+        </member>
+        <member name="T:RJM.API.DAL.Repositories.ResumeSkillRepository">
+            <summary>
+            The repository for ResumeSkills in the data access layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.Repositories.ResumeSkillRepository.#ctor(RJM.API.DAL.RJMContext)">
+            <summary>
+            The constructor of the ResumeSkill repository.
+            </summary>
+        </member>
         <member name="T:RJM.API.DAL.Repositories.SkillRepository">
             <summary>
             The repository for Skills in the data access layer.
@@ -112,6 +236,141 @@
         <member name="M:RJM.API.DAL.Repositories.SkillRepository.#ctor(RJM.API.DAL.RJMContext)">
             <summary>
             The constructor of the Skill repository.
+            </summary>
+        </member>
+        <member name="T:RJM.API.Models.Resume">
+            <summary>
+            Resume model
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.Id">
+            <summary>
+            The identifier of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.JobTitle">
+            <summary>
+            The JobTitle property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.Description">
+            <summary>
+            The Description property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.ResumeSkill">
+            <summary>
+            The related Skills of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
+        <member name="T:RJM.API.Models.ResumeSkill">
+            <summary>
+            ResumeSkill model
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.Id">
+            <summary>
+            The identifier of ResumeSkill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.Rating">
+            <summary>
+            The Rating property of ResumeSkill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.Description">
+            <summary>
+            The Description property of ResumeSkill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.ResumeId">
+            <summary>
+            The related foreign key ResumeId for Resume of ResumeSkill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.Resume">
+            <summary>
+            The related Resume of ResumeSkill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.SkillId">
+            <summary>
+            The related foreign key SkillId for Skill of ResumeSkill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.Skill">
+            <summary>
+            The related Skill of ResumeSkill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeSkill.ModifiedByUser">
+            <summary>
+            The user who last modified the record
             </summary>
         </member>
         <member name="T:RJM.API.Models.Skill">
@@ -132,6 +391,11 @@
         <member name="P:RJM.API.Models.Skill.Description">
             <summary>
             The Description property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.ResumeSkill">
+            <summary>
+            The related Resumes of Skill.
             </summary>
         </member>
         <member name="P:RJM.API.Models.Skill.CreatedOn">
@@ -169,6 +433,61 @@
             The user who last modified the record
             </summary>
         </member>
+        <member name="T:RJM.API.ViewModels.ResumeVM">
+            <summary>
+            Resume view model
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.Id">
+            <summary>
+            The identifier of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.JobTitle">
+            <summary>
+            The JobTitle property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.Description">
+            <summary>
+            The Description property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.Skills">
+            <summary>
+            The related Skills of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:RJM.API.ViewModels.SkillVM">
             <summary>
             Skill view model
@@ -187,6 +506,11 @@
         <member name="P:RJM.API.ViewModels.SkillVM.Description">
             <summary>
             The Description property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.Resumes">
+            <summary>
+            The related Resumes of Skill.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.SkillVM.CreatedOn">

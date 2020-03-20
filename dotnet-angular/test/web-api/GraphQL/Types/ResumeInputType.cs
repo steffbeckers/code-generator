@@ -8,7 +8,7 @@ namespace RJM.API.GraphQL.Types
         {
             Name = "resumeInput";
             Field<IdGraphType>("id");
-		    Field<StringGraphType>("job Title");
+		    Field<StringGraphType>("jobTitle");
 		    Field<StringGraphType>("description");
 
             // To create a link with Skill directly on create of Resume.
