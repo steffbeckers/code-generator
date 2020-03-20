@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RJM.API</name>
+    </assembly>
+    <members>
+        <member name="T:RJM.API.BLL.AuthBLL">
+            <summary>
+            The business logic layer for authentication.
+            </summary>
+        </member>
+        <member name="T:RJM.API.BLL.SkillBLL">
+            <summary>
+            The business logic layer for Skills.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillBLL.#ctor(RJM.API.DAL.Repositories.SkillRepository)">
+            <summary>
+            The constructor of the Skill business logic layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillBLL.GetAllSkillsAsync">
+            <summary>
+            Retrieves all skills.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillBLL.GetSkillByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one skill by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillBLL.CreateSkillAsync(RJM.API.Models.Skill)">
+            <summary>
+            Creates a new skill record.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillBLL.UpdateSkillAsync(RJM.API.Models.Skill)">
+            <summary>
+            Updates an existing skill record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillBLL.DeleteSkillByIdAsync(System.Guid)">
+            <summary>
+            Deletes an existing skill record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillBLL.DeleteSkillAsync(RJM.API.Models.Skill)">
+            <summary>
+            Deletes an existing skill record.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.AuthController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{RJM.API.Controllers.AuthController},AutoMapper.IMapper,RJM.API.BLL.AuthBLL)">
+            <summary>
+            The constructor of the Auth controller.
+            </summary>
+        </member>
+        <member name="T:RJM.API.Controllers.SkillsController">
+            <summary>
+            The Skills controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillsController.#ctor(Microsoft.Extensions.Logging.ILogger{RJM.API.Controllers.SkillsController},AutoMapper.IMapper,RJM.API.BLL.SkillBLL)">
+            <summary>
+            The constructor of the Skills controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillsController.GetSkills">
+            <summary>
+            Retrieves all skills.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillsController.GetSkill(System.Guid)">
+            <summary>
+            Retrieves a specific skill.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillsController.CreateSkill(RJM.API.ViewModels.SkillVM)">
+            <summary>
+            Creates a new skill.
+            </summary>
+            <param name="skillVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillsController.UpdateSkill(System.Guid,RJM.API.ViewModels.SkillVM)">
+            <summary>
+            Updates a specific skill.
+            </summary>
+            <param name="id"></param>
+            <param name="skillVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillsController.DeleteSkill(System.Guid)">
+            <summary>
+            Deletes a specific skill.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:RJM.API.DAL.AutoMapperProfile">
+            <summary>
+            Profile for mapping models to/from view models with AutoMapper.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.AutoMapperProfile.#ctor">
+            <summary>
+            The constructor of AutoMapperProfile.
+            </summary>
+        </member>
+        <member name="T:RJM.API.DAL.Repositories.SkillRepository">
+            <summary>
+            The repository for Skills in the data access layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.Repositories.SkillRepository.#ctor(RJM.API.DAL.RJMContext)">
+            <summary>
+            The constructor of the Skill repository.
+            </summary>
+        </member>
+        <member name="T:RJM.API.Models.Skill">
+            <summary>
+            Skill model
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.Id">
+            <summary>
+            The identifier of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.Name">
+            <summary>
+            The Name property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.Description">
+            <summary>
+            The Description property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Skill.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
+        <member name="T:RJM.API.ViewModels.SkillVM">
+            <summary>
+            Skill view model
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.Id">
+            <summary>
+            The identifier of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.Name">
+            <summary>
+            The Name property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.Description">
+            <summary>
+            The Description property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
+    </members>
+</doc>
