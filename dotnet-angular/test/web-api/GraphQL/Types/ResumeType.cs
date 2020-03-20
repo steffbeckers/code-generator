@@ -5,30 +5,30 @@ using RJM.API.Models;
 
 namespace RJM.API.GraphQL.Types
 {
-    public class SkillType : ObjectGraphType<Skill>
+    public class ResumeType : ObjectGraphType<Resume>
     {
-        public SkillType(
-			SkillRepository skillRepository,
-            ResumeRepository resumeRepository,
+        public ResumeType(
+			ResumeRepository resumeRepository,
+            SkillRepository skillRepository,
 			ResumeSkillRepository resumeSkillRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
-            Field(x => x.Name);
+            Field(x => x.Job Title, nullable: true);
             Field(x => x.Description, nullable: true);
 
-            Field<ListGraphType<ResumeType>>(
-                "resumes",
-                resolve: context => resumeRepository.GetBySkillId(context.Source.Id)
+            Field<ListGraphType<SkillType>>(
+                "skills",
+                resolve: context => skillRepository.GetByResumeId(context.Source.Id)
             );
 
             //// Async test
-            //FieldAsync<ListGraphType<ResumeType>>(
-            //    "resumes",
+            //FieldAsync<ListGraphType<SkillType>>(
+            //    "skills",
             //    resolve: async context =>
             //    {
             //        return await context.TryAsyncResolve(
-            //            async c => await resumeRepository.GetBySkillIdAsync(context.Source.Id)
+            //            async c => await skillRepository.GetByResumeIdAsync(context.Source.Id)
             //        );
             //    }
             //);

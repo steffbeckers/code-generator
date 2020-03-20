@@ -1,38 +1,35 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using RJM.API.ViewModels.Identity;
 
-namespace RJM.API.ViewModels
+namespace RJM.API.Models
 {
 	/// <summary>
-    /// Skill view model
+    /// Resume model
     /// </summary>
-    public class SkillVM
+    public class Resume
     {
-		public SkillVM()
+		public Resume()
         {
             // Relations
 
 			//// Many-to-many
-			this.Resumes = new List<ResumeVM>();
+			this.ResumeSkill = new List<ResumeSkill>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Skill.
+        /// The identifier of Resume.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Name property of Skill.
+        /// The Job Title property of Resume.
         /// </summary>
-        [Required]
-		public string Name { get; set; }
+		public string Job Title { get; set; }
 
 		/// <summary>
-        /// The Description property of Skill.
+        /// The Description property of Resume.
         /// </summary>
 		public string Description { get; set; }
 
@@ -41,14 +38,9 @@ namespace RJM.API.ViewModels
 		//// Many-to-many
 
 		/// <summary>
-        /// The related Resumes of Skill.
+        /// The related Skills of Resume.
         /// </summary>
-		public IList<ResumeVM> Resumes { get; set; }
-
-        ////// To create a link with Resume directly on create of Skill.
-        public Guid? ResumeId { get; set; }
-        public int ResumeRating { get; set; }
-        public string ResumeDescription { get; set; }
+		public IList<ResumeSkill> ResumeSkill { get; set; }
 
 		// Generic properties
 
@@ -63,6 +55,11 @@ namespace RJM.API.ViewModels
 		public DateTime ModifiedOn { get; set; }
 
 		/// <summary>
+        /// The date and time of when the record is (soft) deleted
+        /// </summary>
+		public DateTime? DeletedOn { get; set; }
+
+		/// <summary>
         /// The Id of the user who created the record
         /// </summary>
 		public Guid CreatedByUserId { get; set; }
@@ -70,7 +67,7 @@ namespace RJM.API.ViewModels
 		/// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+		public User CreatedByUser { get; set; }
 
 		/// <summary>
         /// The Id of the user who last modified the record
@@ -80,7 +77,9 @@ namespace RJM.API.ViewModels
 		/// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+		public User ModifiedByUser { get; set; }
 
+		// TODO: Multi-tenancy
+		//public Guid TenantId { get; set; }
     }
 }

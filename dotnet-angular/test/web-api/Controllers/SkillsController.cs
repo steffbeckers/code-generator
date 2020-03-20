@@ -120,6 +120,46 @@ namespace RJM.API.Controllers
 			return Ok(this.mapper.Map<Skill, SkillVM>(skill));
         }
 
+        // PUT: api/skills/resumes/link
+		/// <summary>
+		/// Links a specific resume to skill.
+		/// </summary>
+		/// <param name="resumeSkill"></param>
+        [HttpPut("Resumes/Link")]
+        public async Task<ActionResult<SkillVM>> LinkResumeToSkill([FromBody] ResumeSkill resumeSkill)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Skill skill = await this.bll.LinkResumeToSkillAsync(resumeSkill);
+
+            // Mapping
+            return Ok(this.mapper.Map<Skill, SkillVM>(skill));
+        }
+
+        // PUT: api/skills/resumes/unlink
+		/// <summary>
+		/// Unlinks a specific resume from skill.
+		/// </summary>
+		/// <param name="resumeSkill"></param>
+        [HttpPut("Resumes/Unlink")]
+        public async Task<ActionResult<SkillVM>> UnlinkResumeFromSkill([FromBody] ResumeSkill resumeSkill)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Skill skill = await this.bll.UnlinkResumeFromSkillAsync(resumeSkill);
+
+            // Mapping
+            return Ok(this.mapper.Map<Skill, SkillVM>(skill));
+        }
+
         // DELETE: api/skills/{id}
 		/// <summary>
 		/// Deletes a specific skill.

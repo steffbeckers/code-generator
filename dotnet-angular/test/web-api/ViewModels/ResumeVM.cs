@@ -6,33 +6,32 @@ using RJM.API.ViewModels.Identity;
 namespace RJM.API.ViewModels
 {
 	/// <summary>
-    /// Skill view model
+    /// Resume view model
     /// </summary>
-    public class SkillVM
+    public class ResumeVM
     {
-		public SkillVM()
+		public ResumeVM()
         {
             // Relations
 
 			//// Many-to-many
-			this.Resumes = new List<ResumeVM>();
+			this.Skills = new List<SkillVM>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Skill.
+        /// The identifier of Resume.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Name property of Skill.
+        /// The Job Title property of Resume.
         /// </summary>
-        [Required]
-		public string Name { get; set; }
+		public string Job Title { get; set; }
 
 		/// <summary>
-        /// The Description property of Skill.
+        /// The Description property of Resume.
         /// </summary>
 		public string Description { get; set; }
 
@@ -41,14 +40,14 @@ namespace RJM.API.ViewModels
 		//// Many-to-many
 
 		/// <summary>
-        /// The related Resumes of Skill.
+        /// The related Skills of Resume.
         /// </summary>
-		public IList<ResumeVM> Resumes { get; set; }
+		public IList<SkillVM> Skills { get; set; }
 
-        ////// To create a link with Resume directly on create of Skill.
-        public Guid? ResumeId { get; set; }
-        public int ResumeRating { get; set; }
-        public string ResumeDescription { get; set; }
+        ////// To create a link with Skill directly on create of Resume.
+        public Guid? SkillId { get; set; }
+        public int SkillRating { get; set; }
+        public string SkillDescription { get; set; }
 
 		// Generic properties
 

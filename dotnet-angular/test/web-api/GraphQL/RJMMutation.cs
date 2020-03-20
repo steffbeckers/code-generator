@@ -10,10 +10,107 @@ namespace RJM.API.GraphQL
     public class RJMMutation : ObjectGraphType
     {
         public RJMMutation(
+			ResumeBLL resumeBLL,
 			SkillBLL skillBLL
         )
         {
             this.AuthorizeWith("Authorized");
+
+			// Resumes
+            FieldAsync<ResumeType>(
+                "createResume",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeInputType>>
+                    {
+                        Name = "resume"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Resume resume = context.GetArgument<Resume>("resume");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeBLL.CreateResumeAsync(resume)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeType>(
+                "updateResume",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<ResumeInputType>>
+                    {
+                        Name = "resume"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    Resume resume = context.GetArgument<Resume>("resume");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeBLL.UpdateResumeAsync(resume)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeType>(
+                "linkSkillToResume",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
+                    {
+                        Name = "resumeSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeBLL.LinkSkillToResumeAsync(resumeSkill)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeType>(
+                "unlinkSkillFromResume",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
+                    {
+                        Name = "resumeSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeBLL.UnlinkSkillFromResumeAsync(resumeSkill)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeType>(
+                "removeResume",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeBLL.DeleteResumeByIdAsync(id)
+                    );
+                }
+            );
 
 			// Skills
             FieldAsync<SkillType>(
@@ -53,6 +150,42 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await skillBLL.UpdateSkillAsync(skill)
+                    );
+                }
+            );
+
+            FieldAsync<SkillType>(
+                "linkResumeToSkill",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
+                    {
+                        Name = "resumeSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await skillBLL.LinkResumeToSkillAsync(resumeSkill)
+                    );
+                }
+            );
+
+            FieldAsync<SkillType>(
+                "unlinkResumeFromSkill",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
+                    {
+                        Name = "resumeSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await skillBLL.UnlinkResumeFromSkillAsync(resumeSkill)
                     );
                 }
             );

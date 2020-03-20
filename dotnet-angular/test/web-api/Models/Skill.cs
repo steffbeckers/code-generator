@@ -10,6 +10,10 @@ namespace RJM.API.Models
     {
 		public Skill()
         {
+            // Relations
+
+			//// Many-to-many
+			this.ResumeSkill = new List<ResumeSkill>();
         }
 
 		// Properties
@@ -29,6 +33,14 @@ namespace RJM.API.Models
         /// </summary>
 		public string Description { get; set; }
 
+		// Relations
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Resumes of Skill.
+        /// </summary>
+		public IList<ResumeSkill> ResumeSkill { get; set; }
 
 		// Generic properties
 

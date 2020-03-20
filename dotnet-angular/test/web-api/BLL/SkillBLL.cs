@@ -12,15 +12,21 @@ namespace RJM.API.BLL
     public class SkillBLL
     {
         private readonly SkillRepository skillRepository;
+        private readonly ResumeRepository resumeRepository;
+        private readonly ResumeSkillRepository resumeSkillRepository;
 
 		/// <summary>
 		/// The constructor of the Skill business logic layer.
 		/// </summary>
         public SkillBLL(
-			SkillRepository skillRepository
+			SkillRepository skillRepository,
+            ResumeRepository resumeRepository,
+			ResumeSkillRepository resumeSkillRepository
 		)
         {
             this.skillRepository = skillRepository;
+            this.resumeRepository = resumeRepository;
+			this.resumeSkillRepository = resumeSkillRepository;
         }
 
 		/// <summary>
@@ -110,6 +116,60 @@ namespace RJM.API.BLL
 			// #-#-#
 
             return skill;
+        }
+
+        public async Task<Skill> LinkResumeToSkillAsync(ResumeSkill resumeSkill)
+        {
+            // Validation
+            if (resumeSkill == null) { return null; }
+
+            // Check if skill exists
+            Skill skill = await this.skillRepository.GetByIdAsync(resumeSkill.SkillId);
+            if (skill == null)
+            {
+                return null;
+            }
+
+            // Check if resume exists
+            Resume resume = await this.resumeRepository.GetByIdAsync(resumeSkill.ResumeId);
+            if (resume == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
+            ResumeSkill resumeSkillLink = this.resumeSkillRepository.GetBySkillAndResumeId(resumeSkill.SkillId, resumeSkill.ResumeId);
+
+            if (resumeSkillLink == null)
+            {
+                await this.resumeSkillRepository.InsertAsync(resumeSkill);
+            }
+            else
+            {
+                // Mapping of fields on many-to-many
+                resumeSkillLink.Rating = resumeSkill.Rating;
+                resumeSkillLink.Description = resumeSkill.Description;
+
+                await this.resumeSkillRepository.UpdateAsync(resumeSkillLink);
+            }
+
+            return await this.GetSkillByIdAsync(resumeSkill.SkillId);
+        }
+
+        public async Task<Skill> UnlinkResumeFromSkillAsync(ResumeSkill resumeSkill)
+        {
+            // Validation
+            if (resumeSkill == null) { return null; }
+
+            // Retrieve existing link
+            ResumeSkill resumeSkillLink = this.resumeSkillRepository.GetBySkillAndResumeId(resumeSkill.SkillId, resumeSkill.ResumeId);
+		
+            if (resumeSkillLink != null)
+            {
+                await this.resumeSkillRepository.DeleteAsync(resumeSkillLink);
+            }
+
+            return await this.GetSkillByIdAsync(resumeSkill.SkillId);
         }
 
 		/// <summary>

@@ -18,9 +18,60 @@ namespace RJM.API.DAL
 		/// </summary>
         public AutoMapperProfile()
         {
+            // Resumes
+			CreateMap<Resume, ResumeVM>()
+                .ForMember(
+                    x => x.Skills,
+                    x => x.MapFrom(
+                        y => y.ResumeSkill.Select(z => z.Skill)
+                    )
+                );
+            CreateMap<ResumeVM, Resume>()
+                .ForMember(
+                    x => x.ResumeSkill,
+                    x =>
+                    {
+                        x.PreCondition(z => z.SkillId != null);
+                        x.MapFrom(
+                            y => new List<ResumeSkill>() {
+                                new ResumeSkill()
+                                {
+                                    SkillId = (Guid)y.SkillId,
+                                    Rating = y.SkillRating,
+                                    Description = y.SkillDescription
+                                }
+                            }
+                        );
+                    }
+                );
+
             // Skills
-			CreateMap<Skill, SkillVM>();
-            CreateMap<SkillVM, Skill>();
+			CreateMap<Skill, SkillVM>()
+                .ForMember(
+                    x => x.Resumes,
+                    x => x.MapFrom(
+                        y => y.ResumeSkill.Select(z => z.Resume)
+                    )
+                );
+            CreateMap<SkillVM, Skill>()
+                .ForMember(
+                    x => x.ResumeSkill,
+                    x =>
+                    {
+                        x.PreCondition(z => z.ResumeId != null);
+                        x.MapFrom(
+                            y => new List<ResumeSkill>() {
+                                new ResumeSkill()
+                                {
+                                    ResumeId = (Guid)y.ResumeId,
+                                    Rating = y.ResumeRating,
+                                    Description = y.ResumeDescription
+                                }
+                            }
+                        );
+                    }
+                );
+
             // Users
 			CreateMap<User, UserVM>();
             CreateMap<UserVM, User>();

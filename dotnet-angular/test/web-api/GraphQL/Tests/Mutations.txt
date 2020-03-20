@@ -1,3 +1,21 @@
+// Resumes
+
+mutation createResume($resume: resumeInput!) {
+  createResume(resume: $resume) {
+    id
+    job Title
+    description
+  }
+}
+
+{
+  "resume": {
+    "job Title": "",
+    "description": ""
+  }
+}
+
+
 // Skills
 
 mutation createSkill($skill: skillInput!) {
@@ -11,6 +29,24 @@ mutation createSkill($skill: skillInput!) {
 {
   "skill": {
     "name": "",
+    "description": ""
+  }
+}
+
+
+// ResumeSkills
+
+mutation createResumeSkill($resumeSkill: resumeSkillInput!) {
+  createResumeSkill(resumeSkill: $resumeSkill) {
+    id
+    rating
+    description
+  }
+}
+
+{
+  "resumeSkill": {
+    "rating": "",
     "description": ""
   }
 }

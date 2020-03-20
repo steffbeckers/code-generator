@@ -9,58 +9,58 @@ using RJM.API.Models;
 namespace RJM.API.DAL.Repositories
 {
 	/// <summary>
-	/// The repository for Skills in the data access layer.
+	/// The repository for Resumes in the data access layer.
 	/// </summary>
-    public class SkillRepository : Repository<Skill>
+    public class ResumeRepository : Repository<Resume>
     {
         private new readonly RJMContext context;
 
 		/// <summary>
-		/// The constructor of the Skill repository.
+		/// The constructor of the Resume repository.
 		/// </summary>
-        public SkillRepository(RJMContext context) : base(context)
+        public ResumeRepository(RJMContext context) : base(context)
         {
             this.context = context;
         }
 
         // Additional functionality and overrides
 
-		public async Task<IEnumerable<Skill>> GetWithLinkedEntitiesAsync()
+		public async Task<IEnumerable<Resume>> GetWithLinkedEntitiesAsync()
         {
-            return await this.context.Skills
+            return await this.context.Resumes
                 .Include(x => x.ResumeSkill)
-                    .ThenInclude(x => x.Resume)
+                    .ThenInclude(x => x.Skill)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .ToListAsync();
         }
 
-		public async Task<Skill> GetWithLinkedEntitiesByIdAsync(Guid id)
+		public async Task<Resume> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
-            return await this.context.Skills
+            return await this.context.Resumes
                 .Include(x => x.ResumeSkill)
-                    .ThenInclude(x => x.Resume)
+                    .ThenInclude(x => x.Skill)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public IEnumerable<Skill> GetByResumeId(Guid resumeId)
+        public IEnumerable<Resume> GetBySkillId(Guid skillId)
         {
             return this.context.ResumeSkill
-                .Include(x => x.Skill)
-                .Where(x => x.ResumeId == resumeId)
-                .Select(x => x.Skill)
+                .Include(x => x.Resume)
+                .Where(x => x.SkillId == skillId)
+                .Select(x => x.Resume)
                 .ToList();
         }
         
         //// Async test
-        //public async Task<IEnumerable<Skill>> GetByResumeIdAsync(Guid resumeId)
+        //public async Task<IEnumerable<Resume>> GetBySkillIdAsync(Guid skillId)
         //{
         //    return await this.context.ResumeSkill
-        //        .Include(x => x.Skill)
-        //        .Where(x => x.ResumeId == resumeId)
-        //        .Select(x => x.Skill)
+        //        .Include(x => x.Resume)
+        //        .Where(x => x.SkillId == skillId)
+        //        .Select(x => x.Resume)
         //        .ToListAsync();
         //}
     }
