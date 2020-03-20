@@ -4,16 +4,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
-COPY ["Test.API.csproj", "Test.API/"]
-RUN dotnet restore "Test.API/Test.API.csproj"
-COPY . "Test.API/"
-WORKDIR "/src/Test.API"
-RUN dotnet build "Test.API.csproj" -c Release -o /app
+COPY ["RJM.API.csproj", "RJM.API/"]
+RUN dotnet restore "RJM.API/RJM.API.csproj"
+COPY . "RJM.API/"
+WORKDIR "/src/RJM.API"
+RUN dotnet build "RJM.API.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Test.API.csproj" -c Release -o /app
+RUN dotnet publish "RJM.API.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Test.API.dll"]
+ENTRYPOINT ["dotnet", "RJM.API.dll"]

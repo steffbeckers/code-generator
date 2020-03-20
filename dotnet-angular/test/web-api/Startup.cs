@@ -27,15 +27,15 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Test.API.BLL;
-using Test.API.DAL;
-using Test.API.DAL.Repositories;
-using Test.API.Framework.Exceptions;
-using Test.API.GraphQL;
-using Test.API.Models;
-using Test.API.Services;
+using RJM.API.BLL;
+using RJM.API.DAL;
+using RJM.API.DAL.Repositories;
+using RJM.API.Framework.Exceptions;
+using RJM.API.GraphQL;
+using RJM.API.Models;
+using RJM.API.Services;
 
-namespace Test.API
+namespace RJM.API
 {
     public class Startup
     {
@@ -52,14 +52,14 @@ namespace Test.API
 		    // CORS
             services.AddCors();
 
-            // Connection to the Test database
-            services.AddDbContext<TestContext>(options =>
-                options.UseSqlServer(this.configuration.GetConnectionString("TestContext")));
+            // Connection to the RJM database
+            services.AddDbContext<RJMContext>(options =>
+                options.UseSqlServer(this.configuration.GetConnectionString("RJMContext")));
 
             // Authentication
             services.AddIdentity<User, IdentityRole<Guid>>()
                 .AddRoleManager<RoleManager<IdentityRole<Guid>>>()
-                .AddEntityFrameworkStores<TestContext>()
+                .AddEntityFrameworkStores<RJMContext>()
                 .AddDefaultTokenProviders();
 
             //// Options
@@ -129,19 +129,8 @@ namespace Test.API
             });
 
             // Repositories
-			services.AddScoped<ProductRepository>();
-			services.AddScoped<CartRepository>();
-			services.AddScoped<CartProductRepository>();
-			services.AddScoped<OrderRepository>();
-			services.AddScoped<OrderStateRepository>();
-			services.AddScoped<AddressRepository>();
 
 			// BLLs
-			services.AddScoped<ProductBLL>();
-			services.AddScoped<CartBLL>();
-			services.AddScoped<OrderBLL>();
-			services.AddScoped<OrderStateBLL>();
-			services.AddScoped<AddressBLL>();
             services.AddScoped<AuthBLL>();
 
             // Services
@@ -150,7 +139,7 @@ namespace Test.API
             // GraphQL
             services.AddScoped<IDependencyResolver>(s =>
                 new FuncDependencyResolver(s.GetRequiredService));
-            services.AddScoped<TestSchema>();
+            services.AddScoped<RJMSchema>();
             services.AddGraphQL(options =>
             {
                 options.EnableMetrics = true;
@@ -188,7 +177,7 @@ namespace Test.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Test Web API",
+                    Title = "RJM Web API",
                     Version = "v1"
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -284,8 +273,8 @@ namespace Test.API
             app.UseWebSockets();
 
             // GraphQL
-            app.UseGraphQLWebSockets<TestSchema>("/graphql");
-            app.UseGraphQL<TestSchema>("/graphql");
+            app.UseGraphQLWebSockets<RJMSchema>("/graphql");
+            app.UseGraphQL<RJMSchema>("/graphql");
             app.UseGraphiQLServer(new GraphiQLOptions
             {
                 GraphiQLPath = "/ui/graphiql",
@@ -302,7 +291,7 @@ namespace Test.API
             // specifying the Swagger JSON endpoint.
             .UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("./swagger/v1/swagger.json", "Test Web API V1");
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "RJM Web API V1");
                 c.RoutePrefix = string.Empty;
             });
 
@@ -319,7 +308,7 @@ namespace Test.API
         {
             using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                using (TestContext context = serviceScope.ServiceProvider.GetService<TestContext>())
+                using (RJMContext context = serviceScope.ServiceProvider.GetService<RJMContext>())
                 {
                     context.Database.Migrate();
                 }
@@ -344,6 +333,76 @@ namespace Test.API
 
                 Task<IdentityResult> createAdminRole = roleManager.CreateAsync(newAdminRole);
                 createAdminRole.Wait();
+            }
+
+            Task<IdentityRole<Guid>> itRole = roleManager.FindByNameAsync("IT");
+            itRole.Wait();
+            if (itRole.Result == null)
+            {
+                IdentityRole<Guid> newITRole = new IdentityRole<Guid>()
+                {
+                    Name = "IT",
+                    NormalizedName = "IT"
+                };
+
+                Task<IdentityResult> createITRole = roleManager.CreateAsync(newITRole);
+                createITRole.Wait();
+            }
+
+            Task<IdentityRole<Guid>> salesRole = roleManager.FindByNameAsync("Sales");
+            salesRole.Wait();
+            if (salesRole.Result == null)
+            {
+                IdentityRole<Guid> newSalesRole = new IdentityRole<Guid>()
+                {
+                    Name = "Sales",
+                    NormalizedName = "SALES"
+                };
+
+                Task<IdentityResult> createSalesRole = roleManager.CreateAsync(newSalesRole);
+                createSalesRole.Wait();
+            }
+
+            Task<IdentityRole<Guid>> hrRole = roleManager.FindByNameAsync("HR");
+            hrRole.Wait();
+            if (hrRole.Result == null)
+            {
+                IdentityRole<Guid> newHRRole = new IdentityRole<Guid>()
+                {
+                    Name = "HR",
+                    NormalizedName = "HR"
+                };
+
+                Task<IdentityResult> createHRRole = roleManager.CreateAsync(newHRRole);
+                createHRRole.Wait();
+            }
+
+            Task<IdentityRole<Guid>> recruitmentRole = roleManager.FindByNameAsync("Recruitment");
+            recruitmentRole.Wait();
+            if (recruitmentRole.Result == null)
+            {
+                IdentityRole<Guid> newRecruitmentRole = new IdentityRole<Guid>()
+                {
+                    Name = "Recruitment",
+                    NormalizedName = "RECRUITMENT"
+                };
+
+                Task<IdentityResult> createRecruitmentRole = roleManager.CreateAsync(newRecruitmentRole);
+                createRecruitmentRole.Wait();
+            }
+
+            Task<IdentityRole<Guid>> ceoRole = roleManager.FindByNameAsync("CEO");
+            ceoRole.Wait();
+            if (ceoRole.Result == null)
+            {
+                IdentityRole<Guid> newCEORole = new IdentityRole<Guid>()
+                {
+                    Name = "CEO",
+                    NormalizedName = "CEO"
+                };
+
+                Task<IdentityResult> createCEORole = roleManager.CreateAsync(newCEORole);
+                createCEORole.Wait();
             }
 
             // Default admin user
