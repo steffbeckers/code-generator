@@ -179,7 +179,7 @@ namespace RJM.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "RJM Web API",
+                    Title = "Resume Job Matcher Web API",
                     Version = "v1"
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
