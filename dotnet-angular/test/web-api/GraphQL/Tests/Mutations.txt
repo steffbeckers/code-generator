@@ -1,0 +1,18 @@
+// Skills
+
+mutation createSkill($skill: skillInput!) {
+  createSkill(skill: $skill) {
+    id
+    name
+    description
+  }
+}
+
+{
+  "skill": {
+    "name": "",
+    "description": ""
+  }
+}
+
+
