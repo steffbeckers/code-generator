@@ -340,32 +340,32 @@ namespace RJM.API
                 createAdminRole.Wait();
             }
 
-            Task<IdentityRole<Guid>> itRole = roleManager.FindByNameAsync("IT");
-            itRole.Wait();
-            if (itRole.Result == null)
+            Task<IdentityRole<Guid>> candidateRole = roleManager.FindByNameAsync("Candidate");
+            candidateRole.Wait();
+            if (candidateRole.Result == null)
             {
-                IdentityRole<Guid> newITRole = new IdentityRole<Guid>()
+                IdentityRole<Guid> newCandidateRole = new IdentityRole<Guid>()
                 {
-                    Name = "IT",
-                    NormalizedName = "IT"
+                    Name = "Candidate",
+                    NormalizedName = "CANDIDATE"
                 };
 
-                Task<IdentityResult> createITRole = roleManager.CreateAsync(newITRole);
-                createITRole.Wait();
+                Task<IdentityResult> createCandidateRole = roleManager.CreateAsync(newCandidateRole);
+                createCandidateRole.Wait();
             }
 
-            Task<IdentityRole<Guid>> salesRole = roleManager.FindByNameAsync("Sales");
-            salesRole.Wait();
-            if (salesRole.Result == null)
+            Task<IdentityRole<Guid>> recruitmentRole = roleManager.FindByNameAsync("Recruitment");
+            recruitmentRole.Wait();
+            if (recruitmentRole.Result == null)
             {
-                IdentityRole<Guid> newSalesRole = new IdentityRole<Guid>()
+                IdentityRole<Guid> newRecruitmentRole = new IdentityRole<Guid>()
                 {
-                    Name = "Sales",
-                    NormalizedName = "SALES"
+                    Name = "Recruitment",
+                    NormalizedName = "RECRUITMENT"
                 };
 
-                Task<IdentityResult> createSalesRole = roleManager.CreateAsync(newSalesRole);
-                createSalesRole.Wait();
+                Task<IdentityResult> createRecruitmentRole = roleManager.CreateAsync(newRecruitmentRole);
+                createRecruitmentRole.Wait();
             }
 
             Task<IdentityRole<Guid>> hrRole = roleManager.FindByNameAsync("HR");
@@ -382,18 +382,18 @@ namespace RJM.API
                 createHRRole.Wait();
             }
 
-            Task<IdentityRole<Guid>> recruitmentRole = roleManager.FindByNameAsync("Recruitment");
-            recruitmentRole.Wait();
-            if (recruitmentRole.Result == null)
+            Task<IdentityRole<Guid>> salesRole = roleManager.FindByNameAsync("Sales");
+            salesRole.Wait();
+            if (salesRole.Result == null)
             {
-                IdentityRole<Guid> newRecruitmentRole = new IdentityRole<Guid>()
+                IdentityRole<Guid> newSalesRole = new IdentityRole<Guid>()
                 {
-                    Name = "Recruitment",
-                    NormalizedName = "RECRUITMENT"
+                    Name = "Sales",
+                    NormalizedName = "SALES"
                 };
 
-                Task<IdentityResult> createRecruitmentRole = roleManager.CreateAsync(newRecruitmentRole);
-                createRecruitmentRole.Wait();
+                Task<IdentityResult> createSalesRole = roleManager.CreateAsync(newSalesRole);
+                createSalesRole.Wait();
             }
 
             Task<IdentityRole<Guid>> ceoRole = roleManager.FindByNameAsync("CEO");
