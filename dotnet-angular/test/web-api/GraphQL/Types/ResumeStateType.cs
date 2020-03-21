@@ -18,7 +18,7 @@ namespace RJM.API.GraphQL.Types
 
             Field<ListGraphType<ResumeType>>(
                 "resumes",
-                resolve: context => resumeRepository.GetByResumeId(context.Source.Id)
+                resolve: context => resumeRepository.GetByResumesId(context.Source.Id)
             );
 
             //// Async test
@@ -27,7 +27,7 @@ namespace RJM.API.GraphQL.Types
             //    resolve: async context =>
             //    {
             //        return await context.TryAsyncResolve(
-            //            async c => await resumeRepository.GetByResumeIdAsync(context.Source.Id)
+            //            async c => await resumeRepository.GetByResumesIdAsync(context.Source.Id)
             //        );
             //    }
             //);
