@@ -66,7 +66,14 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             
             #line default
             #line hidden
-            this.Write(@"    public class TestContext : IdentityDbContext<
+            this.Write("    public class ");
+            
+            #line 23 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\DbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
+            
+            #line default
+            #line hidden
+            this.Write(@"Context : IdentityDbContext<
         User,
         IdentityRole<Guid>,
         Guid,

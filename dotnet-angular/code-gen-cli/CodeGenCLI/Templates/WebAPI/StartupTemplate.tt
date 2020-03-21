@@ -200,7 +200,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "<#= config.Name #> Web API",
+                    Title = "<#= config.DisplayName #> Web API",
                     Version = "v1"
                 });
 <# if (config.Authentication.Enabled) { #>
@@ -316,7 +316,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // specifying the Swagger JSON endpoint.
             .UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("./swagger/v1/swagger.json", "<#= config.Name #> Web API V1");
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "<#= config.DisplayName #> Web API V1");
                 c.RoutePrefix = string.Empty;
             });
 

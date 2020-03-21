@@ -1,110 +1,39 @@
 {
-  "Name": "Test",
-  "DisplayName": "Test App",
+  "Name": "RJM",
+  "DisplayName": "Resume Job Matcher",
   "Description": "", // Optional
   "Override": true,
   "Models": [
     {
-      "Name": "Product",
+      "Name": "Resume",
       "Properties": [
         {
-          "Name": "Name",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "Description",
-          "Type": "string"
-        },
-        {
-          "Name": "Price",
-          "Type": "double"
-        }
-      ],
-      "Relations": [
-        {
-          "Name": "Carts",
-          "Type": "many-to-many",
-          "Model": "Cart",
-          "Through": "CartProduct"
-        }
-      ]
-    },
-    {
-      "Name": "Cart",
-      "Properties": [
-        {
-          "Name": "Name",
-          "Type": "string",
-          "Required": true
-        }
-      ],
-      "Relations": [
-        {
-          "Name": "Products",
-          "Type": "many-to-many",
-          "Model": "Product",
-          "Through": "CartProduct"
-        }
-      ]
-    },
-    {
-      "Name": "CartProduct",
-      "ManyToMany": true,
-      "Properties": [
-        {
-          "Name": "Quantity",
-          "Type": "int",
-          "Required": true
-        },
-        {
-          "Name": "Price",
-          "Type": "double",
-          "Required": true
-        }
-      ],
-      "Relations": [
-        {
-          "Name": "Cart",
-          "Type": "many-to-one",
-          "Required": true,
-          "Model": "Cart"
-        },
-        {
-          "Name": "Product",
-          "Type": "many-to-one",
-          "Required": true,
-          "Model": "Product"
-        }
-      ]
-    },
-    {
-      "Name": "Order",
-      "Properties": [
-        {
-          "Name": "Number",
+          "Name": "JobTitle",
+          "DisplayName": "Job Title",
           "Type": "string"
         },
         {
           "Name": "Description",
           "Type": "string"
-        },
-        {
-          "Name": "TotalPrice",
-          "Type": "double"
         }
       ],
       "Relations": [
         {
-          "Name": "OrderState",
+          "Name": "ResumeState",
           "Type": "many-to-one",
           "Required": true,
-          "Model": "OrderState"
+          "Model": "ResumeState"
+        },
+        {
+          "Name": "Skills",
+          "Type": "many-to-many",
+          "Model": "Skill",
+          "Through": "ResumeSkill"
         }
       ]
     },
     {
-      "Name": "OrderState",
+      "Name": "ResumeState",
       "Properties": [
         {
           "Name": "Name",
@@ -113,49 +42,332 @@
         },
         {
           "Name": "DisplayName",
+          "Type": "string",
+          "Required": true
+        }
+      ],
+      "Relations": [
+        {
+          "Name": "Resumes",
+          "Type": "one-to-many",
+          "Model": "Resume"
+        }
+      ]
+    },
+    {
+      "Name": "Skill",
+      "Properties": [
+        {
+          "Name": "Name",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "Description",
           "Type": "string"
         }
       ],
       "Relations": [
         {
-          "Name": "Orders",
+          "Name": "Aliases",
           "Type": "one-to-many",
-          "Model": "Order"
+          "Model": "SkillAlias"
+        },
+        {
+          "Name": "Resumes",
+          "Type": "many-to-many",
+          "Model": "Resume",
+          "Through": "ResumeSkill"
+        },
+        {
+          "Name": "Jobs",
+          "Type": "many-to-many",
+          "Model": "Job",
+          "Through": "JobSkill"
         }
       ]
     },
     {
-      "Name": "Address",
-      "NamePlural": "Addresses",
+      "Name": "SkillAlias",
+      "NamePlural": "SkillAliases",
       "Properties": [
         {
-          "Name": "Street",
+          "Name": "Name",
           "Type": "string",
           "Required": true
         },
         {
-          "Name": "Number",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "PostalCode",
-          "DisplayName": "Postal Code",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "City",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "Primary",
-          "Type": "bool"
+          "Name": "Description",
+          "Type": "string"
         }
       ],
-      "Relations": []
+      "Relations": [
+        {
+          "Name": "Skill",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Skill"
+        }
+      ]
+    },
+    {
+      "Name": "ResumeSkill",
+      "ManyToMany": true,
+      "Properties": [
+        {
+          "Name": "Rating",
+          "Type": "int"
+        },
+        {
+          "Name": "Description",
+          "Type": "string"
+        }
+      ],
+      "Relations": [
+        {
+          "Name": "Resume",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Resume"
+        },
+        {
+          "Name": "Skill",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Skill"
+        }
+      ]
+    },
+    {
+      "Name": "Job",
+      "Properties": [
+        {
+          "Name": "Title",
+          "DisplayName": "Title",
+          "Type": "string"
+        },
+        {
+          "Name": "Description",
+          "Type": "string"
+        }
+      ],
+      "Relations": [
+        {
+          "Name": "JobState",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "JobState"
+        },
+        {
+          "Name": "Skills",
+          "Type": "many-to-many",
+          "Model": "Skill",
+          "Through": "JobSkill"
+        }
+      ]
+    },
+    {
+      "Name": "JobState",
+      "Properties": [
+        {
+          "Name": "Name",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "DisplayName",
+          "Type": "string",
+          "Required": true
+        }
+      ],
+      "Relations": [
+        {
+          "Name": "Jobs",
+          "Type": "one-to-many",
+          "Model": "Job"
+        }
+      ]
+    },
+    {
+      "Name": "JobSkill",
+      "ManyToMany": true,
+      "Properties": [
+        {
+          "Name": "Rating",
+          "Type": "int"
+        },
+        {
+          "Name": "Description",
+          "Type": "string"
+        }
+      ],
+      "Relations": [
+        {
+          "Name": "Job",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Job"
+        },
+        {
+          "Name": "Skill",
+          "Type": "many-to-one",
+          "Required": true,
+          "Model": "Skill"
+        }
+      ]
     }
+    //{
+    //  "Name": "Product",
+    //  "Properties": [
+    //    {
+    //      "Name": "Name",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Description",
+    //      "Type": "string"
+    //    },
+    //    {
+    //      "Name": "Price",
+    //      "Type": "double"
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Carts",
+    //      "Type": "many-to-many",
+    //      "Model": "Cart",
+    //      "Through": "CartProduct"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "Cart",
+    //  "Properties": [
+    //    {
+    //      "Name": "Name",
+    //      "Type": "string",
+    //      "Required": true
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Products",
+    //      "Type": "many-to-many",
+    //      "Model": "Product",
+    //      "Through": "CartProduct"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "CartProduct",
+    //  "ManyToMany": true,
+    //  "Properties": [
+    //    {
+    //      "Name": "Quantity",
+    //      "Type": "int",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Price",
+    //      "Type": "double",
+    //      "Required": true
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Cart",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "Cart"
+    //    },
+    //    {
+    //      "Name": "Product",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "Product"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "Order",
+    //  "Properties": [
+    //    {
+    //      "Name": "Number",
+    //      "Type": "string"
+    //    },
+    //    {
+    //      "Name": "Description",
+    //      "Type": "string"
+    //    },
+    //    {
+    //      "Name": "TotalPrice",
+    //      "Type": "double"
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "OrderState",
+    //      "Type": "many-to-one",
+    //      "Required": true,
+    //      "Model": "OrderState"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "OrderState",
+    //  "Properties": [
+    //    {
+    //      "Name": "Name",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "DisplayName",
+    //      "Type": "string"
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Orders",
+    //      "Type": "one-to-many",
+    //      "Model": "Order"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "Name": "Address",
+    //  "NamePlural": "Addresses",
+    //  "Properties": [
+    //    {
+    //      "Name": "Street",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Number",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "PostalCode",
+    //      "DisplayName": "Postal Code",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "City",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Primary",
+    //      "Type": "bool"
+    //    }
+    //  ],
+    //  "Relations": []
+    //},
     //{
     //  "Name": "Account",
     //  "DisplayField": "Name",
@@ -492,29 +704,29 @@
     "Secret": "ecd81ddc42741f570d02de8521f4e3326868a2233b2ff0c6589f5d7c26fb49a7",
     "TokenExpiresInMinutes": "1440",
     "EmailConfirmation": true,
-    "ConfirmEmailURL": "http://localhost:5000/api/auth/confirm-email?id={{userId}}&email={{userEmail}}&code={{code}}",
-    "ResetPasswordURL": "https://test.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}",
+    "ConfirmEmailURL": "https://cv-job-matcher.steffbeckers.eu/api/auth/confirm-email?id={{userId}}&email={{userEmail}}&code={{code}}",
+    "ResetPasswordURL": "https://cv-job-matcher.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}",
     "Admin": {
       "FirstName": "Steff",
       "LastName": "Beckers",
-      "UserName": "admin",
+      "UserName": "steff",
       "Email": "admin@steffbeckers.eu",
       "Password": "Steff12345!"
-    } //,
-    //"OtherRoles": [ "IT", "Sales", "HR", "CEO" ]
+    },
+    "OtherRoles": [ "Candidate", "Recruitment", "HR", "Sales", "CEO" ]
   },
   "WebAPI": {
     "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
-    "DatabaseConnection": "Server=localhost;Database=CodeGenCLITest;Trusted_Connection=True;MultipleActiveResultSets=true",
-    "NamespaceRoot": "Test.API",
+    "DatabaseConnection": "Server=localhost;Database=ResumeJobMatcher;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "NamespaceRoot": "RJM.API",
     "EmailService": {
       "Enabled": true,
       "MailServer": "smtp.gmail.com",
       "MailPort": 587,
       "UseSSL": false,
-      "SenderName": "Test App",
+      "SenderName": "Resume Job Matcher",
       "Sender": "steff@steffbeckers.eu",
-      "Password": "PASSWORD"
+      "Password": "qkwezhwchapbcsnl"
     }
   },
   "Angular": {

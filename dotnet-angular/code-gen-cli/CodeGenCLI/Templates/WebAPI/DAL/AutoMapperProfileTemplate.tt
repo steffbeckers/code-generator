@@ -31,8 +31,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
 <# List<CodeGenModel> manyToManysWithModel = manyToManyModels.Where(m => m.Relations.SingleOrDefault(r => r.Model == model.Name) != null).ToList(); #>
             // <#= !string.IsNullOrEmpty(model.NamePlural) ? model.NamePlural : model.Name + "s" #>
-			CreateMap<<#= model.Name #>, <#= model.Name #>VM>()<#= (manyToManysWithModel.Count == 0 ? ";" : "") #>
 <# foreach (CodeGenModel manyToManyWithModel in manyToManysWithModel) { #>
+			CreateMap<<#= model.Name #>, <#= model.Name #>VM>()<#= (manyToManysWithModel.Count == 0 ? ";" : "") #>
 <# CodeGenModelRelation manyToManyOtherRelation = manyToManyWithModel.Relations.First(r => r.Model != model.Name); #>
 <# CodeGenModel manyToManyOtherRelationModel = config.Models.First(x => x.Name == manyToManyOtherRelation.Model); #>
                 .ForMember(
@@ -42,8 +42,8 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                     )
                 );
 <# } #>
-            CreateMap<<#= model.Name #>VM, <#= model.Name #>>()<#= (manyToManysWithModel.Count == 0 ? ";" : "") #>
 <# foreach (CodeGenModel manyToManyWithModel in manyToManysWithModel) { #>
+            CreateMap<<#= model.Name #>VM, <#= model.Name #>>()<#= (manyToManysWithModel.Count == 0 ? ";" : "") #>
 <# CodeGenModelRelation manyToManyOtherRelation = manyToManyWithModel.Relations.First(r => r.Model != model.Name); #>
 <# CodeGenModel manyToManyOtherRelationModel = config.Models.First(x => x.Name == manyToManyOtherRelation.Model); #>
                 .ForMember(

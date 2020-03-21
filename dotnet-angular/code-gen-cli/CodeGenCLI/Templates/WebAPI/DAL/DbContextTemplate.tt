@@ -20,7 +20,7 @@ using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.Nam
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.DAL
 {
 <# if (config.Authentication.Enabled) { #>
-    public class TestContext : IdentityDbContext<
+    public class <#= config.Name #>Context : IdentityDbContext<
         User,
         IdentityRole<Guid>,
         Guid,

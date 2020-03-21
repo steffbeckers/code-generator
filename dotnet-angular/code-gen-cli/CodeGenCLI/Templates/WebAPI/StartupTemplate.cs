@@ -364,7 +364,7 @@ using ");
                     Title = """);
             
             #line 203 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.DisplayName));
             
             #line default
             #line hidden
@@ -470,7 +470,7 @@ using ");
                 c.SwaggerEndpoint(""./swagger/v1/swagger.json"", """);
             
             #line 319 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(config.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(config.DisplayName));
             
             #line default
             #line hidden
