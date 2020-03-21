@@ -46,7 +46,6 @@ namespace RJM.API.DAL
                 );
 
             // ResumeStates
-            CreateMap<ResumeStateVM, ResumeState>();
 
             // Skills
 			CreateMap<Skill, SkillVM>()
@@ -81,6 +80,7 @@ namespace RJM.API.DAL
                         );
                     }
                 );
+            CreateMap<SkillVM, Skill>()
                 .ForMember(
                     x => x.JobSkill,
                     x =>
@@ -100,7 +100,6 @@ namespace RJM.API.DAL
                 );
 
             // SkillAliases
-            CreateMap<SkillAliasVM, SkillAlias>();
 
             // Jobs
 			CreateMap<Job, JobVM>()
@@ -130,7 +129,6 @@ namespace RJM.API.DAL
                 );
 
             // JobStates
-            CreateMap<JobStateVM, JobState>();
 
             // Users
 			CreateMap<User, UserVM>();

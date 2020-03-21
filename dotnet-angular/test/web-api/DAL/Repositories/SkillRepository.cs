@@ -31,6 +31,8 @@ namespace RJM.API.DAL.Repositories
                 .Include(x => x.Aliases)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Resume)
+                .Include(x => x.JobSkill)
+                    .ThenInclude(x => x.Job)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .ToListAsync();
@@ -42,6 +44,8 @@ namespace RJM.API.DAL.Repositories
                 .Include(x => x.Aliases)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Resume)
+                .Include(x => x.JobSkill)
+                    .ThenInclude(x => x.Job)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
@@ -62,6 +66,25 @@ namespace RJM.API.DAL.Repositories
         //    return await this.context.ResumeSkill
         //        .Include(x => x.Skill)
         //        .Where(x => x.ResumeId == resumeId)
+        //        .Select(x => x.Skill)
+        //        .ToListAsync();
+        //}
+
+        public IEnumerable<Skill> GetByJobId(Guid jobId)
+        {
+            return this.context.JobSkill
+                .Include(x => x.Skill)
+                .Where(x => x.JobId == jobId)
+                .Select(x => x.Skill)
+                .ToList();
+        }
+        
+        //// Async test
+        //public async Task<IEnumerable<Skill>> GetByJobIdAsync(Guid jobId)
+        //{
+        //    return await this.context.JobSkill
+        //        .Include(x => x.Skill)
+        //        .Where(x => x.JobId == jobId)
         //        .Select(x => x.Skill)
         //        .ToListAsync();
         //}

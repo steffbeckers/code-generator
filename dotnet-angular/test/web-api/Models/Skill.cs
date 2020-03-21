@@ -17,6 +17,7 @@ namespace RJM.API.Models
 
 			//// Many-to-many
 			this.ResumeSkill = new List<ResumeSkill>();
+			this.JobSkill = new List<JobSkill>();
         }
 
 		// Properties
@@ -51,6 +52,10 @@ namespace RJM.API.Models
         /// The related Resumes of Skill.
         /// </summary>
 		public IList<ResumeSkill> ResumeSkill { get; set; }
+		/// <summary>
+        /// The related Jobs of Skill.
+        /// </summary>
+		public IList<JobSkill> JobSkill { get; set; }
 
 		// Generic properties
 

@@ -19,6 +19,7 @@ namespace RJM.API.ViewModels
 
 			//// Many-to-many
 			this.Resumes = new List<ResumeVM>();
+			this.Jobs = new List<JobVM>();
         }
 
 		// Properties
@@ -59,6 +60,15 @@ namespace RJM.API.ViewModels
         public Guid? ResumeId { get; set; }
         public int? ResumeRating { get; set; }
         public string ResumeDescription { get; set; }
+		/// <summary>
+        /// The related Jobs of Skill.
+        /// </summary>
+		public IList<JobVM> Jobs { get; set; }
+
+        ////// To create a link with Job directly on create of Skill.
+        public Guid? JobId { get; set; }
+        public int? JobRating { get; set; }
+        public string JobDescription { get; set; }
 
 		// Generic properties
 

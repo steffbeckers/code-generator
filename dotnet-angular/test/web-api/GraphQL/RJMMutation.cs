@@ -255,6 +255,42 @@ namespace RJM.API.GraphQL
             );
 
             FieldAsync<SkillType>(
+                "linkJobToSkill",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<JobSkillInputType>>
+                    {
+                        Name = "jobSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    JobSkill jobSkill = context.GetArgument<JobSkill>("jobSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await skillBLL.LinkJobToSkillAsync(jobSkill)
+                    );
+                }
+            );
+
+            FieldAsync<SkillType>(
+                "unlinkJobFromSkill",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<JobSkillInputType>>
+                    {
+                        Name = "jobSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    JobSkill jobSkill = context.GetArgument<JobSkill>("jobSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await skillBLL.UnlinkJobFromSkillAsync(jobSkill)
+                    );
+                }
+            );
+
+            FieldAsync<SkillType>(
                 "removeSkill",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>>

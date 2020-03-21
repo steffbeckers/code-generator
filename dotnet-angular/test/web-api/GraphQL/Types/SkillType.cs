@@ -11,7 +11,9 @@ namespace RJM.API.GraphQL.Types
             SkillAliasRepository skillAliasRepository,
 			SkillRepository skillRepository,
             ResumeRepository resumeRepository,
-			ResumeSkillRepository resumeSkillRepository
+			ResumeSkillRepository resumeSkillRepository,
+            JobRepository jobRepository,
+			JobSkillRepository jobSkillRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
@@ -46,6 +48,22 @@ namespace RJM.API.GraphQL.Types
             //    {
             //        return await context.TryAsyncResolve(
             //            async c => await resumeRepository.GetBySkillIdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
+
+            Field<ListGraphType<JobType>>(
+                "jobs",
+                resolve: context => jobRepository.GetBySkillId(context.Source.Id)
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<JobType>>(
+            //    "jobs",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await jobRepository.GetBySkillIdAsync(context.Source.Id)
             //        );
             //    }
             //);

@@ -14,6 +14,8 @@ namespace RJM.API.BLL
         private readonly SkillRepository skillRepository;
         private readonly ResumeRepository resumeRepository;
         private readonly ResumeSkillRepository resumeSkillRepository;
+        private readonly JobRepository jobRepository;
+        private readonly JobSkillRepository jobSkillRepository;
 
 		/// <summary>
 		/// The constructor of the Skill business logic layer.
@@ -21,12 +23,16 @@ namespace RJM.API.BLL
         public SkillBLL(
 			SkillRepository skillRepository,
             ResumeRepository resumeRepository,
-			ResumeSkillRepository resumeSkillRepository
+			ResumeSkillRepository resumeSkillRepository,
+            JobRepository jobRepository,
+			JobSkillRepository jobSkillRepository
 		)
         {
             this.skillRepository = skillRepository;
             this.resumeRepository = resumeRepository;
 			this.resumeSkillRepository = resumeSkillRepository;
+            this.jobRepository = jobRepository;
+			this.jobSkillRepository = jobSkillRepository;
         }
 
 		/// <summary>
@@ -156,6 +162,44 @@ namespace RJM.API.BLL
             return await this.GetSkillByIdAsync(resumeSkill.SkillId);
         }
 
+        public async Task<Skill> LinkJobToSkillAsync(JobSkill jobSkill)
+        {
+            // Validation
+            if (jobSkill == null) { return null; }
+
+            // Check if skill exists
+            Skill skill = await this.skillRepository.GetByIdAsync(jobSkill.SkillId);
+            if (skill == null)
+            {
+                return null;
+            }
+
+            // Check if job exists
+            Job job = await this.jobRepository.GetByIdAsync(jobSkill.JobId);
+            if (job == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
+            JobSkill jobSkillLink = this.jobSkillRepository.GetBySkillAndJobId(jobSkill.SkillId, jobSkill.JobId);
+
+            if (jobSkillLink == null)
+            {
+                await this.jobSkillRepository.InsertAsync(jobSkill);
+            }
+            else
+            {
+                // Mapping of fields on many-to-many
+                jobSkillLink.Rating = jobSkill.Rating;
+                jobSkillLink.Description = jobSkill.Description;
+
+                await this.jobSkillRepository.UpdateAsync(jobSkillLink);
+            }
+
+            return await this.GetSkillByIdAsync(jobSkill.SkillId);
+        }
+
         public async Task<Skill> UnlinkResumeFromSkillAsync(ResumeSkill resumeSkill)
         {
             // Validation
@@ -170,6 +214,22 @@ namespace RJM.API.BLL
             }
 
             return await this.GetSkillByIdAsync(resumeSkill.SkillId);
+        }
+
+        public async Task<Skill> UnlinkJobFromSkillAsync(JobSkill jobSkill)
+        {
+            // Validation
+            if (jobSkill == null) { return null; }
+
+            // Retrieve existing link
+            JobSkill jobSkillLink = this.jobSkillRepository.GetBySkillAndJobId(jobSkill.SkillId, jobSkill.JobId);
+		
+            if (jobSkillLink != null)
+            {
+                await this.jobSkillRepository.DeleteAsync(jobSkillLink);
+            }
+
+            return await this.GetSkillByIdAsync(jobSkill.SkillId);
         }
 
 		/// <summary>
