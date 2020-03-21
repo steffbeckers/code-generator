@@ -40,14 +40,14 @@ namespace RJM.API.ViewModels
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key StateId for State of Resume.
+        /// The related foreign key ResumeStateId for ResumeState of Resume.
         /// </summary>
-		public Guid StateId { get; set; }
+		public Guid ResumeStateId { get; set; }
 
 		/// <summary>
-        /// The related State of Resume.
+        /// The related ResumeState of Resume.
         /// </summary>
-		public ResumeStateVM State { get; set; }
+		public ResumeStateVM ResumeState { get; set; }
 
 
 		//// Many-to-many

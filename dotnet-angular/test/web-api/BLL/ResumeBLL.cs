@@ -104,7 +104,7 @@ namespace RJM.API.BLL
             // Mapping
             resume.JobTitle = resumeUpdate.JobTitle;
             resume.Description = resumeUpdate.Description;
-            resume.StateId = resumeUpdate.StateId;
+            resume.ResumeStateId = resumeUpdate.ResumeStateId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

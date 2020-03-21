@@ -19,23 +19,23 @@ namespace RJM.API.GraphQL.Types
             Field(x => x.Description, nullable: true);
 
             Field<ResumeStateType>(
-                "state",
+                "resumeState",
                 resolve: context =>
                 {
-                    if (context.Source.StateId != null)
-                        return resumeStateRepository.GetById((Guid)context.Source.StateId);
+                    if (context.Source.ResumeStateId != null)
+                        return resumeStateRepository.GetById((Guid)context.Source.ResumeStateId);
                     return null;
                 }
             );
 
             //// Async test
             //FieldAsync<ResumeStateType>(
-            //    "state",
+            //    "resumeState",
             //    resolve: async context =>
             //    {
-            //        if (context.Source.StateId != null) {
+            //        if (context.Source.ResumeStateId != null) {
             //            return await context.TryAsyncResolve(
-            //                async c => await resumeStateRepository.GetByIdAsync((Guid)context.Source.StateId)
+            //                async c => await resumeStateRepository.GetByIdAsync((Guid)context.Source.ResumeStateId)
             //            );
             //        }
             //        

@@ -49,6 +49,46 @@
             Deletes an existing resume record.
             </summary>
         </member>
+        <member name="T:RJM.API.BLL.ResumeStateBLL">
+            <summary>
+            The business logic layer for ResumeStates.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeStateBLL.#ctor(RJM.API.DAL.Repositories.ResumeStateRepository)">
+            <summary>
+            The constructor of the ResumeState business logic layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeStateBLL.GetAllResumeStatesAsync">
+            <summary>
+            Retrieves all resumestates.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeStateBLL.GetResumeStateByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one resumestate by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeStateBLL.CreateResumeStateAsync(RJM.API.Models.ResumeState)">
+            <summary>
+            Creates a new resumestate record.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeStateBLL.UpdateResumeStateAsync(RJM.API.Models.ResumeState)">
+            <summary>
+            Updates an existing resumestate record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeStateBLL.DeleteResumeStateByIdAsync(System.Guid)">
+            <summary>
+            Deletes an existing resumestate record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.ResumeStateBLL.DeleteResumeStateAsync(RJM.API.Models.ResumeState)">
+            <summary>
+            Deletes an existing resumestate record.
+            </summary>
+        </member>
         <member name="T:RJM.API.BLL.SkillAliasBLL">
             <summary>
             The business logic layer for SkillAliases.
@@ -186,6 +226,46 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:RJM.API.Controllers.ResumeStatesController">
+            <summary>
+            The ResumeStates controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumeStatesController.#ctor(Microsoft.Extensions.Logging.ILogger{RJM.API.Controllers.ResumeStatesController},AutoMapper.IMapper,RJM.API.BLL.ResumeStateBLL)">
+            <summary>
+            The constructor of the ResumeStates controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumeStatesController.GetResumeStates">
+            <summary>
+            Retrieves all resumestates.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumeStatesController.GetResumeState(System.Guid)">
+            <summary>
+            Retrieves a specific resumestate.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumeStatesController.CreateResumeState(RJM.API.ViewModels.ResumeStateVM)">
+            <summary>
+            Creates a new resumestate.
+            </summary>
+            <param name="resumestateVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumeStatesController.UpdateResumeState(System.Guid,RJM.API.ViewModels.ResumeStateVM)">
+            <summary>
+            Updates a specific resumestate.
+            </summary>
+            <param name="id"></param>
+            <param name="resumeStateVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumeStatesController.DeleteResumeState(System.Guid)">
+            <summary>
+            Deletes a specific resumestate.
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="T:RJM.API.Controllers.SkillAliasesController">
             <summary>
             The SkillAliases controller.
@@ -308,6 +388,16 @@
             The constructor of the ResumeSkill repository.
             </summary>
         </member>
+        <member name="T:RJM.API.DAL.Repositories.ResumeStateRepository">
+            <summary>
+            The repository for ResumeStates in the data access layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.Repositories.ResumeStateRepository.#ctor(RJM.API.DAL.RJMContext)">
+            <summary>
+            The constructor of the ResumeState repository.
+            </summary>
+        </member>
         <member name="T:RJM.API.DAL.Repositories.SkillAliasRepository">
             <summary>
             The repository for SkillAliases in the data access layer.
@@ -346,6 +436,16 @@
         <member name="P:RJM.API.Models.Resume.Description">
             <summary>
             The Description property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.ResumeStateId">
+            <summary>
+            The related foreign key ResumeStateId for ResumeState of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.ResumeState">
+            <summary>
+            The related ResumeState of Resume.
             </summary>
         </member>
         <member name="P:RJM.API.Models.Resume.ResumeSkill">
@@ -459,6 +559,66 @@
             </summary>
         </member>
         <member name="P:RJM.API.Models.ResumeSkill.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
+        <member name="T:RJM.API.Models.ResumeState">
+            <summary>
+            ResumeState model
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.Id">
+            <summary>
+            The identifier of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.Name">
+            <summary>
+            The Name property of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.DisplayName">
+            <summary>
+            The DisplayName property of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.Resumes">
+            <summary>
+            The related Resumes of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.ResumeState.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
@@ -593,6 +753,61 @@
             The user who last modified the record
             </summary>
         </member>
+        <member name="T:RJM.API.ViewModels.ResumeStateVM">
+            <summary>
+            ResumeState view model
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.Id">
+            <summary>
+            The identifier of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.Name">
+            <summary>
+            The Name property of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.DisplayName">
+            <summary>
+            The DisplayName property of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.Resumes">
+            <summary>
+            The related Resumes of ResumeState.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeStateVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:RJM.API.ViewModels.ResumeVM">
             <summary>
             Resume view model
@@ -611,6 +826,16 @@
         <member name="P:RJM.API.ViewModels.ResumeVM.Description">
             <summary>
             The Description property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.ResumeStateId">
+            <summary>
+            The related foreign key ResumeStateId for ResumeState of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.ResumeState">
+            <summary>
+            The related ResumeState of Resume.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.ResumeVM.Skills">
