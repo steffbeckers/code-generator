@@ -59,7 +59,7 @@ namespace RJM.API.ViewModels
 
         ////// To create a link with Skill directly on create of Resume.
         public Guid? SkillId { get; set; }
-        public int SkillRating { get; set; }
+        public int? SkillRating { get; set; }
         public string SkillDescription { get; set; }
 
 		// Generic properties

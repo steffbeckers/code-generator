@@ -2,17 +2,17 @@ using GraphQL.Types;
 
 namespace RJM.API.GraphQL.Types
 {
-    public class ResumeInputType : InputObjectGraphType
+    public class JobInputType : InputObjectGraphType
     {
-        public ResumeInputType()
+        public JobInputType()
         {
-            Name = "resumeInput";
+            Name = "jobInput";
             Field<IdGraphType>("id");
-		    Field<StringGraphType>("jobTitle");
+		    Field<StringGraphType>("title");
 		    Field<StringGraphType>("description");
-		    Field<NonNullGraphType<IdGraphType>>("resumeStateId");
+		    Field<NonNullGraphType<IdGraphType>>("jobStateId");
 
-            // To create a link with Skill directly on create of Resume.
+            // To create a link with Skill directly on create of Job.
             //Field<IdGraphType>("skillId");
             //Field<IntGraphType>("skillRating");
             //Field<StringGraphType>("skillDescription");

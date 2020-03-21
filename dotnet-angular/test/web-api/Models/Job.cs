@@ -4,29 +4,32 @@ using System.Collections.Generic;
 namespace RJM.API.Models
 {
 	/// <summary>
-    /// ResumeSkill model
+    /// Job model
     /// </summary>
-    public class ResumeSkill
+    public class Job
     {
-		public ResumeSkill()
+		public Job()
         {
             // Relations
+
+			//// Many-to-many
+			this.JobSkill = new List<JobSkill>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of ResumeSkill.
+        /// The identifier of Job.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Rating property of ResumeSkill.
+        /// The Title property of Job.
         /// </summary>
-		public int? Rating { get; set; }
+		public string Title { get; set; }
 
 		/// <summary>
-        /// The Description property of ResumeSkill.
+        /// The Description property of Job.
         /// </summary>
 		public string Description { get; set; }
 
@@ -35,25 +38,22 @@ namespace RJM.API.Models
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key ResumeId for Resume of ResumeSkill.
+        /// The related foreign key JobStateId for JobState of Job.
         /// </summary>
-		public Guid ResumeId { get; set; }
+		public Guid JobStateId { get; set; }
 
 		/// <summary>
-        /// The related Resume of ResumeSkill.
+        /// The related JobState of Job.
         /// </summary>
-		public Resume Resume { get; set; }
+		public JobState JobState { get; set; }
 
-	    /// <summary>
-        /// The related foreign key SkillId for Skill of ResumeSkill.
-        /// </summary>
-		public Guid SkillId { get; set; }
+
+		//// Many-to-many
 
 		/// <summary>
-        /// The related Skill of ResumeSkill.
+        /// The related Skills of Job.
         /// </summary>
-		public Skill Skill { get; set; }
-
+		public IList<JobSkill> JobSkill { get; set; }
 
 		// Generic properties
 

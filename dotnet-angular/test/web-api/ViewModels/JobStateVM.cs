@@ -6,59 +6,45 @@ using RJM.API.ViewModels.Identity;
 namespace RJM.API.ViewModels
 {
 	/// <summary>
-    /// Skill view model
+    /// JobState view model
     /// </summary>
-    public class SkillVM
+    public class JobStateVM
     {
-		public SkillVM()
+		public JobStateVM()
         {
             // Relations
 
 			//// One-to-many
-			this.Aliases = new List<SkillAliasVM>();
-
-			//// Many-to-many
-			this.Resumes = new List<ResumeVM>();
+			this.Jobs = new List<JobVM>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Skill.
+        /// The identifier of JobState.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Name property of Skill.
+        /// The Name property of JobState.
         /// </summary>
         [Required]
 		public string Name { get; set; }
 
 		/// <summary>
-        /// The Description property of Skill.
+        /// The DisplayName property of JobState.
         /// </summary>
-		public string Description { get; set; }
+        [Required]
+		public string DisplayName { get; set; }
 
 		// Relations
 
 		//// One-to-many
 
 		/// <summary>
-        /// The related Aliases of Skill.
+        /// The related Jobs of JobState.
         /// </summary>
-		public IList<SkillAliasVM> Aliases { get; set; }
-
-		//// Many-to-many
-
-		/// <summary>
-        /// The related Resumes of Skill.
-        /// </summary>
-		public IList<ResumeVM> Resumes { get; set; }
-
-        ////// To create a link with Resume directly on create of Skill.
-        public Guid? ResumeId { get; set; }
-        public int? ResumeRating { get; set; }
-        public string ResumeDescription { get; set; }
+		public IList<JobVM> Jobs { get; set; }
 
 		// Generic properties
 

@@ -1,32 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using RJM.API.ViewModels.Identity;
 
-namespace RJM.API.Models
+namespace RJM.API.ViewModels
 {
 	/// <summary>
-    /// ResumeSkill model
+    /// Job view model
     /// </summary>
-    public class ResumeSkill
+    public class JobVM
     {
-		public ResumeSkill()
+		public JobVM()
         {
             // Relations
+
+			//// Many-to-many
+			this.Skills = new List<SkillVM>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of ResumeSkill.
+        /// The identifier of Job.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Rating property of ResumeSkill.
+        /// The Title property of Job.
         /// </summary>
-		public int? Rating { get; set; }
+		public string Title { get; set; }
 
 		/// <summary>
-        /// The Description property of ResumeSkill.
+        /// The Description property of Job.
         /// </summary>
 		public string Description { get; set; }
 
@@ -35,25 +40,27 @@ namespace RJM.API.Models
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key ResumeId for Resume of ResumeSkill.
+        /// The related foreign key JobStateId for JobState of Job.
         /// </summary>
-		public Guid ResumeId { get; set; }
+		public Guid JobStateId { get; set; }
 
 		/// <summary>
-        /// The related Resume of ResumeSkill.
+        /// The related JobState of Job.
         /// </summary>
-		public Resume Resume { get; set; }
+		public JobStateVM JobState { get; set; }
 
-	    /// <summary>
-        /// The related foreign key SkillId for Skill of ResumeSkill.
-        /// </summary>
-		public Guid SkillId { get; set; }
+
+		//// Many-to-many
 
 		/// <summary>
-        /// The related Skill of ResumeSkill.
+        /// The related Skills of Job.
         /// </summary>
-		public Skill Skill { get; set; }
+		public IList<SkillVM> Skills { get; set; }
 
+        ////// To create a link with Skill directly on create of Job.
+        public Guid? SkillId { get; set; }
+        public int? SkillRating { get; set; }
+        public string SkillDescription { get; set; }
 
 		// Generic properties
 
@@ -68,11 +75,6 @@ namespace RJM.API.Models
 		public DateTime ModifiedOn { get; set; }
 
 		/// <summary>
-        /// The date and time of when the record is (soft) deleted
-        /// </summary>
-		public DateTime? DeletedOn { get; set; }
-
-		/// <summary>
         /// The Id of the user who created the record
         /// </summary>
 		public Guid CreatedByUserId { get; set; }
@@ -80,7 +82,7 @@ namespace RJM.API.Models
 		/// <summary>
         /// The user who created the record
         /// </summary>
-		public User CreatedByUser { get; set; }
+		public UserVM CreatedByUser { get; set; }
 
 		/// <summary>
         /// The Id of the user who last modified the record
@@ -90,9 +92,7 @@ namespace RJM.API.Models
 		/// <summary>
         /// The user who last modified the record
         /// </summary>
-		public User ModifiedByUser { get; set; }
+		public UserVM ModifiedByUser { get; set; }
 
-		// TODO: Multi-tenancy
-		//public Guid TenantId { get; set; }
     }
 }

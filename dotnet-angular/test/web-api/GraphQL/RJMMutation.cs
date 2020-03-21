@@ -13,7 +13,9 @@ namespace RJM.API.GraphQL
 			ResumeBLL resumeBLL,
 			ResumeStateBLL resumeStateBLL,
 			SkillBLL skillBLL,
-			SkillAliasBLL skillAliasBLL
+			SkillAliasBLL skillAliasBLL,
+			JobBLL jobBLL,
+			JobStateBLL jobStateBLL
         )
         {
             this.AuthorizeWith("Authorized");
@@ -326,6 +328,162 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await skillAliasBLL.DeleteSkillAliasByIdAsync(id)
+                    );
+                }
+            );
+
+			// Jobs
+            FieldAsync<JobType>(
+                "createJob",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<JobInputType>>
+                    {
+                        Name = "job"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Job job = context.GetArgument<Job>("job");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobBLL.CreateJobAsync(job)
+                    );
+                }
+            );
+
+            FieldAsync<JobType>(
+                "updateJob",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<JobInputType>>
+                    {
+                        Name = "job"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    Job job = context.GetArgument<Job>("job");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobBLL.UpdateJobAsync(job)
+                    );
+                }
+            );
+
+            FieldAsync<JobType>(
+                "linkSkillToJob",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<JobSkillInputType>>
+                    {
+                        Name = "jobSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    JobSkill jobSkill = context.GetArgument<JobSkill>("jobSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobBLL.LinkSkillToJobAsync(jobSkill)
+                    );
+                }
+            );
+
+            FieldAsync<JobType>(
+                "unlinkSkillFromJob",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<JobSkillInputType>>
+                    {
+                        Name = "jobSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    JobSkill jobSkill = context.GetArgument<JobSkill>("jobSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobBLL.UnlinkSkillFromJobAsync(jobSkill)
+                    );
+                }
+            );
+
+            FieldAsync<JobType>(
+                "removeJob",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobBLL.DeleteJobByIdAsync(id)
+                    );
+                }
+            );
+
+			// JobStates
+            FieldAsync<JobStateType>(
+                "createJobState",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<JobStateInputType>>
+                    {
+                        Name = "jobState"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    JobState jobState = context.GetArgument<JobState>("jobState");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobStateBLL.CreateJobStateAsync(jobState)
+                    );
+                }
+            );
+
+            FieldAsync<JobStateType>(
+                "updateJobState",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<JobStateInputType>>
+                    {
+                        Name = "jobState"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    JobState jobState = context.GetArgument<JobState>("jobState");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobStateBLL.UpdateJobStateAsync(jobState)
+                    );
+                }
+            );
+
+            FieldAsync<JobStateType>(
+                "removeJobState",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await jobStateBLL.DeleteJobStateByIdAsync(id)
                     );
                 }
             );

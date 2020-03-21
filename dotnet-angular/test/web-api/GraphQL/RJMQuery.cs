@@ -13,7 +13,9 @@ namespace RJM.API.GraphQL
 			ResumeRepository resumeRepository,
 			ResumeStateRepository resumeStateRepository,
 			SkillRepository skillRepository,
-			SkillAliasRepository skillAliasRepository
+			SkillAliasRepository skillAliasRepository,
+			JobRepository jobRepository,
+			JobStateRepository jobStateRepository
         )
         {
             this.AuthorizeWith("Authorized");
@@ -158,6 +160,78 @@ namespace RJM.API.GraphQL
             //    {
             //        return await context.TryAsyncResolve(
             //            async c => await skillAliasRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
+            //        );
+            //    }
+            //);
+
+			// Jobs
+            
+            Field<ListGraphType<JobType>>(
+                "jobs",
+                resolve: context => jobRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<JobType>>(
+            //    "jobs",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await jobRepository.GetAsync(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            //        );
+            //    }
+            //);
+
+            Field<JobType>(
+                "job",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+                resolve: context => jobRepository.GetById(context.GetArgument<Guid>("id"))
+            );
+
+            //// Async test
+            //FieldAsync<JobType>(
+            //    "job",
+            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await jobRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
+            //        );
+            //    }
+            //);
+
+			// JobStates
+            
+            Field<ListGraphType<JobStateType>>(
+                "jobStates",
+                resolve: context => jobStateRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<JobStateType>>(
+            //    "jobStates",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await jobStateRepository.GetAsync(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            //        );
+            //    }
+            //);
+
+            Field<JobStateType>(
+                "jobState",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+                resolve: context => jobStateRepository.GetById(context.GetArgument<Guid>("id"))
+            );
+
+            //// Async test
+            //FieldAsync<JobStateType>(
+            //    "jobState",
+            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await jobStateRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
             //        );
             //    }
             //);

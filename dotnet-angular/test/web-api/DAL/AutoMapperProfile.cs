@@ -57,6 +57,12 @@ namespace RJM.API.DAL
                         y => y.ResumeSkill.Select(z => z.Resume)
                     )
                 );
+                .ForMember(
+                    x => x.Jobs,
+                    x => x.MapFrom(
+                        y => y.JobSkill.Select(z => z.Job)
+                    )
+                );
             CreateMap<SkillVM, Skill>()
                 .ForMember(
                     x => x.ResumeSkill,
@@ -75,10 +81,58 @@ namespace RJM.API.DAL
                         );
                     }
                 );
+                .ForMember(
+                    x => x.JobSkill,
+                    x =>
+                    {
+                        x.PreCondition(z => z.JobId != null);
+                        x.MapFrom(
+                            y => new List<JobSkill>() {
+                                new JobSkill()
+                                {
+                                    JobId = (Guid)y.JobId,
+                                    Rating = y.JobRating,
+                                    Description = y.JobDescription
+                                }
+                            }
+                        );
+                    }
+                );
 
             // SkillAliases
 			CreateMap<SkillAlias, SkillAliasVM>();
             CreateMap<SkillAliasVM, SkillAlias>();
+
+            // Jobs
+			CreateMap<Job, JobVM>()
+                .ForMember(
+                    x => x.Skills,
+                    x => x.MapFrom(
+                        y => y.JobSkill.Select(z => z.Skill)
+                    )
+                );
+            CreateMap<JobVM, Job>()
+                .ForMember(
+                    x => x.JobSkill,
+                    x =>
+                    {
+                        x.PreCondition(z => z.SkillId != null);
+                        x.MapFrom(
+                            y => new List<JobSkill>() {
+                                new JobSkill()
+                                {
+                                    SkillId = (Guid)y.SkillId,
+                                    Rating = y.SkillRating,
+                                    Description = y.SkillDescription
+                                }
+                            }
+                        );
+                    }
+                );
+
+            // JobStates
+			CreateMap<JobState, JobStateVM>();
+            CreateMap<JobStateVM, JobState>();
 
             // Users
 			CreateMap<User, UserVM>();

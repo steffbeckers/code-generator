@@ -4,11 +4,11 @@ using System.Collections.Generic;
 namespace RJM.API.Models
 {
 	/// <summary>
-    /// ResumeSkill model
+    /// JobSkill model
     /// </summary>
-    public class ResumeSkill
+    public class JobSkill
     {
-		public ResumeSkill()
+		public JobSkill()
         {
             // Relations
         }
@@ -16,17 +16,17 @@ namespace RJM.API.Models
 		// Properties
 
 		/// <summary>
-        /// The identifier of ResumeSkill.
+        /// The identifier of JobSkill.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Rating property of ResumeSkill.
+        /// The Rating property of JobSkill.
         /// </summary>
 		public int? Rating { get; set; }
 
 		/// <summary>
-        /// The Description property of ResumeSkill.
+        /// The Description property of JobSkill.
         /// </summary>
 		public string Description { get; set; }
 
@@ -35,22 +35,22 @@ namespace RJM.API.Models
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key ResumeId for Resume of ResumeSkill.
+        /// The related foreign key JobId for Job of JobSkill.
         /// </summary>
-		public Guid ResumeId { get; set; }
+		public Guid JobId { get; set; }
 
 		/// <summary>
-        /// The related Resume of ResumeSkill.
+        /// The related Job of JobSkill.
         /// </summary>
-		public Resume Resume { get; set; }
+		public Job Job { get; set; }
 
 	    /// <summary>
-        /// The related foreign key SkillId for Skill of ResumeSkill.
+        /// The related foreign key SkillId for Skill of JobSkill.
         /// </summary>
 		public Guid SkillId { get; set; }
 
 		/// <summary>
-        /// The related Skill of ResumeSkill.
+        /// The related Skill of JobSkill.
         /// </summary>
 		public Skill Skill { get; set; }
 

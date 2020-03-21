@@ -134,12 +134,17 @@ namespace RJM.API
 			services.AddScoped<SkillRepository>();
 			services.AddScoped<SkillAliasRepository>();
 			services.AddScoped<ResumeSkillRepository>();
+			services.AddScoped<JobRepository>();
+			services.AddScoped<JobStateRepository>();
+			services.AddScoped<JobSkillRepository>();
 
 			// BLLs
 			services.AddScoped<ResumeBLL>();
 			services.AddScoped<ResumeStateBLL>();
 			services.AddScoped<SkillBLL>();
 			services.AddScoped<SkillAliasBLL>();
+			services.AddScoped<JobBLL>();
+			services.AddScoped<JobStateBLL>();
             services.AddScoped<AuthBLL>();
 
             // Services

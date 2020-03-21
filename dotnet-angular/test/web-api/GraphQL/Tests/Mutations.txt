@@ -88,3 +88,57 @@ mutation createResumeSkill($resumeSkill: resumeSkillInput!) {
 }
 
 
+// Jobs
+
+mutation createJob($job: jobInput!) {
+  createJob(job: $job) {
+    id
+    title
+    description
+  }
+}
+
+{
+  "job": {
+    "title": "",
+    "description": ""
+  }
+}
+
+
+// JobStates
+
+mutation createJobState($jobState: jobStateInput!) {
+  createJobState(jobState: $jobState) {
+    id
+    name
+    displayName
+  }
+}
+
+{
+  "jobState": {
+    "name": "",
+    "displayName": ""
+  }
+}
+
+
+// JobSkills
+
+mutation createJobSkill($jobSkill: jobSkillInput!) {
+  createJobSkill(jobSkill: $jobSkill) {
+    id
+    rating
+    description
+  }
+}
+
+{
+  "jobSkill": {
+    "rating": "",
+    "description": ""
+  }
+}
+
+
