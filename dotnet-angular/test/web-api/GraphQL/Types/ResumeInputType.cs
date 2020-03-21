@@ -14,7 +14,7 @@ namespace RJM.API.GraphQL.Types
 
             // To create a link with Skill directly on create of Resume.
             //Field<IdGraphType>("skillId");
-            //Field<IntGraphType>("skillRating");
+            //Field<IntGraphType>("skillLevel");
             //Field<StringGraphType>("skillDescription");
         }
     }

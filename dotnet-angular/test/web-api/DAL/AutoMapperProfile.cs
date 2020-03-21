@@ -18,6 +18,8 @@ namespace RJM.API.DAL
 		/// </summary>
         public AutoMapperProfile()
         {
+            // Documents
+
             // Resumes
 			CreateMap<Resume, ResumeVM>()
                 .ForMember(
@@ -37,7 +39,7 @@ namespace RJM.API.DAL
                                 new ResumeSkill()
                                 {
                                     SkillId = (Guid)y.SkillId,
-                                    Rating = y.SkillRating,
+                                    Level = y.SkillLevel,
                                     Description = y.SkillDescription
                                 }
                             }
@@ -73,7 +75,7 @@ namespace RJM.API.DAL
                                 new ResumeSkill()
                                 {
                                     ResumeId = (Guid)y.ResumeId,
-                                    Rating = y.ResumeRating,
+                                    Level = y.ResumeLevel,
                                     Description = y.ResumeDescription
                                 }
                             }
@@ -91,7 +93,7 @@ namespace RJM.API.DAL
                                 new JobSkill()
                                 {
                                     JobId = (Guid)y.JobId,
-                                    Rating = y.JobRating,
+                                    Level = y.JobLevel,
                                     Description = y.JobDescription
                                 }
                             }
@@ -120,7 +122,7 @@ namespace RJM.API.DAL
                                 new JobSkill()
                                 {
                                     SkillId = (Guid)y.SkillId,
-                                    Rating = y.SkillRating,
+                                    Level = y.SkillLevel,
                                     Description = y.SkillDescription
                                 }
                             }

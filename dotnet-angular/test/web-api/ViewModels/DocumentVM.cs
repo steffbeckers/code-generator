@@ -6,11 +6,11 @@ using RJM.API.ViewModels.Identity;
 namespace RJM.API.ViewModels
 {
 	/// <summary>
-    /// Job view model
+    /// Document view model
     /// </summary>
-    public class JobVM
+    public class DocumentVM
     {
-		public JobVM()
+		public DocumentVM()
         {
             // Relations
 
@@ -21,43 +21,64 @@ namespace RJM.API.ViewModels
 		// Properties
 
 		/// <summary>
-        /// The identifier of Job.
+        /// The identifier of Document.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Title property of Job.
+        /// The Name property of Document.
         /// </summary>
-		public string Title { get; set; }
+        [Required]
+		public string Name { get; set; }
 
 		/// <summary>
-        /// The Description property of Job.
+        /// The DisplayName property of Document.
+        /// </summary>
+		public string DisplayName { get; set; }
+
+		/// <summary>
+        /// The Description property of Document.
         /// </summary>
 		public string Description { get; set; }
+
+		/// <summary>
+        /// The Path property of Document.
+        /// </summary>
+		public string Path { get; set; }
+
+		/// <summary>
+        /// The URL property of Document.
+        /// </summary>
+		public string URL { get; set; }
+
+		/// <summary>
+        /// The MimeType property of Document.
+        /// </summary>
+		public string MimeType { get; set; }
 
 		// Relations
 
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key JobStateId for JobState of Job.
+        /// The related foreign key ResumeStateId for ResumeState of Document.
         /// </summary>
-		public Guid JobStateId { get; set; }
+		public Guid ResumeStateId { get; set; }
 
 		/// <summary>
-        /// The related JobState of Job.
+        /// The related ResumeState of Document.
         /// </summary>
-		public JobStateVM JobState { get; set; }
+		public ResumeStateVM ResumeState { get; set; }
 
 
 		//// Many-to-many
 
 		/// <summary>
-        /// The related Skills of Job.
+        /// The related Skills of Document.
         /// </summary>
 		public IList<SkillVM> Skills { get; set; }
 
-        ////// To create a link with Skill directly on create of Job.
+        ////// To create a link with Skill directly on create of Document.
         public Guid? SkillId { get; set; }
         public int? SkillLevel { get; set; }
         public string SkillDescription { get; set; }

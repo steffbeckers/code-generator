@@ -21,9 +21,9 @@ namespace RJM.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Rating property of JobSkill.
+        /// The Level property of JobSkill.
         /// </summary>
-		public int? Rating { get; set; }
+		public int? Level { get; set; }
 
 		/// <summary>
         /// The Description property of JobSkill.

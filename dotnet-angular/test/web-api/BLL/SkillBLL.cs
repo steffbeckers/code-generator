@@ -153,7 +153,7 @@ namespace RJM.API.BLL
             else
             {
                 // Mapping of fields on many-to-many
-                resumeSkillLink.Rating = resumeSkill.Rating;
+                resumeSkillLink.Level = resumeSkill.Level;
                 resumeSkillLink.Description = resumeSkill.Description;
 
                 await this.resumeSkillRepository.UpdateAsync(resumeSkillLink);
@@ -191,7 +191,7 @@ namespace RJM.API.BLL
             else
             {
                 // Mapping of fields on many-to-many
-                jobSkillLink.Rating = jobSkill.Rating;
+                jobSkillLink.Level = jobSkill.Level;
                 jobSkillLink.Description = jobSkill.Description;
 
                 await this.jobSkillRepository.UpdateAsync(jobSkillLink);

@@ -13,11 +13,11 @@ namespace RJM.API.GraphQL.Types
 
             // To create a link with Resume directly on create of Skill.
             //Field<IdGraphType>("resumeId");
-            //Field<IntGraphType>("resumeRating");
+            //Field<IntGraphType>("resumeLevel");
             //Field<StringGraphType>("resumeDescription");
             // To create a link with Job directly on create of Skill.
             //Field<IdGraphType>("jobId");
-            //Field<IntGraphType>("jobRating");
+            //Field<IntGraphType>("jobLevel");
             //Field<StringGraphType>("jobDescription");
         }
     }

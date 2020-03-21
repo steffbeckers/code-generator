@@ -10,6 +10,7 @@ namespace RJM.API.GraphQL
     public class RJMMutation : ObjectGraphType
     {
         public RJMMutation(
+			DocumentBLL documentBLL,
 			ResumeBLL resumeBLL,
 			ResumeStateBLL resumeStateBLL,
 			SkillBLL skillBLL,
@@ -19,6 +20,102 @@ namespace RJM.API.GraphQL
         )
         {
             this.AuthorizeWith("Authorized");
+
+			// Documents
+            FieldAsync<DocumentType>(
+                "createDocument",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<DocumentInputType>>
+                    {
+                        Name = "document"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Document document = context.GetArgument<Document>("document");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentBLL.CreateDocumentAsync(document)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentType>(
+                "updateDocument",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<DocumentInputType>>
+                    {
+                        Name = "document"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    Document document = context.GetArgument<Document>("document");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentBLL.UpdateDocumentAsync(document)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentType>(
+                "linkSkillToDocument",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
+                    {
+                        Name = "resumeSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentBLL.LinkSkillToDocumentAsync(resumeSkill)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentType>(
+                "unlinkSkillFromDocument",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
+                    {
+                        Name = "resumeSkill"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentBLL.UnlinkSkillFromDocumentAsync(resumeSkill)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentType>(
+                "removeDocument",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentBLL.DeleteDocumentByIdAsync(id)
+                    );
+                }
+            );
 
 			// Resumes
             FieldAsync<ResumeType>(

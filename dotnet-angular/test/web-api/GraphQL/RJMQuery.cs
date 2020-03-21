@@ -10,6 +10,7 @@ namespace RJM.API.GraphQL
     public class RJMQuery : ObjectGraphType
     {
         public RJMQuery(
+			DocumentRepository documentRepository,
 			ResumeRepository resumeRepository,
 			ResumeStateRepository resumeStateRepository,
 			SkillRepository skillRepository,
@@ -19,6 +20,42 @@ namespace RJM.API.GraphQL
         )
         {
             this.AuthorizeWith("Authorized");
+
+			// Documents
+            
+            Field<ListGraphType<DocumentType>>(
+                "documents",
+                resolve: context => documentRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<DocumentType>>(
+            //    "documents",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await documentRepository.GetAsync(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            //        );
+            //    }
+            //);
+
+            Field<DocumentType>(
+                "document",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+                resolve: context => documentRepository.GetById(context.GetArgument<Guid>("id"))
+            );
+
+            //// Async test
+            //FieldAsync<DocumentType>(
+            //    "document",
+            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await documentRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
+            //        );
+            //    }
+            //);
 
 			// Resumes
             

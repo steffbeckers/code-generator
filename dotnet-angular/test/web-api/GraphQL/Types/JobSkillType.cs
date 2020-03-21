@@ -14,7 +14,7 @@ namespace RJM.API.GraphQL.Types
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
-            Field(x => x.Rating, nullable: true);
+            Field(x => x.Level, nullable: true);
             Field(x => x.Description, nullable: true);
 
             Field<JobType>(

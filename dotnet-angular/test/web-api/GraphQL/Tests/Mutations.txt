@@ -1,3 +1,29 @@
+// Documents
+
+mutation createDocument($document: documentInput!) {
+  createDocument(document: $document) {
+    id
+    name
+    displayName
+    description
+    path
+    uRL
+    mimeType
+  }
+}
+
+{
+  "document": {
+    "name": "",
+    "displayName": "",
+    "description": "",
+    "path": "",
+    "uRL": "",
+    "mimeType": ""
+  }
+}
+
+
 // Resumes
 
 mutation createResume($resume: resumeInput!) {
@@ -75,14 +101,14 @@ mutation createSkillAlias($skillAlias: skillAliasInput!) {
 mutation createResumeSkill($resumeSkill: resumeSkillInput!) {
   createResumeSkill(resumeSkill: $resumeSkill) {
     id
-    rating
+    level
     description
   }
 }
 
 {
   "resumeSkill": {
-    "rating": "",
+    "level": "",
     "description": ""
   }
 }
@@ -129,14 +155,14 @@ mutation createJobState($jobState: jobStateInput!) {
 mutation createJobSkill($jobSkill: jobSkillInput!) {
   createJobSkill(jobSkill: $jobSkill) {
     id
-    rating
+    level
     description
   }
 }
 
 {
   "jobSkill": {
-    "rating": "",
+    "level": "",
     "description": ""
   }
 }

@@ -58,7 +58,7 @@ namespace RJM.API.ViewModels
 
         ////// To create a link with Resume directly on create of Skill.
         public Guid? ResumeId { get; set; }
-        public int? ResumeRating { get; set; }
+        public int? ResumeLevel { get; set; }
         public string ResumeDescription { get; set; }
 		/// <summary>
         /// The related Jobs of Skill.
@@ -67,7 +67,7 @@ namespace RJM.API.ViewModels
 
         ////// To create a link with Job directly on create of Skill.
         public Guid? JobId { get; set; }
-        public int? JobRating { get; set; }
+        public int? JobLevel { get; set; }
         public string JobDescription { get; set; }
 
 		// Generic properties

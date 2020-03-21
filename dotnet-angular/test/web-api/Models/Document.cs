@@ -4,56 +4,76 @@ using System.Collections.Generic;
 namespace RJM.API.Models
 {
 	/// <summary>
-    /// ResumeSkill model
+    /// Document model
     /// </summary>
-    public class ResumeSkill
+    public class Document
     {
-		public ResumeSkill()
+		public Document()
         {
             // Relations
+
+			//// Many-to-many
+			this.ResumeSkill = new List<ResumeSkill>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of ResumeSkill.
+        /// The identifier of Document.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Level property of ResumeSkill.
+        /// The Name property of Document.
         /// </summary>
-		public int? Level { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
-        /// The Description property of ResumeSkill.
+        /// The DisplayName property of Document.
+        /// </summary>
+		public string DisplayName { get; set; }
+
+		/// <summary>
+        /// The Description property of Document.
         /// </summary>
 		public string Description { get; set; }
+
+		/// <summary>
+        /// The Path property of Document.
+        /// </summary>
+		public string Path { get; set; }
+
+		/// <summary>
+        /// The URL property of Document.
+        /// </summary>
+		public string URL { get; set; }
+
+		/// <summary>
+        /// The MimeType property of Document.
+        /// </summary>
+		public string MimeType { get; set; }
 
 		// Relations
 
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key ResumeId for Resume of ResumeSkill.
+        /// The related foreign key ResumeStateId for ResumeState of Document.
         /// </summary>
-		public Guid ResumeId { get; set; }
+		public Guid ResumeStateId { get; set; }
 
 		/// <summary>
-        /// The related Resume of ResumeSkill.
+        /// The related ResumeState of Document.
         /// </summary>
-		public Resume Resume { get; set; }
+		public ResumeState ResumeState { get; set; }
 
-	    /// <summary>
-        /// The related foreign key SkillId for Skill of ResumeSkill.
-        /// </summary>
-		public Guid SkillId { get; set; }
+
+		//// Many-to-many
 
 		/// <summary>
-        /// The related Skill of ResumeSkill.
+        /// The related Skills of Document.
         /// </summary>
-		public Skill Skill { get; set; }
-
+		public IList<ResumeSkill> ResumeSkill { get; set; }
 
 		// Generic properties
 
