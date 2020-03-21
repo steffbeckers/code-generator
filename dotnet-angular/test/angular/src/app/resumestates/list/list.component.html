@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1>ResumeStates</h1>
+    <a routerLink="/resumestates/create">Add new ResumeState</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="!resumestates">Loading...</p>
+    <p *ngIf="resumestates && resumestates.length === 0">No resumestates added yet.</p>
+    <table *ngIf="resumestates && resumestates.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Name</th>
+        <th>DisplayName</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resumeState of resumestates" [routerLink]="['/resumestates', resumeState.id]" class="cursor--pointer">
+          <td>
+            {{ resumeState.name }}
+          </td>
+          <td>
+            {{ resumeState.displayName }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

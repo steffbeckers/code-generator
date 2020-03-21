@@ -1,0 +1,17 @@
+
+<p *ngIf="!skill">Loading...</p>
+<div *ngIf="skill?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1 [routerLink]="['/skills', skill.id]">Skill - {{ skill.id }}</h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Name</label>
+      <span>{{ skill.name }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Description</label>
+      <span>{{ skill.description }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<p *ngIf="!job">Loading...</p>
+<div *ngIf="job?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
+    <h1>Job - {{ job.id }}</h1>
+    <!-- #-#-# -->
+    <button (click)="deleteJob()">Delete</button>
+    <button [routerLink]="['/jobs', job.id, 'edit']">Edit</button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Title</label>
+      <span>{{ job.title }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Description</label>
+      <span>{{ job.description }}</span>
+    </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">JobState</label>
+        <span *ngIf="job.jobState" [routerLink]="['/jobstates', job.jobState.id]" class="cursor--pointer">
+          {{ job.jobState.id }}
+        </span>
+      </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Skills</h2>
+    <a routerLink="/skills/create" [queryParams]="{ jobId: job.id }">Add new Skill</a>
+    <a [routerLink]="['/jobs', job.id, 'link', 'skill']">Link existing Skill</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="job.skills && job.skills.length === 0">No skills added yet.</p>
+    <table *ngIf="job.skills && job.skills.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Name</th>
+        <th>Description</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let skill of job.skills" [routerLink]="['/skills', skill.id]">
+          <td>
+            {{ skill.name }}
+          </td>
+          <td>
+            {{ skill.description }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

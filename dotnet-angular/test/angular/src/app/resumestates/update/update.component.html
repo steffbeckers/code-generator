@@ -1,0 +1,20 @@
+<div *ngIf="resumeState?.id" fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="resumeStateForm" (ngSubmit)="updateResumeState()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>ResumeState - {{ resumeState.id }}</h1>
+      <button (click)="deleteResumeState()">Delete</button>
+      <button (click)="updateResumeState()" [disabled]="resumeStateForm.invalid">Save</button>
+      <button (click)="updateResumeState(true)" [disabled]="resumeStateForm.invalid">Save and Close</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Name</label>
+        <input formControlName="name" placeholder="Name" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">DisplayName</label>
+        <input formControlName="displayName" placeholder="DisplayName" required />
+      </div>
+    </div>
+  </form>
+</div>

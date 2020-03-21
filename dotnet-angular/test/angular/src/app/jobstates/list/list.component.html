@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1>JobStates</h1>
+    <a routerLink="/jobstates/create">Add new JobState</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="!jobstates">Loading...</p>
+    <p *ngIf="jobstates && jobstates.length === 0">No jobstates added yet.</p>
+    <table *ngIf="jobstates && jobstates.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Name</th>
+        <th>DisplayName</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jobState of jobstates" [routerLink]="['/jobstates', jobState.id]" class="cursor--pointer">
+          <td>
+            {{ jobState.name }}
+          </td>
+          <td>
+            {{ jobState.displayName }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

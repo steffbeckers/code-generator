@@ -1,0 +1,36 @@
+<p *ngIf="!document">Loading...</p>
+<div *ngIf="document?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
+    <h1>Document - {{ document.id }}</h1>
+    <!-- #-#-# -->
+    <button (click)="deleteDocument()">Delete</button>
+    <button [routerLink]="['/documents', document.id, 'edit']">Edit</button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Name</label>
+      <span>{{ document.name }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">DisplayName</label>
+      <span>{{ document.displayName }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Description</label>
+      <span>{{ document.description }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Path</label>
+      <span>{{ document.path }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">URL</label>
+      <span>{{ document.uRL }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">MimeType</label>
+      <span>{{ document.mimeType }}</span>
+    </div>
+  </div>
+</div>

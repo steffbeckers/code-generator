@@ -1,0 +1,36 @@
+<div *ngIf="document?.id" fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="documentForm" (ngSubmit)="updateDocument()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Document - {{ document.id }}</h1>
+      <button (click)="deleteDocument()">Delete</button>
+      <button (click)="updateDocument()" [disabled]="documentForm.invalid">Save</button>
+      <button (click)="updateDocument(true)" [disabled]="documentForm.invalid">Save and Close</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Name</label>
+        <input formControlName="name" placeholder="Name" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">DisplayName</label>
+        <input formControlName="displayName" placeholder="DisplayName" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Description</label>
+        <input formControlName="description" placeholder="Description" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Path</label>
+        <input formControlName="path" placeholder="Path" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">URL</label>
+        <input formControlName="uRL" placeholder="URL" />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">MimeType</label>
+        <input formControlName="mimeType" placeholder="MimeType" />
+      </div>
+    </div>
+  </form>
+</div>

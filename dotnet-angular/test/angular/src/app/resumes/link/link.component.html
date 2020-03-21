@@ -1,0 +1,23 @@
+
+<p *ngIf="!resume">Loading...</p>
+<div *ngIf="resume?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1 [routerLink]="['/resumes', resume.id]">Resume - {{ resume.id }}</h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Job Title</label>
+      <span>{{ resume.jobTitle }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Description</label>
+      <span>{{ resume.description }}</span>
+    </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">ResumeState</label>
+        <span *ngIf="resume.resumeState" [routerLink]="['/resumestates', resume.resumeState.id]" class="cursor--pointer">
+          {{ resume.resumeState.id }}
+        </span>
+      </div>
+  </div>
+</div>

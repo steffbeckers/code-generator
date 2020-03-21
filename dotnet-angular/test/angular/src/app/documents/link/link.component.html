@@ -1,0 +1,33 @@
+
+<p *ngIf="!document">Loading...</p>
+<div *ngIf="document?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1 [routerLink]="['/documents', document.id]">Document - {{ document.id }}</h1>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Name</label>
+      <span>{{ document.name }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">DisplayName</label>
+      <span>{{ document.displayName }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Description</label>
+      <span>{{ document.description }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Path</label>
+      <span>{{ document.path }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">URL</label>
+      <span>{{ document.uRL }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">MimeType</label>
+      <span>{{ document.mimeType }}</span>
+    </div>
+  </div>
+</div>

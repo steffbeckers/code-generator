@@ -1,0 +1,31 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1>SkillAliases</h1>
+    <a routerLink="/skillaliases/create">Add new SkillAlias</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="!skillaliases">Loading...</p>
+    <p *ngIf="skillaliases && skillaliases.length === 0">No skillaliases added yet.</p>
+    <table *ngIf="skillaliases && skillaliases.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Skill</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let skillAlias of skillaliases" [routerLink]="['/skillaliases', skillAlias.id]" class="cursor--pointer">
+          <td>
+            {{ skillAlias.name }}
+          </td>
+          <td>
+            {{ skillAlias.description }}
+          </td>
+          <td *ngIf="skillAlias.skill" [routerLink]="['/skills', skillAlias.skill.id]">
+            {{ skillAlias.skill.id }}
+          </td>
+          <td *ngIf="!skillAlias.skill"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

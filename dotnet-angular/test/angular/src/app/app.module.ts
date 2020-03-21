@@ -11,9 +11,13 @@ import { AppComponent } from './app.component';
 import { TopNavComponent } from './shared/top-nav/top-nav.component';
 
 // Services
-import { ProductService } from './shared/services/ProductService';
-import { SupplierService } from './shared/services/SupplierService';
-import { ProductDetailService } from './shared/services/ProductDetailService';
+import { DocumentService } from './shared/services/DocumentService';
+import { ResumeService } from './shared/services/ResumeService';
+import { ResumeStateService } from './shared/services/ResumeStateService';
+import { SkillService } from './shared/services/SkillService';
+import { SkillAliasService } from './shared/services/SkillAliasService';
+import { JobService } from './shared/services/JobService';
+import { JobStateService } from './shared/services/JobStateService';
 
 @NgModule({
   declarations: [
@@ -27,9 +31,13 @@ import { ProductDetailService } from './shared/services/ProductDetailService';
     SharedModule
   ],
   providers: [
-    ProductService,
-    SupplierService,
-    ProductDetailService,
+    DocumentService,
+    ResumeService,
+    ResumeStateService,
+    SkillService,
+    SkillAliasService,
+    JobService,
+    JobStateService,
   ],
   bootstrap: [AppComponent]
 })

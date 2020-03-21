@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <form [formGroup]="jobStateForm" (ngSubmit)="createJobState()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <h1>Add new JobState</h1>
+      <button (click)="createJobState()" [disabled]="jobStateForm.invalid">Add</button>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">Name</label>
+        <input formControlName="name" placeholder="Name" required />
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+        <label class="bold">DisplayName</label>
+        <input formControlName="displayName" placeholder="DisplayName" required />
+      </div>
+    </div>
+  </form>
+</div>

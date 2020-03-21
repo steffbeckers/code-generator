@@ -1,0 +1,31 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1>Jobs</h1>
+    <a routerLink="/jobs/create">Add new Job</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="!jobs">Loading...</p>
+    <p *ngIf="jobs && jobs.length === 0">No jobs added yet.</p>
+    <table *ngIf="jobs && jobs.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Title</th>
+        <th>Description</th>
+        <th>JobState</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs" [routerLink]="['/jobs', job.id]" class="cursor--pointer">
+          <td>
+            {{ job.title }}
+          </td>
+          <td>
+            {{ job.description }}
+          </td>
+          <td *ngIf="job.jobState" [routerLink]="['/jobstates', job.jobState.id]">
+            {{ job.jobState.id }}
+          </td>
+          <td *ngIf="!job.jobState"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

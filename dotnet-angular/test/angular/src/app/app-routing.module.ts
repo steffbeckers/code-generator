@@ -3,16 +3,32 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'products',
-    loadChildren: './products/products.module#ProductsModule',
+    path: 'documents',
+    loadChildren: './documents/documents.module#DocumentsModule',
   },
   {
-    path: 'suppliers',
-    loadChildren: './suppliers/suppliers.module#SuppliersModule',
+    path: 'resumes',
+    loadChildren: './resumes/resumes.module#ResumesModule',
   },
   {
-    path: 'productdetails',
-    loadChildren: './productdetails/productdetails.module#ProductDetailsModule',
+    path: 'resumestates',
+    loadChildren: './resumestates/resumestates.module#ResumeStatesModule',
+  },
+  {
+    path: 'skills',
+    loadChildren: './skills/skills.module#SkillsModule',
+  },
+  {
+    path: 'skillaliases',
+    loadChildren: './skillaliases/skillaliases.module#SkillAliasesModule',
+  },
+  {
+    path: 'jobs',
+    loadChildren: './jobs/jobs.module#JobsModule',
+  },
+  {
+    path: 'jobstates',
+    loadChildren: './jobstates/jobstates.module#JobStatesModule',
   },
   {
     path: '**',

@@ -1,0 +1,43 @@
+<p *ngIf="!resumeState">Loading...</p>
+<div *ngIf="resumeState?.id" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <!-- #-#-# {C7F36FD4-5D57-4CBB-8B49-D6781BD5E2D0} -->
+    <h1>ResumeState - {{ resumeState.id }}</h1>
+    <!-- #-#-# -->
+    <button (click)="deleteResumeState()">Delete</button>
+    <button [routerLink]="['/resumestates', resumeState.id, 'edit']">Edit</button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">Name</label>
+      <span>{{ resumeState.name }}</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px" fxFlex>
+      <label class="bold">DisplayName</label>
+      <span>{{ resumeState.displayName }}</span>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Resumes</h2>
+    <a routerLink="/resumes/create" [queryParams]="{ resumeStateId: resumeState.id }">Add new Resume</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="resumeState.resumes && resumeState.resumes.length === 0">No resumes added yet.</p>
+    <table *ngIf="resumeState.resumes && resumeState.resumes.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Job Title</th>
+        <th>Description</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resume of resumeState.resumes" [routerLink]="['/resumes', resume.id]">
+          <td>
+            {{ resume.jobTitle }}
+          </td>
+          <td>
+            {{ resume.description }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
