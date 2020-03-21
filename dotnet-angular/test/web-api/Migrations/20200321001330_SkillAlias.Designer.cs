@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RJM.API.DAL;
 
 namespace RJM.API.Migrations
 {
     [DbContext(typeof(RJMContext))]
-    partial class RJMContextModelSnapshot : ModelSnapshot
+    [Migration("20200321001330_SkillAlias")]
+    partial class SkillAlias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

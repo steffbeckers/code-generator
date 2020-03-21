@@ -49,6 +49,46 @@
             Deletes an existing resume record.
             </summary>
         </member>
+        <member name="T:RJM.API.BLL.SkillAliasBLL">
+            <summary>
+            The business logic layer for SkillAliases.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillAliasBLL.#ctor(RJM.API.DAL.Repositories.SkillAliasRepository)">
+            <summary>
+            The constructor of the SkillAlias business logic layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillAliasBLL.GetAllSkillAliasesAsync">
+            <summary>
+            Retrieves all skillaliases.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillAliasBLL.GetSkillAliasByIdAsync(System.Guid)">
+            <summary>
+            Retrieves one skillalias by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillAliasBLL.CreateSkillAliasAsync(RJM.API.Models.SkillAlias)">
+            <summary>
+            Creates a new skillalias record.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillAliasBLL.UpdateSkillAliasAsync(RJM.API.Models.SkillAlias)">
+            <summary>
+            Updates an existing skillalias record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillAliasBLL.DeleteSkillAliasByIdAsync(System.Guid)">
+            <summary>
+            Deletes an existing skillalias record by Id.
+            </summary>
+        </member>
+        <member name="M:RJM.API.BLL.SkillAliasBLL.DeleteSkillAliasAsync(RJM.API.Models.SkillAlias)">
+            <summary>
+            Deletes an existing skillalias record.
+            </summary>
+        </member>
         <member name="T:RJM.API.BLL.SkillBLL">
             <summary>
             The business logic layer for Skills.
@@ -146,6 +186,46 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:RJM.API.Controllers.SkillAliasesController">
+            <summary>
+            The SkillAliases controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillAliasesController.#ctor(Microsoft.Extensions.Logging.ILogger{RJM.API.Controllers.SkillAliasesController},AutoMapper.IMapper,RJM.API.BLL.SkillAliasBLL)">
+            <summary>
+            The constructor of the SkillAliases controller.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillAliasesController.GetSkillAliases">
+            <summary>
+            Retrieves all skillaliases.
+            </summary>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillAliasesController.GetSkillAlias(System.Guid)">
+            <summary>
+            Retrieves a specific skillalias.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillAliasesController.CreateSkillAlias(RJM.API.ViewModels.SkillAliasVM)">
+            <summary>
+            Creates a new skillalias.
+            </summary>
+            <param name="skillaliasVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillAliasesController.UpdateSkillAlias(System.Guid,RJM.API.ViewModels.SkillAliasVM)">
+            <summary>
+            Updates a specific skillalias.
+            </summary>
+            <param name="id"></param>
+            <param name="skillAliasVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.SkillAliasesController.DeleteSkillAlias(System.Guid)">
+            <summary>
+            Deletes a specific skillalias.
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="T:RJM.API.Controllers.SkillsController">
             <summary>
             The Skills controller.
@@ -226,6 +306,16 @@
         <member name="M:RJM.API.DAL.Repositories.ResumeSkillRepository.#ctor(RJM.API.DAL.RJMContext)">
             <summary>
             The constructor of the ResumeSkill repository.
+            </summary>
+        </member>
+        <member name="T:RJM.API.DAL.Repositories.SkillAliasRepository">
+            <summary>
+            The repository for SkillAliases in the data access layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.Repositories.SkillAliasRepository.#ctor(RJM.API.DAL.RJMContext)">
+            <summary>
+            The constructor of the SkillAlias repository.
             </summary>
         </member>
         <member name="T:RJM.API.DAL.Repositories.SkillRepository">
@@ -393,6 +483,11 @@
             The Description property of Skill.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Skill.Aliases">
+            <summary>
+            The related Aliases of Skill.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Skill.ResumeSkill">
             <summary>
             The related Resumes of Skill.
@@ -429,6 +524,71 @@
             </summary>
         </member>
         <member name="P:RJM.API.Models.Skill.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
+        <member name="T:RJM.API.Models.SkillAlias">
+            <summary>
+            SkillAlias model
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.Id">
+            <summary>
+            The identifier of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.Name">
+            <summary>
+            The Name property of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.Description">
+            <summary>
+            The Description property of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.SkillId">
+            <summary>
+            The related foreign key SkillId for Skill of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.Skill">
+            <summary>
+            The related Skill of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.SkillAlias.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
@@ -488,6 +648,66 @@
             The user who last modified the record
             </summary>
         </member>
+        <member name="T:RJM.API.ViewModels.SkillAliasVM">
+            <summary>
+            SkillAlias view model
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.Id">
+            <summary>
+            The identifier of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.Name">
+            <summary>
+            The Name property of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.Description">
+            <summary>
+            The Description property of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.SkillId">
+            <summary>
+            The related foreign key SkillId for Skill of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.Skill">
+            <summary>
+            The related Skill of SkillAlias.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillAliasVM.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
         <member name="T:RJM.API.ViewModels.SkillVM">
             <summary>
             Skill view model
@@ -506,6 +726,11 @@
         <member name="P:RJM.API.ViewModels.SkillVM.Description">
             <summary>
             The Description property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.Aliases">
+            <summary>
+            The related Aliases of Skill.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.SkillVM.Resumes">

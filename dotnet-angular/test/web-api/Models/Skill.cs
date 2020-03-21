@@ -12,6 +12,9 @@ namespace RJM.API.Models
         {
             // Relations
 
+			//// One-to-many
+			this.Aliases = new List<SkillAlias>();
+
 			//// Many-to-many
 			this.ResumeSkill = new List<ResumeSkill>();
         }
@@ -35,18 +38,12 @@ namespace RJM.API.Models
 
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key AliasesId for Aliases of Skill.
-        /// </summary>
-		public Guid? AliasesId { get; set; }
+		//// One-to-many
 
 		/// <summary>
         /// The related Aliases of Skill.
         /// </summary>
-		public SkillAlias Aliases { get; set; }
-
+		public IList<SkillAlias> Aliases { get; set; }
 
 		//// Many-to-many
 

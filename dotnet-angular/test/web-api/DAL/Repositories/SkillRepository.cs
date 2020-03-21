@@ -47,21 +47,6 @@ namespace RJM.API.DAL.Repositories
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public IEnumerable<Skill> GetByAliasesId(Guid aliasesId)
-        {
-            return this.context.Skills
-                .Where(t => t.AliasesId == aliasesId)
-                .ToList();
-        }
-        
-        //// Async test
-        //public async Task<IEnumerable<Skill>> GetByAliasesIdAsync(Guid aliasesId)
-        //{
-        //    return await this.context.Skills
-        //        .Where(t => t.AliasesId == aliasesId)
-        //        .ToListAsync();
-        //}
-
         public IEnumerable<Skill> GetByResumeId(Guid resumeId)
         {
             return this.context.ResumeSkill

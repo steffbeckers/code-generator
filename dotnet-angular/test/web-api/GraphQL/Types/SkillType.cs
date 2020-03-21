@@ -18,28 +18,19 @@ namespace RJM.API.GraphQL.Types
             Field(x => x.Name);
             Field(x => x.Description, nullable: true);
 
-            Field<SkillAliasType>(
-                "aliases",
-                resolve: context =>
-                {
-                    if (context.Source.AliasesId != null)
-                        return skillAliasRepository.GetById((Guid)context.Source.AliasesId);
-                    return null;
-                }
+            Field<ListGraphType<SkillAliasType>>(
+                "skillAliases",
+                resolve: context => skillAliasRepository.GetBySkillId(context.Source.Id)
             );
 
             //// Async test
-            //FieldAsync<SkillAliasType>(
-            //    "aliases",
+            //FieldAsync<ListGraphType<SkillAliasType>>(
+            //    "skillAliases",
             //    resolve: async context =>
             //    {
-            //        if (context.Source.AliasesId != null) {
-            //            return await context.TryAsyncResolve(
-            //                async c => await skillAliasRepository.GetByIdAsync((Guid)context.Source.AliasesId)
-            //            );
-            //        }
-            //        
-            //        return null;
+            //        return await context.TryAsyncResolve(
+            //            async c => await skillAliasRepository.GetBySkillIdAsync(context.Source.Id)
+            //        );
             //    }
             //);
 
