@@ -20,7 +20,7 @@ namespace RJM.API.GraphQL.Types
 
             Field<ListGraphType<SkillAliasType>>(
                 "skillAliases",
-                resolve: context => skillAliasRepository.GetBySkillId(context.Source.Id)
+                resolve: context => skillAliasRepository.GetBySkillAliasId(context.Source.Id)
             );
 
             //// Async test
@@ -29,7 +29,7 @@ namespace RJM.API.GraphQL.Types
             //    resolve: async context =>
             //    {
             //        return await context.TryAsyncResolve(
-            //            async c => await skillAliasRepository.GetBySkillIdAsync(context.Source.Id)
+            //            async c => await skillAliasRepository.GetBySkillAliasIdAsync(context.Source.Id)
             //        );
             //    }
             //);
