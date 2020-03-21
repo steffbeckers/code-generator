@@ -6,61 +6,45 @@ using RJM.API.ViewModels.Identity;
 namespace RJM.API.ViewModels
 {
 	/// <summary>
-    /// Resume view model
+    /// ResumeState view model
     /// </summary>
-    public class ResumeVM
+    public class ResumeStateVM
     {
-		public ResumeVM()
+		public ResumeStateVM()
         {
             // Relations
 
-			//// Many-to-many
-			this.Skills = new List<SkillVM>();
+			//// One-to-many
+			this.Resumes = new List<ResumeVM>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Resume.
+        /// The identifier of ResumeState.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The JobTitle property of Resume.
+        /// The Name property of ResumeState.
         /// </summary>
-		public string JobTitle { get; set; }
+        [Required]
+		public string Name { get; set; }
 
 		/// <summary>
-        /// The Description property of Resume.
+        /// The DisplayName property of ResumeState.
         /// </summary>
-		public string Description { get; set; }
+        [Required]
+		public string DisplayName { get; set; }
 
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key StateId for State of Resume.
-        /// </summary>
-		public Guid StateId { get; set; }
+		//// One-to-many
 
 		/// <summary>
-        /// The related State of Resume.
+        /// The related Resumes of ResumeState.
         /// </summary>
-		public ResumeStateVM State { get; set; }
-
-
-		//// Many-to-many
-
-		/// <summary>
-        /// The related Skills of Resume.
-        /// </summary>
-		public IList<SkillVM> Skills { get; set; }
-
-        ////// To create a link with Skill directly on create of Resume.
-        public Guid? SkillId { get; set; }
-        public int SkillRating { get; set; }
-        public string SkillDescription { get; set; }
+		public IList<ResumeVM> Resumes { get; set; }
 
 		// Generic properties
 

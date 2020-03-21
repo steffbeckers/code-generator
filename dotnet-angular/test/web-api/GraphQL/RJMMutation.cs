@@ -11,6 +11,7 @@ namespace RJM.API.GraphQL
     {
         public RJMMutation(
 			ResumeBLL resumeBLL,
+			ResumeStateBLL resumeStateBLL,
 			SkillBLL skillBLL,
 			SkillAliasBLL skillAliasBLL
         )
@@ -109,6 +110,66 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await resumeBLL.DeleteResumeByIdAsync(id)
+                    );
+                }
+            );
+
+			// ResumeStates
+            FieldAsync<ResumeStateType>(
+                "createResumeState",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ResumeStateInputType>>
+                    {
+                        Name = "resumeState"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    ResumeState resumeState = context.GetArgument<ResumeState>("resumeState");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeStateBLL.CreateResumeStateAsync(resumeState)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeStateType>(
+                "updateResumeState",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<ResumeStateInputType>>
+                    {
+                        Name = "resumeState"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    ResumeState resumeState = context.GetArgument<ResumeState>("resumeState");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeStateBLL.UpdateResumeStateAsync(resumeState)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeStateType>(
+                "removeResumeState",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeStateBLL.DeleteResumeStateByIdAsync(id)
                     );
                 }
             );

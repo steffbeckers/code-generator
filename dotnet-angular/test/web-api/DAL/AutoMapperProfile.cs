@@ -45,6 +45,10 @@ namespace RJM.API.DAL
                     }
                 );
 
+            // ResumeStates
+			CreateMap<ResumeState, ResumeStateVM>();
+            CreateMap<ResumeStateVM, ResumeState>();
+
             // Skills
 			CreateMap<Skill, SkillVM>()
                 .ForMember(

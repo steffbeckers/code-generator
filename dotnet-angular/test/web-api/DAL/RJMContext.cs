@@ -35,6 +35,7 @@ namespace RJM.API.DAL
         }
 
 		public DbSet<Resume> Resumes { get; set; }
+		public DbSet<ResumeState> ResumeStates { get; set; }
 		public DbSet<Skill> Skills { get; set; }
 		public DbSet<SkillAlias> SkillAliases { get; set; }
 		public DbSet<ResumeSkill> ResumeSkill { get; set; }
@@ -92,6 +93,7 @@ namespace RJM.API.DAL
 			modelBuilder.Entity<Resume>().HasKey(e => e.Id);
 
             // Required properties
+            modelBuilder.Entity<Resume>().Property(e => e.ResumeStateId).IsRequired();
 
             // User
             modelBuilder.Entity<Resume>()
@@ -100,6 +102,34 @@ namespace RJM.API.DAL
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Resume>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
+			#region ResumeStates
+
+            // Soft delete query filter
+            modelBuilder.Entity<ResumeState>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+			modelBuilder.Entity<ResumeState>().ToTable("ResumeStates");
+
+			// Key
+			modelBuilder.Entity<ResumeState>().HasKey(e => e.Id);
+
+            // Required properties
+            modelBuilder.Entity<ResumeState>().Property(e => e.Name).IsRequired();
+            modelBuilder.Entity<ResumeState>().Property(e => e.DisplayName).IsRequired();
+
+            // User
+            modelBuilder.Entity<ResumeState>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ResumeState>()
                 .HasOne(x => x.ModifiedByUser)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
@@ -216,6 +246,7 @@ namespace RJM.API.DAL
                 // Models that have soft delete
                 if (
 					entry.Entity.GetType() == typeof(Resume) ||
+					entry.Entity.GetType() == typeof(ResumeState) ||
 					entry.Entity.GetType() == typeof(Skill) ||
 					entry.Entity.GetType() == typeof(SkillAlias) ||
 					entry.Entity.GetType() == typeof(ResumeSkill)
@@ -242,6 +273,7 @@ namespace RJM.API.DAL
                 // Models that have soft delete
                 if (
 					entry.Entity.GetType() == typeof(Resume) ||
+					entry.Entity.GetType() == typeof(ResumeState) ||
 					entry.Entity.GetType() == typeof(Skill) ||
 					entry.Entity.GetType() == typeof(SkillAlias) ||
 					entry.Entity.GetType() == typeof(ResumeSkill)
@@ -273,6 +305,7 @@ namespace RJM.API.DAL
                     Type entityType = entry.Entity.GetType();
                     if (
 					    entry.Entity.GetType() == typeof(Resume) ||
+					    entry.Entity.GetType() == typeof(ResumeState) ||
 					    entry.Entity.GetType() == typeof(Skill) ||
 					    entry.Entity.GetType() == typeof(SkillAlias) ||
 					    entry.Entity.GetType() == typeof(ResumeSkill)

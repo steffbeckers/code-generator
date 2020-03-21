@@ -4,56 +4,43 @@ using System.Collections.Generic;
 namespace RJM.API.Models
 {
 	/// <summary>
-    /// Resume model
+    /// ResumeState model
     /// </summary>
-    public class Resume
+    public class ResumeState
     {
-		public Resume()
+		public ResumeState()
         {
             // Relations
 
-			//// Many-to-many
-			this.ResumeSkill = new List<ResumeSkill>();
+			//// One-to-many
+			this.Resumes = new List<Resume>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Resume.
+        /// The identifier of ResumeState.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The JobTitle property of Resume.
+        /// The Name property of ResumeState.
         /// </summary>
-		public string JobTitle { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
-        /// The Description property of Resume.
+        /// The DisplayName property of ResumeState.
         /// </summary>
-		public string Description { get; set; }
+		public string DisplayName { get; set; }
 
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key StateId for State of Resume.
-        /// </summary>
-		public Guid StateId { get; set; }
+		//// One-to-many
 
 		/// <summary>
-        /// The related State of Resume.
+        /// The related Resumes of ResumeState.
         /// </summary>
-		public ResumeState State { get; set; }
-
-
-		//// Many-to-many
-
-		/// <summary>
-        /// The related Skills of Resume.
-        /// </summary>
-		public IList<ResumeSkill> ResumeSkill { get; set; }
+		public IList<Resume> Resumes { get; set; }
 
 		// Generic properties
 

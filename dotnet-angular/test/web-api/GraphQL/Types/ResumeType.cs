@@ -8,6 +8,7 @@ namespace RJM.API.GraphQL.Types
     public class ResumeType : ObjectGraphType<Resume>
     {
         public ResumeType(
+            ResumeStateRepository resumeStateRepository,
 			ResumeRepository resumeRepository,
             SkillRepository skillRepository,
 			ResumeSkillRepository resumeSkillRepository
@@ -16,6 +17,31 @@ namespace RJM.API.GraphQL.Types
             Field(x => x.Id, type: typeof(IdGraphType));
             Field(x => x.JobTitle, nullable: true);
             Field(x => x.Description, nullable: true);
+
+            Field<ResumeStateType>(
+                "state",
+                resolve: context =>
+                {
+                    if (context.Source.StateId != null)
+                        return resumeStateRepository.GetById((Guid)context.Source.StateId);
+                    return null;
+                }
+            );
+
+            //// Async test
+            //FieldAsync<ResumeStateType>(
+            //    "state",
+            //    resolve: async context =>
+            //    {
+            //        if (context.Source.StateId != null) {
+            //            return await context.TryAsyncResolve(
+            //                async c => await resumeStateRepository.GetByIdAsync((Guid)context.Source.StateId)
+            //            );
+            //        }
+            //        
+            //        return null;
+            //    }
+            //);
 
             Field<ListGraphType<SkillType>>(
                 "skills",

@@ -16,6 +16,24 @@ mutation createResume($resume: resumeInput!) {
 }
 
 
+// ResumeStates
+
+mutation createResumeState($resumeState: resumeStateInput!) {
+  createResumeState(resumeState: $resumeState) {
+    id
+    name
+    displayName
+  }
+}
+
+{
+  "resumeState": {
+    "name": "",
+    "displayName": ""
+  }
+}
+
+
 // Skills
 
 mutation createSkill($skill: skillInput!) {
