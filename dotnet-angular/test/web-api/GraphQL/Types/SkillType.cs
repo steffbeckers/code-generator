@@ -8,6 +8,7 @@ namespace RJM.API.GraphQL.Types
     public class SkillType : ObjectGraphType<Skill>
     {
         public SkillType(
+            SkillAliasRepository skillAliasRepository,
 			SkillRepository skillRepository,
             ResumeRepository resumeRepository,
 			ResumeSkillRepository resumeSkillRepository
@@ -16,6 +17,31 @@ namespace RJM.API.GraphQL.Types
             Field(x => x.Id, type: typeof(IdGraphType));
             Field(x => x.Name);
             Field(x => x.Description, nullable: true);
+
+            Field<SkillAliasType>(
+                "aliases",
+                resolve: context =>
+                {
+                    if (context.Source.AliasesId != null)
+                        return skillAliasRepository.GetById((Guid)context.Source.AliasesId);
+                    return null;
+                }
+            );
+
+            //// Async test
+            //FieldAsync<SkillAliasType>(
+            //    "aliases",
+            //    resolve: async context =>
+            //    {
+            //        if (context.Source.AliasesId != null) {
+            //            return await context.TryAsyncResolve(
+            //                async c => await skillAliasRepository.GetByIdAsync((Guid)context.Source.AliasesId)
+            //            );
+            //        }
+            //        
+            //        return null;
+            //    }
+            //);
 
             Field<ListGraphType<ResumeType>>(
                 "resumes",

@@ -35,6 +35,19 @@ namespace RJM.API.Models
 
 		// Relations
 
+		//// Many-to-one
+
+	    /// <summary>
+        /// The related foreign key AliasesId for Aliases of Skill.
+        /// </summary>
+		public Guid? AliasesId { get; set; }
+
+		/// <summary>
+        /// The related Aliases of Skill.
+        /// </summary>
+		public SkillAlias Aliases { get; set; }
+
+
 		//// Many-to-many
 
 		/// <summary>

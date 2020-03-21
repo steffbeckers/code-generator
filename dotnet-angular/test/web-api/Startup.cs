@@ -131,11 +131,13 @@ namespace RJM.API
             // Repositories
 			services.AddScoped<ResumeRepository>();
 			services.AddScoped<SkillRepository>();
+			services.AddScoped<SkillAliasRepository>();
 			services.AddScoped<ResumeSkillRepository>();
 
 			// BLLs
 			services.AddScoped<ResumeBLL>();
 			services.AddScoped<SkillBLL>();
+			services.AddScoped<SkillAliasBLL>();
             services.AddScoped<AuthBLL>();
 
             // Services

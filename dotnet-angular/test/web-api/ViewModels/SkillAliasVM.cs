@@ -6,33 +6,30 @@ using RJM.API.ViewModels.Identity;
 namespace RJM.API.ViewModels
 {
 	/// <summary>
-    /// Skill view model
+    /// SkillAlias view model
     /// </summary>
-    public class SkillVM
+    public class SkillAliasVM
     {
-		public SkillVM()
+		public SkillAliasVM()
         {
             // Relations
-
-			//// Many-to-many
-			this.Resumes = new List<ResumeVM>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Skill.
+        /// The identifier of SkillAlias.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Name property of Skill.
+        /// The Name property of SkillAlias.
         /// </summary>
         [Required]
 		public string Name { get; set; }
 
 		/// <summary>
-        /// The Description property of Skill.
+        /// The Description property of SkillAlias.
         /// </summary>
 		public string Description { get; set; }
 
@@ -41,27 +38,15 @@ namespace RJM.API.ViewModels
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key AliasesId for Aliases of Skill.
+        /// The related foreign key SkillId for Skill of SkillAlias.
         /// </summary>
-		public Guid? AliasesId { get; set; }
+		public Guid SkillId { get; set; }
 
 		/// <summary>
-        /// The related Aliases of Skill.
+        /// The related Skill of SkillAlias.
         /// </summary>
-		public SkillAliasVM Aliases { get; set; }
+		public SkillVM Skill { get; set; }
 
-
-		//// Many-to-many
-
-		/// <summary>
-        /// The related Resumes of Skill.
-        /// </summary>
-		public IList<ResumeVM> Resumes { get; set; }
-
-        ////// To create a link with Resume directly on create of Skill.
-        public Guid? ResumeId { get; set; }
-        public int ResumeRating { get; set; }
-        public string ResumeDescription { get; set; }
 
 		// Generic properties
 

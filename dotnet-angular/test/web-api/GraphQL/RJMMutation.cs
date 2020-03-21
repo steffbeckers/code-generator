@@ -11,7 +11,8 @@ namespace RJM.API.GraphQL
     {
         public RJMMutation(
 			ResumeBLL resumeBLL,
-			SkillBLL skillBLL
+			SkillBLL skillBLL,
+			SkillAliasBLL skillAliasBLL
         )
         {
             this.AuthorizeWith("Authorized");
@@ -204,6 +205,66 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await skillBLL.DeleteSkillByIdAsync(id)
+                    );
+                }
+            );
+
+			// SkillAliases
+            FieldAsync<SkillAliasType>(
+                "createSkillAlias",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<SkillAliasInputType>>
+                    {
+                        Name = "skillAlias"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    SkillAlias skillAlias = context.GetArgument<SkillAlias>("skillAlias");
+
+                    return await context.TryAsyncResolve(
+                        async c => await skillAliasBLL.CreateSkillAliasAsync(skillAlias)
+                    );
+                }
+            );
+
+            FieldAsync<SkillAliasType>(
+                "updateSkillAlias",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<SkillAliasInputType>>
+                    {
+                        Name = "skillAlias"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    SkillAlias skillAlias = context.GetArgument<SkillAlias>("skillAlias");
+
+                    return await context.TryAsyncResolve(
+                        async c => await skillAliasBLL.UpdateSkillAliasAsync(skillAlias)
+                    );
+                }
+            );
+
+            FieldAsync<SkillAliasType>(
+                "removeSkillAlias",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await skillAliasBLL.DeleteSkillAliasByIdAsync(id)
                     );
                 }
             );

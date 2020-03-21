@@ -104,6 +104,7 @@ namespace RJM.API.BLL
             // Mapping
             skill.Name = skillUpdate.Name;
             skill.Description = skillUpdate.Description;
+            skill.AliasesId = skillUpdate.AliasesId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

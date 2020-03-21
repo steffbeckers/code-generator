@@ -28,6 +28,7 @@ namespace RJM.API.DAL.Repositories
 		public async Task<IEnumerable<Skill>> GetWithLinkedEntitiesAsync()
         {
             return await this.context.Skills
+                .Include(x => x.Aliases)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Resume)
                 .Include(x => x.CreatedByUser)
@@ -38,12 +39,28 @@ namespace RJM.API.DAL.Repositories
 		public async Task<Skill> GetWithLinkedEntitiesByIdAsync(Guid id)
         {
             return await this.context.Skills
+                .Include(x => x.Aliases)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Resume)
                 .Include(x => x.CreatedByUser)
                 .Include(x => x.ModifiedByUser)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public IEnumerable<Skill> GetByAliasesId(Guid aliasesId)
+        {
+            return this.context.Skills
+                .Where(t => t.AliasesId == aliasesId)
+                .ToList();
+        }
+        
+        //// Async test
+        //public async Task<IEnumerable<Skill>> GetByAliasesIdAsync(Guid aliasesId)
+        //{
+        //    return await this.context.Skills
+        //        .Where(t => t.AliasesId == aliasesId)
+        //        .ToListAsync();
+        //}
 
         public IEnumerable<Skill> GetByResumeId(Guid resumeId)
         {

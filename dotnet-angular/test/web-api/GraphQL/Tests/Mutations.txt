@@ -34,6 +34,24 @@ mutation createSkill($skill: skillInput!) {
 }
 
 
+// SkillAliases
+
+mutation createSkillAlias($skillAlias: skillAliasInput!) {
+  createSkillAlias(skillAlias: $skillAlias) {
+    id
+    name
+    description
+  }
+}
+
+{
+  "skillAlias": {
+    "name": "",
+    "description": ""
+  }
+}
+
+
 // ResumeSkills
 
 mutation createResumeSkill($resumeSkill: resumeSkillInput!) {

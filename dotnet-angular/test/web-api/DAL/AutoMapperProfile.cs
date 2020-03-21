@@ -72,6 +72,10 @@ namespace RJM.API.DAL
                     }
                 );
 
+            // SkillAliases
+			CreateMap<SkillAlias, SkillAliasVM>();
+            CreateMap<SkillAliasVM, SkillAlias>();
+
             // Users
 			CreateMap<User, UserVM>();
             CreateMap<UserVM, User>();

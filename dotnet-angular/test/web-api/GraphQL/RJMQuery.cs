@@ -11,7 +11,8 @@ namespace RJM.API.GraphQL
     {
         public RJMQuery(
 			ResumeRepository resumeRepository,
-			SkillRepository skillRepository
+			SkillRepository skillRepository,
+			SkillAliasRepository skillAliasRepository
         )
         {
             this.AuthorizeWith("Authorized");
@@ -84,6 +85,42 @@ namespace RJM.API.GraphQL
             //    {
             //        return await context.TryAsyncResolve(
             //            async c => await skillRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
+            //        );
+            //    }
+            //);
+
+			// SkillAliases
+            
+            Field<ListGraphType<SkillAliasType>>(
+                "skillAliases",
+                resolve: context => skillAliasRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<SkillAliasType>>(
+            //    "skillAliases",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await skillAliasRepository.GetAsync(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            //        );
+            //    }
+            //);
+
+            Field<SkillAliasType>(
+                "skillAlias",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+                resolve: context => skillAliasRepository.GetById(context.GetArgument<Guid>("id"))
+            );
+
+            //// Async test
+            //FieldAsync<SkillAliasType>(
+            //    "skillAlias",
+            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await skillAliasRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
             //        );
             //    }
             //);

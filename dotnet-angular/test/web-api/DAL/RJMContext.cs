@@ -36,6 +36,7 @@ namespace RJM.API.DAL
 
 		public DbSet<Resume> Resumes { get; set; }
 		public DbSet<Skill> Skills { get; set; }
+		public DbSet<SkillAlias> SkillAliases { get; set; }
 		public DbSet<ResumeSkill> ResumeSkill { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -132,6 +133,34 @@ namespace RJM.API.DAL
 
             #endregion
 
+			#region SkillAliases
+
+            // Soft delete query filter
+            modelBuilder.Entity<SkillAlias>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+			modelBuilder.Entity<SkillAlias>().ToTable("SkillAliases");
+
+			// Key
+			modelBuilder.Entity<SkillAlias>().HasKey(e => e.Id);
+
+            // Required properties
+            modelBuilder.Entity<SkillAlias>().Property(e => e.Name).IsRequired();
+            modelBuilder.Entity<SkillAlias>().Property(e => e.SkillId).IsRequired();
+
+            // User
+            modelBuilder.Entity<SkillAlias>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<SkillAlias>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
 			#region ResumeSkill
 
             // Soft delete query filter
@@ -188,6 +217,7 @@ namespace RJM.API.DAL
                 if (
 					entry.Entity.GetType() == typeof(Resume) ||
 					entry.Entity.GetType() == typeof(Skill) ||
+					entry.Entity.GetType() == typeof(SkillAlias) ||
 					entry.Entity.GetType() == typeof(ResumeSkill)
 				)
                 {
@@ -213,6 +243,7 @@ namespace RJM.API.DAL
                 if (
 					entry.Entity.GetType() == typeof(Resume) ||
 					entry.Entity.GetType() == typeof(Skill) ||
+					entry.Entity.GetType() == typeof(SkillAlias) ||
 					entry.Entity.GetType() == typeof(ResumeSkill)
 				)
                 {
@@ -243,6 +274,7 @@ namespace RJM.API.DAL
                     if (
 					    entry.Entity.GetType() == typeof(Resume) ||
 					    entry.Entity.GetType() == typeof(Skill) ||
+					    entry.Entity.GetType() == typeof(SkillAlias) ||
 					    entry.Entity.GetType() == typeof(ResumeSkill)
                     )
                     {
