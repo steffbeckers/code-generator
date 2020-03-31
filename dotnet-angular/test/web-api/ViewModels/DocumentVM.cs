@@ -12,6 +12,10 @@ namespace RJM.API.ViewModels
     {
 		public DocumentVM()
         {
+            // Relations
+
+			//// Many-to-many
+			this.Resumes = new List<ResumeVM>();
         }
 
 		// Properties
@@ -52,6 +56,17 @@ namespace RJM.API.ViewModels
         /// </summary>
 		public string MimeType { get; set; }
 
+		// Relations
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Resumes of Document.
+        /// </summary>
+		public IList<ResumeVM> Resumes { get; set; }
+
+        ////// To create a link with Resume directly on create of Document.
+        public Guid? ResumeId { get; set; }
 
 		// Generic properties
 

@@ -4,61 +4,46 @@ using System.Collections.Generic;
 namespace RJM.API.Models
 {
 	/// <summary>
-    /// Resume model
+    /// DocumentResume model
     /// </summary>
-    public class Resume
+    public class DocumentResume
     {
-		public Resume()
+		public DocumentResume()
         {
             // Relations
-
-			//// Many-to-many
-			this.DocumentResume = new List<DocumentResume>();
-			this.ResumeSkill = new List<ResumeSkill>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Resume.
+        /// The identifier of DocumentResume.
         /// </summary>
 		public Guid Id { get; set; }
-
-		/// <summary>
-        /// The JobTitle property of Resume.
-        /// </summary>
-		public string JobTitle { get; set; }
-
-		/// <summary>
-        /// The Description property of Resume.
-        /// </summary>
-		public string Description { get; set; }
 
 		// Relations
 
 		//// Many-to-one
 
 	    /// <summary>
-        /// The related foreign key ResumeStateId for ResumeState of Resume.
+        /// The related foreign key DocumentId for Document of DocumentResume.
         /// </summary>
-		public Guid ResumeStateId { get; set; }
+		public Guid DocumentId { get; set; }
 
 		/// <summary>
-        /// The related ResumeState of Resume.
+        /// The related Document of DocumentResume.
         /// </summary>
-		public ResumeState ResumeState { get; set; }
+		public Document Document { get; set; }
 
-
-		//// Many-to-many
+	    /// <summary>
+        /// The related foreign key ResumeId for Resume of DocumentResume.
+        /// </summary>
+		public Guid ResumeId { get; set; }
 
 		/// <summary>
-        /// The related Documents of Resume.
+        /// The related Resume of DocumentResume.
         /// </summary>
-		public IList<DocumentResume> DocumentResume { get; set; }
-		/// <summary>
-        /// The related Skills of Resume.
-        /// </summary>
-		public IList<ResumeSkill> ResumeSkill { get; set; }
+		public Resume Resume { get; set; }
+
 
 		// Generic properties
 

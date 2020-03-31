@@ -35,6 +35,7 @@ namespace RJM.API.DAL
         }
 
 		public DbSet<Document> Documents { get; set; }
+		public DbSet<DocumentResume> DocumentResume { get; set; }
 		public DbSet<Resume> Resumes { get; set; }
 		public DbSet<ResumeState> ResumeStates { get; set; }
 		public DbSet<Skill> Skills { get; set; }
@@ -106,6 +107,34 @@ namespace RJM.API.DAL
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Document>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
+
+			#region DocumentResume
+
+            // Soft delete query filter
+            modelBuilder.Entity<DocumentResume>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+			modelBuilder.Entity<DocumentResume>().ToTable("DocumentResume");
+
+			// Key
+			modelBuilder.Entity<DocumentResume>().HasKey(e => e.Id);
+
+            // Required properties
+            modelBuilder.Entity<DocumentResume>().Property(e => e.DocumentId).IsRequired();
+            modelBuilder.Entity<DocumentResume>().Property(e => e.ResumeId).IsRequired();
+
+            // User
+            modelBuilder.Entity<DocumentResume>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DocumentResume>()
                 .HasOne(x => x.ModifiedByUser)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
@@ -359,6 +388,7 @@ namespace RJM.API.DAL
                 // Models that have soft delete
                 if (
 					entry.Entity.GetType() == typeof(Document) ||
+					entry.Entity.GetType() == typeof(DocumentResume) ||
 					entry.Entity.GetType() == typeof(Resume) ||
 					entry.Entity.GetType() == typeof(ResumeState) ||
 					entry.Entity.GetType() == typeof(Skill) ||
@@ -390,6 +420,7 @@ namespace RJM.API.DAL
                 // Models that have soft delete
                 if (
 					entry.Entity.GetType() == typeof(Document) ||
+					entry.Entity.GetType() == typeof(DocumentResume) ||
 					entry.Entity.GetType() == typeof(Resume) ||
 					entry.Entity.GetType() == typeof(ResumeState) ||
 					entry.Entity.GetType() == typeof(Skill) ||
@@ -426,6 +457,7 @@ namespace RJM.API.DAL
                     Type entityType = entry.Entity.GetType();
                     if (
 					    entry.Entity.GetType() == typeof(Document) ||
+					    entry.Entity.GetType() == typeof(DocumentResume) ||
 					    entry.Entity.GetType() == typeof(Resume) ||
 					    entry.Entity.GetType() == typeof(ResumeState) ||
 					    entry.Entity.GetType() == typeof(Skill) ||

@@ -10,6 +10,10 @@ namespace RJM.API.Models
     {
 		public Document()
         {
+            // Relations
+
+			//// Many-to-many
+			this.DocumentResume = new List<DocumentResume>();
         }
 
 		// Properties
@@ -49,6 +53,14 @@ namespace RJM.API.Models
         /// </summary>
 		public string MimeType { get; set; }
 
+		// Relations
+
+		//// Many-to-many
+
+		/// <summary>
+        /// The related Resumes of Document.
+        /// </summary>
+		public IList<DocumentResume> DocumentResume { get; set; }
 
 		// Generic properties
 

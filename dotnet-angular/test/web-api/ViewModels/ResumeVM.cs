@@ -15,6 +15,7 @@ namespace RJM.API.ViewModels
             // Relations
 
 			//// Many-to-many
+			this.Documents = new List<DocumentVM>();
 			this.Skills = new List<SkillVM>();
         }
 
@@ -52,6 +53,13 @@ namespace RJM.API.ViewModels
 
 		//// Many-to-many
 
+		/// <summary>
+        /// The related Documents of Resume.
+        /// </summary>
+		public IList<DocumentVM> Documents { get; set; }
+
+        ////// To create a link with Document directly on create of Resume.
+        public Guid? DocumentId { get; set; }
 		/// <summary>
         /// The related Skills of Resume.
         /// </summary>
