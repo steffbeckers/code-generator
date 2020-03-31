@@ -10,10 +10,6 @@ namespace RJM.API.Models
     {
 		public Document()
         {
-            // Relations
-
-			//// Many-to-many
-			this.ResumeSkill = new List<ResumeSkill>();
         }
 
 		// Properties
@@ -53,27 +49,6 @@ namespace RJM.API.Models
         /// </summary>
 		public string MimeType { get; set; }
 
-		// Relations
-
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key ResumeStateId for ResumeState of Document.
-        /// </summary>
-		public Guid ResumeStateId { get; set; }
-
-		/// <summary>
-        /// The related ResumeState of Document.
-        /// </summary>
-		public ResumeState ResumeState { get; set; }
-
-
-		//// Many-to-many
-
-		/// <summary>
-        /// The related Skills of Document.
-        /// </summary>
-		public IList<ResumeSkill> ResumeSkill { get; set; }
 
 		// Generic properties
 

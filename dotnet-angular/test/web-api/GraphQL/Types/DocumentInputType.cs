@@ -14,12 +14,7 @@ namespace RJM.API.GraphQL.Types
 		    Field<StringGraphType>("path");
 		    Field<StringGraphType>("uRL");
 		    Field<StringGraphType>("mimeType");
-		    Field<NonNullGraphType<IdGraphType>>("resumeStateId");
 
-            // To create a link with Skill directly on create of Document.
-            //Field<IdGraphType>("skillId");
-            //Field<IntGraphType>("skillLevel");
-            //Field<StringGraphType>("skillDescription");
         }
     }
 }

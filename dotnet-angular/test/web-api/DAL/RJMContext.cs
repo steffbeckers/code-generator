@@ -98,7 +98,6 @@ namespace RJM.API.DAL
 
             // Required properties
             modelBuilder.Entity<Document>().Property(e => e.Name).IsRequired();
-            modelBuilder.Entity<Document>().Property(e => e.ResumeStateId).IsRequired();
 
             // User
             modelBuilder.Entity<Document>()

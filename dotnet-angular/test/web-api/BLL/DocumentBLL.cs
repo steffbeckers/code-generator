@@ -12,21 +12,15 @@ namespace RJM.API.BLL
     public class DocumentBLL
     {
         private readonly DocumentRepository documentRepository;
-        private readonly SkillRepository skillRepository;
-        private readonly ResumeSkillRepository resumeSkillRepository;
 
 		/// <summary>
 		/// The constructor of the Document business logic layer.
 		/// </summary>
         public DocumentBLL(
-			DocumentRepository documentRepository,
-            SkillRepository skillRepository,
-			ResumeSkillRepository resumeSkillRepository
+			DocumentRepository documentRepository
 		)
         {
             this.documentRepository = documentRepository;
-            this.skillRepository = skillRepository;
-			this.resumeSkillRepository = resumeSkillRepository;
         }
 
 		/// <summary>
@@ -124,7 +118,6 @@ namespace RJM.API.BLL
             document.Path = documentUpdate.Path;
             document.URL = documentUpdate.URL;
             document.MimeType = documentUpdate.MimeType;
-            document.ResumeStateId = documentUpdate.ResumeStateId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update
@@ -137,60 +130,6 @@ namespace RJM.API.BLL
 			// #-#-#
 
             return document;
-        }
-
-        public async Task<Document> LinkSkillToDocumentAsync(ResumeSkill resumeSkill)
-        {
-            // Validation
-            if (resumeSkill == null) { return null; }
-
-            // Check if document exists
-            Document document = await this.documentRepository.GetByIdAsync(resumeSkill.DocumentId);
-            if (document == null)
-            {
-                return null;
-            }
-
-            // Check if skill exists
-            Skill skill = await this.skillRepository.GetByIdAsync(resumeSkill.SkillId);
-            if (skill == null)
-            {
-                return null;
-            }
-
-            // Retrieve existing link
-            ResumeSkill resumeSkillLink = this.resumeSkillRepository.GetByDocumentAndSkillId(resumeSkill.DocumentId, resumeSkill.SkillId);
-
-            if (resumeSkillLink == null)
-            {
-                await this.resumeSkillRepository.InsertAsync(resumeSkill);
-            }
-            else
-            {
-                // Mapping of fields on many-to-many
-                resumeSkillLink.Level = resumeSkill.Level;
-                resumeSkillLink.Description = resumeSkill.Description;
-
-                await this.resumeSkillRepository.UpdateAsync(resumeSkillLink);
-            }
-
-            return await this.GetDocumentByIdAsync(resumeSkill.DocumentId);
-        }
-
-        public async Task<Document> UnlinkSkillFromDocumentAsync(ResumeSkill resumeSkill)
-        {
-            // Validation
-            if (resumeSkill == null) { return null; }
-
-            // Retrieve existing link
-            ResumeSkill resumeSkillLink = this.resumeSkillRepository.GetByDocumentAndSkillId(resumeSkill.DocumentId, resumeSkill.SkillId);
-		
-            if (resumeSkillLink != null)
-            {
-                await this.resumeSkillRepository.DeleteAsync(resumeSkillLink);
-            }
-
-            return await this.GetDocumentByIdAsync(resumeSkill.DocumentId);
         }
 
 		/// <summary>

@@ -64,42 +64,6 @@ namespace RJM.API.GraphQL
             );
 
             FieldAsync<DocumentType>(
-                "linkSkillToDocument",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
-                    {
-                        Name = "resumeSkill"
-                    }
-                ),
-                resolve: async context =>
-                {
-                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
-
-                    return await context.TryAsyncResolve(
-                        async c => await documentBLL.LinkSkillToDocumentAsync(resumeSkill)
-                    );
-                }
-            );
-
-            FieldAsync<DocumentType>(
-                "unlinkSkillFromDocument",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ResumeSkillInputType>>
-                    {
-                        Name = "resumeSkill"
-                    }
-                ),
-                resolve: async context =>
-                {
-                    ResumeSkill resumeSkill = context.GetArgument<ResumeSkill>("resumeSkill");
-
-                    return await context.TryAsyncResolve(
-                        async c => await documentBLL.UnlinkSkillFromDocumentAsync(resumeSkill)
-                    );
-                }
-            );
-
-            FieldAsync<DocumentType>(
                 "removeDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>>

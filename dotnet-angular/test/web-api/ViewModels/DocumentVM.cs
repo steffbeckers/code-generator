@@ -12,10 +12,6 @@ namespace RJM.API.ViewModels
     {
 		public DocumentVM()
         {
-            // Relations
-
-			//// Many-to-many
-			this.Skills = new List<SkillVM>();
         }
 
 		// Properties
@@ -56,32 +52,6 @@ namespace RJM.API.ViewModels
         /// </summary>
 		public string MimeType { get; set; }
 
-		// Relations
-
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key ResumeStateId for ResumeState of Document.
-        /// </summary>
-		public Guid ResumeStateId { get; set; }
-
-		/// <summary>
-        /// The related ResumeState of Document.
-        /// </summary>
-		public ResumeStateVM ResumeState { get; set; }
-
-
-		//// Many-to-many
-
-		/// <summary>
-        /// The related Skills of Document.
-        /// </summary>
-		public IList<SkillVM> Skills { get; set; }
-
-        ////// To create a link with Skill directly on create of Document.
-        public Guid? SkillId { get; set; }
-        public int? SkillLevel { get; set; }
-        public string SkillDescription { get; set; }
 
 		// Generic properties
 
