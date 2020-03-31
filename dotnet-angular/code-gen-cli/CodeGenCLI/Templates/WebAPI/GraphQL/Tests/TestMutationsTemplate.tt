@@ -19,7 +19,7 @@ mutation create<#= model.Name #>($<#= model.Name.ToCamelCase() #>: <#= model.Nam
 
 {
   "<#= model.Name.ToCamelCase() #>": {
-<# CodeGenModelProperty lastProperty = model.Properties.Last(); #>
+<# CodeGenModelProperty lastProperty = model.Properties.LastOrDefault(); #>
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
     "<#= property.Name.ToCamelCase() #>": ""<#= property != lastProperty ? "," : "" #>
 <# } #>

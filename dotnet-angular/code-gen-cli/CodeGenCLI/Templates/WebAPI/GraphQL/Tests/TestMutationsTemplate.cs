@@ -116,7 +116,7 @@ namespace CodeGenCLI.Templates.WebAPI.GraphQL.Tests
             this.Write("\": {\r\n");
             
             #line 22 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\GraphQL\Tests\TestMutationsTemplate.tt"
- CodeGenModelProperty lastProperty = model.Properties.Last(); 
+ CodeGenModelProperty lastProperty = model.Properties.LastOrDefault(); 
             
             #line default
             #line hidden

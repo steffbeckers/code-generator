@@ -543,7 +543,7 @@ namespace CodeGenCLI.Templates.Angular
             
             #line default
             #line hidden
-            this.Write("Id}/unlink`);\r\n  }\r\n\r\n");
+            this.Write("Id}/unlink`, null);\r\n  }\r\n\r\n");
             
             #line 60 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\Angular\DataServiceTemplate.tt"
  } 

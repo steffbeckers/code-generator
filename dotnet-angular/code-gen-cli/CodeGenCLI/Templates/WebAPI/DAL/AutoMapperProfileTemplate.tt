@@ -56,7 +56,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                                 new <#= manyToManyWithModel.Name #>()
                                 {
                                     <#= manyToManyOtherRelation.Model #>Id = (Guid)y.<#= manyToManyOtherRelation.Model #>Id<#= (manyToManyWithModel.Properties.Count > 0 ? "," : "") #>
-<# CodeGenModelProperty lastManyToManyWithModelProperty = manyToManyWithModel.Properties.Last(); #>
+<# CodeGenModelProperty lastManyToManyWithModelProperty = manyToManyWithModel.Properties.LastOrDefault(); #>
 <# foreach (CodeGenModelProperty manyToManyWithModelProperty in manyToManyWithModel.Properties) { #>
                                     <#= manyToManyWithModelProperty.Name #> = y.<#= manyToManyOtherRelation.Model #><#= manyToManyWithModelProperty.Name #><#= manyToManyWithModelProperty != lastManyToManyWithModelProperty ? "," : "" #>
 <# } #>

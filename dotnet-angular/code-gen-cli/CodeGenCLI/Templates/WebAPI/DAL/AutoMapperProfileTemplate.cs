@@ -279,7 +279,7 @@ namespace CodeGenCLI.Templates.WebAPI.DAL
             this.Write("\r\n");
             
             #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt"
- CodeGenModelProperty lastManyToManyWithModelProperty = manyToManyWithModel.Properties.Last(); 
+ CodeGenModelProperty lastManyToManyWithModelProperty = manyToManyWithModel.Properties.LastOrDefault(); 
             
             #line default
             #line hidden
