@@ -24,6 +24,20 @@ mutation createDocument($document: documentInput!) {
 }
 
 
+// DocumentResumes
+
+mutation createDocumentResume($documentResume: documentResumeInput!) {
+  createDocumentResume(documentResume: $documentResume) {
+    id
+  }
+}
+
+{
+  "documentResume": {
+  }
+}
+
+
 // Resumes
 
 mutation createResume($resume: resumeInput!) {
