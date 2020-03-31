@@ -24,6 +24,46 @@
       </div>
   </div>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Documents</h2>
+    <a routerLink="/documents/create" [queryParams]="{ resumeId: resume.id }">Add new Document</a>
+    <a [routerLink]="['/resumes', resume.id, 'link', 'document']">Link existing Document</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="resume.documents && resume.documents.length === 0">No documents added yet.</p>
+    <table *ngIf="resume.documents && resume.documents.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Name</th>
+        <th>DisplayName</th>
+        <th>Description</th>
+        <th>Path</th>
+        <th>URL</th>
+        <th>MimeType</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of resume.documents" [routerLink]="['/documents', document.id]">
+          <td>
+            {{ document.name }}
+          </td>
+          <td>
+            {{ document.displayName }}
+          </td>
+          <td>
+            {{ document.description }}
+          </td>
+          <td>
+            {{ document.path }}
+          </td>
+          <td>
+            {{ document.uRL }}
+          </td>
+          <td>
+            {{ document.mimeType }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <h2>Skills</h2>
     <a routerLink="/skills/create" [queryParams]="{ resumeId: resume.id }">Add new Skill</a>
     <a [routerLink]="['/resumes', resume.id, 'link', 'skill']">Link existing Skill</a>

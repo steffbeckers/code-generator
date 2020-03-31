@@ -35,6 +35,7 @@ export class DocumentCreateComponent implements OnInit {
       path: [''],
       uRL: [''],
       mimeType: [''],
+      resumeId: [''],
     });
 
     // Patch query params to form from URL

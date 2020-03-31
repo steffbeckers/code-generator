@@ -37,6 +37,18 @@ export class DocumentService {
     return this.http.put<Document>(`${environment.api}/documents/${document.id}`, document);
   }
 
+  // PUT: api/Documents/{documentId}/resumes/{resumeId}/link
+  // Links a specific resume to document.
+  public linkResumeToDocument(documentId: string, resumeId: string): Observable<Document> {
+    return this.http.put<Document>(`${environment.api}/documents/${documentId}/resumes/${resumeId}/link`, null);
+  }
+
+  // PUT: api/Documents/{documentId}/resumes/{resumeId}/unlink
+  // Unlinks a specific resume from document.
+  public unlinkResumeFromDocument(documentId: string, resumeId: string): Observable<Document> {
+    return this.http.put<Document>(`${environment.api}/documents/${documentId}/resumes/${resumeId}/unlink`, null);
+  }
+
   // DELETE: api/documents/{id}
   // Deletes a specific document.
   public deleteDocument(document: Document | string): Observable<Document> {

@@ -32,6 +32,7 @@ export class ResumeCreateComponent implements OnInit {
       jobTitle: [''],
       description: [''],
       resumeStateId: ['', Validators.required],
+      documentId: [''],
       skillId: [''],
     });
 

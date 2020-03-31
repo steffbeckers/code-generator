@@ -37,6 +37,18 @@ export class ResumeService {
     return this.http.put<Resume>(`${environment.api}/resumes/${resume.id}`, resume);
   }
 
+  // PUT: api/Resumes/{resumeId}/documents/{documentId}/link
+  // Links a specific document to resume.
+  public linkDocumentToResume(resumeId: string, documentId: string): Observable<Resume> {
+    return this.http.put<Resume>(`${environment.api}/resumes/${resumeId}/documents/${documentId}/link`, null);
+  }
+
+  // PUT: api/Resumes/{resumeId}/documents/{documentId}/unlink
+  // Unlinks a specific document from resume.
+  public unlinkDocumentFromResume(resumeId: string, documentId: string): Observable<Resume> {
+    return this.http.put<Resume>(`${environment.api}/resumes/${resumeId}/documents/${documentId}/unlink`, null);
+  }
+
   // PUT: api/Resumes/{resumeId}/skills/{skillId}/link
   // Links a specific skill to resume.
   public linkSkillToResume(resumeId: string, skillId: string): Observable<Resume> {

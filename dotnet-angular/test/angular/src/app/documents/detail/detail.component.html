@@ -33,4 +33,28 @@
       <span>{{ document.mimeType }}</span>
     </div>
   </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h2>Resumes</h2>
+    <a routerLink="/resumes/create" [queryParams]="{ documentId: document.id }">Add new Resume</a>
+    <a [routerLink]="['/documents', document.id, 'link', 'resume']">Link existing Resume</a>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <p *ngIf="document.resumes && document.resumes.length === 0">No resumes added yet.</p>
+    <table *ngIf="document.resumes && document.resumes.length > 0" cellspacing="0" cellpadding="5">
+      <thead>
+        <th>Job Title</th>
+        <th>Description</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resume of document.resumes" [routerLink]="['/resumes', resume.id]">
+          <td>
+            {{ resume.jobTitle }}
+          </td>
+          <td>
+            {{ resume.description }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

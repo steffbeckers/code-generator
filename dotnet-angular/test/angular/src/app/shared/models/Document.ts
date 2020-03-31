@@ -1,3 +1,4 @@
+import { Resume } from './Resume';
 
 export class Document {
   public id: string;
@@ -7,4 +8,5 @@ export class Document {
   public path: string;
   public uRL: string;
   public mimeType: string;
+  public resumes: Resume[];
 }
