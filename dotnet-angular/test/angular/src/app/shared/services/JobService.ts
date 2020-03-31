@@ -46,7 +46,7 @@ export class JobService {
   // PUT: api/Jobs/{jobId}/skills/{skillId}/unlink
   // Unlinks a specific skill from job.
   public unlinkSkillFromJob(jobId: string, skillId: string): Observable<Job> {
-    return this.http.put<Job>(`${environment.api}/jobs/${jobId}/skills/${skillId}/unlink`);
+    return this.http.put<Job>(`${environment.api}/jobs/${jobId}/skills/${skillId}/unlink`, null);
   }
 
   // DELETE: api/jobs/{id}

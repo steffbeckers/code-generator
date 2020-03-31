@@ -46,7 +46,7 @@ export class SkillService {
   // PUT: api/Skills/{skillId}/resumes/{resumeId}/unlink
   // Unlinks a specific resume from skill.
   public unlinkResumeFromSkill(skillId: string, resumeId: string): Observable<Skill> {
-    return this.http.put<Skill>(`${environment.api}/skills/${skillId}/resumes/${resumeId}/unlink`);
+    return this.http.put<Skill>(`${environment.api}/skills/${skillId}/resumes/${resumeId}/unlink`, null);
   }
 
   // PUT: api/Skills/{skillId}/jobs/{jobId}/link
@@ -58,7 +58,7 @@ export class SkillService {
   // PUT: api/Skills/{skillId}/jobs/{jobId}/unlink
   // Unlinks a specific job from skill.
   public unlinkJobFromSkill(skillId: string, jobId: string): Observable<Skill> {
-    return this.http.put<Skill>(`${environment.api}/skills/${skillId}/jobs/${jobId}/unlink`);
+    return this.http.put<Skill>(`${environment.api}/skills/${skillId}/jobs/${jobId}/unlink`, null);
   }
 
   // DELETE: api/skills/{id}

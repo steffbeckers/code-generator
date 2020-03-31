@@ -46,7 +46,7 @@ export class ResumeService {
   // PUT: api/Resumes/{resumeId}/skills/{skillId}/unlink
   // Unlinks a specific skill from resume.
   public unlinkSkillFromResume(resumeId: string, skillId: string): Observable<Resume> {
-    return this.http.put<Resume>(`${environment.api}/resumes/${resumeId}/skills/${skillId}/unlink`);
+    return this.http.put<Resume>(`${environment.api}/resumes/${resumeId}/skills/${skillId}/unlink`, null);
   }
 
   // DELETE: api/resumes/{id}
