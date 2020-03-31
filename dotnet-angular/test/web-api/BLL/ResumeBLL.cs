@@ -12,6 +12,8 @@ namespace RJM.API.BLL
     public class ResumeBLL
     {
         private readonly ResumeRepository resumeRepository;
+        private readonly DocumentRepository documentRepository;
+        private readonly DocumentResumeRepository documentResumeRepository;
         private readonly SkillRepository skillRepository;
         private readonly ResumeSkillRepository resumeSkillRepository;
 
@@ -20,11 +22,15 @@ namespace RJM.API.BLL
 		/// </summary>
         public ResumeBLL(
 			ResumeRepository resumeRepository,
+            DocumentRepository documentRepository,
+			DocumentResumeRepository documentResumeRepository,
             SkillRepository skillRepository,
 			ResumeSkillRepository resumeSkillRepository
 		)
         {
             this.resumeRepository = resumeRepository;
+            this.documentRepository = documentRepository;
+			this.documentResumeRepository = documentResumeRepository;
             this.skillRepository = skillRepository;
 			this.resumeSkillRepository = resumeSkillRepository;
         }
@@ -119,6 +125,42 @@ namespace RJM.API.BLL
             return resume;
         }
 
+        public async Task<Resume> LinkDocumentToResumeAsync(DocumentResume documentResume)
+        {
+            // Validation
+            if (documentResume == null) { return null; }
+
+            // Check if resume exists
+            Resume resume = await this.resumeRepository.GetByIdAsync(documentResume.ResumeId);
+            if (resume == null)
+            {
+                return null;
+            }
+
+            // Check if document exists
+            Document document = await this.documentRepository.GetByIdAsync(documentResume.DocumentId);
+            if (document == null)
+            {
+                return null;
+            }
+
+            // Retrieve existing link
+            DocumentResume documentResumeLink = this.documentResumeRepository.GetByResumeAndDocumentId(documentResume.ResumeId, documentResume.DocumentId);
+
+            if (documentResumeLink == null)
+            {
+                await this.documentResumeRepository.InsertAsync(documentResume);
+            }
+            else
+            {
+                // Mapping of fields on many-to-many
+
+                await this.documentResumeRepository.UpdateAsync(documentResumeLink);
+            }
+
+            return await this.GetResumeByIdAsync(documentResume.ResumeId);
+        }
+
         public async Task<Resume> LinkSkillToResumeAsync(ResumeSkill resumeSkill)
         {
             // Validation
@@ -155,6 +197,22 @@ namespace RJM.API.BLL
             }
 
             return await this.GetResumeByIdAsync(resumeSkill.ResumeId);
+        }
+
+        public async Task<Resume> UnlinkDocumentFromResumeAsync(DocumentResume documentResume)
+        {
+            // Validation
+            if (documentResume == null) { return null; }
+
+            // Retrieve existing link
+            DocumentResume documentResumeLink = this.documentResumeRepository.GetByResumeAndDocumentId(documentResume.ResumeId, documentResume.DocumentId);
+		
+            if (documentResumeLink != null)
+            {
+                await this.documentResumeRepository.DeleteAsync(documentResumeLink);
+            }
+
+            return await this.GetResumeByIdAsync(documentResume.ResumeId);
         }
 
         public async Task<Resume> UnlinkSkillFromResumeAsync(ResumeSkill resumeSkill)

@@ -8,7 +8,9 @@ namespace RJM.API.GraphQL.Types
     public class DocumentType : ObjectGraphType<Document>
     {
         public DocumentType(
-			DocumentRepository documentRepository
+			DocumentRepository documentRepository,
+            ResumeRepository resumeRepository,
+			DocumentResumeRepository documentResumeRepository
         )
         {
             Field(x => x.Id, type: typeof(IdGraphType));
@@ -18,6 +20,22 @@ namespace RJM.API.GraphQL.Types
             Field(x => x.Path, nullable: true);
             Field(x => x.URL, nullable: true);
             Field(x => x.MimeType, nullable: true);
+
+            Field<ListGraphType<ResumeType>>(
+                "resumes",
+                resolve: context => resumeRepository.GetByDocumentId(context.Source.Id)
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<ResumeType>>(
+            //    "resumes",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await resumeRepository.GetByDocumentIdAsync(context.Source.Id)
+            //        );
+            //    }
+            //);
 
             Field(x => x.CreatedByUserId, type: typeof(IdGraphType));
             // TODO: Field(x => x.CreatedByUser, type: typeof(UserType));

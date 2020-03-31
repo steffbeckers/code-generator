@@ -19,14 +19,60 @@ namespace RJM.API.DAL
         public AutoMapperProfile()
         {
             // Documents
+			CreateMap<Document, DocumentVM>()
+                .ForMember(
+                    x => x.Resumes,
+                    x => x.MapFrom(
+                        y => y.DocumentResume.Select(z => z.Resume)
+                    )
+                );
+            CreateMap<DocumentVM, Document>()
+                .ForMember(
+                    x => x.DocumentResume,
+                    x =>
+                    {
+                        x.PreCondition(z => z.ResumeId != null);
+                        x.MapFrom(
+                            y => new List<DocumentResume>() {
+                                new DocumentResume()
+                                {
+                                    ResumeId = (Guid)y.ResumeId
+                                }
+                            }
+                        );
+                    }
+                );
 
             // Resumes
+			CreateMap<Resume, ResumeVM>()
+                .ForMember(
+                    x => x.Documents,
+                    x => x.MapFrom(
+                        y => y.DocumentResume.Select(z => z.Document)
+                    )
+                );
 			CreateMap<Resume, ResumeVM>()
                 .ForMember(
                     x => x.Skills,
                     x => x.MapFrom(
                         y => y.ResumeSkill.Select(z => z.Skill)
                     )
+                );
+            CreateMap<ResumeVM, Resume>()
+                .ForMember(
+                    x => x.DocumentResume,
+                    x =>
+                    {
+                        x.PreCondition(z => z.DocumentId != null);
+                        x.MapFrom(
+                            y => new List<DocumentResume>() {
+                                new DocumentResume()
+                                {
+                                    DocumentId = (Guid)y.DocumentId
+                                }
+                            }
+                        );
+                    }
                 );
             CreateMap<ResumeVM, Resume>()
                 .ForMember(

@@ -64,6 +64,42 @@ namespace RJM.API.GraphQL
             );
 
             FieldAsync<DocumentType>(
+                "linkResumeToDocument",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
+                    {
+                        Name = "documentResume"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    DocumentResume documentResume = context.GetArgument<DocumentResume>("documentResume");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentBLL.LinkResumeToDocumentAsync(documentResume)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentType>(
+                "unlinkResumeFromDocument",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
+                    {
+                        Name = "documentResume"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    DocumentResume documentResume = context.GetArgument<DocumentResume>("documentResume");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentBLL.UnlinkResumeFromDocumentAsync(documentResume)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentType>(
                 "removeDocument",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>>
@@ -119,6 +155,42 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await resumeBLL.UpdateResumeAsync(resume)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeType>(
+                "linkDocumentToResume",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
+                    {
+                        Name = "documentResume"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    DocumentResume documentResume = context.GetArgument<DocumentResume>("documentResume");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeBLL.LinkDocumentToResumeAsync(documentResume)
+                    );
+                }
+            );
+
+            FieldAsync<ResumeType>(
+                "unlinkDocumentFromResume",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<DocumentResumeInputType>>
+                    {
+                        Name = "documentResume"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    DocumentResume documentResume = context.GetArgument<DocumentResume>("documentResume");
+
+                    return await context.TryAsyncResolve(
+                        async c => await resumeBLL.UnlinkDocumentFromResumeAsync(documentResume)
                     );
                 }
             );

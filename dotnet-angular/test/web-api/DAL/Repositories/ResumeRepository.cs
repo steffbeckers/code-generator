@@ -29,6 +29,8 @@ namespace RJM.API.DAL.Repositories
         {
             return await this.context.Resumes
                 .Include(x => x.ResumeState)
+                .Include(x => x.DocumentResume)
+                    .ThenInclude(x => x.Document)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Skill)
                 .Include(x => x.CreatedByUser)
@@ -40,6 +42,8 @@ namespace RJM.API.DAL.Repositories
         {
             return await this.context.Resumes
                 .Include(x => x.ResumeState)
+                .Include(x => x.DocumentResume)
+                    .ThenInclude(x => x.Document)
                 .Include(x => x.ResumeSkill)
                     .ThenInclude(x => x.Skill)
                 .Include(x => x.CreatedByUser)
@@ -59,6 +63,25 @@ namespace RJM.API.DAL.Repositories
         //{
         //    return await this.context.Resumes
         //        .Where(t => t.ResumeStateId == resumeStateId)
+        //        .ToListAsync();
+        //}
+
+        public IEnumerable<Resume> GetByDocumentId(Guid documentId)
+        {
+            return this.context.DocumentResume
+                .Include(x => x.Resume)
+                .Where(x => x.DocumentId == documentId)
+                .Select(x => x.Resume)
+                .ToList();
+        }
+        
+        //// Async test
+        //public async Task<IEnumerable<Resume>> GetByDocumentIdAsync(Guid documentId)
+        //{
+        //    return await this.context.DocumentResume
+        //        .Include(x => x.Resume)
+        //        .Where(x => x.DocumentId == documentId)
+        //        .Select(x => x.Resume)
         //        .ToListAsync();
         //}
 

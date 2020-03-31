@@ -15,6 +15,8 @@ namespace RJM.API.GraphQL.Types
 		    Field<StringGraphType>("uRL");
 		    Field<StringGraphType>("mimeType");
 
+            // To create a link with Resume directly on create of Document.
+            //Field<IdGraphType>("resumeId");
         }
     }
 }

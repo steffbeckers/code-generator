@@ -10,6 +10,8 @@ namespace RJM.API.GraphQL.Types
         public ResumeType(
             ResumeStateRepository resumeStateRepository,
 			ResumeRepository resumeRepository,
+            DocumentRepository documentRepository,
+			DocumentResumeRepository documentResumeRepository,
             SkillRepository skillRepository,
 			ResumeSkillRepository resumeSkillRepository
         )
@@ -40,6 +42,22 @@ namespace RJM.API.GraphQL.Types
             //        }
             //        
             //        return null;
+            //    }
+            //);
+
+            Field<ListGraphType<DocumentType>>(
+                "documents",
+                resolve: context => documentRepository.GetByResumeId(context.Source.Id)
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<DocumentType>>(
+            //    "documents",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await documentRepository.GetByResumeIdAsync(context.Source.Id)
+            //        );
             //    }
             //);
 

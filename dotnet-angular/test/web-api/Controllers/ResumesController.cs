@@ -120,6 +120,46 @@ namespace RJM.API.Controllers
 			return Ok(this.mapper.Map<Resume, ResumeVM>(resume));
         }
 
+        // PUT: api/resumes/documents/link
+		/// <summary>
+		/// Links a specific document to resume.
+		/// </summary>
+		/// <param name="documentResume"></param>
+        [HttpPut("Documents/Link")]
+        public async Task<ActionResult<ResumeVM>> LinkDocumentToResume([FromBody] DocumentResume documentResume)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Resume resume = await this.bll.LinkDocumentToResumeAsync(documentResume);
+
+            // Mapping
+            return Ok(this.mapper.Map<Resume, ResumeVM>(resume));
+        }
+
+        // PUT: api/resumes/documents/unlink
+		/// <summary>
+		/// Unlinks a specific document from resume.
+		/// </summary>
+		/// <param name="documentResume"></param>
+        [HttpPut("Documents/Unlink")]
+        public async Task<ActionResult<ResumeVM>> UnlinkDocumentFromResume([FromBody] DocumentResume documentResume)
+        {
+			// Validation
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Resume resume = await this.bll.UnlinkDocumentFromResumeAsync(documentResume);
+
+            // Mapping
+            return Ok(this.mapper.Map<Resume, ResumeVM>(resume));
+        }
+
         // PUT: api/resumes/skills/link
 		/// <summary>
 		/// Links a specific skill to resume.
