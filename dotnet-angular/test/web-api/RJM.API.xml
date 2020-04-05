@@ -14,7 +14,7 @@
             The business logic layer for Documents.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(RJM.API.DAL.Repositories.DocumentRepository)">
+        <member name="M:RJM.API.BLL.DocumentBLL.#ctor(RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentResumeRepository)">
             <summary>
             The constructor of the Document business logic layer.
             </summary>
@@ -134,7 +134,7 @@
             The business logic layer for Resumes.
             </summary>
         </member>
-        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.SkillRepository,RJM.API.DAL.Repositories.ResumeSkillRepository)">
+        <member name="M:RJM.API.BLL.ResumeBLL.#ctor(RJM.API.DAL.Repositories.ResumeRepository,RJM.API.DAL.Repositories.DocumentRepository,RJM.API.DAL.Repositories.DocumentResumeRepository,RJM.API.DAL.Repositories.SkillRepository,RJM.API.DAL.Repositories.ResumeSkillRepository)">
             <summary>
             The constructor of the Resume business logic layer.
             </summary>
@@ -328,6 +328,18 @@
             <param name="id"></param>
             <param name="documentVM"></param>
         </member>
+        <member name="M:RJM.API.Controllers.DocumentsController.LinkResumeToDocument(RJM.API.Models.DocumentResume)">
+            <summary>
+            Links a specific resume to document.
+            </summary>
+            <param name="documentResume"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.DocumentsController.UnlinkResumeFromDocument(RJM.API.Models.DocumentResume)">
+            <summary>
+            Unlinks a specific resume from document.
+            </summary>
+            <param name="documentResume"></param>
+        </member>
         <member name="M:RJM.API.Controllers.DocumentsController.DeleteDocument(System.Guid)">
             <summary>
             Deletes a specific document.
@@ -459,6 +471,18 @@
             </summary>
             <param name="id"></param>
             <param name="resumeVM"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.LinkDocumentToResume(RJM.API.Models.DocumentResume)">
+            <summary>
+            Links a specific document to resume.
+            </summary>
+            <param name="documentResume"></param>
+        </member>
+        <member name="M:RJM.API.Controllers.ResumesController.UnlinkDocumentFromResume(RJM.API.Models.DocumentResume)">
+            <summary>
+            Unlinks a specific document from resume.
+            </summary>
+            <param name="documentResume"></param>
         </member>
         <member name="M:RJM.API.Controllers.ResumesController.LinkSkillToResume(RJM.API.Models.ResumeSkill)">
             <summary>
@@ -642,6 +666,16 @@
             The constructor of the Document repository.
             </summary>
         </member>
+        <member name="T:RJM.API.DAL.Repositories.DocumentResumeRepository">
+            <summary>
+            The repository for DocumentResumes in the data access layer.
+            </summary>
+        </member>
+        <member name="M:RJM.API.DAL.Repositories.DocumentResumeRepository.#ctor(RJM.API.DAL.RJMContext)">
+            <summary>
+            The constructor of the DocumentResume repository.
+            </summary>
+        </member>
         <member name="T:RJM.API.DAL.Repositories.JobRepository">
             <summary>
             The repository for Jobs in the data access layer.
@@ -762,6 +796,11 @@
             The MimeType property of Document.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Document.DocumentResume">
+            <summary>
+            The related Resumes of Document.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Document.CreatedOn">
             <summary>
             The date and time of when the record is created
@@ -793,6 +832,71 @@
             </summary>
         </member>
         <member name="P:RJM.API.Models.Document.ModifiedByUser">
+            <summary>
+            The user who last modified the record
+            </summary>
+        </member>
+        <member name="T:RJM.API.Models.DocumentResume">
+            <summary>
+            DocumentResume model
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.Id">
+            <summary>
+            The identifier of DocumentResume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.DocumentId">
+            <summary>
+            The related foreign key DocumentId for Document of DocumentResume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.Document">
+            <summary>
+            The related Document of DocumentResume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.ResumeId">
+            <summary>
+            The related foreign key ResumeId for Resume of DocumentResume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.Resume">
+            <summary>
+            The related Resume of DocumentResume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.CreatedOn">
+            <summary>
+            The date and time of when the record is created
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.ModifiedOn">
+            <summary>
+            The date and time of when the record is modified
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.DeletedOn">
+            <summary>
+            The date and time of when the record is (soft) deleted
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.CreatedByUserId">
+            <summary>
+            The Id of the user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.CreatedByUser">
+            <summary>
+            The user who created the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.ModifiedByUserId">
+            <summary>
+            The Id of the user who last modified the record
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.DocumentResume.ModifiedByUser">
             <summary>
             The user who last modified the record
             </summary>
@@ -1030,6 +1134,11 @@
         <member name="P:RJM.API.Models.Resume.ResumeState">
             <summary>
             The related ResumeState of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.DocumentResume">
+            <summary>
+            The related Documents of Resume.
             </summary>
         </member>
         <member name="P:RJM.API.Models.Resume.ResumeSkill">
@@ -1382,6 +1491,11 @@
             The MimeType property of Document.
             </summary>
         </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.Resumes">
+            <summary>
+            The related Resumes of Document.
+            </summary>
+        </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.CreatedOn">
             <summary>
             The date and time of when the record is created
@@ -1615,6 +1729,11 @@
         <member name="P:RJM.API.ViewModels.ResumeVM.ResumeState">
             <summary>
             The related ResumeState of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.Documents">
+            <summary>
+            The related Documents of Resume.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.ResumeVM.Skills">
