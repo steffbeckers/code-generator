@@ -8,6 +8,8 @@ mutation createDocument($document: documentInput!) {
     description
     path
     uRL
+    sizeInBytes
+    fileLastModifiedOn
     mimeType
   }
 }
@@ -19,6 +21,8 @@ mutation createDocument($document: documentInput!) {
     "description": "",
     "path": "",
     "uRL": "",
+    "sizeInBytes": "",
+    "fileLastModifiedOn": "",
     "mimeType": ""
   }
 }

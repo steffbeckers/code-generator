@@ -49,6 +49,16 @@ namespace RJM.API.Models
 		public string URL { get; set; }
 
 		/// <summary>
+        /// The SizeInBytes property of Document.
+        /// </summary>
+		public int? SizeInBytes { get; set; }
+
+		/// <summary>
+        /// The FileLastModifiedOn property of Document.
+        /// </summary>
+		public DateTime FileLastModifiedOn { get; set; }
+
+		/// <summary>
         /// The MimeType property of Document.
         /// </summary>
 		public string MimeType { get; set; }

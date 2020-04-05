@@ -19,6 +19,8 @@ namespace RJM.API.GraphQL.Types
             Field(x => x.Description, nullable: true);
             Field(x => x.Path, nullable: true);
             Field(x => x.URL, nullable: true);
+            Field(x => x.SizeInBytes, nullable: true);
+            Field(x => x.FileLastModifiedOn, nullable: true);
             Field(x => x.MimeType, nullable: true);
 
             Field<ListGraphType<ResumeType>>(
