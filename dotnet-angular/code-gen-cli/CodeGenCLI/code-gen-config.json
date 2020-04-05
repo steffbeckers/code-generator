@@ -29,6 +29,14 @@
           "Type": "string"
         },
         {
+          "Name": "SizeInBytes",
+          "Type": "int"
+        },
+        {
+          "Name": "FileLastModifiedOn",
+          "Type": "DateTime"
+        },
+        {
           "Name": "MimeType",
           "Type": "string"
         }
