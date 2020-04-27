@@ -8,6 +8,7 @@ namespace RJM.API.GraphQL.Types
     public class DocumentType : ObjectGraphType<Document>
     {
         public DocumentType(
+            DocumentTypeRepository documentTypeRepository,
 			DocumentRepository documentRepository,
             ResumeRepository resumeRepository,
 			DocumentResumeRepository documentResumeRepository
@@ -22,6 +23,31 @@ namespace RJM.API.GraphQL.Types
             Field(x => x.SizeInBytes, nullable: true);
             Field(x => x.FileLastModifiedOn, nullable: true);
             Field(x => x.MimeType, nullable: true);
+
+            Field<DocumentTypeType>(
+                "documentType",
+                resolve: context =>
+                {
+                    if (context.Source.DocumentTypeId != null)
+                        return documentTypeRepository.GetById((Guid)context.Source.DocumentTypeId);
+                    return null;
+                }
+            );
+
+            //// Async test
+            //FieldAsync<DocumentTypeType>(
+            //    "documentType",
+            //    resolve: async context =>
+            //    {
+            //        if (context.Source.DocumentTypeId != null) {
+            //            return await context.TryAsyncResolve(
+            //                async c => await documentTypeRepository.GetByIdAsync((Guid)context.Source.DocumentTypeId)
+            //            );
+            //        }
+            //        
+            //        return null;
+            //    }
+            //);
 
             Field<ListGraphType<ResumeType>>(
                 "resumes",

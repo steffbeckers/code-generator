@@ -11,6 +11,7 @@ namespace RJM.API.GraphQL
     {
         public RJMMutation(
 			DocumentBLL documentBLL,
+			DocumentTypeBLL documentTypeBLL,
 			ResumeBLL resumeBLL,
 			ResumeStateBLL resumeStateBLL,
 			SkillBLL skillBLL,
@@ -113,6 +114,66 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await documentBLL.DeleteDocumentByIdAsync(id)
+                    );
+                }
+            );
+
+			// DocumentTypes
+            FieldAsync<DocumentTypeType>(
+                "createDocumentType",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<DocumentTypeInputType>>
+                    {
+                        Name = "documentType"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    DocumentType documentType = context.GetArgument<DocumentType>("documentType");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentTypeBLL.CreateDocumentTypeAsync(documentType)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentTypeType>(
+                "updateDocumentType",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<DocumentTypeInputType>>
+                    {
+                        Name = "documentType"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    DocumentType documentType = context.GetArgument<DocumentType>("documentType");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentTypeBLL.UpdateDocumentTypeAsync(documentType)
+                    );
+                }
+            );
+
+            FieldAsync<DocumentTypeType>(
+                "removeDocumentType",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await documentTypeBLL.DeleteDocumentTypeByIdAsync(id)
                     );
                 }
             );

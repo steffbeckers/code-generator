@@ -4,86 +4,43 @@ using System.Collections.Generic;
 namespace RJM.API.Models
 {
 	/// <summary>
-    /// Document model
+    /// DocumentType model
     /// </summary>
-    public class Document
+    public class DocumentType
     {
-		public Document()
+		public DocumentType()
         {
             // Relations
 
-			//// Many-to-many
-			this.DocumentResume = new List<DocumentResume>();
+			//// One-to-many
+			this.Documents = new List<Document>();
         }
 
 		// Properties
 
 		/// <summary>
-        /// The identifier of Document.
+        /// The identifier of DocumentType.
         /// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-        /// The Name property of Document.
+        /// The Name property of DocumentType.
         /// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-        /// The DisplayName property of Document.
+        /// The DisplayName property of DocumentType.
         /// </summary>
 		public string DisplayName { get; set; }
 
-		/// <summary>
-        /// The Description property of Document.
-        /// </summary>
-		public string Description { get; set; }
-
-		/// <summary>
-        /// The Path property of Document.
-        /// </summary>
-		public string Path { get; set; }
-
-		/// <summary>
-        /// The URL property of Document.
-        /// </summary>
-		public string URL { get; set; }
-
-		/// <summary>
-        /// The SizeInBytes property of Document.
-        /// </summary>
-		public int? SizeInBytes { get; set; }
-
-		/// <summary>
-        /// The FileLastModifiedOn property of Document.
-        /// </summary>
-		public DateTime FileLastModifiedOn { get; set; }
-
-		/// <summary>
-        /// The MimeType property of Document.
-        /// </summary>
-		public string MimeType { get; set; }
-
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key DocumentTypeId for DocumentType of Document.
-        /// </summary>
-		public Guid DocumentTypeId { get; set; }
+		//// One-to-many
 
 		/// <summary>
-        /// The related DocumentType of Document.
+        /// The related Documents of DocumentType.
         /// </summary>
-		public DocumentType DocumentType { get; set; }
-
-
-		//// Many-to-many
-
-		/// <summary>
-        /// The related Resumes of Document.
-        /// </summary>
-		public IList<DocumentResume> DocumentResume { get; set; }
+		public IList<Document> Documents { get; set; }
 
 		// Generic properties
 

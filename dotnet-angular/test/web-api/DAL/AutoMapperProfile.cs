@@ -43,6 +43,8 @@ namespace RJM.API.DAL
                     }
                 );
 
+            // DocumentTypes
+
             // Resumes
 			CreateMap<Resume, ResumeVM>()
                 .ForMember(

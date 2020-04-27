@@ -28,6 +28,24 @@ mutation createDocument($document: documentInput!) {
 }
 
 
+// DocumentTypes
+
+mutation createDocumentType($documentType: documentTypeInput!) {
+  createDocumentType(documentType: $documentType) {
+    id
+    name
+    displayName
+  }
+}
+
+{
+  "documentType": {
+    "name": "",
+    "displayName": ""
+  }
+}
+
+
 // DocumentResumes
 
 mutation createDocumentResume($documentResume: documentResumeInput!) {
