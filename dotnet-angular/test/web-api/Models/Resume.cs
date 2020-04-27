@@ -25,6 +25,16 @@ namespace RJM.API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
+        /// The Name property of Resume.
+        /// </summary>
+		public string Name { get; set; }
+
+		/// <summary>
+        /// The DisplayName property of Resume.
+        /// </summary>
+		public string DisplayName { get; set; }
+
+		/// <summary>
         /// The JobTitle property of Resume.
         /// </summary>
 		public string JobTitle { get; set; }

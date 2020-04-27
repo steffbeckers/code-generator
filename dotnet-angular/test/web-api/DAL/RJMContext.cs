@@ -183,6 +183,8 @@ namespace RJM.API.DAL
 			modelBuilder.Entity<Resume>().HasKey(e => e.Id);
 
             // Required properties
+            modelBuilder.Entity<Resume>().Property(e => e.Name).IsRequired();
+            modelBuilder.Entity<Resume>().Property(e => e.DisplayName).IsRequired();
             modelBuilder.Entity<Resume>().Property(e => e.ResumeStateId).IsRequired();
 
             // User

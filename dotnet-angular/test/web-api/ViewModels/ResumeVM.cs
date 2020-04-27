@@ -27,6 +27,18 @@ namespace RJM.API.ViewModels
 		public Guid Id { get; set; }
 
 		/// <summary>
+        /// The Name property of Resume.
+        /// </summary>
+        [Required]
+		public string Name { get; set; }
+
+		/// <summary>
+        /// The DisplayName property of Resume.
+        /// </summary>
+        [Required]
+		public string DisplayName { get; set; }
+
+		/// <summary>
         /// The JobTitle property of Resume.
         /// </summary>
 		public string JobTitle { get; set; }

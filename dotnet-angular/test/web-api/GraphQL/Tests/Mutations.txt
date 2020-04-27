@@ -65,6 +65,8 @@ mutation createDocumentResume($documentResume: documentResumeInput!) {
 mutation createResume($resume: resumeInput!) {
   createResume(resume: $resume) {
     id
+    name
+    displayName
     jobTitle
     description
   }
@@ -72,6 +74,8 @@ mutation createResume($resume: resumeInput!) {
 
 {
   "resume": {
+    "name": "",
+    "displayName": "",
     "jobTitle": "",
     "description": ""
   }
