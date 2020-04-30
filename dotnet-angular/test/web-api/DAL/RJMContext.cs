@@ -241,6 +241,7 @@ namespace RJM.API.DAL
 
             // Required properties
             modelBuilder.Entity<Skill>().Property(e => e.Name).IsRequired();
+            modelBuilder.Entity<Skill>().Property(e => e.DisplayName).IsRequired();
 
             // User
             modelBuilder.Entity<Skill>()

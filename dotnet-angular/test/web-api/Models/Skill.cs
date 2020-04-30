@@ -33,6 +33,11 @@ namespace RJM.API.Models
 		public string Name { get; set; }
 
 		/// <summary>
+        /// The DisplayName property of Skill.
+        /// </summary>
+		public string DisplayName { get; set; }
+
+		/// <summary>
         /// The Description property of Skill.
         /// </summary>
 		public string Description { get; set; }

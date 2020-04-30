@@ -101,6 +101,16 @@
       "Name": "Resume",
       "Properties": [
         {
+          "Name": "Name",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "DisplayName",
+          "Type": "string",
+          "Required": true
+        },
+        {
           "Name": "JobTitle",
           "DisplayName": "Job Title",
           "Type": "string"
@@ -158,6 +168,11 @@
       "Properties": [
         {
           "Name": "Name",
+          "Type": "string",
+          "Required": true
+        },
+        {
+          "Name": "DisplayName",
           "Type": "string",
           "Required": true
         },

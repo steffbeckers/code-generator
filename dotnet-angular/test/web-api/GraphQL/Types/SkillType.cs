@@ -18,6 +18,7 @@ namespace RJM.API.GraphQL.Types
         {
             Field(x => x.Id, type: typeof(IdGraphType));
             Field(x => x.Name);
+            Field(x => x.DisplayName);
             Field(x => x.Description, nullable: true);
 
             Field<ListGraphType<SkillAliasType>>(

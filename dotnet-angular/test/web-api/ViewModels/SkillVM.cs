@@ -36,6 +36,12 @@ namespace RJM.API.ViewModels
 		public string Name { get; set; }
 
 		/// <summary>
+        /// The DisplayName property of Skill.
+        /// </summary>
+        [Required]
+		public string DisplayName { get; set; }
+
+		/// <summary>
         /// The Description property of Skill.
         /// </summary>
 		public string Description { get; set; }

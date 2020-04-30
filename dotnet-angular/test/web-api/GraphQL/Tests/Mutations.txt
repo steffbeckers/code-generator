@@ -106,6 +106,7 @@ mutation createSkill($skill: skillInput!) {
   createSkill(skill: $skill) {
     id
     name
+    displayName
     description
   }
 }
@@ -113,6 +114,7 @@ mutation createSkill($skill: skillInput!) {
 {
   "skill": {
     "name": "",
+    "displayName": "",
     "description": ""
   }
 }

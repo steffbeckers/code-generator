@@ -70,6 +70,8 @@ namespace RJM.API.BLL
 			// Trimming strings
             if (!string.IsNullOrEmpty(skill.Name))
                 skill.Name = skill.Name.Trim();
+            if (!string.IsNullOrEmpty(skill.DisplayName))
+                skill.DisplayName = skill.DisplayName.Trim();
             if (!string.IsNullOrEmpty(skill.Description))
                 skill.Description = skill.Description.Trim();
 
@@ -104,11 +106,14 @@ namespace RJM.API.BLL
 			// Trimming strings
             if (!string.IsNullOrEmpty(skillUpdate.Name))
                 skillUpdate.Name = skillUpdate.Name.Trim();
+            if (!string.IsNullOrEmpty(skillUpdate.DisplayName))
+                skillUpdate.DisplayName = skillUpdate.DisplayName.Trim();
             if (!string.IsNullOrEmpty(skillUpdate.Description))
                 skillUpdate.Description = skillUpdate.Description.Trim();
 
             // Mapping
             skill.Name = skillUpdate.Name;
+            skill.DisplayName = skillUpdate.DisplayName;
             skill.Description = skillUpdate.Description;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
