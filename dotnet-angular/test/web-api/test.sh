@@ -51,7 +51,7 @@ function hh(){
       har[4]--;
     }
     else{
-      if(/^[+-]/){
+      if(/^#-#(.+?)#-#/){
         keep=1
       }
       out[n++] = $0
