@@ -68,6 +68,10 @@
           "Name": "DisplayName",
           "Type": "string",
           "Required": true
+        },
+        {
+          "Name": "Test",
+          "Type": "string"
         }
       ],
       "Relations": [
