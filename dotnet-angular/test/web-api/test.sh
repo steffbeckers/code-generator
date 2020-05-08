@@ -42,7 +42,7 @@ function hh(){
     hrn=n
   }
   else if(NR > hr){
-    if(/^\-/ && $0 ~ pat){
+    if(/^\-/ && $0 !~ pat){
       har[4]++;
       sub(/^\-/, " ", $0);
       out[n++] = $0
