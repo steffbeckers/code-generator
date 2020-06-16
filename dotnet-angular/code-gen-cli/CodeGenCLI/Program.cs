@@ -393,6 +393,7 @@ namespace CodeGenCLI
                     #endregion
 
                     #region BLL
+
                     foreach (CodeGenModel codeGenModel in Config.Models.Where(m => !m.ManyToMany))
                     {
                         // Existing code
