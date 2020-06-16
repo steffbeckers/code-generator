@@ -29,14 +29,14 @@ namespace RJM.API.BLL
 			this.documentResumeRepository = documentResumeRepository;
         }
 
-        #region KeepThisRegion
+        // #-#-#
 
         private void CustomFunction()
         {
             // Test
         }
-        
-        #endregion
+
+        // #-#-#
 
         /// <summary>
         /// Retrieves all documents.
