@@ -47,41 +47,41 @@
           "Type": "many-to-many",
           "Model": "Resume",
           "Through": "DocumentResume"
-        },
-        {
-          "Name": "DocumentType",
-          "Type": "many-to-one",
-          "Required": true,
-          "Model": "DocumentType"
-        }
+        }//,
+        //{
+        //  "Name": "DocumentType",
+        //  "Type": "many-to-one",
+        //  "Required": true,
+        //  "Model": "DocumentType"
+        //}
       ]
     },
-    {
-      "Name": "DocumentType",
-      "Properties": [
-        {
-          "Name": "Name",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "DisplayName",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "Test",
-          "Type": "string"
-        }
-      ],
-      "Relations": [
-        {
-          "Name": "Documents",
-          "Type": "one-to-many",
-          "Model": "Document"
-        }
-      ]
-    },
+    //{
+    //  "Name": "DocumentType",
+    //  "Properties": [
+    //    {
+    //      "Name": "Name",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "DisplayName",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Test",
+    //      "Type": "string"
+    //    }
+    //  ],
+    //  "Relations": [
+    //    {
+    //      "Name": "Documents",
+    //      "Type": "one-to-many",
+    //      "Model": "Document"
+    //    }
+    //  ]
+    //},
     {
       "Name": "DocumentResume",
       "ManyToMany": true,
