@@ -17,6 +17,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Medallion.Shell;
+using System.Text;
 
 namespace CodeGenCLI
 {
@@ -585,16 +586,92 @@ namespace CodeGenCLI
 
                     try
                     {
-                        Console.WriteLine();
-                        Console.WriteLine("### git checkout -p ###");
+                        using (Process gitCheckoutP = new Process {
+                            StartInfo = new ProcessStartInfo
+                            {
+                                FileName = "git",
+                                //Arguments = "checkout -p",
+                                Arguments = "log",
+                                WorkingDirectory = Config.WebAPI.ProjectPath,
+                                RedirectStandardOutput = true,
+                                RedirectStandardError = true,
+                                RedirectStandardInput = true,
+                                CreateNoWindow = true,
+                                UseShellExecute = false
+                            }
+                        })
+                        {
+                            StringBuilder output = new StringBuilder();
+                            StringBuilder error = new StringBuilder();
+
+                            using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
+                            using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+                            {
+                                gitCheckoutP.OutputDataReceived += (object sender, DataReceivedEventArgs e) => {
+                                    if (e.Data == null)
+                                    {
+                                        outputWaitHandle.Set();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("OutputDataReceived: " + e.Data);
+                                        output.AppendLine(e.Data);
+                                    }
+                                };
+                                gitCheckoutP.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
+                                {
+                                    if (e.Data == null)
+                                    {
+                                        errorWaitHandle.Set();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("ErrorDataReceived: " + e.Data);
+                                        error.AppendLine(e.Data);
+                                    }
+                                };
+
+                                gitCheckoutP.Start();
+
+                                gitCheckoutP.BeginOutputReadLine();
+                                gitCheckoutP.BeginErrorReadLine();
+
+                                //if (gitCheckoutP.WaitForExit(20000) &&
+                                //    outputWaitHandle.WaitOne(20000) &&
+                                //    errorWaitHandle.WaitOne(20000))
+                                //{
+                                //    // Process completed. Check process.ExitCode here.
+                                //    Console.WriteLine("Process completed. ExitCode: " + gitCheckoutP.ExitCode);
+                                //    Console.WriteLine("Output:");
+                                //    Console.WriteLine(output);
+                                //}
+                                //else
+                                //{
+                                //    // Timed out.
+                                //    Console.WriteLine("Timed out.");
+                                //}
+                            }
+                        }
+
+                        //Console.WriteLine();
+                        //Console.WriteLine("### git log ###");
+
+                        //Command gitLogCommand = Command.Run("git", "log");
+                        //ICollection<string> gitLogCommandLines = new List<string>();
+                        //gitLogCommand.StandardOutput.PipeToAsync(gitLogCommandLines);
+                        //gitLogCommand.Wait();
+                        //CommandResult gitLogCommandResult = gitLogCommand.Result;
 
 
-                        Command gitCheckoutPCommand = Command.Run("git", "checkout", "-p");
-                        gitCheckoutPCommand.Wait();
-                        CommandResult gitCheckoutPCommandResult = gitCheckoutPCommand.Result;
+                        //Console.WriteLine();
+                        //Console.WriteLine("### git checkout -p ###");
 
+                        //Command gitCheckoutPCommand = Command.Run("git", "checkout", "-p");
+                        //ICollection<string> gitCheckoutPCommandLines = new List<string>();
+                        //gitCheckoutPCommand.StandardOutput.PipeToAsync(gitCheckoutPCommandLines);
+                        //gitCheckoutPCommand.Wait();
+                        //CommandResult gitCheckoutPCommandResult = gitCheckoutPCommand.Result;
 
-                        Console.WriteLine("Medallion.Shell.Command.Run().Wait(); ran");
 
                         //Process gitCheckoutP = new Process
                         //{
