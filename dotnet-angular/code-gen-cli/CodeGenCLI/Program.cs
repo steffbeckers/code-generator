@@ -600,6 +600,7 @@ namespace CodeGenCLI
                         }
                     };
 
+                    gitCheckoutP.StandardInput.Close();
                     gitCheckoutP.Start();
 
                     string line;
@@ -612,12 +613,16 @@ namespace CodeGenCLI
                         {
                             if (currentHunk.Contains("#-#-#"))
                             {
+                                gitCheckoutP.StandardOutput.Close();
                                 gitCheckoutP.StandardInput.WriteLine("y");
+                                gitCheckoutP.StandardInput.Close();
                                 currentHunk = string.Empty;
                             }
                             else
                             {
+                                gitCheckoutP.StandardOutput.Close();
                                 gitCheckoutP.StandardInput.WriteLine("n");
+                                gitCheckoutP.StandardInput.Close();
                                 currentHunk = string.Empty;
                             }
                         }
