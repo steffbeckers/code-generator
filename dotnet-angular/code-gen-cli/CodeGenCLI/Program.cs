@@ -27,6 +27,12 @@ namespace CodeGenCLI
         static CodeGenConfig Config { get; set; }
         static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
 
+        // git checkout -p
+        static string currentHunk = string.Empty;
+        static bool writeYes = false;
+        static bool writeNo = false;
+        static bool done = false;
+
         static void Main(string[] args)
         {
             Console.WriteLine("### CodeGenCLI - " + DateTime.Now.ToString("s", CultureInfo.InvariantCulture) + " ###");
@@ -605,39 +611,10 @@ namespace CodeGenCLI
                         {
                             gitCheckoutP.Start();
 
-                            string currentHunk = string.Empty;
-                            bool writeYes = false;
-                            bool writeNo = false;
+                            ReadGitCheckoutPOutput(gitCheckoutP.StandardOutput);
 
-                            while (true)
+                            while (!done)
                             {
-                                Task.Run(() =>
-                                {
-                                    Task.Delay(100);
-
-                                    string line;
-                                    while ((line = gitCheckoutP.StandardOutput.ReadLine()) != null)
-                                    {
-                                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                                        {
-                                            if (currentHunk.Contains("#-#-#"))
-                                            {
-                                                writeYes = true;
-                                                currentHunk = string.Empty;
-                                            }
-                                            else
-                                            {
-                                                writeNo = true;
-                                                currentHunk = string.Empty;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            currentHunk += line + Environment.NewLine;
-                                        }
-                                    }
-                                });
-
                                 Task.Run(() =>
                                 {
                                     Task.Delay(50);
@@ -652,7 +629,7 @@ namespace CodeGenCLI
                                         gitCheckoutP.StandardInput.WriteLine("n");
                                         writeNo = false;
                                     }
-                                });
+                                }).Wait();
                             }
                         }
 
@@ -1382,6 +1359,39 @@ namespace CodeGenCLI
 
             //App.HelpOption("-x"); // top level help -- '-h | -? | --help would be consumed by 'dotnet run'
             App.Execute(args);
+        }
+
+        private static void ReadGitCheckoutPOutput(StreamReader standardOutput)
+        {
+            Task.Run(() =>
+            {
+                while (standardOutput.Peek() > -1)
+                {
+                    Task.Delay(200);
+
+                    string line = standardOutput.ReadLine();
+
+                    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
+                    {
+                        if (currentHunk.Contains("#-#-#"))
+                        {
+                            writeYes = true;
+                            currentHunk = string.Empty;
+                        }
+                        else
+                        {
+                            writeNo = true;
+                            currentHunk = string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        currentHunk += line + Environment.NewLine;
+                    }
+                }
+
+                done = true;
+            }).Wait();
         }
     }
 }
