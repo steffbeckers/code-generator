@@ -400,7 +400,7 @@ namespace CodeGenCLI
                         if (File.Exists(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs"))
                         {
                             string existingBLLTemplate = File.ReadAllText(Config.WebAPI.ProjectPath + "\\" + (!string.IsNullOrEmpty(Config.WebAPI.BLLPath) ? Config.WebAPI.BLLPath : "BLL") + "\\" + codeGenModel.Name + "BLL.cs");
-                            MatchCollection existingBLLCodeRegionMatches = Regex.Matches(existingBLLTemplate, @"#-#-#(.+?)#-#-#", RegexOptions.Singleline);
+                            MatchCollection existingBLLCodeRegionMatches = Regex.Matches(existingBLLTemplate, @"#region KeepThisRegion(.+?)#endregion", RegexOptions.Singleline);
                             foreach (Match existingBLLCodeRegionMatch in existingBLLCodeRegionMatches)
                             {
                                 customBLLCodeBlocks.Add(existingBLLCodeRegionMatch.Value.Substring(6, 38), existingBLLCodeRegionMatch.Value);
@@ -411,7 +411,7 @@ namespace CodeGenCLI
                         string bllTemplateContent = new WebAPITemplates.BLL.BLLTemplate(Config, codeGenModel).TransformText();
 
                         // Replace custom code from existing code
-                        MatchCollection bllCodeRegionMatches = Regex.Matches(bllTemplateContent, @"#-#-#(.+?)#-#-#", RegexOptions.Singleline);
+                        MatchCollection bllCodeRegionMatches = Regex.Matches(bllTemplateContent, @"#region KeepThisRegion(.+?)#endregion", RegexOptions.Singleline);
                         foreach (Match bllCodeRegionMatch in bllCodeRegionMatches)
                         {
                             if (customBLLCodeBlocks.ContainsKey(bllCodeRegionMatch.Value.Substring(6, 38)))
