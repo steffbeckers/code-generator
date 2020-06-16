@@ -586,72 +586,141 @@ namespace CodeGenCLI
 
                     try
                     {
-                        using (Process gitCheckoutP = new Process {
+                        Console.WriteLine();
+                        Console.WriteLine("### git checkout -p ###");
+
+                        using (Process gitCheckoutP = new Process
+                        {
                             StartInfo = new ProcessStartInfo
                             {
                                 FileName = "git",
-                                //Arguments = "checkout -p",
-                                Arguments = "log",
+                                Arguments = "checkout -p",
                                 WorkingDirectory = Config.WebAPI.ProjectPath,
                                 RedirectStandardOutput = true,
-                                RedirectStandardError = true,
                                 RedirectStandardInput = true,
                                 CreateNoWindow = true,
                                 UseShellExecute = false
                             }
                         })
                         {
-                            StringBuilder output = new StringBuilder();
-                            StringBuilder error = new StringBuilder();
+                            gitCheckoutP.Start();
 
-                            using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
-                            using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+                            string currentHunk = string.Empty;
+                            bool writeYes = false;
+                            bool writeNo = false;
+
+                            while (true)
                             {
-                                gitCheckoutP.OutputDataReceived += (object sender, DataReceivedEventArgs e) => {
-                                    if (e.Data == null)
-                                    {
-                                        outputWaitHandle.Set();
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("OutputDataReceived: " + e.Data);
-                                        output.AppendLine(e.Data);
-                                    }
-                                };
-                                gitCheckoutP.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
+                                Task.Run(() =>
                                 {
-                                    if (e.Data == null)
+                                    string line;
+                                    while ((line = gitCheckoutP.StandardOutput.ReadLine()) != null)
                                     {
-                                        errorWaitHandle.Set();
+                                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
+                                        {
+                                            if (currentHunk.Contains("#-#-#"))
+                                            {
+                                                writeYes = true;
+                                                currentHunk = string.Empty;
+                                            }
+                                            else
+                                            {
+                                                writeNo = true;
+                                                currentHunk = string.Empty;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            currentHunk += line + Environment.NewLine;
+                                        }
                                     }
-                                    else
+                                });
+
+                                Task.Run(() =>
+                                {
+                                    if (writeYes)
                                     {
-                                        Console.WriteLine("ErrorDataReceived: " + e.Data);
-                                        error.AppendLine(e.Data);
+                                        gitCheckoutP.StandardInput.WriteLine("y");
+                                        writeYes = false;
                                     }
-                                };
-
-                                gitCheckoutP.Start();
-
-                                gitCheckoutP.BeginOutputReadLine();
-                                gitCheckoutP.BeginErrorReadLine();
-
-                                //if (gitCheckoutP.WaitForExit(20000) &&
-                                //    outputWaitHandle.WaitOne(20000) &&
-                                //    errorWaitHandle.WaitOne(20000))
-                                //{
-                                //    // Process completed. Check process.ExitCode here.
-                                //    Console.WriteLine("Process completed. ExitCode: " + gitCheckoutP.ExitCode);
-                                //    Console.WriteLine("Output:");
-                                //    Console.WriteLine(output);
-                                //}
-                                //else
-                                //{
-                                //    // Timed out.
-                                //    Console.WriteLine("Timed out.");
-                                //}
+                                    else if (writeNo)
+                                    {
+                                        gitCheckoutP.StandardInput.WriteLine("n");
+                                        writeNo = false;
+                                    }
+                                });
                             }
                         }
+
+                        //using (Process gitCheckoutP = new Process {
+                        //    StartInfo = new ProcessStartInfo
+                        //    {
+                        //        FileName = "git",
+                        //        //Arguments = "checkout -p",
+                        //        Arguments = "log",
+                        //        WorkingDirectory = Config.WebAPI.ProjectPath,
+                        //        RedirectStandardOutput = true,
+                        //        RedirectStandardError = true,
+                        //        RedirectStandardInput = true,
+                        //        CreateNoWindow = true,
+                        //        UseShellExecute = false
+                        //    }
+                        //})
+                        //{
+                        //    StringBuilder output = new StringBuilder();
+                        //    StringBuilder error = new StringBuilder();
+
+                        //    using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
+                        //    using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+                        //    {
+                        //        gitCheckoutP.OutputDataReceived += (object sender, DataReceivedEventArgs e) => {
+                        //            if (e.Data == null)
+                        //            {
+                        //                outputWaitHandle.Set();
+                        //            }
+                        //            else
+                        //            {
+                        //                Console.WriteLine("OutputDataReceived: " + e.Data);
+                        //                output.AppendLine(e.Data);
+                        //            }
+                        //        };
+                        //        gitCheckoutP.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
+                        //        {
+                        //            if (e.Data == null)
+                        //            {
+                        //                errorWaitHandle.Set();
+                        //            }
+                        //            else
+                        //            {
+                        //                Console.WriteLine("ErrorDataReceived: " + e.Data);
+                        //                error.AppendLine(e.Data);
+                        //            }
+                        //        };
+
+                        //        gitCheckoutP.Start();
+
+                        //        gitCheckoutP.BeginOutputReadLine();
+                        //        gitCheckoutP.BeginErrorReadLine();
+
+                        //        gitCheckoutP.WaitForExit();
+
+                        //        //if (gitCheckoutP.WaitForExit(20000) &&
+                        //        //    outputWaitHandle.WaitOne(20000) &&
+                        //        //    errorWaitHandle.WaitOne(20000))
+                        //        //{
+                        //        //    // Process completed. Check process.ExitCode here.
+                        //        //    Console.WriteLine("Process completed. ExitCode: " + gitCheckoutP.ExitCode);
+                        //        //    Console.WriteLine("Output:");
+                        //        //    Console.WriteLine(output);
+                        //        //}
+                        //        //else
+                        //        //{
+                        //        //    // Timed out.
+                        //        //    Console.WriteLine("Timed out.");
+                        //        //}
+                        //    }
+                        //}
+
 
                         //Console.WriteLine();
                         //Console.WriteLine("### git log ###");
