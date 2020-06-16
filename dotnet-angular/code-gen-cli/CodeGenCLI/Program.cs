@@ -16,6 +16,7 @@ using System.Globalization;
 using System.Threading;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Medallion.Shell;
 
 namespace CodeGenCLI
 {
@@ -588,7 +589,9 @@ namespace CodeGenCLI
                         Console.WriteLine("### git checkout -p ###");
 
 
-                        Medallion.Shell.Command.Run("git", "checkout", "-p").Wait();
+                        Command gitCheckoutPCommand = Command.Run("git", "checkout", "-p");
+                        gitCheckoutPCommand.Wait();
+                        CommandResult gitCheckoutPCommandResult = gitCheckoutPCommand.Result;
 
 
                         Console.WriteLine("Medallion.Shell.Command.Run().Wait(); ran");
