@@ -29,10 +29,19 @@ namespace RJM.API.BLL
 			this.documentResumeRepository = documentResumeRepository;
         }
 
-		/// <summary>
-		/// Retrieves all documents.
-		/// </summary>
-		public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
+        #region KeepThisRegion
+
+        private void CustomFunction()
+        {
+            // Test
+        }
+        
+        #endregion
+
+        /// <summary>
+        /// Retrieves all documents.
+        /// </summary>
+        public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
         {
 			// #-#-# {83B8AA9F-713A-42FB-ADE1-8A4AA43886C8}
 			// Before retrieval
