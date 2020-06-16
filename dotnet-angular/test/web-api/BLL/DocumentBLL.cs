@@ -29,15 +29,6 @@ namespace RJM.API.BLL
 			this.documentResumeRepository = documentResumeRepository;
         }
 
-        // #-#-#
-
-        private void CustomFunction()
-        {
-            // Test
-        }
-
-        // #-#-#
-
         /// <summary>
         /// Retrieves all documents.
         /// </summary>
