@@ -126,7 +126,6 @@ namespace RJM.API.BLL
             document.SizeInBytes = documentUpdate.SizeInBytes;
             document.FileLastModifiedOn = documentUpdate.FileLastModifiedOn;
             document.MimeType = documentUpdate.MimeType;
-            document.DocumentTypeId = documentUpdate.DocumentTypeId;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

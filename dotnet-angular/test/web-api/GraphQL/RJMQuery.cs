@@ -11,7 +11,6 @@ namespace RJM.API.GraphQL
     {
         public RJMQuery(
 			DocumentRepository documentRepository,
-			DocumentTypeRepository documentTypeRepository,
 			ResumeRepository resumeRepository,
 			ResumeStateRepository resumeStateRepository,
 			SkillRepository skillRepository,
@@ -54,42 +53,6 @@ namespace RJM.API.GraphQL
             //    {
             //        return await context.TryAsyncResolve(
             //            async c => await documentRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
-            //        );
-            //    }
-            //);
-
-			// DocumentTypes
-            
-            Field<ListGraphType<DocumentTypeType>>(
-                "documentTypes",
-                resolve: context => documentTypeRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
-            );
-
-            //// Async test
-            //FieldAsync<ListGraphType<DocumentTypeType>>(
-            //    "documentTypes",
-            //    resolve: async context =>
-            //    {
-            //        return await context.TryAsyncResolve(
-            //            async c => await documentTypeRepository.GetAsync(null, x => x.OrderByDescending(x => x.ModifiedOn))
-            //        );
-            //    }
-            //);
-
-            Field<DocumentTypeType>(
-                "documentType",
-                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
-                resolve: context => documentTypeRepository.GetById(context.GetArgument<Guid>("id"))
-            );
-
-            //// Async test
-            //FieldAsync<DocumentTypeType>(
-            //    "documentType",
-            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
-            //    resolve: async context =>
-            //    {
-            //        return await context.TryAsyncResolve(
-            //            async c => await documentTypeRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
             //        );
             //    }
             //);

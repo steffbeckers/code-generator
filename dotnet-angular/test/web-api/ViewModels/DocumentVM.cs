@@ -68,19 +68,6 @@ namespace RJM.API.ViewModels
 
 		// Relations
 
-		//// Many-to-one
-
-	    /// <summary>
-        /// The related foreign key DocumentTypeId for DocumentType of Document.
-        /// </summary>
-		public Guid DocumentTypeId { get; set; }
-
-		/// <summary>
-        /// The related DocumentType of Document.
-        /// </summary>
-		public DocumentTypeVM DocumentType { get; set; }
-
-
 		//// Many-to-many
 
 		/// <summary>
