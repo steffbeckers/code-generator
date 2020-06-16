@@ -10,12 +10,7 @@ namespace RJM.API.ViewModels
     /// </summary>
     public class DocumentTypeVM
     {
-        // #-#
-        // Test
-        // #-#
-
-
-        public DocumentTypeVM()
+		public DocumentTypeVM()
         {
             // Relations
 
@@ -41,6 +36,11 @@ namespace RJM.API.ViewModels
         /// </summary>
         [Required]
 		public string DisplayName { get; set; }
+
+		/// <summary>
+        /// The Test property of DocumentType.
+        /// </summary>
+		public string Test { get; set; }
 
 		// Relations
 

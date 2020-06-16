@@ -10,6 +10,7 @@ namespace RJM.API.GraphQL.Types
             Field<IdGraphType>("id");
 		    Field<NonNullGraphType<StringGraphType>>("name");
 		    Field<NonNullGraphType<StringGraphType>>("displayName");
+		    Field<StringGraphType>("test");
 
         }
     }

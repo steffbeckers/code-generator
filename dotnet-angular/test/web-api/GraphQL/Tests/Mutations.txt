@@ -35,13 +35,15 @@ mutation createDocumentType($documentType: documentTypeInput!) {
     id
     name
     displayName
+    test
   }
 }
 
 {
   "documentType": {
     "name": "",
-    "displayName": ""
+    "displayName": "",
+    "test": ""
   }
 }
 

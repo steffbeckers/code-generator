@@ -60,6 +60,8 @@ namespace RJM.API.BLL
                 documentType.Name = documentType.Name.Trim();
             if (!string.IsNullOrEmpty(documentType.DisplayName))
                 documentType.DisplayName = documentType.DisplayName.Trim();
+            if (!string.IsNullOrEmpty(documentType.Test))
+                documentType.Test = documentType.Test.Trim();
 
 			// #-#-# {D4775AF3-4BFA-496A-AA82-001028A22DD6}
 			// Before creation
@@ -94,10 +96,13 @@ namespace RJM.API.BLL
                 documentTypeUpdate.Name = documentTypeUpdate.Name.Trim();
             if (!string.IsNullOrEmpty(documentTypeUpdate.DisplayName))
                 documentTypeUpdate.DisplayName = documentTypeUpdate.DisplayName.Trim();
+            if (!string.IsNullOrEmpty(documentTypeUpdate.Test))
+                documentTypeUpdate.Test = documentTypeUpdate.Test.Trim();
 
             // Mapping
             documentType.Name = documentTypeUpdate.Name;
             documentType.DisplayName = documentTypeUpdate.DisplayName;
+            documentType.Test = documentTypeUpdate.Test;
 
 			// #-#-# {B5914243-E57E-41AE-A7C8-553F2F93267B}
 			// Before update

@@ -33,6 +33,11 @@ namespace RJM.API.Models
         /// </summary>
 		public string DisplayName { get; set; }
 
+		/// <summary>
+        /// The Test property of DocumentType.
+        /// </summary>
+		public string Test { get; set; }
+
 		// Relations
 
 		//// One-to-many
