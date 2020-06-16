@@ -591,7 +591,7 @@ namespace CodeGenCLI
                         StartInfo = new ProcessStartInfo
                         {
                             FileName = "git",
-                            Arguments = "checkout -p",
+                            Arguments = "/c checkout -p",
                             WorkingDirectory = Config.WebAPI.ProjectPath,
                             RedirectStandardOutput = true,
                             RedirectStandardInput = true,
@@ -613,16 +613,12 @@ namespace CodeGenCLI
                         {
                             if (currentHunk.Contains("#-#-#"))
                             {
-                                gitCheckoutP.StandardOutput.Close();
                                 gitCheckoutP.StandardInput.WriteLine("y");
-                                gitCheckoutP.StandardInput.Close();
                                 currentHunk = string.Empty;
                             }
                             else
                             {
-                                gitCheckoutP.StandardOutput.Close();
                                 gitCheckoutP.StandardInput.WriteLine("n");
-                                gitCheckoutP.StandardInput.Close();
                                 currentHunk = string.Empty;
                             }
                         }
