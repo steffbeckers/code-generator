@@ -598,7 +598,8 @@ namespace CodeGenCLI
                                 RedirectStandardInput = true,
                                 CreateNoWindow = true,
                                 UseShellExecute = false
-                            }
+                            },
+                            EnableRaisingEvents = true
                         };
 
                         gitCheckoutP.OutputDataReceived += GitCheckoutP_OutputDataReceived;
