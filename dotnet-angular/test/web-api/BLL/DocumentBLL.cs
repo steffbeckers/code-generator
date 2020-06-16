@@ -34,13 +34,6 @@ namespace RJM.API.BLL
 		/// </summary>
 		public async Task<IEnumerable<Document>> GetAllDocumentsAsync()
         {
-			// #-#-# {83B8AA9F-713A-42FB-ADE1-8A4AA43886C8}
-            // Before retrieval
-            // Test
-			// #-#-#
-
-            // Test 2
-
             return await this.documentRepository.GetWithLinkedEntitiesAsync();
         }
 
