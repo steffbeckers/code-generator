@@ -646,10 +646,10 @@ namespace CodeGenCLI
 
                         cmdGitStatus.Start();
 
-                        cmdGitStatus.StandardInput.WriteLine("git status");
+                        cmdGitStatus.StandardInput.WriteLine("git checkout -p");
                         Console.WriteLine(cmdGitStatus.StandardOutput.ReadToEnd());
-                        cmdGitStatus.StandardInput.WriteLine("git diff");
-                        Console.WriteLine(cmdGitStatus.StandardOutput.ReadToEnd());
+                        cmdGitStatus.StandardInput.WriteLine("y");
+                        cmdGitStatus.StandardInput.WriteLine("exit");
 
                         cmdGitStatus.Dispose();
                     }
