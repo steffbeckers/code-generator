@@ -791,6 +791,16 @@
             The URL property of Document.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Document.SizeInBytes">
+            <summary>
+            The SizeInBytes property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Document.FileLastModifiedOn">
+            <summary>
+            The FileLastModifiedOn property of Document.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Document.MimeType">
             <summary>
             The MimeType property of Document.
@@ -1116,6 +1126,16 @@
             The identifier of Resume.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Resume.Name">
+            <summary>
+            The Name property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.Models.Resume.DisplayName">
+            <summary>
+            The DisplayName property of Resume.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Resume.JobTitle">
             <summary>
             The JobTitle property of Resume.
@@ -1331,6 +1351,11 @@
             The Name property of Skill.
             </summary>
         </member>
+        <member name="P:RJM.API.Models.Skill.DisplayName">
+            <summary>
+            The DisplayName property of Skill.
+            </summary>
+        </member>
         <member name="P:RJM.API.Models.Skill.Description">
             <summary>
             The Description property of Skill.
@@ -1484,6 +1509,16 @@
         <member name="P:RJM.API.ViewModels.DocumentVM.URL">
             <summary>
             The URL property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.SizeInBytes">
+            <summary>
+            The SizeInBytes property of Document.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.DocumentVM.FileLastModifiedOn">
+            <summary>
+            The FileLastModifiedOn property of Document.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.DocumentVM.MimeType">
@@ -1711,6 +1746,16 @@
             The identifier of Resume.
             </summary>
         </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.Name">
+            <summary>
+            The Name property of Resume.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.ResumeVM.DisplayName">
+            <summary>
+            The DisplayName property of Resume.
+            </summary>
+        </member>
         <member name="P:RJM.API.ViewModels.ResumeVM.JobTitle">
             <summary>
             The JobTitle property of Resume.
@@ -1844,6 +1889,11 @@
         <member name="P:RJM.API.ViewModels.SkillVM.Name">
             <summary>
             The Name property of Skill.
+            </summary>
+        </member>
+        <member name="P:RJM.API.ViewModels.SkillVM.DisplayName">
+            <summary>
+            The DisplayName property of Skill.
             </summary>
         </member>
         <member name="P:RJM.API.ViewModels.SkillVM.Description">
