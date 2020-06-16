@@ -600,8 +600,8 @@ namespace CodeGenCLI
                         }
                     };
 
-                    gitCheckoutP.StandardInput.Close();
                     gitCheckoutP.Start();
+                    gitCheckoutP.StandardInput.Close();
 
                     string line;
                     string currentHunk = string.Empty;
