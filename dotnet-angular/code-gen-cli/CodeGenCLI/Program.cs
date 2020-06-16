@@ -648,8 +648,6 @@ namespace CodeGenCLI
 
                         cmdGitStatus.StandardInput.WriteLine("git checkout -p");
                         Console.WriteLine(cmdGitStatus.StandardOutput.ReadToEnd());
-                        cmdGitStatus.StandardInput.WriteLine("y");
-                        cmdGitStatus.StandardInput.WriteLine("exit");
 
                         cmdGitStatus.Dispose();
                     }
