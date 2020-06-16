@@ -600,6 +600,35 @@ namespace CodeGenCLI
                         }
                     };
 
+                    gitCheckoutP.Start();
+
+                    string line;
+                    string currentHunk = string.Empty;
+                    while (gitCheckoutP.StandardOutput.Peek() > -1)
+                    {
+                        line = gitCheckoutP.StandardOutput.ReadLine();
+
+                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                        {
+                            if (currentHunk.Contains("#-#-#"))
+                            {
+                                gitCheckoutP.StandardInput.WriteLine("y");
+                                currentHunk = string.Empty;
+                            }
+                            else
+                            {
+                                gitCheckoutP.StandardInput.WriteLine("n");
+                                currentHunk = string.Empty;
+                            }
+                        }
+                        else
+                        {
+                            currentHunk += line + Environment.NewLine;
+                        }
+                    }
+
+                    gitCheckoutP.WaitForExit();
+
                     // CASE 1
 
                     //gitCheckoutP.Start();
@@ -636,7 +665,7 @@ namespace CodeGenCLI
 
                     // CASE 2
 
-                    gitCheckoutP.Start();
+                    //gitCheckoutP.Start();
 
                     //string line;
                     //string currentHunk = string.Empty;
@@ -664,7 +693,7 @@ namespace CodeGenCLI
                     //    }
                     //}
 
-                    gitCheckoutP.WaitForExit();
+                    //gitCheckoutP.WaitForExit();
 
                     // CASE 2
 
