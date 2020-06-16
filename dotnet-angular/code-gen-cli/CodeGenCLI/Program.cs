@@ -582,53 +582,39 @@ namespace CodeGenCLI
                     //gitDiffOut.Start();
                     //gitDiffOut.WaitForExit();
 
-
-                    Console.WriteLine();
-                    Console.WriteLine("### git checkout -p ###");
-
-                    Process gitCheckoutP = new Process
+                    try
                     {
-                        StartInfo = new ProcessStartInfo
+                        Console.WriteLine();
+                        Console.WriteLine("### git checkout -p ###");
+
+                        Process gitCheckoutP = new Process
                         {
-                            FileName = "git",
-                            Arguments = "/c checkout -p",
-                            WorkingDirectory = Config.WebAPI.ProjectPath,
-                            RedirectStandardOutput = true,
-                            RedirectStandardInput = true,
-                            CreateNoWindow = true,
-                            UseShellExecute = false
-                        }
-                    };
-
-                    gitCheckoutP.Start();
-                    gitCheckoutP.StandardInput.Close();
-
-                    string line;
-                    string currentHunk = string.Empty;
-                    while (gitCheckoutP.StandardOutput.Peek() > -1)
-                    {
-                        line = gitCheckoutP.StandardOutput.ReadLine();
-
-                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                        {
-                            if (currentHunk.Contains("#-#-#"))
+                            StartInfo = new ProcessStartInfo
                             {
-                                gitCheckoutP.StandardInput.WriteLine("y");
-                                currentHunk = string.Empty;
+                                FileName = "git",
+                                Arguments = "checkout -p",
+                                WorkingDirectory = Config.WebAPI.ProjectPath,
+                                RedirectStandardOutput = true,
+                                RedirectStandardInput = true,
+                                CreateNoWindow = true,
+                                UseShellExecute = false
                             }
-                            else
-                            {
-                                gitCheckoutP.StandardInput.WriteLine("n");
-                                currentHunk = string.Empty;
-                            }
-                        }
-                        else
-                        {
-                            currentHunk += line + Environment.NewLine;
-                        }
+                        };
+
+                        gitCheckoutP.OutputDataReceived += GitCheckoutP_OutputDataReceived;
+
+                        gitCheckoutP.Start();
+
+                        gitCheckoutP.BeginOutputReadLine();
+
+                        gitCheckoutP.WaitForExit();
+
+                        gitCheckoutP.OutputDataReceived -= GitCheckoutP_OutputDataReceived;
                     }
-
-                    gitCheckoutP.WaitForExit();
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
 
                     // CASE 1
 
@@ -641,7 +627,7 @@ namespace CodeGenCLI
                     //{
                     //    Console.WriteLine(line);
 
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                     //    {
                     //        if (currentHunk.Contains("#-#-#"))
                     //        {
@@ -675,7 +661,7 @@ namespace CodeGenCLI
                     //{
                     //    line = gitCheckoutP.StandardOutput.ReadLine();
 
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                     //    {
                     //        if (currentHunk.Contains("#-#-#"))
                     //        {
@@ -711,7 +697,7 @@ namespace CodeGenCLI
 
                     //        string line = gitCheckoutP.StandardOutput.ReadLine();
 
-                    //        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                    //        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                     //        {
                     //            if (currentHunk.Contains("#-#-#"))
                     //            {
@@ -764,7 +750,7 @@ namespace CodeGenCLI
                     //{
                     //    Console.WriteLine(line);
 
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                     //    {
                     //        if (currentHunk.Contains("#-#-#"))
                     //        {
@@ -816,7 +802,7 @@ namespace CodeGenCLI
 
                     //    string line = gitCheckoutP.StandardOutput.ReadLine();
 
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                     //    {
                     //        if (currentHunk.Contains("#-#-#"))
                     //        {
@@ -1192,6 +1178,11 @@ namespace CodeGenCLI
 
             //App.HelpOption("-x"); // top level help -- '-h | -? | --help would be consumed by 'dotnet run'
             App.Execute(args);
+        }
+
+        private static void GitCheckoutP_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.WriteLine(e.Data);
         }
     }
 }
