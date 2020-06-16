@@ -613,6 +613,8 @@ namespace CodeGenCLI
                             {
                                 Task.Run(() =>
                                 {
+                                    Task.Delay(100);
+
                                     string line;
                                     while ((line = gitCheckoutP.StandardOutput.ReadLine()) != null)
                                     {
@@ -638,6 +640,8 @@ namespace CodeGenCLI
 
                                 Task.Run(() =>
                                 {
+                                    Task.Delay(50);
+
                                     if (writeYes)
                                     {
                                         gitCheckoutP.StandardInput.WriteLine("y");
