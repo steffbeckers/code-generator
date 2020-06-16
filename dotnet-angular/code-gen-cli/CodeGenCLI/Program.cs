@@ -608,7 +608,7 @@ namespace CodeGenCLI
                     {
                         line = gitCheckoutP.StandardOutput.ReadLine();
 
-                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,e,?]? "))
+                        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                         {
                             if (currentHunk.Contains("#-#-#"))
                             {
