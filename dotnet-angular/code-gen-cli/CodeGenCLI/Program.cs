@@ -595,7 +595,7 @@ namespace CodeGenCLI
                                 Arguments = "checkout -p",
                                 WorkingDirectory = Config.WebAPI.ProjectPath,
                                 RedirectStandardOutput = true,
-                                RedirectStandardInput = true,
+                                RedirectStandardInput = false,
                                 CreateNoWindow = true,
                                 UseShellExecute = false
                             }
