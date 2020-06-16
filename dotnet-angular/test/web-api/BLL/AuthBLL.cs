@@ -31,6 +31,8 @@ namespace RJM.API.BLL
         private readonly SignInManager<User> signInManager;
         private readonly IEmailService emailService;
 
+        // Test
+
         public AuthBLL(
             IConfiguration configuration,
             ILogger<AuthBLL> logger,
