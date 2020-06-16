@@ -584,58 +584,15 @@ namespace CodeGenCLI
 
                     try
                     {
-                        //Console.WriteLine();
-                        //Console.WriteLine("### git checkout -p ###");
+                        Console.WriteLine();
+                        Console.WriteLine("### git checkout -p ###");
 
-                        //Process gitCheckoutP = new Process
-                        //{
-                        //    StartInfo = new ProcessStartInfo
-                        //    {
-                        //        FileName = "git",
-                        //        Arguments = "checkout -p",
-                        //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                        //        RedirectStandardOutput = true,
-                        //        RedirectStandardInput = true,
-                        //        CreateNoWindow = true,
-                        //        UseShellExecute = false
-                        //    }
-                        //};
-
-                        //gitCheckoutP.Start();
-
-                        //string line;
-                        //string currentHunk = string.Empty;
-
-                        //while (gitCheckoutP.StandardOutput.Peek() > -1)
-                        //{
-                        //    line = gitCheckoutP.StandardOutput.ReadLine();
-
-                        //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                        //    {
-                        //        if (currentHunk.Contains("#-#-#"))
-                        //        {
-                        //            gitCheckoutP.StandardInput.WriteLine("y");
-                        //            currentHunk = string.Empty;
-                        //        }
-                        //        else
-                        //        {
-                        //            gitCheckoutP.StandardInput.WriteLine("n");
-                        //            currentHunk = string.Empty;
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        currentHunk += line + Environment.NewLine;
-                        //    }
-                        //}
-
-                        //gitCheckoutP.WaitForExit();
-
-                        Process cmdGitStatus = new Process
+                        Process gitCheckoutP = new Process
                         {
                             StartInfo = new ProcessStartInfo
                             {
-                                FileName = "cmd",
+                                FileName = "git",
+                                Arguments = "checkout -p",
                                 WorkingDirectory = Config.WebAPI.ProjectPath,
                                 RedirectStandardOutput = true,
                                 RedirectStandardInput = true,
@@ -644,12 +601,60 @@ namespace CodeGenCLI
                             }
                         };
 
-                        cmdGitStatus.Start();
+                        gitCheckoutP.Start();
 
-                        cmdGitStatus.StandardInput.WriteLine("git checkout -p");
-                        Console.WriteLine(cmdGitStatus.StandardOutput.ReadToEnd());
+                        string line;
+                        string currentHunk = string.Empty;
 
-                        cmdGitStatus.Dispose();
+                        while (gitCheckoutP.StandardOutput.Peek() > -1)
+                        {
+                            line = gitCheckoutP.StandardOutput.ReadLine();
+
+                            if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
+                            {
+                                if (currentHunk.Contains("#-#-#"))
+                                {
+                                    gitCheckoutP.StandardInput.WriteLine("y");
+                                    currentHunk = string.Empty;
+                                }
+                                else
+                                {
+                                    gitCheckoutP.StandardInput.WriteLine("n");
+                                    currentHunk = string.Empty;
+                                }
+                            }
+                            else
+                            {
+                                currentHunk += line + Environment.NewLine;
+                            }
+                        }
+
+                        gitCheckoutP.WaitForExit();
+
+
+                        // CMD test
+                        //Console.WriteLine();
+                        //Console.WriteLine("### cmd => git checkout -p ###");
+
+                        //Process cmdGitStatus = new Process
+                        //{
+                        //    StartInfo = new ProcessStartInfo
+                        //    {
+                        //        FileName = "cmd",
+                        //        WorkingDirectory = Config.WebAPI.ProjectPath,
+                        //        RedirectStandardOutput = true,
+                        //        RedirectStandardInput = true,
+                        //        CreateNoWindow = true,
+                        //        UseShellExecute = false
+                        //    }
+                        //};
+
+                        //cmdGitStatus.Start();
+
+                        //cmdGitStatus.StandardInput.WriteLine("git checkout -p");
+                        //Console.WriteLine(cmdGitStatus.StandardOutput.ReadToEnd());
+
+                        //cmdGitStatus.Dispose();
                     }
                     catch (Exception ex)
                     {
