@@ -583,22 +583,22 @@ namespace CodeGenCLI
                     //gitDiffOut.WaitForExit();
 
 
-                    //Console.WriteLine();
-                    //Console.WriteLine("### git checkout -p ###");
+                    Console.WriteLine();
+                    Console.WriteLine("### git checkout -p ###");
 
-                    //Process gitCheckoutP = new Process
-                    //{
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "git",
-                    //        Arguments = "checkout -p",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        RedirectStandardOutput = true,
-                    //        RedirectStandardInput = false,
-                    //        CreateNoWindow = true,
-                    //        UseShellExecute = false
-                    //    }
-                    //};
+                    Process gitCheckoutP = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "git",
+                            Arguments = "checkout -p",
+                            WorkingDirectory = Config.WebAPI.ProjectPath,
+                            RedirectStandardOutput = true,
+                            RedirectStandardInput = false,
+                            CreateNoWindow = true,
+                            UseShellExecute = false
+                        }
+                    };
 
                     // CASE 1
 
@@ -636,7 +636,7 @@ namespace CodeGenCLI
 
                     // CASE 2
 
-                    //gitCheckoutP.Start();
+                    gitCheckoutP.Start();
 
                     //string line;
                     //string currentHunk = string.Empty;
@@ -664,7 +664,7 @@ namespace CodeGenCLI
                     //    }
                     //}
 
-                    //gitCheckoutP.WaitForExit();
+                    gitCheckoutP.WaitForExit();
 
                     // CASE 2
 
