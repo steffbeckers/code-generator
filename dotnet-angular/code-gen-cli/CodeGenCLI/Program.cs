@@ -616,7 +616,7 @@ namespace CodeGenCLI
                     //cmdGitStatus.WaitForExit();
 
 
-                    Process gitCheckoutP = new Process
+                    Process gitCheckoutPOutput = new Process
                     {
                         StartInfo = new ProcessStartInfo
                         {
@@ -630,18 +630,45 @@ namespace CodeGenCLI
                         }
                     };
 
+                    Process gitCheckoutPInput = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "cmd",
+                            Arguments = "/c git checkout -p",
+                            WorkingDirectory = Config.WebAPI.ProjectPath,
+                            RedirectStandardOutput = false,
+                            RedirectStandardInput = true,
+                            CreateNoWindow = true,
+                            UseShellExecute = false
+                        }
+                    };
+
                     try
                     {
                         Console.WriteLine();
                         Console.WriteLine("### git checkout -p ###");
 
-                        gitCheckoutP.Start();
+                        gitCheckoutPOutput.Start();
 
-                        string output = gitCheckoutP.StandardOutput.ReadToEnd();
+                        string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
 
                         Console.WriteLine(output);
 
-                        gitCheckoutP.WaitForExit();
+                        gitCheckoutPOutput.WaitForExit();
+
+                        gitCheckoutPInput.Start();
+
+                        if (output.Contains("#-#-#"))
+                        {
+                            gitCheckoutPInput.StandardInput.WriteLine("y");
+                        }
+                        else
+                        {
+                            gitCheckoutPInput.StandardInput.WriteLine("n");
+                        }
+
+                        gitCheckoutPInput.WaitForExit();
 
                         //StreamReader sr = gitCheckoutP.StandardOutput;
                         //string line = string.Empty;
@@ -687,7 +714,7 @@ namespace CodeGenCLI
                     }
                     finally
                     {
-                        gitCheckoutP.Kill();
+                        gitCheckoutPOutput.Kill();
                     }
 
 
