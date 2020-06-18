@@ -633,7 +633,7 @@ namespace CodeGenCLI
                     try
                     {
                         Console.WriteLine();
-                        Console.WriteLine("### cmd => git checkout -p ###");
+                        Console.WriteLine("### git checkout -p ###");
 
                         gitCheckoutP.Start();
 
@@ -681,8 +681,9 @@ namespace CodeGenCLI
                     }
                     finally
                     {
-                        //gitCheckoutP.Kill();
+                        gitCheckoutP.Kill();
                     }
+
 
                     //Console.WriteLine();
                     //Console.WriteLine("### git checkout -p ###");
