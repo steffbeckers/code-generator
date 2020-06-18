@@ -666,6 +666,13 @@ namespace CodeGenCLI
                             // Supply input, based on output
                             gitCheckoutPInput.Start();
 
+                            // No changes anymore? no patching needed then
+                            if (output.Contains("No changes."))
+                            {
+                                needsPatching = false;
+                                continue;
+                            }
+
                             if (output.Contains("#-#-#"))
                             {
                                 Console.WriteLine("y");
