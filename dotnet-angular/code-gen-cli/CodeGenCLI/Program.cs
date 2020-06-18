@@ -687,7 +687,7 @@ namespace CodeGenCLI
 
                             // Stop following patches
                             //while (!gitCheckoutPInput.HasExited)
-                            //    gitCheckoutPInput.StandardInput.WriteLine("q");
+                            gitCheckoutPInput.StandardInput.WriteLine("q");
 
                             // Exit
                             gitCheckoutPInput.WaitForExit();
