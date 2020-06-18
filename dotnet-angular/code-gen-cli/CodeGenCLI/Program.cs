@@ -677,6 +677,8 @@ namespace CodeGenCLI
                                 gitCheckoutPInput.StandardInput.WriteLine("n");
                             }
 
+                            Thread.Sleep(500);
+
                             gitCheckoutPInput.StandardInput.WriteLine("e");
 
                             Console.WriteLine("gitCheckoutPInput.WaitForExit()");
