@@ -680,7 +680,7 @@ namespace CodeGenCLI
                         //gitCheckoutPInput.StandardInput.Flush();
 
                         Console.WriteLine("gitCheckoutPInput.WaitForExit()");
-                        gitCheckoutPInput.WaitForExit();
+                        gitCheckoutPInput.WaitForExit(2000);
 
                         Console.WriteLine("gitCheckoutPInput.Kill()");
                         gitCheckoutPInput.Kill();
