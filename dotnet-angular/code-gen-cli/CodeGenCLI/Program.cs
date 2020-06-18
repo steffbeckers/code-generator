@@ -652,11 +652,13 @@ namespace CodeGenCLI
 
                                 if (currentHunk.Contains("#-#-#"))
                                 {
-                                    gitCheckoutP.StandardInput.WriteLine("y");
+                                    Console.WriteLine("y");
+                                    //gitCheckoutP.StandardInput.WriteLine("y");
                                 }
                                 else
                                 {
-                                    gitCheckoutP.StandardInput.WriteLine("n");
+                                    Console.WriteLine("n");
+                                    //gitCheckoutP.StandardInput.WriteLine("n");
                                 }
                             }
                             else if (line.EndsWith(Environment.NewLine))
