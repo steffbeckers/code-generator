@@ -53,6 +53,8 @@ namespace RJM.API.BLL
             this.emailService = emailService;
         }
 
+        // Test 2
+
         public async Task<AuthenticatedVM> Login(LoginVM loginVM)
         {
             // Validation
@@ -61,11 +63,16 @@ namespace RJM.API.BLL
                 return null;
             }
 
+            // #-#-#
+            // Test 3
+
             // Result
             AuthenticatedVM authenticatedVM = new AuthenticatedVM()
             {
                 RememberMe = loginVM.RememberMe
             };
+
+            // Test 4
 
             // Retrieve user by email or username
             User user = await userManager.FindByEmailAsync(loginVM.EmailOrUsername) ?? await userManager.FindByNameAsync(loginVM.EmailOrUsername);
