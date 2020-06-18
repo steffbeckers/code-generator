@@ -649,6 +649,8 @@ namespace CodeGenCLI
                             // No changes anymore? no patching needed then
                             if (string.IsNullOrEmpty(output))
                             {
+                                Console.WriteLine("Done patching custom changes.");
+
                                 needsPatching = false;
                                 continue;
                             }
