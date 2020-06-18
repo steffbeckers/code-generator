@@ -10,5 +10,8 @@ namespace RJM.API.GraphQL
             Query = resolver.Resolve<RJMQuery>();
             Mutation = resolver.Resolve<RJMMutation>();
         }
+
+        // #-#-#
+        // Test
     }
 }

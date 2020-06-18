@@ -11,6 +11,16 @@ using RJM.API.ViewModels;
 
 namespace RJM.API.Controllers
 {
+
+    
+    
+    
+    // #-#-#
+    // Test
+
+
+
+
 	/// <summary>
 	/// The Documents controller.
 	/// </summary>
@@ -46,16 +56,24 @@ namespace RJM.API.Controllers
         public async Task<ActionResult<IEnumerable<DocumentVM>>> GetDocuments()
         {
             IEnumerable<Document> documents = await this.bll.GetAllDocumentsAsync();
+            // #-#-#
+            // Test
 
-			// Mapping
+
+            // Mapping
             return Ok(this.mapper.Map<IEnumerable<Document>, List<DocumentVM>>(documents));
         }
 
+        // #-#-#
+        // Test
+
+
+
         // GET: api/documents/{id}
-		/// <summary>
-		/// Retrieves a specific document.
-		/// </summary>
-		/// <param name="id"></param>
+        /// <summary>
+        /// Retrieves a specific document.
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public async Task<ActionResult<DocumentVM>> GetDocument([FromRoute] Guid id)
         {
