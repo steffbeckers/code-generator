@@ -624,7 +624,7 @@ namespace CodeGenCLI
                             Arguments = "/c git checkout -p",
                             WorkingDirectory = Config.WebAPI.ProjectPath,
                             RedirectStandardOutput = true,
-                            RedirectStandardInput = true,
+                            RedirectStandardInput = false,
                             CreateNoWindow = true,
                             UseShellExecute = false
                         }
@@ -653,12 +653,12 @@ namespace CodeGenCLI
                                 if (currentHunk.Contains("#-#-#"))
                                 {
                                     Console.WriteLine("y");
-                                    //gitCheckoutP.StandardInput.WriteLine("y");
+                                    gitCheckoutP.StandardInput.WriteLine("y");
                                 }
                                 else
                                 {
                                     Console.WriteLine("n");
-                                    //gitCheckoutP.StandardInput.WriteLine("n");
+                                    gitCheckoutP.StandardInput.WriteLine("n");
                                 }
                             }
                             else if (line.EndsWith(Environment.NewLine))
