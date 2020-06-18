@@ -650,41 +650,44 @@ namespace CodeGenCLI
 
                     try
                     {
-                        Console.WriteLine();
-                        Console.WriteLine("### git checkout -p ###");
-
-                        // Read output
-                        gitCheckoutPOutput.Start();
-                        string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
-                        Console.WriteLine(output);
-                        gitCheckoutPOutput.WaitForExit();
-                        gitCheckoutPOutput.Kill();
-
-                        // Supply input, based on output
-                        gitCheckoutPInput.Start();
-
-                        if (output.Contains("#-#-#"))
+                        bool needsPatching = true;
+                        while (needsPatching)
                         {
-                            Console.WriteLine("y");
-                            gitCheckoutPInput.StandardInput.WriteLine("y");
-                            //gitCheckoutPInput.StandardInput.Flush();
+                            Console.WriteLine();
+                            Console.WriteLine("### git checkout -p ###");
+
+                            // Read output
+                            gitCheckoutPOutput.Start();
+                            string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
+                            Console.WriteLine(output);
+                            gitCheckoutPOutput.WaitForExit();
+                            gitCheckoutPOutput.Kill();
+
+                            // Supply input, based on output
+                            gitCheckoutPInput.Start();
+
+                            if (output.Contains("#-#-#"))
+                            {
+                                Console.WriteLine("y");
+                                gitCheckoutPInput.StandardInput.WriteLine("y");
+                            }
+                            else
+                            {
+                                Console.WriteLine("n");
+                                gitCheckoutPInput.StandardInput.WriteLine("n");
+                            }
+
+                            if (gitCheckoutPInput.HasExited)
+                            {
+                                needsPatching = false;
+                            }
+
+                            Console.WriteLine("gitCheckoutPInput.WaitForExit()");
+                            gitCheckoutPInput.WaitForExit(100);
+
+                            Console.WriteLine("gitCheckoutPInput.Kill()");
+                            gitCheckoutPInput.Kill();
                         }
-                        else
-                        {
-                            Console.WriteLine("n");
-                            gitCheckoutPInput.StandardInput.WriteLine("n");
-                            //gitCheckoutPInput.StandardInput.Flush();
-                        }
-
-                        //gitCheckoutPInput.StandardInput.WriteLine("exit");
-                        //gitCheckoutPInput.StandardInput.Flush();
-
-                        Console.WriteLine("gitCheckoutPInput.WaitForExit()");
-                        gitCheckoutPInput.WaitForExit(2000);
-
-                        Console.WriteLine("gitCheckoutPInput.Kill()");
-                        gitCheckoutPInput.Kill();
-
 
                         //StreamReader sr = gitCheckoutP.StandardOutput;
                         //string line = string.Empty;
