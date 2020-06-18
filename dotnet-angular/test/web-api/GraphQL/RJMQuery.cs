@@ -19,8 +19,7 @@ namespace RJM.API.GraphQL
 			JobStateRepository jobStateRepository
         )
         {
-            // #-#-#
-            //this.AuthorizeWith("Authorized");
+            this.AuthorizeWith("Authorized");
 
 			// Documents
             
