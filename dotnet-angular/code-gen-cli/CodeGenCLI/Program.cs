@@ -616,38 +616,6 @@ namespace CodeGenCLI
                     //cmdGitStatus.WaitForExit();
 
 
-                    Process gitCheckoutPOutput = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "git",
-                            Arguments = "checkout -p",
-                            //FileName = "cmd",
-                            //Arguments = "/c git checkout -p",
-                            WorkingDirectory = Config.WebAPI.ProjectPath,
-                            RedirectStandardOutput = true,
-                            RedirectStandardInput = false,
-                            CreateNoWindow = true,
-                            UseShellExecute = false
-                        }
-                    };
-
-                    Process gitCheckoutPInput = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "git",
-                            Arguments = "checkout -p",
-                            //FileName = "cmd",
-                            //Arguments = "/c git checkout -p",
-                            WorkingDirectory = Config.WebAPI.ProjectPath,
-                            RedirectStandardOutput = false,
-                            RedirectStandardInput = true,
-                            CreateNoWindow = true,
-                            UseShellExecute = false
-                        }
-                    };
-
                     try
                     {
                         bool needsPatching = true;
@@ -656,6 +624,22 @@ namespace CodeGenCLI
                             Console.WriteLine();
                             Console.WriteLine("### git checkout -p ###");
 
+                            Process gitCheckoutPOutput = new Process
+                            {
+                                StartInfo = new ProcessStartInfo
+                                {
+                                    FileName = "git",
+                                    Arguments = "checkout -p",
+                                    //FileName = "cmd",
+                                    //Arguments = "/c git checkout -p",
+                                    WorkingDirectory = Config.WebAPI.ProjectPath,
+                                    RedirectStandardOutput = true,
+                                    RedirectStandardInput = false,
+                                    CreateNoWindow = true,
+                                    UseShellExecute = false
+                                }
+                            };
+
                             // Read output
                             gitCheckoutPOutput.Start();
                             string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
@@ -663,15 +647,31 @@ namespace CodeGenCLI
                             gitCheckoutPOutput.WaitForExit();
                             gitCheckoutPOutput.Kill();
 
-                            // Supply input, based on output
-                            gitCheckoutPInput.Start();
-
                             // No changes anymore? no patching needed then
                             if (output.Contains("No changes."))
                             {
                                 needsPatching = false;
                                 continue;
                             }
+
+                            // Supply input, based on output
+                            Process gitCheckoutPInput = new Process
+                            {
+                                StartInfo = new ProcessStartInfo
+                                {
+                                    FileName = "git",
+                                    Arguments = "checkout -p",
+                                    //FileName = "cmd",
+                                    //Arguments = "/c git checkout -p",
+                                    WorkingDirectory = Config.WebAPI.ProjectPath,
+                                    RedirectStandardOutput = false,
+                                    RedirectStandardInput = true,
+                                    CreateNoWindow = true,
+                                    UseShellExecute = false
+                                }
+                            };
+
+                            gitCheckoutPInput.Start();
 
                             if (output.Contains("#-#-#"))
                             {
@@ -735,10 +735,6 @@ namespace CodeGenCLI
                     catch (Exception ex)
                     {
                         throw;
-                    }
-                    finally
-                    {
-                        gitCheckoutPOutput.Kill();
                     }
 
 
