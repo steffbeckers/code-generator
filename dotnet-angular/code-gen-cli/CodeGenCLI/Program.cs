@@ -638,29 +638,24 @@ namespace CodeGenCLI
 
                         string line;
                         string currentHunk = string.Empty;
-
                         while (gitCheckoutP.StandardOutput.Peek() > -1)
                         {
                             line = gitCheckoutP.StandardOutput.ReadLine();
                             Console.WriteLine(line);
 
-                            if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                            {
-                                if (currentHunk.Contains("#-#-#"))
-                                {
-                                    gitCheckoutP.StandardInput.WriteLine("y");
-                                    currentHunk = string.Empty;
-                                }
-                                else
-                                {
-                                    gitCheckoutP.StandardInput.WriteLine("n");
-                                    currentHunk = string.Empty;
-                                }
-                            }
-                            else
+                            if (!line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                             {
                                 currentHunk += line + Environment.NewLine;
                             }
+                        }
+
+                        if (currentHunk.Contains("#-#-#"))
+                        {
+                            gitCheckoutP.StandardInput.WriteLine("y");
+                        }
+                        else
+                        {
+                            gitCheckoutP.StandardInput.WriteLine("n");
                         }
 
                         gitCheckoutP.WaitForExit();
