@@ -657,6 +657,8 @@ namespace CodeGenCLI
 
                         gitCheckoutPOutput.WaitForExit();
 
+                        gitCheckoutPOutput.Kill();
+
                         gitCheckoutPInput.Start();
 
                         if (output.Contains("#-#-#"))
@@ -669,6 +671,9 @@ namespace CodeGenCLI
                         }
 
                         gitCheckoutPInput.WaitForExit();
+
+                        gitCheckoutPInput.Kill();
+
 
                         //StreamReader sr = gitCheckoutP.StandardOutput;
                         //string line = string.Empty;
