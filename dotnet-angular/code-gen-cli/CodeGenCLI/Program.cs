@@ -681,7 +681,7 @@ namespace CodeGenCLI
                     }
                     finally
                     {
-                        gitCheckoutP.Kill();
+                        //gitCheckoutP.Kill();
                     }
 
                     //Console.WriteLine();
