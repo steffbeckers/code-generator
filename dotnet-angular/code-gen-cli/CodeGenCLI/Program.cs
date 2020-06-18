@@ -659,7 +659,7 @@ namespace CodeGenCLI
                             // Read output
                             gitCheckoutPOutput.Start();
                             string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
-                            Console.WriteLine(output);
+                            Console.Write(output);
                             gitCheckoutPOutput.WaitForExit();
                             gitCheckoutPOutput.Kill();
 
