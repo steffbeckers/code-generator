@@ -684,10 +684,8 @@ namespace CodeGenCLI
                                 gitCheckoutPInput.StandardInput.WriteLine("n");
                             }
 
-                            Thread.Sleep(1000);
-
-                            //Console.WriteLine("gitCheckoutPInput.WaitForExit()");
-                            //gitCheckoutPInput.WaitForExit();
+                            Console.WriteLine("gitCheckoutPInput.WaitForExit(5000)");
+                            gitCheckoutPInput.WaitForExit(5000);
 
                             Console.WriteLine("gitCheckoutPInput.Kill()");
                             gitCheckoutPInput.Kill();
