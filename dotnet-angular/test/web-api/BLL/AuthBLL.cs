@@ -31,8 +31,6 @@ namespace RJM.API.BLL
         private readonly SignInManager<User> signInManager;
         private readonly IEmailService emailService;
 
-        // Test
-
         public AuthBLL(
             IConfiguration configuration,
             ILogger<AuthBLL> logger,
@@ -51,9 +49,6 @@ namespace RJM.API.BLL
             this.signInManager = signInManager;
             this.emailService = emailService;
         }
-
-        // #-#-#
-        // Test 2
 
         public async Task<AuthenticatedVM> Login(LoginVM loginVM)
         {
