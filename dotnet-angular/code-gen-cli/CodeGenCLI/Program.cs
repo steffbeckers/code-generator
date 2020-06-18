@@ -624,7 +624,7 @@ namespace CodeGenCLI
                             Arguments = "/c git checkout -p",
                             WorkingDirectory = Config.WebAPI.ProjectPath,
                             RedirectStandardOutput = true,
-                            RedirectStandardInput = true,
+                            RedirectStandardInput = false,
                             CreateNoWindow = true,
                             UseShellExecute = false
                         }
@@ -639,9 +639,9 @@ namespace CodeGenCLI
 
                         string output = gitCheckoutP.StandardOutput.ReadToEnd();
 
-                        gitCheckoutP.WaitForExit();
-
                         Console.WriteLine(output);
+
+                        gitCheckoutP.WaitForExit();
 
                         //StreamReader sr = gitCheckoutP.StandardOutput;
                         //string line = string.Empty;
