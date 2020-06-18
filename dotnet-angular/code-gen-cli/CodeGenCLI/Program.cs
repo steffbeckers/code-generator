@@ -620,8 +620,10 @@ namespace CodeGenCLI
                     {
                         StartInfo = new ProcessStartInfo
                         {
-                            FileName = "cmd",
-                            Arguments = "/c git checkout -p",
+                            FileName = "git",
+                            Arguments = "checkout -p",
+                            //FileName = "cmd",
+                            //Arguments = "/c git checkout -p",
                             WorkingDirectory = Config.WebAPI.ProjectPath,
                             RedirectStandardOutput = true,
                             RedirectStandardInput = false,
@@ -634,8 +636,10 @@ namespace CodeGenCLI
                     {
                         StartInfo = new ProcessStartInfo
                         {
-                            FileName = "cmd",
-                            Arguments = "/c git checkout -p",
+                            FileName = "git",
+                            Arguments = "checkout -p",
+                            //FileName = "cmd",
+                            //Arguments = "/c git checkout -p",
                             WorkingDirectory = Config.WebAPI.ProjectPath,
                             RedirectStandardOutput = false,
                             RedirectStandardInput = true,
@@ -649,35 +653,33 @@ namespace CodeGenCLI
                         Console.WriteLine();
                         Console.WriteLine("### git checkout -p ###");
 
+                        // Read output
                         gitCheckoutPOutput.Start();
-
                         string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
-
                         Console.WriteLine(output);
-
                         gitCheckoutPOutput.WaitForExit();
-
                         gitCheckoutPOutput.Kill();
 
+                        // Supply input, based on output
                         gitCheckoutPInput.Start();
 
                         if (output.Contains("#-#-#"))
                         {
                             Console.WriteLine("y");
-
                             gitCheckoutPInput.StandardInput.WriteLine("y");
-                            gitCheckoutPInput.StandardInput.Flush();
+                            //gitCheckoutPInput.StandardInput.Flush();
                         }
                         else
                         {
                             Console.WriteLine("n");
-
                             gitCheckoutPInput.StandardInput.WriteLine("n");
-                            gitCheckoutPInput.StandardInput.Flush();
+                            //gitCheckoutPInput.StandardInput.Flush();
                         }
 
-                        gitCheckoutPInput.StandardInput.WriteLine("exit");
-                        gitCheckoutPInput.StandardInput.Flush();
+                        //gitCheckoutPInput.StandardInput.WriteLine("exit");
+                        //gitCheckoutPInput.StandardInput.Flush();
+
+                        gitCheckoutPInput.WaitForExit();
 
                         gitCheckoutPInput.Kill();
 
