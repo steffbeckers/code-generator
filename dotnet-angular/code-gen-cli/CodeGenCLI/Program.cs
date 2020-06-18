@@ -647,7 +647,7 @@ namespace CodeGenCLI
                             gitCheckoutPOutput.WaitForExit();
 
                             // No changes anymore? no patching needed then
-                            if (output.Contains("No changes."))
+                            if (string.IsNullOrEmpty(output))
                             {
                                 needsPatching = false;
                                 continue;
