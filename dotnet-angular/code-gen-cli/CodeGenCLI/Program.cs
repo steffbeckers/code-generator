@@ -645,7 +645,6 @@ namespace CodeGenCLI
                             string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
                             Console.Write(output);
                             gitCheckoutPOutput.WaitForExit();
-                            gitCheckoutPOutput.Kill();
 
                             // No changes anymore? no patching needed then
                             if (output.Contains("No changes."))
@@ -684,13 +683,8 @@ namespace CodeGenCLI
                                 gitCheckoutPInput.StandardInput.WriteLine("n");
                             }
 
-                            gitCheckoutPInput.StandardInput.Flush();
-
                             Console.WriteLine("gitCheckoutPInput.WaitForExit(5000)");
                             gitCheckoutPInput.WaitForExit(5000);
-
-                            Console.WriteLine("gitCheckoutPInput.Kill()");
-                            gitCheckoutPInput.Kill();
                         }
 
 
