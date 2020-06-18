@@ -648,6 +648,8 @@ namespace CodeGenCLI
 
                             if (line.EndsWith("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
                             {
+                                Console.WriteLine(line);
+
                                 if (currentHunk.Contains("#-#-#"))
                                 {
                                     gitCheckoutP.StandardInput.WriteLine("y");
@@ -659,7 +661,10 @@ namespace CodeGenCLI
                             }
                             else if (line.EndsWith(Environment.NewLine))
                             {
+                                Console.WriteLine(line);
+
                                 currentHunk += line;
+
                                 line = string.Empty;
                             }
                         }
