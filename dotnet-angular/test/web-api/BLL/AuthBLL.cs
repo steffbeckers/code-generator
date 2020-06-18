@@ -53,8 +53,6 @@ namespace RJM.API.BLL
             this.emailService = emailService;
         }
 
-        // Test 2
-
         public async Task<AuthenticatedVM> Login(LoginVM loginVM)
         {
             // Validation
@@ -62,9 +60,6 @@ namespace RJM.API.BLL
             {
                 return null;
             }
-
-            // #-#-#
-            // Test 3
 
             // Result
             AuthenticatedVM authenticatedVM = new AuthenticatedVM()
