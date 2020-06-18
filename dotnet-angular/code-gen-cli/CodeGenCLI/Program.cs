@@ -665,13 +665,15 @@ namespace CodeGenCLI
                         {
                             Console.WriteLine("y");
 
-                            gitCheckoutPInput.StandardInput.WriteLine("y" + Environment.NewLine);
+                            gitCheckoutPInput.StandardInput.WriteLine("y");
+                            gitCheckoutPInput.StandardInput.Flush();
                         }
                         else
                         {
                             Console.WriteLine("n");
 
-                            gitCheckoutPInput.StandardInput.WriteLine("n" + Environment.NewLine);
+                            gitCheckoutPInput.StandardInput.WriteLine("n");
+                            gitCheckoutPInput.StandardInput.Flush();
                         }
 
                         gitCheckoutPInput.WaitForExit();
