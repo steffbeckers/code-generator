@@ -637,43 +637,49 @@ namespace CodeGenCLI
 
                         gitCheckoutP.Start();
 
-                        StreamReader sr = gitCheckoutP.StandardOutput;
-                        string line = string.Empty;
-                        string currentHunk = string.Empty;
-
-                        while (!sr.EndOfStream)
-                        {
-                            char inputChar = (char)sr.Read();
-                            line += inputChar;
-
-                            if (line.EndsWith("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                            {
-                                Console.WriteLine(line);
-
-                                if (currentHunk.Contains("#-#-#"))
-                                {
-                                    Console.WriteLine("y");
-                                    gitCheckoutP.StandardInput.WriteLine("y");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("n");
-                                    gitCheckoutP.StandardInput.WriteLine("n");
-                                }
-                            }
-                            else if (line.EndsWith(Environment.NewLine))
-                            {
-                                Console.WriteLine(line);
-
-                                currentHunk += line;
-
-                                line = string.Empty;
-                            }
-                        }
-
-                        sr.Close();
+                        string output = gitCheckoutP.StandardOutput.ReadToEnd();
 
                         gitCheckoutP.WaitForExit();
+
+                        Console.WriteLine(output);
+
+                        //StreamReader sr = gitCheckoutP.StandardOutput;
+                        //string line = string.Empty;
+                        //string currentHunk = string.Empty;
+
+                        //while (!sr.EndOfStream)
+                        //{
+                        //    char inputChar = (char)sr.Read();
+                        //    line += inputChar;
+
+                        //    if (line.EndsWith("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
+                        //    {
+                        //        Console.WriteLine(line);
+
+                        //        if (currentHunk.Contains("#-#-#"))
+                        //        {
+                        //            Console.WriteLine("y");
+                        //            gitCheckoutP.StandardInput.WriteLine("y");
+                        //        }
+                        //        else
+                        //        {
+                        //            Console.WriteLine("n");
+                        //            gitCheckoutP.StandardInput.WriteLine("n");
+                        //        }
+                        //    }
+                        //    else if (line.EndsWith(Environment.NewLine))
+                        //    {
+                        //        Console.WriteLine(line);
+
+                        //        currentHunk += line;
+
+                        //        line = string.Empty;
+                        //    }
+                        //}
+
+                        //sr.Close();
+
+                        //gitCheckoutP.WaitForExit();
                     }
                     catch (Exception ex)
                     {
