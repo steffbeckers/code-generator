@@ -663,10 +663,14 @@ namespace CodeGenCLI
 
                         if (output.Contains("#-#-#"))
                         {
+                            Console.WriteLine("y");
+
                             gitCheckoutPInput.StandardInput.WriteLine("y");
                         }
                         else
                         {
+                            Console.WriteLine("n");
+
                             gitCheckoutPInput.StandardInput.WriteLine("n");
                         }
 
