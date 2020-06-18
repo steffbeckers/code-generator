@@ -661,7 +661,7 @@ namespace CodeGenCLI
                             string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
                             Console.WriteLine(output);
                             gitCheckoutPOutput.WaitForExit();
-                            gitCheckoutPOutput.Close();
+                            gitCheckoutPOutput.Kill();
 
                             // Supply input, based on output
                             gitCheckoutPInput.Start();
@@ -677,7 +677,7 @@ namespace CodeGenCLI
                                 gitCheckoutPInput.StandardInput.WriteLine("n");
                             }
 
-                            Thread.Sleep(500);
+                            Thread.Sleep(1000);
 
                             gitCheckoutPInput.StandardInput.WriteLine("e");
 
@@ -685,11 +685,9 @@ namespace CodeGenCLI
                             gitCheckoutPInput.WaitForExit();
 
                             Console.WriteLine("gitCheckoutPInput.Kill()");
-                            gitCheckoutPInput.Close();
+                            gitCheckoutPInput.Kill();
                         }
 
-                        gitCheckoutPOutput.Kill();
-                        gitCheckoutPInput.Kill();
 
                         //StreamReader sr = gitCheckoutP.StandardOutput;
                         //string line = string.Empty;
