@@ -56,18 +56,10 @@ namespace RJM.API.Controllers
         public async Task<ActionResult<IEnumerable<DocumentVM>>> GetDocuments()
         {
             IEnumerable<Document> documents = await this.bll.GetAllDocumentsAsync();
-            // #-#-#
-            // Test
-
 
             // Mapping
             return Ok(this.mapper.Map<IEnumerable<Document>, List<DocumentVM>>(documents));
         }
-
-        // #-#-#
-        // Test
-
-
 
         // GET: api/documents/{id}
         /// <summary>

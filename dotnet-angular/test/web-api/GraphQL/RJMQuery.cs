@@ -19,18 +19,6 @@ namespace RJM.API.GraphQL
 			JobStateRepository jobStateRepository
         )
         {
-            // #-#-#
-            // Test generator undo
-
-
-
-            // #-#-#
-            // Test
-
-
-
-
-
             this.AuthorizeWith("Authorized");
 
 			// Documents
