@@ -645,7 +645,6 @@ namespace CodeGenCLI
                             string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
                             Console.Write(output);
                             gitCheckoutPOutput.WaitForExit();
-                            gitCheckoutPOutput.Kill();
 
                             // No changes anymore? no patching needed then
                             if (string.IsNullOrEmpty(output))
