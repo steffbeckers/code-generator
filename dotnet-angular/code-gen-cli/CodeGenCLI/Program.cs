@@ -747,7 +747,7 @@ namespace CodeGenCLI
 
                         string[] gitDiffForPatchingOutputLines = Regex.Split(gitDiffForPatchingOutput, "\r?\n");
 
-                        Dictionary<long, string> gitDiffForPatchingOutputLineBlocks = new Dictionary<long, string>();
+                        Dictionary<long, string> gitDiffForPatchingOutputHunks = new Dictionary<long, string>();
                         long gitDiffForPatchingOutputLineBlockCounter = 0;
 
                         foreach (string gitDiffForPatchingOutputLine in gitDiffForPatchingOutputLines)
@@ -755,18 +755,27 @@ namespace CodeGenCLI
                             if (gitDiffForPatchingOutputLine.StartsWith("@@"))
                             {
                                 gitDiffForPatchingOutputLineBlockCounter = gitDiffForPatchingOutputLineBlockCounter + 1;
-                                if (!gitDiffForPatchingOutputLineBlocks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter))
+                                if (!gitDiffForPatchingOutputHunks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter))
                                 {
-                                    gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
+                                    gitDiffForPatchingOutputHunks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
                                 }
                             }
-                            else if (gitDiffForPatchingOutputLineBlocks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter) &&
+                            else if (gitDiffForPatchingOutputHunks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter) &&
                                      (gitDiffForPatchingOutputLine.StartsWith("+") || gitDiffForPatchingOutputLine.StartsWith("-"))) {
-                                gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] += gitDiffForPatchingOutputLine;
+                                gitDiffForPatchingOutputHunks[gitDiffForPatchingOutputLineBlockCounter] += gitDiffForPatchingOutputLine;
                             }
                         }
 
-                        Console.WriteLine("Done with blocks");
+                        foreach(string hunk in gitDiffForPatchingOutputHunks.Values) {
+                            if (hunk.Contains("@@@"))
+                            {
+                                gitCheckoutPInput.StandardInput.WriteLine("y");
+                            }
+                            else
+                            {
+                                gitCheckoutPInput.StandardInput.WriteLine("n");
+                            }
+                        }
 
                         //using (StringReader gitDiffForPatchingOutputStringReader = new StringReader(gitDiffForPatchingOutput))
                         //{
