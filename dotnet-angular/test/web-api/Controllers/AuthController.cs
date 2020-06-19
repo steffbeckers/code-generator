@@ -10,6 +10,8 @@ using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.Controllers
 {
+    // Test
+
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -19,6 +21,9 @@ namespace RJM.API.Controllers
         private readonly ILogger logger;
         private readonly IMapper mapper;
         private readonly AuthBLL bll;
+
+        // @@@
+        // Test 2
 
         /// <summary>
         /// The constructor of the Auth controller.
