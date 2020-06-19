@@ -718,7 +718,7 @@ namespace CodeGenCLI
                             // No changes anymore? no patching needed then
                             if (string.IsNullOrEmpty(gitDiffForPatchingOutput))
                             {
-                                Console.WriteLine("No diffs.");
+                                Console.WriteLine("No diffs. No patching needed");
 
                                 //needsPatching = false;
                                 //continue;
