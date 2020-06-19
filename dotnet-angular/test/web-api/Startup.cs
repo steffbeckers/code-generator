@@ -139,7 +139,6 @@ namespace RJM.API
 			services.AddScoped<JobRepository>();
 			services.AddScoped<JobStateRepository>();
 			services.AddScoped<JobSkillRepository>();
-			services.AddScoped<SettingRepository>();
 
 			// BLLs
 			services.AddScoped<DocumentBLL>();
@@ -149,7 +148,6 @@ namespace RJM.API
 			services.AddScoped<SkillAliasBLL>();
 			services.AddScoped<JobBLL>();
 			services.AddScoped<JobStateBLL>();
-			services.AddScoped<SettingBLL>();
             services.AddScoped<AuthBLL>();
 
             // Services
