@@ -693,6 +693,7 @@ namespace CodeGenCLI
                         //bool needsPatching = true;
                         //while (needsPatching)
                         //{
+
                         Console.WriteLine();
                         Console.WriteLine("### git diff ###");
 
@@ -723,6 +724,9 @@ namespace CodeGenCLI
                             //needsPatching = false;
                             //continue;
                         }
+
+                        Console.WriteLine();
+                        Console.WriteLine("### git checkout -p ###");
 
                         // Supply input, based on output
                         Process gitCheckoutPInput = new Process
