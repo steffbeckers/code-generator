@@ -760,10 +760,8 @@ namespace CodeGenCLI
                                     gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
                                 }
                             }
-                            else if (gitDiffForPatchingOutputLineBlocks.Count() > 0 &&
-                                     gitDiffForPatchingOutputLineBlocks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter) &&
-                                     gitDiffForPatchingOutputLine.StartsWith("+") ||
-                                     gitDiffForPatchingOutputLine.StartsWith("-")) {
+                            else if (gitDiffForPatchingOutputLineBlocks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter) &&
+                                     (gitDiffForPatchingOutputLine.StartsWith("+") || gitDiffForPatchingOutputLine.StartsWith("-"))) {
                                 gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] += gitDiffForPatchingOutputLine;
                             }
                         }
