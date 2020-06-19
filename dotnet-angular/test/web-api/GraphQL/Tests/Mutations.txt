@@ -14,8 +14,6 @@ mutation createDocument($document: documentInput!) {
   }
 }
 
-
-
 {
   "document": {
     "name": "",
