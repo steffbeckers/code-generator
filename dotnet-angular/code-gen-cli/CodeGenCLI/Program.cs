@@ -745,10 +745,13 @@ namespace CodeGenCLI
 
                         gitCheckoutPInput.Start();
 
-                        string[] gitDiffForPatchingOutputLines = gitDiffForPatchingOutput.Split(new[] { gitDiffForPatching.StandardInput.NewLine }, StringSplitOptions.None);
-                        foreach (string gitDiffForPatchingOutputLine in gitDiffForPatchingOutputLines)
+                        using (StringReader gitDiffForPatchingOutputStringReader = new StringReader(gitDiffForPatchingOutput))
                         {
-                            Console.WriteLine("@@@@@:" + gitDiffForPatchingOutputLine);
+                            string gitDiffForPatchingOutputLine;
+                            while (!string.IsNullOrEmpty(gitDiffForPatchingOutputLine = gitDiffForPatchingOutputStringReader.ReadLine())
+                            {
+                                Console.WriteLine("@@@@: " + gitDiffForPatchingOutputLine);
+                            }
                         }
 
                         //gitCheckoutPInput.StandardInput.WriteLine("n");
