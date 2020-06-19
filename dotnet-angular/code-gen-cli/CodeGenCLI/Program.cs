@@ -693,70 +693,73 @@ namespace CodeGenCLI
                         //bool needsPatching = true;
                         //while (needsPatching)
                         //{
-                            Console.WriteLine();
-                            Console.WriteLine("### git diff ###");
+                        Console.WriteLine();
+                        Console.WriteLine("### git diff ###");
 
-                            Process gitDiffForPatching = new Process
+                        Process gitDiffForPatching = new Process
+                        {
+                            StartInfo = new ProcessStartInfo
                             {
-                                StartInfo = new ProcessStartInfo
-                                {
-                                    FileName = "git",
-                                    Arguments = "diff",
-                                    WorkingDirectory = Config.WebAPI.ProjectPath,
-                                    RedirectStandardOutput = true,
-                                    CreateNoWindow = true,
-                                    UseShellExecute = false
-                                }
-                            };
-
-                            // Read output
-                            gitDiffForPatching.Start();
-                            string gitDiffForPatchingOutput = gitDiffForPatching.StandardOutput.ReadToEnd();
-                            Console.Write(gitDiffForPatchingOutput);
-                            gitDiffForPatching.WaitForExit();
-
-                            // No changes anymore? no patching needed then
-                            if (string.IsNullOrEmpty(gitDiffForPatchingOutput))
-                            {
-                                Console.WriteLine("No diffs. No patching needed");
-
-                                //needsPatching = false;
-                                //continue;
+                                FileName = "git",
+                                Arguments = "diff",
+                                WorkingDirectory = Config.WebAPI.ProjectPath,
+                                RedirectStandardOutput = true,
+                                CreateNoWindow = true,
+                                UseShellExecute = false
                             }
+                        };
 
-                            //// Supply input, based on output
-                            //Process gitAddPInput = new Process
-                            //{
-                            //    StartInfo = new ProcessStartInfo
-                            //    {
-                            //        FileName = "git",
-                            //        Arguments = "add -p",
-                            //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                            //        RedirectStandardOutput = false,
-                            //        RedirectStandardInput = true,
-                            //        CreateNoWindow = true,
-                            //        UseShellExecute = false
-                            //    }
-                            //};
+                        // Read output
+                        gitDiffForPatching.Start();
+                        string gitDiffForPatchingOutput = gitDiffForPatching.StandardOutput.ReadToEnd();
+                        Console.Write(gitDiffForPatchingOutput);
+                        gitDiffForPatching.WaitForExit();
 
-                            //gitAddPInput.Start();
+                        // No changes anymore? no patching needed then
+                        if (string.IsNullOrEmpty(gitDiffForPatchingOutput))
+                        {
+                            Console.WriteLine("No diffs. No patching needed");
 
-                            //if (output.Contains("#-#-#"))
-                            //{
-                            //    Console.WriteLine("y");
-                            //    gitAddPInput.StandardInput.WriteLine("y");
-                            //}
-                            //else
-                            //{
-                            //    Console.WriteLine("n");
-                            //    gitAddPInput.StandardInput.WriteLine("n");
-                            //}
+                            //needsPatching = false;
+                            //continue;
+                        }
 
-                            //// Stop following patches
-                            //gitAddPInput.StandardInput.WriteLine("q");
+                        // Supply input, based on output
+                        Process gitAddPInput = new Process
+                        {
+                            StartInfo = new ProcessStartInfo
+                            {
+                                FileName = "git",
+                                Arguments = "add -p",
+                                WorkingDirectory = Config.WebAPI.ProjectPath,
+                                RedirectStandardOutput = false,
+                                RedirectStandardInput = true,
+                                CreateNoWindow = true,
+                                UseShellExecute = false
+                            }
+                        };
 
-                            //// Exit
-                            //gitAddPInput.WaitForExit();
+                        gitAddPInput.Start();
+
+                        gitAddPInput.StandardInput.WriteLine("y");
+                        gitAddPInput.StandardInput.WriteLine("y");
+
+                        //if (output.Contains("#-#-#"))
+                        //{
+                        //    Console.WriteLine("y");
+                        //    gitAddPInput.StandardInput.WriteLine("y");
+                        //}
+                        //else
+                        //{
+                        //    Console.WriteLine("n");
+                        //    gitAddPInput.StandardInput.WriteLine("n");
+                        //}
+
+                        //// Stop following patches
+                        //gitAddPInput.StandardInput.WriteLine("q");
+
+                        // Exit
+                        gitAddPInput.WaitForExit();
                         //}
 
 
