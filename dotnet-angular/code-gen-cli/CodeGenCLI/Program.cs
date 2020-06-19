@@ -725,12 +725,12 @@ namespace CodeGenCLI
                         }
 
                         // Supply input, based on output
-                        Process gitAddPInput = new Process
+                        Process gitCheckoutPInput = new Process
                         {
                             StartInfo = new ProcessStartInfo
                             {
                                 FileName = "git",
-                                Arguments = "add -p",
+                                Arguments = "checkout -p",
                                 WorkingDirectory = Config.WebAPI.ProjectPath,
                                 RedirectStandardOutput = false,
                                 RedirectStandardInput = true,
@@ -739,10 +739,10 @@ namespace CodeGenCLI
                             }
                         };
 
-                        gitAddPInput.Start();
+                        gitCheckoutPInput.Start();
 
-                        gitAddPInput.StandardInput.WriteLine("y");
-                        gitAddPInput.StandardInput.WriteLine("y");
+                        gitCheckoutPInput.StandardInput.WriteLine("y");
+                        gitCheckoutPInput.StandardInput.WriteLine("y");
 
                         //if (output.Contains("#-#-#"))
                         //{
@@ -759,7 +759,7 @@ namespace CodeGenCLI
                         //gitAddPInput.StandardInput.WriteLine("q");
 
                         // Exit
-                        gitAddPInput.WaitForExit();
+                        gitCheckoutPInput.WaitForExit();
                         //}
 
 
