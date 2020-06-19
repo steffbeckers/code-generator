@@ -777,6 +777,8 @@ namespace CodeGenCLI
                             }
                         }
 
+                        gitCheckoutPInput.WaitForExit();
+
                         //using (StringReader gitDiffForPatchingOutputStringReader = new StringReader(gitDiffForPatchingOutput))
                         //{
                         //    string gitDiffForPatchingOutputLine;
@@ -805,7 +807,6 @@ namespace CodeGenCLI
                         //gitAddPInput.StandardInput.WriteLine("q");
 
                         // Exit
-                        gitCheckoutPInput.WaitForExit();
                         //}
 
 

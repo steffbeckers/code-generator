@@ -10,8 +10,6 @@ using RJM.API.ViewModels.Identity;
 
 namespace RJM.API.Controllers
 {
-    // Test
-
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
