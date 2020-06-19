@@ -11,8 +11,6 @@ using RJM.API.Models;
 
 namespace RJM.API.DAL
 {
-    // Test 3
-
     public class RJMContext : IdentityDbContext<
         User,
         IdentityRole<Guid>,

@@ -8,9 +8,6 @@ using RJM.API.Controllers;
 
 namespace RJM.API.Services
 {
-    // Test 4
-    // #-#-#
-
     // This class is used by the application to send email for account confirmation and password reset.
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713 and https://kenhaggerty.com/articles/article/aspnet-core-22-smtp-emailsender-implementation
 
