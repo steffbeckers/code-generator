@@ -23,6 +23,8 @@ namespace RJM.API.Controllers
         private readonly IMapper mapper;
         private readonly AuthBLL bll;
 
+        // Test 2
+
         /// <summary>
         /// The constructor of the Auth controller.
         /// </summary>
