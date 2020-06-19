@@ -571,129 +571,8 @@ namespace CodeGenCLI
                     gitStatus.WorkingDirectory = Config.WebAPI.ProjectPath;
                     Process.Start(gitStatus).WaitForExit();
 
-
-                    //Console.WriteLine();
-                    //Console.WriteLine("### git diff > code-gen-patching.txt ###");
-
-                    //Process gitDiffOut = new Process
-                    //{
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "git",
-                    //        Arguments = "diff > " + Config.WebAPI.ProjectPath + "code-gen-patching.txt",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        CreateNoWindow = true,
-                    //        UseShellExecute = false
-                    //    }
-                    //};
-
-                    //gitDiffOut.Start();
-                    //gitDiffOut.WaitForExit();
-
-
-                    // CMD test
-                    //Console.WriteLine();
-                    //Console.WriteLine("### cmd => git status ###");
-
-                    //Process cmdGitStatus = new Process
-                    //{
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "cmd",
-                    //        Arguments = "/c git status",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        RedirectStandardOutput = true,
-                    //        RedirectStandardInput = true,
-                    //        CreateNoWindow = true,
-                    //        UseShellExecute = false
-                    //    }
-                    //};
-
-                    //cmdGitStatus.Start();
-
-                    //Console.WriteLine(cmdGitStatus.StandardOutput.ReadToEnd());
-
-                    //cmdGitStatus.WaitForExit();
-
-
                     try
                     {
-                        // THIS WORKS
-                        //bool needsPatching = true;
-                        //while (needsPatching)
-                        //{
-                        //    Console.WriteLine();
-                        //    Console.WriteLine("### git add -p ###");
-
-                        //    Process gitAddPOutput = new Process
-                        //    {
-                        //        StartInfo = new ProcessStartInfo
-                        //        {
-                        //            FileName = "git",
-                        //            Arguments = "add -p",
-                        //            WorkingDirectory = Config.WebAPI.ProjectPath,
-                        //            RedirectStandardOutput = true,
-                        //            RedirectStandardInput = false,
-                        //            CreateNoWindow = true,
-                        //            UseShellExecute = false
-                        //        }
-                        //    };
-
-                        //    // Read output
-                        //    gitAddPOutput.Start();
-                        //    string output = gitAddPOutput.StandardOutput.ReadToEnd();
-                        //    Console.Write(output);
-                        //    gitAddPOutput.WaitForExit();
-
-                        //    // No changes anymore? no patching needed then
-                        //    if (string.IsNullOrEmpty(output))
-                        //    {
-                        //        Console.WriteLine("Done patching custom changes.");
-
-                        //        needsPatching = false;
-                        //        continue;
-                        //    }
-
-                        //    // Supply input, based on output
-                        //    Process gitAddPInput = new Process
-                        //    {
-                        //        StartInfo = new ProcessStartInfo
-                        //        {
-                        //            FileName = "git",
-                        //            Arguments = "add -p",
-                        //            WorkingDirectory = Config.WebAPI.ProjectPath,
-                        //            RedirectStandardOutput = false,
-                        //            RedirectStandardInput = true,
-                        //            CreateNoWindow = true,
-                        //            UseShellExecute = false
-                        //        }
-                        //    };
-
-                        //    gitAddPInput.Start();
-
-                        //    if (output.Contains("#-#-#"))
-                        //    {
-                        //        Console.WriteLine("y");
-                        //        gitAddPInput.StandardInput.WriteLine("y");
-                        //    }
-                        //    else
-                        //    {
-                        //        Console.WriteLine("n");
-                        //        gitAddPInput.StandardInput.WriteLine("n");
-                        //    }
-
-                        //    // Stop following patches
-                        //    gitAddPInput.StandardInput.WriteLine("q");
-
-                        //    // Exit
-                        //    gitAddPInput.WaitForExit();
-                        //}
-
-
-                        //bool needsPatching = true;
-                        //while (needsPatching)
-                        //{
-
                         Console.WriteLine();
                         Console.WriteLine("### git diff ###");
 
@@ -720,522 +599,72 @@ namespace CodeGenCLI
                         if (string.IsNullOrEmpty(gitDiffForPatchingOutput))
                         {
                             Console.WriteLine("No diffs. No patching needed");
-
-                            //needsPatching = false;
-                            //continue;
                         }
-
-                        Console.WriteLine();
-                        Console.WriteLine("### git checkout -p ###");
-
-                        // Supply input, based on output
-                        Process gitCheckoutPInput = new Process
+                        else
                         {
-                            StartInfo = new ProcessStartInfo
+                            Console.WriteLine("Diffs found. Patching for custom @@@ code needed");
+
+                            Console.WriteLine();
+                            Console.WriteLine("### git checkout -p ###");
+
+                            // Supply input, based on output
+                            Process gitCheckoutPInput = new Process
                             {
-                                FileName = "git",
-                                Arguments = "checkout -p",
-                                WorkingDirectory = Config.WebAPI.ProjectPath,
-                                RedirectStandardOutput = false,
-                                RedirectStandardInput = true,
-                                CreateNoWindow = true,
-                                UseShellExecute = false
-                            }
-                        };
-
-                        gitCheckoutPInput.Start();
-
-                        string[] gitDiffForPatchingOutputLines = Regex.Split(gitDiffForPatchingOutput, "\r?\n");
-
-                        Dictionary<long, string> gitDiffForPatchingOutputHunks = new Dictionary<long, string>();
-                        long gitDiffForPatchingOutputLineBlockCounter = 0;
-
-                        foreach (string gitDiffForPatchingOutputLine in gitDiffForPatchingOutputLines)
-                        {
-                            if (gitDiffForPatchingOutputLine.StartsWith("@@"))
-                            {
-                                gitDiffForPatchingOutputLineBlockCounter = gitDiffForPatchingOutputLineBlockCounter + 1;
-                                if (!gitDiffForPatchingOutputHunks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter))
+                                StartInfo = new ProcessStartInfo
                                 {
-                                    gitDiffForPatchingOutputHunks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
+                                    FileName = "git",
+                                    Arguments = "checkout -p",
+                                    WorkingDirectory = Config.WebAPI.ProjectPath,
+                                    RedirectStandardOutput = false,
+                                    RedirectStandardInput = true,
+                                    CreateNoWindow = true,
+                                    UseShellExecute = false
+                                }
+                            };
+
+                            gitCheckoutPInput.Start();
+
+                            string[] gitDiffForPatchingOutputLines = Regex.Split(gitDiffForPatchingOutput, "\r?\n");
+
+                            Dictionary<long, string> gitDiffForPatchingOutputHunks = new Dictionary<long, string>();
+                            long gitDiffForPatchingOutputLineBlockCounter = 0;
+
+                            foreach (string gitDiffForPatchingOutputLine in gitDiffForPatchingOutputLines)
+                            {
+                                if (gitDiffForPatchingOutputLine.StartsWith("@@"))
+                                {
+                                    gitDiffForPatchingOutputLineBlockCounter = gitDiffForPatchingOutputLineBlockCounter + 1;
+                                    if (!gitDiffForPatchingOutputHunks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter))
+                                    {
+                                        gitDiffForPatchingOutputHunks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
+                                    }
+                                }
+                                else if (gitDiffForPatchingOutputHunks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter) &&
+                                         (gitDiffForPatchingOutputLine.StartsWith("+") || gitDiffForPatchingOutputLine.StartsWith("-")))
+                                {
+                                    gitDiffForPatchingOutputHunks[gitDiffForPatchingOutputLineBlockCounter] += gitDiffForPatchingOutputLine;
                                 }
                             }
-                            else if (gitDiffForPatchingOutputHunks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter) &&
-                                     (gitDiffForPatchingOutputLine.StartsWith("+") || gitDiffForPatchingOutputLine.StartsWith("-"))) {
-                                gitDiffForPatchingOutputHunks[gitDiffForPatchingOutputLineBlockCounter] += gitDiffForPatchingOutputLine;
-                            }
-                        }
 
-                        foreach(string hunk in gitDiffForPatchingOutputHunks.Values) {
-                            if (hunk.Contains("@@@"))
+                            foreach (string hunk in gitDiffForPatchingOutputHunks.Values)
                             {
-                                gitCheckoutPInput.StandardInput.WriteLine("y");
+                                if (hunk.Contains("@@@"))
+                                {
+                                    gitCheckoutPInput.StandardInput.WriteLine("y");
+                                }
+                                else
+                                {
+                                    gitCheckoutPInput.StandardInput.WriteLine("n");
+                                }
                             }
-                            else
-                            {
-                                gitCheckoutPInput.StandardInput.WriteLine("n");
-                            }
+
+                            gitCheckoutPInput.WaitForExit();
                         }
-
-                        gitCheckoutPInput.WaitForExit();
-
-                        //using (StringReader gitDiffForPatchingOutputStringReader = new StringReader(gitDiffForPatchingOutput))
-                        //{
-                        //    string gitDiffForPatchingOutputLine;
-                        //    while (!string.IsNullOrEmpty(gitDiffForPatchingOutputLine = gitDiffForPatchingOutputStringReader.ReadLine()))
-                        //    {
-                        //        Console.WriteLine("@@@@: " + gitDiffForPatchingOutputLine);
-                        //    }
-                        //}
-
-                        //gitCheckoutPInput.StandardInput.WriteLine("n");
-                        //gitCheckoutPInput.StandardInput.WriteLine("y");
-                        //gitCheckoutPInput.StandardInput.WriteLine("n");
-
-                        //if (output.Contains("#-#-#"))
-                        //{
-                        //    Console.WriteLine("y");
-                        //    gitAddPInput.StandardInput.WriteLine("y");
-                        //}
-                        //else
-                        //{
-                        //    Console.WriteLine("n");
-                        //    gitAddPInput.StandardInput.WriteLine("n");
-                        //}
-
-                        //// Stop following patches
-                        //gitAddPInput.StandardInput.WriteLine("q");
-
-                        // Exit
-                        //}
-
-
-                        //StreamReader sr = gitCheckoutP.StandardOutput;
-                        //string line = string.Empty;
-                        //string currentHunk = string.Empty;
-
-                        //while (!sr.EndOfStream)
-                        //{
-                        //    char inputChar = (char)sr.Read();
-                        //    line += inputChar;
-
-                        //    if (line.EndsWith("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                        //    {
-                        //        Console.WriteLine(line);
-
-                        //        if (currentHunk.Contains("#-#-#"))
-                        //        {
-                        //            Console.WriteLine("y");
-                        //            gitCheckoutP.StandardInput.WriteLine("y");
-                        //        }
-                        //        else
-                        //        {
-                        //            Console.WriteLine("n");
-                        //            gitCheckoutP.StandardInput.WriteLine("n");
-                        //        }
-                        //    }
-                        //    else if (line.EndsWith(Environment.NewLine))
-                        //    {
-                        //        Console.WriteLine(line);
-
-                        //        currentHunk += line;
-
-                        //        line = string.Empty;
-                        //    }
-                        //}
-
-                        //sr.Close();
-
-                        //gitCheckoutP.WaitForExit();
                     }
                     catch (Exception ex)
                     {
                         throw;
                     }
-
-
-                    //Console.WriteLine();
-                    //Console.WriteLine("### git checkout -p ###");
-
-                    //using (Process gitCheckoutP = new Process
-                    //{
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "git",
-                    //        Arguments = "checkout -p",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        RedirectStandardOutput = true,
-                    //        RedirectStandardInput = true,
-                    //        CreateNoWindow = true,
-                    //        UseShellExecute = false
-                    //    }
-                    //})
-                    //{
-                    //    gitCheckoutP.Start();
-
-                    //    ReadGitCheckoutPOutput(gitCheckoutP.StandardOutput);
-
-                    //    while (!done)
-                    //    {
-                    //        Task.Run(() =>
-                    //        {
-                    //            Task.Delay(50);
-
-                    //            if (writeYes)
-                    //            {
-                    //                gitCheckoutP.StandardInput.WriteLine("y");
-                    //                writeYes = false;
-                    //            }
-                    //            else if (writeNo)
-                    //            {
-                    //                gitCheckoutP.StandardInput.WriteLine("n");
-                    //                writeNo = false;
-                    //            }
-                    //        }).Wait();
-                    //    }
-                    //}
-
-                    //using (Process gitCheckoutP = new Process {
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "git",
-                    //        //Arguments = "checkout -p",
-                    //        Arguments = "log",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        RedirectStandardOutput = true,
-                    //        RedirectStandardError = true,
-                    //        RedirectStandardInput = true,
-                    //        CreateNoWindow = true,
-                    //        UseShellExecute = false
-                    //    }
-                    //})
-                    //{
-                    //    StringBuilder output = new StringBuilder();
-                    //    StringBuilder error = new StringBuilder();
-
-                    //    using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
-                    //    using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
-                    //    {
-                    //        gitCheckoutP.OutputDataReceived += (object sender, DataReceivedEventArgs e) => {
-                    //            if (e.Data == null)
-                    //            {
-                    //                outputWaitHandle.Set();
-                    //            }
-                    //            else
-                    //            {
-                    //                Console.WriteLine("OutputDataReceived: " + e.Data);
-                    //                output.AppendLine(e.Data);
-                    //            }
-                    //        };
-                    //        gitCheckoutP.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
-                    //        {
-                    //            if (e.Data == null)
-                    //            {
-                    //                errorWaitHandle.Set();
-                    //            }
-                    //            else
-                    //            {
-                    //                Console.WriteLine("ErrorDataReceived: " + e.Data);
-                    //                error.AppendLine(e.Data);
-                    //            }
-                    //        };
-
-                    //        gitCheckoutP.Start();
-
-                    //        gitCheckoutP.BeginOutputReadLine();
-                    //        gitCheckoutP.BeginErrorReadLine();
-
-                    //        gitCheckoutP.WaitForExit();
-
-                    //        //if (gitCheckoutP.WaitForExit(20000) &&
-                    //        //    outputWaitHandle.WaitOne(20000) &&
-                    //        //    errorWaitHandle.WaitOne(20000))
-                    //        //{
-                    //        //    // Process completed. Check process.ExitCode here.
-                    //        //    Console.WriteLine("Process completed. ExitCode: " + gitCheckoutP.ExitCode);
-                    //        //    Console.WriteLine("Output:");
-                    //        //    Console.WriteLine(output);
-                    //        //}
-                    //        //else
-                    //        //{
-                    //        //    // Timed out.
-                    //        //    Console.WriteLine("Timed out.");
-                    //        //}
-                    //    }
-                    //}
-
-
-                    //Console.WriteLine();
-                    //Console.WriteLine("### git log ###");
-
-                    //Command gitLogCommand = Command.Run("git", "log");
-                    //ICollection<string> gitLogCommandLines = new List<string>();
-                    //gitLogCommand.StandardOutput.PipeToAsync(gitLogCommandLines);
-                    //gitLogCommand.Wait();
-                    //CommandResult gitLogCommandResult = gitLogCommand.Result;
-
-
-                    //Console.WriteLine();
-                    //Console.WriteLine("### git checkout -p ###");
-
-                    //Command gitCheckoutPCommand = Command.Run("git", "checkout", "-p");
-                    //ICollection<string> gitCheckoutPCommandLines = new List<string>();
-                    //gitCheckoutPCommand.StandardOutput.PipeToAsync(gitCheckoutPCommandLines);
-                    //gitCheckoutPCommand.Wait();
-                    //CommandResult gitCheckoutPCommandResult = gitCheckoutPCommand.Result;
-
-
-                    //Process gitCheckoutP = new Process
-                    //{
-                    //    StartInfo = new ProcessStartInfo
-                    //    {
-                    //        FileName = "cmd",
-                    //        Arguments = "/c git checkout -p",
-                    //        WorkingDirectory = Config.WebAPI.ProjectPath,
-                    //        RedirectStandardOutput = true,
-                    //        RedirectStandardInput = false,
-                    //        CreateNoWindow = true,
-                    //        UseShellExecute = false
-                    //    }
-                    //};
-
-                    //gitCheckoutP.Start();
-
-                    //string line;
-                    //string currentHunk = string.Empty;
-
-                    //while (gitCheckoutP.StandardOutput.Peek() > -1)
-                    //{
-                    //    line = gitCheckoutP.StandardOutput.ReadLine();
-
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                    //    {
-                    //        if (currentHunk.Contains("#-#-#"))
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("y");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //        else
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("n");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        currentHunk += line + Environment.NewLine;
-                    //    }
-                    //}
-
-                    //gitCheckoutP.WaitForExit();
-
-                    // CASE 1
-
-                    //gitCheckoutP.Start();
-
-                    //string line;
-                    //string currentHunk = string.Empty;
-
-                    //while ((line = gitCheckoutP.StandardOutput.ReadLine()) != null)
-                    //{
-                    //    Console.WriteLine(line);
-
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                    //    {
-                    //        if (currentHunk.Contains("#-#-#"))
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("y");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //        else
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("n");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        currentHunk += line + Environment.NewLine;
-                    //    }
-                    //}
-
-                    //gitCheckoutP.WaitForExit();
-
-                    // CASE 1
-
-                    // CASE 2
-
-                    //gitCheckoutP.Start();
-
-                    //string line;
-                    //string currentHunk = string.Empty;
-
-                    //while (gitCheckoutP.StandardOutput.Peek() > -1)
-                    //{
-                    //    line = gitCheckoutP.StandardOutput.ReadLine();
-
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                    //    {
-                    //        if (currentHunk.Contains("#-#-#"))
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("y");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //        else
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("n");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        currentHunk += line + Environment.NewLine;
-                    //    }
-                    //}
-
-                    //gitCheckoutP.WaitForExit();
-
-                    // CASE 2
-
-                    //bool watchingOutput = true;
-                    //string currentHunk = string.Empty;
-                    //bool undoHunk = false;
-                    //bool acceptHunk = false;
-
-                    //var outputTask = Task.Run(() =>
-                    //{
-                    //    while (gitCheckoutP.StandardOutput.Peek() > -1)
-                    //    {
-                    //        Thread.Sleep(200);
-
-                    //        string line = gitCheckoutP.StandardOutput.ReadLine();
-
-                    //        if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                    //        {
-                    //            if (currentHunk.Contains("#-#-#"))
-                    //            {
-                    //                undoHunk = true;
-                    //                currentHunk = string.Empty;
-                    //            }
-                    //            else
-                    //            {
-                    //                acceptHunk = true;
-                    //                currentHunk = string.Empty;
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            currentHunk += line + Environment.NewLine;
-                    //        }
-                    //    }
-
-                    //    watchingOutput = false;
-                    //});
-
-                    //var inputTask = Task.Run(() =>
-                    //{
-                    //    while (watchingOutput)
-                    //    {
-                    //        Thread.Sleep(50);
-
-                    //        if (undoHunk)
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("y");
-                    //            undoHunk = false;
-                    //        }
-                    //        if (acceptHunk)
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("n");
-                    //            acceptHunk = false;
-                    //        }
-                    //    }
-                    //});
-
-                    //Task.WaitAll(outputTask, inputTask);
-
-                    //gitCheckoutP.WaitForExit();
-
-
-                    //string line;
-                    //string currentHunk = string.Empty;
-
-                    //while ((line = gitCheckoutP.StandardOutput.ReadLine()) != null)
-                    //{
-                    //    Console.WriteLine(line);
-
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                    //    {
-                    //        if (currentHunk.Contains("#-#-#"))
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("y");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //        else
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("n");
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        currentHunk += line + Environment.NewLine;
-                    //    }
-                    //}
-
-
-                    //string output = gitCheckoutP.StandardOutput.ReadToEnd();
-
-                    //bool watchingOutput = true;
-                    //string currentHunk = string.Empty;
-                    //bool undoHunk = false;
-                    //bool acceptHunk = false;
-
-                    //new Thread(() =>
-                    //{
-                    //    while (watchingOutput)
-                    //    {
-                    //        Thread.Sleep(100);
-
-                    //        if (undoHunk)
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("y");
-                    //            undoHunk = false;
-                    //        }
-                    //        if (acceptHunk)
-                    //        {
-                    //            gitCheckoutP.StandardInput.WriteLine("n");
-                    //            acceptHunk = false;
-                    //        }
-                    //    }
-                    //}).Start();
-
-                    //while (gitCheckoutP.StandardOutput.Peek() > -1)
-                    //{
-                    //    Thread.Sleep(200);
-
-                    //    string line = gitCheckoutP.StandardOutput.ReadLine();
-
-                    //    if (line.Equals("Discard this hunk from worktree [y,n,q,a,d,j,J,g,/,e,?]? "))
-                    //    {
-                    //        if (currentHunk.Contains("#-#-#"))
-                    //        {
-                    //            undoHunk = true;
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //        else
-                    //        {
-                    //            acceptHunk = true;
-                    //            currentHunk = string.Empty;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        currentHunk += line + Environment.NewLine;
-                    //    }
-                    //}
-
-                    //watchingOutput = false;
-                    //gitCheckoutP.WaitForExit();
 
                     #endregion;
 
