@@ -16,7 +16,8 @@ namespace RJM.API.GraphQL
 			SkillRepository skillRepository,
 			SkillAliasRepository skillAliasRepository,
 			JobRepository jobRepository,
-			JobStateRepository jobStateRepository
+			JobStateRepository jobStateRepository,
+			SettingRepository settingRepository
         )
         {
             this.AuthorizeWith("Authorized");
@@ -269,6 +270,42 @@ namespace RJM.API.GraphQL
             //    {
             //        return await context.TryAsyncResolve(
             //            async c => await jobStateRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
+            //        );
+            //    }
+            //);
+
+			// Settings
+            
+            Field<ListGraphType<SettingType>>(
+                "settings",
+                resolve: context => settingRepository.Get(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            );
+
+            //// Async test
+            //FieldAsync<ListGraphType<SettingType>>(
+            //    "settings",
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await settingRepository.GetAsync(null, x => x.OrderByDescending(x => x.ModifiedOn))
+            //        );
+            //    }
+            //);
+
+            Field<SettingType>(
+                "setting",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+                resolve: context => settingRepository.GetById(context.GetArgument<Guid>("id"))
+            );
+
+            //// Async test
+            //FieldAsync<SettingType>(
+            //    "setting",
+            //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }),
+            //    resolve: async context =>
+            //    {
+            //        return await context.TryAsyncResolve(
+            //            async c => await settingRepository.GetByIdAsync(context.GetArgument<Guid>("id"))
             //        );
             //    }
             //);

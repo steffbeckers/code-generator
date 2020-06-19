@@ -192,3 +192,21 @@ mutation createJobSkill($jobSkill: jobSkillInput!) {
 }
 
 
+// Settings
+
+mutation createSetting($setting: settingInput!) {
+  createSetting(setting: $setting) {
+    id
+    key
+    value
+  }
+}
+
+{
+  "setting": {
+    "key": "",
+    "value": ""
+  }
+}
+
+

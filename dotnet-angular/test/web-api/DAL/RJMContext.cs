@@ -44,6 +44,7 @@ namespace RJM.API.DAL
 		public DbSet<Job> Jobs { get; set; }
 		public DbSet<JobState> JobStates { get; set; }
 		public DbSet<JobSkill> JobSkill { get; set; }
+		public DbSet<Setting> Settings { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -364,6 +365,33 @@ namespace RJM.API.DAL
                 .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
+
+			#region Settings
+
+            // Soft delete query filter
+            modelBuilder.Entity<Setting>().HasQueryFilter(e => e.DeletedOn == null);
+
+            // Table
+			modelBuilder.Entity<Setting>().ToTable("Settings");
+
+			// Key
+			modelBuilder.Entity<Setting>().HasKey(e => e.Id);
+
+            // Required properties
+            modelBuilder.Entity<Setting>().Property(e => e.Key).IsRequired();
+
+            // User
+            modelBuilder.Entity<Setting>()
+                .HasOne(x => x.CreatedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Setting>()
+                .HasOne(x => x.ModifiedByUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            #endregion
 		}
 
 		public override int SaveChanges()
@@ -399,7 +427,8 @@ namespace RJM.API.DAL
 					entry.Entity.GetType() == typeof(ResumeSkill) ||
 					entry.Entity.GetType() == typeof(Job) ||
 					entry.Entity.GetType() == typeof(JobState) ||
-					entry.Entity.GetType() == typeof(JobSkill)
+					entry.Entity.GetType() == typeof(JobSkill) ||
+					entry.Entity.GetType() == typeof(Setting)
 				)
                 {
                     switch (entry.State)
@@ -431,7 +460,8 @@ namespace RJM.API.DAL
 					entry.Entity.GetType() == typeof(ResumeSkill) ||
 					entry.Entity.GetType() == typeof(Job) ||
 					entry.Entity.GetType() == typeof(JobState) ||
-					entry.Entity.GetType() == typeof(JobSkill)
+					entry.Entity.GetType() == typeof(JobSkill) ||
+					entry.Entity.GetType() == typeof(Setting)
 				)
                 {
                     switch (entry.State)
@@ -468,7 +498,8 @@ namespace RJM.API.DAL
 					    entry.Entity.GetType() == typeof(ResumeSkill) ||
 					    entry.Entity.GetType() == typeof(Job) ||
 					    entry.Entity.GetType() == typeof(JobState) ||
-					    entry.Entity.GetType() == typeof(JobSkill)
+					    entry.Entity.GetType() == typeof(JobSkill) ||
+					    entry.Entity.GetType() == typeof(Setting)
                     )
                     {
                         switch (entry.State)

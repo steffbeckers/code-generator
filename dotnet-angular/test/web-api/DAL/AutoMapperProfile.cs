@@ -178,6 +178,7 @@ namespace RJM.API.DAL
 
             // JobStates
 
+            // Settings
             // Users
 			CreateMap<User, UserVM>();
             CreateMap<UserVM, User>();

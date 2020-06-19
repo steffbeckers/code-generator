@@ -16,7 +16,8 @@ namespace RJM.API.GraphQL
 			SkillBLL skillBLL,
 			SkillAliasBLL skillAliasBLL,
 			JobBLL jobBLL,
-			JobStateBLL jobStateBLL
+			JobStateBLL jobStateBLL,
+			SettingBLL settingBLL
         )
         {
             this.AuthorizeWith("Authorized");
@@ -653,6 +654,66 @@ namespace RJM.API.GraphQL
 
                     return await context.TryAsyncResolve(
                         async c => await jobStateBLL.DeleteJobStateByIdAsync(id)
+                    );
+                }
+            );
+
+			// Settings
+            FieldAsync<SettingType>(
+                "createSetting",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<SettingInputType>>
+                    {
+                        Name = "setting"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Setting setting = context.GetArgument<Setting>("setting");
+
+                    return await context.TryAsyncResolve(
+                        async c => await settingBLL.CreateSettingAsync(setting)
+                    );
+                }
+            );
+
+            FieldAsync<SettingType>(
+                "updateSetting",
+                arguments: new QueryArguments(
+                    //new QueryArgument<NonNullGraphType<IdGraphType>>
+                    //{
+                    //    Name = "id"
+                    //},
+                    new QueryArgument<NonNullGraphType<SettingInputType>>
+                    {
+                        Name = "setting"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    //Guid id = context.GetArgument<Guid>("id");
+                    Setting setting = context.GetArgument<Setting>("setting");
+
+                    return await context.TryAsyncResolve(
+                        async c => await settingBLL.UpdateSettingAsync(setting)
+                    );
+                }
+            );
+
+            FieldAsync<SettingType>(
+                "removeSetting",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    {
+                        Name = "id"
+                    }
+                ),
+                resolve: async context =>
+                {
+                    Guid id = context.GetArgument<Guid>("id");
+
+                    return await context.TryAsyncResolve(
+                        async c => await settingBLL.DeleteSettingByIdAsync(id)
                     );
                 }
             );
