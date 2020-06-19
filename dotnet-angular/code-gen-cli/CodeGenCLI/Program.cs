@@ -745,9 +745,15 @@ namespace CodeGenCLI
 
                         gitCheckoutPInput.Start();
 
-                        gitCheckoutPInput.StandardInput.WriteLine("n");
-                        gitCheckoutPInput.StandardInput.WriteLine("y");
-                        gitCheckoutPInput.StandardInput.WriteLine("n");
+                        foreach (string gitDiffForPatchingOutputLine in gitDiffForPatchingOutput.Split(Environment.NewLine))
+                        {
+                            Console.WriteLine(gitDiffForPatchingOutputLine);
+                            Console.WriteLine();
+                        }
+
+                        //gitCheckoutPInput.StandardInput.WriteLine("n");
+                        //gitCheckoutPInput.StandardInput.WriteLine("y");
+                        //gitCheckoutPInput.StandardInput.WriteLine("n");
 
                         //if (output.Contains("#-#-#"))
                         //{
