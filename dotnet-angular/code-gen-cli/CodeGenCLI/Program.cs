@@ -760,7 +760,7 @@ namespace CodeGenCLI
                                     gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
                                 }
                             }
-                            else if (gitDiffForPatchingOutputLineBlockCounter > 0 &&
+                            else if (gitDiffForPatchingOutputLineBlocks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter) &&
                                      gitDiffForPatchingOutputLine.StartsWith("+") ||
                                      gitDiffForPatchingOutputLine.StartsWith("-")) {
                                 gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] += gitDiffForPatchingOutputLine;
