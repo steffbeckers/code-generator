@@ -748,7 +748,7 @@ namespace CodeGenCLI
                         using (StringReader gitDiffForPatchingOutputStringReader = new StringReader(gitDiffForPatchingOutput))
                         {
                             string gitDiffForPatchingOutputLine;
-                            while (!string.IsNullOrEmpty(gitDiffForPatchingOutputLine = gitDiffForPatchingOutputStringReader.ReadLine())
+                            while (!string.IsNullOrEmpty(gitDiffForPatchingOutputLine = gitDiffForPatchingOutputStringReader.ReadLine()))
                             {
                                 Console.WriteLine("@@@@: " + gitDiffForPatchingOutputLine);
                             }
