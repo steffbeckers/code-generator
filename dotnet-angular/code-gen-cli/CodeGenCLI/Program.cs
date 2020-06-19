@@ -745,9 +745,9 @@ namespace CodeGenCLI
 
                         gitCheckoutPInput.Start();
 
-                        gitCheckoutPInput.StandardInput.WriteLine("y");
                         gitCheckoutPInput.StandardInput.WriteLine("n");
                         gitCheckoutPInput.StandardInput.WriteLine("y");
+                        gitCheckoutPInput.StandardInput.WriteLine("n");
 
                         //if (output.Contains("#-#-#"))
                         //{
