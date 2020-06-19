@@ -754,7 +754,7 @@ namespace CodeGenCLI
                         {
                             if (gitDiffForPatchingOutputLine.StartsWith("@@"))
                             {
-                                gitDiffForPatchingOutputLineBlockCounter++;
+                                gitDiffForPatchingOutputLineBlockCounter = gitDiffForPatchingOutputLineBlockCounter + 1;
                                 if (!gitDiffForPatchingOutputLineBlocks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter))
                                 {
                                     gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
