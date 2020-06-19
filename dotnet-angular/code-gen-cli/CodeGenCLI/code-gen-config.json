@@ -333,21 +333,21 @@
           "Model": "Skill"
         }
       ]
-    },
-    {
-      "Name": "Setting",
-      "Properties": [
-        {
-          "Name": "Key",
-          "Type": "string",
-          "Required": true
-        },
-        {
-          "Name": "Value",
-          "Type": "string"
-        }
-      ]
-    },
+    }//,
+    //{
+    //  "Name": "Setting",
+    //  "Properties": [
+    //    {
+    //      "Name": "Key",
+    //      "Type": "string",
+    //      "Required": true
+    //    },
+    //    {
+    //      "Name": "Value",
+    //      "Type": "string"
+    //    }
+    //  ]
+    //},
     //{
     //  "Name": "Product",
     //  "Properties": [
