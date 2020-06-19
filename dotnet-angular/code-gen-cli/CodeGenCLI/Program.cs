@@ -746,10 +746,28 @@ namespace CodeGenCLI
                         gitCheckoutPInput.Start();
 
                         string[] gitDiffForPatchingOutputLines = Regex.Split(gitDiffForPatchingOutput, "\r?\n");
+
+                        Dictionary<long, string> gitDiffForPatchingOutputLineBlocks = new Dictionary<long, string>();
+                        long gitDiffForPatchingOutputLineBlockCounter = 0;
+
                         foreach (string gitDiffForPatchingOutputLine in gitDiffForPatchingOutputLines)
                         {
-                            Console.WriteLine("@@@@:" + gitDiffForPatchingOutputLine);
+                            if (gitDiffForPatchingOutputLine.StartsWith("@@"))
+                            {
+                                gitDiffForPatchingOutputLineBlockCounter++;
+                                if (!gitDiffForPatchingOutputLineBlocks.ContainsKey(gitDiffForPatchingOutputLineBlockCounter))
+                                {
+                                    gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] = string.Empty;
+                                }
+                            }
+                            else if (gitDiffForPatchingOutputLineBlockCounter > 0 &&
+                                     gitDiffForPatchingOutputLine.StartsWith("+") ||
+                                     gitDiffForPatchingOutputLine.StartsWith("-")) {
+                                gitDiffForPatchingOutputLineBlocks[gitDiffForPatchingOutputLineBlockCounter] += gitDiffForPatchingOutputLine;
+                            }
                         }
+
+                        Console.WriteLine("Done with blocks");
 
                         //using (StringReader gitDiffForPatchingOutputStringReader = new StringReader(gitDiffForPatchingOutput))
                         //{
