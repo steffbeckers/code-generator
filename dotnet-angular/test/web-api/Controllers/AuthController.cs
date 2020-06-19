@@ -20,9 +20,6 @@ namespace RJM.API.Controllers
         private readonly IMapper mapper;
         private readonly AuthBLL bll;
 
-        // @@@
-        // Test 2
-
         /// <summary>
         /// The constructor of the Auth controller.
         /// </summary>
@@ -38,9 +35,6 @@ namespace RJM.API.Controllers
             this.mapper = mapper;
             this.bll = bll;
         }
-
-        // Test 3 
-        ////////@@@
 
         [HttpPost]
         [Route("login")]
