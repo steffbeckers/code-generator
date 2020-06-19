@@ -748,8 +748,7 @@ namespace CodeGenCLI
                         string[] gitDiffForPatchingOutputLines = gitDiffForPatchingOutput.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
                         foreach (string gitDiffForPatchingOutputLine in gitDiffForPatchingOutputLines)
                         {
-                            Console.WriteLine(gitDiffForPatchingOutputLine);
-                            Console.WriteLine();
+                            Console.WriteLine("@@@@@:" + gitDiffForPatchingOutputLine);
                         }
 
                         //gitCheckoutPInput.StandardInput.WriteLine("n");
