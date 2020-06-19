@@ -622,16 +622,14 @@ namespace CodeGenCLI
                         while (needsPatching)
                         {
                             Console.WriteLine();
-                            Console.WriteLine("### git checkout -p ###");
+                            Console.WriteLine("### git add -p ###");
 
-                            Process gitCheckoutPOutput = new Process
+                            Process gitAddPOutput = new Process
                             {
                                 StartInfo = new ProcessStartInfo
                                 {
                                     FileName = "git",
-                                    Arguments = "checkout -p",
-                                    //FileName = "cmd",
-                                    //Arguments = "/c git checkout -p",
+                                    Arguments = "add -p",
                                     WorkingDirectory = Config.WebAPI.ProjectPath,
                                     RedirectStandardOutput = true,
                                     RedirectStandardInput = false,
@@ -641,10 +639,10 @@ namespace CodeGenCLI
                             };
 
                             // Read output
-                            gitCheckoutPOutput.Start();
-                            string output = gitCheckoutPOutput.StandardOutput.ReadToEnd();
+                            gitAddPOutput.Start();
+                            string output = gitAddPOutput.StandardOutput.ReadToEnd();
                             Console.Write(output);
-                            gitCheckoutPOutput.WaitForExit();
+                            gitAddPOutput.WaitForExit();
 
                             // No changes anymore? no patching needed then
                             if (string.IsNullOrEmpty(output))
@@ -656,14 +654,12 @@ namespace CodeGenCLI
                             }
 
                             // Supply input, based on output
-                            Process gitCheckoutPInput = new Process
+                            Process gitAddPInput = new Process
                             {
                                 StartInfo = new ProcessStartInfo
                                 {
                                     FileName = "git",
-                                    Arguments = "checkout -p",
-                                    //FileName = "cmd",
-                                    //Arguments = "/c git checkout -p",
+                                    Arguments = "add -p",
                                     WorkingDirectory = Config.WebAPI.ProjectPath,
                                     RedirectStandardOutput = false,
                                     RedirectStandardInput = true,
@@ -672,24 +668,24 @@ namespace CodeGenCLI
                                 }
                             };
 
-                            gitCheckoutPInput.Start();
+                            gitAddPInput.Start();
 
                             if (output.Contains("#-#-#"))
                             {
                                 Console.WriteLine("y");
-                                gitCheckoutPInput.StandardInput.WriteLine("y");
+                                gitAddPInput.StandardInput.WriteLine("y");
                             }
                             else
                             {
                                 Console.WriteLine("n");
-                                gitCheckoutPInput.StandardInput.WriteLine("n");
+                                gitAddPInput.StandardInput.WriteLine("n");
                             }
 
                             // Stop following patches
-                            gitCheckoutPInput.StandardInput.WriteLine("q");
+                            gitAddPInput.StandardInput.WriteLine("q");
 
                             // Exit
-                            gitCheckoutPInput.WaitForExit();
+                            gitAddPInput.WaitForExit();
                         }
 
 
