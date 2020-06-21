@@ -834,7 +834,7 @@
   "Authentication": {
     "Enabled": true,
     "Secret": "ecd81ddc42741f570d02de8521f4e3326868a2233b2ff0c6589f5d7c26fb49a7",
-    "TokenExpiresInMinutes": "1440",
+    "TokenExpiresInMinutes": 1440,
     "EmailConfirmation": true,
     "ConfirmEmailURL": "https://resume-job-matcher.steffbeckers.eu/api/auth/confirm-email?id={{userId}}&email={{userEmail}}&code={{code}}",
     "ResetPasswordURL": "https://resume-job-matcher.steffbeckers.eu/auth/reset-password?id={{userId}}&email={{userEmail}}&code={{code}}",
@@ -848,8 +848,8 @@
     "OtherRoles": [ "Candidate", "Recruitment", "HR", "Sales", "CEO" ]
   },
   "WebAPI": {
-    "ProjectPath": "C:\\dev\\steffbeckers\\code-generator\\dotnet-angular\\test\\web-api",
-    "DatabaseConnection": "Server=localhost;Database=ResumeJobMatcher;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "ProjectPath": "C:\\dev\\steffbeckers\\cv-matching\\back-end\\RJM.API",
+    "DatabaseConnection": "Server=mssql-mssql-linux.mssql.svc.cluster.local;Database=ResumeJobMatcher;User ID=resume-job-matcher;Password=7xgT3wtDNCPNCtvofQYe;MultipleActiveResultSets=true",
     "NamespaceRoot": "RJM.API",
     "EmailService": {
       "Enabled": true,

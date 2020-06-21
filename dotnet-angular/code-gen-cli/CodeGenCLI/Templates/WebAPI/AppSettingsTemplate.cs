@@ -57,14 +57,14 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
-            this.Write("\",\r\n    \"TokenExpiresInMinutes\": \"");
+            this.Write("\",\r\n    \"TokenExpiresInMinutes\": ");
             
             #line 14 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.TokenExpiresInMinutes));
             
             #line default
             #line hidden
-            this.Write("\",\r\n    \"EmailConfirmation\": ");
+            this.Write(",\r\n    \"EmailConfirmation\": ");
             
             #line 15 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.Authentication.EmailConfirmation.ToString().ToLower()));

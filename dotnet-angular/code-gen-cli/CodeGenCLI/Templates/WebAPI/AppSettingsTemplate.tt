@@ -11,7 +11,7 @@
 <# if (config.Authentication.Enabled) { #>
   "Authentication": {
     "Secret": "<#= config.Authentication.Secret #>",
-    "TokenExpiresInMinutes": "<#= config.Authentication.TokenExpiresInMinutes #>",
+    "TokenExpiresInMinutes": <#= config.Authentication.TokenExpiresInMinutes #>,
     "EmailConfirmation": <#= config.Authentication.EmailConfirmation.ToString().ToLower() #>,
     "ConfirmEmailURL": "<#= config.Authentication.ConfirmEmailURL #>",
     "ResetPasswordURL": "<#= config.Authentication.ResetPasswordURL #>",
