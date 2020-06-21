@@ -222,7 +222,7 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AuthBLLTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\WebAPI\DAL\AutoMapperProfileTemplate.tt">
+    <None Update="Templates\WebAPI\Mappers\AutoMapperProfileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AutoMapperProfileTemplate.cs</LastGenOutput>
     </None>
@@ -468,7 +468,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ControllerTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\WebAPI\DAL\AutoMapperProfileTemplate.cs">
+    <Compile Update="Templates\WebAPI\Mappers\AutoMapperProfileTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AutoMapperProfileTemplate.tt</DependentUpon>

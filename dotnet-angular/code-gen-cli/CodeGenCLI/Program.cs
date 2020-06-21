@@ -27,12 +27,6 @@ namespace CodeGenCLI
         static CodeGenConfig Config { get; set; }
         static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
 
-        // git checkout -p
-        static string currentHunk = string.Empty;
-        static bool writeYes = false;
-        static bool writeNo = false;
-        static bool done = false;
-
         static void Main(string[] args)
         {
             Console.WriteLine("### CodeGenCLI - " + DateTime.Now.ToString("s", CultureInfo.InvariantCulture) + " ###");
@@ -239,6 +233,14 @@ namespace CodeGenCLI
                         Console.WriteLine(Config.WebAPI.ModelsPath);
                     }
 
+                    // Mappers
+                    Config.WebAPI.MappersPath = !string.IsNullOrEmpty(Config.WebAPI.MappersPath) ? Config.WebAPI.MappersPath : "Mappers";
+                    if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.MappersPath))
+                    {
+                        Directory.CreateDirectory(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.MappersPath);
+                        Console.WriteLine(Config.WebAPI.MappersPath);
+                    }
+
                     // DAL
                     Config.WebAPI.DALPath = !string.IsNullOrEmpty(Config.WebAPI.DALPath) ? Config.WebAPI.DALPath : "DAL";
                     if (!Directory.Exists(Config.WebAPI.ProjectPath + "\\" + Config.WebAPI.DALPath))
@@ -379,14 +381,6 @@ namespace CodeGenCLI
                         Console.WriteLine(dalDbContextPath);
                     }
 
-                    // AutoMapper
-                    string dalAutoMapperPath = Config.WebAPI.DALPath + "\\AutoMapperProfile.cs";
-                    if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + dalAutoMapperPath) || Config.Override)
-                    {
-                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + dalAutoMapperPath, new WebAPITemplates.DAL.AutoMapperProfileTemplate(Config).TransformText());
-                        Console.WriteLine(dalAutoMapperPath);
-                    }
-
                     // Repositories
                     foreach (CodeGenModel codeGenModel in Config.Models)
                     {
@@ -396,6 +390,18 @@ namespace CodeGenCLI
                             File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + repositoryPath, new WebAPITemplates.DAL.Repositories.RepositoryTemplate(Config, codeGenModel).TransformText());
                             Console.WriteLine(repositoryPath);
                         }
+                    }
+
+                    #endregion
+
+                    #region Mappers
+
+                    // AutoMapper
+                    string mappersAutoMapperPath = Config.WebAPI.MappersPath + "\\AutoMapperProfile.cs";
+                    if (!File.Exists(Config.WebAPI.ProjectPath + "\\" + mappersAutoMapperPath) || Config.Override)
+                    {
+                        File.WriteAllText(Config.WebAPI.ProjectPath + "\\" + mappersAutoMapperPath, new WebAPITemplates.Mappers.AutoMapperProfileTemplate(Config).TransformText());
+                        Console.WriteLine(mappersAutoMapperPath);
                     }
 
                     #endregion

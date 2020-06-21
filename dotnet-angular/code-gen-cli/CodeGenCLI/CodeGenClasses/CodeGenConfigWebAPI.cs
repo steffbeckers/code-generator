@@ -15,6 +15,7 @@ namespace CodeGenCLI.CodeGenClasses
         public string FrameworkPath { get; set; }
         public string ModelsPath { get; set; }
         public string ViewModelsPath { get; set; }
+        public string MappersPath { get; set; }
         public string DALPath { get; set; }
         public string BLLPath { get; set; }
         public string ControllersPath { get; set; }
