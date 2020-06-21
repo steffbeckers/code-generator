@@ -127,64 +127,99 @@ namespace CodeGenCLI.Templates.WebAPI
             
             #line default
             #line hidden
+            this.Write(@"  ""AWS"": {
+    ""Profile"": ""default"",
+    ""Region"": ""eu-west-2"",
+    ""S3"": {
+      ""Bucket"": {
+        ""Name"": ""resume-job-matcher"",
+        ""DocumentsPath"": ""documents""
+      }
+    }
+  },
+  ""FileService"": {
+    ""Location"": ""AWSS3"",
+    ""MaxFileSizeInBytes"": 52428800
+  },
+  ""RabbitMQService"": {
+    ""UserName"": ""rjm"",
+    ""Password"": ""VImuRPJWNe3umk3leUwo"",
+    ""HostName"": ""rabbitmq.rabbitmq.svc.cluster.local"",
+    ""VirtualHost"": ""/"",
+    ""Port"": 5672,
+    ""Suffix"": """"
+  },
+");
             
-            #line 27 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 49 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
  if (config.WebAPI.EmailService.Enabled) { 
             
             #line default
             #line hidden
             this.Write("  \"EmailService\": {\r\n    \"MailServer\": \"");
             
-            #line 29 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailServer));
             
             #line default
             #line hidden
             this.Write("\",\r\n    \"MailPort\": ");
             
-            #line 30 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 52 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.MailPort));
             
             #line default
             #line hidden
             this.Write(",\r\n    \"UseSSL\": ");
             
-            #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 53 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.UseSSL.ToString().ToLower()));
             
             #line default
             #line hidden
             this.Write(",\r\n    \"SenderName\": \"");
             
-            #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 54 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.SenderName));
             
             #line default
             #line hidden
             this.Write("\",\r\n    \"Sender\": \"");
             
-            #line 33 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Sender));
             
             #line default
             #line hidden
             this.Write("\",\r\n    \"Password\": \"");
             
-            #line 34 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 56 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(config.WebAPI.EmailService.Password));
             
             #line default
             #line hidden
             this.Write("\"\r\n  },\r\n");
             
-            #line 36 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
+            #line 58 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\AppSettingsTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("  \"Logging\": {\r\n    \"LogLevel\": {\r\n      \"Default\": \"Information\",\r\n      \"Micros" +
-                    "oft\": \"Warning\",\r\n      \"Microsoft.Hosting.Lifetime\": \"Information\"\r\n    }\r\n  }," +
-                    "\r\n  \"AllowedHosts\": \"*\"\r\n}\r\n");
+            this.Write(@"  ""Logging"": {
+    ""LogLevel"": {
+      ""Default"": ""Information"",
+      ""Microsoft"": ""Warning"",
+      ""Microsoft.Hosting.Lifetime"": ""Information""
+    }
+  },
+  ""ElasticApm"": {
+    ""LogLevel"": ""Information"",
+    ""ServerUrls"": ""http://apm-server.elastic.svc.cluster.local:8200"",
+    ""TransactionSampleRate"": 1.0
+  },
+  ""AllowedHosts"": ""*""
+}
+");
             return this.GenerationEnvironment.ToString();
         }
     }

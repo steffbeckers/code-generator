@@ -842,7 +842,7 @@
       "FirstName": "Steff",
       "LastName": "Beckers",
       "UserName": "steff",
-      "Email": "admin@steffbeckers.eu",
+      "Email": "steff@steffbeckers.eu",
       "Password": "Steff12345!"
     },
     "OtherRoles": [ "Candidate", "Recruitment", "HR", "Sales", "CEO" ]

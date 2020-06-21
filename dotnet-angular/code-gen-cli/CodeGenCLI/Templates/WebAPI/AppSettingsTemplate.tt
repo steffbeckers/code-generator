@@ -24,6 +24,28 @@
     }
   },
 <# } #>
+  "AWS": {
+    "Profile": "default",
+    "Region": "eu-west-2",
+    "S3": {
+      "Bucket": {
+        "Name": "resume-job-matcher",
+        "DocumentsPath": "documents"
+      }
+    }
+  },
+  "FileService": {
+    "Location": "AWSS3",
+    "MaxFileSizeInBytes": 52428800
+  },
+  "RabbitMQService": {
+    "UserName": "rjm",
+    "Password": "VImuRPJWNe3umk3leUwo",
+    "HostName": "rabbitmq.rabbitmq.svc.cluster.local",
+    "VirtualHost": "/",
+    "Port": 5672,
+    "Suffix": ""
+  },
 <# if (config.WebAPI.EmailService.Enabled) { #>
   "EmailService": {
     "MailServer": "<#= config.WebAPI.EmailService.MailServer #>",
@@ -40,6 +62,11 @@
       "Microsoft": "Warning",
       "Microsoft.Hosting.Lifetime": "Information"
     }
+  },
+  "ElasticApm": {
+    "LogLevel": "Information",
+    "ServerUrls": "http://apm-server.elastic.svc.cluster.local:8200",
+    "TransactionSampleRate": 1.0
   },
   "AllowedHosts": "*"
 }
