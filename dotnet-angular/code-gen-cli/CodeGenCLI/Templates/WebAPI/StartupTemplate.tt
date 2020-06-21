@@ -5,7 +5,9 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGenCLI.CodeGenClasses" #>
 <#@ import namespace="CodeGenCLI.Extensions" #>
+using Amazon.S3;
 using AutoMapper;
+using Elastic.Apm.NetCoreAll;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Authorization.AspNetCore;
@@ -18,15 +20,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.ObjectPool;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -62,7 +67,43 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // Connection to the <#= config.Name #> database
             services.AddDbContext<<#= config.Name #>Context>(options =>
                 options.UseSqlServer(this.configuration.GetConnectionString("<#= config.Name #>Context")));
-<#    if (config.Authentication.Enabled) { #>
+
+            // Repositories
+<# foreach (CodeGenModel model in config.Models) { #>
+			services.AddScoped<<#= model.Name #>Repository>();
+<# } #>
+
+			// BLLs
+<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
+			services.AddScoped<<#= model.Name #>BLL>();
+<# } #>
+<# if (config.Authentication.Enabled) { #>
+            services.AddScoped<AuthBLL>();
+<# } #>
+
+            // Services
+<# if (config.WebAPI.EmailService.Enabled) { #>
+            services.AddSingleton<IEmailService, EmailService>();
+<# } #>
+
+            // Uploads
+            services.AddSingleton<FileService>();
+            services.Configure<FormOptions>(options =>
+            {
+                // Set the upload limit
+                options.MultipartBodyLengthLimit = this.configuration.GetSection("FileService").GetValue<int>("MaxFileSizeInBytes");
+            });
+
+            // AWS
+            services.AddDefaultAWSOptions(this.configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonS3>();
+            services.AddSingleton<AWSS3Service>();
+
+            // RabbitMQ
+            services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
+            services.AddSingleton<IPooledObjectPolicy<IModel>, RabbitMQPooledObjectPolicy>();
+            services.AddSingleton<RabbitMQService>();
+<# if (config.Authentication.Enabled) { #>
 
             // Authentication
             services.AddIdentity<User, IdentityRole<Guid>>()
@@ -139,24 +180,6 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             });
 
 <# } #>
-            // Repositories
-<# foreach (CodeGenModel model in config.Models) { #>
-			services.AddScoped<<#= model.Name #>Repository>();
-<# } #>
-
-			// BLLs
-<# foreach (CodeGenModel model in config.Models.Where(m => !m.ManyToMany)) { #>
-			services.AddScoped<<#= model.Name #>BLL>();
-<# } #>
-<# if (config.Authentication.Enabled) { #>
-            services.AddScoped<AuthBLL>();
-<# } #>
-
-            // Services
-<# if (config.WebAPI.EmailService.Enabled) { #>
-            services.AddSingleton<IEmailService, EmailService>();
-<# } #>
-
             // GraphQL
             services.AddScoped<IDependencyResolver>(s =>
                 new FuncDependencyResolver(s.GetRequiredService));
@@ -188,7 +211,7 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 			// MVC
             services.AddControllers()
                 .AddNewtonsoftJson(options => {
-                    options.SerializerSettings.MaxDepth = 5;
+                    options.SerializerSettings.MaxDepth = 10;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
@@ -242,12 +265,18 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             // Kestrel
             services.Configure<KestrelServerOptions>(options =>
             {
+                // Uploads
+                // Handle requests up to 50 MB
+                options.Limits.MaxRequestBodySize = 52428800;
                 options.AllowSynchronousIO = true;
             });
 
             // IIS Express
             services.Configure<IISServerOptions>(options =>
             {
+                // Uploads
+                // Handle requests up to 50 MB
+                options.MaxRequestBodySize = 52428800;
                 options.AllowSynchronousIO = true;
             });
         }
@@ -280,14 +309,23 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             //    });
             //}
 
+            // Error handling
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
+            // Elastic APM
+            if (env.IsProduction())
+            {
+                app.UseAllElasticApm(this.configuration);
+            }
+
+            // Static files, most likely for resumes templates now
+            app.UseStaticFiles();
+
             // Update database migrations on startup
             UpdateDatabase(app);
 
             // Authentication
             app.UseAuthentication();
-
-            // Error handling
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseRouting();
 
