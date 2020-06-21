@@ -89,6 +89,11 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             services.AddSingleton<IEmailService, EmailService>();
 <# } #>
 
+            // AWS
+            services.AddDefaultAWSOptions(this.configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonS3>();
+            services.AddSingleton<AWSS3Service>();
+
             // Uploads
             services.AddSingleton<FileService>();
             services.Configure<FormOptions>(options =>
@@ -96,11 +101,6 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
                 // Set the upload limit
                 options.MultipartBodyLengthLimit = this.configuration.GetSection("FileService").GetValue<int>("MaxFileSizeInBytes");
             });
-
-            // AWS
-            services.AddDefaultAWSOptions(this.configuration.GetAWSOptions());
-            services.AddAWSService<IAmazonS3>();
-            services.AddSingleton<AWSS3Service>();
 
             // RabbitMQ
             services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
@@ -350,15 +350,18 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
             app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
 
-			// Swagger
+            // Swagger
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger()
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "ui/swagger/{documentName}/swagger.json";
+            })
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
             // specifying the Swagger JSON endpoint.
             .UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("./swagger/v1/swagger.json", "<#= config.DisplayName #> Web API V1");
-                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint("/ui/swagger/v1/swagger.json", "Resume Job Matcher Web API V1");
+                c.RoutePrefix = "ui/swagger";
             });
 
             app.UseEndpoints(endpoints =>
