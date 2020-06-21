@@ -172,8 +172,7 @@
       "Properties": [
         {
           "Name": "Name",
-          "Type": "string",
-          "Required": true
+          "Type": "string"
         },
         {
           "Name": "DisplayName",

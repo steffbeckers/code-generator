@@ -13,7 +13,7 @@ using <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.Nam
 
 namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI.NamespaceRoot : config.Name #>.ViewModels
 {
-	/// <summary>
+    /// <summary>
     /// <#= model.Name #> view model
 <# if (!string.IsNullOrEmpty(model.Description)) { #>
     /// <#= model.Description #>.
@@ -21,89 +21,89 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
     /// </summary>
     public class <#= model.Name #>VM
     {
-		public <#= model.Name #>VM()
+        public <#= model.Name #>VM()
         {
 <# if (model.Relations.ToList().Count > 0) { #>
             // Relations
 <# if (model.Relations.Where(r => r.Type == "one-to-many").ToList().Count > 0) { #>
 
-			//// One-to-many
+            //// One-to-many
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
-			this.<#= relation.Name #> = new List<<#= relation.Model #>VM>();
+            this.<#= relation.Name #> = new List<<#= relation.Model #>VM>();
 <# } #>
 <# } #>
 <# if (model.Relations.Where(r => r.Type == "many-to-many").ToList().Count > 0) { #>
 
-			//// Many-to-many
+            //// Many-to-many
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
-			this.<#= relation.Name #> = new List<<#= relation.Model #>VM>();
+            this.<#= relation.Name #> = new List<<#= relation.Model #>VM>();
 <# } #>
 <# } #>
 <# } #>
         }
 
-		// Properties
+        // Properties
 
-		/// <summary>
+        /// <summary>
         /// The identifier of <#= model.Name #>.
         /// </summary>
-		public Guid Id { get; set; }
+        public Guid Id { get; set; }
 <# foreach (CodeGenModelProperty property in model.Properties) { #>
 
 <# if (!string.IsNullOrEmpty(property.Description)) { #>
-		/// <summary>
+        /// <summary>
         /// <#= property.Description #>.
         /// </summary>
 <# } else { #>
-		/// <summary>
+        /// <summary>
         /// The <#= property.Name #> property of <#= model.Name #>.
         /// </summary>
 <# } #>
 <# if (property.Required) { #>
         [Required]
 <# } #>
-		public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
+        public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
 <# } #>
 
 <# if (model.Relations.ToList().Count > 0) { #>
-		// Relations
+        // Relations
 <# if (model.Relations.Where(r => r.Type == "many-to-one").ToList().Count > 0) { #>
 
-		//// Many-to-one
+        //// Many-to-one
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { #>
-	    /// <summary>
+        /// <summary>
         /// The related foreign key <#= relation.Name #>Id for <#= relation.Name #> of <#= model.Name #>.
         /// </summary>
-		public Guid<#= (relation.Required ? "" : "?") #> <#= relation.Name #>Id { get; set; }
+        public Guid<#= (relation.Required ? "" : "?") #> <#= relation.Name #>Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The related <#= relation.Name #> of <#= model.Name #>.
         /// </summary>
-		public <#= relation.Model #>VM <#= relation.Name #> { get; set; }
+        public <#= relation.Model #>VM <#= relation.Name #> { get; set; }
 
 <# } #>
 <# } #>
 <# if (model.Relations.Where(r => r.Type == "one-to-many").ToList().Count > 0) { #>
 
-		//// One-to-many
+        //// One-to-many
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { #>
-		/// <summary>
+        /// <summary>
         /// The related <#= relation.Name #> of <#= model.Name #>.
         /// </summary>
-		public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
+        public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
 <# } #>
 <# } #>
 <# if (model.Relations.Where(r => r.Type == "many-to-many").ToList().Count > 0) { #>
 
-		//// Many-to-many
+        //// Many-to-many
 
 <# foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { #>
-		/// <summary>
+        /// <summary>
         /// The related <#= relation.Name #> of <#= model.Name #>.
         /// </summary>
-		public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
+        public IList<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
 
         ////// To create a link with <#= relation.Model #> directly on create of <#= model.Name #>.
         public Guid? <#= relation.Model #>Id { get; set; }
@@ -115,38 +115,38 @@ namespace <#= !string.IsNullOrEmpty(config.WebAPI.NamespaceRoot) ? config.WebAPI
 <# } #>
 <# } #>
 
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
 <# if (config.Authentication.Enabled) { #>
-		/// <summary>
+        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
 <# } #>
     }

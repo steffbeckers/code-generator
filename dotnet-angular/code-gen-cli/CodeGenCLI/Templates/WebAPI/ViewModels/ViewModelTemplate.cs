@@ -58,7 +58,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write(".ViewModels\r\n{\r\n\t/// <summary>\r\n    /// ");
+            this.Write(".ViewModels\r\n{\r\n    /// <summary>\r\n    /// ");
             
             #line 17 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
@@ -93,7 +93,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("VM\r\n    {\r\n\t\tpublic ");
+            this.Write("VM\r\n    {\r\n        public ");
             
             #line 24 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
@@ -114,14 +114,14 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t//// One-to-many\r\n");
+            this.Write("\r\n            //// One-to-many\r\n");
             
             #line 31 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { 
             
             #line default
             #line hidden
-            this.Write("\t\t\tthis.");
+            this.Write("            this.");
             
             #line 32 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
@@ -154,14 +154,14 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t//// Many-to-many\r\n");
+            this.Write("\r\n            //// Many-to-many\r\n");
             
             #line 38 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { 
             
             #line default
             #line hidden
-            this.Write("\t\t\tthis.");
+            this.Write("            this.");
             
             #line 39 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
@@ -194,14 +194,15 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("        }\r\n\r\n\t\t// Properties\r\n\r\n\t\t/// <summary>\r\n        /// The identifier of ");
+            this.Write("        }\r\n\r\n        // Properties\r\n\r\n        /// <summary>\r\n        /// The iden" +
+                    "tifier of ");
             
             #line 48 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(model.Name));
             
             #line default
             #line hidden
-            this.Write(".\r\n        /// </summary>\r\n\t\tpublic Guid Id { get; set; }\r\n");
+            this.Write(".\r\n        /// </summary>\r\n        public Guid Id { get; set; }\r\n");
             
             #line 51 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelProperty property in model.Properties) { 
@@ -215,7 +216,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\t\t/// <summary>\r\n        /// ");
+            this.Write("        /// <summary>\r\n        /// ");
             
             #line 55 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Description));
@@ -229,7 +230,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\t\t/// <summary>\r\n        /// The ");
+            this.Write("        /// <summary>\r\n        /// The ");
             
             #line 59 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
@@ -263,7 +264,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\t\tpublic ");
+            this.Write("        public ");
             
             #line 65 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Type));
@@ -297,21 +298,21 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\t\t// Relations\r\n");
+            this.Write("        // Relations\r\n");
             
             #line 70 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
  if (model.Relations.Where(r => r.Type == "many-to-one").ToList().Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t//// Many-to-one\r\n\r\n");
+            this.Write("\r\n        //// Many-to-one\r\n\r\n");
             
             #line 74 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-one")) { 
             
             #line default
             #line hidden
-            this.Write("\t    /// <summary>\r\n        /// The related foreign key ");
+            this.Write("        /// <summary>\r\n        /// The related foreign key ");
             
             #line 76 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
@@ -332,7 +333,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write(".\r\n        /// </summary>\r\n\t\tpublic Guid");
+            this.Write(".\r\n        /// </summary>\r\n        public Guid");
             
             #line 78 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((relation.Required ? "" : "?")));
@@ -346,7 +347,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("Id { get; set; }\r\n\r\n\t\t/// <summary>\r\n        /// The related ");
+            this.Write("Id { get; set; }\r\n\r\n        /// <summary>\r\n        /// The related ");
             
             #line 81 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
@@ -360,7 +361,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write(".\r\n        /// </summary>\r\n\t\tpublic ");
+            this.Write(".\r\n        /// </summary>\r\n        public ");
             
             #line 83 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
@@ -393,14 +394,14 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t//// One-to-many\r\n\r\n");
+            this.Write("\r\n        //// One-to-many\r\n\r\n");
             
             #line 91 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "one-to-many")) { 
             
             #line default
             #line hidden
-            this.Write("\t\t/// <summary>\r\n        /// The related ");
+            this.Write("        /// <summary>\r\n        /// The related ");
             
             #line 93 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
@@ -414,7 +415,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write(".\r\n        /// </summary>\r\n\t\tpublic IList<");
+            this.Write(".\r\n        /// </summary>\r\n        public IList<");
             
             #line 95 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
@@ -447,14 +448,14 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t//// Many-to-many\r\n\r\n");
+            this.Write("\r\n        //// Many-to-many\r\n\r\n");
             
             #line 102 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelRelation relation in model.Relations.Where(r => r.Type == "many-to-many")) { 
             
             #line default
             #line hidden
-            this.Write("\t\t/// <summary>\r\n        /// The related ");
+            this.Write("        /// <summary>\r\n        /// The related ");
             
             #line 104 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Name));
@@ -468,7 +469,7 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write(".\r\n        /// </summary>\r\n\t\tpublic IList<");
+            this.Write(".\r\n        /// </summary>\r\n        public IList<");
             
             #line 106 "C:\dev\steffbeckers\code-generator\dotnet-angular\code-gen-cli\CodeGenCLI\Templates\WebAPI\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(relation.Model));
@@ -568,17 +569,17 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             #line default
             #line hidden
             this.Write(@"
-		// Generic properties
+        // Generic properties
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is created
         /// </summary>
-		public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The date and time of when the record is modified
         /// </summary>
-		public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
 ");
             
@@ -587,25 +588,25 @@ namespace CodeGenCLI.Templates.WebAPI.ViewModels
             
             #line default
             #line hidden
-            this.Write(@"		/// <summary>
+            this.Write(@"        /// <summary>
         /// The Id of the user who created the record
         /// </summary>
-		public Guid CreatedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who created the record
         /// </summary>
-		public UserVM CreatedByUser { get; set; }
+        public UserVM CreatedByUser { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The Id of the user who last modified the record
         /// </summary>
-		public Guid ModifiedByUserId { get; set; }
+        public Guid ModifiedByUserId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The user who last modified the record
         /// </summary>
-		public UserVM ModifiedByUser { get; set; }
+        public UserVM ModifiedByUser { get; set; }
 
 ");
             
