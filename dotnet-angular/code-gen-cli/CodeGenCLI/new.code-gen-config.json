@@ -1,0 +1,42 @@
+﻿{
+  "name": "Customer Relationship Management",
+  "abbreviation": "CRM",
+  "description": "",
+  "entities": [
+    {
+      "name": "account",
+      "properties": [
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "properties": [
+        {
+          "name": "firstName",
+          "title": "First name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "lastName",
+          "title": "Last name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "emailAddress",
+          "title": "E-mail address",
+          "description": "The contact's personal e-mail address",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "entityRelations": [ {} ]
+}
