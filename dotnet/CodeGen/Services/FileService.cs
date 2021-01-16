@@ -13,6 +13,9 @@ namespace CodeGen.Services
     public interface IFileService
     {
         Task Create(string path, string text);
+        Task<string> Read(string path);
+        Task<List<string>> GetSubdirectories(string path);
+        Task<List<string>> TraverseDirectory(string path);
         Task DeleteDirectory(string path);
     }
 
@@ -30,10 +33,18 @@ namespace CodeGen.Services
             _codeGenConfig = codeGenConfigOptions.Value;
         }
 
+        public Task<string> Read(string path)
+        {
+            if (File.Exists(path))
+            {
+                return File.ReadAllTextAsync(path);
+            }
+
+            return Task.FromResult(string.Empty);
+        }
+
         public Task Create(string path, string text)
         {
-            path = Path.Combine(Directory.GetCurrentDirectory(), path);
-
             string directoryName = Path.GetDirectoryName(path);
             if (!Directory.Exists(directoryName))
             {
@@ -43,10 +54,18 @@ namespace CodeGen.Services
             return File.WriteAllTextAsync(path, text);
         }
 
+        public Task<List<string>> GetSubdirectories(string path)
+        {
+            return Task.FromResult(Directory.GetDirectories(path).ToList());
+        }
+
+        public Task<List<string>> TraverseDirectory(string path)
+        {
+            return Task.FromResult(Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList());
+        }
+
         public Task DeleteDirectory(string path)
         {
-            path = Path.Combine(Directory.GetCurrentDirectory(), path);
-
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);

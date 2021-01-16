@@ -13,7 +13,7 @@ namespace CodeGen.Generators
 {
     public interface IModelsGenerator
     {
-        Task Generate();
+        Task Generate(string projectTemplateFile, GenerateForEachModelData data);
     }
 
     public class ModelsGenerator : IModelsGenerator
@@ -33,14 +33,26 @@ namespace CodeGen.Generators
             _fileService = fileService;
         }
 
-        public Task Generate()
+        public Task Generate(string projectTemplateFile, GenerateForEachModelData data)
         {
             foreach (var model in _codeGenConfig.Models)
             {
-                string filePath = Path.Combine(_codeGenConfig.Paths.Output, "Projects", "WebAPI", "Models", $"{model.Name}.cs");
-                string fileText = new Templates.Projects.WebAPI.Models.Model(model).TransformText();
+                string filePath = Path.Combine(
+                    _codeGenConfig.Paths.Output,
+                    Path.GetDirectoryName(projectTemplateFile),
+                    string.Format(data.Output, model.Name)
+                );
+                filePath = filePath.Replace("Templates\\", "");
+
+                string templateTypeFormat = projectTemplateFile.Replace("\\", ".").Replace(".tt", "");
+                Type templateType = Type.GetType($"CodeGen.{templateTypeFormat}, CodeGen");
+                var template = Activator.CreateInstance(templateType, model) as dynamic;
+
+                string fileText = template.TransformText();
 
                 _fileService.Create(filePath, fileText);
+
+                _logger.LogInformation(filePath);
             }
 
             return Task.CompletedTask;

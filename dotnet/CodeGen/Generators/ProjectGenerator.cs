@@ -2,6 +2,7 @@
 using CodeGen.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,22 +37,73 @@ namespace CodeGen.Generators
             _modelsGenerator = modelsGenerator;
         }
 
-        public Task Generate()
+        public async Task Generate()
         {
-            CleanupOutputDirectory();
+            await CleanupOutputDirectory();
 
             _logger.LogInformation("Generating projects");
 
-            _modelsGenerator.Generate();
+            List<string> projectTemplates = await ListProjectTemplates();
+            foreach (string projectTemplate in projectTemplates)
+            {
+                _logger.LogInformation($"Project template: {projectTemplate}");
 
-            return Task.CompletedTask;
+                // List files within the project templates directory
+                List<string> projectTemplateFiles = await _fileService.TraverseDirectory(Path.Combine("Templates", "Projects", projectTemplate));
+
+                // Search for template settings
+                CodeGenTemplateSettings codeGenTemplateSettings = null;
+                foreach (string projectTemplateFile in projectTemplateFiles)
+                {
+                    if (projectTemplateFile.EndsWith("templatesettings.json"))
+                    {
+                        string templateSettingsJson = await _fileService.Read(projectTemplateFile);
+                        if (!string.IsNullOrEmpty(templateSettingsJson))
+                        {
+                            codeGenTemplateSettings = JsonConvert.DeserializeObject<CodeGenTemplateSettings>(templateSettingsJson);
+                        }
+                    }
+                }
+
+                // Template settings not found? Next project..
+                if (codeGenTemplateSettings == null) { continue; }
+
+                // Generate files based on each model
+                foreach (GenerateForEachModelData data in codeGenTemplateSettings.GenerateForEachModel)
+                {
+                    foreach (string projectTemplateFile in projectTemplateFiles)
+                    {
+                        if (projectTemplateFile.EndsWith(data.T4Template))
+                        {
+                            await _modelsGenerator.Generate(projectTemplateFile, data);
+                        }
+                    }
+                }
+            }
         }
 
         private Task CleanupOutputDirectory()
         {
-            _logger.LogInformation("Cleanup output directory");
-            _fileService.DeleteDirectory(_codeGenConfig.Paths.Output);
-            return Task.CompletedTask;
+            return _fileService.DeleteDirectory(_codeGenConfig.Paths.Output);
+        }
+
+        private async Task<List<string>> ListProjectTemplates()
+        {
+            List<string> projectTemplates = new List<string>();
+
+            List<string> subDirectories = await _fileService.GetSubdirectories(Path.Combine("Templates", "Projects"));
+            foreach (string directoryPath in subDirectories)
+            {
+                string[] directoryPathArr = directoryPath.Split("\\");
+                string directory = directoryPathArr[directoryPathArr.Length - 1];
+
+                if (!projectTemplates.Contains(directory))
+                {
+                    projectTemplates.Add(directory);
+                }
+            }
+
+            return projectTemplates;
         }
     }
 }
