@@ -51,6 +51,8 @@ namespace CodeGen.Services
                 Directory.CreateDirectory(directoryName);
             }
 
+            _logger.LogInformation($"Create file: " + path);
+
             return File.WriteAllTextAsync(path, text);
         }
 

@@ -37,6 +37,7 @@ namespace CodeGen.Generators
         {
             foreach (var model in _codeGenConfig.Models)
             {
+                // File path
                 string filePath = Path.Combine(
                     _codeGenConfig.Paths.Output,
                     Path.GetDirectoryName(projectTemplateFile),
@@ -44,15 +45,13 @@ namespace CodeGen.Generators
                 );
                 filePath = filePath.Replace("Templates\\", "");
 
+                // File text
                 string templateTypeFormat = projectTemplateFile.Replace("\\", ".").Replace(".tt", "");
                 Type templateType = Type.GetType($"CodeGen.{templateTypeFormat}, CodeGen");
-                var template = Activator.CreateInstance(templateType, model) as dynamic;
-
+                var template = Activator.CreateInstance(templateType, _codeGenConfig, model) as dynamic;
                 string fileText = template.TransformText();
 
                 _fileService.Create(filePath, fileText);
-
-                _logger.LogInformation(filePath);
             }
 
             return Task.CompletedTask;
