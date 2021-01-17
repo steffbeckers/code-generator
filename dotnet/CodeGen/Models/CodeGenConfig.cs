@@ -13,6 +13,7 @@ namespace CodeGen.Models
         public string Description { get; set; }
 
         public List<CodeGenModel> Models { get; set; }
-        public CodeGenPaths Paths { get; set; }
+        public CodeGenConfigPaths Paths { get; set; }
+        public CodeGenConfigProjects Projects { get; set; }
     }
 }

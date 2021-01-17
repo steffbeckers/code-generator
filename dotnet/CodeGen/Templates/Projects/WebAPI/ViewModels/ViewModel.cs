@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace CodeGen.Templates.Projects.WebAPI.Models
+namespace CodeGen.Templates.Projects.WebAPI.ViewModels
 {
     using System.Linq;
     using System.Text;
@@ -19,9 +19,9 @@ namespace CodeGen.Templates.Projects.WebAPI.Models
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+    #line 1 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class Model : ModelBase
+    public partial class ViewModel : ViewModelBase
     {
 #line hidden
         /// <summary>
@@ -31,48 +31,48 @@ namespace CodeGen.Templates.Projects.WebAPI.Models
         {
             this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace ");
             
-            #line 10 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+            #line 10 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_config.Projects.WebAPI.NamespacePrefix));
             
             #line default
             #line hidden
-            this.Write(".Models\r\n{\r\n\tpublic class ");
+            this.Write(".ViewModels\r\n{\r\n\tpublic class ");
             
-            #line 12 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+            #line 12 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
             
             #line default
             #line hidden
-            this.Write("\r\n    {\r\n");
+            this.Write("VM\r\n    {\r\n");
             
-            #line 14 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+            #line 14 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
  foreach (CodeGenModelProperty property in _model.Properties) { 
             
             #line default
             #line hidden
             this.Write("\t\tpublic ");
             
-            #line 15 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+            #line 15 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Type));
             
             #line default
             #line hidden
             
-            #line 15 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+            #line 15 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : ""))));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 15 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+            #line 15 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 16 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\Models\Model.tt"
+            #line 16 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
  } 
             
             #line default
@@ -89,7 +89,7 @@ namespace CodeGen.Templates.Projects.WebAPI.Models
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ModelBase
+    public class ViewModelBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

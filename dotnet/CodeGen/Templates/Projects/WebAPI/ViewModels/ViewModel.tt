@@ -7,9 +7,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace <#= _config.Projects.WebAPI.NamespacePrefix #>.Models
+namespace <#= _config.Projects.WebAPI.NamespacePrefix #>.ViewModels
 {
-	public class <#= _model.Name #>
+	public class <#= _model.Name #>VM
     {
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
 		public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }

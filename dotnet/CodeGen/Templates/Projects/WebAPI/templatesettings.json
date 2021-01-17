@@ -1,8 +1,12 @@
-﻿{
+﻿{  
   "GenerateForEachModel": [
     {
       "T4Template": "Models\\Model.tt",
       "Output": "{0}.cs"
+    },
+    {
+      "T4Template": "ViewModels\\ViewModel.tt",
+      "Output": "{0}VM.cs"
     }
   ]
 }

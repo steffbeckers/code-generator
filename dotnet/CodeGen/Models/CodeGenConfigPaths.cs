@@ -1,6 +1,6 @@
 ﻿namespace CodeGen.Models
 {
-    public class CodeGenPaths
+    public class CodeGenConfigPaths
     {
         public string Output { get; set; }
     }

@@ -16,6 +16,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model.cs</LastGenOutput>
     </None>
+    <None Update="Templates\Projects\WebAPI\ViewModels\ViewModel.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewModel.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +31,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Projects\WebAPI\ViewModels\ViewModel.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ViewModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
