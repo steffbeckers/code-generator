@@ -1,5 +1,11 @@
-﻿{  
-  "GenerateForEachModel": [
+﻿{
+  "ConfigBasedGenerator": [
+    {
+      "T4Template": "Services\\EmailService.tt",
+      "Output": "EmailService.cs"
+    }
+  ],
+  "ModelsBasedGenerator": [
     {
       "T4Template": "Models\\Model.tt",
       "Output": "{0}.cs"

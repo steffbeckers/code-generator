@@ -22,19 +22,22 @@ namespace CodeGen.Generators
         private readonly ILogger<ProjectGenerator> _logger;
         private readonly CodeGenConfig _codeGenConfig;
         private readonly IFileService _fileService;
-        private readonly IModelsGenerator _modelsGenerator;
+        private readonly IConfigBasedGenerator _configBasedGenerator;
+        private readonly IModelsBasedGenerator _modelsBasedGenerator;
 
         public ProjectGenerator(
             ILogger<ProjectGenerator> logger,
             IOptions<CodeGenConfig> codeGenConfigOptions,
             IFileService fileService,
-            IModelsGenerator modelsGenerator
+            IConfigBasedGenerator configBasedGenerator,
+            IModelsBasedGenerator modelsBasedGenerator
         )
         {
             _logger = logger;
             _codeGenConfig = codeGenConfigOptions.Value;
             _fileService = fileService;
-            _modelsGenerator = modelsGenerator;
+            _configBasedGenerator = configBasedGenerator;
+            _modelsBasedGenerator = modelsBasedGenerator;
         }
 
         public async Task Generate()
@@ -68,14 +71,26 @@ namespace CodeGen.Generators
                 // Template settings not found? Next project..
                 if (codeGenTemplateSettings == null) { continue; }
 
-                // Generate files based on each model
-                foreach (GenerateForEachModelData data in codeGenTemplateSettings.GenerateForEachModel)
+                // Generate files with config
+                foreach (CodeGenTemplateSettingsData data in codeGenTemplateSettings.ConfigBasedGenerator)
                 {
                     foreach (string projectTemplateFile in projectTemplateFiles)
                     {
                         if (projectTemplateFile.EndsWith(data.T4Template))
                         {
-                            await _modelsGenerator.Generate(projectTemplateFile, data);
+                            await _configBasedGenerator.Generate(projectTemplateFile, data);
+                        }
+                    }
+                }
+
+                // Generate files based on each model
+                foreach (CodeGenTemplateSettingsData data in codeGenTemplateSettings.ModelsBasedGenerator)
+                {
+                    foreach (string projectTemplateFile in projectTemplateFiles)
+                    {
+                        if (projectTemplateFile.EndsWith(data.T4Template))
+                        {
+                            await _modelsBasedGenerator.Generate(projectTemplateFile, data);
                         }
                     }
                 }

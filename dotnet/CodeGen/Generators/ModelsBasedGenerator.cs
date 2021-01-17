@@ -3,27 +3,24 @@ using CodeGen.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeGen.Generators
 {
-    public interface IModelsGenerator
+    public interface IModelsBasedGenerator
     {
-        Task Generate(string projectTemplateFile, GenerateForEachModelData data);
+        Task Generate(string projectTemplateFile, CodeGenTemplateSettingsData data);
     }
 
-    public class ModelsGenerator : IModelsGenerator
+    public class ModelsBasedGenerator : IModelsBasedGenerator
     {
-        private readonly ILogger<ModelsGenerator> _logger;
+        private readonly ILogger<ModelsBasedGenerator> _logger;
         private readonly CodeGenConfig _codeGenConfig;
         private readonly IFileService _fileService;
 
-        public ModelsGenerator(
-            ILogger<ModelsGenerator> logger,
+        public ModelsBasedGenerator(
+            ILogger<ModelsBasedGenerator> logger,
             IOptions<CodeGenConfig> codeGenConfigOptions,
             IFileService fileService
         )
@@ -33,7 +30,7 @@ namespace CodeGen.Generators
             _fileService = fileService;
         }
 
-        public Task Generate(string projectTemplateFile, GenerateForEachModelData data)
+        public Task Generate(string projectTemplateFile, CodeGenTemplateSettingsData data)
         {
             foreach (var model in _codeGenConfig.Models)
             {
@@ -48,7 +45,7 @@ namespace CodeGen.Generators
                 // File text
                 string templateTypeFormat = projectTemplateFile.Replace("\\", ".").Replace(".tt", "");
                 Type templateType = Type.GetType($"CodeGen.{templateTypeFormat}, CodeGen");
-                var template = Activator.CreateInstance(templateType, _codeGenConfig, data, model) as dynamic;
+                var template = Activator.CreateInstance(templateType, _codeGenConfig, model) as dynamic;
                 string fileText = template.TransformText();
 
                 _fileService.Create(filePath, fileText);

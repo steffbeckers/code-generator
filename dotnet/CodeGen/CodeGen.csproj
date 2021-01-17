@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="_Output\**" />
+    <Content Remove="_Output\**" />
+    <EmbeddedResource Remove="_Output\**" />
+    <None Remove="_Output\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
@@ -15,6 +22,10 @@
     <None Update="Templates\Projects\WebAPI\Models\Model.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\Projects\WebAPI\Services\EmailService.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EmailService.cs</LastGenOutput>
     </None>
     <None Update="Templates\Projects\WebAPI\ViewModels\ViewModel.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -31,6 +42,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\Projects\WebAPI\Services\EmailService.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EmailService.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\Projects\WebAPI\ViewModels\ViewModel.cs">
       <DesignTime>True</DesignTime>

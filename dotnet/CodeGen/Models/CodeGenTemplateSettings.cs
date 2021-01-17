@@ -10,13 +10,15 @@ namespace CodeGen.Models
     {
         public CodeGenTemplateSettings()
         {
-            GenerateForEachModel = new List<GenerateForEachModelData>();
+            ConfigBasedGenerator = new List<CodeGenTemplateSettingsData>();
+            ModelsBasedGenerator = new List<CodeGenTemplateSettingsData>();
         }
 
-        public List<GenerateForEachModelData> GenerateForEachModel { get; set; }
+        public List<CodeGenTemplateSettingsData> ConfigBasedGenerator { get; set; }
+        public List<CodeGenTemplateSettingsData> ModelsBasedGenerator { get; set; }
     }
 
-    public class GenerateForEachModelData
+    public class CodeGenTemplateSettingsData
     {
         public string T4Template { get; set; }
         public string Output { get; set; }

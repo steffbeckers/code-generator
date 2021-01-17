@@ -19,7 +19,8 @@ namespace CodeGen
                 {
                     services.Configure<CodeGenConfig>(hostContext.Configuration.GetSection("CodeGenConfig"));
                     services.AddSingleton<IFileService, FileService>();
-                    services.AddSingleton<IModelsGenerator, ModelsGenerator>();
+                    services.AddSingleton<IConfigBasedGenerator, ConfigBasedGenerator>();
+                    services.AddSingleton<IModelsBasedGenerator, ModelsBasedGenerator>();
                     services.AddSingleton<IProjectGenerator, ProjectGenerator>();
                     services.AddHostedService<Worker>();
                 });
