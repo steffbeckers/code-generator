@@ -31,17 +31,13 @@ namespace CodeGen
             _logger.LogInformation($"Name: {_codeGenConfig.Name}");
             _logger.LogInformation($"Description: {_codeGenConfig.Description}");
 
-            await _projectGenerator.Generate();
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                await _projectGenerator.Generate();
+                await Task.Delay(5000);
+            }
 
             _logger.LogInformation("Done");
-
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    await _projectGenerator.Generate();
-
-            //    _logger.LogInformation("Press enter to run again, or CTRL+C to exit.");
-            //    Console.ReadLine();
-            //}
         }
     }
 }

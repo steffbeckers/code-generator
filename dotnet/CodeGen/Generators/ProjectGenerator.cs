@@ -54,6 +54,55 @@ namespace CodeGen.Generators
                 // List files within the project templates directory
                 List<string> projectTemplateFiles = await _fileService.TraverseDirectory(Path.Combine("Templates", "Projects", projectTemplate));
 
+                // Filter all template generation files
+                List<string> templateGenerationFiles = new List<string>();
+                foreach (string projectTemplateFile in projectTemplateFiles)
+                {
+                    string projectTemplateFileName = Path.GetFileName(projectTemplateFile);
+
+                    if (projectTemplateFile.EndsWith("templatesettings.json") ||
+                        projectTemplateFile.EndsWith(".tt") ||
+                        projectTemplateFile.EndsWith("Partial.cs"))
+                    {
+                        templateGenerationFiles.Add(projectTemplateFile);
+                    }
+                }
+
+                // Also exclude .cs files from .tt files
+                foreach (string projectTemplateFile in projectTemplateFiles)
+                {
+                    string projectTemplateFileName = Path.GetFileName(projectTemplateFile);
+
+                    if (projectTemplateFile.EndsWith(".cs"))
+                    {
+                        if (templateGenerationFiles.Any(x => x.Contains(Path.GetFileNameWithoutExtension(projectTemplateFileName) + ".tt")))
+                        {
+                            templateGenerationFiles.Add(projectTemplateFile);
+                        }
+                    }
+                }
+
+                // Copy all non template generation files to output
+                foreach (string projectTemplateFile in projectTemplateFiles)
+                {
+                    if (templateGenerationFiles.Contains(projectTemplateFile)) { continue; }
+
+                    string projectTemplateFileName = Path.GetFileName(projectTemplateFile);
+
+                    // File path
+                    string filePath = Path.Combine(
+                        _codeGenConfig.Paths.Output,
+                        Path.GetDirectoryName(projectTemplateFile),
+                        projectTemplateFileName
+                    );
+                    filePath = filePath.Replace("Templates\\", "");
+
+                    // File text
+                    string fileText = await _fileService.Read(projectTemplateFile);
+
+                    await _fileService.Create(filePath, fileText);
+                }
+
                 // Search for template settings
                 CodeGenTemplateSettings codeGenTemplateSettings = null;
                 foreach (string projectTemplateFile in projectTemplateFiles)
@@ -70,6 +119,8 @@ namespace CodeGen.Generators
 
                 // Template settings not found? Next project..
                 if (codeGenTemplateSettings == null) { continue; }
+
+                projectTemplateFiles.Sort();
 
                 // Generate files with config
                 foreach (CodeGenTemplateSettingsData data in codeGenTemplateSettings.ConfigBasedGenerator)
