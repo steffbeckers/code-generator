@@ -23,10 +23,6 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model.cs</LastGenOutput>
     </None>
-    <None Update="Templates\Projects\WebAPI\Services\EmailService.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EmailService.cs</LastGenOutput>
-    </None>
     <None Update="Templates\Projects\WebAPI\ViewModels\ViewModel.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ViewModel.cs</LastGenOutput>
@@ -42,11 +38,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\Projects\WebAPI\Services\EmailService.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>EmailService.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\Projects\WebAPI\ViewModels\ViewModel.cs">
       <DesignTime>True</DesignTime>

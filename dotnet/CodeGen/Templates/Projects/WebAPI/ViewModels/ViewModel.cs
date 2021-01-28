@@ -29,14 +29,8 @@ namespace CodeGen.Templates.Projects.WebAPI.ViewModels
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace ");
-            
-            #line 10 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_config.Projects.WebAPI.NamespacePrefix));
-            
-            #line default
-            #line hidden
-            this.Write(".ViewModels\r\n{\r\n\tpublic class ");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\n\r\nnamespace CodeGenOutput.ViewM" +
+                    "odels\r\n{\r\n\tpublic class ");
             
             #line 12 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\ViewModels\ViewModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));

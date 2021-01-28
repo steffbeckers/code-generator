@@ -1,9 +1,9 @@
 ﻿{
   "ConfigBasedGenerator": [
-    {
-      "T4Template": "Services\\EmailService.tt",
-      "Output": "EmailService.cs"
-    }
+    //{
+    //  "T4Template": "Services\\EmailService.tt",
+    //  "Output": "EmailService.cs"
+    //}
   ],
   "ModelsBasedGenerator": [
     {
