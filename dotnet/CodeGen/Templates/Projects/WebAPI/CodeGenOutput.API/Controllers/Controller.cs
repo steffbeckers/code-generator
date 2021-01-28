@@ -29,24 +29,25 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using Microsoft.AspNetCore.Mvc;\r\nusing System.Collections.Generic;\r\n\r\nnamespace C" +
-                    "odeGenOutput.API.Controllers\r\n{\r\n    [Route(\"api/");
+            this.Write("using CodeGenOutput.ViewModels;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing System;\r\n" +
+                    "using System.Collections.Generic;\r\n\r\nnamespace CodeGenOutput.API.Controllers\r\n{\r" +
+                    "\n    [Route(\"api/");
             
-            #line 12 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 14 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("s\")]\r\n    [ApiController]\r\n    public class ");
             
-            #line 14 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 16 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
             
             #line default
             #line hidden
             this.Write("sController : ControllerBase\r\n    {\r\n        // GET: api/");
             
-            #line 16 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 18 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
@@ -54,7 +55,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers
             this.Write("s\r\n        [HttpGet]\r\n        public IActionResult Get()\r\n        {\r\n            " +
                     "return Ok();\r\n        }\r\n\r\n        // GET api/");
             
-            #line 23 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 25 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
@@ -62,28 +63,28 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers
             this.Write("s/{id}\r\n        [HttpGet(\"{id}\")]\r\n        public IActionResult GetById(Guid id)\r" +
                     "\n        {\r\n            return Ok();\r\n        }\r\n\r\n        // POST api/");
             
-            #line 30 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 32 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write("s\r\n        [HttpPost]\r\n        public IActionResult Create([FromBody] ");
             
-            #line 32 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 34 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
             
             #line default
             #line hidden
             this.Write("VM ");
             
-            #line 32 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 34 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            return Ok();\r\n        }\r\n\r\n        // PUT api/");
             
-            #line 37 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 39 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
@@ -91,21 +92,21 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers
             this.Write("s/{id}\r\n        [HttpPut(\"{id}\")]\r\n        public IActionResult Update(Guid id, [" +
                     "FromBody] ");
             
-            #line 39 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 41 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
             
             #line default
             #line hidden
             this.Write("VM ");
             
-            #line 39 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 41 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            return Ok();\r\n        }\r\n\r\n        // DELETE api/");
             
-            #line 44 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 46 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default

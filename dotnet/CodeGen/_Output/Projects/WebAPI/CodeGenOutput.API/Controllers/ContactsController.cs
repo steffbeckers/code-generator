@@ -1,4 +1,6 @@
+using CodeGenOutput.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace CodeGenOutput.API.Controllers

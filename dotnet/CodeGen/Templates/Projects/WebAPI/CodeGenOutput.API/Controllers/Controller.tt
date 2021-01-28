@@ -4,7 +4,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+using CodeGenOutput.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace CodeGenOutput.API.Controllers
