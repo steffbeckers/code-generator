@@ -22,8 +22,8 @@ namespace CodeGen
         )
         {
             _logger = logger;
-            _projectGenerator = projectGenerator;
             _codeGenConfig = codeGenConfigOptions.Value;
+            _projectGenerator = projectGenerator;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

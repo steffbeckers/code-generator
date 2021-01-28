@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace CodeGenOutput.ViewModels
 {
 	public class <#= _model.Name #>VM
-    {
+	{
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
 		public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
 <# } #>

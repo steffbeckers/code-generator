@@ -37,7 +37,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels
             
             #line default
             #line hidden
-            this.Write("VM\r\n    {\r\n");
+            this.Write("VM\r\n\t{\r\n");
             
             #line 14 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModel.tt"
  foreach (CodeGenModelProperty property in _model.Properties) { 

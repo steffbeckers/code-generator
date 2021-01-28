@@ -1,6 +1,7 @@
 using CodeGen.Generators;
 using CodeGen.Models;
 using CodeGen.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,6 +16,14 @@ namespace CodeGen
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostContext, config) => {
+                    IHostEnvironment env = hostContext.HostingEnvironment;
+
+                    config.SetBasePath(env.ContentRootPath);
+                    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                    config.AddEnvironmentVariables();
+                })
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.Configure<CodeGenConfig>(hostContext.Configuration.GetSection("CodeGenConfig"));
