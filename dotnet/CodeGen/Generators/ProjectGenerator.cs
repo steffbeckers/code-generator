@@ -1,5 +1,6 @@
 ﻿using CodeGen.Models;
 using CodeGen.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -20,21 +21,21 @@ namespace CodeGen.Generators
     public class ProjectGenerator : IProjectGenerator
     {
         private readonly ILogger<ProjectGenerator> _logger;
-        private readonly CodeGenConfig _codeGenConfig;
+        private readonly IAppSettingsService _appSettingsService;
         private readonly IFileService _fileService;
         private readonly IConfigBasedGenerator _configBasedGenerator;
         private readonly IModelsBasedGenerator _modelsBasedGenerator;
 
         public ProjectGenerator(
             ILogger<ProjectGenerator> logger,
-            IOptions<CodeGenConfig> codeGenConfigOptions,
+            IAppSettingsService appSettingsService,
             IFileService fileService,
             IConfigBasedGenerator configBasedGenerator,
             IModelsBasedGenerator modelsBasedGenerator
         )
         {
             _logger = logger;
-            _codeGenConfig = codeGenConfigOptions.Value;
+            _appSettingsService = appSettingsService;
             _fileService = fileService;
             _configBasedGenerator = configBasedGenerator;
             _modelsBasedGenerator = modelsBasedGenerator;
@@ -91,7 +92,7 @@ namespace CodeGen.Generators
 
                     // File path
                     string filePath = Path.Combine(
-                        _codeGenConfig.Paths.Output,
+                        _appSettingsService.CodeGenConfig.Paths.Output,
                         Path.GetDirectoryName(projectTemplateFile),
                         projectTemplateFileName
                     );
@@ -150,7 +151,7 @@ namespace CodeGen.Generators
 
         private Task CleanupOutputDirectory()
         {
-            return _fileService.DeleteDirectory(_codeGenConfig.Paths.Output);
+            return _fileService.DeleteDirectory(_appSettingsService.CodeGenConfig.Paths.Output);
         }
 
         private async Task<List<string>> ListProjectTemplates()

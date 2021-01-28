@@ -26,7 +26,7 @@ namespace CodeGen
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.Configure<CodeGenConfig>(hostContext.Configuration.GetSection("CodeGenConfig"));
+                    services.AddSingleton<IAppSettingsService, AppSettingsService>();
                     services.AddSingleton<IFileService, FileService>();
                     services.AddSingleton<IConfigBasedGenerator, ConfigBasedGenerator>();
                     services.AddSingleton<IModelsBasedGenerator, ModelsBasedGenerator>();

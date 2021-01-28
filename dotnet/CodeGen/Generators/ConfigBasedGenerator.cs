@@ -1,5 +1,6 @@
 ﻿using CodeGen.Models;
 using CodeGen.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -16,17 +17,17 @@ namespace CodeGen.Generators
     public class ConfigBasedGenerator : IConfigBasedGenerator
     {
         private readonly ILogger<ConfigBasedGenerator> _logger;
-        private readonly CodeGenConfig _codeGenConfig;
+        private readonly IAppSettingsService _appSettingsService;
         private readonly IFileService _fileService;
 
         public ConfigBasedGenerator(
             ILogger<ConfigBasedGenerator> logger,
-            IOptions<CodeGenConfig> codeGenConfigOptions,
+            IAppSettingsService appSettingsService,
             IFileService fileService
         )
         {
             _logger = logger;
-            _codeGenConfig = codeGenConfigOptions.Value;
+            _appSettingsService = appSettingsService;
             _fileService = fileService;
         }
 
@@ -34,7 +35,7 @@ namespace CodeGen.Generators
         {
             // File path
             string filePath = Path.Combine(
-                _codeGenConfig.Paths.Output,
+                _appSettingsService.CodeGenConfig.Paths.Output,
                 Path.GetDirectoryName(projectTemplateFile),
                 data.Output
             );
@@ -43,7 +44,7 @@ namespace CodeGen.Generators
             // File text
             string templateTypeFormat = projectTemplateFile.Replace("\\", ".").Replace(".tt", "");
             Type templateType = Type.GetType($"CodeGen.{templateTypeFormat}, CodeGen");
-            var template = Activator.CreateInstance(templateType, _codeGenConfig) as dynamic;
+            var template = Activator.CreateInstance(templateType, _appSettingsService.CodeGenConfig) as dynamic;
             string fileText = template.TransformText();
 
             _fileService.Create(filePath, fileText);

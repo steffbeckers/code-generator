@@ -1,4 +1,5 @@
 ﻿using CodeGen.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -22,15 +23,10 @@ namespace CodeGen.Services
     public class FileService : IFileService
     {
         private readonly ILogger<FileService> _logger;
-        private readonly CodeGenConfig _codeGenConfig;
 
-        public FileService(
-            ILogger<FileService> logger,
-            IOptions<CodeGenConfig> codeGenConfigOptions
-        )
+        public FileService(ILogger<FileService> logger)
         {
             _logger = logger;
-            _codeGenConfig = codeGenConfigOptions.Value;
         }
 
         public Task<string> Read(string path)

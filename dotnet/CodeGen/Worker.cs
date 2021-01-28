@@ -1,5 +1,6 @@
 using CodeGen.Generators;
 using CodeGen.Models;
+using CodeGen.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -12,29 +13,27 @@ namespace CodeGen
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly CodeGenConfig _codeGenConfig;
+        private readonly IAppSettingsService _appSettingsService;
         private readonly IProjectGenerator _projectGenerator;
 
         public Worker(
             ILogger<Worker> logger,
-            IOptions<CodeGenConfig> codeGenConfigOptions,
+            IAppSettingsService appSettingsService,
             IProjectGenerator projectGenerator
         )
         {
             _logger = logger;
-            _codeGenConfig = codeGenConfigOptions.Value;
+            _appSettingsService = appSettingsService;
             _projectGenerator = projectGenerator;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation($"Name: {_codeGenConfig.Name}");
-            _logger.LogInformation($"Description: {_codeGenConfig.Description}");
-
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
                 {
+                    await _appSettingsService.Load();
                     await _projectGenerator.Generate();
                 }
                 catch (Exception ex)
