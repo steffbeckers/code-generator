@@ -6,10 +6,50 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
     <Compile Remove="_Output\**" />
+    <Content Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
     <Content Remove="_Output\**" />
+    <EmbeddedResource Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
     <EmbeddedResource Remove="_Output\**" />
+    <None Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
     <None Remove="_Output\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerPartial.cs" />
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\Models\Model.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelPartial.cs" />
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModel.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelPartial.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Controller.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Projects\WebAPI\CodeGenOutput.API\Models\Model.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModel.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewModel.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

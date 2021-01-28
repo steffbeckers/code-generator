@@ -1,0 +1,51 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+
+namespace CodeGenOutput.API.Controllers
+{
+    [Route("api/<#= _model.Name.ToLower() #>s")]
+    [ApiController]
+    public class <#= _model.Name #>sController : ControllerBase
+    {
+        // GET: api/<#= _model.Name.ToLower() #>s
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok();
+        }
+
+        // GET api/<#= _model.Name.ToLower() #>s/{id}
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            return Ok();
+        }
+
+        // POST api/<#= _model.Name.ToLower() #>s
+        [HttpPost]
+        public IActionResult Create([FromBody] <#= _model.Name #>VM <#= _model.Name.ToLower() #>)
+        {
+            return Ok();
+        }
+
+        // PUT api/<#= _model.Name.ToLower() #>s/{id}
+        [HttpPut("{id}")]
+        public IActionResult Update(Guid id, [FromBody] <#= _model.Name #>VM <#= _model.Name.ToLower() #>)
+        {
+            return Ok();
+        }
+
+        // DELETE api/<#= _model.Name.ToLower() #>s/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            return Ok();
+        }
+    }
+}

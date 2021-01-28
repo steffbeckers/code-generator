@@ -33,7 +33,16 @@ namespace CodeGen
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _projectGenerator.Generate();
+                try
+                {
+                    await _projectGenerator.Generate();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message, ex);
+                    //throw;
+                }
+
                 await Task.Delay(5000);
             }
 

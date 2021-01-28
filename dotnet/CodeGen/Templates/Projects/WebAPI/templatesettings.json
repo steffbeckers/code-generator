@@ -1,18 +1,22 @@
 ﻿{
   "ConfigBasedGenerator": [
     //{
-    //  "T4Template": "Services\\EmailService.tt",
+    //  "T4Template": "CodeGenOutput.Services\\Notifications\EmailService.tt",
     //  "Output": "EmailService.cs"
     //}
   ],
   "ModelsBasedGenerator": [
     {
-      "T4Template": "Models\\Model.tt",
+      "T4Template": "CodeGenOutput.API\\Models\\Model.tt",
       "Output": "{0}.cs"
     },
     {
-      "T4Template": "ViewModels\\ViewModel.tt",
+      "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModel.tt",
       "Output": "{0}VM.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Controllers\\Controller.tt",
+      "Output": "{0}sController.cs"
     }
   ]
 }
