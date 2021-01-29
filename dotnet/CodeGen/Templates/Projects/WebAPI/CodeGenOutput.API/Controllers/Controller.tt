@@ -4,10 +4,14 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.DAL;
+using CodeGenOutput.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Controllers
 {
@@ -15,39 +19,93 @@ namespace CodeGenOutput.API.Controllers
     [ApiController]
     public class <#= _model.Name #>sController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public <#= _model.Name #>sController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/<#= _model.Name.ToLower() #>s
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Get<#= _model.Name #>s()
         {
-            return Ok();
+            return await _context.<#= _model.Name #>s.ToListAsync();
         }
 
-        // GET api/<#= _model.Name.ToLower() #>s/{id}
+        // GET: api/<#= _model.Name.ToLower() #>s/{id}
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public async Task<ActionResult<<#= _model.Name #>>> Get<#= _model.Name #>(Guid id)
         {
-            return Ok();
-        }
+            var <#= _model.Name.ToLower() #> = await _context.<#= _model.Name #>s.FindAsync(id);
 
-        // POST api/<#= _model.Name.ToLower() #>s
+            if (<#= _model.Name.ToLower() #> == null)
+            {
+                return NotFound();
+            }
+
+            return <#= _model.Name.ToLower() #>;
+        }
+        
+        // POST: api/<#= _model.Name.ToLower() #>s
         [HttpPost]
-        public IActionResult Create([FromBody] <#= _model.Name #>VM <#= _model.Name.ToLower() #>)
+        public async Task<ActionResult<<#= _model.Name #>>> Create<#= _model.Name #>(<#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
-            return Ok();
+            _context.<#= _model.Name #>s.Add(<#= _model.Name.ToLower() #>);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("Get<#= _model.Name #>", new { id = <#= _model.Name.ToLower() #>.Id }, <#= _model.Name.ToLower() #>);
         }
 
-        // PUT api/<#= _model.Name.ToLower() #>s/{id}
+        // PUT: api/<#= _model.Name.ToLower() #>s/{id}
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, [FromBody] <#= _model.Name #>VM <#= _model.Name.ToLower() #>)
+        public async Task<IActionResult> Update<#= _model.Name #>(Guid id, <#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
-            return Ok();
+            if (id != <#= _model.Name.ToLower() #>.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(<#= _model.Name.ToLower() #>).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!<#= _model.Name #>Exists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // DELETE api/<#= _model.Name.ToLower() #>s/{id}
+        // DELETE: api/<#= _model.Name.ToLower() #>s/{id}
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete<#= _model.Name #>(Guid id)
         {
-            return Ok();
+            var <#= _model.Name.ToLower() #> = await _context.<#= _model.Name #>s.FindAsync(id);
+            if (<#= _model.Name.ToLower() #> == null)
+            {
+                return NotFound();
+            }
+
+            _context.<#= _model.Name #>s.Remove(<#= _model.Name.ToLower() #>);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool <#= _model.Name #>Exists(Guid id)
+        {
+            return _context.<#= _model.Name #>s.Any(e => e.Id == id);
         }
     }
 }

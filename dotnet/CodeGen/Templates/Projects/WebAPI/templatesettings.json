@@ -1,9 +1,9 @@
 ﻿{
   "ConfigBasedGenerator": [
-    //{
-    //  "T4Template": "CodeGenOutput.Services\\Notifications\EmailService.tt",
-    //  "Output": "EmailService.cs"
-    //}
+    {
+      "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContext.tt",
+      "Output": "ApplicationDbContext.cs"
+    }
   ],
   "ModelsBasedGenerator": [
     {

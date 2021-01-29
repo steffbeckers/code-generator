@@ -1,7 +1,11 @@
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.DAL;
+using CodeGenOutput.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Controllers
 {
@@ -9,39 +13,93 @@ namespace CodeGenOutput.API.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public AccountsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/accounts
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
-            return Ok();
+            return await _context.Accounts.ToListAsync();
         }
 
-        // GET api/accounts/{id}
+        // GET: api/accounts/{id}
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public async Task<ActionResult<Account>> GetAccount(Guid id)
         {
-            return Ok();
-        }
+            var account = await _context.Accounts.FindAsync(id);
 
-        // POST api/accounts
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            return account;
+        }
+        
+        // POST: api/accounts
         [HttpPost]
-        public IActionResult Create([FromBody] AccountVM account)
+        public async Task<ActionResult<Account>> CreateAccount(Account account)
         {
-            return Ok();
+            _context.Accounts.Add(account);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
         }
 
-        // PUT api/accounts/{id}
+        // PUT: api/accounts/{id}
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, [FromBody] AccountVM account)
+        public async Task<IActionResult> UpdateAccount(Guid id, Account account)
         {
-            return Ok();
+            if (id != account.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(account).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AccountExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // DELETE api/accounts/{id}
+        // DELETE: api/accounts/{id}
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> DeleteAccount(Guid id)
         {
-            return Ok();
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            _context.Accounts.Remove(account);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool AccountExists(Guid id)
+        {
+            return _context.Accounts.Any(e => e.Id == id);
         }
     }
 }

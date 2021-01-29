@@ -23,6 +23,12 @@
       <DependentUpon>Controller.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerPartial.cs" />
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContext.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApplicationDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextPartial.cs" />
     <Compile Include="Templates\Projects\WebAPI\CodeGenOutput.API\Models\Model.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -41,6 +47,10 @@
     <None Include="Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Controller.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContext.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ApplicationDbContext.cs</LastGenOutput>
     </None>
     <None Include="Templates\Projects\WebAPI\CodeGenOutput.API\Models\Model.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

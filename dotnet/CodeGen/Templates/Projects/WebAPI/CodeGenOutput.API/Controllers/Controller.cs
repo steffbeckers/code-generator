@@ -29,90 +29,322 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using CodeGenOutput.ViewModels;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing System;\r\n" +
-                    "using System.Collections.Generic;\r\n\r\nnamespace CodeGenOutput.API.Controllers\r\n{\r" +
-                    "\n    [Route(\"api/");
-            
-            #line 14 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write("s\")]\r\n    [ApiController]\r\n    public class ");
-            
-            #line 16 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("sController : ControllerBase\r\n    {\r\n        // GET: api/");
+            this.Write(@"using CodeGenOutput.API.DAL;
+using CodeGenOutput.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CodeGenOutput.API.Controllers
+{
+    [Route(""api/");
             
             #line 18 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("s\r\n        [HttpGet]\r\n        public IActionResult Get()\r\n        {\r\n            " +
-                    "return Ok();\r\n        }\r\n\r\n        // GET api/");
+            this.Write("s\")]\r\n    [ApiController]\r\n    public class ");
             
-            #line 25 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write("s/{id}\r\n        [HttpGet(\"{id}\")]\r\n        public IActionResult GetById(Guid id)\r" +
-                    "\n        {\r\n            return Ok();\r\n        }\r\n\r\n        // POST api/");
-            
-            #line 32 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write("s\r\n        [HttpPost]\r\n        public IActionResult Create([FromBody] ");
-            
-            #line 34 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 20 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
             
             #line default
             #line hidden
-            this.Write("VM ");
+            this.Write("sController : ControllerBase\r\n    {\r\n        private readonly ApplicationDbContex" +
+                    "t _context;\r\n\r\n        public ");
             
-            #line 34 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write(")\r\n        {\r\n            return Ok();\r\n        }\r\n\r\n        // PUT api/");
-            
-            #line 39 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write("s/{id}\r\n        [HttpPut(\"{id}\")]\r\n        public IActionResult Update(Guid id, [" +
-                    "FromBody] ");
-            
-            #line 41 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 24 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
             
             #line default
             #line hidden
-            this.Write("VM ");
+            this.Write("sController(ApplicationDbContext context)\r\n        {\r\n            _context = cont" +
+                    "ext;\r\n        }\r\n\r\n        // GET: api/");
             
-            #line 41 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 29 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write(")\r\n        {\r\n            return Ok();\r\n        }\r\n\r\n        // DELETE api/");
+            this.Write("s\r\n        [HttpGet]\r\n        public async Task<ActionResult<IEnumerable<");
             
-            #line 46 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            #line 31 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">>> Get");
+            
+            #line 31 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s()\r\n        {\r\n            return await _context.");
+            
+            #line 33 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s.ToListAsync();\r\n        }\r\n\r\n        // GET: api/");
+            
+            #line 36 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
             
             #line default
             #line hidden
-            this.Write("s/{id}\r\n        [HttpDelete(\"{id}\")]\r\n        public IActionResult Delete(Guid id" +
-                    ")\r\n        {\r\n            return Ok();\r\n        }\r\n    }\r\n}\r\n");
+            this.Write("s/{id}\r\n        [HttpGet(\"{id}\")]\r\n        public async Task<ActionResult<");
+            
+            #line 38 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">> Get");
+            
+            #line 38 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("(Guid id)\r\n        {\r\n            var ");
+            
+            #line 40 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(" = await _context.");
+            
+            #line 40 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s.FindAsync(id);\r\n\r\n            if (");
+            
+            #line 42 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(" == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n  " +
+                    "          return ");
+            
+            #line 47 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n        }\r\n        \r\n        // POST: api/");
+            
+            #line 50 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("s\r\n        [HttpPost]\r\n        public async Task<ActionResult<");
+            
+            #line 52 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">> Create");
+            
+            #line 52 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("(");
+            
+            #line 52 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 52 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        {\r\n            _context.");
+            
+            #line 54 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s.Add(");
+            
+            #line 54 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n            await _context.SaveChangesAsync();\r\n\r\n            return CreatedA" +
+                    "tAction(\"Get");
+            
+            #line 57 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", new { id = ");
+            
+            #line 57 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(".Id }, ");
+            
+            #line 57 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n        }\r\n\r\n        // PUT: api/");
+            
+            #line 60 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("s/{id}\r\n        [HttpPut(\"{id}\")]\r\n        public async Task<IActionResult> Updat" +
+                    "e");
+            
+            #line 62 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("(Guid id, ");
+            
+            #line 62 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 62 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        {\r\n            if (id != ");
+            
+            #line 64 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(".Id)\r\n            {\r\n                return BadRequest();\r\n            }\r\n\r\n     " +
+                    "       _context.Entry(");
+            
+            #line 69 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(").State = EntityState.Modified;\r\n\r\n            try\r\n            {\r\n              " +
+                    "  await _context.SaveChangesAsync();\r\n            }\r\n            catch (DbUpdate" +
+                    "ConcurrencyException)\r\n            {\r\n                if (!");
+            
+            #line 77 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(@"Exists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // DELETE: api/");
+            
+            #line 90 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("s/{id}\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task<IActionResult> De" +
+                    "lete");
+            
+            #line 92 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("(Guid id)\r\n        {\r\n            var ");
+            
+            #line 94 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(" = await _context.");
+            
+            #line 94 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s.FindAsync(id);\r\n            if (");
+            
+            #line 95 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(" == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n  " +
+                    "          _context.");
+            
+            #line 100 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s.Remove(");
+            
+            #line 100 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n            await _context.SaveChangesAsync();\r\n\r\n            return NoConten" +
+                    "t();\r\n        }\r\n\r\n        private bool ");
+            
+            #line 106 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Exists(Guid id)\r\n        {\r\n            return _context.");
+            
+            #line 108 "C:\Dev\steffbeckers\code-generator\dotnet\CodeGen\Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\Controller.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s.Any(e => e.Id == id);\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
