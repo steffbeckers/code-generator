@@ -42,10 +42,9 @@ namespace CodeGen
                     //throw;
                 }
 
-                await Task.Delay(5000);
+                _logger.LogInformation("Waiting 10 seconds before regenerating");
+                await Task.Delay(10000);
             }
-
-            _logger.LogInformation("Done");
         }
     }
 }

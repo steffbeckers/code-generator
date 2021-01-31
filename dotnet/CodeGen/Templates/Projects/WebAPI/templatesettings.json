@@ -1,4 +1,7 @@
 ﻿{
+  "StartupProjectPath": "CodeGenOutput.API\\",
+  "RecreateDatabaseAfterGenerate": true,
+  "TestProjectAfterGenerate": true,
   "ConfigBasedGenerator": [
     {
       "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContext.tt",

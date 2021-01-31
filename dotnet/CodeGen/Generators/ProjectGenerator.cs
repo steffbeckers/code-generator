@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -114,6 +115,7 @@ namespace CodeGen.Generators
                         if (!string.IsNullOrEmpty(templateSettingsJson))
                         {
                             codeGenTemplateSettings = JsonConvert.DeserializeObject<CodeGenTemplateSettings>(templateSettingsJson);
+                            codeGenTemplateSettings.TemplatePath = Path.GetDirectoryName(projectTemplateFile);
                         }
                     }
                 }
@@ -145,6 +147,39 @@ namespace CodeGen.Generators
                             await _modelsBasedGenerator.Generate(projectTemplateFile, data);
                         }
                     }
+                }
+
+                // Determine startup project path
+                string startupProjectPath = Path.Combine(
+                    _appSettingsService.CodeGenConfig.Paths.Output,
+                    codeGenTemplateSettings.TemplatePath,
+                    codeGenTemplateSettings.StartupProjectPath
+                );
+                startupProjectPath = startupProjectPath.Replace("Templates\\", "");
+
+                // ApplicationDbContext
+                if (codeGenTemplateSettings.RecreateDatabaseAfterGenerate)
+                {
+                    // Drop the existing database
+                    ProcessStartInfo dotnetDropDatabase = new ProcessStartInfo("dotnet");
+                    dotnetDropDatabase.Arguments = @"ef database drop --force";
+                    dotnetDropDatabase.WorkingDirectory = startupProjectPath;
+                    Process.Start(dotnetDropDatabase).WaitForExit();
+
+                    // Generate new Initial migration
+                    ProcessStartInfo dotnetAddInitialMigration = new ProcessStartInfo("dotnet");
+                    dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir .\DAL\Migrations";
+                    dotnetAddInitialMigration.WorkingDirectory = startupProjectPath;
+                    Process.Start(dotnetAddInitialMigration).WaitForExit();
+                }
+
+                // Test project after generate
+                if (codeGenTemplateSettings.TestProjectAfterGenerate)
+                {
+                    ProcessStartInfo dotnetRun = new ProcessStartInfo("dotnet");
+                    dotnetRun.Arguments = @"run";
+                    dotnetRun.WorkingDirectory = startupProjectPath;
+                    Process.Start(dotnetRun).WaitForExit();
                 }
             }
         }
