@@ -16,25 +16,27 @@
   <ItemGroup>
     <Watch Include="**\*settings*.json" />
     <Watch Remove="_Output\**" />
-    <DotNetCliToolReference Include="dotnet-t4-project-tool" Version="2.2.0" />
-    <TextTemplate Include="**\*.tt" />
-    <Generated Include="**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-t4-project-tool" Version="2.2.0" />
     <TextTemplate Include="**\*.tt" />
-    <!-- <Generated Include="**\*.Generated.cs" /> -->
+    <Generated Include="**\*.g.cs" />
   </ItemGroup>
 
   <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
-    <!-- <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.Filename) -o $(RootNameSpace).%(TextTemplate.Filename).Generated.cs" /> -->
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity)" />
+    <ItemGroup>
+      <TextTemplate>
+        <NameSpace>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('\', '.').Replace('.%(TextTemplate.Filename).tt', ''))</NameSpace>
+        <OutputPath>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('.tt', '.g.cs'))</OutputPath>
+      </TextTemplate>
+    </ItemGroup>
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.NameSpace).%(TextTemplate.Filename) -o %(TextTemplate.OutputPath)" />
   </Target>
 
-  <!-- <Target Name="TextTemplateClean" AfterTargets="Clean">
+  <Target Name="TextTemplateClean" AfterTargets="Clean">
     <Delete Files="@(Generated)" />
-  </Target> -->
+  </Target>
 
   <ItemGroup>
     <Compile Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
