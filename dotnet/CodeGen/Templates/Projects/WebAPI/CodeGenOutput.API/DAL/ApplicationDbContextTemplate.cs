@@ -2,11 +2,11 @@
 
 namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL
 {
-    public partial class ApplicationDbContext
+    public partial class ApplicationDbContextTemplate : ITextTemplate
     {
         private readonly CodeGenConfig _config;
 
-        public ApplicationDbContext(CodeGenConfig config)
+        public ApplicationDbContextTemplate(CodeGenConfig config)
         {
             _config = config;
         }
