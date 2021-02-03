@@ -24,16 +24,17 @@
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-t4-project-tool" Version="2.2.0" />
     <TextTemplate Include="**\*.tt" />
-    <Generated Include="**\*.Generated.cs" />
+    <!-- <Generated Include="**\*.Generated.cs" /> -->
   </ItemGroup>
 
   <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.Filename) -o $(RootNameSpace).%(TextTemplate.Filename).Generated.cs" />
+    <!-- <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.Filename) -o $(RootNameSpace).%(TextTemplate.Filename).Generated.cs" /> -->
+    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity)" />
   </Target>
 
-  <Target Name="TextTemplateClean" AfterTargets="Clean">
+  <!-- <Target Name="TextTemplateClean" AfterTargets="Clean">
     <Delete Files="@(Generated)" />
-  </Target>
+  </Target> -->
 
   <ItemGroup>
     <Compile Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
