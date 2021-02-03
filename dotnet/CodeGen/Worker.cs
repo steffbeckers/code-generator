@@ -29,22 +29,21 @@ namespace CodeGen
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            // while (!stoppingToken.IsCancellationRequested)
+            // {
+            try
             {
-                try
-                {
-                    await _appSettingsService.Load();
-                    await _projectGenerator.Generate();
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex.Message, ex);
-                    //throw;
-                }
-
-                _logger.LogInformation("Waiting 10 seconds before regenerating");
-                await Task.Delay(10000);
+                await _appSettingsService.Load();
+                await _projectGenerator.Generate();
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                throw;
+            }
+            //     _logger.LogInformation("Waiting 10 seconds before regenerating");
+            //     await Task.Delay(10000);
+            // }
         }
     }
 }
