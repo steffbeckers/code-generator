@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-CodeGen-06075989-882D-4771-BD2D-1D6354FF0F9D</UserSecretsId>
   </PropertyGroup>
@@ -21,14 +20,14 @@
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-t4-project-tool" Version="2.2.0" />
     <TextTemplate Include="**\*.tt" />
-    <Generated Include="**\*.g.cs" />
+    <Generated Include="**\*.Generated.cs" />
   </ItemGroup>
 
   <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <TextTemplate>
         <NameSpace>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('\', '.').Replace('.%(TextTemplate.Filename).tt', ''))</NameSpace>
-        <OutputPath>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('.tt', '.g.cs'))</OutputPath>
+        <OutputPath>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('.tt', '.Generated.cs'))</OutputPath>
       </TextTemplate>
     </ItemGroup>
     <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.NameSpace).%(TextTemplate.Filename) -o %(TextTemplate.OutputPath)" />

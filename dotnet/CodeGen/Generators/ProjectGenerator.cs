@@ -64,7 +64,7 @@ namespace CodeGen.Generators
 
                     if (projectTemplateFile.EndsWith("templatesettings.json") ||
                         projectTemplateFile.EndsWith(".tt") ||
-                        projectTemplateFile.EndsWith("Partial.cs"))
+                        projectTemplateFile.EndsWith(".Generated.cs"))
                     {
                         templateGenerationFiles.Add(projectTemplateFile);
                     }

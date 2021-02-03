@@ -44,6 +44,10 @@ namespace CodeGen.Generators
             // File text
             string templateTypeFormat = projectTemplateFile.Replace("\\", ".").Replace(".tt", "");
             Type templateType = Type.GetType($"CodeGen.{templateTypeFormat}, CodeGen");
+            if (templateType == null) {
+                throw new Exception($"Can't get type for T4 template: CodeGen.{templateTypeFormat}, CodeGen");
+            }
+
             var template = Activator.CreateInstance(templateType, _appSettingsService.CodeGenConfig) as dynamic;
             string fileText = template.TransformText();
 
