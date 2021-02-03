@@ -13,6 +13,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="_Output\**" />
+    <Content Remove="_Output\**" />
+    <EmbeddedResource Remove="_Output\**" />
+    <None Remove="_Output\**" />
+
+    <Compile Remove="Templates\**" />
+    <Content Remove="Templates\**" />
+    <EmbeddedResource Remove="Templates\**" />
+    <None Remove="Templates\**" />
+    
+    <Compile Include="Templates\**\*Template*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Watch Include="**\*settings*.json" />
     <Watch Remove="_Output\**" />
   </ItemGroup>
@@ -36,16 +50,4 @@
   <Target Name="TextTemplateClean" AfterTargets="Clean">
     <Delete Files="@(Generated)" />
   </Target>
-
-  <ItemGroup>
-    <Compile Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
-    <Content Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
-    <EmbeddedResource Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
-    <None Remove="Templates\Projects\WebAPI\CodeGenOutput.API\**" />
-    
-    <Compile Remove="_Output\**" />
-    <Content Remove="_Output\**" />
-    <EmbeddedResource Remove="_Output\**" />
-    <None Remove="_Output\**" />
-  </ItemGroup>
 </Project>
