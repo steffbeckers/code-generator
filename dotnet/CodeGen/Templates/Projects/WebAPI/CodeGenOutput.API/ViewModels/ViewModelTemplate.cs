@@ -4,8 +4,8 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels
 {
     public partial class ViewModelTemplate
     {
-        private readonly CodeGenConfig _config;
-        private readonly CodeGenModel _model;
+        public CodeGenConfig _config;
+        public CodeGenModel _model;
 
         public ViewModelTemplate(CodeGenConfig config, CodeGenModel model)
         {
