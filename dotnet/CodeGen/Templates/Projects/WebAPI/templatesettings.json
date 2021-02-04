@@ -4,22 +4,22 @@
   "StartupProjectPath": "CodeGenOutput.API\\",
   "ConfigBasedGenerator": [
     {
-      "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContext.tt",
+      "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
       "Output": "ApplicationDbContext.cs"
     }
   ],
   "ModelsBasedGenerator": [
     {
-      "T4Template": "CodeGenOutput.API\\Models\\Model.tt",
+      "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
+      "Output": "{0}sController.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Models\\ModelTemplate.tt",
       "Output": "{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModel.tt",
+      "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModelTemplate.tt",
       "Output": "{0}VM.cs"
-    },
-    {
-      "T4Template": "CodeGenOutput.API\\Controllers\\Controller.tt",
-      "Output": "{0}sController.cs"
     }
   ]
 }

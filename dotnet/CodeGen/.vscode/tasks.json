@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/_Output/Projects/WebAPI/CodeGenOutput.API/CodeGenOutput.API.csproj",
+        "${workspaceFolder}/CodeGen.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/_Output/Projects/WebAPI/CodeGenOutput.API/CodeGenOutput.API.csproj",
+        "${workspaceFolder}CodeGen.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -32,7 +32,7 @@
       "args": [
         "watch",
         "run",
-        "${workspaceFolder}/_Output/Projects/WebAPI/CodeGenOutput.API/CodeGenOutput.API.csproj",
+        "${workspaceFolder}CodeGen.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],

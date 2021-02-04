@@ -11,5 +11,6 @@ namespace CodeGenOutput.ViewModels
 		public string Telephone { get; set; }
 		public string Email { get; set; }
 		public string Website { get; set; }
+		public string VAT { get; set; }
 	}
 }
