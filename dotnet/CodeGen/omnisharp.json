@@ -1,10 +1,5 @@
 {
   "fileOptions": {
-    "systemExcludeSearchPatterns": [
-      "**/bin/**/*",
-      "**/obj/**/*"
-      // "**/_Output/**/*",
-      // "**/Templates/**/*"
-    ]
+    "systemExcludeSearchPatterns": ["**/bin/**/*", "**/obj/**/*"]
   }
 }
