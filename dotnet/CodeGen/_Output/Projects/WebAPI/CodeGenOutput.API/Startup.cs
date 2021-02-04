@@ -1,3 +1,4 @@
+using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,8 +24,10 @@ namespace CodeGenOutput.API
             services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(_configuration.GetConnectionString("ApplicationDbContext")));
 
-            services.AddControllers();
+            services.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();
 
+            services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CodeGenOutput.API", Version = "v1" });

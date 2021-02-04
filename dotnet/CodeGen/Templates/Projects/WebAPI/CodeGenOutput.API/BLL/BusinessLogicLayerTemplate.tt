@@ -1,0 +1,20 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+using System;
+
+namespace CodeGenOutput.API.BLL
+{
+    public interface IBusinessLogicLayer :
+<# foreach(CodeGenModel model in _config.Models) { #>
+        I<#= model.Name#>BLL<#= model != _config.Models.Last() ? "," : "" #>
+<# } #>
+    {}
+
+    public class BusinessLogicLayer : IBusinessLogicLayer
+    {
+    }
+}

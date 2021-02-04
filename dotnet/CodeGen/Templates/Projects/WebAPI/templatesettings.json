@@ -1,14 +1,26 @@
 ﻿{
   "RecreateDatabaseAfterGenerate": false,
-  "TestProjectAfterGenerate": false,
+  "TestProjectAfterGenerate": true,
   "StartupProjectPath": "CodeGenOutput.API\\",
   "ConfigBasedGenerator": [
     {
       "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
       "Output": "ApplicationDbContext.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+      "Output": "_BusinessLogicLayer.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
+      "Output": "Startup.cs"
     }
   ],
   "ModelsBasedGenerator": [
+    {
+      "T4Template": "CodeGenOutput.API\\BLL\\BLLTemplate.tt",
+      "Output": "{0}BLL.cs"
+    },
     {
       "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
       "Output": "{0}sController.cs"
