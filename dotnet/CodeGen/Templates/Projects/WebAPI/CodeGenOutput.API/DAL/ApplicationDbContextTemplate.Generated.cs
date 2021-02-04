@@ -29,59 +29,57 @@ namespace CodeGenOutput.API.DAL
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {}
 
 ");
             
             #line default
             #line hidden
             
-            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  foreach (CodeGenModel model in _config.Models) { 
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("        public DbSet<");
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("> ");
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("s { get; set; }\r\n");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("    }\r\n}\r\n");
             
             #line default
