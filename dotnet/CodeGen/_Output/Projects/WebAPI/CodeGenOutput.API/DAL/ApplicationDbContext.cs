@@ -5,10 +5,8 @@ namespace CodeGenOutput.API.DAL
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {}
 
         public DbSet<Account> Accounts { get; set; }
     }
