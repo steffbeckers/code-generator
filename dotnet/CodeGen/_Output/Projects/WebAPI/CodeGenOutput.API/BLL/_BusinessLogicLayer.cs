@@ -12,10 +12,12 @@ namespace CodeGenOutput.API.BLL
     public partial class BusinessLogicLayer : IBusinessLogicLayer
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly AccountRepository _accountRepository;
 
         public BusinessLogicLayer(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _accountRepository = (AccountRepository)unitOfWork.GetRepository<Account>();
         }
     }
 }

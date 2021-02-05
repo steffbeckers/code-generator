@@ -16,24 +16,16 @@ namespace CodeGenOutput.API.BLL
         Task DeleteAccountAsync(Account account);
     }
 
-    public class AccountBLL : BusinessLogicLayer, IAccountBLL
+    public partial class BusinessLogicLayer : IAccountBLL
     {
-        private readonly AccountRepository _accountRepository;
-
-        public AccountBLL(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-            _accountRepository = (AccountRepository)unitOfWork.GetRepository<Account>();
-        }
-
         public async Task<List<Account>> GetAccountsAsync()
         {
-            return (List<Account>) await accountRepository.GetAsync();
+            return (List<Account>) await _accountRepository.GetAsync();
         }
 
         public async Task<Account> GetAccountByIdAsync(Guid id)
         {
-            
-            return await accountRepository.GetByIdAsync(id);
+            return await _accountRepository.GetByIdAsync(id);
         }
 
         public async Task<Account> CreateAccountAsync(Account account)
