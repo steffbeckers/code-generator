@@ -1,16 +1,19 @@
 ﻿using CodeGenOutput.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CodeGenOutput.API.DAL.Repositories
+namespace CodeGenOutput.API.DAL
 {
-    public class AccountRepository : Repository<Account>
+    public static class AccountRepositoryExtensions
     {
-        private readonly ApplicationDbContext _dbContext;
-
-        public AccountRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public static async Task<IEnumerable<Account>> SearchAccount(
+            this IRepository<Account> repository,
+            string term
+        )
         {
-            _dbContext = dbContext;
+            return await repository.GetAsync(x => x.Name.Contains(term));
         }
-
-        // Add additional repository methods for account here.
     }
 }

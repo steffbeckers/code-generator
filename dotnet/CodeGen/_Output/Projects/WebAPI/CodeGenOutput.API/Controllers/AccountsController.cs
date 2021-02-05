@@ -1,11 +1,8 @@
 using CodeGenOutput.API.BLL;
-using CodeGenOutput.API.DAL;
 using CodeGenOutput.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Controllers
@@ -34,7 +31,14 @@ namespace CodeGenOutput.API.Controllers
         {
             return Ok(await _bll.GetAccountByIdAsync(id));
         }
-        
+
+        // GET: api/accounts/search
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Account>>> SearchAccount([FromQuery] string term)
+        {
+            return Ok(await _bll.SearchAccountAsync(term));
+        }
+
         // POST: api/accounts
         [HttpPost]
         public async Task<ActionResult<Account>> CreateAccount([FromBody] Account account)

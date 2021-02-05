@@ -1,9 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace CodeGenOutput.API.DAL
 {
@@ -23,7 +23,7 @@ namespace CodeGenOutput.API.DAL
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly ApplicationDbContext _dbContext;
-        
+
         public Repository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;

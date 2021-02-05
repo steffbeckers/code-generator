@@ -29,7 +29,7 @@ namespace CodeGenOutput.API
             services.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();
 
             services.AddControllers();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CodeGenOutput.API", Version = "v1" });
