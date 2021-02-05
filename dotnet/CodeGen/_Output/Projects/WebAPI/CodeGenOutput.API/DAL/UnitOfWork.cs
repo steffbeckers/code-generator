@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.DAL
@@ -6,7 +7,7 @@ namespace CodeGenOutput.API.DAL
     public interface IUnitOfWork : IAsyncDisposable
     {
         IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
-        Task SaveChangesAsync();
+        Task Commit();
     }
 
     public class UnitOfWork : IUnitOfWork
@@ -23,9 +24,9 @@ namespace CodeGenOutput.API.DAL
             return new Repository<TEntity>(_dbContext);
         }
 
-        public Task SaveChangesAsync()
+        public async Task Commit()
         {
-            throw new NotImplementedException();
+            await _dbContext.SaveChangesAsync();
         }
 
         public ValueTask DisposeAsync()

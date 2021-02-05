@@ -24,6 +24,8 @@ namespace CodeGenOutput.API
             services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(_configuration.GetConnectionString("ApplicationDbContext")));
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();
 
             services.AddControllers();
