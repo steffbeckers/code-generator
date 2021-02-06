@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "CodeGenCLI": {
-      "commandName": "Project",
-      "commandLineArgs": "web-api"
-    }
-  }
-}

@@ -1,4 +1,0 @@
-{
-  "uiFramework": "<%= uiFramework %>",
-  "style": "<%= styleext %>"
-}
