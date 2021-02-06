@@ -8,11 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace CodeGen
 {
-    public interface ITextTemplate
-    {
-        string TransformText() => throw new NotImplementedException();
-    }
-
     public class Program
     {
         public static void Main(string[] args)
