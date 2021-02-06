@@ -30,6 +30,10 @@
       "Output": "{0}.cs"
     },
     {
+      "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
+      "Output": "{0}Repository.cs"
+    },
+    {
       "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModelTemplate.tt",
       "Output": "{0}VM.cs"
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
+namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
@@ -16,79 +16,64 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
     using System;
     
     
-    public partial class ModelTemplate : ModelTemplateBase {
+    public partial class RepositoryTemplate : RepositoryTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
             
-            #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("using System;\r\n\r\nnamespace CodeGenOutput.Models\r\n{\r\n    public class ");
+            #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("using CodeGenOutput.Models;\r\nusing System.Collections.Generic;\r\nusing System.Thre" +
+                    "ading.Tasks;\r\n\r\nnamespace CodeGenOutput.API.DAL.Repositories\r\n{\r\n    public stat" +
+                    "ic class ");
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("\r\n    {\r\n");
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("RepositoryExtensions\r\n    {\r\n        public static async Task<IEnumerable<");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties) { 
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("        public ");
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(">> Search");
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) ));
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("(\r\n            this IRepository<");
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" ");
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" { get; set; }\r\n");
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("    }\r\n}\r\n");
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("> repository,\r\n            string term\r\n        )\r\n        {\r\n            return " +
+                    "await repository.GetAsync(x => x.Name.Contains(term));\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden
@@ -99,7 +84,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
         }
     }
     
-    public class ModelTemplateBase {
+    public class RepositoryTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         

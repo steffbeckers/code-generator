@@ -4,13 +4,11 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.BLL;
 using CodeGenOutput.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Controllers
@@ -19,93 +17,56 @@ namespace CodeGenOutput.API.Controllers
     [ApiController]
     public class <#= _model.Name #>sController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly I<#= _model.Name #>BLL _bll;
 
-        public <#= _model.Name #>sController(ApplicationDbContext context)
+        public <#= _model.Name #>sController(IBusinessLogicLayer bll)
         {
-            _context = context;
+            _bll = bll;
         }
 
         // GET: api/<#= _model.Name.ToLower() #>s
         [HttpGet]
         public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Get<#= _model.Name #>s()
         {
-            return await _context.<#= _model.Name #>s.ToListAsync();
+            return Ok(await _bll.Get<#= _model.Name #>sAsync());
         }
 
         // GET: api/<#= _model.Name.ToLower() #>s/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<<#= _model.Name #>>> Get<#= _model.Name #>(Guid id)
+        public async Task<ActionResult<<#= _model.Name #>>> Get<#= _model.Name #>ById([FromRoute] Guid id)
         {
-            var <#= _model.Name.ToLower() #> = await _context.<#= _model.Name #>s.FindAsync(id);
-
-            if (<#= _model.Name.ToLower() #> == null)
-            {
-                return NotFound();
-            }
-
-            return <#= _model.Name.ToLower() #>;
+            return Ok(await _bll.Get<#= _model.Name #>ByIdAsync(id));
         }
-        
+
+        // GET: api/<#= _model.Name.ToLower() #>s/search
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Search<#= _model.Name #>([FromQuery] string term)
+        {
+            return Ok(await _bll.Search<#= _model.Name #>Async(term));
+        }
+
         // POST: api/<#= _model.Name.ToLower() #>s
         [HttpPost]
-        public async Task<ActionResult<<#= _model.Name #>>> Create<#= _model.Name #>(<#= _model.Name #> <#= _model.Name.ToLower() #>)
+        public async Task<ActionResult<<#= _model.Name #>>> Create<#= _model.Name #>([FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
-            _context.<#= _model.Name #>s.Add(<#= _model.Name.ToLower() #>);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("Get<#= _model.Name #>", new { id = <#= _model.Name.ToLower() #>.Id }, <#= _model.Name.ToLower() #>);
+            <#= _model.Name #> created<#= _model.Name #> = await _bll.Create<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+            return CreatedAtAction("Get<#= _model.Name #>ById", new { id = created<#= _model.Name #>.Id }, created<#= _model.Name #>);
         }
 
         // PUT: api/<#= _model.Name.ToLower() #>s/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update<#= _model.Name #>(Guid id, <#= _model.Name #> <#= _model.Name.ToLower() #>)
+        public async Task<ActionResult<<#= _model.Name #>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
-            if (id != <#= _model.Name.ToLower() #>.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(<#= _model.Name.ToLower() #>).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!<#= _model.Name #>Exists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            if (id != <#= _model.Name.ToLower() #>.Id) { return BadRequest(); }
+            return Ok(await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>));
         }
 
         // DELETE: api/<#= _model.Name.ToLower() #>s/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete<#= _model.Name #>(Guid id)
         {
-            var <#= _model.Name.ToLower() #> = await _context.<#= _model.Name #>s.FindAsync(id);
-            if (<#= _model.Name.ToLower() #> == null)
-            {
-                return NotFound();
-            }
-
-            _context.<#= _model.Name #>s.Remove(<#= _model.Name.ToLower() #>);
-            await _context.SaveChangesAsync();
-
+            await _bll.Delete<#= _model.Name #>Async(new <#= _model.Name #>() { Id = id });
             return NoContent();
-        }
-
-        private bool <#= _model.Name #>Exists(Guid id)
-        {
-            return _context.<#= _model.Name #>s.Any(e => e.Id == id);
         }
     }
 }

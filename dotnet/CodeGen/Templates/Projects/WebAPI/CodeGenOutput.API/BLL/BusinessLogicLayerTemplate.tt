@@ -4,7 +4,8 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-using System;
+using CodeGenOutput.API.DAL;
+using CodeGenOutput.Models;
 
 namespace CodeGenOutput.API.BLL
 {
@@ -12,9 +13,20 @@ namespace CodeGenOutput.API.BLL
 <# foreach(CodeGenModel model in _config.Models) { #>
         I<#= model.Name#>BLL<#= model != _config.Models.Last() ? "," : "" #>
 <# } #>
-    {}
+    { }
 
-    public class BusinessLogicLayer : IBusinessLogicLayer
+    public partial class BusinessLogicLayer : IBusinessLogicLayer
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public BusinessLogicLayer(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+
+            // Repositories
+<# foreach(CodeGenModel model in _config.Models) { #>
+            _<#= model.Name.ToLower() #>Repository = unitOfWork.GetRepository<<#= model.Name#>>();
+<# } #>
+        }
     }
 }

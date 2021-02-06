@@ -5,14 +5,13 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
 using System;
-using System.Collections.Generic;
 
 namespace CodeGenOutput.ViewModels
 {
-	public class <#= _model.Name #>VM
-	{
+    public class <#= _model.Name #>VM
+    {
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
-		public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
+        public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
 <# } #>
-	}
+    }
 }

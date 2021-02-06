@@ -22,43 +22,658 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("using System;\r\n\r\nnamespace CodeGenOutput.API.BLL\r\n{\r\n    public interface I");
+            this.Write("using CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.Models;\r\nusing System;\r\nusing S" +
+                    "ystem.Collections.Generic;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace CodeGenOu" +
+                    "tput.API.BLL\r\n{\r\n    public interface I");
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("BLL {}\r\n\r\n    public class ");
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("BLL\r\n    {\r\n        Task<IEnumerable<");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("BLL : I");
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(">> Get");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("BLL\r\n    {\r\n    }\r\n}\r\n");
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("sAsync();\r\n        Task<");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("> Get");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("ByIdAsync(Guid id);\r\n        Task<IEnumerable<");
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(">> Search");
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(string term);\r\n        Task<");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("> Create");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(");\r\n        Task<");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("> Update");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(");\r\n        Task Delete");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(");\r\n    }\r\n\r\n    public partial class BusinessLogicLayer : I");
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("BLL\r\n    {\r\n        private readonly IRepository<");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("> _");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Repository;\r\n\r\n        public async Task<IEnumerable<");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(">> Get");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("sAsync()\r\n        {\r\n            return await _");
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Repository.GetAsync();\r\n        }\r\n\r\n        public async Task<");
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("> Get");
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("ByIdAsync(Guid id)\r\n        {\r\n            return await _");
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Repository.GetByIdAsync(id);\r\n        }\r\n\r\n        public async Task<IEnumerable<" +
+                    "");
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(">> Search");
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(string term)\r\n        {\r\n            return await _");
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Repository.Search");
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("(term);\r\n        }\r\n\r\n        public async Task<");
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("> Create");
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(");
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(")\r\n        {\r\n            ");
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" created");
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" = await _");
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Repository.CreateAsync(");
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(");\r\n            await _unitOfWork.Commit();\r\n            return created");
+            
+            #line default
+            #line hidden
+            
+            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(";\r\n        }\r\n\r\n        public async Task<");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("> Update");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(")\r\n        {\r\n            ");
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" updated");
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" = await _");
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Repository.UpdateAsync(");
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(");\r\n            await _unitOfWork.Commit();\r\n            return updated");
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(";\r\n        }\r\n\r\n        public async Task Delete");
+            
+            #line default
+            #line hidden
+            
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Async(");
+            
+            #line default
+            #line hidden
+            
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(")\r\n        {\r\n            await _");
+            
+            #line default
+            #line hidden
+            
+            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("Repository.DeleteAsync(");
+            
+            #line default
+            #line hidden
+            
+            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(");\r\n            await _unitOfWork.Commit();\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

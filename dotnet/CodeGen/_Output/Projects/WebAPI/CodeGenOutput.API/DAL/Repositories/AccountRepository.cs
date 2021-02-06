@@ -1,8 +1,8 @@
-﻿using CodeGenOutput.Models;
+using CodeGenOutput.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CodeGenOutput.API.DAL
+namespace CodeGenOutput.API.DAL.Repositories
 {
     public static class AccountRepositoryExtensions
     {

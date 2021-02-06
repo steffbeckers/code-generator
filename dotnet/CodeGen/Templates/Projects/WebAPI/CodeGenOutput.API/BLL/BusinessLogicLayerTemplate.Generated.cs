@@ -22,57 +22,115 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write("using System;\r\n\r\nnamespace CodeGenOutput.API.BLL\r\n{\r\n    public interface IBusine" +
-                    "ssLogicLayer :\r\n");
+            this.Write("using CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.Models;\r\n\r\nnamespace CodeGenOut" +
+                    "put.API.BLL\r\n{\r\n    public interface IBusinessLogicLayer :\r\n");
             
             #line default
             #line hidden
             
-            #line 12 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
  foreach(CodeGenModel model in _config.Models) { 
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
             this.Write("        I");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( model.Name));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
             this.Write("BLL");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( model != _config.Models.Last() ? "," : "" ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
             this.Write("\r\n");
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write("    {}\r\n\r\n    public class BusinessLogicLayer : IBusinessLogicLayer\r\n    {\r\n    }" +
-                    "\r\n}\r\n");
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            this.Write(@"    { }
+
+    public partial class BusinessLogicLayer : IBusinessLogicLayer
+    {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public BusinessLogicLayer(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+
+            // Repositories
+");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+ foreach(CodeGenModel model in _config.Models) { 
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            this.Write("            _");
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            this.Write("Repository = unitOfWork.GetRepository<");
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name));
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            this.Write(">();\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
+            this.Write("        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden
