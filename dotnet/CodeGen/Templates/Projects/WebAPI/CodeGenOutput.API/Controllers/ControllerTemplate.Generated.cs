@@ -30,25 +30,25 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
             #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s\")]\r\n    [ApiController]\r\n    public class ");
+            this.Write("\")]\r\n    [ApiController]\r\n    public class ");
             
             #line default
             #line hidden
             
             #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
             #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("sController : ControllerBase\r\n    {\r\n        private readonly I");
+            this.Write("Controller : ControllerBase\r\n    {\r\n        private readonly I");
             
             #line default
             #line hidden
@@ -66,26 +66,26 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
             #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("sController(IBusinessLogicLayer bll)\r\n        {\r\n            _bll = bll;\r\n       " +
-                    " }\r\n\r\n        // GET: api/");
+            this.Write("Controller(IBusinessLogicLayer bll)\r\n        {\r\n            _bll = bll;\r\n        " +
+                    "}\r\n\r\n        // GET: api/");
             
             #line default
             #line hidden
             
             #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
             #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s\r\n        [HttpGet]\r\n        public async Task<ActionResult<IEnumerable<");
+            this.Write("\r\n        [HttpGet]\r\n        public async Task<ActionResult<IEnumerable<");
             
             #line default
             #line hidden
@@ -103,37 +103,37 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
             #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s()\r\n        {\r\n            return Ok(await _bll.Get");
+            this.Write("()\r\n        {\r\n            return Ok(await _bll.Get");
             
             #line default
             #line hidden
             
             #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
             #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("sAsync());\r\n        }\r\n\r\n        // GET: api/");
+            this.Write("Async());\r\n        }\r\n\r\n        // GET: api/");
             
             #line default
             #line hidden
             
             #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
             #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s/{id}\r\n        [HttpGet(\"{id}\")]\r\n        public async Task<ActionResult<");
+            this.Write("/{id}\r\n        [HttpGet(\"{id}\")]\r\n        public async Task<ActionResult<");
             
             #line default
             #line hidden
@@ -175,14 +175,14 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
             #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s/search\r\n        [HttpGet(\"search\")]\r\n        public async Task<ActionResult<IEn" +
-                    "umerable<");
+            this.Write("/search\r\n        [HttpGet(\"search\")]\r\n        public async Task<ActionResult<IEnu" +
+                    "merable<");
             
             #line default
             #line hidden
@@ -224,13 +224,13 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
             #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s\r\n        [HttpPost]\r\n        public async Task<ActionResult<");
+            this.Write("\r\n        [HttpPost]\r\n        public async Task<ActionResult<");
             
             #line default
             #line hidden
@@ -368,13 +368,13 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
             #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s/{id}\r\n        [HttpPut(\"{id}\")]\r\n        public async Task<ActionResult<");
+            this.Write("/{id}\r\n        [HttpPut(\"{id}\")]\r\n        public async Task<ActionResult<");
             
             #line default
             #line hidden
@@ -464,14 +464,14 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 64 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
             #line 64 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("s/{id}\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task<IActionResult> De" +
-                    "lete");
+            this.Write("/{id}\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task<IActionResult> Del" +
+                    "ete");
             
             #line default
             #line hidden

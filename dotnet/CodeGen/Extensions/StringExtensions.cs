@@ -12,6 +12,24 @@
             return str;
         }
 
+        public static string ToPlural(this string str)
+        {
+            if (!string.IsNullOrEmpty(str) && str.Length > 1)
+            {
+                if (str.EndsWith("y"))
+                {
+                    str = str.Remove(str.Length - 1);
+                    str += "ies";
+                }
+                else
+                {
+                    str += "s";
+                }
+            }
+
+            return str;
+        }
+
         public static string ToSingular(this string str)
         {
             if (!string.IsNullOrEmpty(str) && str.Length > 1)

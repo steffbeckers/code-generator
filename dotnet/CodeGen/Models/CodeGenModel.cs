@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CodeGen.Extensions;
+using System.Collections.Generic;
 
 namespace CodeGen.Models
 {
@@ -10,6 +11,11 @@ namespace CodeGen.Models
         }
 
         public string Name { get; set; }
+        public string NamePlural {
+            get {
+                return Name.ToPlural();
+            }
+        }
         public string Description { get; set; }
 
         public List<CodeGenModelProperty> Properties { get; set; }

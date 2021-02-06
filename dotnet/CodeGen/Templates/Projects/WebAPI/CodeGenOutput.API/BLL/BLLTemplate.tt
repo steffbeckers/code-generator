@@ -14,7 +14,7 @@ namespace CodeGenOutput.API.BLL
 {
     public interface I<#= _model.Name #>BLL
     {
-        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.Name #>sAsync();
+        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async();
         Task<<#= _model.Name #>> Get<#= _model.Name #>ByIdAsync(Guid id);
         Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term);
         Task<<#= _model.Name #>> Create<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
@@ -26,7 +26,7 @@ namespace CodeGenOutput.API.BLL
     {
         private readonly IRepository<<#= _model.Name #>> _<#= _model.Name.ToLower() #>Repository;
 
-        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.Name #>sAsync()
+        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async()
         {
             return await _<#= _model.Name.ToLower() #>Repository.GetAsync();
         }

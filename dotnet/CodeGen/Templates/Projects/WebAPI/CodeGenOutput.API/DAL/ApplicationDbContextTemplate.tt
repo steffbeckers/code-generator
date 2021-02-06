@@ -15,7 +15,7 @@ namespace CodeGenOutput.API.DAL
         {}
 
 <# foreach (CodeGenModel model in _config.Models) { #>
-        public DbSet<<#= model.Name #>> <#= model.Name #>s { get; set; }
+        public DbSet<<#= model.Name #>> <#= model.NamePlural #> { get; set; }
 <# } #>
     }
 }

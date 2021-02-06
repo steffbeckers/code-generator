@@ -13,39 +13,39 @@ using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Controllers
 {
-    [Route("api/<#= _model.Name.ToLower() #>s")]
+    [Route("api/<#= _model.NamePlural.ToLower() #>")]
     [ApiController]
-    public class <#= _model.Name #>sController : ControllerBase
+    public class <#= _model.NamePlural #>Controller : ControllerBase
     {
         private readonly I<#= _model.Name #>BLL _bll;
 
-        public <#= _model.Name #>sController(IBusinessLogicLayer bll)
+        public <#= _model.NamePlural #>Controller(IBusinessLogicLayer bll)
         {
             _bll = bll;
         }
 
-        // GET: api/<#= _model.Name.ToLower() #>s
+        // GET: api/<#= _model.NamePlural.ToLower() #>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Get<#= _model.Name #>s()
+        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Get<#= _model.NamePlural #>()
         {
-            return Ok(await _bll.Get<#= _model.Name #>sAsync());
+            return Ok(await _bll.Get<#= _model.NamePlural #>Async());
         }
 
-        // GET: api/<#= _model.Name.ToLower() #>s/{id}
+        // GET: api/<#= _model.NamePlural.ToLower() #>/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<<#= _model.Name #>>> Get<#= _model.Name #>ById([FromRoute] Guid id)
         {
             return Ok(await _bll.Get<#= _model.Name #>ByIdAsync(id));
         }
 
-        // GET: api/<#= _model.Name.ToLower() #>s/search
+        // GET: api/<#= _model.NamePlural.ToLower() #>/search
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Search<#= _model.Name #>([FromQuery] string term)
         {
             return Ok(await _bll.Search<#= _model.Name #>Async(term));
         }
 
-        // POST: api/<#= _model.Name.ToLower() #>s
+        // POST: api/<#= _model.NamePlural.ToLower() #>
         [HttpPost]
         public async Task<ActionResult<<#= _model.Name #>>> Create<#= _model.Name #>([FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
@@ -53,7 +53,7 @@ namespace CodeGenOutput.API.Controllers
             return CreatedAtAction("Get<#= _model.Name #>ById", new { id = created<#= _model.Name #>.Id }, created<#= _model.Name #>);
         }
 
-        // PUT: api/<#= _model.Name.ToLower() #>s/{id}
+        // PUT: api/<#= _model.NamePlural.ToLower() #>/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult<<#= _model.Name #>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
@@ -61,7 +61,7 @@ namespace CodeGenOutput.API.Controllers
             return Ok(await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>));
         }
 
-        // DELETE: api/<#= _model.Name.ToLower() #>s/{id}
+        // DELETE: api/<#= _model.NamePlural.ToLower() #>/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete<#= _model.Name #>(Guid id)
         {

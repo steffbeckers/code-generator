@@ -62,13 +62,13 @@ namespace CodeGenOutput.API.DAL
             #line hidden
             
             #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural ));
             
             #line default
             #line hidden
             
             #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write("s { get; set; }\r\n");
+            this.Write(" { get; set; }\r\n");
             
             #line default
             #line hidden
