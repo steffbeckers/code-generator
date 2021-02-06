@@ -12,7 +12,7 @@ namespace CodeGenOutput.API.DAL
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {}
+        { }
 
 <# foreach (CodeGenModel model in _config.Models) { #>
         public DbSet<<#= model.Name #>> <#= model.NamePlural #> { get; set; }

@@ -1,5 +1,5 @@
 ﻿{
-  "InstallProjectTemplateAfterGenerate": true,
+  "InstallProjectTemplateAfterGenerate": false,
   "RecreateDatabaseAfterGenerate": false,
   "TestProjectAfterGenerate": false,
   "StartupProjectPath": "CodeGenOutput.API\\",
