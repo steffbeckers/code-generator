@@ -151,17 +151,36 @@ namespace CodeGen.Generators
                     }
                 }
 
-                // Determine startup project path
-                string startupProjectPath = Path.Combine(
+                // Generation done
+
+                // Output project path
+                string outputProjectPath = Path.Combine(
                     _appSettingsService.CodeGenConfig.Paths.Output,
-                    codeGenTemplateSettings.TemplatePath,
+                    codeGenTemplateSettings.TemplatePath
+                );
+                outputProjectPath = outputProjectPath.Replace("Templates\\", "");
+
+                // Output startup project path
+                string startupProjectPath = Path.Combine(
+                    outputProjectPath,
                     codeGenTemplateSettings.StartupProjectPath
                 );
-                startupProjectPath = startupProjectPath.Replace("Templates\\", "");
 
-                // ApplicationDbContext
+                // Install project template with dotnet new
+                if (codeGenTemplateSettings.InstallProjectTemplateAfterGenerate) {
+                    _logger.LogInformation("Installing project template: " + outputProjectPath);
+
+                    ProcessStartInfo dotnetInstallProject = new ProcessStartInfo("dotnet");
+                    dotnetInstallProject.Arguments = @"new -i ./";
+                    dotnetInstallProject.WorkingDirectory = outputProjectPath;
+                    Process.Start(dotnetInstallProject).WaitForExit();
+                }
+
+                // Recreate database
                 if (codeGenTemplateSettings.RecreateDatabaseAfterGenerate)
                 {
+                    _logger.LogInformation("Recreating database/migrations: " + startupProjectPath);
+
                     // Drop the existing database
                     ProcessStartInfo dotnetDropDatabase = new ProcessStartInfo("dotnet");
                     dotnetDropDatabase.Arguments = @"ef database drop --force";
@@ -178,6 +197,8 @@ namespace CodeGen.Generators
                 // Test project after generate
                 if (codeGenTemplateSettings.TestProjectAfterGenerate)
                 {
+                    _logger.LogInformation("Test run project: " + startupProjectPath);
+
                     ProcessStartInfo dotnetRun = new ProcessStartInfo("dotnet");
                     dotnetRun.Arguments = @"run";
                     dotnetRun.WorkingDirectory = startupProjectPath;

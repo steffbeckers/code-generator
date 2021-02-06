@@ -15,6 +15,7 @@ namespace CodeGen.Models
         }
 
         public string TemplatePath { get; set; }
+        public bool InstallProjectTemplateAfterGenerate { get; set; }
         public bool RecreateDatabaseAfterGenerate { get; set; }
         public bool TestProjectAfterGenerate { get; set; }
         public string StartupProjectPath { get; set; }
