@@ -14,21 +14,21 @@ using System.Threading.Tasks;
 
 namespace CodeGen.Generators
 {
-    public interface IProjectGenerator
+    public interface IProjectsGenerator
     {
         Task Generate();
     }
 
-    public class ProjectGenerator : IProjectGenerator
+    public class ProjectsGenerator : IProjectsGenerator
     {
-        private readonly ILogger<ProjectGenerator> _logger;
+        private readonly ILogger<ProjectsGenerator> _logger;
         private readonly IAppSettingsService _appSettingsService;
         private readonly IFileService _fileService;
         private readonly IConfigBasedGenerator _configBasedGenerator;
         private readonly IModelsBasedGenerator _modelsBasedGenerator;
 
-        public ProjectGenerator(
-            ILogger<ProjectGenerator> logger,
+        public ProjectsGenerator(
+            ILogger<ProjectsGenerator> logger,
             IAppSettingsService appSettingsService,
             IFileService fileService,
             IConfigBasedGenerator configBasedGenerator,
@@ -44,6 +44,8 @@ namespace CodeGen.Generators
 
         public async Task Generate()
         {
+            await CommitOutputDirectory();
+
             await CleanupOutputDirectory();
 
             _logger.LogInformation("Generating projects");
@@ -168,7 +170,7 @@ namespace CodeGen.Generators
 
                     // Generate new Initial migration
                     ProcessStartInfo dotnetAddInitialMigration = new ProcessStartInfo("dotnet");
-                    dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir .\DAL\Migrations";
+                    dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir " + codeGenTemplateSettings.MigrationsFolderPath;
                     dotnetAddInitialMigration.WorkingDirectory = startupProjectPath;
                     Process.Start(dotnetAddInitialMigration).WaitForExit();
                 }
@@ -184,9 +186,32 @@ namespace CodeGen.Generators
             }
         }
 
+        private Task CommitOutputDirectory()
+        {
+            string projectsOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects");
+
+            _logger.LogInformation("Saving changes of output folder: " + projectsOutputFolderPath);
+
+            ProcessStartInfo gitAdd = new ProcessStartInfo("git");
+            gitAdd.Arguments = "add .";
+            gitAdd.WorkingDirectory = projectsOutputFolderPath;
+            Process.Start(gitAdd).WaitForExit();
+
+            ProcessStartInfo gitCommit = new ProcessStartInfo("git");
+            gitCommit.Arguments = $"commit -m \"Save before generating projects\"";
+            gitCommit.WorkingDirectory = projectsOutputFolderPath;
+            Process.Start(gitCommit).WaitForExit();
+
+            return Task.CompletedTask;
+        }
+
         private Task CleanupOutputDirectory()
         {
-            return _fileService.DeleteDirectory(_appSettingsService.CodeGenConfig.Paths.Output);
+            string projectsOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects");
+
+            _logger.LogInformation("Deleting output folder: " + projectsOutputFolderPath);
+
+            return _fileService.DeleteDirectory(projectsOutputFolderPath);
         }
 
         private async Task<List<string>> ListProjectTemplates()

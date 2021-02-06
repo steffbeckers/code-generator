@@ -15,13 +15,14 @@ namespace CodeGen.Models
         }
 
         public string TemplatePath { get; set; }
-        public string StartupProjectPath { get; set; }
         public bool RecreateDatabaseAfterGenerate { get; set; }
         public bool TestProjectAfterGenerate { get; set; }
+        public string StartupProjectPath { get; set; }
+        public string MigrationsFolderPath { get; set; }
 
         public List<CodeGenTemplateSettingsData> ConfigBasedGenerator { get; set; }
         public List<CodeGenTemplateSettingsData> ModelsBasedGenerator { get; set; }
-    }
+  }
 
     public class CodeGenTemplateSettingsData
     {

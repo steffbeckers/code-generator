@@ -14,17 +14,17 @@ namespace CodeGen
     {
         private readonly ILogger<Worker> _logger;
         private readonly IAppSettingsService _appSettingsService;
-        private readonly IProjectGenerator _projectGenerator;
+        private readonly IProjectsGenerator _projectsGenerator;
 
         public Worker(
             ILogger<Worker> logger,
             IAppSettingsService appSettingsService,
-            IProjectGenerator projectGenerator
+            IProjectsGenerator projectsGenerator
         )
         {
             _logger = logger;
             _appSettingsService = appSettingsService;
-            _projectGenerator = projectGenerator;
+            _projectsGenerator = projectsGenerator;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -34,7 +34,7 @@ namespace CodeGen
             try
             {
                 await _appSettingsService.Load();
-                await _projectGenerator.Generate();
+                await _projectsGenerator.Generate();
             }
             catch (Exception ex)
             {

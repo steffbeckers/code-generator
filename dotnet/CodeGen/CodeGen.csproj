@@ -21,8 +21,9 @@
   <ItemGroup>
     <Watch Include="**\*settings*.json" />
     <Watch Include="Templates\**\*.tt" />
-    <Watch Remove="**\_Output\**" />
+    <Watch Include="**\*.cs" />
     <Watch Remove="**\*Generated.cs" />
+    <Watch Remove="**\_Output\**" />
     <Watch Remove="**\bin\**\*" />
     <Watch Remove="**\obj\**\*" />
   </ItemGroup>

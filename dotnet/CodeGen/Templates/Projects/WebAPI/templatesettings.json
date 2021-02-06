@@ -1,7 +1,8 @@
 ﻿{
-  "RecreateDatabaseAfterGenerate": true,
-  "TestProjectAfterGenerate": true,
+  "RecreateDatabaseAfterGenerate": false,
+  "TestProjectAfterGenerate": false,
   "StartupProjectPath": "CodeGenOutput.API\\",
+  "MigrationsFolderPath": ".\\DAL\\Migrations",
   "ConfigBasedGenerator": [
     {
       "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
