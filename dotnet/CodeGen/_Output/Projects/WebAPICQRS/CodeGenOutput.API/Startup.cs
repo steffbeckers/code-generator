@@ -31,6 +31,12 @@ namespace CodeGenOutput.API
 
             services.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();
 
+            services.AddMediatR(typeof(Startup));
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
