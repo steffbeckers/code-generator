@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "../../templatesettings.schema.json",
-  "Generate": false,
+  "Generate": true,
   "InstallProjectTemplateAfterGenerate": false,
   "RecreateDatabaseAfterGenerate": false,
   "TestProjectAfterGenerate": false,
