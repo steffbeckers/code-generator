@@ -1,0 +1,72 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+using CodeGenOutput.API.BLL;
+using CodeGenOutput.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace CodeGenOutput.API.Controllers
+{
+    [Route("api/<#= _model.NamePlural.ToLower() #>")]
+    [ApiController]
+    public class <#= _model.NamePlural #>Controller : ControllerBase
+    {
+        private readonly I<#= _model.Name #>BLL _bll;
+
+        public <#= _model.NamePlural #>Controller(IBusinessLogicLayer bll)
+        {
+            _bll = bll;
+        }
+
+        // GET: api/<#= _model.NamePlural.ToLower() #>
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Get<#= _model.NamePlural #>()
+        {
+            return Ok(await _bll.Get<#= _model.NamePlural #>Async());
+        }
+
+        // GET: api/<#= _model.NamePlural.ToLower() #>/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<<#= _model.Name #>>> Get<#= _model.Name #>ById([FromRoute] Guid id)
+        {
+            return Ok(await _bll.Get<#= _model.Name #>ByIdAsync(id));
+        }
+
+        // GET: api/<#= _model.NamePlural.ToLower() #>/search
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Search<#= _model.Name #>([FromQuery] string term)
+        {
+            return Ok(await _bll.Search<#= _model.Name #>Async(term));
+        }
+
+        // POST: api/<#= _model.NamePlural.ToLower() #>
+        [HttpPost]
+        public async Task<ActionResult<<#= _model.Name #>>> Create<#= _model.Name #>([FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
+        {
+            <#= _model.Name #> created<#= _model.Name #> = await _bll.Create<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+            return CreatedAtAction("Get<#= _model.Name #>ById", new { id = created<#= _model.Name #>.Id }, created<#= _model.Name #>);
+        }
+
+        // PUT: api/<#= _model.NamePlural.ToLower() #>/{id}
+        [HttpPut("{id}")]
+        public async Task<ActionResult<<#= _model.Name #>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
+        {
+            if (id != <#= _model.Name.ToLower() #>.Id) { return BadRequest(); }
+            return Ok(await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>));
+        }
+
+        // DELETE: api/<#= _model.NamePlural.ToLower() #>/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete<#= _model.Name #>(Guid id)
+        {
+            await _bll.Delete<#= _model.Name #>Async(new <#= _model.Name #>() { Id = id });
+            return NoContent();
+        }
+    }
+}

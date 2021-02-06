@@ -1,0 +1,43 @@
+﻿{
+  "InstallProjectTemplateAfterGenerate": true,
+  "RecreateDatabaseAfterGenerate": false,
+  "TestProjectAfterGenerate": false,
+  "StartupProjectPath": "CodeGenOutput.API\\",
+  "MigrationsFolderPath": ".\\DAL\\Migrations",
+  "ConfigBasedGenerator": [
+    {
+      "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
+      "Output": "ApplicationDbContext.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+      "Output": "_BusinessLogicLayer.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
+      "Output": "Startup.cs"
+    }
+  ],
+  "ModelsBasedGenerator": [
+    {
+      "T4Template": "CodeGenOutput.API\\BLL\\BLLTemplate.tt",
+      "Output": "{0}BLL.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
+      "Output": "{0}sController.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Models\\ModelTemplate.tt",
+      "Output": "{0}.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
+      "Output": "{0}Repository.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModelTemplate.tt",
+      "Output": "{0}VM.cs"
+    }
+  ]
+}
