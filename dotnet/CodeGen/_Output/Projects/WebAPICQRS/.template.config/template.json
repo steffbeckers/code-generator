@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Steff Beckers <steff@steffbeckers.eu>",
-  "identity": "SteffBeckers.CodeGen.Templates.WebAPI",
-  "name": "Steff Beckers Code Generator Web API Template",
-  "shortName": "sb-cg-web-api",
+  "identity": "SteffBeckers.CodeGen.Templates.WebAPICQRS",
+  "name": "Steff Beckers Code Generator Web API CQRS Template",
+  "shortName": "sb-cg-web-api-cqrs",
   "tags": {
     "language": "C#"
   },
