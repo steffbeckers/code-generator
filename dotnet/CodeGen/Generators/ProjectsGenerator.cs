@@ -44,19 +44,45 @@ namespace CodeGen.Generators
 
         public async Task Generate()
         {
-            await CommitOutputDirectory();
-
-            await CleanupOutputDirectory();
-
             _logger.LogInformation("Generating projects");
 
             List<string> projectTemplates = await ListProjectTemplates();
             foreach (string projectTemplate in projectTemplates)
             {
-                _logger.LogInformation($"Project template: {projectTemplate}");
-
                 // List files within the project templates directory
                 List<string> projectTemplateFiles = await _fileService.TraverseDirectory(Path.Combine("Templates", "Projects", projectTemplate));
+
+                // Search for template settings
+                CodeGenTemplateSettings codeGenTemplateSettings = null;
+                foreach (string projectTemplateFile in projectTemplateFiles)
+                {
+                    if (codeGenTemplateSettings != null) { continue; }
+                    if (projectTemplateFile.EndsWith("templatesettings.json"))
+                    {
+                        string templateSettingsJson = await _fileService.Read(projectTemplateFile);
+                        if (!string.IsNullOrEmpty(templateSettingsJson))
+                        {
+                            codeGenTemplateSettings = JsonConvert.DeserializeObject<CodeGenTemplateSettings>(templateSettingsJson);
+                            codeGenTemplateSettings.TemplatePath = Path.GetDirectoryName(projectTemplateFile);
+                        }
+                    }
+                }
+
+                // Template settings not found or Generate on false => Skip to next project
+                if (codeGenTemplateSettings == null || !codeGenTemplateSettings.Generate) {
+                    _logger.LogInformation($"Skipping project template: {projectTemplate}");
+                    continue;
+                }
+
+                _logger.LogInformation($"Regenerating project template: {projectTemplate}");
+
+                // Saving changes before cleanup
+                await CommitProjectOutputDirectory(projectTemplate);
+
+                await CleanupProjectOutputDirectory(projectTemplate);
+
+                // Sort files for better generation output
+                projectTemplateFiles.Sort();
 
                 // Filter all template generation files
                 List<string> templateGenerationFiles = new List<string>();
@@ -106,26 +132,6 @@ namespace CodeGen.Generators
 
                     await _fileService.Create(filePath, fileText);
                 }
-
-                // Search for template settings
-                CodeGenTemplateSettings codeGenTemplateSettings = null;
-                foreach (string projectTemplateFile in projectTemplateFiles)
-                {
-                    if (projectTemplateFile.EndsWith("templatesettings.json"))
-                    {
-                        string templateSettingsJson = await _fileService.Read(projectTemplateFile);
-                        if (!string.IsNullOrEmpty(templateSettingsJson))
-                        {
-                            codeGenTemplateSettings = JsonConvert.DeserializeObject<CodeGenTemplateSettings>(templateSettingsJson);
-                            codeGenTemplateSettings.TemplatePath = Path.GetDirectoryName(projectTemplateFile);
-                        }
-                    }
-                }
-
-                // Template settings not found? Next project..
-                if (codeGenTemplateSettings == null) { continue; }
-
-                projectTemplateFiles.Sort();
 
                 // Generate files with config
                 foreach (CodeGenTemplateSettingsData data in codeGenTemplateSettings.ConfigBasedGenerator)
@@ -207,32 +213,35 @@ namespace CodeGen.Generators
             }
         }
 
-        private Task CommitOutputDirectory()
+        private Task CommitProjectOutputDirectory(string projectName)
         {
-            string projectsOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects");
+            string projectOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects", projectName);
 
-            _logger.LogInformation("Saving changes of output folder: " + projectsOutputFolderPath);
+            bool pathExists = _fileService.DirectoryExists(projectOutputFolderPath);
+            if (!pathExists) { return Task.CompletedTask; }
+
+            _logger.LogInformation("Saving changes of project output folder: " + projectOutputFolderPath);
 
             ProcessStartInfo gitAdd = new ProcessStartInfo("git");
             gitAdd.Arguments = "add .";
-            gitAdd.WorkingDirectory = projectsOutputFolderPath;
+            gitAdd.WorkingDirectory = projectOutputFolderPath;
             Process.Start(gitAdd).WaitForExit();
 
             ProcessStartInfo gitCommit = new ProcessStartInfo("git");
-            gitCommit.Arguments = $"commit -m \"Save before generating projects\"";
-            gitCommit.WorkingDirectory = projectsOutputFolderPath;
+            gitCommit.Arguments = $"commit -m \"Save before regenerating project template {projectName}\"";
+            gitCommit.WorkingDirectory = projectOutputFolderPath;
             Process.Start(gitCommit).WaitForExit();
 
             return Task.CompletedTask;
         }
 
-        private Task CleanupOutputDirectory()
+        private Task CleanupProjectOutputDirectory(string projectName)
         {
-            string projectsOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects");
+            string projectOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects", projectName);
 
-            _logger.LogInformation("Deleting output folder: " + projectsOutputFolderPath);
+            _logger.LogInformation("Cleaning project output folder: " + projectOutputFolderPath);
 
-            return _fileService.DeleteDirectory(projectsOutputFolderPath);
+            return _fileService.DeleteDirectory(projectOutputFolderPath);
         }
 
         private async Task<List<string>> ListProjectTemplates()

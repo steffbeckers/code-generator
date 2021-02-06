@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Watch Include="appsettings*.json" />
+    <Watch Include="**\*settings*.json" />
     <Watch Include="code-gen-config.json" />
     <Watch Include="Templates\**\*.tt" />
     <Watch Include="**\*.cs" />

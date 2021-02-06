@@ -17,6 +17,7 @@ namespace CodeGen.Services
         Task<string> Read(string path);
         Task<List<string>> GetSubdirectories(string path);
         Task<List<string>> TraverseDirectory(string path);
+        bool DirectoryExists(string projectsOutputFolderPath);
         Task DeleteDirectory(string path);
     }
 
@@ -62,9 +63,13 @@ namespace CodeGen.Services
             return Task.FromResult(Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList());
         }
 
+        public bool DirectoryExists(string path) {
+            return Directory.Exists(path);
+        }
+
         public Task DeleteDirectory(string path)
         {
-            if (Directory.Exists(path))
+            if (DirectoryExists(path))
             {
                 Directory.Delete(path, true);
             }
