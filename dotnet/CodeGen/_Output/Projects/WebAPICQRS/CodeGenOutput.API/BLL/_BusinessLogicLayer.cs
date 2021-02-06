@@ -4,7 +4,6 @@ using CodeGenOutput.Models;
 namespace CodeGenOutput.API.BLL
 {
     public interface IBusinessLogicLayer :
-        ITestBLL,
         IAccountBLL,
         IContactBLL
     { }
@@ -18,7 +17,6 @@ namespace CodeGenOutput.API.BLL
             _unitOfWork = unitOfWork;
 
             // Repositories
-            _testRepository = unitOfWork.GetRepository<Test>();
             _accountRepository = unitOfWork.GetRepository<Account>();
             _contactRepository = unitOfWork.GetRepository<Contact>();
         }
