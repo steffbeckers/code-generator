@@ -1,15 +1,11 @@
 ﻿using CodeGen.Models;
 using CodeGen.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeGen.Generators
@@ -22,21 +18,21 @@ namespace CodeGen.Generators
     public class ProjectsGenerator : IProjectsGenerator
     {
         private readonly ILogger<ProjectsGenerator> _logger;
-        private readonly IAppSettingsService _appSettingsService;
+        private readonly IConfigService _configService;
         private readonly IFileService _fileService;
         private readonly IConfigBasedGenerator _configBasedGenerator;
         private readonly IModelsBasedGenerator _modelsBasedGenerator;
 
         public ProjectsGenerator(
             ILogger<ProjectsGenerator> logger,
-            IAppSettingsService appSettingsService,
+            IConfigService configService,
             IFileService fileService,
             IConfigBasedGenerator configBasedGenerator,
             IModelsBasedGenerator modelsBasedGenerator
         )
         {
             _logger = logger;
-            _appSettingsService = appSettingsService;
+            _configService = configService;
             _fileService = fileService;
             _configBasedGenerator = configBasedGenerator;
             _modelsBasedGenerator = modelsBasedGenerator;
@@ -121,7 +117,7 @@ namespace CodeGen.Generators
 
                     // File path
                     string filePath = Path.Combine(
-                        _appSettingsService.CodeGenConfig.Paths.Output,
+                        _configService.CodeGenConfig.Paths.Output,
                         Path.GetDirectoryName(projectTemplateFile),
                         projectTemplateFileName
                     );
@@ -161,7 +157,7 @@ namespace CodeGen.Generators
 
                 // Output project path
                 string outputProjectPath = Path.Combine(
-                    _appSettingsService.CodeGenConfig.Paths.Output,
+                    _configService.CodeGenConfig.Paths.Output,
                     codeGenTemplateSettings.TemplatePath
                 );
                 outputProjectPath = outputProjectPath.Replace("Templates\\", "");
@@ -215,7 +211,7 @@ namespace CodeGen.Generators
 
         private Task CommitProjectOutputDirectory(string projectName)
         {
-            string projectOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects", projectName);
+            string projectOutputFolderPath = Path.Combine(_configService.CodeGenConfig.Paths.Output, "Projects", projectName);
 
             bool pathExists = _fileService.DirectoryExists(projectOutputFolderPath);
             if (!pathExists) { return Task.CompletedTask; }
@@ -237,7 +233,7 @@ namespace CodeGen.Generators
 
         private Task CleanupProjectOutputDirectory(string projectName)
         {
-            string projectOutputFolderPath = Path.Combine(_appSettingsService.CodeGenConfig.Paths.Output, "Projects", projectName);
+            string projectOutputFolderPath = Path.Combine(_configService.CodeGenConfig.Paths.Output, "Projects", projectName);
 
             _logger.LogInformation("Cleaning project output folder: " + projectOutputFolderPath);
 

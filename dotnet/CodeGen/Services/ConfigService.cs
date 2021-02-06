@@ -1,27 +1,24 @@
 ﻿using CodeGen.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeGen.Services
 {
-    public interface IAppSettingsService
+    public interface IConfigService
     {
         Task Load();
         CodeGenConfig CodeGenConfig { get; }
     }
 
-    public class AppSettingsService : IAppSettingsService
+    public class ConfigService : IConfigService
     {
         private readonly IConfiguration _configuration;
         
         private CodeGenConfig _codeGenConfig;
         public CodeGenConfig CodeGenConfig => _codeGenConfig;
 
-        public AppSettingsService(IConfiguration configuration)
+        public ConfigService(IConfiguration configuration)
         {
             _configuration = configuration;
         }

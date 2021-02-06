@@ -13,17 +13,17 @@ namespace CodeGen
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly IAppSettingsService _appSettingsService;
+        private readonly IConfigService _configService;
         private readonly IProjectsGenerator _projectsGenerator;
 
         public Worker(
             ILogger<Worker> logger,
-            IAppSettingsService appSettingsService,
+            IConfigService configService,
             IProjectsGenerator projectsGenerator
         )
         {
             _logger = logger;
-            _appSettingsService = appSettingsService;
+            _configService = configService;
             _projectsGenerator = projectsGenerator;
         }
 
@@ -33,7 +33,7 @@ namespace CodeGen
             // {
             try
             {
-                await _appSettingsService.Load();
+                await _configService.Load();
                 await _projectsGenerator.Generate();
             }
             catch (Exception ex)
