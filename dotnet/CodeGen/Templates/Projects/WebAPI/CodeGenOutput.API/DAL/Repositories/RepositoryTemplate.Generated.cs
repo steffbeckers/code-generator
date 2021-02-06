@@ -23,55 +23,55 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write("using CodeGenOutput.Models;\r\nusing System.Collections.Generic;\r\nusing System.Thre" +
-                    "ading.Tasks;\r\n\r\nnamespace CodeGenOutput.API.DAL.Repositories\r\n{\r\n    public stat" +
-                    "ic class ");
+                    "ading.Tasks;\r\n\r\n// TODO: namespace CodeGenOutput.API.DAL.Repositories\r\nnamespace" +
+                    " CodeGenOutput.API.DAL\r\n{\r\n    public static class ");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write("RepositoryExtensions\r\n    {\r\n        public static async Task<IEnumerable<");
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(">> Search");
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write("(\r\n            this IRepository<");
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write("> repository,\r\n            string term\r\n        )\r\n        {\r\n            return " +
                     "await repository.GetAsync(x => x.Name.Contains(term));\r\n        }\r\n    }\r\n}\r\n");
             

@@ -2,7 +2,8 @@ using CodeGenOutput.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CodeGenOutput.API.DAL.Repositories
+// TODO: namespace CodeGenOutput.API.DAL.Repositories
+namespace CodeGenOutput.API.DAL
 {
     public static class ContactRepositoryExtensions
     {

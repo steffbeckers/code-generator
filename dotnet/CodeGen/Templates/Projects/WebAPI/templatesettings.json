@@ -1,6 +1,6 @@
 ﻿{
-  "RecreateDatabaseAfterGenerate": false,
-  "TestProjectAfterGenerate": false,
+  "RecreateDatabaseAfterGenerate": true,
+  "TestProjectAfterGenerate": true,
   "StartupProjectPath": "CodeGenOutput.API\\",
   "ConfigBasedGenerator": [
     {
