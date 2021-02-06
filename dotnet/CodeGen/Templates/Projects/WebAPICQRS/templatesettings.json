@@ -1,4 +1,5 @@
 ﻿{
+  "Generate": true,
   "InstallProjectTemplateAfterGenerate": false,
   "RecreateDatabaseAfterGenerate": false,
   "TestProjectAfterGenerate": false,

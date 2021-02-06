@@ -1,0 +1,60 @@
+{
+  "$schema": "./code-gen-config.schema.json",
+  "CodeGenConfig": {
+    "Models": [
+      {
+        "Name": "Account",
+        "Properties": [
+          {
+            "Name": "Id",
+            "Type": "Guid",
+            "Required": true
+          },
+          {
+            "Name": "Name",
+            "Type": "string",
+            "Required": true
+          },
+          {
+            "Name": "Description",
+            "Type": "string"
+          },
+          {
+            "Name": "Telephone",
+            "Type": "string"
+          },
+          {
+            "Name": "Email",
+            "Type": "string"
+          },
+          {
+            "Name": "Website",
+            "Type": "string"
+          },
+          {
+            "Name": "VAT",
+            "Type": "string"
+          }
+        ]
+      },
+      {
+        "Name": "Contact",
+        "Properties": [
+          {
+            "Name": "Id",
+            "Type": "Guid",
+            "Required": true
+          },
+          {
+            "Name": "Name",
+            "Type": "string",
+            "Required": true
+          }
+        ]
+      }
+    ],
+    "Paths": {
+      "Output": "_Output"
+    }
+  }
+}

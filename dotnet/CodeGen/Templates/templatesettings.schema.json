@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://steffbeckers.eu/code-generator/templatesettings.schema.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "Generate": false,
+      "InstallProjectTemplateAfterGenerate": false,
+      "RecreateDatabaseAfterGenerate": false,
+      "TestProjectAfterGenerate": false,
+      "StartupProjectPath": "CodeGenOutput.API\\",
+      "MigrationsFolderPath": ".\\DAL\\Migrations",
+      "ConfigBasedGenerator": [
+        {
+          "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
+          "Output": "ApplicationDbContext.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+          "Output": "_BusinessLogicLayer.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
+          "Output": "Startup.cs"
+        }
+      ],
+      "ModelsBasedGenerator": [
+        {
+          "T4Template": "CodeGenOutput.API\\BLL\\BLLTemplate.tt",
+          "Output": "{0}BLL.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
+          "Output": "{0}sController.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\Models\\ModelTemplate.tt",
+          "Output": "{0}.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
+          "Output": "{0}Repository.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModelTemplate.tt",
+          "Output": "{0}VM.cs"
+        }
+      ]
+    }
+  ],
+  "required": [
+    "Generate",
+    "InstallProjectTemplateAfterGenerate",
+    "RecreateDatabaseAfterGenerate",
+    "TestProjectAfterGenerate",
+    "StartupProjectPath",
+    "MigrationsFolderPath",
+    "ConfigBasedGenerator",
+    "ModelsBasedGenerator"
+  ],
+  "properties": {
+    "Generate": {
+      "$id": "#/properties/Generate",
+      "type": "boolean",
+      "title": "The Generate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [false]
+    },
+    "InstallProjectTemplateAfterGenerate": {
+      "$id": "#/properties/InstallProjectTemplateAfterGenerate",
+      "type": "boolean",
+      "title": "The InstallProjectTemplateAfterGenerate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [false]
+    },
+    "RecreateDatabaseAfterGenerate": {
+      "$id": "#/properties/RecreateDatabaseAfterGenerate",
+      "type": "boolean",
+      "title": "The RecreateDatabaseAfterGenerate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [false]
+    },
+    "TestProjectAfterGenerate": {
+      "$id": "#/properties/TestProjectAfterGenerate",
+      "type": "boolean",
+      "title": "The TestProjectAfterGenerate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [false]
+    },
+    "StartupProjectPath": {
+      "$id": "#/properties/StartupProjectPath",
+      "type": "string",
+      "title": "The StartupProjectPath schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["CodeGenOutput.API\\"]
+    },
+    "MigrationsFolderPath": {
+      "$id": "#/properties/MigrationsFolderPath",
+      "type": "string",
+      "title": "The MigrationsFolderPath schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [".\\DAL\\Migrations"]
+    },
+    "ConfigBasedGenerator": {
+      "$id": "#/properties/ConfigBasedGenerator",
+      "type": "array",
+      "title": "The ConfigBasedGenerator schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
+            "Output": "ApplicationDbContext.cs"
+          },
+          {
+            "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+            "Output": "_BusinessLogicLayer.cs"
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/ConfigBasedGenerator/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/ConfigBasedGenerator/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
+                "Output": "ApplicationDbContext.cs"
+              }
+            ],
+            "required": ["T4Template", "Output"],
+            "properties": {
+              "T4Template": {
+                "$id": "#/properties/ConfigBasedGenerator/items/anyOf/0/properties/T4Template",
+                "type": "string",
+                "title": "The T4Template schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt"
+                ]
+              },
+              "Output": {
+                "$id": "#/properties/ConfigBasedGenerator/items/anyOf/0/properties/Output",
+                "type": "string",
+                "title": "The Output schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": ["ApplicationDbContext.cs"]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "ModelsBasedGenerator": {
+      "$id": "#/properties/ModelsBasedGenerator",
+      "type": "array",
+      "title": "The ModelsBasedGenerator schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "T4Template": "CodeGenOutput.API\\BLL\\BLLTemplate.tt",
+            "Output": "{0}BLL.cs"
+          },
+          {
+            "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
+            "Output": "{0}sController.cs"
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/ModelsBasedGenerator/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/ModelsBasedGenerator/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "T4Template": "CodeGenOutput.API\\BLL\\BLLTemplate.tt",
+                "Output": "{0}BLL.cs"
+              }
+            ],
+            "required": ["T4Template", "Output"],
+            "properties": {
+              "T4Template": {
+                "$id": "#/properties/ModelsBasedGenerator/items/anyOf/0/properties/T4Template",
+                "type": "string",
+                "title": "The T4Template schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": ["CodeGenOutput.API\\BLL\\BLLTemplate.tt"]
+              },
+              "Output": {
+                "$id": "#/properties/ModelsBasedGenerator/items/anyOf/0/properties/Output",
+                "type": "string",
+                "title": "The Output schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": ["{0}BLL.cs"]
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}

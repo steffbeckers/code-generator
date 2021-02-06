@@ -1,0 +1,347 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "CodeGenConfig": {
+        "Models": [
+          {
+            "Name": "Account",
+            "Properties": [
+              {
+                "Name": "Id",
+                "Type": "Guid",
+                "Required": true
+              },
+              {
+                "Name": "Name",
+                "Type": "string",
+                "Required": true
+              },
+              {
+                "Name": "Description",
+                "Type": "string"
+              },
+              {
+                "Name": "Telephone",
+                "Type": "string"
+              },
+              {
+                "Name": "Email",
+                "Type": "string"
+              },
+              {
+                "Name": "Website",
+                "Type": "string"
+              },
+              {
+                "Name": "VAT",
+                "Type": "string"
+              }
+            ]
+          }
+        ],
+        "Paths": {
+          "Output": "_Output"
+        }
+      }
+    }
+  ],
+  "required": ["CodeGenConfig"],
+  "properties": {
+    "CodeGenConfig": {
+      "$id": "#/properties/CodeGenConfig",
+      "type": "object",
+      "title": "The CodeGenConfig schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "Models": [
+            {
+              "Name": "Account",
+              "Properties": [
+                {
+                  "Name": "Id",
+                  "Type": "Guid",
+                  "Required": true
+                },
+                {
+                  "Name": "Name",
+                  "Type": "string",
+                  "Required": true
+                },
+                {
+                  "Name": "Description",
+                  "Type": "string"
+                },
+                {
+                  "Name": "Telephone",
+                  "Type": "string"
+                },
+                {
+                  "Name": "Email",
+                  "Type": "string"
+                },
+                {
+                  "Name": "Website",
+                  "Type": "string"
+                },
+                {
+                  "Name": "VAT",
+                  "Type": "string"
+                }
+              ]
+            }
+          ],
+          "Paths": {
+            "Output": "_Output"
+          }
+        }
+      ],
+      "required": ["Models", "Paths"],
+      "properties": {
+        "Models": {
+          "$id": "#/properties/CodeGenConfig/properties/Models",
+          "type": "array",
+          "title": "The Models schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
+            [
+              {
+                "Name": "Account",
+                "Properties": [
+                  {
+                    "Name": "Id",
+                    "Type": "Guid",
+                    "Required": true
+                  },
+                  {
+                    "Name": "Name",
+                    "Type": "string",
+                    "Required": true
+                  },
+                  {
+                    "Name": "Description",
+                    "Type": "string"
+                  },
+                  {
+                    "Name": "Telephone",
+                    "Type": "string"
+                  },
+                  {
+                    "Name": "Email",
+                    "Type": "string"
+                  },
+                  {
+                    "Name": "Website",
+                    "Type": "string"
+                  },
+                  {
+                    "Name": "VAT",
+                    "Type": "string"
+                  }
+                ]
+              }
+            ]
+          ],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/CodeGenConfig/properties/Models/items",
+            "anyOf": [
+              {
+                "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "Name": "Account",
+                    "Properties": [
+                      {
+                        "Name": "Id",
+                        "Type": "Guid",
+                        "Required": true
+                      },
+                      {
+                        "Name": "Name",
+                        "Type": "string",
+                        "Required": true
+                      },
+                      {
+                        "Name": "Description",
+                        "Type": "string"
+                      },
+                      {
+                        "Name": "Telephone",
+                        "Type": "string"
+                      },
+                      {
+                        "Name": "Email",
+                        "Type": "string"
+                      },
+                      {
+                        "Name": "Website",
+                        "Type": "string"
+                      },
+                      {
+                        "Name": "VAT",
+                        "Type": "string"
+                      }
+                    ]
+                  }
+                ],
+                "required": ["Name", "Properties"],
+                "properties": {
+                  "Name": {
+                    "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Name",
+                    "type": "string",
+                    "title": "The Name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": ["Account"]
+                  },
+                  "Properties": {
+                    "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties",
+                    "type": "array",
+                    "title": "The Properties schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": [],
+                    "examples": [
+                      [
+                        {
+                          "Name": "Id",
+                          "Type": "Guid",
+                          "Required": true
+                        },
+                        {
+                          "Name": "Name",
+                          "Type": "string",
+                          "Required": true
+                        }
+                      ]
+                    ],
+                    "additionalItems": true,
+                    "items": {
+                      "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items",
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0",
+                          "type": "object",
+                          "title": "The first anyOf schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": {},
+                          "examples": [
+                            {
+                              "Name": "Id",
+                              "Type": "Guid",
+                              "Required": true
+                            }
+                          ],
+                          "required": ["Name", "Type", "Required"],
+                          "properties": {
+                            "Name": {
+                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Name",
+                              "type": "string",
+                              "title": "The Name schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": ["Id"]
+                            },
+                            "Type": {
+                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Type",
+                              "type": "string",
+                              "title": "The Type schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": ["Guid"]
+                            },
+                            "Required": {
+                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Required",
+                              "type": "boolean",
+                              "title": "The Required schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": false,
+                              "examples": [true]
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        {
+                          "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/1",
+                          "type": "object",
+                          "title": "The second anyOf schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": {},
+                          "examples": [
+                            {
+                              "Name": "Description",
+                              "Type": "string"
+                            }
+                          ],
+                          "required": ["Name", "Type"],
+                          "properties": {
+                            "Name": {
+                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/1/properties/Name",
+                              "type": "string",
+                              "title": "The Name schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": ["Description"]
+                            },
+                            "Type": {
+                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/1/properties/Type",
+                              "type": "string",
+                              "title": "The Type schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": ["string"]
+                            }
+                          },
+                          "additionalProperties": true
+                        }
+                      ]
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "Paths": {
+          "$id": "#/properties/CodeGenConfig/properties/Paths",
+          "type": "object",
+          "title": "The Paths schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "Output": "_Output"
+            }
+          ],
+          "required": ["Output"],
+          "properties": {
+            "Output": {
+              "$id": "#/properties/CodeGenConfig/properties/Paths/properties/Output",
+              "type": "string",
+              "title": "The Output schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": ["_Output"]
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
