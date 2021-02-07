@@ -8,21 +8,21 @@ namespace CodeGenOutput.API.BLL
 {
     public interface IAccountBLL
     {
-        Task<IEnumerable<Account>> GetAccountsAsync(int? skip = null, int? take = null);
+        Task<IEnumerable<Account>> GetAccountsAsync(int skip, int take);
         Task<Account> GetAccountByIdAsync(Guid id);
         Task<IEnumerable<Account>> SearchAccountAsync(string term);
         Task<Account> CreateAccountAsync(Account account);
         Task<Account> UpdateAccountAsync(Account account);
-        Task DeleteAccountAsync(Account account);
+        Task DeleteAccountAsync(Guid id);
     }
 
     public partial class BusinessLogicLayer : IAccountBLL
     {
         private readonly IRepository<Account> _accountRepository;
 
-        public async Task<IEnumerable<Account>> GetAccountsAsync(int? skip = null, int? take = null)
+        public async Task<IEnumerable<Account>> GetAccountsAsync(int skip, int take)
         {
-            return await _accountRepository.GetAsync(skip: skip, take: take);
+            return await _accountRepository.GetAsync(skip, take);
         }
 
         public async Task<Account> GetAccountByIdAsync(Guid id)
@@ -49,9 +49,9 @@ namespace CodeGenOutput.API.BLL
             return updatedAccount;
         }
 
-        public async Task DeleteAccountAsync(Account account)
+        public async Task DeleteAccountAsync(Guid id)
         {
-            await _accountRepository.DeleteAsync(account);
+            await _accountRepository.DeleteAsync(id);
             await _unitOfWork.Commit();
         }
     }

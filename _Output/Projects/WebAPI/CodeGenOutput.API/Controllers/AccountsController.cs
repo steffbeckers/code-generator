@@ -1,5 +1,7 @@
-using CodeGenOutput.API.BLL;
-using CodeGenOutput.Models;
+using CodeGenOutput.API.Requests;
+using CodeGenOutput.API.Requests.Accounts;
+using CodeGenOutput.ViewModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,56 +13,48 @@ namespace CodeGenOutput.API.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private readonly IAccountBLL _bll;
+        private readonly IMediator _mediator;
 
-        public AccountsController(IBusinessLogicLayer bll)
+        public AccountsController(IMediator mediator)
         {
-            _bll = bll;
+            _mediator = mediator;
         }
 
         // GET: api/accounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
+        public async Task<ActionResult<Response<List<AccountListVM>>>> GetAccounts([FromQuery] int skip = 0, [FromQuery] int take = 20)
         {
-            return Ok(await _bll.GetAccountsAsync());
+            return Ok(await _mediator.Send(new GetAccounts() { Skip = skip, Take = take }));
         }
 
         // GET: api/accounts/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccountById([FromRoute] Guid id)
+        public async Task<ActionResult<Response<AccountVM>>> GetAccountById([FromRoute] Guid id)
         {
-            return Ok(await _bll.GetAccountByIdAsync(id));
-        }
-
-        // GET: api/accounts/search
-        [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Account>>> SearchAccount([FromQuery] string term)
-        {
-            return Ok(await _bll.SearchAccountAsync(term));
+            return Ok(await _mediator.Send(new GetAccountById() { Id = id }));
         }
 
         // POST: api/accounts
         [HttpPost]
-        public async Task<ActionResult<Account>> CreateAccount([FromBody] Account account)
+        public async Task<ActionResult<Response<AccountVM>>> CreateAccount([FromBody] AccountCreateVM accountCreateVM)
         {
-            Account createdAccount = await _bll.CreateAccountAsync(account);
-            return CreatedAtAction("GetAccountById", new { id = createdAccount.Id }, createdAccount);
+            Response<AccountVM> response = await _mediator.Send(new CreateAccount() { AccountCreateVM = accountCreateVM });
+            return CreatedAtAction("GetAccountById", new { id = response.Data.Id }, response);
         }
 
         // PUT: api/accounts/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult<Account>> UpdateAccount([FromRoute] Guid id, [FromBody] Account account)
+        public async Task<ActionResult<Response<AccountVM>>> UpdateAccount([FromRoute] Guid id, [FromBody] AccountVM accountVM)
         {
-            if (id != account.Id) { return BadRequest(); }
-            return Ok(await _bll.UpdateAccountAsync(account));
+            if (id != accountVM.Id) { return BadRequest(); }
+            return Ok(await _mediator.Send(new UpdateAccount() { AccountVM = accountVM }));
         }
 
         // DELETE: api/accounts/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAccount(Guid id)
+        public async Task<ActionResult<Response>> DeleteAccount([FromRoute] Guid id)
         {
-            await _bll.DeleteAccountAsync(new Account() { Id = id });
-            return NoContent();
+            return Ok(await _mediator.Send(new DeleteAccount() { Id = id }));
         }
     }
 }

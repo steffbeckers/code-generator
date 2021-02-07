@@ -31,6 +31,8 @@ namespace CodeGenOutput.API
 
             services.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddMediatR(typeof(Startup));
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

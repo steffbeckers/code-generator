@@ -12,8 +12,8 @@ namespace CodeGenOutput.API.Requests.Accounts
 {
     public class GetAccounts : IRequest<Response<List<AccountListVM>>>
     {
-        public int Skip { get; set; } = 0;
-        public int Take { get; set; } = 20;
+        public int Skip { get; set; }
+        public int Take { get; set; }
     }
 
     public class GetAccountsHandler : IRequestHandler<GetAccounts, Response<List<AccountListVM>>>
@@ -31,7 +31,7 @@ namespace CodeGenOutput.API.Requests.Accounts
         {
             Response<List<AccountListVM>> response = new Response<List<AccountListVM>>();
 
-            List<Account> accounts = (await _bll.GetAccountsAsync()).ToList();
+            List<Account> accounts = (await _bll.GetAccountsAsync(request.Skip, request.Take)).ToList();
             response.Data = _mapper.Map<List<AccountListVM>>(accounts);
 
             return response;

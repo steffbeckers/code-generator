@@ -10,16 +10,16 @@ namespace CodeGenOutput.API.DAL
     public interface IRepository<TEntity> where TEntity : class
     {
         Task<IEnumerable<TEntity>> GetAsync(
+            int skip,
+            int take,
             Expression<Func<TEntity, bool>> filter = null,
             string includeProperties = "",
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            int? skip = null,
-            int? take = null
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         );
         Task<TEntity> GetByIdAsync(Guid id);
         Task<TEntity> CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity);
+        Task DeleteAsync(Guid id);
     }
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -32,11 +32,11 @@ namespace CodeGenOutput.API.DAL
         }
 
         public async Task<IEnumerable<TEntity>> GetAsync(
+            int skip,
+            int take,
             Expression<Func<TEntity, bool>> filter = null,
             string includeProperties = "",
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            int? skip = 0,
-            int? take = 20
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         )
         {
             IQueryable<TEntity> query = _dbContext.Set<TEntity>();
@@ -53,15 +53,10 @@ namespace CodeGenOutput.API.DAL
 
             if (orderBy != null)
             {
-                IQueryable<TEntity> entities = orderBy(query);
-                entities.Skip((int)skip);
-                entities.Take((int)take);
-
-                return await entities.ToListAsync();
+                query = orderBy(query);
             }
 
-            query.Skip((int)skip);
-            query.Take((int)take);
+            query = query.Skip(skip).Take(take);
 
             return await query.ToListAsync();
         }
@@ -83,7 +78,13 @@ namespace CodeGenOutput.API.DAL
             return Task.FromResult(entity);
         }
 
-        public Task DeleteAsync(TEntity entity)
+        public async Task DeleteAsync(Guid id)
+        {
+            TEntity entity = await GetByIdAsync(id);
+            await DeleteAsync(entity);
+        }
+
+        private Task DeleteAsync(TEntity entity)
         {
             _dbContext.Remove(entity);
             return Task.CompletedTask;
