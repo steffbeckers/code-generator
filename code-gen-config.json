@@ -36,21 +36,6 @@
             "Type": "string"
           }
         ]
-      },
-      {
-        "Name": "Contact",
-        "Properties": [
-          {
-            "Name": "Id",
-            "Type": "Guid",
-            "Required": true
-          },
-          {
-            "Name": "Name",
-            "Type": "string",
-            "Required": true
-          }
-        ]
       }
     ],
     "Paths": {

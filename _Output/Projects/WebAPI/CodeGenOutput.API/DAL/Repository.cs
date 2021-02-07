@@ -81,7 +81,9 @@ namespace CodeGenOutput.API.DAL
         public async Task DeleteAsync(Guid id)
         {
             TEntity entity = await GetByIdAsync(id);
-            await DeleteAsync(entity);
+            if (entity != null) {
+                await DeleteAsync(entity);
+            }
         }
 
         private Task DeleteAsync(TEntity entity)

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CodeGenOutput.API.BLL;
 using MediatR;
 using System;

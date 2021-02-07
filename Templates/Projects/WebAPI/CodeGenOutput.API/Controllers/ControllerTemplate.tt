@@ -4,8 +4,10 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-using CodeGenOutput.API.BLL;
-using CodeGenOutput.Models;
+using CodeGenOutput.API.Requests;
+using CodeGenOutput.API.Requests.<#= _model.NamePlural #>;
+using CodeGenOutput.ViewModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,56 +19,48 @@ namespace CodeGenOutput.API.Controllers
     [ApiController]
     public class <#= _model.NamePlural #>Controller : ControllerBase
     {
-        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IMediator _mediator;
 
-        public <#= _model.NamePlural #>Controller(IBusinessLogicLayer bll)
+        public <#= _model.NamePlural #>Controller(IMediator mediator)
         {
-            _bll = bll;
+            _mediator = mediator;
         }
 
         // GET: api/<#= _model.NamePlural.ToLower() #>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Get<#= _model.NamePlural #>()
+        public async Task<ActionResult<Response<List<<#= _model.Name #>ListVM>>>> Get<#= _model.NamePlural #>([FromQuery] int skip = 0, [FromQuery] int take = 20)
         {
-            return Ok(await _bll.Get<#= _model.NamePlural #>Async());
+            return Ok(await _mediator.Send(new Get<#= _model.NamePlural #>() { Skip = skip, Take = take }));
         }
 
         // GET: api/<#= _model.NamePlural.ToLower() #>/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<<#= _model.Name #>>> Get<#= _model.Name #>ById([FromRoute] Guid id)
+        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Get<#= _model.Name #>ById([FromRoute] Guid id)
         {
-            return Ok(await _bll.Get<#= _model.Name #>ByIdAsync(id));
-        }
-
-        // GET: api/<#= _model.NamePlural.ToLower() #>/search
-        [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<<#= _model.Name #>>>> Search<#= _model.Name #>([FromQuery] string term)
-        {
-            return Ok(await _bll.Search<#= _model.Name #>Async(term));
+            return Ok(await _mediator.Send(new Get<#= _model.Name #>ById() { Id = id }));
         }
 
         // POST: api/<#= _model.NamePlural.ToLower() #>
         [HttpPost]
-        public async Task<ActionResult<<#= _model.Name #>>> Create<#= _model.Name #>([FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
+        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Create<#= _model.Name #>([FromBody] <#= _model.Name #>CreateVM <#= _model.Name.ToLower() #>CreateVM)
         {
-            <#= _model.Name #> created<#= _model.Name #> = await _bll.Create<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
-            return CreatedAtAction("Get<#= _model.Name #>ById", new { id = created<#= _model.Name #>.Id }, created<#= _model.Name #>);
+            Response<<#= _model.Name #>VM> response = await _mediator.Send(new Create<#= _model.Name #>() { <#= _model.Name #>CreateVM = <#= _model.Name.ToLower() #>CreateVM });
+            return CreatedAtAction("Get<#= _model.Name #>ById", new { id = response.Data.Id }, response);
         }
 
         // PUT: api/<#= _model.NamePlural.ToLower() #>/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult<<#= _model.Name #>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #> <#= _model.Name.ToLower() #>)
+        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #>VM <#= _model.Name.ToLower() #>VM)
         {
-            if (id != <#= _model.Name.ToLower() #>.Id) { return BadRequest(); }
-            return Ok(await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>));
+            if (id != <#= _model.Name.ToLower() #>VM.Id) { return BadRequest(); }
+            return Ok(await _mediator.Send(new Update<#= _model.Name #>() { <#= _model.Name #>VM = <#= _model.Name.ToLower() #>VM }));
         }
 
         // DELETE: api/<#= _model.NamePlural.ToLower() #>/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete<#= _model.Name #>(Guid id)
+        public async Task<ActionResult<Response>> Delete<#= _model.Name #>([FromRoute] Guid id)
         {
-            await _bll.Delete<#= _model.Name #>Async(new <#= _model.Name #>() { Id = id });
-            return NoContent();
+            return Ok(await _mediator.Send(new Delete<#= _model.Name #>() { Id = id }));
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
+namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Mappers {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
@@ -16,65 +16,135 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
     using System;
     
     
-    public partial class RepositoryTemplate : RepositoryTemplateBase {
+    public partial class AutoMappingTemplate : AutoMappingTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
             
-            #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("using CodeGenOutput.Models;\r\nusing System.Collections.Generic;\r\nusing System.Thre" +
-                    "ading.Tasks;\r\n\r\n// TODO: namespace CodeGenOutput.API.DAL.Repositories\r\nnamespace" +
-                    " CodeGenOutput.API.DAL\r\n{\r\n    public static class ");
+            #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("using AutoMapper;\r\nusing CodeGenOutput.Models;\r\nusing CodeGenOutput.ViewModels;\r\n" +
+                    "\r\nnamespace CodeGenOutput.API.Mappers\r\n{\r\n    public class AutoMapping : Profile" +
+                    "\r\n    {\r\n        public AutoMapping()\r\n        {\r\n");
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+ foreach (CodeGenModel model in _config.Models) { 
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("RepositoryExtensions\r\n    {\r\n        public static async Task<IEnumerable<");
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("            CreateMap<");
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(">> Search");
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(", ");
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("(\r\n            this IRepository<");
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("VM>();\r\n            CreateMap<");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("> repository,\r\n            string term\r\n        )\r\n        {\r\n            return " +
-                    "await repository.GetAsync(0, 20, x => x.Name.Contains(term));\r\n        }\r\n    }\r" +
-                    "\n}\r\n");
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(", ");
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("ListVM>();\r\n            CreateMap<");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("VM, ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(">();\r\n            CreateMap<");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("CreateVM, ");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(">();\r\n            \r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden
@@ -85,7 +155,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
         }
     }
     
-    public class RepositoryTemplateBase {
+    public class AutoMappingTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         

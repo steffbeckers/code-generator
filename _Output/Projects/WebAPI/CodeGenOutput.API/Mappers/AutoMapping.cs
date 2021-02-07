@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CodeGenOutput.Models;
 using CodeGenOutput.ViewModels;
 
@@ -12,6 +12,7 @@ namespace CodeGenOutput.API.Mappers
             CreateMap<Account, AccountListVM>();
             CreateMap<AccountVM, Account>();
             CreateMap<AccountCreateVM, Account>();
+            
         }
     }
 }

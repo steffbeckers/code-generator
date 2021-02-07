@@ -14,4 +14,18 @@ namespace CodeGenOutput.ViewModels
         public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
 <# } #>
     }
+
+    public class <#= _model.Name #>ListVM
+    {
+<# foreach (CodeGenModelProperty property in _model.Properties) { #>
+        public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
+<# } #>
+    }
+
+    public class <#= _model.Name #>CreateVM
+    {
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != "Id")) { #>
+        public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
+<# } #>
+    }
 }

@@ -35,21 +35,22 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API {
                     " =>\r\n                    options.UseSqlServer(_configuration.GetConnectionString" +
                     "(\"ApplicationDbContext\")));\r\n\r\n            services.AddScoped<IUnitOfWork, UnitO" +
                     "fWork>();\r\n\r\n            services.AddScoped<IBusinessLogicLayer, BusinessLogicLa" +
-                    "yer>();\r\n\r\n            services.AddMediatR(typeof(Startup));\r\n\r\n            serv" +
-                    "ices.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));\r" +
-                    "\n\r\n            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);\r\n\r\n" +
-                    "            services.AddControllers();\r\n\r\n            services.AddSwaggerGen(c =" +
-                    ">\r\n            {\r\n                c.SwaggerDoc(\"v1\", new OpenApiInfo { Title = \"" +
-                    "CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n        }\r\n\r\n        //" +
-                    " This method gets called by the runtime. Use this method to configure the HTTP r" +
-                    "equest pipeline.\r\n        public void Configure(IApplicationBuilder app, IWebHos" +
-                    "tEnvironment env)\r\n        {\r\n            if (env.IsDevelopment())\r\n            " +
-                    "{\r\n                app.UseDeveloperExceptionPage();\r\n\r\n                app.UseSw" +
-                    "agger();\r\n                app.UseSwaggerUI(c => c.SwaggerEndpoint(\"/swagger/v1/s" +
-                    "wagger.json\", \"CodeGenOutput.API v1\"));\r\n            }\r\n\r\n            app.UseHtt" +
-                    "psRedirection();\r\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthoriz" +
-                    "ation();\r\n\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n          " +
-                    "      endpoints.MapControllers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
+                    "yer>();\r\n\r\n            services.AddAutoMapper(typeof(Startup));\r\n\r\n            s" +
+                    "ervices.AddMediatR(typeof(Startup));\r\n\r\n            services.AddTransient(typeof" +
+                    "(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));\r\n\r\n            services." +
+                    "AddValidatorsFromAssembly(typeof(Startup).Assembly);\r\n\r\n            services.Add" +
+                    "Controllers();\r\n\r\n            services.AddSwaggerGen(c =>\r\n            {\r\n      " +
+                    "          c.SwaggerDoc(\"v1\", new OpenApiInfo { Title = \"CodeGenOutput.API\", Vers" +
+                    "ion = \"v1\" });\r\n            });\r\n        }\r\n\r\n        // This method gets called" +
+                    " by the runtime. Use this method to configure the HTTP request pipeline.\r\n      " +
+                    "  public void Configure(IApplicationBuilder app, IWebHostEnvironment env)\r\n     " +
+                    "   {\r\n            if (env.IsDevelopment())\r\n            {\r\n                app.U" +
+                    "seDeveloperExceptionPage();\r\n\r\n                app.UseSwagger();\r\n              " +
+                    "  app.UseSwaggerUI(c => c.SwaggerEndpoint(\"/swagger/v1/swagger.json\", \"CodeGenOu" +
+                    "tput.API v1\"));\r\n            }\r\n\r\n            app.UseHttpsRedirection();\r\n\r\n    " +
+                    "        app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r\n            " +
+                    "app.UseEndpoints(endpoints =>\r\n            {\r\n                endpoints.MapContr" +
+                    "ollers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

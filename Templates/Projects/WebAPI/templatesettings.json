@@ -9,12 +9,16 @@
   "MigrationsFolderPath": ".\\DAL\\Migrations",
   "ConfigBasedGenerator": [
     {
+      "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+      "Output": "_BusinessLogicLayer.cs"
+    },
+    {
       "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
       "Output": "ApplicationDbContext.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
-      "Output": "_BusinessLogicLayer.cs"
+      "T4Template": "CodeGenOutput.API\\Mappers\\AutoMappingTemplate.tt",
+      "Output": "AutoMapping.cs"
     },
     {
       "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
@@ -28,15 +32,35 @@
     },
     {
       "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
-      "Output": "{0}sController.cs"
+      "Output": "{1}Controller.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
+      "Output": "{0}Repository.cs"
     },
     {
       "T4Template": "CodeGenOutput.API\\Models\\ModelTemplate.tt",
       "Output": "{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
-      "Output": "{0}Repository.cs"
+      "T4Template": "CodeGenOutput.API\\Requests\\CreateTemplate.tt",
+      "Output": "{1}\\Create{0}.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Requests\\DeleteTemplate.tt",
+      "Output": "{1}\\Delete{0}.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Requests\\GetByIdTemplate.tt",
+      "Output": "{1}\\Get{0}ById.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Requests\\GetTemplate.tt",
+      "Output": "{1}\\Get{1}.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Requests\\UpdateTemplate.tt",
+      "Output": "{1}\\Update{0}.cs"
     },
     {
       "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModelTemplate.tt",

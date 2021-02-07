@@ -37,7 +37,7 @@ namespace CodeGen.Generators
                 string filePath = Path.Combine(
                     _configService.CodeGenConfig.Paths.Output,
                     Path.GetDirectoryName(projectTemplateFile),
-                    string.Format(data.Output, model.Name)
+                    string.Format(data.Output, model.Name, model.NamePlural)
                 );
                 filePath = filePath.Replace("Templates\\", "");
 

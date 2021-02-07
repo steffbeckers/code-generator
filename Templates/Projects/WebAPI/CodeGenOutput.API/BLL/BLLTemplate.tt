@@ -14,21 +14,21 @@ namespace CodeGenOutput.API.BLL
 {
     public interface I<#= _model.Name #>BLL
     {
-        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async();
+        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(int skip, int take);
         Task<<#= _model.Name #>> Get<#= _model.Name #>ByIdAsync(Guid id);
         Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term);
         Task<<#= _model.Name #>> Create<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
         Task<<#= _model.Name #>> Update<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
-        Task Delete<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
+        Task Delete<#= _model.Name #>Async(Guid id);
     }
 
     public partial class BusinessLogicLayer : I<#= _model.Name #>BLL
     {
         private readonly IRepository<<#= _model.Name #>> _<#= _model.Name.ToLower() #>Repository;
 
-        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async()
+        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(int skip, int take)
         {
-            return await _<#= _model.Name.ToLower() #>Repository.GetAsync();
+            return await _<#= _model.Name.ToLower() #>Repository.GetAsync(skip, take);
         }
 
         public async Task<<#= _model.Name #>> Get<#= _model.Name #>ByIdAsync(Guid id)
@@ -55,9 +55,9 @@ namespace CodeGenOutput.API.BLL
             return updated<#= _model.Name #>;
         }
 
-        public async Task Delete<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>)
+        public async Task Delete<#= _model.Name #>Async(Guid id)
         {
-            await _<#= _model.Name.ToLower() #>Repository.DeleteAsync(<#= _model.Name.ToLower() #>);
+            await _<#= _model.Name.ToLower() #>Repository.DeleteAsync(id);
             await _unitOfWork.Commit();
         }
     }

@@ -22,94 +22,83 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("using CodeGenOutput.API.BLL;\r\nusing CodeGenOutput.Models;\r\nusing Microsoft.AspNet" +
-                    "Core.Mvc;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Thread" +
-                    "ing.Tasks;\r\n\r\nnamespace CodeGenOutput.API.Controllers\r\n{\r\n    [Route(\"api/");
+            this.Write("using CodeGenOutput.API.Requests;\r\nusing CodeGenOutput.API.Requests.");
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write(";\r\nusing CodeGenOutput.ViewModels;\r\nusing MediatR;\r\nusing Microsoft.AspNetCore.Mv" +
+                    "c;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tas" +
+                    "ks;\r\n\r\nnamespace CodeGenOutput.API.Controllers\r\n{\r\n    [Route(\"api/");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write("\")]\r\n    [ApiController]\r\n    public class ");
             
             #line default
             #line hidden
             
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("Controller : ControllerBase\r\n    {\r\n        private readonly I");
-            
-            #line default
-            #line hidden
-            
             #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            this.Write("Controller : ControllerBase\r\n    {\r\n        private readonly IMediator _mediator;" +
+                    "\r\n\r\n        public ");
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("BLL _bll;\r\n\r\n        public ");
-            
-            #line default
-            #line hidden
-            
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("Controller(IBusinessLogicLayer bll)\r\n        {\r\n            _bll = bll;\r\n        " +
-                    "}\r\n\r\n        // GET: api/");
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("Controller(IMediator mediator)\r\n        {\r\n            _mediator = mediator;\r\n   " +
+                    "     }\r\n\r\n        // GET: api/");
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("\r\n        [HttpGet]\r\n        public async Task<ActionResult<IEnumerable<");
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("\r\n        [HttpGet]\r\n        public async Task<ActionResult<Response<List<");
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(">>> Get");
-            
-            #line default
-            #line hidden
-            
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
-            
-            #line default
-            #line hidden
-            
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("()\r\n        {\r\n            return Ok(await _bll.Get");
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("ListVM>>>> Get");
             
             #line default
             #line hidden
@@ -121,43 +110,33 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("Async());\r\n        }\r\n\r\n        // GET: api/");
+            this.Write("([FromQuery] int skip = 0, [FromQuery] int take = 20)\r\n        {\r\n            ret" +
+                    "urn Ok(await _mediator.Send(new Get");
             
             #line default
             #line hidden
             
-            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("() { Skip = skip, Take = take }));\r\n        }\r\n\r\n        // GET: api/");
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("/{id}\r\n        [HttpGet(\"{id}\")]\r\n        public async Task<ActionResult<");
-            
-            #line default
-            #line hidden
-            
             #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(">> Get");
-            
-            #line default
-            #line hidden
-            
-            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("ById([FromRoute] Guid id)\r\n        {\r\n            return Ok(await _bll.Get");
+            this.Write("/{id}\r\n        [HttpGet(\"{id}\")]\r\n        public async Task<ActionResult<Response" +
+                    "<");
             
             #line default
             #line hidden
@@ -169,44 +148,44 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("ByIdAsync(id));\r\n        }\r\n\r\n        // GET: api/");
+            this.Write("VM>>> Get");
             
             #line default
             #line hidden
             
-            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("ById([FromRoute] Guid id)\r\n        {\r\n            return Ok(await _mediator.Send(" +
+                    "new Get");
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("ById() { Id = id }));\r\n        }\r\n\r\n        // POST: api/");
+            
+            #line default
+            #line hidden
+            
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("/search\r\n        [HttpGet(\"search\")]\r\n        public async Task<ActionResult<IEnu" +
-                    "merable<");
-            
-            #line default
-            #line hidden
-            
             #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(">>> Search");
-            
-            #line default
-            #line hidden
-            
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("([FromQuery] string term)\r\n        {\r\n            return Ok(await _bll.Search");
+            this.Write("\r\n        [HttpPost]\r\n        public async Task<ActionResult<Response<");
             
             #line default
             #line hidden
@@ -218,296 +197,252 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("Async(term));\r\n        }\r\n\r\n        // POST: api/");
+            this.Write("VM>>> Create");
             
             #line default
             #line hidden
             
-            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("\r\n        [HttpPost]\r\n        public async Task<ActionResult<");
-            
-            #line default
-            #line hidden
-            
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(">> Create");
-            
-            #line default
-            #line hidden
-            
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write("([FromBody] ");
             
             #line default
             #line hidden
             
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(" ");
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("CreateVM ");
             
             #line default
             #line hidden
             
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(")\r\n        {\r\n            ");
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("CreateVM)\r\n        {\r\n            Response<");
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(" created");
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("VM> response = await _mediator.Send(new Create");
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(" = await _bll.Create");
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("() { ");
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("Async(");
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("CreateVM = ");
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(");\r\n            return CreatedAtAction(\"Get");
+            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("CreateVM });\r\n            return CreatedAtAction(\"Get");
             
             #line default
             #line hidden
             
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("ById\", new { id = created");
+            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("ById\", new { id = response.Data.Id }, response);\r\n        }\r\n\r\n        // PUT: ap" +
+                    "i/");
             
             #line default
             #line hidden
             
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(".Id }, created");
-            
-            #line default
-            #line hidden
-            
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(");\r\n        }\r\n\r\n        // PUT: api/");
-            
-            #line default
-            #line hidden
-            
-            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("/{id}\r\n        [HttpPut(\"{id}\")]\r\n        public async Task<ActionResult<");
+            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("/{id}\r\n        [HttpPut(\"{id}\")]\r\n        public async Task<ActionResult<Response" +
+                    "<");
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(">> Update");
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("VM>>> Update");
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write("([FromRoute] Guid id, [FromBody] ");
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(" ");
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("VM ");
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(")\r\n        {\r\n            if (id != ");
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("VM)\r\n        {\r\n            if (id != ");
             
             #line default
             #line hidden
             
-            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(".Id) { return BadRequest(); }\r\n            return Ok(await _bll.Update");
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("VM.Id) { return BadRequest(); }\r\n            return Ok(await _mediator.Send(new U" +
+                    "pdate");
             
             #line default
             #line hidden
             
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("Async(");
+            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("() { ");
             
             #line default
             #line hidden
             
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("VM = ");
+            
+            #line default
+            #line hidden
+            
+            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("));\r\n        }\r\n\r\n        // DELETE: api/");
+            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("VM }));\r\n        }\r\n\r\n        // DELETE: api/");
             
             #line default
             #line hidden
             
-            #line 64 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 59 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 64 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("/{id}\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task<IActionResult> Del" +
-                    "ete");
+            #line 59 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("/{id}\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task<ActionResult<Respo" +
+                    "nse>> Delete");
             
             #line default
             #line hidden
             
-            #line 66 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 66 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("(Guid id)\r\n        {\r\n            await _bll.Delete");
+            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("([FromRoute] Guid id)\r\n        {\r\n            return Ok(await _mediator.Send(new " +
+                    "Delete");
             
             #line default
             #line hidden
             
-            #line 68 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 68 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("Async(new ");
-            
-            #line default
-            #line hidden
-            
-            #line 68 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 68 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("() { Id = id });\r\n            return NoContent();\r\n        }\r\n    }\r\n}\r\n");
+            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
+            this.Write("() { Id = id }));\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

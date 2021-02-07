@@ -1,0 +1,45 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+using AutoMapper;
+using CodeGenOutput.API.BLL;
+using CodeGenOutput.Models;
+using CodeGenOutput.ViewModels;
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
+{
+    public class Create<#= _model.Name #> : IRequest<Response<<#= _model.Name #>VM>>
+    {
+        public <#= _model.Name #>CreateVM <#= _model.Name #>CreateVM { get; set; }
+    }
+
+    public class Create<#= _model.Name #>Handler : IRequestHandler<Create<#= _model.Name #>, Response<<#= _model.Name #>VM>>
+    {
+        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IMapper _mapper;
+
+        public Create<#= _model.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        {
+            _bll = bll;
+            _mapper = mapper;
+        }
+
+        public async Task<Response<<#= _model.Name #>VM>> Handle(Create<#= _model.Name #> request, CancellationToken cancellationToken)
+        {
+            Response<<#= _model.Name #>VM> response = new Response<<#= _model.Name #>VM>();
+
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = _mapper.Map<<#= _model.Name #>>(request.<#= _model.Name #>CreateVM);
+            <#= _model.Name.ToLower() #> = await _bll.Create<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+            response.Message = "<#= _model.Name #> created";
+            response.Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>);
+
+            return response;
+        }
+    }
+}
