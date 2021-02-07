@@ -3,8 +3,8 @@
   "Generate": true,
   "CommitProjectOutputDirectoryBeforeGenerate": true,
   "InstallProjectTemplateAfterGenerate": true,
-  "RecreateDatabaseAfterGenerate": true,
-  "TestProjectAfterGenerate": true,
+  "RecreateDatabaseAfterGenerate": false,
+  "TestProjectAfterGenerate": false,
   "StartupProjectPath": "CodeGenOutput.API\\",
   "MigrationsFolderPath": ".\\DAL\\Migrations",
   "ConfigBasedGenerator": [
