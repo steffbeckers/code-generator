@@ -11,8 +11,10 @@ namespace CodeGenOutput.API.DAL
     {
         Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
+            string includeProperties = "",
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = ""
+            int? skip = null,
+            int? take = null
         );
         Task<TEntity> GetByIdAsync(Guid id);
         Task<TEntity> CreateAsync(TEntity entity);
@@ -29,7 +31,13 @@ namespace CodeGenOutput.API.DAL
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public async Task<IEnumerable<TEntity>> GetAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            string includeProperties = "",
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            int? skip = 0,
+            int? take = 20
+        )
         {
             IQueryable<TEntity> query = _dbContext.Set<TEntity>();
 
@@ -45,8 +53,15 @@ namespace CodeGenOutput.API.DAL
 
             if (orderBy != null)
             {
-                return await orderBy(query).ToListAsync();
+                IQueryable<TEntity> entities = orderBy(query);
+                entities.Skip((int)skip);
+                entities.Take((int)take);
+
+                return await entities.ToListAsync();
             }
+
+            query.Skip((int)skip);
+            query.Take((int)take);
 
             return await query.ToListAsync();
         }

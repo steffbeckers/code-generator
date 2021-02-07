@@ -8,7 +8,7 @@ namespace CodeGenOutput.API.BLL
 {
     public interface IAccountBLL
     {
-        Task<IEnumerable<Account>> GetAccountsAsync();
+        Task<IEnumerable<Account>> GetAccountsAsync(int? skip = null, int? take = null);
         Task<Account> GetAccountByIdAsync(Guid id);
         Task<IEnumerable<Account>> SearchAccountAsync(string term);
         Task<Account> CreateAccountAsync(Account account);
@@ -20,9 +20,9 @@ namespace CodeGenOutput.API.BLL
     {
         private readonly IRepository<Account> _accountRepository;
 
-        public async Task<IEnumerable<Account>> GetAccountsAsync()
+        public async Task<IEnumerable<Account>> GetAccountsAsync(int? skip = null, int? take = null)
         {
-            return await _accountRepository.GetAsync();
+            return await _accountRepository.GetAsync(skip: skip, take: take);
         }
 
         public async Task<Account> GetAccountByIdAsync(Guid id)

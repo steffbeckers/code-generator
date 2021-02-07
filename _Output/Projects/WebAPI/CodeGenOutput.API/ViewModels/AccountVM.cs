@@ -12,4 +12,11 @@ namespace CodeGenOutput.ViewModels
         public string Website { get; set; }
         public string VAT { get; set; }
     }
+
+    public class AccountListVM
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
 }
