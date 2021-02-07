@@ -170,16 +170,6 @@ namespace CodeGen.Generators
                     codeGenTemplateSettings.StartupProjectPath
                 );
 
-                // Install project template with dotnet new
-                if (codeGenTemplateSettings.InstallProjectTemplateAfterGenerate) {
-                    _logger.LogInformation("Installing project template: " + outputProjectPath);
-
-                    ProcessStartInfo dotnetInstallProject = new ProcessStartInfo("dotnet");
-                    dotnetInstallProject.Arguments = @"new -i ./";
-                    dotnetInstallProject.WorkingDirectory = outputProjectPath;
-                    Process.Start(dotnetInstallProject).WaitForExit();
-                }
-
                 // Recreate database
                 if (codeGenTemplateSettings.RecreateDatabaseAfterGenerate)
                 {
@@ -196,6 +186,16 @@ namespace CodeGen.Generators
                     dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir " + codeGenTemplateSettings.MigrationsFolderPath;
                     dotnetAddInitialMigration.WorkingDirectory = startupProjectPath;
                     Process.Start(dotnetAddInitialMigration).WaitForExit();
+                }
+
+                // Install project template with dotnet new
+                if (codeGenTemplateSettings.InstallProjectTemplateAfterGenerate) {
+                    _logger.LogInformation("Installing project template: " + outputProjectPath);
+
+                    ProcessStartInfo dotnetInstallProject = new ProcessStartInfo("dotnet");
+                    dotnetInstallProject.Arguments = @"new -i ./";
+                    dotnetInstallProject.WorkingDirectory = outputProjectPath;
+                    Process.Start(dotnetInstallProject).WaitForExit();
                 }
 
                 // Test project after generate
