@@ -73,7 +73,9 @@ namespace CodeGen.Generators
                 _logger.LogInformation($"Regenerating project template: {projectTemplate}");
 
                 // Saving changes before cleanup
-                await CommitProjectOutputDirectory(projectTemplate);
+                if (codeGenTemplateSettings.CommitProjectOutputDirectoryBeforeGenerate) {
+                    await CommitProjectOutputDirectory(projectTemplate);
+                }
 
                 await CleanupProjectOutputDirectory(projectTemplate);
 

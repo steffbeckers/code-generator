@@ -15,12 +15,13 @@ namespace CodeGen.Models
         }
 
         public bool Generate { get; set; }
+        public bool CommitProjectOutputDirectoryBeforeGenerate { get; set; }
         public bool InstallProjectTemplateAfterGenerate { get; set; }
         public bool RecreateDatabaseAfterGenerate { get; set; }
         public bool TestProjectAfterGenerate { get; set; }
+
         public string StartupProjectPath { get; set; }
         public string MigrationsFolderPath { get; set; }
-
         // Filled by generator
         public string TemplatePath { get; set; }
 

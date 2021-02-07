@@ -1,9 +1,10 @@
 ﻿{
   "$schema": "../../templatesettings.schema.json",
-  "Generate": false,
-  "InstallProjectTemplateAfterGenerate": false,
-  "RecreateDatabaseAfterGenerate": false,
-  "TestProjectAfterGenerate": false,
+  "Generate": true,
+  "CommitProjectOutputDirectoryBeforeGenerate": true,
+  "InstallProjectTemplateAfterGenerate": true,
+  "RecreateDatabaseAfterGenerate": true,
+  "TestProjectAfterGenerate": true,
   "StartupProjectPath": "CodeGenOutput.API\\",
   "MigrationsFolderPath": ".\\DAL\\Migrations",
   "ConfigBasedGenerator": [
