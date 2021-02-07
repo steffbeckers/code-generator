@@ -47,23 +47,6 @@ namespace CodeGenOutput.API.DAL.Migrations
 
                     b.ToTable("Accounts");
                 });
-
-            modelBuilder.Entity("CodeGenOutput.Models.Contact", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Contacts");
-                });
 #pragma warning restore 612, 618
         }
     }
