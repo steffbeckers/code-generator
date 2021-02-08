@@ -22,9 +22,9 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("using CodeGenOutput.Models;\r\nusing System.Collections.Generic;\r\nusing System.Thre" +
-                    "ading.Tasks;\r\n\r\n// TODO: namespace CodeGenOutput.API.DAL.Repositories\r\nnamespace" +
-                    " CodeGenOutput.API.DAL\r\n{\r\n    public static class ");
+            this.Write("using CodeGenOutput.API.Models;\r\nusing System.Collections.Generic;\r\nusing System." +
+                    "Threading.Tasks;\r\n\r\n// TODO: namespace CodeGenOutput.API.DAL.Repositories\r\nnames" +
+                    "pace CodeGenOutput.API.DAL\r\n{\r\n    public static class ");
             
             #line default
             #line hidden

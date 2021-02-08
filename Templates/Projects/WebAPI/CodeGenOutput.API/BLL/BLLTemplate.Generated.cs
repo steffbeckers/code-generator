@@ -22,9 +22,9 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("using CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.Models;\r\nusing System;\r\nusing S" +
-                    "ystem.Collections.Generic;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace CodeGenOu" +
-                    "tput.API.BLL\r\n{\r\n    public interface I");
+            this.Write("using CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.API.Models;\r\nusing System;\r\nusi" +
+                    "ng System.Collections.Generic;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace CodeG" +
+                    "enOutput.API.BLL\r\n{\r\n    public interface I");
             
             #line default
             #line hidden

@@ -22,9 +22,9 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\CreateTemplate.tt"
-            this.Write("using AutoMapper;\r\nusing CodeGenOutput.API.BLL;\r\nusing CodeGenOutput.Models;\r\nusi" +
-                    "ng CodeGenOutput.ViewModels;\r\nusing MediatR;\r\nusing System.Threading;\r\nusing Sys" +
-                    "tem.Threading.Tasks;\r\n\r\nnamespace CodeGenOutput.API.Requests.");
+            this.Write("using AutoMapper;\r\nusing CodeGenOutput.API.BLL;\r\nusing CodeGenOutput.API.Models;\r" +
+                    "\nusing CodeGenOutput.API.ViewModels;\r\nusing MediatR;\r\nusing System.Threading;\r\nu" +
+                    "sing System.Threading.Tasks;\r\n\r\nnamespace CodeGenOutput.API.Requests.");
             
             #line default
             #line hidden

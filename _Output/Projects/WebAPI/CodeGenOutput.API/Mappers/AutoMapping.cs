@@ -1,6 +1,6 @@
 using AutoMapper;
-using CodeGenOutput.Models;
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.Models;
+using CodeGenOutput.API.ViewModels;
 
 namespace CodeGenOutput.API.Mappers
 {

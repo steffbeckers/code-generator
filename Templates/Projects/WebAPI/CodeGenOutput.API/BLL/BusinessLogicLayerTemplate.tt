@@ -5,13 +5,13 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
 using CodeGenOutput.API.DAL;
-using CodeGenOutput.Models;
+using CodeGenOutput.API.Models;
 
 namespace CodeGenOutput.API.BLL
 {
     public interface IBusinessLogicLayer :
-<# foreach(CodeGenModel model in _config.Models) { #>
-        I<#= model.Name#>BLL<#= model != _config.Models.Last() ? "," : "" #>
+<# foreach(CodeGenModel model in _config.Models.List) { #>
+        I<#= model.Name#>BLL<#= model != _config.Models.List.Last() ? "," : "" #>
 <# } #>
     { }
 
@@ -24,7 +24,7 @@ namespace CodeGenOutput.API.BLL
             _unitOfWork = unitOfWork;
 
             // Repositories
-<# foreach(CodeGenModel model in _config.Models) { #>
+<# foreach(CodeGenModel model in _config.Models.List) { #>
             _<#= model.Name.ToLower() #>Repository = unitOfWork.GetRepository<<#= model.Name#>>();
 <# } #>
         }

@@ -19,7 +19,7 @@ namespace CodeGenOutput.API.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
-            modelBuilder.Entity("CodeGenOutput.Models.Account", b =>
+            modelBuilder.Entity("CodeGenOutput.API.Models.Account", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,5 +1,6 @@
 ﻿using CodeGen.Models;
 using CodeGen.Services;
+using CodeGen.Templates;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
@@ -31,7 +32,7 @@ namespace CodeGen.Generators
 
         public Task Generate(string projectTemplateFile, CodeGenTemplateSettingsData data)
         {
-            foreach (var model in _configService.CodeGenConfig.Models)
+            foreach (CodeGenModel model in _configService.CodeGenConfig.Models.List)
             {
                 // File path
                 string filePath = Path.Combine(
@@ -44,7 +45,10 @@ namespace CodeGen.Generators
                 // File text
                 string templateTypeFormat = projectTemplateFile.Replace("\\", ".").Replace(".tt", "");
                 Type templateType = Type.GetType($"CodeGen.{templateTypeFormat}, CodeGen");
-                var template = Activator.CreateInstance(templateType, _configService.CodeGenConfig, model) as dynamic;
+                if (templateType == null) {
+                    throw new Exception($"Can't get type for T4 template: CodeGen.{templateTypeFormat}, CodeGen");
+                }
+                ITextTemplate template = Activator.CreateInstance(templateType, _configService.CodeGenConfig, model) as ITextTemplate;
                 string fileText = template.TransformText();
 
                 _fileService.Create(filePath, fileText);

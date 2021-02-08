@@ -24,8 +24,8 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetTemplate.tt"
             this.Write(@"using AutoMapper;
 using CodeGenOutput.API.BLL;
-using CodeGenOutput.Models;
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.Models;
+using CodeGenOutput.API.ViewModels;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;

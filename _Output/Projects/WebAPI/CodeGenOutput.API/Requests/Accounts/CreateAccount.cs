@@ -1,7 +1,7 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
-using CodeGenOutput.Models;
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.Models;
+using CodeGenOutput.API.ViewModels;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

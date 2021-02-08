@@ -5,8 +5,8 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
 using AutoMapper;
-using CodeGenOutput.Models;
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.Models;
+using CodeGenOutput.API.ViewModels;
 
 namespace CodeGenOutput.API.Mappers
 {
@@ -14,7 +14,7 @@ namespace CodeGenOutput.API.Mappers
     {
         public AutoMapping()
         {
-<# foreach (CodeGenModel model in _config.Models) { #>
+<# foreach (CodeGenModel model in _config.Models.List) { #>
             CreateMap<<#= model.Name #>, <#= model.Name #>VM>();
             CreateMap<<#= model.Name #>, <#= model.Name #>ListVM>();
             CreateMap<<#= model.Name #>VM, <#= model.Name #>>();

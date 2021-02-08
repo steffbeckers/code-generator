@@ -34,9 +34,9 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(";\r\nusing CodeGenOutput.ViewModels;\r\nusing MediatR;\r\nusing Microsoft.AspNetCore.Mv" +
-                    "c;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tas" +
-                    "ks;\r\n\r\nnamespace CodeGenOutput.API.Controllers\r\n{\r\n    [Route(\"api/");
+            this.Write(";\r\nusing CodeGenOutput.API.ViewModels;\r\nusing MediatR;\r\nusing Microsoft.AspNetCor" +
+                    "e.Mvc;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Threading" +
+                    ".Tasks;\r\n\r\nnamespace CodeGenOutput.API.Controllers\r\n{\r\n    [Route(\"api/");
             
             #line default
             #line hidden

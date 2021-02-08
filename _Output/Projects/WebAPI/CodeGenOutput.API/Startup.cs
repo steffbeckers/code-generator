@@ -41,9 +41,9 @@ namespace CodeGenOutput.API
 
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CodeGenOutput.API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "CodeGenOutput.API", Version = "v1" });
             });
         }
 
@@ -55,7 +55,11 @@ namespace CodeGenOutput.API
                 app.UseDeveloperExceptionPage();
 
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CodeGenOutput.API v1"));
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("swagger/v1/swagger.json", "CodeGenOutput.API v1");
+                    options.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();

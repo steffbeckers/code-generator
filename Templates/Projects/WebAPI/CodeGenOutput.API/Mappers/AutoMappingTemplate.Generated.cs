@@ -22,15 +22,15 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Mappers {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
-            this.Write("using AutoMapper;\r\nusing CodeGenOutput.Models;\r\nusing CodeGenOutput.ViewModels;\r\n" +
-                    "\r\nnamespace CodeGenOutput.API.Mappers\r\n{\r\n    public class AutoMapping : Profile" +
-                    "\r\n    {\r\n        public AutoMapping()\r\n        {\r\n");
+            this.Write("using AutoMapper;\r\nusing CodeGenOutput.API.Models;\r\nusing CodeGenOutput.API.ViewM" +
+                    "odels;\r\n\r\nnamespace CodeGenOutput.API.Mappers\r\n{\r\n    public class AutoMapping :" +
+                    " Profile\r\n    {\r\n        public AutoMapping()\r\n        {\r\n");
             
             #line default
             #line hidden
             
             #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
- foreach (CodeGenModel model in _config.Models) { 
+ foreach (CodeGenModel model in _config.Models.List) { 
             
             #line default
             #line hidden

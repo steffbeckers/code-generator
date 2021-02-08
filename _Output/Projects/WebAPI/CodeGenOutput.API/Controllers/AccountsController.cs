@@ -1,6 +1,6 @@
 using CodeGenOutput.API.Requests;
 using CodeGenOutput.API.Requests.Accounts;
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;

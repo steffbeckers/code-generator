@@ -4,12 +4,15 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); #>
 using System;
 
-namespace CodeGenOutput.ViewModels
+namespace CodeGenOutput.API.ViewModels
 {
+
     public class <#= _model.Name #>VM
     {
+        public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
         public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
 <# } #>
@@ -17,6 +20,7 @@ namespace CodeGenOutput.ViewModels
 
     public class <#= _model.Name #>ListVM
     {
+        public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
         public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
 <# } #>

@@ -6,7 +6,7 @@
 <#@ import namespace="CodeGen.Models" #>
 using CodeGenOutput.API.Requests;
 using CodeGenOutput.API.Requests.<#= _model.NamePlural #>;
-using CodeGenOutput.ViewModels;
+using CodeGenOutput.API.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;

@@ -38,7 +38,7 @@ namespace CodeGen
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex);
+                _logger.LogError(ex, ex.Message);
                 throw;
             }
             //     _logger.LogInformation("Waiting 10 seconds before regenerating");

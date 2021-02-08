@@ -22,14 +22,14 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write("using CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.Models;\r\n\r\nnamespace CodeGenOut" +
-                    "put.API.BLL\r\n{\r\n    public interface IBusinessLogicLayer :\r\n");
+            this.Write("using CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.API.Models;\r\n\r\nnamespace CodeGe" +
+                    "nOutput.API.BLL\r\n{\r\n    public interface IBusinessLogicLayer :\r\n");
             
             #line default
             #line hidden
             
             #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
- foreach(CodeGenModel model in _config.Models) { 
+ foreach(CodeGenModel model in _config.Models.List) { 
             
             #line default
             #line hidden
@@ -53,7 +53,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model != _config.Models.Last() ? "," : "" ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( model != _config.Models.List.Last() ? "," : "" ));
             
             #line default
             #line hidden
@@ -88,7 +88,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
- foreach(CodeGenModel model in _config.Models) { 
+ foreach(CodeGenModel model in _config.Models.List) { 
             
             #line default
             #line hidden

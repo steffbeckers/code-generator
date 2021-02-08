@@ -1,4 +1,4 @@
-using CodeGenOutput.Models;
+using CodeGenOutput.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeGenOutput.API.DAL

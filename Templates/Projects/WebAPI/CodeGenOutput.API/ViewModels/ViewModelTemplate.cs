@@ -2,7 +2,7 @@
 
 namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels
 {
-    public partial class ViewModelTemplate
+    public partial class ViewModelTemplate : ITextTemplate
     {
         public CodeGenConfig _config;
         public CodeGenModel _model;

@@ -1,5 +1,6 @@
 ﻿using CodeGen.Models;
 using CodeGen.Services;
+using CodeGen.Templates;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
@@ -45,8 +46,7 @@ namespace CodeGen.Generators
             if (templateType == null) {
                 throw new Exception($"Can't get type for T4 template: CodeGen.{templateTypeFormat}, CodeGen");
             }
-
-            var template = Activator.CreateInstance(templateType, _configService.CodeGenConfig) as dynamic;
+            ITextTemplate template = Activator.CreateInstance(templateType, _configService.CodeGenConfig) as ITextTemplate;
             string fileText = template.TransformText();
 
             _fileService.Create(filePath, fileText);

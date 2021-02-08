@@ -1,5 +1,5 @@
 using CodeGenOutput.API.DAL;
-using CodeGenOutput.Models;
+using CodeGenOutput.API.Models;
 
 namespace CodeGenOutput.API.BLL
 {

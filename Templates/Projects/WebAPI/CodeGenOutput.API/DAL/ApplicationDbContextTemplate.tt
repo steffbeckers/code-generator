@@ -4,7 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-using CodeGenOutput.Models;
+using CodeGenOutput.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeGenOutput.API.DAL
@@ -14,7 +14,7 @@ namespace CodeGenOutput.API.DAL
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {}
 
-<# foreach (CodeGenModel model in _config.Models) { #>
+<# foreach (CodeGenModel model in _config.Models.List) { #>
         public DbSet<<#= model.Name #>> <#= model.NamePlural #> { get; set; }
 <# } #>
     }

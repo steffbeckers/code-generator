@@ -1,4 +1,4 @@
-using CodeGenOutput.Models;
+using CodeGenOutput.API.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

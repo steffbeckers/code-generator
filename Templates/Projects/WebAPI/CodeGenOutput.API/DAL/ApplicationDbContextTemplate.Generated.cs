@@ -22,7 +22,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write(@"using CodeGenOutput.Models;
+            this.Write(@"using CodeGenOutput.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeGenOutput.API.DAL
@@ -38,7 +38,7 @@ namespace CodeGenOutput.API.DAL
             #line hidden
             
             #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
- foreach (CodeGenModel model in _config.Models) { 
+ foreach (CodeGenModel model in _config.Models.List) { 
             
             #line default
             #line hidden

@@ -22,72 +22,97 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("using System;\r\n\r\nnamespace CodeGenOutput.Models\r\n{\r\n    public class ");
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); 
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 11 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("\r\n    {\r\n");
+            #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("using System;\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace CodeGenO" +
+                    "utput.API.Models\r\n{\r\n    public class ");
             
             #line default
             #line hidden
             
             #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties) { 
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("        public ");
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) ));
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" ");
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" { get; set; }\r\n");
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- } 
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("\r\n    {\r\n        [Key]\r\n        public ");
             
             #line default
             #line hidden
             
             #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties) { 
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("        public ");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
             this.Write("    }\r\n}\r\n");
             
             #line default

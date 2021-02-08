@@ -26,7 +26,7 @@ namespace CodeGen.Services
         public Task Load()
         {
             _codeGenConfig = _configuration.GetSection("CodeGenConfig").Get<CodeGenConfig>();
-            _codeGenConfig.Models = _codeGenConfig.Models.OrderBy(x => x.Name).ToList();
+            _codeGenConfig.Models.List = _codeGenConfig.Models.List.OrderBy(x => x.Name).ToList();
             return Task.CompletedTask;
         }
     }

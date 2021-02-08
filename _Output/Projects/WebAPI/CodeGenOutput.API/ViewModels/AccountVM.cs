@@ -1,7 +1,8 @@
 using System;
 
-namespace CodeGenOutput.ViewModels
+namespace CodeGenOutput.API.ViewModels
 {
+
     public class AccountVM
     {
         public Guid Id { get; set; }
