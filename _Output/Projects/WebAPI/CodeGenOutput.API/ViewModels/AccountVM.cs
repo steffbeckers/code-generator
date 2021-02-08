@@ -12,6 +12,10 @@ namespace CodeGenOutput.API.ViewModels
         public string Email { get; set; }
         public string Website { get; set; }
         public string VAT { get; set; }
+        public Guid CreatedBy { get; set; }
+        public DateTime DateCreated { get; set; }
+        public Guid? ModifiedBy { get; set; }
+        public DateTime? DateModified { get; set; }
     }
 
     public class AccountListVM

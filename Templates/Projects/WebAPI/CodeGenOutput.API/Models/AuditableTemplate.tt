@@ -4,17 +4,13 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); #>
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace CodeGenOutput.API.Models
 {
-    public class <#= _model.Name #><#= _model.Audit ? " : Auditable" : "" #>
+    public abstract class Auditable
     {
-        [Key]
-        public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
-<# foreach (CodeGenModelProperty property in _model.Properties) { #>
+<# foreach (CodeGenModelProperty property in _config.Models.DefaultAuditProperties()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }

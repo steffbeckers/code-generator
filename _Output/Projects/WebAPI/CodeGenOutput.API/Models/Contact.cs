@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CodeGenOutput.API.Models
 {
-    public class Contact
+    public class Contact : Auditable
     {
         [Key]
         public Guid Id { get; set; }

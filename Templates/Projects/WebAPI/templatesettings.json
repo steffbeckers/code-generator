@@ -28,6 +28,10 @@
       "Output": "AutoMapping.cs"
     },
     {
+      "T4Template": "CodeGenOutput.API\\Models\\AuditableTemplate.tt",
+      "Output": "Auditable.cs"
+    },
+    {
       "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
       "Output": "Startup.cs"
     }

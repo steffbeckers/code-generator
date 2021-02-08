@@ -14,7 +14,10 @@ namespace CodeGenOutput.API.ViewModels
     {
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
-        public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
+        public <#= property.Type #> <#= property.Name #> { get; set; }
+<# } #>
+<# foreach (CodeGenModelProperty property in _config.Models.DefaultAuditProperties().Where(x => !x.AuditDeleted).ToList()) { #>
+        public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }
 
@@ -22,14 +25,14 @@ namespace CodeGenOutput.API.ViewModels
     {
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
-        public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
+        public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }
 
     public class <#= _model.Name #>CreateVM
     {
 <# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != "Id")) { #>
-        public <#= property.Type #><#= (property.Required ? "" : (property.Type == "Guid" || property.Type == "int" ? "?" : "")) #> <#= property.Name #> { get; set; }
+        public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }
 }

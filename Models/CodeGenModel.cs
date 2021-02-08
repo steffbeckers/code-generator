@@ -17,6 +17,7 @@ namespace CodeGen.Models
             }
         }
         public string Description { get; set; }
+        public bool Audit { get; set; }
 
         public List<CodeGenModelProperty> Properties { get; set; }
     }
