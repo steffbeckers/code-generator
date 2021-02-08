@@ -72,7 +72,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write("VM ");
+            this.Write("UpdateVM ");
             
             #line default
             #line hidden
@@ -84,7 +84,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write("VM { get; set; }\r\n    }\r\n\r\n    public class Update");
+            this.Write("UpdateVM { get; set; }\r\n    }\r\n\r\n    public class Update");
             
             #line default
             #line hidden
@@ -242,7 +242,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write("VM);\r\n            ");
+            this.Write("UpdateVM);\r\n            ");
             
             #line default
             #line hidden

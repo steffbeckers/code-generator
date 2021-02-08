@@ -10,7 +10,7 @@ namespace CodeGenOutput.API.Requests.Accounts
 {
     public class UpdateAccount : IRequest<Response<AccountVM>>
     {
-        public AccountVM AccountVM { get; set; }
+        public AccountUpdateVM AccountUpdateVM { get; set; }
     }
 
     public class UpdateAccountHandler : IRequestHandler<UpdateAccount, Response<AccountVM>>
@@ -28,7 +28,7 @@ namespace CodeGenOutput.API.Requests.Accounts
         {
             Response<AccountVM> response = new Response<AccountVM>();
 
-            Account account = _mapper.Map<Account>(request.AccountVM);
+            Account account = _mapper.Map<Account>(request.AccountUpdateVM);
             account = await _bll.UpdateAccountAsync(account);
             response.Message = "Account updated";
             response.Data = _mapper.Map<AccountVM>(account);

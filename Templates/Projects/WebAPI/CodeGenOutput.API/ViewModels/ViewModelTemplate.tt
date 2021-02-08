@@ -9,7 +9,6 @@ using System;
 
 namespace CodeGenOutput.API.ViewModels
 {
-
     public class <#= _model.Name #>VM
     {
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
@@ -32,6 +31,14 @@ namespace CodeGenOutput.API.ViewModels
     public class <#= _model.Name #>CreateVM
     {
 <# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != "Id")) { #>
+        public <#= property.Type #> <#= property.Name #> { get; set; }
+<# } #>
+    }
+
+    public class <#= _model.Name #>UpdateVM
+    {
+        public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
+<# foreach (CodeGenModelProperty property in _model.Properties) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }

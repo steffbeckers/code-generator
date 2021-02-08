@@ -50,10 +50,10 @@ namespace CodeGenOutput.API.Controllers
 
         // PUT: api/<#= _model.NamePlural.ToLower() #>/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #>VM <#= _model.Name.ToLower() #>VM)
+        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM)
         {
-            if (id != <#= _model.Name.ToLower() #>VM.Id) { return BadRequest(); }
-            return Ok(await _mediator.Send(new Update<#= _model.Name #>() { <#= _model.Name #>VM = <#= _model.Name.ToLower() #>VM }));
+            if (id != <#= _model.Name.ToLower() #>UpdateVM.Id) { return BadRequest(); }
+            return Ok(await _mediator.Send(new Update<#= _model.Name #>() { <#= _model.Name #>UpdateVM = <#= _model.Name.ToLower() #>UpdateVM }));
         }
 
         // DELETE: api/<#= _model.NamePlural.ToLower() #>/{id}

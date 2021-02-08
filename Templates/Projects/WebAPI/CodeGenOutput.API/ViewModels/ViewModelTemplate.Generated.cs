@@ -28,276 +28,360 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels {
             #line hidden
             
             #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
-            this.Write("using System;\r\n\r\nnamespace CodeGenOutput.API.ViewModels\r\n{\r\n\r\n    public class ");
+            this.Write("using System;\r\n\r\nnamespace CodeGenOutput.API.ViewModels\r\n{\r\n    public class ");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 12 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 12 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("VM\r\n    {\r\n        public ");
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties) { 
             
             #line default
             #line hidden
             
             #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties) { 
-            
-            #line default
-            #line hidden
-            
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("        public ");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+ } 
             
             #line default
             #line hidden
             
             #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelProperty property in _config.Models.DefaultAuditProperties().Where(x => !x.AuditDeleted).ToList()) { 
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("        public ");
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+ } 
             
             #line default
             #line hidden
             
             #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("    }\r\n\r\n    public class ");
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("ListVM\r\n    {\r\n        public ");
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" { get; set; }\r\n");
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelProperty property in _model.Properties) { 
             
             #line default
             #line hidden
             
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("        public ");
             
             #line default
             #line hidden
             
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
             
             #line default
             #line hidden
             
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
             
             #line default
             #line hidden
             
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+ } 
             
             #line default
             #line hidden
             
             #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("    }\r\n\r\n    public class ");
             
             #line default
             #line hidden
             
-            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("CreateVM\r\n    {\r\n");
             
             #line default
             #line hidden
             
-            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
  foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != "Id")) { 
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("        public ");
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write(" { get; set; }\r\n");
             
             #line default
             #line hidden
             
-            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write("    }\r\n\r\n    public class ");
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write("UpdateVM\r\n    {\r\n        public ");
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties) { 
+            
+            #line default
+            #line hidden
+            
+            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write("        public ");
+            
+            #line default
+            #line hidden
+            
+            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
             this.Write("    }\r\n}\r\n");
             
             #line default

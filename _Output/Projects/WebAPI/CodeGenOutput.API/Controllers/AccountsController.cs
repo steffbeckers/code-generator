@@ -44,10 +44,10 @@ namespace CodeGenOutput.API.Controllers
 
         // PUT: api/accounts/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult<Response<AccountVM>>> UpdateAccount([FromRoute] Guid id, [FromBody] AccountVM accountVM)
+        public async Task<ActionResult<Response<AccountVM>>> UpdateAccount([FromRoute] Guid id, [FromBody] AccountUpdateVM accountUpdateVM)
         {
-            if (id != accountVM.Id) { return BadRequest(); }
-            return Ok(await _mediator.Send(new UpdateAccount() { AccountVM = accountVM }));
+            if (id != accountUpdateVM.Id) { return BadRequest(); }
+            return Ok(await _mediator.Send(new UpdateAccount() { AccountUpdateVM = accountUpdateVM }));
         }
 
         // DELETE: api/accounts/{id}

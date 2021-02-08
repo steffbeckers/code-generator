@@ -16,7 +16,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 {
     public class Update<#= _model.Name #> : IRequest<Response<<#= _model.Name #>VM>>
     {
-        public <#= _model.Name #>VM <#= _model.Name #>VM { get; set; }
+        public <#= _model.Name #>UpdateVM <#= _model.Name #>UpdateVM { get; set; }
     }
 
     public class Update<#= _model.Name #>Handler : IRequestHandler<Update<#= _model.Name #>, Response<<#= _model.Name #>VM>>
@@ -34,7 +34,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
         {
             Response<<#= _model.Name #>VM> response = new Response<<#= _model.Name #>VM>();
 
-            <#= _model.Name #> <#= _model.Name.ToLower() #> = _mapper.Map<<#= _model.Name #>>(request.<#= _model.Name #>VM);
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = _mapper.Map<<#= _model.Name #>>(request.<#= _model.Name #>UpdateVM);
             <#= _model.Name.ToLower() #> = await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
             response.Message = "<#= _model.Name #> updated";
             response.Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>);

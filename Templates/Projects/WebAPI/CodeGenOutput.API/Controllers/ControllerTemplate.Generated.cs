@@ -343,7 +343,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("VM ");
+            this.Write("UpdateVM ");
             
             #line default
             #line hidden
@@ -355,7 +355,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("VM)\r\n        {\r\n            if (id != ");
+            this.Write("UpdateVM)\r\n        {\r\n            if (id != ");
             
             #line default
             #line hidden
@@ -367,8 +367,8 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("VM.Id) { return BadRequest(); }\r\n            return Ok(await _mediator.Send(new U" +
-                    "pdate");
+            this.Write("UpdateVM.Id) { return BadRequest(); }\r\n            return Ok(await _mediator.Send" +
+                    "(new Update");
             
             #line default
             #line hidden
@@ -392,7 +392,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("VM = ");
+            this.Write("UpdateVM = ");
             
             #line default
             #line hidden
@@ -404,7 +404,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("VM }));\r\n        }\r\n\r\n        // DELETE: api/");
+            this.Write("UpdateVM }));\r\n        }\r\n\r\n        // DELETE: api/");
             
             #line default
             #line hidden
