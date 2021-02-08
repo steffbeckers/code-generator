@@ -1,26 +1,36 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://steffbeckers.eu/code-generator/templatesettings.schema.json",
+  "$id": "http://example.com/example.json",
   "type": "object",
   "title": "The root schema",
   "description": "The root schema comprises the entire JSON document.",
   "default": {},
   "examples": [
     {
-      "Generate": false,
-      "InstallProjectTemplateAfterGenerate": false,
-      "RecreateDatabaseAfterGenerate": false,
-      "TestProjectAfterGenerate": false,
+      "Generate": true,
+      "BeforeGenerate": {
+        "CommitProjectOutputDirectory": false
+      },
+      "AfterGenerate": {
+        "Build": true,
+        "RecreateDatabase": true,
+        "InstallProjectTemplate": false,
+        "Run": true
+      },
       "StartupProjectPath": "CodeGenOutput.API\\",
       "MigrationsFolderPath": ".\\DAL\\Migrations",
       "ConfigBasedGenerator": [
+        {
+          "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+          "Output": "_BusinessLogicLayer.cs"
+        },
         {
           "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
           "Output": "ApplicationDbContext.cs"
         },
         {
-          "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
-          "Output": "_BusinessLogicLayer.cs"
+          "T4Template": "CodeGenOutput.API\\Mappers\\AutoMappingTemplate.tt",
+          "Output": "AutoMapping.cs"
         },
         {
           "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
@@ -34,15 +44,35 @@
         },
         {
           "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
-          "Output": "{0}sController.cs"
+          "Output": "{1}Controller.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
+          "Output": "{0}Repository.cs"
         },
         {
           "T4Template": "CodeGenOutput.API\\Models\\ModelTemplate.tt",
           "Output": "{0}.cs"
         },
         {
-          "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
-          "Output": "{0}Repository.cs"
+          "T4Template": "CodeGenOutput.API\\Requests\\CreateTemplate.tt",
+          "Output": "{1}\\Create{0}.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\Requests\\DeleteTemplate.tt",
+          "Output": "{1}\\Delete{0}.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\Requests\\GetByIdTemplate.tt",
+          "Output": "{1}\\Get{0}ById.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\Requests\\GetTemplate.tt",
+          "Output": "{1}\\Get{1}.cs"
+        },
+        {
+          "T4Template": "CodeGenOutput.API\\Requests\\UpdateTemplate.tt",
+          "Output": "{1}\\Update{0}.cs"
         },
         {
           "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModelTemplate.tt",
@@ -53,9 +83,8 @@
   ],
   "required": [
     "Generate",
-    "InstallProjectTemplateAfterGenerate",
-    "RecreateDatabaseAfterGenerate",
-    "TestProjectAfterGenerate",
+    "BeforeGenerate",
+    "AfterGenerate",
     "StartupProjectPath",
     "MigrationsFolderPath",
     "ConfigBasedGenerator",
@@ -68,31 +97,87 @@
       "title": "The Generate schema",
       "description": "An explanation about the purpose of this instance.",
       "default": false,
-      "examples": [false]
+      "examples": [true]
     },
-    "InstallProjectTemplateAfterGenerate": {
-      "$id": "#/properties/InstallProjectTemplateAfterGenerate",
-      "type": "boolean",
-      "title": "The InstallProjectTemplateAfterGenerate schema",
+    "BeforeGenerate": {
+      "$id": "#/properties/BeforeGenerate",
+      "type": "object",
+      "title": "The BeforeGenerate schema",
       "description": "An explanation about the purpose of this instance.",
-      "default": false,
-      "examples": [false]
+      "default": {},
+      "examples": [
+        {
+          "CommitProjectOutputDirectory": false
+        }
+      ],
+      "required": ["CommitProjectOutputDirectory"],
+      "properties": {
+        "CommitProjectOutputDirectory": {
+          "$id": "#/properties/BeforeGenerate/properties/CommitProjectOutputDirectory",
+          "type": "boolean",
+          "title": "The CommitProjectOutputDirectory schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [false]
+        }
+      },
+      "additionalProperties": true
     },
-    "RecreateDatabaseAfterGenerate": {
-      "$id": "#/properties/RecreateDatabaseAfterGenerate",
-      "type": "boolean",
-      "title": "The RecreateDatabaseAfterGenerate schema",
+    "AfterGenerate": {
+      "$id": "#/properties/AfterGenerate",
+      "type": "object",
+      "title": "The AfterGenerate schema",
       "description": "An explanation about the purpose of this instance.",
-      "default": false,
-      "examples": [false]
-    },
-    "TestProjectAfterGenerate": {
-      "$id": "#/properties/TestProjectAfterGenerate",
-      "type": "boolean",
-      "title": "The TestProjectAfterGenerate schema",
-      "description": "An explanation about the purpose of this instance.",
-      "default": false,
-      "examples": [false]
+      "default": {},
+      "examples": [
+        {
+          "Build": true,
+          "RecreateDatabase": true,
+          "InstallProjectTemplate": false,
+          "Run": true
+        }
+      ],
+      "required": [
+        "Build",
+        "RecreateDatabase",
+        "InstallProjectTemplate",
+        "Run"
+      ],
+      "properties": {
+        "Build": {
+          "$id": "#/properties/AfterGenerate/properties/Build",
+          "type": "boolean",
+          "title": "The Build schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [true]
+        },
+        "RecreateDatabase": {
+          "$id": "#/properties/AfterGenerate/properties/RecreateDatabase",
+          "type": "boolean",
+          "title": "The RecreateDatabase schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [true]
+        },
+        "InstallProjectTemplate": {
+          "$id": "#/properties/AfterGenerate/properties/InstallProjectTemplate",
+          "type": "boolean",
+          "title": "The InstallProjectTemplate schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [false]
+        },
+        "Run": {
+          "$id": "#/properties/AfterGenerate/properties/Run",
+          "type": "boolean",
+          "title": "The Run schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [true]
+        }
+      },
+      "additionalProperties": true
     },
     "StartupProjectPath": {
       "$id": "#/properties/StartupProjectPath",
@@ -119,12 +204,12 @@
       "examples": [
         [
           {
-            "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
-            "Output": "ApplicationDbContext.cs"
-          },
-          {
             "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
             "Output": "_BusinessLogicLayer.cs"
+          },
+          {
+            "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
+            "Output": "ApplicationDbContext.cs"
           }
         ]
       ],
@@ -140,8 +225,8 @@
             "default": {},
             "examples": [
               {
-                "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
-                "Output": "ApplicationDbContext.cs"
+                "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+                "Output": "_BusinessLogicLayer.cs"
               }
             ],
             "required": ["T4Template", "Output"],
@@ -153,7 +238,7 @@
                 "description": "An explanation about the purpose of this instance.",
                 "default": "",
                 "examples": [
-                  "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt"
+                  "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt"
                 ]
               },
               "Output": {
@@ -162,10 +247,10 @@
                 "title": "The Output schema",
                 "description": "An explanation about the purpose of this instance.",
                 "default": "",
-                "examples": ["ApplicationDbContext.cs"]
+                "examples": ["_BusinessLogicLayer.cs"]
               }
             },
-            "additionalProperties": false
+            "additionalProperties": true
           }
         ]
       }
@@ -184,7 +269,7 @@
           },
           {
             "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
-            "Output": "{0}sController.cs"
+            "Output": "{1}Controller.cs"
           }
         ]
       ],
@@ -223,7 +308,7 @@
                 "examples": ["{0}BLL.cs"]
               }
             },
-            "additionalProperties": false
+            "additionalProperties": true
           }
         ]
       }

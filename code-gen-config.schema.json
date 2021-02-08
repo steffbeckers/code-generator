@@ -8,68 +8,46 @@
   "examples": [
     {
       "CodeGenConfig": {
-        "Models": [
-          {
-            "Name": "Account",
+        "Models": {
+          "Defaults": {
             "Properties": [
               {
                 "Name": "Id",
                 "Type": "Guid",
-                "Required": true
+                "Key": true
               },
               {
-                "Name": "Name",
-                "Type": "string",
-                "Required": true
+                "Name": "CreatedBy",
+                "Type": "Guid",
+                "AuditCreatedBy": true
               },
               {
-                "Name": "Description",
-                "Type": "string"
+                "Name": "DateCreated",
+                "Type": "DateTime",
+                "AuditDateCreated": true
               },
               {
-                "Name": "Telephone",
-                "Type": "string"
+                "Name": "ModifiedBy",
+                "Type": "Guid?",
+                "AuditModifiedBy": true
               },
               {
-                "Name": "Email",
-                "Type": "string"
+                "Name": "DateModified",
+                "Type": "DateTime?",
+                "AuditDateModified": true
               },
               {
-                "Name": "Website",
-                "Type": "string"
-              },
-              {
-                "Name": "VAT",
-                "Type": "string"
+                "Name": "Deleted",
+                "Type": "boolean",
+                "AuditDeleted": true
               }
             ]
-          }
-        ],
-        "Paths": {
-          "Output": "_Output"
-        }
-      }
-    }
-  ],
-  "required": ["CodeGenConfig"],
-  "properties": {
-    "CodeGenConfig": {
-      "$id": "#/properties/CodeGenConfig",
-      "type": "object",
-      "title": "The CodeGenConfig schema",
-      "description": "An explanation about the purpose of this instance.",
-      "default": {},
-      "examples": [
-        {
-          "Models": [
+          },
+          "List": [
             {
               "Name": "Account",
+              "Audit": true,
               "Properties": [
-                {
-                  "Name": "Id",
-                  "Type": "Guid",
-                  "Required": true
-                },
                 {
                   "Name": "Name",
                   "Type": "string",
@@ -97,30 +75,64 @@
                 }
               ]
             }
-          ],
-          "Paths": {
-            "Output": "_Output"
-          }
+          ]
+        },
+        "Paths": {
+          "Output": "_Output"
         }
-      ],
-      "required": ["Models", "Paths"],
-      "properties": {
-        "Models": {
-          "$id": "#/properties/CodeGenConfig/properties/Models",
-          "type": "array",
-          "title": "The Models schema",
-          "description": "An explanation about the purpose of this instance.",
-          "default": [],
-          "examples": [
-            [
+      }
+    }
+  ],
+  "required": ["CodeGenConfig"],
+  "properties": {
+    "CodeGenConfig": {
+      "$id": "#/properties/CodeGenConfig",
+      "type": "object",
+      "title": "The CodeGenConfig schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "Models": {
+            "Defaults": {
+              "Properties": [
+                {
+                  "Name": "Id",
+                  "Type": "Guid",
+                  "Key": true
+                },
+                {
+                  "Name": "CreatedBy",
+                  "Type": "Guid",
+                  "AuditCreatedBy": true
+                },
+                {
+                  "Name": "DateCreated",
+                  "Type": "DateTime",
+                  "AuditDateCreated": true
+                },
+                {
+                  "Name": "ModifiedBy",
+                  "Type": "Guid?",
+                  "AuditModifiedBy": true
+                },
+                {
+                  "Name": "DateModified",
+                  "Type": "DateTime?",
+                  "AuditDateModified": true
+                },
+                {
+                  "Name": "Deleted",
+                  "Type": "boolean",
+                  "AuditDeleted": true
+                }
+              ]
+            },
+            "List": [
               {
                 "Name": "Account",
+                "Audit": true,
                 "Properties": [
-                  {
-                    "Name": "Id",
-                    "Type": "Guid",
-                    "Required": true
-                  },
                   {
                     "Name": "Name",
                     "Type": "string",
@@ -149,26 +161,431 @@
                 ]
               }
             ]
-          ],
-          "additionalItems": true,
-          "items": {
-            "$id": "#/properties/CodeGenConfig/properties/Models/items",
-            "anyOf": [
-              {
-                "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0",
-                "type": "object",
-                "title": "The first anyOf schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
+          },
+          "Paths": {
+            "Output": "_Output"
+          }
+        }
+      ],
+      "required": ["Models", "Paths"],
+      "properties": {
+        "Models": {
+          "$id": "#/properties/CodeGenConfig/properties/Models",
+          "type": "object",
+          "title": "The Models schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "Defaults": {
+                "Properties": [
                   {
-                    "Name": "Account",
-                    "Properties": [
+                    "Name": "Id",
+                    "Type": "Guid",
+                    "Key": true
+                  },
+                  {
+                    "Name": "CreatedBy",
+                    "Type": "Guid",
+                    "AuditCreatedBy": true
+                  },
+                  {
+                    "Name": "DateCreated",
+                    "Type": "DateTime",
+                    "AuditDateCreated": true
+                  },
+                  {
+                    "Name": "ModifiedBy",
+                    "Type": "Guid?",
+                    "AuditModifiedBy": true
+                  },
+                  {
+                    "Name": "DateModified",
+                    "Type": "DateTime?",
+                    "AuditDateModified": true
+                  },
+                  {
+                    "Name": "Deleted",
+                    "Type": "boolean",
+                    "AuditDeleted": true
+                  }
+                ]
+              },
+              "List": [
+                {
+                  "Name": "Account",
+                  "Audit": true,
+                  "Properties": [
+                    {
+                      "Name": "Name",
+                      "Type": "string",
+                      "Required": true
+                    },
+                    {
+                      "Name": "Description",
+                      "Type": "string"
+                    },
+                    {
+                      "Name": "Telephone",
+                      "Type": "string"
+                    },
+                    {
+                      "Name": "Email",
+                      "Type": "string"
+                    },
+                    {
+                      "Name": "Website",
+                      "Type": "string"
+                    },
+                    {
+                      "Name": "VAT",
+                      "Type": "string"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "required": ["Defaults", "List"],
+          "properties": {
+            "Defaults": {
+              "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults",
+              "type": "object",
+              "title": "The Defaults schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "Properties": [
+                    {
+                      "Name": "Id",
+                      "Type": "Guid",
+                      "Key": true
+                    },
+                    {
+                      "Name": "CreatedBy",
+                      "Type": "Guid",
+                      "AuditCreatedBy": true
+                    },
+                    {
+                      "Name": "DateCreated",
+                      "Type": "DateTime",
+                      "AuditDateCreated": true
+                    },
+                    {
+                      "Name": "ModifiedBy",
+                      "Type": "Guid?",
+                      "AuditModifiedBy": true
+                    },
+                    {
+                      "Name": "DateModified",
+                      "Type": "DateTime?",
+                      "AuditDateModified": true
+                    },
+                    {
+                      "Name": "Deleted",
+                      "Type": "boolean",
+                      "AuditDeleted": true
+                    }
+                  ]
+                }
+              ],
+              "required": ["Properties"],
+              "properties": {
+                "Properties": {
+                  "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties",
+                  "type": "array",
+                  "title": "The Properties schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": [],
+                  "examples": [
+                    [
                       {
                         "Name": "Id",
                         "Type": "Guid",
-                        "Required": true
+                        "Key": true
                       },
+                      {
+                        "Name": "CreatedBy",
+                        "Type": "Guid",
+                        "AuditCreatedBy": true
+                      }
+                    ]
+                  ],
+                  "additionalItems": true,
+                  "items": {
+                    "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items",
+                    "anyOf": [
+                      {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                          {
+                            "Name": "Id",
+                            "Type": "Guid",
+                            "Key": true
+                          }
+                        ],
+                        "required": ["Name", "Type", "Key"],
+                        "properties": {
+                          "Name": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/0/properties/Name",
+                            "type": "string",
+                            "title": "The Name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["Id"]
+                          },
+                          "Type": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/0/properties/Type",
+                            "type": "string",
+                            "title": "The Type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["Guid"]
+                          },
+                          "Key": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/0/properties/Key",
+                            "type": "boolean",
+                            "title": "The Key schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [true]
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/1",
+                        "type": "object",
+                        "title": "The second anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                          {
+                            "Name": "CreatedBy",
+                            "Type": "Guid",
+                            "AuditCreatedBy": true
+                          }
+                        ],
+                        "required": ["Name", "Type", "AuditCreatedBy"],
+                        "properties": {
+                          "Name": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/1/properties/Name",
+                            "type": "string",
+                            "title": "The Name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["CreatedBy"]
+                          },
+                          "Type": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/1/properties/Type",
+                            "type": "string",
+                            "title": "The Type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["Guid"]
+                          },
+                          "AuditCreatedBy": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/1/properties/AuditCreatedBy",
+                            "type": "boolean",
+                            "title": "The AuditCreatedBy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [true]
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/2",
+                        "type": "object",
+                        "title": "The third anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                          {
+                            "Name": "DateCreated",
+                            "Type": "DateTime",
+                            "AuditDateCreated": true
+                          }
+                        ],
+                        "required": ["Name", "Type", "AuditDateCreated"],
+                        "properties": {
+                          "Name": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/2/properties/Name",
+                            "type": "string",
+                            "title": "The Name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["DateCreated"]
+                          },
+                          "Type": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/2/properties/Type",
+                            "type": "string",
+                            "title": "The Type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["DateTime"]
+                          },
+                          "AuditDateCreated": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/2/properties/AuditDateCreated",
+                            "type": "boolean",
+                            "title": "The AuditDateCreated schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [true]
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/3",
+                        "type": "object",
+                        "title": "The fourth anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                          {
+                            "Name": "ModifiedBy",
+                            "Type": "Guid?",
+                            "AuditModifiedBy": true
+                          }
+                        ],
+                        "required": ["Name", "Type", "AuditModifiedBy"],
+                        "properties": {
+                          "Name": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/3/properties/Name",
+                            "type": "string",
+                            "title": "The Name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["ModifiedBy"]
+                          },
+                          "Type": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/3/properties/Type",
+                            "type": "string",
+                            "title": "The Type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["Guid?"]
+                          },
+                          "AuditModifiedBy": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/3/properties/AuditModifiedBy",
+                            "type": "boolean",
+                            "title": "The AuditModifiedBy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [true]
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/4",
+                        "type": "object",
+                        "title": "The fifth anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                          {
+                            "Name": "DateModified",
+                            "Type": "DateTime?",
+                            "AuditDateModified": true
+                          }
+                        ],
+                        "required": ["Name", "Type", "AuditDateModified"],
+                        "properties": {
+                          "Name": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/4/properties/Name",
+                            "type": "string",
+                            "title": "The Name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["DateModified"]
+                          },
+                          "Type": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/4/properties/Type",
+                            "type": "string",
+                            "title": "The Type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["DateTime?"]
+                          },
+                          "AuditDateModified": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/4/properties/AuditDateModified",
+                            "type": "boolean",
+                            "title": "The AuditDateModified schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [true]
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/5",
+                        "type": "object",
+                        "title": "The sixth anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                          {
+                            "Name": "Deleted",
+                            "Type": "boolean",
+                            "AuditDeleted": true
+                          }
+                        ],
+                        "required": ["Name", "Type", "AuditDeleted"],
+                        "properties": {
+                          "Name": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/5/properties/Name",
+                            "type": "string",
+                            "title": "The Name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["Deleted"]
+                          },
+                          "Type": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/5/properties/Type",
+                            "type": "string",
+                            "title": "The Type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": ["boolean"]
+                          },
+                          "AuditDeleted": {
+                            "$id": "#/properties/CodeGenConfig/properties/Models/properties/Defaults/properties/Properties/items/anyOf/5/properties/AuditDeleted",
+                            "type": "boolean",
+                            "title": "The AuditDeleted schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [true]
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": true
+            },
+            "List": {
+              "$id": "#/properties/CodeGenConfig/properties/Models/properties/List",
+              "type": "array",
+              "title": "The List schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "examples": [
+                [
+                  {
+                    "Name": "Account",
+                    "Audit": true,
+                    "Properties": [
                       {
                         "Name": "Name",
                         "Type": "string",
@@ -196,124 +613,178 @@
                       }
                     ]
                   }
-                ],
-                "required": ["Name", "Properties"],
-                "properties": {
-                  "Name": {
-                    "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Name",
-                    "type": "string",
-                    "title": "The Name schema",
+                ]
+              ],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0",
+                    "type": "object",
+                    "title": "The first anyOf schema",
                     "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": ["Account"]
-                  },
-                  "Properties": {
-                    "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties",
-                    "type": "array",
-                    "title": "The Properties schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
+                    "default": {},
                     "examples": [
-                      [
-                        {
-                          "Name": "Id",
-                          "Type": "Guid",
-                          "Required": true
-                        },
-                        {
-                          "Name": "Name",
-                          "Type": "string",
-                          "Required": true
-                        }
-                      ]
-                    ],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items",
-                      "anyOf": [
-                        {
-                          "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0",
-                          "type": "object",
-                          "title": "The first anyOf schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": {},
-                          "examples": [
-                            {
-                              "Name": "Id",
-                              "Type": "Guid",
-                              "Required": true
-                            }
-                          ],
-                          "required": ["Name", "Type", "Required"],
-                          "properties": {
-                            "Name": {
-                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Name",
-                              "type": "string",
-                              "title": "The Name schema",
-                              "description": "An explanation about the purpose of this instance.",
-                              "default": "",
-                              "examples": ["Id"]
-                            },
-                            "Type": {
-                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Type",
-                              "type": "string",
-                              "title": "The Type schema",
-                              "description": "An explanation about the purpose of this instance.",
-                              "default": "",
-                              "examples": ["Guid"]
-                            },
-                            "Required": {
-                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Required",
-                              "type": "boolean",
-                              "title": "The Required schema",
-                              "description": "An explanation about the purpose of this instance.",
-                              "default": false,
-                              "examples": [true]
-                            }
+                      {
+                        "Name": "Account",
+                        "Audit": true,
+                        "Properties": [
+                          {
+                            "Name": "Name",
+                            "Type": "string",
+                            "Required": true
                           },
-                          "additionalProperties": true
-                        },
-                        {
-                          "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/1",
-                          "type": "object",
-                          "title": "The second anyOf schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": {},
-                          "examples": [
+                          {
+                            "Name": "Description",
+                            "Type": "string"
+                          },
+                          {
+                            "Name": "Telephone",
+                            "Type": "string"
+                          },
+                          {
+                            "Name": "Email",
+                            "Type": "string"
+                          },
+                          {
+                            "Name": "Website",
+                            "Type": "string"
+                          },
+                          {
+                            "Name": "VAT",
+                            "Type": "string"
+                          }
+                        ]
+                      }
+                    ],
+                    "required": ["Name", "Audit", "Properties"],
+                    "properties": {
+                      "Name": {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Name",
+                        "type": "string",
+                        "title": "The Name schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": ["Account"]
+                      },
+                      "Audit": {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Audit",
+                        "type": "boolean",
+                        "title": "The Audit schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": false,
+                        "examples": [true]
+                      },
+                      "Properties": {
+                        "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties",
+                        "type": "array",
+                        "title": "The Properties schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": [],
+                        "examples": [
+                          [
+                            {
+                              "Name": "Name",
+                              "Type": "string",
+                              "Required": true
+                            },
                             {
                               "Name": "Description",
                               "Type": "string"
                             }
-                          ],
-                          "required": ["Name", "Type"],
-                          "properties": {
-                            "Name": {
-                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/1/properties/Name",
-                              "type": "string",
-                              "title": "The Name schema",
+                          ]
+                        ],
+                        "additionalItems": true,
+                        "items": {
+                          "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items",
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items/anyOf/0",
+                              "type": "object",
+                              "title": "The first anyOf schema",
                               "description": "An explanation about the purpose of this instance.",
-                              "default": "",
-                              "examples": ["Description"]
+                              "default": {},
+                              "examples": [
+                                {
+                                  "Name": "Name",
+                                  "Type": "string",
+                                  "Required": true
+                                }
+                              ],
+                              "required": ["Name", "Type", "Required"],
+                              "properties": {
+                                "Name": {
+                                  "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Name",
+                                  "type": "string",
+                                  "title": "The Name schema",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": "",
+                                  "examples": ["Name"]
+                                },
+                                "Type": {
+                                  "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Type",
+                                  "type": "string",
+                                  "title": "The Type schema",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": "",
+                                  "examples": ["string"]
+                                },
+                                "Required": {
+                                  "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items/anyOf/0/properties/Required",
+                                  "type": "boolean",
+                                  "title": "The Required schema",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": false,
+                                  "examples": [true]
+                                }
+                              },
+                              "additionalProperties": true
                             },
-                            "Type": {
-                              "$id": "#/properties/CodeGenConfig/properties/Models/items/anyOf/0/properties/Properties/items/anyOf/1/properties/Type",
-                              "type": "string",
-                              "title": "The Type schema",
+                            {
+                              "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items/anyOf/1",
+                              "type": "object",
+                              "title": "The second anyOf schema",
                               "description": "An explanation about the purpose of this instance.",
-                              "default": "",
-                              "examples": ["string"]
+                              "default": {},
+                              "examples": [
+                                {
+                                  "Name": "Description",
+                                  "Type": "string"
+                                }
+                              ],
+                              "required": ["Name", "Type"],
+                              "properties": {
+                                "Name": {
+                                  "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items/anyOf/1/properties/Name",
+                                  "type": "string",
+                                  "title": "The Name schema",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": "",
+                                  "examples": ["Description"]
+                                },
+                                "Type": {
+                                  "$id": "#/properties/CodeGenConfig/properties/Models/properties/List/items/anyOf/0/properties/Properties/items/anyOf/1/properties/Type",
+                                  "type": "string",
+                                  "title": "The Type schema",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": "",
+                                  "examples": ["string"]
+                                }
+                              },
+                              "additionalProperties": true
                             }
-                          },
-                          "additionalProperties": true
+                          ]
                         }
-                      ]
-                    }
+                      }
+                    },
+                    "additionalProperties": true
                   }
-                },
-                "additionalProperties": false
+                ]
               }
-            ]
-          }
+            }
+          },
+          "additionalProperties": true
         },
         "Paths": {
           "$id": "#/properties/CodeGenConfig/properties/Paths",

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CodeGen.Models
 {
@@ -15,23 +11,16 @@ namespace CodeGen.Models
         }
 
         public bool Generate { get; set; }
-        public bool CommitProjectOutputDirectoryBeforeGenerate { get; set; }
-        public bool RecreateDatabaseAfterGenerate { get; set; }
-        public bool InstallProjectTemplateAfterGenerate { get; set; }
-        public bool TestProjectAfterGenerate { get; set; }
+        public CodeGenTemplateSettingsBeforeGenerate BeforeGenerate { get; set; }
+        public CodeGenTemplateSettingsAfterGenerate AfterGenerate { get; set; }
 
         public string StartupProjectPath { get; set; }
+        public string StartupProjectURL { get; set; }
         public string MigrationsFolderPath { get; set; }
         // Filled by generator
         public string TemplatePath { get; set; }
 
         public List<CodeGenTemplateSettingsData> ConfigBasedGenerator { get; set; }
         public List<CodeGenTemplateSettingsData> ModelsBasedGenerator { get; set; }
-  }
-
-    public class CodeGenTemplateSettingsData
-    {
-        public string T4Template { get; set; }
-        public string Output { get; set; }
     }
 }

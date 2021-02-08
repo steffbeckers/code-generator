@@ -10,7 +10,7 @@ namespace CodeGenOutput.API.BLL
     {
         Task<IEnumerable<Account>> GetAccountsAsync(int skip, int take);
         Task<Account> GetAccountByIdAsync(Guid id);
-        Task<IEnumerable<Account>> SearchAccountAsync(string term);
+        // Task<IEnumerable<Account>> SearchAccountAsync(string term);
         Task<Account> CreateAccountAsync(Account account);
         Task<Account> UpdateAccountAsync(Account account);
         Task DeleteAccountAsync(Guid id);
@@ -30,10 +30,10 @@ namespace CodeGenOutput.API.BLL
             return await _accountRepository.GetByIdAsync(id);
         }
 
-        public async Task<IEnumerable<Account>> SearchAccountAsync(string term)
-        {
-            return await _accountRepository.SearchAccount(term);
-        }
+        // public async Task<IEnumerable<Account>> SearchAccountAsync(string term)
+        // {
+        //     return await _accountRepository.SearchAccount(term);
+        // }
 
         public async Task<Account> CreateAccountAsync(Account account)
         {

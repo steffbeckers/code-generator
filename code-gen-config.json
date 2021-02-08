@@ -1,4 +1,5 @@
 {
+  "$schema": "./code-gen-config.schema.json",
   "CodeGenConfig": {
     "Models": {
       "Defaults": {
@@ -63,6 +64,30 @@
             },
             {
               "Name": "VAT",
+              "Type": "string"
+            }
+          ]
+        },
+        {
+          "Name": "Contact",
+          "Audit": true,
+          "Properties": [
+            {
+              "Name": "FirstName",
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "LastName",
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "Telephone",
+              "Type": "string"
+            },
+            {
+              "Name": "Email",
               "Type": "string"
             }
           ]

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 // TODO: namespace CodeGenOutput.API.DAL.Repositories
 namespace CodeGenOutput.API.DAL
 {
-    public static class AccountRepositoryExtensions
+    public static class ContactRepositoryExtensions
     {
         // Additional repository functions here
 
-        // public static async Task<IEnumerable<Account>> SearchAccount(
-        //     this IRepository<Account> repository,
+        // public static async Task<IEnumerable<Contact>> SearchContact(
+        //     this IRepository<Contact> repository,
         //     string term
         // )
         // {

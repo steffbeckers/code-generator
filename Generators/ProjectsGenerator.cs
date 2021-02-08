@@ -2,6 +2,7 @@
 using CodeGen.Services;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -73,7 +74,7 @@ namespace CodeGen.Generators
                 _logger.LogInformation($"Regenerating project template: {projectTemplate}");
 
                 // Saving changes before cleanup
-                if (codeGenTemplateSettings.CommitProjectOutputDirectoryBeforeGenerate) {
+                if (codeGenTemplateSettings.BeforeGenerate.CommitProjectOutputDirectory) {
                     await CommitProjectOutputDirectory(projectTemplate);
                 }
 
@@ -170,8 +171,23 @@ namespace CodeGen.Generators
                     codeGenTemplateSettings.StartupProjectPath
                 );
 
-                // Recreate database
-                if (codeGenTemplateSettings.RecreateDatabaseAfterGenerate)
+                // Build after generate
+                if (codeGenTemplateSettings.AfterGenerate.Build)
+                {
+                    _logger.LogInformation("Buiding project: " + startupProjectPath);
+
+                    ProcessStartInfo dotnetBuild = new ProcessStartInfo("dotnet");
+                    dotnetBuild.Arguments = @"build";
+                    dotnetBuild.WorkingDirectory = startupProjectPath;
+                    Process dotnetBuildProcess = Process.Start(dotnetBuild);
+                    await dotnetBuildProcess.WaitForExitAsync();
+                    if (dotnetBuildProcess.ExitCode == 1) {
+                        throw new Exception("Project build failed. Stopping next after generate steps");
+                    }
+                }
+
+                // Recreate database after generate
+                if (codeGenTemplateSettings.AfterGenerate.RecreateDatabase)
                 {
                     _logger.LogInformation("Recreating database/migrations: " + startupProjectPath);
 
@@ -179,58 +195,65 @@ namespace CodeGen.Generators
                     ProcessStartInfo dotnetDropDatabase = new ProcessStartInfo("dotnet");
                     dotnetDropDatabase.Arguments = @"ef database drop --force";
                     dotnetDropDatabase.WorkingDirectory = startupProjectPath;
-                    Process.Start(dotnetDropDatabase).WaitForExit();
+                    await Process.Start(dotnetDropDatabase).WaitForExitAsync();
 
                     // Generate new Initial migration
                     ProcessStartInfo dotnetAddInitialMigration = new ProcessStartInfo("dotnet");
                     dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir " + codeGenTemplateSettings.MigrationsFolderPath;
                     dotnetAddInitialMigration.WorkingDirectory = startupProjectPath;
-                    Process.Start(dotnetAddInitialMigration).WaitForExit();
+                    await Process.Start(dotnetAddInitialMigration).WaitForExitAsync();
                 }
 
-                // Install project template with dotnet new
-                if (codeGenTemplateSettings.InstallProjectTemplateAfterGenerate) {
+                // Install project template with dotnet new after generate
+                if (codeGenTemplateSettings.AfterGenerate.InstallProjectTemplate) {
                     _logger.LogInformation("Installing project template: " + outputProjectPath);
 
                     ProcessStartInfo dotnetInstallProject = new ProcessStartInfo("dotnet");
                     dotnetInstallProject.Arguments = @"new -i ./";
                     dotnetInstallProject.WorkingDirectory = outputProjectPath;
-                    Process.Start(dotnetInstallProject).WaitForExit();
+                    await Process.Start(dotnetInstallProject).WaitForExitAsync();
                 }
 
-                // Test project after generate
-                if (codeGenTemplateSettings.TestProjectAfterGenerate)
+                // Open swagger after generate
+                if (codeGenTemplateSettings.AfterGenerate.OpenSwagger) {
+                    _logger.LogInformation("Opening Swagger docs: " + outputProjectPath);
+
+                    ProcessStartInfo openSwagger = new ProcessStartInfo("explorer");
+                    openSwagger.Arguments = codeGenTemplateSettings.StartupProjectURL;
+                    await Process.Start(openSwagger).WaitForExitAsync();
+                }
+
+                // Run project after generate
+                if (codeGenTemplateSettings.AfterGenerate.Run)
                 {
                     _logger.LogInformation("Test run project: " + startupProjectPath);
 
                     ProcessStartInfo dotnetRun = new ProcessStartInfo("dotnet");
                     dotnetRun.Arguments = @"run";
                     dotnetRun.WorkingDirectory = startupProjectPath;
-                    Process.Start(dotnetRun).WaitForExit();
+                    await Process.Start(dotnetRun).WaitForExitAsync();
                 }
             }
         }
 
-        private Task CommitProjectOutputDirectory(string projectName)
+        private async Task CommitProjectOutputDirectory(string projectName)
         {
             string projectOutputFolderPath = Path.Combine(_configService.CodeGenConfig.Paths.Output, "Projects", projectName);
 
             bool pathExists = _fileService.DirectoryExists(projectOutputFolderPath);
-            if (!pathExists) { return Task.CompletedTask; }
+            if (!pathExists) { return; }
 
             _logger.LogInformation("Saving changes of project output folder: " + projectOutputFolderPath);
 
             ProcessStartInfo gitAdd = new ProcessStartInfo("git");
             gitAdd.Arguments = "add .";
             gitAdd.WorkingDirectory = projectOutputFolderPath;
-            Process.Start(gitAdd).WaitForExit();
+            await Process.Start(gitAdd).WaitForExitAsync();
 
             ProcessStartInfo gitCommit = new ProcessStartInfo("git");
             gitCommit.Arguments = $"commit -m \"Save before regenerating project template {projectName}\"";
             gitCommit.WorkingDirectory = projectOutputFolderPath;
-            Process.Start(gitCommit).WaitForExit();
-
-            return Task.CompletedTask;
+            await Process.Start(gitCommit).WaitForExitAsync();
         }
 
         private Task CleanupProjectOutputDirectory(string projectName)

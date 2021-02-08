@@ -13,12 +13,14 @@ namespace CodeGenOutput.API.DAL
 {
     public static class <#= _model.Name #>RepositoryExtensions
     {
-        public static async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>(
-            this IRepository<<#= _model.Name #>> repository,
-            string term
-        )
-        {
-            return await repository.GetAsync(0, 20, x => x.Name.Contains(term));
-        }
+        // Additional repository functions here
+
+        // public static async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>(
+        //     this IRepository<<#= _model.Name #>> repository,
+        //     string term
+        // )
+        // {
+        //     return await repository.GetAsync(0, 20, x => x.Name.Contains(term));
+        // }
     }
 }

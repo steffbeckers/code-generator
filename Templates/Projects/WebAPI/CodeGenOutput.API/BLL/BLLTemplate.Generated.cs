@@ -84,7 +84,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("ByIdAsync(Guid id);\r\n        Task<IEnumerable<");
+            this.Write("ByIdAsync(Guid id);\r\n        // Task<IEnumerable<");
             
             #line default
             #line hidden
@@ -324,8 +324,8 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("Repository.GetByIdAsync(id);\r\n        }\r\n\r\n        public async Task<IEnumerable<" +
-                    "");
+            this.Write("Repository.GetByIdAsync(id);\r\n        }\r\n\r\n        // public async Task<IEnumerab" +
+                    "le<");
             
             #line default
             #line hidden
@@ -349,7 +349,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("Async(string term)\r\n        {\r\n            return await _");
+            this.Write("Async(string term)\r\n        // {\r\n        //     return await _");
             
             #line default
             #line hidden
@@ -373,7 +373,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("(term);\r\n        }\r\n\r\n        public async Task<");
+            this.Write("(term);\r\n        // }\r\n\r\n        public async Task<");
             
             #line default
             #line hidden
