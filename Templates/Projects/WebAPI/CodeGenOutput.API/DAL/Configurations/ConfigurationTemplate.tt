@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CodeGenOutput.API.DAL.Configurations
 {
-    public static class <#= _model.Name #>Configuration : IEntityTypeConfiguration<<#= _model.Name #>>
+    public class <#= _model.Name #>Configuration : IEntityTypeConfiguration<<#= _model.Name #>>
     {
         public void Configure(EntityTypeBuilder<<#= _model.Name #>> builder)
         {

@@ -46,6 +46,10 @@
       "Output": "{1}Controller.cs"
     },
     {
+      "T4Template": "CodeGenOutput.API\\DAL\\Configurations\\ConfigurationTemplate.tt",
+      "Output": "{0}Configuration.cs"
+    },
+    {
       "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
       "Output": "{0}Repository.cs"
     },

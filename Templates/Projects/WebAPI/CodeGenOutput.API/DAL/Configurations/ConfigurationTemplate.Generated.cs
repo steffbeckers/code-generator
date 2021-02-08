@@ -24,7 +24,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Configurations
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
             this.Write("using CodeGenOutput.API.Models;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Micr" +
                     "osoft.EntityFrameworkCore.Metadata.Builders;\r\n\r\nnamespace CodeGenOutput.API.DAL." +
-                    "Configurations\r\n{\r\n    public static class ");
+                    "Configurations\r\n{\r\n    public class ");
             
             #line default
             #line hidden
