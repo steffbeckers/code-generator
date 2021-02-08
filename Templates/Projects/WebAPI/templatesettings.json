@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "../../templatesettings.schema.json",
   "Generate": true,
-  "CommitProjectOutputDirectoryBeforeGenerate": true,
+  "CommitProjectOutputDirectoryBeforeGenerate": false,
   "RecreateDatabaseAfterGenerate": true,
   "InstallProjectTemplateAfterGenerate": true,
   "TestProjectAfterGenerate": true,
