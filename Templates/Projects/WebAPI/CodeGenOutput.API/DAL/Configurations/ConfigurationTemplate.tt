@@ -1,0 +1,27 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+using CodeGenOutput.API.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CodeGenOutput.API.DAL.Configurations
+{
+    public static class <#= _model.Name #>Configuration : IEntityTypeConfiguration<<#= _model.Name #>>
+    {
+        public void Configure(EntityTypeBuilder<<#= _model.Name #>> builder)
+        {
+<# CodeGenModelProperty auditDeletedProperty = _config.Models.DefaultAuditDeletedProperty(); #>
+<# if (auditDeletedProperty != null) { #>
+            builder.HasQueryFilter(x => !x.<#= auditDeletedProperty.Name #>);
+            
+<# } #>
+            // builder.Property(t => t.Title)
+            //     .HasMaxLength(200)
+            //     .IsRequired();
+        }
+    }
+}

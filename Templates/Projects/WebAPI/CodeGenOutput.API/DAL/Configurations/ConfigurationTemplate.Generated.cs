@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
+namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Configurations {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
@@ -16,66 +16,94 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
     using System;
     
     
-    public partial class RepositoryTemplate : RepositoryTemplateBase {
+    public partial class ConfigurationTemplate : ConfigurationTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
             
-            #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("using CodeGenOutput.API.Models;\r\nusing System.Collections.Generic;\r\nusing System." +
-                    "Threading.Tasks;\r\n\r\nnamespace CodeGenOutput.API.DAL.Repositories\r\n{\r\n    public " +
-                    "static class ");
+            #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("using CodeGenOutput.API.Models;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Micr" +
+                    "osoft.EntityFrameworkCore.Metadata.Builders;\r\n\r\nnamespace CodeGenOutput.API.DAL." +
+                    "Configurations\r\n{\r\n    public static class ");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("RepositoryExtensions\r\n    {\r\n        // Additional repository functions here\r\n\r\n " +
-                    "       // public static async Task<IEnumerable<");
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("Configuration : IEntityTypeConfiguration<");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(">> Search");
+            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(">\r\n    {\r\n        public void Configure(EntityTypeBuilder<");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("(\r\n        //     this IRepository<");
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("> builder)\r\n        {\r\n");
             
             #line default
             #line hidden
             
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ CodeGenModelProperty auditDeletedProperty = _config.Models.DefaultAuditDeletedProperty(); 
             
             #line default
             #line hidden
             
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("> repository,\r\n        //     string term\r\n        // )\r\n        // {\r\n        //" +
-                    "     return await repository.GetAsync(0, 20, x => x.Name.Contains(term));\r\n     " +
-                    "   // }\r\n    }\r\n}\r\n");
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ if (auditDeletedProperty != null) { 
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("            builder.HasQueryFilter(x => !x.");
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( auditDeletedProperty.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(");\r\n            \r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("            // builder.Property(t => t.Title)\r\n            //     .HasMaxLength(2" +
+                    "00)\r\n            //     .IsRequired();\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden
@@ -86,7 +114,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
         }
     }
     
-    public class RepositoryTemplateBase {
+    public class ConfigurationTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         

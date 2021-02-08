@@ -2,8 +2,7 @@ using CodeGenOutput.API.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-// TODO: namespace CodeGenOutput.API.DAL.Repositories
-namespace CodeGenOutput.API.DAL
+namespace CodeGenOutput.API.DAL.Repositories
 {
     public static class AccountRepositoryExtensions
     {

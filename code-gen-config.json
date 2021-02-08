@@ -10,24 +10,24 @@
             "Key": true
           },
           {
-            "Name": "CreatedBy",
-            "Type": "Guid",
-            "AuditCreatedBy": true
-          },
-          {
             "Name": "DateCreated",
             "Type": "DateTime",
             "AuditDateCreated": true
           },
           {
-            "Name": "ModifiedBy",
-            "Type": "Guid?",
-            "AuditModifiedBy": true
+            "Name": "CreatedBy",
+            "Type": "Guid",
+            "AuditCreatedBy": true
           },
           {
             "Name": "DateModified",
             "Type": "DateTime?",
             "AuditDateModified": true
+          },
+          {
+            "Name": "ModifiedBy",
+            "Type": "Guid?",
+            "AuditModifiedBy": true
           },
           {
             "Name": "Deleted",
