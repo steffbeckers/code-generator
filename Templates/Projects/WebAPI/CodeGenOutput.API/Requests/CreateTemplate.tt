@@ -33,8 +33,8 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
         public async Task<Response<<#= _model.Name #>VM>> Handle(Create<#= _model.Name #> request, CancellationToken cancellationToken)
         {
             Response<<#= _model.Name #>VM> response = new Response<<#= _model.Name #>VM>();
-
             <#= _model.Name #> <#= _model.Name.ToLower() #> = _mapper.Map<<#= _model.Name #>>(request.<#= _model.Name #>CreateVM);
+
             <#= _model.Name.ToLower() #> = await _bll.Create<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
             response.Message = "<#= _model.Name #> created";
             response.Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>);

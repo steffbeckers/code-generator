@@ -27,8 +27,8 @@ namespace CodeGenOutput.API.Requests.Accounts
         public async Task<Response<AccountVM>> Handle(CreateAccount request, CancellationToken cancellationToken)
         {
             Response<AccountVM> response = new Response<AccountVM>();
-
             Account account = _mapper.Map<Account>(request.AccountCreateVM);
+
             account = await _bll.CreateAccountAsync(account);
             response.Message = "Account created";
             response.Data = _mapper.Map<AccountVM>(account);

@@ -19,6 +19,7 @@ namespace CodeGenOutput.API.Mappers
             CreateMap<<#= model.Name #>, <#= model.Name #>ListVM>();
             CreateMap<<#= model.Name #>VM, <#= model.Name #>>();
             CreateMap<<#= model.Name #>CreateVM, <#= model.Name #>>();
+            CreateMap<<#= model.Name #>UpdateVM, <#= model.Name #>>();
             
 <# } #>
         }

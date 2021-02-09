@@ -132,18 +132,42 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Mappers {
             #line hidden
             
             #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(">();\r\n            CreateMap<");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write("UpdateVM, ");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
             this.Write(">();\r\n            \r\n");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
             this.Write("        }\r\n    }\r\n}\r\n");
             
             #line default

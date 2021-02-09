@@ -9,6 +9,7 @@ using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,11 +34,19 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
         public async Task<Response<<#= _model.Name #>VM>> Handle(Update<#= _model.Name #> request, CancellationToken cancellationToken)
         {
             Response<<#= _model.Name #>VM> response = new Response<<#= _model.Name #>VM>();
-
             <#= _model.Name #> <#= _model.Name.ToLower() #> = _mapper.Map<<#= _model.Name #>>(request.<#= _model.Name #>UpdateVM);
-            <#= _model.Name.ToLower() #> = await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
-            response.Message = "<#= _model.Name #> updated";
-            response.Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>);
+
+            try
+            {
+                <#= _model.Name.ToLower() #> = await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+                response.Message = "<#= _model.Name #> updated";
+                response.Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
 
             return response;
         }
