@@ -29,10 +29,20 @@ namespace CodeGenOutput.API.Requests.Accounts
             Response<AccountVM> response = new Response<AccountVM>();
 
             Account account = _mapper.Map<Account>(request.AccountUpdateVM);
-            account = await _bll.UpdateAccountAsync(account);
-            response.Message = "Account updated";
-            response.Data = _mapper.Map<AccountVM>(account);
 
+            try
+            {
+                account = await _bll.UpdateAccountAsync(account);
+
+                response.Message = "Account updated";
+                response.Data = _mapper.Map<AccountVM>(account);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            
             return response;
         }
     }

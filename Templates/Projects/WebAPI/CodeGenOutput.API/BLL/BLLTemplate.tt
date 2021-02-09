@@ -33,7 +33,12 @@ namespace CodeGenOutput.API.BLL
 
         public async Task<<#= _model.Name #>> Get<#= _model.Name #>ByIdAsync(Guid id)
         {
-            return await _<#= _model.Name.ToLower() #>Repository.GetByIdAsync(id);
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await _<#= _model.Name.ToLower() #>Repository.GetByIdAsync(id);
+            if (<#= _model.Name.ToLower() #> == null) {
+                throw new Exception($"<#= _model.Name #> '{id}' not found.");
+            }
+
+            return <#= _model.Name.ToLower() #>;
         }
 
         // public async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term)
@@ -50,6 +55,11 @@ namespace CodeGenOutput.API.BLL
 
         public async Task<<#= _model.Name #>> Update<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
+            // Keep creating auditing details
+            <#= _model.Name #> existing<#= _model.Name #> = await Get<#= _model.Name #>ByIdAsync(<#= _model.Name.ToLower() #>.Id);
+            <#= _model.Name.ToLower() #>.DateCreated = existing<#= _model.Name #>.DateCreated;
+            <#= _model.Name.ToLower() #>.CreatedBy = existing<#= _model.Name #>.CreatedBy;
+
             <#= _model.Name #> updated<#= _model.Name #> = await _<#= _model.Name.ToLower() #>Repository.UpdateAsync(<#= _model.Name.ToLower() #>);
             await _unitOfWork.Commit();
             return updated<#= _model.Name #>;

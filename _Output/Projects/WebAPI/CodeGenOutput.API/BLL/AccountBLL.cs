@@ -49,14 +49,13 @@ namespace CodeGenOutput.API.BLL
 
         public async Task<Account> UpdateAccountAsync(Account account)
         {
-            Account existingAccount = await GetAccountByIdAsync(account.Id);
             // Keep creating auditing details
+            Account existingAccount = await GetAccountByIdAsync(account.Id);
             account.DateCreated = existingAccount.DateCreated;
             account.CreatedBy = existingAccount.CreatedBy;
 
             Account updatedAccount = await _accountRepository.UpdateAsync(account);
             await _unitOfWork.Commit();
-
             return updatedAccount;
         }
 
