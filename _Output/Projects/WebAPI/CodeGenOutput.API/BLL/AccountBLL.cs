@@ -52,7 +52,6 @@ namespace CodeGenOutput.API.BLL
             // Keep creating auditing details
             Account existingAccount = await GetAccountByIdAsync(account.Id);
             account.DateCreated = existingAccount.DateCreated;
-            account.CreatedBy = existingAccount.CreatedBy;
 
             Account updatedAccount = await _accountRepository.UpdateAsync(account);
             await _unitOfWork.Commit();

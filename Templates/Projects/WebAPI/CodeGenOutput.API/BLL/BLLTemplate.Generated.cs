@@ -636,138 +636,144 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 59 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(".Id);\r\n            ");
+            this.Write(".Id);\r\n");
             
             #line default
             #line hidden
             
             #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+ CodeGenModelProperty auditDateCreatedProperty = _config.Models.DefaultAuditDateCreatedProperty(); 
+            
+            #line default
+            #line hidden
+            
+            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+ if (auditDateCreatedProperty != null) { 
+            
+            #line default
+            #line hidden
+            
+            #line 62 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("            ");
+            
+            #line default
+            #line hidden
+            
+            #line 62 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 62 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(".DateCreated = existing");
             
             #line default
             #line hidden
             
-            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 62 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(".DateCreated;\r\n            ");
-            
-            #line default
-            #line hidden
-            
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(".CreatedBy = existing");
-            
-            #line default
-            #line hidden
-            
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(".CreatedBy;\r\n\r\n            ");
+            #line 62 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write(".DateCreated;\r\n");
             
             #line default
             #line hidden
             
             #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 64 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            this.Write("\r\n            ");
+            
+            #line default
+            #line hidden
+            
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(" updated");
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(" = await _");
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write("Repository.UpdateAsync(");
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(");\r\n            await _unitOfWork.Commit();\r\n            return updated");
             
             #line default
             #line hidden
             
-            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 67 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 67 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(";\r\n        }\r\n\r\n        public async Task Delete");
             
             #line default
             #line hidden
             
-            #line 68 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 70 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 68 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 70 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write("Async(Guid id)\r\n        {\r\n            await _");
             
             #line default
             #line hidden
             
-            #line 70 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 70 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write("Repository.DeleteAsync(id);\r\n            await _unitOfWork.Commit();\r\n        }\r\n" +
                     "    }\r\n}\r\n");
             

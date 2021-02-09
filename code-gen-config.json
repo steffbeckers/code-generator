@@ -14,21 +14,21 @@
             "Type": "DateTime",
             "AuditDateCreated": true
           },
-          {
-            "Name": "CreatedBy",
-            "Type": "Guid",
-            "AuditCreatedBy": true
-          },
+          // {
+          //   "Name": "CreatedBy",
+          //   "Type": "Guid",
+          //   "AuditCreatedBy": true
+          // },
           {
             "Name": "DateModified",
             "Type": "DateTime?",
             "AuditDateModified": true
           },
-          {
-            "Name": "ModifiedBy",
-            "Type": "Guid?",
-            "AuditModifiedBy": true
-          },
+          // {
+          //   "Name": "ModifiedBy",
+          //   "Type": "Guid?",
+          //   "AuditModifiedBy": true
+          // },
           {
             "Name": "Deleted",
             "Type": "bool",
@@ -67,31 +67,31 @@
               "Type": "string"
             }
           ]
-        } // ,
-        // {
-        //   "Name": "Contact",
-        //   "Audit": true,
-        //   "Properties": [
-        //     {
-        //       "Name": "FirstName",
-        //       "Type": "string",
-        //       "Required": true
-        //     },
-        //     {
-        //       "Name": "LastName",
-        //       "Type": "string",
-        //       "Required": true
-        //     },
-        //     {
-        //       "Name": "Telephone",
-        //       "Type": "string"
-        //     },
-        //     {
-        //       "Name": "Email",
-        //       "Type": "string"
-        //     }
-        //   ]
-        // }
+        },
+        {
+          "Name": "Contact",
+          "Audit": true,
+          "Properties": [
+            {
+              "Name": "FirstName",
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "LastName",
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "Telephone",
+              "Type": "string"
+            },
+            {
+              "Name": "Email",
+              "Type": "string"
+            }
+          ]
+        }
       ]
     },
     "Paths": {

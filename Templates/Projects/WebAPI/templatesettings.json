@@ -7,7 +7,7 @@
   "AfterGenerate": {
     "Build": true,
     "RecreateDatabase": true,
-    "InstallProjectTemplate": false,
+    "InstallProjectTemplate": true,
     "OpenSwagger": true,
     "Run": true
   },

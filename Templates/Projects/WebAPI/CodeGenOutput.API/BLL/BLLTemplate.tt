@@ -57,8 +57,10 @@ namespace CodeGenOutput.API.BLL
         {
             // Keep creating auditing details
             <#= _model.Name #> existing<#= _model.Name #> = await Get<#= _model.Name #>ByIdAsync(<#= _model.Name.ToLower() #>.Id);
+<# CodeGenModelProperty auditDateCreatedProperty = _config.Models.DefaultAuditDateCreatedProperty(); #>
+<# if (auditDateCreatedProperty != null) { #>
             <#= _model.Name.ToLower() #>.DateCreated = existing<#= _model.Name #>.DateCreated;
-            <#= _model.Name.ToLower() #>.CreatedBy = existing<#= _model.Name #>.CreatedBy;
+<# } #>
 
             <#= _model.Name #> updated<#= _model.Name #> = await _<#= _model.Name.ToLower() #>Repository.UpdateAsync(<#= _model.Name.ToLower() #>);
             await _unitOfWork.Commit();
