@@ -27,7 +27,12 @@ namespace CodeGenOutput.API.BLL
 
         public async Task<Account> GetAccountByIdAsync(Guid id)
         {
-            return await _accountRepository.GetByIdAsync(id);
+            Account account = await _accountRepository.GetByIdAsync(id);
+            if (account == null) {
+                throw new Exception($"Account '{id}' not found.");
+            }
+
+            return account;
         }
 
         // public async Task<IEnumerable<Account>> SearchAccountAsync(string term)
@@ -44,8 +49,14 @@ namespace CodeGenOutput.API.BLL
 
         public async Task<Account> UpdateAccountAsync(Account account)
         {
+            Account existingAccount = await GetAccountByIdAsync(account.Id);
+            // Keep creating auditing details
+            account.DateCreated = existingAccount.DateCreated;
+            account.CreatedBy = existingAccount.CreatedBy;
+
             Account updatedAccount = await _accountRepository.UpdateAsync(account);
             await _unitOfWork.Commit();
+
             return updatedAccount;
         }
 
