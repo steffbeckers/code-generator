@@ -1,12 +1,11 @@
 # Code Generator
 
-.NET based code generator. Configure projects and generate boilerplate code with T4 templates based on your domain models.
+.NET based code generator. Configure projects and generate boilerplate code with T4 templates, based on a simple JSON representation of domain models.
 
 https://steffbeckers.eu/projects/code-generator
 
-## Build Setup
+## Start development
 
 ```bash
-# Start development
 $ dotnet watch run
 ```
