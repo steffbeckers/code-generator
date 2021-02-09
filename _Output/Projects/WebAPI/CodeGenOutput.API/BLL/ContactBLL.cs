@@ -9,11 +9,11 @@ namespace CodeGenOutput.API.BLL
     public interface IContactBLL
     {
         Task<IEnumerable<Contact>> GetContactsAsync(int skip, int take);
-        Task<Contact> GetContactByIdAsync(Guid id);
+        Task<Contact> GetContactByCodeAsync(string code);
         // Task<IEnumerable<Contact>> SearchContactAsync(string term);
         Task<Contact> CreateContactAsync(Contact contact);
         Task<Contact> UpdateContactAsync(Contact contact);
-        Task DeleteContactAsync(Guid id);
+        Task DeleteContactAsync(string code);
     }
 
     public partial class BusinessLogicLayer : IContactBLL
@@ -25,11 +25,11 @@ namespace CodeGenOutput.API.BLL
             return await _contactRepository.GetAsync(skip, take);
         }
 
-        public async Task<Contact> GetContactByIdAsync(Guid id)
+        public async Task<Contact> GetContactByCodeAsync(string code)
         {
-            Contact contact = await _contactRepository.GetByIdAsync(id);
+            Contact contact = await _contactRepository.GetByCodeAsync(code);
             if (contact == null) {
-                throw new Exception($"Contact '{id}' not found.");
+                throw new Exception($"Contact '{code}' not found.");
             }
 
             return contact;
@@ -50,7 +50,7 @@ namespace CodeGenOutput.API.BLL
         public async Task<Contact> UpdateContactAsync(Contact contact)
         {
             // Keep creating auditing details
-            Contact existingContact = await GetContactByIdAsync(contact.Id);
+            Contact existingContact = await GetContactByCodeAsync(contact.Code);
             contact.DateCreated = existingContact.DateCreated;
 
             Contact updatedContact = await _contactRepository.UpdateAsync(contact);
@@ -58,9 +58,9 @@ namespace CodeGenOutput.API.BLL
             return updatedContact;
         }
 
-        public async Task DeleteContactAsync(Guid id)
+        public async Task DeleteContactAsync(string code)
         {
-            await _contactRepository.DeleteAsync(id);
+            await _contactRepository.DeleteAsync(code);
             await _unitOfWork.Commit();
         }
     }

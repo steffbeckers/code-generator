@@ -27,11 +27,11 @@ namespace CodeGenOutput.API.Controllers
             return Ok(await _mediator.Send(new GetContacts() { Skip = skip, Take = take }));
         }
 
-        // GET: api/contacts/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Response<ContactVM>>> GetContactById([FromRoute] Guid id)
+        // GET: api/contacts/{code}
+        [HttpGet("{code}")]
+        public async Task<ActionResult<Response<ContactVM>>> GetContactByCode([FromRoute] string code)
         {
-            return Ok(await _mediator.Send(new GetContactById() { Id = id }));
+            return Ok(await _mediator.Send(new GetContactByCode() { Code = code }));
         }
 
         // POST: api/contacts
@@ -39,22 +39,22 @@ namespace CodeGenOutput.API.Controllers
         public async Task<ActionResult<Response<ContactVM>>> CreateContact([FromBody] ContactCreateVM contactCreateVM)
         {
             Response<ContactVM> response = await _mediator.Send(new CreateContact() { ContactCreateVM = contactCreateVM });
-            return CreatedAtAction("GetContactById", new { id = response.Data.Id }, response);
+            return CreatedAtAction("GetContactByCode", new { code = response.Data.Code }, response);
         }
 
-        // PUT: api/contacts/{id}
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Response<ContactVM>>> UpdateContact([FromRoute] Guid id, [FromBody] ContactUpdateVM contactUpdateVM)
+        // PUT: api/contacts/{code}
+        [HttpPut("{code}")]
+        public async Task<ActionResult<Response<ContactVM>>> UpdateContact([FromRoute] string code, [FromBody] ContactUpdateVM contactUpdateVM)
         {
-            if (id != contactUpdateVM.Id) { return BadRequest(); }
+            if (code != contactUpdateVM.Code) { return BadRequest(); }
             return Ok(await _mediator.Send(new UpdateContact() { ContactUpdateVM = contactUpdateVM }));
         }
 
-        // DELETE: api/contacts/{id}
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Response>> DeleteContact([FromRoute] Guid id)
+        // DELETE: api/contacts/{code}
+        [HttpDelete("{code}")]
+        public async Task<ActionResult<Response>> DeleteContact([FromRoute] string code)
         {
-            return Ok(await _mediator.Send(new DeleteContact() { Id = id }));
+            return Ok(await _mediator.Send(new DeleteContact() { Code = code }));
         }
     }
 }

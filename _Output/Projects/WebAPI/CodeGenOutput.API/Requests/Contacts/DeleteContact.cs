@@ -9,7 +9,7 @@ namespace CodeGenOutput.API.Requests.Contacts
 {
     public class DeleteContact : IRequest<Response>
     {
-        public Guid Id { get; set; }
+        public string Code { get; set; }
     }
 
     public class DeleteContactHandler : IRequestHandler<DeleteContact, Response>
@@ -25,7 +25,7 @@ namespace CodeGenOutput.API.Requests.Contacts
         {
             Response response = new Response();
 
-            await _bll.DeleteContactAsync(request.Id);
+            await _bll.DeleteContactAsync(request.Code);
             response.Message = "Contact deleted";
 
             return response;

@@ -27,11 +27,11 @@ namespace CodeGenOutput.API.Controllers
             return Ok(await _mediator.Send(new GetAccounts() { Skip = skip, Take = take }));
         }
 
-        // GET: api/accounts/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Response<AccountVM>>> GetAccountById([FromRoute] Guid id)
+        // GET: api/accounts/{code}
+        [HttpGet("{code}")]
+        public async Task<ActionResult<Response<AccountVM>>> GetAccountByCode([FromRoute] string code)
         {
-            return Ok(await _mediator.Send(new GetAccountById() { Id = id }));
+            return Ok(await _mediator.Send(new GetAccountByCode() { Code = code }));
         }
 
         // POST: api/accounts
@@ -39,22 +39,22 @@ namespace CodeGenOutput.API.Controllers
         public async Task<ActionResult<Response<AccountVM>>> CreateAccount([FromBody] AccountCreateVM accountCreateVM)
         {
             Response<AccountVM> response = await _mediator.Send(new CreateAccount() { AccountCreateVM = accountCreateVM });
-            return CreatedAtAction("GetAccountById", new { id = response.Data.Id }, response);
+            return CreatedAtAction("GetAccountByCode", new { code = response.Data.Code }, response);
         }
 
-        // PUT: api/accounts/{id}
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Response<AccountVM>>> UpdateAccount([FromRoute] Guid id, [FromBody] AccountUpdateVM accountUpdateVM)
+        // PUT: api/accounts/{code}
+        [HttpPut("{code}")]
+        public async Task<ActionResult<Response<AccountVM>>> UpdateAccount([FromRoute] string code, [FromBody] AccountUpdateVM accountUpdateVM)
         {
-            if (id != accountUpdateVM.Id) { return BadRequest(); }
+            if (code != accountUpdateVM.Code) { return BadRequest(); }
             return Ok(await _mediator.Send(new UpdateAccount() { AccountUpdateVM = accountUpdateVM }));
         }
 
-        // DELETE: api/accounts/{id}
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Response>> DeleteAccount([FromRoute] Guid id)
+        // DELETE: api/accounts/{code}
+        [HttpDelete("{code}")]
+        public async Task<ActionResult<Response>> DeleteAccount([FromRoute] string code)
         {
-            return Ok(await _mediator.Send(new DeleteAccount() { Id = id }));
+            return Ok(await _mediator.Send(new DeleteAccount() { Code = code }));
         }
     }
 }

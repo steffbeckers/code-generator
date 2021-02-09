@@ -1,3 +1,10 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); #>
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,10 +23,10 @@ namespace CodeGenOutput.API.DAL
             string includeProperties = "",
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         );
-        Task<TEntity> GetByIdAsync(Guid id);
+        Task<TEntity> GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>);
         Task<TEntity> CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>);
     }
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -61,9 +68,9 @@ namespace CodeGenOutput.API.DAL
             return await query.ToListAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(Guid id)
+        public async Task<TEntity> GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
-            return await _dbContext.Set<TEntity>().FindAsync(id);
+            return await _dbContext.Set<TEntity>().FindAsync(<#= defaultKey.Name.ToLower() #>);
         }
 
         public async Task<TEntity> CreateAsync(TEntity entity)
@@ -78,9 +85,9 @@ namespace CodeGenOutput.API.DAL
             return Task.FromResult(entity);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
-            TEntity entity = await GetByIdAsync(id);
+            TEntity entity = await GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>);
             if (entity != null) {
                 await DeleteAsync(entity);
             }

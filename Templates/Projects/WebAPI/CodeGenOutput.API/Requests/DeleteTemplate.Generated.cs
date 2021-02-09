@@ -22,6 +22,12 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); 
+            
+            #line default
+            #line hidden
+            
+            #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write("using AutoMapper;\r\nusing CodeGenOutput.API.BLL;\r\nusing MediatR;\r\nusing System;\r\nu" +
                     "sing System.Threading;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace CodeGenOutput" +
                     ".API.Requests.");
@@ -29,105 +35,116 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 14 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write("\r\n{\r\n    public class Delete");
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
-            this.Write(" : IRequest<Response>\r\n    {\r\n        public Guid Id { get; set; }\r\n    }\r\n\r\n    " +
-                    "public class Delete");
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(" : IRequest<Response>\r\n    {\r\n        public ");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(" { get; set; }\r\n    }\r\n\r\n    public class Delete");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write("Handler : IRequestHandler<Delete");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(", Response>\r\n    {\r\n        private readonly I");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write("BLL _bll;\r\n\r\n        public Delete");
             
             #line default
             #line hidden
             
-            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write("Handler(IBusinessLogicLayer bll, IMapper mapper)\r\n        {\r\n            _bll = b" +
                     "ll;\r\n        }\r\n\r\n        public async Task<Response> Handle(Delete");
             
             #line default
             #line hidden
             
-            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(" request, CancellationToken cancellationToken)\r\n        {\r\n            Response r" +
                     "esponse = new Response();\r\n\r\n            await _bll.Delete");
             
             #line default
             #line hidden
             
-            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
-            this.Write("Async(request.Id);\r\n            response.Message = \"");
-            
-            #line default
-            #line hidden
-            
             #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
@@ -135,6 +152,30 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write("Async(request.");
+            
+            #line default
+            #line hidden
+            
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(");\r\n            response.Message = \"");
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\DeleteTemplate.tt"
             this.Write(" deleted\";\r\n\r\n            return response;\r\n        }\r\n    }\r\n}\r\n");
             
             #line default

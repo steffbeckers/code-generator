@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); #>
 using AutoMapper;
 using CodeGenOutput.API.BLL;
 using MediatR;
@@ -15,7 +16,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 {
     public class Delete<#= _model.Name #> : IRequest<Response>
     {
-        public Guid Id { get; set; }
+        public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
     }
 
     public class Delete<#= _model.Name #>Handler : IRequestHandler<Delete<#= _model.Name #>, Response>
@@ -31,7 +32,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
         {
             Response response = new Response();
 
-            await _bll.Delete<#= _model.Name #>Async(request.Id);
+            await _bll.Delete<#= _model.Name #>Async(request.<#= defaultKey.Name #>);
             response.Message = "<#= _model.Name #> deleted";
 
             return response;

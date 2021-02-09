@@ -5,8 +5,8 @@
       "Defaults": {
         "Properties": [
           {
-            "Name": "Id",
-            "Type": "Guid",
+            "Name": "Code",
+            "Type": "string",
             "Key": true
           },
           {

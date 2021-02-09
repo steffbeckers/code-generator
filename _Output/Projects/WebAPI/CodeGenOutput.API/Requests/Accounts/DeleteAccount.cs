@@ -9,7 +9,7 @@ namespace CodeGenOutput.API.Requests.Accounts
 {
     public class DeleteAccount : IRequest<Response>
     {
-        public Guid Id { get; set; }
+        public string Code { get; set; }
     }
 
     public class DeleteAccountHandler : IRequestHandler<DeleteAccount, Response>
@@ -25,7 +25,7 @@ namespace CodeGenOutput.API.Requests.Accounts
         {
             Response response = new Response();
 
-            await _bll.DeleteAccountAsync(request.Id);
+            await _bll.DeleteAccountAsync(request.Code);
             response.Message = "Account deleted";
 
             return response;

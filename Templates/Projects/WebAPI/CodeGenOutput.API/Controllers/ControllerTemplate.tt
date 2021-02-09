@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); #>
 using CodeGenOutput.API.Requests;
 using CodeGenOutput.API.Requests.<#= _model.NamePlural #>;
 using CodeGenOutput.API.ViewModels;
@@ -33,11 +34,11 @@ namespace CodeGenOutput.API.Controllers
             return Ok(await _mediator.Send(new Get<#= _model.NamePlural #>() { Skip = skip, Take = take }));
         }
 
-        // GET: api/<#= _model.NamePlural.ToLower() #>/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Get<#= _model.Name #>ById([FromRoute] Guid id)
+        // GET: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
+        [HttpGet("{<#= defaultKey.Name.ToLower() #>}")]
+        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Get<#= _model.Name #>By<#= defaultKey.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
-            return Ok(await _mediator.Send(new Get<#= _model.Name #>ById() { Id = id }));
+            return Ok(await _mediator.Send(new Get<#= _model.Name #>By<#= defaultKey.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #> }));
         }
 
         // POST: api/<#= _model.NamePlural.ToLower() #>
@@ -45,22 +46,22 @@ namespace CodeGenOutput.API.Controllers
         public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Create<#= _model.Name #>([FromBody] <#= _model.Name #>CreateVM <#= _model.Name.ToLower() #>CreateVM)
         {
             Response<<#= _model.Name #>VM> response = await _mediator.Send(new Create<#= _model.Name #>() { <#= _model.Name #>CreateVM = <#= _model.Name.ToLower() #>CreateVM });
-            return CreatedAtAction("Get<#= _model.Name #>ById", new { id = response.Data.Id }, response);
+            return CreatedAtAction("Get<#= _model.Name #>By<#= defaultKey.Name #>", new { <#= defaultKey.Name.ToLower() #> = response.Data.<#= defaultKey.Name #> }, response);
         }
 
-        // PUT: api/<#= _model.NamePlural.ToLower() #>/{id}
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Update<#= _model.Name #>([FromRoute] Guid id, [FromBody] <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM)
+        // PUT: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
+        [HttpPut("{<#= defaultKey.Name.ToLower() #>}")]
+        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Update<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, [FromBody] <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM)
         {
-            if (id != <#= _model.Name.ToLower() #>UpdateVM.Id) { return BadRequest(); }
+            if (<#= defaultKey.Name.ToLower() #> != <#= _model.Name.ToLower() #>UpdateVM.<#= defaultKey.Name #>) { return BadRequest(); }
             return Ok(await _mediator.Send(new Update<#= _model.Name #>() { <#= _model.Name #>UpdateVM = <#= _model.Name.ToLower() #>UpdateVM }));
         }
 
-        // DELETE: api/<#= _model.NamePlural.ToLower() #>/{id}
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Response>> Delete<#= _model.Name #>([FromRoute] Guid id)
+        // DELETE: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
+        [HttpDelete("{<#= defaultKey.Name.ToLower() #>}")]
+        public async Task<ActionResult<Response>> Delete<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
-            return Ok(await _mediator.Send(new Delete<#= _model.Name #>() { Id = id }));
+            return Ok(await _mediator.Send(new Delete<#= _model.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #> }));
         }
     }
 }

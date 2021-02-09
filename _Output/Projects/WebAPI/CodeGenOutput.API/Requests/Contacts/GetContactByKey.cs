@@ -9,27 +9,27 @@ using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Requests.Contacts
 {
-    public class GetContactById : IRequest<Response<ContactVM>>
+    public class GetContactByCode : IRequest<Response<ContactVM>>
     {
-        public Guid Id { get; set; }
+        public string Code { get; set; }
     }
 
-    public class GetContactByIdHandler : IRequestHandler<GetContactById, Response<ContactVM>>
+    public class GetContactByCodeHandler : IRequestHandler<GetContactByCode, Response<ContactVM>>
     {
         private readonly IContactBLL _bll;
         private readonly IMapper _mapper;
 
-        public GetContactByIdHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public GetContactByCodeHandler(IBusinessLogicLayer bll, IMapper mapper)
         {
             _bll = bll;
             _mapper = mapper;
         }
 
-        public async Task<Response<ContactVM>> Handle(GetContactById request, CancellationToken cancellationToken)
+        public async Task<Response<ContactVM>> Handle(GetContactByCode request, CancellationToken cancellationToken)
         {
             Response<ContactVM> response = new Response<ContactVM>();
 
-            Contact contact = await _bll.GetContactByIdAsync(request.Id);
+            Contact contact = await _bll.GetContactByCodeAsync(request.Code);
             response.Data = _mapper.Map<ContactVM>(contact);
 
             return response;

@@ -24,6 +24,10 @@
       "Output": "ApplicationDbContext.cs"
     },
     {
+      "T4Template": "CodeGenOutput.API\\DAL\\GenericRepositoryTemplate.tt",
+      "Output": "Repository.cs"
+    },
+    {
       "T4Template": "CodeGenOutput.API\\Mappers\\AutoMappingTemplate.tt",
       "Output": "AutoMapping.cs"
     },
@@ -66,8 +70,8 @@
       "Output": "{1}\\Delete{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Requests\\GetByIdTemplate.tt",
-      "Output": "{1}\\Get{0}ById.cs"
+      "T4Template": "CodeGenOutput.API\\Requests\\GetByKeyTemplate.tt",
+      "Output": "{1}\\Get{0}ByKey.cs"
     },
     {
       "T4Template": "CodeGenOutput.API\\Requests\\GetTemplate.tt",
