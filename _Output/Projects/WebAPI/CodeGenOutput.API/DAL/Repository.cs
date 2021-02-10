@@ -20,6 +20,7 @@ namespace CodeGenOutput.API.DAL
         Task<TEntity> CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
         Task DeleteAsync(Guid id);
+        Task DeleteAsync(TEntity entity);
     }
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -86,7 +87,7 @@ namespace CodeGenOutput.API.DAL
             }
         }
 
-        private Task DeleteAsync(TEntity entity)
+        public Task DeleteAsync(TEntity entity)
         {
             _dbContext.Remove(entity);
             return Task.CompletedTask;
