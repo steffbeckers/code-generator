@@ -4,7 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using System;
 
 namespace CodeGenOutput.API.ViewModels
@@ -12,7 +12,7 @@ namespace CodeGenOutput.API.ViewModels
     public class <#= _model.Name #>VM
     {
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
-<# foreach (CodeGenModelProperty property in _model.Properties) { #>
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
 <# foreach (CodeGenModelProperty property in _config.Models.DefaultAuditProperties().Where(x => !x.AuditDeleted).ToList()) { #>
@@ -23,7 +23,7 @@ namespace CodeGenOutput.API.ViewModels
     public class <#= _model.Name #>ListVM
     {
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
-<# foreach (CodeGenModelProperty property in _model.Properties) { #>
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }
@@ -38,7 +38,7 @@ namespace CodeGenOutput.API.ViewModels
     public class <#= _model.Name #>UpdateVM
     {
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
-<# foreach (CodeGenModelProperty property in _model.Properties) { #>
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }

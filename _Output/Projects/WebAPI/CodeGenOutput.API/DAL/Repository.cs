@@ -16,10 +16,10 @@ namespace CodeGenOutput.API.DAL
             string includeProperties = "",
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         );
-        Task<TEntity> GetByCodeAsync(string code);
+        Task<TEntity> GetByIdAsync(Guid id);
         Task<TEntity> CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task DeleteAsync(string code);
+        Task DeleteAsync(Guid id);
     }
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -61,9 +61,9 @@ namespace CodeGenOutput.API.DAL
             return await query.ToListAsync();
         }
 
-        public async Task<TEntity> GetByCodeAsync(string code)
+        public async Task<TEntity> GetByIdAsync(Guid id)
         {
-            return await _dbContext.Set<TEntity>().FindAsync(code);
+            return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
         public async Task<TEntity> CreateAsync(TEntity entity)
@@ -78,9 +78,9 @@ namespace CodeGenOutput.API.DAL
             return Task.FromResult(entity);
         }
 
-        public async Task DeleteAsync(string code)
+        public async Task DeleteAsync(Guid id)
         {
-            TEntity entity = await GetByCodeAsync(code);
+            TEntity entity = await GetByIdAsync(id);
             if (entity != null) {
                 await DeleteAsync(entity);
             }

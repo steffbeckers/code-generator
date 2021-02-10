@@ -14,7 +14,14 @@ namespace CodeGen.Models
         public List<CodeGenModel> List { get; set; }
 
         // Helpers
-        public CodeGenModelProperty DefaultKey() {
+        public CodeGenModelProperty DefaultKey(CodeGenModel model = null) {
+            if (model != null) {
+                CodeGenModelProperty modelKey = model.Properties.Where(x => x.Key).FirstOrDefault();
+                if (modelKey != null) {
+                    return modelKey;
+                }
+            }
+
             return Defaults.Properties.Where(x => x.Key).FirstOrDefault() ?? new CodeGenModelProperty() {
                 Name = "Id",
                 Type = "Guid",

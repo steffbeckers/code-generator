@@ -4,7 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,7 +14,7 @@ namespace CodeGenOutput.API.Models
     {
         [Key]
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
-<# foreach (CodeGenModelProperty property in _model.Properties) { #>
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
     }

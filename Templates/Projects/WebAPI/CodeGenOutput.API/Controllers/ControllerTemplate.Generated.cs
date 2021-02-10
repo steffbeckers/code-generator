@@ -22,7 +22,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
- CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); 
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); 
             
             #line default
             #line hidden

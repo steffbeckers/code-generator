@@ -9,11 +9,11 @@ namespace CodeGenOutput.API.BLL
     public interface IAccountBLL
     {
         Task<IEnumerable<Account>> GetAccountsAsync(int skip, int take);
-        Task<Account> GetAccountByCodeAsync(string code);
+        Task<Account> GetAccountByIdAsync(Guid id);
         // Task<IEnumerable<Account>> SearchAccountAsync(string term);
         Task<Account> CreateAccountAsync(Account account);
         Task<Account> UpdateAccountAsync(Account account);
-        Task DeleteAccountAsync(string code);
+        Task DeleteAccountAsync(Guid id);
     }
 
     public partial class BusinessLogicLayer : IAccountBLL
@@ -25,11 +25,11 @@ namespace CodeGenOutput.API.BLL
             return await _accountRepository.GetAsync(skip, take);
         }
 
-        public async Task<Account> GetAccountByCodeAsync(string code)
+        public async Task<Account> GetAccountByIdAsync(Guid id)
         {
-            Account account = await _accountRepository.GetByCodeAsync(code);
+            Account account = await _accountRepository.GetByIdAsync(id);
             if (account == null) {
-                throw new Exception($"Account '{code}' not found.");
+                throw new Exception($"Account '{id}' not found.");
             }
 
             return account;
@@ -50,7 +50,7 @@ namespace CodeGenOutput.API.BLL
         public async Task<Account> UpdateAccountAsync(Account account)
         {
             // Keep creating auditing details
-            Account existingAccount = await GetAccountByCodeAsync(account.Code);
+            Account existingAccount = await GetAccountByIdAsync(account.Id);
             account.DateCreated = existingAccount.DateCreated;
 
             Account updatedAccount = await _accountRepository.UpdateAsync(account);
@@ -58,9 +58,9 @@ namespace CodeGenOutput.API.BLL
             return updatedAccount;
         }
 
-        public async Task DeleteAccountAsync(string code)
+        public async Task DeleteAccountAsync(Guid id)
         {
-            await _accountRepository.DeleteAsync(code);
+            await _accountRepository.DeleteAsync(id);
             await _unitOfWork.Commit();
         }
     }

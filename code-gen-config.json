@@ -5,8 +5,8 @@
       "Defaults": {
         "Properties": [
           {
-            "Name": "Code",
-            "Type": "string",
+            "Name": "Id",
+            "Type": "Guid",
             "Key": true
           },
           {
@@ -72,6 +72,11 @@
           "Name": "Contact",
           "Audit": true,
           "Properties": [
+            {
+              "Name": "Code",
+              "Type": "string",
+              "Key": true
+            },
             {
               "Name": "FirstName",
               "Type": "string",

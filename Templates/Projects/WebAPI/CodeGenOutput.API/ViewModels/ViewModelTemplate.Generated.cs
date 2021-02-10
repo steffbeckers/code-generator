@@ -22,7 +22,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- CodeGenModelProperty defaultKey = _config.Models.DefaultKey(); 
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); 
             
             #line default
             #line hidden
@@ -70,7 +70,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels {
             #line hidden
             
             #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties) { 
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
             
             #line default
             #line hidden
@@ -196,7 +196,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels {
             #line hidden
             
             #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties) { 
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
             
             #line default
             #line hidden
@@ -340,7 +340,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.ViewModels {
             #line hidden
             
             #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\ViewModels\ViewModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties) { 
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
             
             #line default
             #line hidden

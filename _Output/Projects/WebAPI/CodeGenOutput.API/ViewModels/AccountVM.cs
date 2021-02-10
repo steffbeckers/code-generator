@@ -4,7 +4,7 @@ namespace CodeGenOutput.API.ViewModels
 {
     public class AccountVM
     {
-        public string Code { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Telephone { get; set; }
@@ -17,7 +17,7 @@ namespace CodeGenOutput.API.ViewModels
 
     public class AccountListVM
     {
-        public string Code { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Telephone { get; set; }
@@ -38,7 +38,7 @@ namespace CodeGenOutput.API.ViewModels
 
     public class AccountUpdateVM
     {
-        public string Code { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Telephone { get; set; }
