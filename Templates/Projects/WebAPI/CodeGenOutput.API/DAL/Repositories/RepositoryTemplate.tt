@@ -7,6 +7,7 @@
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 <# bool defaultKeyOverridden = _config.Models.DefaultKey() != _config.Models.DefaultKey(_model); #>
 using CodeGenOutput.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace CodeGenOutput.API.DAL.Repositories
             <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>
         )
         {
-            <#= _model.Name #> <#= _model.Name.ToLower() #> = await repository.GetBy<#= defaultKey.Name #>Async(code);
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await repository.GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>);
             if (<#= _model.Name.ToLower() #> != null)
             {
                 await repository.DeleteAsync(<#= _model.Name.ToLower() #>);
