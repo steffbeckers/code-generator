@@ -6,6 +6,7 @@
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using System;
 using System.Collections.Generic;

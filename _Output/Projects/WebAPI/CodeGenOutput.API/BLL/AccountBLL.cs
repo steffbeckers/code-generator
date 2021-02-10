@@ -1,4 +1,5 @@
 using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using System;
 using System.Collections.Generic;

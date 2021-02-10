@@ -4,8 +4,11 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
+<# bool defaultKeyOverridden = _config.Models.DefaultKey() != _config.Models.DefaultKey(_model); #>
 using CodeGenOutput.API.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.DAL.Repositories
@@ -14,6 +17,28 @@ namespace CodeGenOutput.API.DAL.Repositories
     {
         // Additional repository functions here
 
+<# if (defaultKeyOverridden) { #>
+        public static async Task<<#= _model.Name #>> GetBy<#= defaultKey.Name #>Async(
+            this IRepository<<#= _model.Name #>> repository,
+            <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>
+        )
+        {
+            return (await repository.GetAsync(0, 1, x => x.<#= defaultKey.Name #> == <#= defaultKey.Name.ToLower() #>)).FirstOrDefault();
+        }
+
+        public static async Task DeleteAsync(
+            this IRepository<<#= _model.Name #>> repository,
+            <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>
+        )
+        {
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await repository.GetBy<#= defaultKey.Name #>Async(code);
+            if (<#= _model.Name.ToLower() #> != null)
+            {
+                await repository.DeleteAsync(<#= _model.Name.ToLower() #>);
+            }
+        }
+        
+<# } #>
         // public static async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>(
         //     this IRepository<<#= _model.Name #>> repository,
         //     string term

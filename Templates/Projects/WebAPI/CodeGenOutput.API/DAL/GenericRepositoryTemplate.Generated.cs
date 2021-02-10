@@ -108,6 +108,7 @@ namespace CodeGenOutput.API.DAL
             
             #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(@");
+        Task DeleteAsync(TEntity entity);
     }
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -154,49 +155,49 @@ namespace CodeGenOutput.API.DAL
             #line default
             #line hidden
             
-            #line 71 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 71 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write("Async(");
             
             #line default
             #line hidden
             
-            #line 71 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 71 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 71 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 71 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(")\r\n        {\r\n            return await _dbContext.Set<TEntity>().FindAsync(");
             
             #line default
             #line hidden
             
-            #line 73 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 73 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(@");
         }
 
@@ -217,56 +218,56 @@ namespace CodeGenOutput.API.DAL
             #line default
             #line hidden
             
-            #line 88 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 88 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 88 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 88 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(")\r\n        {\r\n            TEntity entity = await GetBy");
             
             #line default
             #line hidden
             
-            #line 90 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 90 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write("Async(");
             
             #line default
             #line hidden
             
-            #line 90 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 90 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(@");
             if (entity != null) {
                 await DeleteAsync(entity);
             }
         }
 
-        private Task DeleteAsync(TEntity entity)
+        public Task DeleteAsync(TEntity entity)
         {
             _dbContext.Remove(entity);
             return Task.CompletedTask;

@@ -9,7 +9,7 @@ namespace CodeGenOutput.API.DAL.Repositories
     {
         // Additional repository functions here
 
-        public static async Task<Contact> GetByKeyAsync(
+        public static async Task<Contact> GetByCodeAsync(
             this IRepository<Contact> repository,
             string code
         )
@@ -22,13 +22,13 @@ namespace CodeGenOutput.API.DAL.Repositories
             string code
         )
         {
-            Contact contact = await repository.GetByKeyAsync(code);
+            Contact contact = await repository.GetByCodeAsync(code);
             if (contact != null)
             {
                 await repository.DeleteAsync(contact);
             }
         }
-
+        
         // public static async Task<IEnumerable<Contact>> SearchContact(
         //     this IRepository<Contact> repository,
         //     string term
