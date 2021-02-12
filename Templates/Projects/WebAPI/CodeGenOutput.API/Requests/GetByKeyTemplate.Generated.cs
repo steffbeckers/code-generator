@@ -67,19 +67,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(" : IRequest<Response<");
-            
-            #line default
-            #line hidden
-            
-            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write("VM>>\r\n    {\r\n        public ");
+            this.Write(" : IRequest<Response>\r\n    {\r\n        public ");
             
             #line default
             #line hidden
@@ -151,19 +139,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(", Response<");
-            
-            #line default
-            #line hidden
-            
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write("VM>>\r\n    {\r\n        private readonly I");
+            this.Write(", Response>\r\n    {\r\n        private readonly I");
             
             #line default
             #line hidden
@@ -201,19 +177,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write("Handler(IBusinessLogicLayer bll, IMapper mapper)\r\n        {\r\n            _bll = b" +
                     "ll;\r\n            _mapper = mapper;\r\n        }\r\n\r\n        public async Task<Respo" +
-                    "nse<");
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write("VM>> Handle(Get");
+                    "nse> Handle(Get");
             
             #line default
             #line hidden
@@ -237,7 +201,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(" request, CancellationToken cancellationToken)\r\n        {\r\n            Response<");
+            this.Write(" request, CancellationToken cancellationToken)\r\n        {\r\n            ");
             
             #line default
             #line hidden
@@ -249,79 +213,68 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write("VM> response = new Response<");
-            
-            #line default
-            #line hidden
-            
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write("VM>();\r\n\r\n            ");
-            
-            #line default
-            #line hidden
-            
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write(" = await _bll.Get");
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write("By");
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write("Async(request.");
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(");\r\n            response.Data = _mapper.Map<");
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            this.Write(");\r\n            if (");
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            this.Write(" == null)\r\n            {\r\n                return new Response() { Success = false" +
+                    ", Message = $\"");
             
             #line default
             #line hidden
@@ -333,19 +286,32 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             #line hidden
             
             #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            this.Write(" {request.Id} not found.\" };\r\n            }\r\n\r\n            return new Response() " +
+                    "{ Data = _mapper.Map<");
+            
+            #line default
+            #line hidden
+            
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write("VM>(");
             
             #line default
             #line hidden
             
-            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
-            this.Write(");\r\n\r\n            return response;\r\n        }\r\n    }\r\n}\r\n");
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\GetByKeyTemplate.tt"
+            this.Write(") };\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

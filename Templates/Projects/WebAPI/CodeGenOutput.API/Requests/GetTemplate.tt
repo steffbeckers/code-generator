@@ -16,13 +16,11 @@ using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 {
-    public class Get<#= _model.NamePlural #> : IRequest<Response<List<<#= _model.Name #>ListVM>>>
+    public class Get<#= _model.NamePlural #> : IRequest<Response>
     {
-        public int Skip { get; set; }
-        public int Take { get; set; }
     }
 
-    public class Get<#= _model.NamePlural #>Handler : IRequestHandler<Get<#= _model.NamePlural #>, Response<List<<#= _model.Name #>ListVM>>>
+    public class Get<#= _model.NamePlural #>Handler : IRequestHandler<Get<#= _model.NamePlural #>, Response>
     {
         private readonly I<#= _model.Name #>BLL _bll;
         private readonly IMapper _mapper;
@@ -33,14 +31,11 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
             _mapper = mapper;
         }
 
-        public async Task<Response<List<<#= _model.Name #>ListVM>>> Handle(Get<#= _model.NamePlural #> request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(Get<#= _model.NamePlural #> request, CancellationToken cancellationToken)
         {
-            Response<List<<#= _model.Name #>ListVM>> response = new Response<List<<#= _model.Name #>ListVM>>();
+            List<<#= _model.Name #>> <#= _model.NamePlural.ToLower() #> = (await _bll.Get<#= _model.NamePlural #>Async()).ToList();
 
-            List<<#= _model.Name #>> <#= _model.NamePlural.ToLower() #> = (await _bll.Get<#= _model.NamePlural #>Async(request.Skip, request.Take)).ToList();
-            response.Data = _mapper.Map<List<<#= _model.Name #>ListVM>>(<#= _model.NamePlural.ToLower() #>);
-
-            return response;
+            return new Response() { Data = _mapper.Map<List<<#= _model.Name #>ListVM>>(<#= _model.NamePlural.ToLower() #>) };
         }
     }
 }

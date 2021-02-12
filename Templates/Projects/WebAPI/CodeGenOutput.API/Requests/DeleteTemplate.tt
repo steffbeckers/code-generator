@@ -30,12 +30,13 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
         public async Task<Response> Handle(Delete<#= _model.Name #> request, CancellationToken cancellationToken)
         {
-            Response response = new Response();
-
             await _bll.Delete<#= _model.Name #>Async(request.<#= defaultKey.Name #>);
-            response.Message = "<#= _model.Name #> deleted";
 
-            return response;
+            return new Response()
+            {
+                Code = "<#= _model.Name.ToUpper() #>_DELETED",
+                Message = "<#= _model.Name #> deleted"
+            };
         }
     }
 }

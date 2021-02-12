@@ -16,12 +16,12 @@ using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 {
-    public class Get<#= _model.Name #>By<#= defaultKey.Name #> : IRequest<Response<<#= _model.Name #>VM>>
+    public class Get<#= _model.Name #>By<#= defaultKey.Name #> : IRequest<Response>
     {
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
     }
 
-    public class Get<#= _model.Name #>By<#= defaultKey.Name #>Handler : IRequestHandler<Get<#= _model.Name #>By<#= defaultKey.Name #>, Response<<#= _model.Name #>VM>>
+    public class Get<#= _model.Name #>By<#= defaultKey.Name #>Handler : IRequestHandler<Get<#= _model.Name #>By<#= defaultKey.Name #>, Response>
     {
         private readonly I<#= _model.Name #>BLL _bll;
         private readonly IMapper _mapper;
@@ -32,14 +32,15 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
             _mapper = mapper;
         }
 
-        public async Task<Response<<#= _model.Name #>VM>> Handle(Get<#= _model.Name #>By<#= defaultKey.Name #> request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(Get<#= _model.Name #>By<#= defaultKey.Name #> request, CancellationToken cancellationToken)
         {
-            Response<<#= _model.Name #>VM> response = new Response<<#= _model.Name #>VM>();
-
             <#= _model.Name #> <#= _model.Name.ToLower() #> = await _bll.Get<#= _model.Name #>By<#= defaultKey.Name #>Async(request.<#= defaultKey.Name #>);
-            response.Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>);
+            if (<#= _model.Name.ToLower() #> == null)
+            {
+                return new Response() { Success = false, Message = $"<#= _model.Name #> {request.Id} not found." };
+            }
 
-            return response;
+            return new Response() { Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>) };
         }
     }
 }
