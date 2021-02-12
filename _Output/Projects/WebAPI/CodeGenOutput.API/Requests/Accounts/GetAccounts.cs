@@ -12,6 +12,7 @@ namespace CodeGenOutput.API.Requests.Accounts
 {
     public class GetAccounts : IRequest<Response>
     {
+        public string Include { get; set; }
     }
 
     public class GetAccountsHandler : IRequestHandler<GetAccounts, Response>
@@ -27,7 +28,7 @@ namespace CodeGenOutput.API.Requests.Accounts
 
         public async Task<Response> Handle(GetAccounts request, CancellationToken cancellationToken)
         {
-            List<Account> accounts = (await _bll.GetAccountsAsync()).ToList();
+            List<Account> accounts = (await _bll.GetAccountsAsync(request.Include)).ToList();
 
             return new Response() { Data = _mapper.Map<List<AccountListVM>>(accounts) };
         }

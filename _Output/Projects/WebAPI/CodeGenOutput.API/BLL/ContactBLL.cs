@@ -1,4 +1,5 @@
 using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace CodeGenOutput.API.BLL
     {
         Task<IEnumerable<Contact>> GetContactsAsync();
         Task<Contact> GetContactByIdAsync(Guid id);
-        // Task<IEnumerable<Contact>> SearchContactAsync(string term);
+        Task<IEnumerable<Contact>> SearchContactAsync(string term);
         Task<Contact> CreateContactAsync(Contact contact);
         Task<Contact> UpdateContactAsync(Contact contact);
         Task DeleteContactAsync(Guid id);
@@ -22,7 +23,7 @@ namespace CodeGenOutput.API.BLL
 
         public async Task<IEnumerable<Contact>> GetContactsAsync()
         {
-            return await _contactRepository.GetAllAsync();
+            return await _contactRepository.GetAsync();
         }
 
         public async Task<Contact> GetContactByIdAsync(Guid id)
@@ -31,10 +32,10 @@ namespace CodeGenOutput.API.BLL
             return contact;
         }
 
-        // public async Task<IEnumerable<Contact>> SearchContactAsync(string term)
-        // {
-        //     return await _contactRepository.SearchContact(term);
-        // }
+        public async Task<IEnumerable<Contact>> SearchContactAsync(string term)
+        {
+            return await _contactRepository.SearchContactAsync(term);
+        }
 
         public async Task<Contact> CreateContactAsync(Contact contact)
         {

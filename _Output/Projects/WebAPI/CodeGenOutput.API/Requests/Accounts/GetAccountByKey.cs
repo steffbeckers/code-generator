@@ -12,6 +12,7 @@ namespace CodeGenOutput.API.Requests.Accounts
     public class GetAccountById : IRequest<Response>
     {
         public Guid Id { get; set; }
+        public string Include { get; set; }
     }
 
     public class GetAccountByIdHandler : IRequestHandler<GetAccountById, Response>
@@ -27,7 +28,7 @@ namespace CodeGenOutput.API.Requests.Accounts
 
         public async Task<Response> Handle(GetAccountById request, CancellationToken cancellationToken)
         {
-            Account account = await _bll.GetAccountByIdAsync(request.Id);
+            Account account = await _bll.GetAccountByIdAsync(request.Id, request.Include);
             if (account == null)
             {
                 return new Response() { Success = false, Message = $"Account {request.Id} not found." };

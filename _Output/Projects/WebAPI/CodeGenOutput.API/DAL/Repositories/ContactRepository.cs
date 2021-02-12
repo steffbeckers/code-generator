@@ -10,12 +10,15 @@ namespace CodeGenOutput.API.DAL.Repositories
     {
         // Additional repository functions here
 
-        // public static async Task<IEnumerable<Contact>> SearchContact(
-        //     this IRepository<Contact> repository,
-        //     string term
-        // )
-        // {
-        //     return await repository.GetAsync(0, 20, x => x.Name.Contains(term));
-        // }
+        public static async Task<IEnumerable<Contact>> SearchContactAsync(
+            this IRepository<Contact> repository,
+            string term
+        )
+        {
+            return await repository.GetAsync(x =>
+                x.FirstName.Contains(term) ||
+                x.LastName.Contains(term)
+            );
+        }
     }
 }

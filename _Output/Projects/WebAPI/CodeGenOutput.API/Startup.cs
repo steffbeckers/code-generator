@@ -33,7 +33,10 @@ namespace CodeGenOutput.API
 
             services.AddMediatR(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             services.AddSwaggerGen(options =>
             {

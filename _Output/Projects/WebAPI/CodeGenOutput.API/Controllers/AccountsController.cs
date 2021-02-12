@@ -21,16 +21,16 @@ namespace CodeGenOutput.API.Controllers
 
         // GET: api/accounts
         [HttpGet]
-        public async Task<IActionResult> GetAccounts()
+        public async Task<IActionResult> GetAccounts([FromQuery] string include = "")
         {
-            return Ok(await _mediator.Send(new GetAccounts()));
+            return Ok(await _mediator.Send(new GetAccounts() { Include = include }));
         }
 
         // GET: api/accounts/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAccountById([FromRoute] Guid id)
+        public async Task<IActionResult> GetAccountById([FromRoute] Guid id, [FromQuery] string include = "")
         {
-            return Ok(await _mediator.Send(new GetAccountById() { Id = id }));
+            return Ok(await _mediator.Send(new GetAccountById() { Id = id, Include = include }));
         }
 
         // POST: api/accounts

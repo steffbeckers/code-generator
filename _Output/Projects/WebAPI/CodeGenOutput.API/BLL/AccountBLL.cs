@@ -1,4 +1,5 @@
 using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ namespace CodeGenOutput.API.BLL
 {
     public interface IAccountBLL
     {
-        Task<IEnumerable<Account>> GetAccountsAsync();
-        Task<Account> GetAccountByIdAsync(Guid id);
-        // Task<IEnumerable<Account>> SearchAccountAsync(string term);
+        Task<IEnumerable<Account>> GetAccountsAsync(string include);
+        Task<Account> GetAccountByIdAsync(Guid id, string include);
+        Task<IEnumerable<Account>> SearchAccountAsync(string term);
         Task<Account> CreateAccountAsync(Account account);
         Task<Account> UpdateAccountAsync(Account account);
         Task DeleteAccountAsync(Guid id);
@@ -20,21 +21,20 @@ namespace CodeGenOutput.API.BLL
     {
         private readonly IRepository<Account> _accountRepository;
 
-        public async Task<IEnumerable<Account>> GetAccountsAsync()
+        public async Task<IEnumerable<Account>> GetAccountsAsync(string include = "")
         {
-            return await _accountRepository.GetAllAsync();
+            return await _accountRepository.GetAsync(include: include);
         }
 
-        public async Task<Account> GetAccountByIdAsync(Guid id)
+        public async Task<Account> GetAccountByIdAsync(Guid id, string include = "")
         {
-            Account account = await _accountRepository.GetByIdAsync(id);
-            return account;
+            return await _accountRepository.GetByIdAsync(id, include: include);
         }
 
-        // public async Task<IEnumerable<Account>> SearchAccountAsync(string term)
-        // {
-        //     return await _accountRepository.SearchAccount(term);
-        // }
+        public async Task<IEnumerable<Account>> SearchAccountAsync(string term)
+        {
+            return await _accountRepository.SearchAccountAsync(term);
+        }
 
         public async Task<Account> CreateAccountAsync(Account account)
         {

@@ -1,4 +1,5 @@
 using CodeGenOutput.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,30 @@ namespace CodeGenOutput.API.DAL.Repositories
     {
         // Additional repository functions here
 
-        // public static async Task<IEnumerable<Account>> SearchAccount(
-        //     this IRepository<Account> repository,
-        //     string term
-        // )
-        // {
-        //     return await repository.GetAsync(0, 20, x => x.Name.Contains(term));
-        // }
+        public static async Task<Account> GetByIdAsync(
+            this IRepository<Account> repository,
+            Guid id,
+            string include = ""
+        )
+        {
+            IQueryable<Account> query = repository.GetDbSet();
+
+            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(property);
+            }
+
+            return await query.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public static async Task<IEnumerable<Account>> SearchAccountAsync(
+            this IRepository<Account> repository,
+            string term
+        )
+        {
+            return await repository.GetAsync(x =>
+                x.Name.Contains(term)
+            );
+        }
     }
 }

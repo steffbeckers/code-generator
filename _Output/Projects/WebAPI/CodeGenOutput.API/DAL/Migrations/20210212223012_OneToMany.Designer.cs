@@ -4,14 +4,16 @@ using CodeGenOutput.API.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeGenOutput.API.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210212223012_OneToMany")]
+    partial class OneToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,32 +59,6 @@ namespace CodeGenOutput.API.DAL.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("CodeGenOutput.API.Models.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("HouseNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Addresses");
-                });
-
             modelBuilder.Entity("CodeGenOutput.API.Models.Contact", b =>
                 {
                     b.Property<Guid>("Id")
@@ -90,9 +66,6 @@ namespace CodeGenOutput.API.DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("AccountId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
@@ -120,8 +93,6 @@ namespace CodeGenOutput.API.DAL.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Contacts");
                 });
 
@@ -131,13 +102,7 @@ namespace CodeGenOutput.API.DAL.Migrations
                         .WithMany("Contacts")
                         .HasForeignKey("AccountId");
 
-                    b.HasOne("CodeGenOutput.API.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.Navigation("Account");
-
-                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("CodeGenOutput.API.Models.Account", b =>
