@@ -17,7 +17,7 @@ namespace CodeGenOutput.API.DAL.Configurations
 <# CodeGenModelProperty auditDeletedProperty = _config.Models.DefaultAuditDeletedProperty(); #>
 <# if (auditDeletedProperty != null) { #>
             builder.HasQueryFilter(x => !x.<#= auditDeletedProperty.Name #>);
-            
+
 <# } #>
             // builder.Property(t => t.Title)
             //     .HasMaxLength(200)

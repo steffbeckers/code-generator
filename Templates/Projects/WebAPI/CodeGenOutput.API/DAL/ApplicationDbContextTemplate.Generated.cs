@@ -34,56 +34,57 @@ namespace CodeGenOutput.API.DAL
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {}
+        {
+        }
 
 ");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  foreach (CodeGenModel model in _config.Models.List) { 
             
             #line default
             #line hidden
             
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("        public DbSet<");
             
             #line default
             #line hidden
             
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( model.Name ));
             
             #line default
             #line hidden
             
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("> ");
             
             #line default
             #line hidden
             
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(" { get; set; }\r\n");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("\r\n        protected override void OnModelCreating(ModelBuilder builder)\r\n        " +
                     "{\r\n            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAsse" +
                     "mbly());\r\n\r\n            base.OnModelCreating(builder);\r\n        }\r\n");
@@ -91,31 +92,31 @@ namespace CodeGenOutput.API.DAL
             #line default
             #line hidden
             
-            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  CodeGenModelProperty auditDeletedProperty = _config.Models.DefaultAuditDeletedProperty(); 
             
             #line default
             #line hidden
             
-            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  CodeGenModelProperty auditDateCreatedProperty = _config.Models.DefaultAuditDateCreatedProperty(); 
             
             #line default
             #line hidden
             
-            #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  CodeGenModelProperty auditDateModifiedProperty = _config.Models.DefaultAuditDateModifiedProperty(); 
             
             #line default
             #line hidden
             
-            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  if (auditDeletedProperty != null || auditDateCreatedProperty != null || auditDateModifiedProperty != null) { 
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("\r\n        public override Task<int> SaveChangesAsync(CancellationToken cancellati" +
                     "onToken = new CancellationToken())\r\n        {\r\n            foreach (var entry in" +
                     " ChangeTracker.Entries<Auditable>())\r\n            {\r\n");
@@ -123,126 +124,114 @@ namespace CodeGenOutput.API.DAL
             #line default
             #line hidden
             
-            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  if (auditDeletedProperty != null) { 
             
             #line default
             #line hidden
             
-            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("                // Soft delete\r\n                if (entry.State == EntityState.De" +
-                    "leted) {\r\n                    entry.State = EntityState.Modified;\r\n             " +
-                    "       entry.CurrentValues[\"");
-            
-            #line default
-            #line hidden
-            
-            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( auditDeletedProperty.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write("\"] = ");
-            
-            #line default
-            #line hidden
-            
-            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( auditDeletedProperty.Type == "bool" ? "true" : auditDeletedProperty.Type == "DateTime?" ? "DateTime.Now" : "" ));
-            
-            #line default
-            #line hidden
-            
-            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write(";\r\n                }\r\n");
+                    "leted)\r\n                {\r\n                    entry.State = EntityState.Modifie" +
+                    "d;\r\n                    entry.CurrentValues[\"");
             
             #line default
             #line hidden
             
             #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
- } 
+            this.Write(this.ToStringHelper.ToStringWithCulture( auditDeletedProperty.Name ));
             
             #line default
             #line hidden
             
-            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
- if (auditDateCreatedProperty != null || auditDateModifiedProperty != null) { 
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            this.Write("\"] = ");
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( auditDeletedProperty.Type == "bool" ? "true" : auditDeletedProperty.Type == "DateTime?" ? "DateTime.Now" : "" ));
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            this.Write(";\r\n                }\r\n");
             
             #line default
             #line hidden
             
             #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+ if (auditDateCreatedProperty != null || auditDateModifiedProperty != null) { 
+            
+            #line default
+            #line hidden
+            
+            #line 50 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("\r\n                switch (entry.State)\r\n                {\r\n");
             
             #line default
             #line hidden
             
-            #line 51 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  if (auditDateCreatedProperty != null) { 
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 54 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("                    case EntityState.Added:\r\n                        entry.Entity" +
                     ".");
             
             #line default
             #line hidden
             
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( auditDateCreatedProperty.Name ));
             
             #line default
             #line hidden
             
-            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(" = DateTime.Now;\r\n                        break;\r\n");
             
             #line default
             #line hidden
             
-            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 57 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 56 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  if (auditDateModifiedProperty != null) { 
             
             #line default
             #line hidden
             
-            #line 57 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 59 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("                    case EntityState.Modified:\r\n                        entry.Ent" +
                     "ity.");
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( auditDateModifiedProperty.Name ));
             
             #line default
             #line hidden
             
-            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write(" = DateTime.Now;\r\n                        break;\r\n");
-            
-            #line default
-            #line hidden
-            
             #line 60 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 61 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
-            this.Write("                }\r\n");
+            this.Write(" = DateTime.Now;\r\n                        break;\r\n");
             
             #line default
             #line hidden
@@ -254,19 +243,31 @@ namespace CodeGenOutput.API.DAL
             #line hidden
             
             #line 63 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            this.Write("                }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 64 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 65 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("            }\r\n\r\n            return base.SaveChangesAsync(cancellationToken);\r\n  " +
                     "      }\r\n");
             
             #line default
             #line hidden
             
-            #line 67 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 69 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 68 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
+            #line 70 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\ApplicationDbContextTemplate.tt"
             this.Write("    }\r\n}\r\n");
             
             #line default

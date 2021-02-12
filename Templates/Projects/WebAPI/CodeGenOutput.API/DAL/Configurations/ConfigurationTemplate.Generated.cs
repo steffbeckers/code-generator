@@ -90,7 +90,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Configurations
             #line hidden
             
             #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
-            this.Write(");\r\n            \r\n");
+            this.Write(");\r\n\r\n");
             
             #line default
             #line hidden

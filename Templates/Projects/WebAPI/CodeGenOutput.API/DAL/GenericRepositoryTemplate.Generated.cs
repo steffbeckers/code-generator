@@ -39,9 +39,8 @@ namespace CodeGenOutput.API.DAL
 {
     public interface IRepository<TEntity> where TEntity : class
     {
+        Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IEnumerable<TEntity>> GetAsync(
-            int skip,
-            int take,
             Expression<Func<TEntity, bool>> filter = null,
             string includeProperties = """",
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
@@ -51,62 +50,62 @@ namespace CodeGenOutput.API.DAL
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write("Async(");
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(");\r\n        Task<TEntity> CreateAsync(TEntity entity);\r\n        Task<TEntity> Upd" +
                     "ateAsync(TEntity entity);\r\n        Task DeleteAsync(");
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(@");
         Task DeleteAsync(TEntity entity);
     }
@@ -120,9 +119,12 @@ namespace CodeGenOutput.API.DAL
             _dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _dbContext.Set<TEntity>().ToListAsync();
+        }
+
         public async Task<IEnumerable<TEntity>> GetAsync(
-            int skip,
-            int take,
             Expression<Func<TEntity, bool>> filter = null,
             string includeProperties = """",
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
@@ -144,8 +146,6 @@ namespace CodeGenOutput.API.DAL
             {
                 query = orderBy(query);
             }
-
-            query = query.Skip(skip).Take(take);
 
             return await query.ToListAsync();
         }
@@ -262,7 +262,8 @@ namespace CodeGenOutput.API.DAL
             
             #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(@");
-            if (entity != null) {
+            if (entity != null)
+            {
                 await DeleteAsync(entity);
             }
         }

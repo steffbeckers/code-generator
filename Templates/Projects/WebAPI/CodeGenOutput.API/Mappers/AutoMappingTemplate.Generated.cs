@@ -156,7 +156,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Mappers {
             #line hidden
             
             #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Mappers\AutoMappingTemplate.tt"
-            this.Write(">();\r\n            \r\n");
+            this.Write(">();\r\n\r\n");
             
             #line default
             #line hidden

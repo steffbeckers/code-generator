@@ -16,7 +16,8 @@ namespace CodeGenOutput.API.DAL
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {}
+        {
+        }
 
 <# foreach (CodeGenModel model in _config.Models.List) { #>
         public DbSet<<#= model.Name #>> <#= model.NamePlural #> { get; set; }
@@ -39,7 +40,8 @@ namespace CodeGenOutput.API.DAL
             {
 <# if (auditDeletedProperty != null) { #>
                 // Soft delete
-                if (entry.State == EntityState.Deleted) {
+                if (entry.State == EntityState.Deleted)
+                {
                     entry.State = EntityState.Modified;
                     entry.CurrentValues["<#= auditDeletedProperty.Name #>"] = <#= auditDeletedProperty.Type == "bool" ? "true" : auditDeletedProperty.Type == "DateTime?" ? "DateTime.Now" : "" #>;
                 }
