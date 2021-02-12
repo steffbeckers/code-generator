@@ -4,7 +4,6 @@ using CodeGenOutput.API.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Controllers
@@ -22,29 +21,29 @@ namespace CodeGenOutput.API.Controllers
 
         // GET: api/accounts
         [HttpGet]
-        public async Task<ActionResult<Response<List<AccountListVM>>>> GetAccounts([FromQuery] int skip = 0, [FromQuery] int take = 20)
+        public async Task<IActionResult> GetAccounts()
         {
-            return Ok(await _mediator.Send(new GetAccounts() { Skip = skip, Take = take }));
+            return Ok(await _mediator.Send(new GetAccounts()));
         }
 
         // GET: api/accounts/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Response<AccountVM>>> GetAccountById([FromRoute] Guid id)
+        public async Task<IActionResult> GetAccountById([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new GetAccountById() { Id = id }));
         }
 
         // POST: api/accounts
         [HttpPost]
-        public async Task<ActionResult<Response<AccountVM>>> CreateAccount([FromBody] AccountCreateVM accountCreateVM)
+        public async Task<IActionResult> CreateAccount([FromBody] AccountCreateVM accountCreateVM)
         {
-            Response<AccountVM> response = await _mediator.Send(new CreateAccount() { AccountCreateVM = accountCreateVM });
-            return CreatedAtAction("GetAccountById", new { id = response.Data.Id }, response);
+            Response response = await _mediator.Send(new CreateAccount() { AccountCreateVM = accountCreateVM });
+            return CreatedAtAction("GetAccountById", new { id = (response.Data as AccountVM).Id }, response);
         }
 
         // PUT: api/accounts/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult<Response<AccountVM>>> UpdateAccount([FromRoute] Guid id, [FromBody] AccountUpdateVM accountUpdateVM)
+        public async Task<IActionResult> UpdateAccount([FromRoute] Guid id, [FromBody] AccountUpdateVM accountUpdateVM)
         {
             if (id != accountUpdateVM.Id) { return BadRequest(); }
             return Ok(await _mediator.Send(new UpdateAccount() { AccountUpdateVM = accountUpdateVM }));
@@ -52,7 +51,7 @@ namespace CodeGenOutput.API.Controllers
 
         // DELETE: api/accounts/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Response>> DeleteAccount([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteAccount([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new DeleteAccount() { Id = id }));
         }

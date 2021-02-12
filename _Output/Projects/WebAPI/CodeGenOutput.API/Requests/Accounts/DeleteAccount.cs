@@ -23,12 +23,13 @@ namespace CodeGenOutput.API.Requests.Accounts
 
         public async Task<Response> Handle(DeleteAccount request, CancellationToken cancellationToken)
         {
-            Response response = new Response();
-
             await _bll.DeleteAccountAsync(request.Id);
-            response.Message = "Account deleted";
 
-            return response;
+            return new Response()
+            {
+                Code = "ACCOUNT_DELETED",
+                Message = "Account deleted"
+            };
         }
     }
 }

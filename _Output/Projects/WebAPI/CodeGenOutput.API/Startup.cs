@@ -1,7 +1,5 @@
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.DAL;
-using CodeGenOutput.API.Pipeline;
-using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,10 +32,6 @@ namespace CodeGenOutput.API
             services.AddAutoMapper(typeof(Startup));
 
             services.AddMediatR(typeof(Startup));
-
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
-            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
             services.AddControllers();
 

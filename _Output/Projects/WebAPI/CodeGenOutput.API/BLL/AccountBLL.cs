@@ -1,5 +1,4 @@
 using CodeGenOutput.API.DAL;
-using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ namespace CodeGenOutput.API.BLL
 {
     public interface IAccountBLL
     {
-        Task<IEnumerable<Account>> GetAccountsAsync(int skip, int take);
+        Task<IEnumerable<Account>> GetAccountsAsync();
         Task<Account> GetAccountByIdAsync(Guid id);
         // Task<IEnumerable<Account>> SearchAccountAsync(string term);
         Task<Account> CreateAccountAsync(Account account);
@@ -21,18 +20,14 @@ namespace CodeGenOutput.API.BLL
     {
         private readonly IRepository<Account> _accountRepository;
 
-        public async Task<IEnumerable<Account>> GetAccountsAsync(int skip, int take)
+        public async Task<IEnumerable<Account>> GetAccountsAsync()
         {
-            return await _accountRepository.GetAsync(skip, take);
+            return await _accountRepository.GetAllAsync();
         }
 
         public async Task<Account> GetAccountByIdAsync(Guid id)
         {
             Account account = await _accountRepository.GetByIdAsync(id);
-            if (account == null) {
-                throw new Exception($"Account '{id}' not found.");
-            }
-
             return account;
         }
 

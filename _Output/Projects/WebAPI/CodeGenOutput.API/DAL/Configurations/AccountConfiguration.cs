@@ -9,7 +9,7 @@ namespace CodeGenOutput.API.DAL.Configurations
         public void Configure(EntityTypeBuilder<Account> builder)
         {
             builder.HasQueryFilter(x => !x.Deleted);
-            
+
             // builder.Property(t => t.Title)
             //     .HasMaxLength(200)
             //     .IsRequired();

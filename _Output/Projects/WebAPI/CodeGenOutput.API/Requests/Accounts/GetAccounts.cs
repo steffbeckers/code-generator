@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Requests.Accounts
 {
-    public class GetAccounts : IRequest<Response<List<AccountListVM>>>
+    public class GetAccounts : IRequest<Response>
     {
-        public int Skip { get; set; }
-        public int Take { get; set; }
     }
 
-    public class GetAccountsHandler : IRequestHandler<GetAccounts, Response<List<AccountListVM>>>
+    public class GetAccountsHandler : IRequestHandler<GetAccounts, Response>
     {
         private readonly IAccountBLL _bll;
         private readonly IMapper _mapper;
@@ -27,14 +25,11 @@ namespace CodeGenOutput.API.Requests.Accounts
             _mapper = mapper;
         }
 
-        public async Task<Response<List<AccountListVM>>> Handle(GetAccounts request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(GetAccounts request, CancellationToken cancellationToken)
         {
-            Response<List<AccountListVM>> response = new Response<List<AccountListVM>>();
+            List<Account> accounts = (await _bll.GetAccountsAsync()).ToList();
 
-            List<Account> accounts = (await _bll.GetAccountsAsync(request.Skip, request.Take)).ToList();
-            response.Data = _mapper.Map<List<AccountListVM>>(accounts);
-
-            return response;
+            return new Response() { Data = _mapper.Map<List<AccountListVM>>(accounts) };
         }
     }
 }

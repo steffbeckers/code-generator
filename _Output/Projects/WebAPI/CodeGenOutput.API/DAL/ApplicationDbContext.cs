@@ -10,7 +10,7 @@ namespace CodeGenOutput.API.DAL
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {}
+        { }
 
         public DbSet<Account> Accounts { get; set; }
 
@@ -26,7 +26,8 @@ namespace CodeGenOutput.API.DAL
             foreach (var entry in ChangeTracker.Entries<Auditable>())
             {
                 // Soft delete
-                if (entry.State == EntityState.Deleted) {
+                if (entry.State == EntityState.Deleted)
+                {
                     entry.State = EntityState.Modified;
                     entry.CurrentValues["Deleted"] = true;
                 }

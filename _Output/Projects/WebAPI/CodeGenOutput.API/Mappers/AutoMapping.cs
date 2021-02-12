@@ -13,7 +13,7 @@ namespace CodeGenOutput.API.Mappers
             CreateMap<AccountVM, Account>();
             CreateMap<AccountCreateVM, Account>();
             CreateMap<AccountUpdateVM, Account>();
-            
+
         }
     }
 }

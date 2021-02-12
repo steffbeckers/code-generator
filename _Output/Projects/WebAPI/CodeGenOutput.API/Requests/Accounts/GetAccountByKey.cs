@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Requests.Accounts
 {
-    public class GetAccountById : IRequest<Response<AccountVM>>
+    public class GetAccountById : IRequest<Response>
     {
         public Guid Id { get; set; }
     }
 
-    public class GetAccountByIdHandler : IRequestHandler<GetAccountById, Response<AccountVM>>
+    public class GetAccountByIdHandler : IRequestHandler<GetAccountById, Response>
     {
         private readonly IAccountBLL _bll;
         private readonly IMapper _mapper;
@@ -25,14 +25,15 @@ namespace CodeGenOutput.API.Requests.Accounts
             _mapper = mapper;
         }
 
-        public async Task<Response<AccountVM>> Handle(GetAccountById request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(GetAccountById request, CancellationToken cancellationToken)
         {
-            Response<AccountVM> response = new Response<AccountVM>();
-
             Account account = await _bll.GetAccountByIdAsync(request.Id);
-            response.Data = _mapper.Map<AccountVM>(account);
+            if (account == null)
+            {
+                return new Response() { Success = false, Message = $"Account {request.Id} not found." };
+            }
 
-            return response;
+            return new Response() { Data = _mapper.Map<AccountVM>(account) };
         }
     }
 }
