@@ -67,36 +67,31 @@
               "Type": "string"
             }
           ]
-        } // ,
-        // {
-        //   "Name": "Contact",
-        //   "Audit": true,
-        //   "Properties": [
-        //     {
-        //       "Name": "Code",
-        //       "Type": "string",
-        //       "Key": true
-        //     },
-        //     {
-        //       "Name": "FirstName",
-        //       "Type": "string",
-        //       "Required": true
-        //     },
-        //     {
-        //       "Name": "LastName",
-        //       "Type": "string",
-        //       "Required": true
-        //     },
-        //     {
-        //       "Name": "Telephone",
-        //       "Type": "string"
-        //     },
-        //     {
-        //       "Name": "Email",
-        //       "Type": "string"
-        //     }
-        //   ]
-        // }
+        },
+        {
+          "Name": "Contact",
+          "Audit": true,
+          "Properties": [
+            {
+              "Name": "FirstName",
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "LastName",
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "Telephone",
+              "Type": "string"
+            },
+            {
+              "Name": "Email",
+              "Type": "string"
+            }
+          ]
+        }
       ]
     },
     "Paths": {
