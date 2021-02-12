@@ -6,7 +6,6 @@
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using CodeGenOutput.API.DAL;
-using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace CodeGenOutput.API.BLL
 {
     public interface I<#= _model.Name #>BLL
     {
-        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(int skip, int take);
+        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async();
         Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>);
         // Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term);
         Task<<#= _model.Name #>> Create<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
@@ -28,18 +27,14 @@ namespace CodeGenOutput.API.BLL
     {
         private readonly IRepository<<#= _model.Name #>> _<#= _model.Name.ToLower() #>Repository;
 
-        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(int skip, int take)
+        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async()
         {
-            return await _<#= _model.Name.ToLower() #>Repository.GetAsync(skip, take);
+            return await _<#= _model.Name.ToLower() #>Repository.GetAllAsync();
         }
 
         public async Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
             <#= _model.Name #> <#= _model.Name.ToLower() #> = await _<#= _model.Name.ToLower() #>Repository.GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>);
-            if (<#= _model.Name.ToLower() #> == null) {
-                throw new Exception($"<#= _model.Name #> '{<#= defaultKey.Name.ToLower() #>}' not found.");
-            }
-
             return <#= _model.Name.ToLower() #>;
         }
 

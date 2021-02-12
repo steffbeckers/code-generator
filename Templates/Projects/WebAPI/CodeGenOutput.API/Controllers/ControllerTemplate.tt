@@ -11,7 +11,6 @@ using CodeGenOutput.API.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.Controllers
@@ -29,29 +28,29 @@ namespace CodeGenOutput.API.Controllers
 
         // GET: api/<#= _model.NamePlural.ToLower() #>
         [HttpGet]
-        public async Task<ActionResult<Response<List<<#= _model.Name #>ListVM>>>> Get<#= _model.NamePlural #>([FromQuery] int skip = 0, [FromQuery] int take = 20)
+        public async Task<IActionResult> Get<#= _model.NamePlural #>()
         {
-            return Ok(await _mediator.Send(new Get<#= _model.NamePlural #>() { Skip = skip, Take = take }));
+            return Ok(await _mediator.Send(new Get<#= _model.NamePlural #>()));
         }
 
         // GET: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
         [HttpGet("{<#= defaultKey.Name.ToLower() #>}")]
-        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Get<#= _model.Name #>By<#= defaultKey.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
+        public async Task<IActionResult> Get<#= _model.Name #>By<#= defaultKey.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
             return Ok(await _mediator.Send(new Get<#= _model.Name #>By<#= defaultKey.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #> }));
         }
 
         // POST: api/<#= _model.NamePlural.ToLower() #>
         [HttpPost]
-        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Create<#= _model.Name #>([FromBody] <#= _model.Name #>CreateVM <#= _model.Name.ToLower() #>CreateVM)
+        public async Task<IActionResult> Create<#= _model.Name #>([FromBody] <#= _model.Name #>CreateVM <#= _model.Name.ToLower() #>CreateVM)
         {
-            Response<<#= _model.Name #>VM> response = await _mediator.Send(new Create<#= _model.Name #>() { <#= _model.Name #>CreateVM = <#= _model.Name.ToLower() #>CreateVM });
-            return CreatedAtAction("Get<#= _model.Name #>By<#= defaultKey.Name #>", new { <#= defaultKey.Name.ToLower() #> = response.Data.<#= defaultKey.Name #> }, response);
+            Response response = await _mediator.Send(new Create<#= _model.Name #>() { <#= _model.Name #>CreateVM = <#= _model.Name.ToLower() #>CreateVM });
+            return CreatedAtAction("Get<#= _model.Name #>By<#= defaultKey.Name #>", new { <#= defaultKey.Name.ToLower() #> = (response.Data as <#= _model.Name #>VM).<#= defaultKey.Name #> }, response);
         }
 
         // PUT: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
         [HttpPut("{<#= defaultKey.Name.ToLower() #>}")]
-        public async Task<ActionResult<Response<<#= _model.Name #>VM>>> Update<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, [FromBody] <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM)
+        public async Task<IActionResult> Update<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, [FromBody] <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM)
         {
             if (<#= defaultKey.Name.ToLower() #> != <#= _model.Name.ToLower() #>UpdateVM.<#= defaultKey.Name #>) { return BadRequest(); }
             return Ok(await _mediator.Send(new Update<#= _model.Name #>() { <#= _model.Name #>UpdateVM = <#= _model.Name.ToLower() #>UpdateVM }));
@@ -59,7 +58,7 @@ namespace CodeGenOutput.API.Controllers
 
         // DELETE: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
         [HttpDelete("{<#= defaultKey.Name.ToLower() #>}")]
-        public async Task<ActionResult<Response>> Delete<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
+        public async Task<IActionResult> Delete<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
             return Ok(await _mediator.Send(new Delete<#= _model.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #> }));
         }
