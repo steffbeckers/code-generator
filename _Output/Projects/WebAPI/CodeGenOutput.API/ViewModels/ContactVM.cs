@@ -13,9 +13,10 @@ namespace CodeGenOutput.API.ViewModels
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
 
-        public Guid? AccountId { get; set; }
-        public AccountVM Account { get; set; }
+        public Guid? AddressId { get; set; }
+        public AddressVM Address { get; set; }
 
+        public List<AccountContactVM> Account { get; set; }
     }
 
     public class ContactListVM
@@ -26,9 +27,10 @@ namespace CodeGenOutput.API.ViewModels
         public string Telephone { get; set; }
         public string Email { get; set; }
 
-        public Guid? AccountId { get; set; }
-        public AccountListVM Account { get; set; }
+        public Guid? AddressId { get; set; }
+        public AddressListVM Address { get; set; }
 
+        public List<AccountContactListVM> Account { get; set; }
     }
 
     public class ContactCreateVM
@@ -38,7 +40,10 @@ namespace CodeGenOutput.API.ViewModels
         public string Telephone { get; set; }
         public string Email { get; set; }
 
-        public Guid? AccountId { get; set; }
+        public Guid? AddressId { get; set; }
+        public AddressCreateVM Address { get; set; }
+
+        public List<AccountContactCreateVM> Account { get; set; }
     }
 
     public class ContactUpdateVM
@@ -48,7 +53,5 @@ namespace CodeGenOutput.API.ViewModels
         public string LastName { get; set; }
         public string Telephone { get; set; }
         public string Email { get; set; }
-
-        public Guid? AccountId { get; set; }
     }
 }

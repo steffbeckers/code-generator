@@ -14,6 +14,18 @@ namespace CodeGenOutput.API.Mappers
             CreateMap<AccountCreateVM, Account>();
             CreateMap<AccountUpdateVM, Account>();
 
+            CreateMap<AccountContact, AccountContactVM>();
+            CreateMap<AccountContact, AccountContactListVM>();
+            CreateMap<AccountContactVM, AccountContact>();
+            CreateMap<AccountContactCreateVM, AccountContact>();
+            CreateMap<AccountContactUpdateVM, AccountContact>();
+
+            CreateMap<Address, AddressVM>();
+            CreateMap<Address, AddressListVM>();
+            CreateMap<AddressVM, Address>();
+            CreateMap<AddressCreateVM, Address>();
+            CreateMap<AddressUpdateVM, Address>();
+
             CreateMap<Contact, ContactVM>();
             CreateMap<Contact, ContactListVM>();
             CreateMap<ContactVM, Contact>();

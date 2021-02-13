@@ -66,7 +66,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             #line hidden
             
             #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { 
+ foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { 
             
             #line default
             #line hidden
@@ -186,7 +186,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             #line hidden
             
             #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { 
+ foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne) { 
             
             #line default
             #line hidden
@@ -258,7 +258,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             #line hidden
             
             #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { 
+ foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { 
             
             #line default
             #line hidden

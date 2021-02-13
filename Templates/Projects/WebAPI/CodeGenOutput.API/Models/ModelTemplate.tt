@@ -16,7 +16,7 @@ namespace CodeGenOutput.API.Models
     {
         public <#= _model.Name #>()
         {
-<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { #>
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { #>
             this.<#= relation.Name #> = new List<<#= relation.Model #>>();
 <# } #>
         }
@@ -27,12 +27,12 @@ namespace CodeGenOutput.API.Models
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
 
-<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne) { #>
         public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
         public <#= relation.Model #> <#= relation.Name #> { get; set; }
 <# } #>
 
-<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { #>
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { #>
         public ICollection<<#= relation.Model #>> <#= relation.Name #> { get; set; }
 <# } #>
     }

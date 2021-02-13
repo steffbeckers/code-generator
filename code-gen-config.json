@@ -70,6 +70,42 @@
             "OneToMany": [
               {
                 "Name": "Contacts",
+                "Model": "AccountContact"
+              }
+            ],
+            "ManyToOne": [
+              {
+                "Name": "Address",
+                "Type": "Guid?",
+                "Model": "Address"
+              }
+            ]
+          }
+        },
+        {
+          "Name": "AccountContact",
+          "Audit": true,
+          "ManyToMany": true,
+          "Properties": [
+            {
+              "Name": "IsPrimary",
+              "Type": "bool"
+            },
+            {
+              "Name": "SortOrder",
+              "Type": "int?"
+            }
+          ],
+          "Relations": {
+            "ManyToOne": [
+              {
+                "Name": "Account",
+                "Type": "Guid",
+                "Model": "Account"
+              },
+              {
+                "Name": "Contact",
+                "Type": "Guid",
                 "Model": "Contact"
               }
             ]
@@ -98,14 +134,48 @@
             }
           ],
           "Relations": {
-            "ManyToOne": [
+            "OneToMany": [
               {
                 "Name": "Account",
+                "Model": "AccountContact"
+              }
+            ],
+            "ManyToOne": [
+              {
+                "Name": "Address",
                 "Type": "Guid?",
-                "Model": "Account"
+                "Model": "Address"
               }
             ]
           }
+        },
+        {
+          "Name": "Address",
+          "NamePlural": "Addresses",
+          "Audit": true,
+          "GenericSearchTermFilter": "x => x.Street.Contains(term)",
+          "Properties": [
+            {
+              "Name": "Street",
+              "Type": "string"
+            },
+            {
+              "Name": "HouseNumber",
+              "Type": "string"
+            },
+            {
+              "Name": "BoxNumber",
+              "Type": "string"
+            },
+            {
+              "Name": "PostalCode",
+              "Type": "string"
+            },
+            {
+              "Name": "City",
+              "Type": "string"
+            }
+          ]
         }
       ]
     },

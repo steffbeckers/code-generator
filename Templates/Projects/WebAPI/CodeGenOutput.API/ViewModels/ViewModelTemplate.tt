@@ -49,12 +49,17 @@ namespace CodeGenOutput.API.ViewModels
 
     public class <#= _model.Name #>CreateVM
     {
-<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != "Id")) { #>
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
 
 <# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
         public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
+        public <#= relation.Model #>CreateVM <#= relation.Name #> { get; set; }
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { #>
+        public List<<#= relation.Model #>CreateVM> <#= relation.Name #> { get; set; }
 <# } #>
     }
 
@@ -63,10 +68,6 @@ namespace CodeGenOutput.API.ViewModels
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
 <# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
-<# } #>
-
-<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
-        public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
 <# } #>
     }
 }

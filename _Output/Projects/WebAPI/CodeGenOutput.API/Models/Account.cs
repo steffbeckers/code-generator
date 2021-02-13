@@ -9,7 +9,7 @@ namespace CodeGenOutput.API.Models
     {
         public Account()
         {
-            this.Contacts = new List<Contact>();
+            this.Contacts = new List<AccountContact>();
         }
 
         [Key]
@@ -21,7 +21,9 @@ namespace CodeGenOutput.API.Models
         public string Website { get; set; }
         public string VAT { get; set; }
 
+        public Guid? AddressId { get; set; }
+        public Address Address { get; set; }
 
-        public ICollection<Contact> Contacts { get; set; }
+        public ICollection<AccountContact> Contacts { get; set; }
     }
 }

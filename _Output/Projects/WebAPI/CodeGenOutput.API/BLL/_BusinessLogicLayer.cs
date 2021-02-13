@@ -5,6 +5,8 @@ namespace CodeGenOutput.API.BLL
 {
     public interface IBusinessLogicLayer :
         IAccountBLL,
+        IAccountContactBLL,
+        IAddressBLL,
         IContactBLL
     { }
 
@@ -18,6 +20,8 @@ namespace CodeGenOutput.API.BLL
 
             // Repositories
             _accountRepository = unitOfWork.GetRepository<Account>();
+            _accountcontactRepository = unitOfWork.GetRepository<AccountContact>();
+            _addressRepository = unitOfWork.GetRepository<Address>();
             _contactRepository = unitOfWork.GetRepository<Contact>();
         }
     }
