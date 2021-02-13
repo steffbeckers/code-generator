@@ -6,10 +6,10 @@
   },
   "AfterGenerate": {
     "Build": true,
-    "RecreateDatabase": false,
+    "RecreateDatabase": true,
     "InstallProjectTemplate": false,
-    "OpenSwagger": false,
-    "Run": false
+    "OpenSwagger": true,
+    "Run": true
   },
   "StartupProjectPath": "CodeGenOutput.API\\",
   "StartupProjectURL": "https://localhost:5000",
