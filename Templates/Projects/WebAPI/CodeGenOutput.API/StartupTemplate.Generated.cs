@@ -36,20 +36,22 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API {
                     "d<IUnitOfWork, UnitOfWork>();\r\n\r\n            services.AddScoped<IBusinessLogicLa" +
                     "yer, BusinessLogicLayer>();\r\n\r\n            services.AddAutoMapper(typeof(Startup" +
                     "));\r\n\r\n            services.AddMediatR(typeof(Startup));\r\n\r\n            services" +
-                    ".AddControllers();\r\n\r\n            services.AddSwaggerGen(options =>\r\n           " +
-                    " {\r\n                options.SwaggerDoc(\"v1\", new OpenApiInfo { Title = \"CodeGenO" +
-                    "utput.API\", Version = \"v1\" });\r\n            });\r\n        }\r\n\r\n        // This me" +
-                    "thod gets called by the runtime. Use this method to configure the HTTP request p" +
-                    "ipeline.\r\n        public void Configure(IApplicationBuilder app, IWebHostEnviron" +
-                    "ment env)\r\n        {\r\n            if (env.IsDevelopment())\r\n            {\r\n     " +
-                    "           app.UseDeveloperExceptionPage();\r\n\r\n                app.UseSwagger();" +
-                    "\r\n                app.UseSwaggerUI(options =>\r\n                {\r\n              " +
-                    "      options.SwaggerEndpoint(\"swagger/v1/swagger.json\", \"CodeGenOutput.API v1\")" +
-                    ";\r\n                    options.RoutePrefix = string.Empty;\r\n                });\r" +
-                    "\n            }\r\n\r\n            app.UseHttpsRedirection();\r\n\r\n            app.UseR" +
-                    "outing();\r\n\r\n            app.UseAuthorization();\r\n\r\n            app.UseEndpoints" +
-                    "(endpoints =>\r\n            {\r\n                endpoints.MapControllers();\r\n     " +
-                    "       });\r\n        }\r\n    }\r\n}\r\n");
+                    ".AddControllers()\r\n                .AddNewtonsoftJson(options =>\r\n              " +
+                    "      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.Referen" +
+                    "ceLoopHandling.Ignore\r\n                );\r\n\r\n            services.AddSwaggerGen(" +
+                    "options =>\r\n            {\r\n                options.SwaggerDoc(\"v1\", new OpenApiI" +
+                    "nfo { Title = \"CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n        " +
+                    "}\r\n\r\n        // This method gets called by the runtime. Use this method to confi" +
+                    "gure the HTTP request pipeline.\r\n        public void Configure(IApplicationBuild" +
+                    "er app, IWebHostEnvironment env)\r\n        {\r\n            if (env.IsDevelopment()" +
+                    ")\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n\r\n          " +
+                    "      app.UseSwagger();\r\n                app.UseSwaggerUI(options =>\r\n          " +
+                    "      {\r\n                    options.SwaggerEndpoint(\"swagger/v1/swagger.json\", " +
+                    "\"CodeGenOutput.API v1\");\r\n                    options.RoutePrefix = string.Empty" +
+                    ";\r\n                });\r\n            }\r\n\r\n            app.UseHttpsRedirection();\r" +
+                    "\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r\n     " +
+                    "       app.UseEndpoints(endpoints =>\r\n            {\r\n                endpoints.M" +
+                    "apControllers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

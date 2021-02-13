@@ -6,6 +6,7 @@
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace CodeGenOutput.API.BLL
 {
     public interface I<#= _model.Name #>BLL
     {
-        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async();
-        Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>);
-        // Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term);
+        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(string include);
+        Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, string include);
+        Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term);
         Task<<#= _model.Name #>> Create<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
         Task<<#= _model.Name #>> Update<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
         Task Delete<#= _model.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>);
@@ -27,21 +28,20 @@ namespace CodeGenOutput.API.BLL
     {
         private readonly IRepository<<#= _model.Name #>> _<#= _model.Name.ToLower() #>Repository;
 
-        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async()
+        public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(string include = "")
         {
-            return await _<#= _model.Name.ToLower() #>Repository.GetAllAsync();
+            return await _<#= _model.Name.ToLower() #>Repository.GetAsync(include: include);
         }
 
-        public async Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
+        public async Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, string include = "")
         {
-            <#= _model.Name #> <#= _model.Name.ToLower() #> = await _<#= _model.Name.ToLower() #>Repository.GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>);
-            return <#= _model.Name.ToLower() #>;
+            return await _<#= _model.Name.ToLower() #>Repository.GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>, include: include);
         }
 
-        // public async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term)
-        // {
-        //     return await _<#= _model.Name.ToLower() #>Repository.Search<#= _model.Name #>(term);
-        // }
+        public async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(string term)
+        {
+            return await _<#= _model.Name.ToLower() #>Repository.Search<#= _model.Name #>Async(term);
+        }
 
         public async Task<<#= _model.Name #>> Create<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>)
         {

@@ -7,6 +7,7 @@
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 <# bool defaultKeyOverridden = _config.Models.DefaultKey() != _config.Models.DefaultKey(_model); #>
 using CodeGenOutput.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,30 @@ namespace CodeGenOutput.API.DAL.Repositories
     {
         // Additional repository functions here
 
-<# if (defaultKeyOverridden) { #>
         public static async Task<<#= _model.Name #>> GetBy<#= defaultKey.Name #>Async(
             this IRepository<<#= _model.Name #>> repository,
-            <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>
+            <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>,
+            string include = ""
         )
         {
-            return (await repository.GetAsync(0, 1, x => x.<#= defaultKey.Name #> == <#= defaultKey.Name.ToLower() #>)).FirstOrDefault();
+            IQueryable<<#= _model.Name #>> query = repository.GetDbSet();
+
+            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(property);
+            }
+
+            return await query.FirstOrDefaultAsync(x => x.<#= defaultKey.Name #> == <#= defaultKey.Name.ToLower() #>);
         }
+
+        public static async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(
+            this IRepository<<#= _model.Name #>> repository,
+            string term
+        )
+        {
+            return await repository.GetAsync(<#= _model.GenericSearchTermFilter #>);
+        }
+<# if (defaultKeyOverridden) { #>
 
         public static async Task DeleteAsync(
             this IRepository<<#= _model.Name #>> repository,
@@ -38,14 +55,6 @@ namespace CodeGenOutput.API.DAL.Repositories
                 await repository.DeleteAsync(<#= _model.Name.ToLower() #>);
             }
         }
-        
 <# } #>
-        // public static async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>(
-        //     this IRepository<<#= _model.Name #>> repository,
-        //     string term
-        // )
-        // {
-        //     return await repository.GetAsync(0, 20, x => x.Name.Contains(term));
-        // }
     }
 }

@@ -12,6 +12,7 @@ namespace CodeGenOutput.API.Requests.Contacts
 {
     public class GetContacts : IRequest<Response>
     {
+        public string Include { get; set; }
     }
 
     public class GetContactsHandler : IRequestHandler<GetContacts, Response>
@@ -27,7 +28,7 @@ namespace CodeGenOutput.API.Requests.Contacts
 
         public async Task<Response> Handle(GetContacts request, CancellationToken cancellationToken)
         {
-            List<Contact> contacts = (await _bll.GetContactsAsync()).ToList();
+            List<Contact> contacts = (await _bll.GetContactsAsync(request.Include)).ToList();
 
             return new Response() { Data = _mapper.Map<List<ContactListVM>>(contacts) };
         }

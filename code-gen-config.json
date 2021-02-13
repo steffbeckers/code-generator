@@ -43,8 +43,7 @@
           "Properties": [
             {
               "Name": "Name",
-              "Type": "string",
-              "Required": true
+              "Type": "string"
             },
             {
               "Name": "Description",
@@ -66,21 +65,28 @@
               "Name": "VAT",
               "Type": "string"
             }
-          ]
+          ],
+          "Relations": {
+            "OneToMany": [
+              {
+                "Name": "Contacts",
+                "Model": "Contact"
+              }
+            ]
+          }
         },
         {
           "Name": "Contact",
           "Audit": true,
+          "GenericSearchTermFilter": "x => x.FirstName.Contains(term) || x.LastName.Contains(term)",
           "Properties": [
             {
               "Name": "FirstName",
-              "Type": "string",
-              "Required": true
+              "Type": "string"
             },
             {
               "Name": "LastName",
-              "Type": "string",
-              "Required": true
+              "Type": "string"
             },
             {
               "Name": "Telephone",
@@ -90,7 +96,16 @@
               "Name": "Email",
               "Type": "string"
             }
-          ]
+          ],
+          "Relations": {
+            "ManyToOne": [
+              {
+                "Name": "Account",
+                "Type": "Guid?",
+                "Model": "Account"
+              }
+            ]
+          }
         }
       ]
     },

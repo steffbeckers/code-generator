@@ -34,33 +34,23 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
             #line hidden
             
             #line 9 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("using CodeGenOutput.API.Models;\r\nusing System;\r\nusing System.Collections.Generic;" +
-                    "\r\nusing System.Linq;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace CodeGenOutput.A" +
-                    "PI.DAL.Repositories\r\n{\r\n    public static class ");
+            this.Write("using CodeGenOutput.API.Models;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Syst" +
+                    "em;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Threadi" +
+                    "ng.Tasks;\r\n\r\nnamespace CodeGenOutput.API.DAL.Repositories\r\n{\r\n    public static " +
+                    "class ");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("RepositoryExtensions\r\n    {\r\n        // Additional repository functions here\r\n\r\n");
-            
-            #line default
-            #line hidden
-            
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
- if (defaultKeyOverridden) { 
-            
-            #line default
-            #line hidden
-            
-            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("        public static async Task<");
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("RepositoryExtensions\r\n    {\r\n        // Additional repository functions here\r\n\r\n " +
+                    "       public static async Task<");
             
             #line default
             #line hidden
@@ -120,109 +110,43 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
             #line hidden
             
             #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("\r\n        )\r\n        {\r\n            return (await repository.GetAsync(0, 1, x => " +
-                    "x.");
+            this.Write(",\r\n            string include = \"\"\r\n        )\r\n        {\r\n            IQueryable<" +
+                    "");
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(@"> query = repository.GetDbSet();
+
+            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(property);
+            }
+
+            return await query.FirstOrDefaultAsync(x => x.");
+            
+            #line default
+            #line hidden
+            
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(" == ");
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(")).FirstOrDefault();\r\n        }\r\n\r\n        public static async Task DeleteAsync(\r" +
-                    "\n            this IRepository<");
-            
-            #line default
-            #line hidden
-            
-            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("> repository,\r\n            ");
-            
-            #line default
-            #line hidden
-            
-            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
-            
-            #line default
-            #line hidden
-            
-            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(" ");
-            
-            #line default
-            #line hidden
-            
-            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("\r\n        )\r\n        {\r\n            ");
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(" ");
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(" = await repository.GetBy");
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("Async(");
-            
-            #line default
-            #line hidden
-            
             #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
@@ -230,81 +154,188 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Repositories {
             #line hidden
             
             #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(");\r\n            if (");
-            
-            #line default
-            #line hidden
-            
-            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(" != null)\r\n            {\r\n                await repository.DeleteAsync(");
+            this.Write(");\r\n        }\r\n\r\n        public static async Task<IEnumerable<");
             
             #line default
             #line hidden
             
             #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write(");\r\n            }\r\n        }\r\n        \r\n");
-            
-            #line default
-            #line hidden
-            
-            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("        // public static async Task<IEnumerable<");
-            
-            #line default
-            #line hidden
-            
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(">> Search");
             
             #line default
             #line hidden
             
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("(\r\n        //     this IRepository<");
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("Async(\r\n            this IRepository<");
             
             #line default
             #line hidden
             
-            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
-            this.Write("> repository,\r\n        //     string term\r\n        // )\r\n        // {\r\n        //" +
-                    "     return await repository.GetAsync(0, 20, x => x.Name.Contains(term));\r\n     " +
-                    "   // }\r\n    }\r\n}\r\n");
+            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("> repository,\r\n            string term\r\n        )\r\n        {\r\n            return " +
+                    "await repository.GetAsync(");
+            
+            #line default
+            #line hidden
+            
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.GenericSearchTermFilter ));
+            
+            #line default
+            #line hidden
+            
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(");\r\n        }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+ if (defaultKeyOverridden) { 
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("\r\n        public static async Task DeleteAsync(\r\n            this IRepository<");
+            
+            #line default
+            #line hidden
+            
+            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("> repository,\r\n            ");
+            
+            #line default
+            #line hidden
+            
+            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("\r\n        )\r\n        {\r\n            ");
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(" = await repository.GetBy");
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("Async(");
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(");\r\n            if (");
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(" != null)\r\n            {\r\n                await repository.DeleteAsync(");
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write(");\r\n            }\r\n        }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 58 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 59 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Repositories\RepositoryTemplate.tt"
+            this.Write("    }\r\n}\r\n");
             
             #line default
             #line hidden

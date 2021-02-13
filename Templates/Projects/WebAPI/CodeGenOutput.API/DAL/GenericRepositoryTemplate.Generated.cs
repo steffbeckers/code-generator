@@ -39,10 +39,10 @@ namespace CodeGenOutput.API.DAL
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        DbSet<TEntity> GetDbSet();
         Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
-            string includeProperties = """",
+            string include = """",
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         );
         Task<TEntity> GetBy");
@@ -119,27 +119,27 @@ namespace CodeGenOutput.API.DAL
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public DbSet<TEntity> GetDbSet()
         {
-            return await _dbContext.Set<TEntity>().ToListAsync();
+            return _dbContext.Set<TEntity>();
         }
 
         public async Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
-            string includeProperties = """",
+            string include = """",
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         )
         {
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>();
+            IQueryable<TEntity> query = GetDbSet();
 
             if (filter != null)
             {
                 query = query.Where(filter);
             }
 
-            foreach (var includeProperty in includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                query = query.Include(includeProperty);
+                query = query.Include(property);
             }
 
             if (orderBy != null)
@@ -186,7 +186,7 @@ namespace CodeGenOutput.API.DAL
             #line hidden
             
             #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
-            this.Write(")\r\n        {\r\n            return await _dbContext.Set<TEntity>().FindAsync(");
+            this.Write(")\r\n        {\r\n            return await GetDbSet().FindAsync(");
             
             #line default
             #line hidden

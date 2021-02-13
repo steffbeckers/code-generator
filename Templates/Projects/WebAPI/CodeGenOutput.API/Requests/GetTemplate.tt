@@ -18,6 +18,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 {
     public class Get<#= _model.NamePlural #> : IRequest<Response>
     {
+        public string Include { get; set; }
     }
 
     public class Get<#= _model.NamePlural #>Handler : IRequestHandler<Get<#= _model.NamePlural #>, Response>
@@ -33,7 +34,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
         public async Task<Response> Handle(Get<#= _model.NamePlural #> request, CancellationToken cancellationToken)
         {
-            List<<#= _model.Name #>> <#= _model.NamePlural.ToLower() #> = (await _bll.Get<#= _model.NamePlural #>Async()).ToList();
+            List<<#= _model.Name #>> <#= _model.NamePlural.ToLower() #> = (await _bll.Get<#= _model.NamePlural #>Async(request.Include)).ToList();
 
             return new Response() { Data = _mapper.Map<List<<#= _model.Name #>ListVM>>(<#= _model.NamePlural.ToLower() #>) };
         }

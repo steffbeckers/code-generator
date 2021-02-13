@@ -28,97 +28,278 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             #line hidden
             
             #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("using System;\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace CodeGenO" +
-                    "utput.API.Models\r\n{\r\n    public class ");
+            this.Write("using System;\r\nusing System.Collections;\r\nusing System.Collections.Generic;\r\nusin" +
+                    "g System.ComponentModel.DataAnnotations;\r\n\r\nnamespace CodeGenOutput.API.Models\r\n" +
+                    "{\r\n    public class ");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Audit ? " : Auditable" : "" ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("\r\n    {\r\n        [Key]\r\n        public ");
-            
-            #line default
-            #line hidden
-            
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
-            
-            #line default
-            #line hidden
-            
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" ");
-            
-            #line default
-            #line hidden
-            
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 16 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" { get; set; }\r\n");
+            #line 15 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("\r\n    {\r\n        public ");
             
             #line default
             #line hidden
             
             #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write("        public ");
-            
-            #line default
-            #line hidden
-            
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
-            
-            #line default
-            #line hidden
-            
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" ");
-            
-            #line default
-            #line hidden
-            
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(" { get; set; }\r\n");
+            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("()\r\n        {\r\n");
             
             #line default
             #line hidden
             
             #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
- } 
+ foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { 
             
             #line default
             #line hidden
             
             #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("            this.");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" = new List<");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Model ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(">();\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("        }\r\n\r\n        [Key]\r\n        public ");
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("        public ");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("        public ");
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Type ));
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("Id { get; set; }\r\n        public ");
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Model ));
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" ");
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("        public ICollection<");
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Model ));
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write("> ");
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+            this.Write(" { get; set; }\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
             this.Write("    }\r\n}\r\n");
             
             #line default

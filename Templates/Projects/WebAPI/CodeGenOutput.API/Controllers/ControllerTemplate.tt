@@ -28,16 +28,16 @@ namespace CodeGenOutput.API.Controllers
 
         // GET: api/<#= _model.NamePlural.ToLower() #>
         [HttpGet]
-        public async Task<IActionResult> Get<#= _model.NamePlural #>()
+        public async Task<IActionResult> Get<#= _model.NamePlural #>([FromQuery] string include = "")
         {
-            return Ok(await _mediator.Send(new Get<#= _model.NamePlural #>()));
+            return Ok(await _mediator.Send(new Get<#= _model.NamePlural #>() { Include = include }));
         }
 
         // GET: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
         [HttpGet("{<#= defaultKey.Name.ToLower() #>}")]
-        public async Task<IActionResult> Get<#= _model.Name #>By<#= defaultKey.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
+        public async Task<IActionResult> Get<#= _model.Name #>By<#= defaultKey.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, [FromQuery] string include = "")
         {
-            return Ok(await _mediator.Send(new Get<#= _model.Name #>By<#= defaultKey.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #> }));
+            return Ok(await _mediator.Send(new Get<#= _model.Name #>By<#= defaultKey.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #>, Include = include }));
         }
 
         // POST: api/<#= _model.NamePlural.ToLower() #>

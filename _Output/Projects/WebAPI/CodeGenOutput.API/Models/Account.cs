@@ -21,6 +21,7 @@ namespace CodeGenOutput.API.Models
         public string Website { get; set; }
         public string VAT { get; set; }
 
+
         public ICollection<Contact> Contacts { get; set; }
     }
 }

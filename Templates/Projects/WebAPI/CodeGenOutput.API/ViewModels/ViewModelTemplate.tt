@@ -6,6 +6,7 @@
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using System;
+using System.Collections.Generic;
 
 namespace CodeGenOutput.API.ViewModels
 {
@@ -18,6 +19,15 @@ namespace CodeGenOutput.API.ViewModels
 <# foreach (CodeGenModelProperty property in _config.Models.DefaultAuditProperties().Where(x => !x.AuditDeleted).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
+        public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
+        public <#= relation.Model #>VM <#= relation.Name #> { get; set; }
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { #>
+        public List<<#= relation.Model #>VM> <#= relation.Name #> { get; set; }
+<# } #>
     }
 
     public class <#= _model.Name #>ListVM
@@ -26,12 +36,25 @@ namespace CodeGenOutput.API.ViewModels
 <# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
 <# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
+        public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
+        public <#= relation.Model #>ListVM <#= relation.Name #> { get; set; }
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { #>
+        public List<<#= relation.Model #>ListVM> <#= relation.Name #> { get; set; }
+<# } #>
     }
 
     public class <#= _model.Name #>CreateVM
     {
 <# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != "Id")) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
+        public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
 <# } #>
     }
 
@@ -40,6 +63,10 @@ namespace CodeGenOutput.API.ViewModels
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
 <# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
+        public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
 <# } #>
     }
 }

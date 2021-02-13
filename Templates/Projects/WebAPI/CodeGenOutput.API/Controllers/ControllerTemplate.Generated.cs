@@ -104,7 +104,8 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("()\r\n        {\r\n            return Ok(await _mediator.Send(new Get");
+            this.Write("([FromQuery] string include = \"\")\r\n        {\r\n            return Ok(await _mediat" +
+                    "or.Send(new Get");
             
             #line default
             #line hidden
@@ -116,7 +117,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write("()));\r\n        }\r\n\r\n        // GET: api/");
+            this.Write("() { Include = include }));\r\n        }\r\n\r\n        // GET: api/");
             
             #line default
             #line hidden
@@ -200,7 +201,8 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(")\r\n        {\r\n            return Ok(await _mediator.Send(new Get");
+            this.Write(", [FromQuery] string include = \"\")\r\n        {\r\n            return Ok(await _media" +
+                    "tor.Send(new Get");
             
             #line default
             #line hidden
@@ -248,7 +250,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Controllers {
             #line hidden
             
             #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Controllers\ControllerTemplate.tt"
-            this.Write(" }));\r\n        }\r\n\r\n        // POST: api/");
+            this.Write(", Include = include }));\r\n        }\r\n\r\n        // POST: api/");
             
             #line default
             #line hidden

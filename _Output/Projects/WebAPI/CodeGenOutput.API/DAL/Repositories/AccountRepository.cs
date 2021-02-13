@@ -32,9 +32,7 @@ namespace CodeGenOutput.API.DAL.Repositories
             string term
         )
         {
-            return await repository.GetAsync(x =>
-                x.Name.Contains(term)
-            );
+            return await repository.GetAsync(x => x.Name.Contains(term));
         }
     }
 }

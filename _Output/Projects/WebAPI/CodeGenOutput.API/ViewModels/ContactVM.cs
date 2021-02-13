@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace CodeGenOutput.API.ViewModels
 {
@@ -14,6 +15,7 @@ namespace CodeGenOutput.API.ViewModels
 
         public Guid? AccountId { get; set; }
         public AccountVM Account { get; set; }
+
     }
 
     public class ContactListVM
@@ -26,6 +28,7 @@ namespace CodeGenOutput.API.ViewModels
 
         public Guid? AccountId { get; set; }
         public AccountListVM Account { get; set; }
+
     }
 
     public class ContactCreateVM

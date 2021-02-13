@@ -16,9 +16,10 @@ namespace CodeGen.Models
                 return Name.ToPlural();
             }
         }
-        public string Description { get; set; }
         public bool Audit { get; set; }
+        public string GenericSearchTermFilter { get; set; } = "x => x.Name.Contains(term)";
 
         public List<CodeGenModelProperty> Properties { get; set; }
+        public CodeGenModelRelations Relations { get; set; }
     }
 }

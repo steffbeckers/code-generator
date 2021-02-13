@@ -6,16 +6,34 @@
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CodeGenOutput.API.Models
 {
     public class <#= _model.Name #><#= _model.Audit ? " : Auditable" : "" #>
     {
+        public <#= _model.Name #>()
+        {
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { #>
+            this.<#= relation.Name #> = new List<<#= relation.Model #>>();
+<# } #>
+        }
+
         [Key]
         public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
 <# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
         public <#= property.Type #> <#= property.Name #> { get; set; }
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne.ToList()) { #>
+        public <#= relation.Type #> <#= relation.Name #>Id { get; set; }
+        public <#= relation.Model #> <#= relation.Name #> { get; set; }
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany.ToList()) { #>
+        public ICollection<<#= relation.Model #>> <#= relation.Name #> { get; set; }
 <# } #>
     }
 }

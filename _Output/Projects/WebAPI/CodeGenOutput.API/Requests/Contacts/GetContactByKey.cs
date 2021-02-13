@@ -12,6 +12,7 @@ namespace CodeGenOutput.API.Requests.Contacts
     public class GetContactById : IRequest<Response>
     {
         public Guid Id { get; set; }
+        public string Include { get; set; }
     }
 
     public class GetContactByIdHandler : IRequestHandler<GetContactById, Response>
@@ -27,7 +28,7 @@ namespace CodeGenOutput.API.Requests.Contacts
 
         public async Task<Response> Handle(GetContactById request, CancellationToken cancellationToken)
         {
-            Contact contact = await _bll.GetContactByIdAsync(request.Id);
+            Contact contact = await _bll.GetContactByIdAsync(request.Id, request.Include);
             if (contact == null)
             {
                 return new Response() { Success = false, Message = $"Contact {request.Id} not found." };

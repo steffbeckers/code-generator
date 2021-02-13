@@ -9,8 +9,8 @@ namespace CodeGenOutput.API.BLL
 {
     public interface IContactBLL
     {
-        Task<IEnumerable<Contact>> GetContactsAsync();
-        Task<Contact> GetContactByIdAsync(Guid id);
+        Task<IEnumerable<Contact>> GetContactsAsync(string include);
+        Task<Contact> GetContactByIdAsync(Guid id, string include);
         Task<IEnumerable<Contact>> SearchContactAsync(string term);
         Task<Contact> CreateContactAsync(Contact contact);
         Task<Contact> UpdateContactAsync(Contact contact);
@@ -21,15 +21,14 @@ namespace CodeGenOutput.API.BLL
     {
         private readonly IRepository<Contact> _contactRepository;
 
-        public async Task<IEnumerable<Contact>> GetContactsAsync()
+        public async Task<IEnumerable<Contact>> GetContactsAsync(string include = "")
         {
-            return await _contactRepository.GetAsync();
+            return await _contactRepository.GetAsync(include: include);
         }
 
-        public async Task<Contact> GetContactByIdAsync(Guid id)
+        public async Task<Contact> GetContactByIdAsync(Guid id, string include = "")
         {
-            Contact contact = await _contactRepository.GetByIdAsync(id);
-            return contact;
+            return await _contactRepository.GetByIdAsync(id, include: include);
         }
 
         public async Task<IEnumerable<Contact>> SearchContactAsync(string term)
