@@ -11,7 +11,6 @@ namespace CodeGenOutput.API.BLL
     {
         Task<IEnumerable<Address>> GetAddressesAsync(string include);
         Task<Address> GetAddressByIdAsync(Guid id, string include);
-        Task<IEnumerable<Address>> SearchAddressAsync(string term);
         Task<Address> CreateAddressAsync(Address address);
         Task<Address> UpdateAddressAsync(Address address);
         Task DeleteAddressAsync(Guid id);
@@ -29,11 +28,6 @@ namespace CodeGenOutput.API.BLL
         public async Task<Address> GetAddressByIdAsync(Guid id, string include = "")
         {
             return await _addressRepository.GetByIdAsync(id, include: include);
-        }
-
-        public async Task<IEnumerable<Address>> SearchAddressAsync(string term)
-        {
-            return await _addressRepository.SearchAddressAsync(term);
         }
 
         public async Task<Address> CreateAddressAsync(Address address)

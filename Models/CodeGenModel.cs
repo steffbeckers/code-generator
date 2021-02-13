@@ -23,7 +23,6 @@ namespace CodeGen.Models
         }
         public bool Audit { get; set; }
         public bool ManyToMany { get; set; }
-        public string GenericSearchTermFilter { get; set; } = "x => x.Name.Contains(term)";
 
         public List<CodeGenModelProperty> Properties { get; set; }
         public CodeGenModelRelations Relations { get; set; }

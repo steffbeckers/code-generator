@@ -114,7 +114,6 @@
         {
           "Name": "Contact",
           "Audit": true,
-          "GenericSearchTermFilter": "x => x.FirstName.Contains(term) || x.LastName.Contains(term)",
           "Properties": [
             {
               "Name": "FirstName",
@@ -153,7 +152,6 @@
           "Name": "Address",
           "NamePlural": "Addresses",
           "Audit": true,
-          "GenericSearchTermFilter": "x => x.Street.Contains(term)",
           "Properties": [
             {
               "Name": "Street",

@@ -11,7 +11,6 @@ namespace CodeGenOutput.API.BLL
     {
         Task<IEnumerable<Account>> GetAccountsAsync(string include);
         Task<Account> GetAccountByIdAsync(Guid id, string include);
-        Task<IEnumerable<Account>> SearchAccountAsync(string term);
         Task<Account> CreateAccountAsync(Account account);
         Task<Account> UpdateAccountAsync(Account account);
         Task DeleteAccountAsync(Guid id);
@@ -29,11 +28,6 @@ namespace CodeGenOutput.API.BLL
         public async Task<Account> GetAccountByIdAsync(Guid id, string include = "")
         {
             return await _accountRepository.GetByIdAsync(id, include: include);
-        }
-
-        public async Task<IEnumerable<Account>> SearchAccountAsync(string term)
-        {
-            return await _accountRepository.SearchAccountAsync(term);
         }
 
         public async Task<Account> CreateAccountAsync(Account account)

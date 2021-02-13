@@ -26,13 +26,5 @@ namespace CodeGenOutput.API.DAL.Repositories
 
             return await query.FirstOrDefaultAsync(x => x.Id == id);
         }
-
-        public static async Task<IEnumerable<Account>> SearchAccountAsync(
-            this IRepository<Account> repository,
-            string term
-        )
-        {
-            return await repository.GetAsync(x => x.Name.Contains(term));
-        }
     }
 }

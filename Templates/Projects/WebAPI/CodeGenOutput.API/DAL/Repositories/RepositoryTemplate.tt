@@ -34,16 +34,6 @@ namespace CodeGenOutput.API.DAL.Repositories
 
             return await query.FirstOrDefaultAsync(x => x.<#= defaultKey.Name #> == <#= defaultKey.Name.ToLower() #>);
         }
-<# if (!_model.ManyToMany) { #>
-
-        public static async Task<IEnumerable<<#= _model.Name #>>> Search<#= _model.Name #>Async(
-            this IRepository<<#= _model.Name #>> repository,
-            string term
-        )
-        {
-            return await repository.GetAsync(<#= _model.GenericSearchTermFilter #>);
-        }
-<# } #>
 <# if (defaultKeyOverridden) { #>
 
         public static async Task DeleteAsync(
