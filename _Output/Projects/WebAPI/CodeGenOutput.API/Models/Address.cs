@@ -19,10 +19,6 @@ namespace CodeGenOutput.API.Models
         public string PostalCode { get; set; }
         public string City { get; set; }
 
-        public Guid? AccountId { get; set; }
-        public Account Account { get; set; }
-        public Guid? ContactId { get; set; }
-        public Contact Contact { get; set; }
 
     }
 }

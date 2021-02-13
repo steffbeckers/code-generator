@@ -173,21 +173,7 @@
               "Name": "City",
               "Type": "string"
             }
-          ],
-          "Relations": {
-            "ManyToOne": [
-              {
-                "Name": "Account",
-                "Type": "Guid?",
-                "Model": "Account"
-              },
-              {
-                "Name": "Contact",
-                "Type": "Guid?",
-                "Model": "Contact"
-              }
-            ]
-          }
+          ]
         }
       ]
     },
