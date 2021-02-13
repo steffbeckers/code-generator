@@ -193,13 +193,13 @@ namespace CodeGen.Generators
 
                     // Drop the existing database
                     ProcessStartInfo dotnetDropDatabase = new ProcessStartInfo("dotnet");
-                    dotnetDropDatabase.Arguments = @"ef database drop --force";
+                    dotnetDropDatabase.Arguments = @"ef database drop --force" + (codeGenTemplateSettings.AfterGenerate.Build ? " --no-build" : "");
                     dotnetDropDatabase.WorkingDirectory = startupProjectPath;
                     await Process.Start(dotnetDropDatabase).WaitForExitAsync();
 
                     // Generate new Initial migration
                     ProcessStartInfo dotnetAddInitialMigration = new ProcessStartInfo("dotnet");
-                    dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir " + codeGenTemplateSettings.MigrationsFolderPath;
+                    dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir " + codeGenTemplateSettings.MigrationsFolderPath + (codeGenTemplateSettings.AfterGenerate.Build ? " --no-build" : "");;
                     dotnetAddInitialMigration.WorkingDirectory = startupProjectPath;
                     await Process.Start(dotnetAddInitialMigration).WaitForExitAsync();
                 }
