@@ -1,3 +1,4 @@
+using FluentValidation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,5 +26,15 @@ namespace CodeGenOutput.API.Models
         public Address Address { get; set; }
 
         public ICollection<AccountContact> Contacts { get; set; }
+    }
+
+    public class AccountValidator : AbstractValidator<Account>
+    {
+        public AccountValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("Name is required")
+                .MaximumLength(100).WithMessage(string.Format("Name has a {0} character limit", 100));
+        }
     }
 }

@@ -2,9 +2,12 @@ using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
+using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.Requests.Accounts
 {
@@ -27,6 +30,11 @@ namespace CodeGenOutput.API.Requests.Accounts
         public async Task<Response> Handle(CreateAccount request, CancellationToken cancellationToken)
         {
             Account account = _mapper.Map<Account>(request.AccountCreateVM);
+
+            AccountValidator validator = new AccountValidator();
+            ValidationResult validationResult = await validator.ValidateAsync(account);
+            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
+
             account = await _bll.CreateAccountAsync(account);
 
             return new Response()

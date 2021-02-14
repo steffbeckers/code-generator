@@ -1,5 +1,8 @@
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.Filters;
+using CodeGenOutput.API.Validation;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,9 +34,13 @@ namespace CodeGenOutput.API
 
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+
             services.AddMediatR(typeof(Startup));
 
-            services.AddControllers()
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+            services.AddControllers(options => options.Filters.Add(new ApiExceptionFilter()))
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
