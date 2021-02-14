@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
+using FluentValidation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,5 +36,26 @@ namespace CodeGenOutput.API.Models
 <# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { #>
         public ICollection<<#= relation.Model #>> <#= relation.Name #> { get; set; }
 <# } #>
+    }
+
+    public class <#= _model.Name #>Validator : AbstractValidator<<#= _model.Name #>>
+    {
+        public <#= _model.Name #>Validator()
+        {
+<# foreach (CodeGenModelProperty property in _model.Properties) { #>
+            RuleFor(x => x.<#= property.Name #>)
+<# if (property.Required) { #>
+                .NotEmpty().WithMessage("<#= property.Name #> is required")
+<# } #>
+<# if (property.Type.ToLower() == "string") { #>
+<# if (property.MaxLength != null) { #>
+                .MaximumLength(<#= property.MaxLength #>).WithMessage(string.Format("<#= property.Name #> has a {0} character limit", <#= property.MaxLength #>))
+<# } else { #>
+                .MaximumLength(<#= _config.Models.StringPropertyMaxLength ?? 100 #>).WithMessage(string.Format("<#= property.Name #> has a {0} character limit", <#= _config.Models.StringPropertyMaxLength ?? 100 #>))
+<# } #>
+<# } #>
+            ;
+<# } #>
+        }
     }
 }

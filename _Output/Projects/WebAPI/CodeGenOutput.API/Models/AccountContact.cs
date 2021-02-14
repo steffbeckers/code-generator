@@ -1,4 +1,7 @@
+using FluentValidation;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CodeGenOutput.API.Models
@@ -19,5 +22,16 @@ namespace CodeGenOutput.API.Models
         public Guid ContactId { get; set; }
         public Contact Contact { get; set; }
 
+    }
+
+    public class AccountContactValidator : AbstractValidator<AccountContact>
+    {
+        public AccountContactValidator()
+        {
+            RuleFor(x => x.IsPrimary)
+            ;
+            RuleFor(x => x.SortOrder)
+            ;
+        }
     }
 }

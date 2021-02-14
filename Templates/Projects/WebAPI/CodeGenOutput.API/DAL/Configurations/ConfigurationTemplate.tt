@@ -21,7 +21,7 @@ namespace CodeGenOutput.API.DAL.Configurations
 
 <# } #>
             builder.HasKey(x => x.<#= defaultKey.Name #>);
-<# foreach (CodeGenModelProperty property in _model.Properties.ToList()) { #>
+<# foreach (CodeGenModelProperty property in _model.Properties) { #>
 
             builder.Property(x => x.<#= property.Name #>)
 <# if (property.Required) { #>

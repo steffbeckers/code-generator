@@ -22,36 +22,40 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\StartupTemplate.tt"
-            this.Write("using CodeGenOutput.API.BLL;\r\nusing CodeGenOutput.API.DAL;\r\nusing MediatR;\r\nusing" +
-                    " Microsoft.AspNetCore.Builder;\r\nusing Microsoft.AspNetCore.Hosting;\r\nusing Micro" +
-                    "soft.EntityFrameworkCore;\r\nusing Microsoft.Extensions.Configuration;\r\nusing Micr" +
-                    "osoft.Extensions.DependencyInjection;\r\nusing Microsoft.Extensions.Hosting;\r\nusin" +
-                    "g Microsoft.OpenApi.Models;\r\n\r\nnamespace CodeGenOutput.API\r\n{\r\n    public class " +
-                    "Startup\r\n    {\r\n        private readonly IConfiguration _configuration;\r\n\r\n     " +
-                    "   public Startup(IConfiguration configuration)\r\n        {\r\n            _configu" +
-                    "ration = configuration;\r\n        }\r\n\r\n        public void ConfigureServices(ISer" +
-                    "viceCollection services)\r\n        {\r\n            services.AddDbContext<Applicati" +
-                    "onDbContext>(options =>\r\n                    options.UseSqlServer(_configuration" +
-                    ".GetConnectionString(\"ApplicationDbContext\")));\r\n\r\n            services.AddScope" +
-                    "d<IUnitOfWork, UnitOfWork>();\r\n\r\n            services.AddScoped<IBusinessLogicLa" +
-                    "yer, BusinessLogicLayer>();\r\n\r\n            services.AddAutoMapper(typeof(Startup" +
-                    "));\r\n\r\n            services.AddMediatR(typeof(Startup));\r\n\r\n            services" +
-                    ".AddControllers()\r\n                .AddNewtonsoftJson(options =>\r\n              " +
-                    "      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.Referen" +
-                    "ceLoopHandling.Ignore\r\n                );\r\n\r\n            services.AddSwaggerGen(" +
-                    "options =>\r\n            {\r\n                options.SwaggerDoc(\"v1\", new OpenApiI" +
-                    "nfo { Title = \"CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n        " +
-                    "}\r\n\r\n        // This method gets called by the runtime. Use this method to confi" +
-                    "gure the HTTP request pipeline.\r\n        public void Configure(IApplicationBuild" +
-                    "er app, IWebHostEnvironment env)\r\n        {\r\n            if (env.IsDevelopment()" +
-                    ")\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n\r\n          " +
-                    "      app.UseSwagger();\r\n                app.UseSwaggerUI(options =>\r\n          " +
-                    "      {\r\n                    options.SwaggerEndpoint(\"swagger/v1/swagger.json\", " +
-                    "\"CodeGenOutput.API v1\");\r\n                    options.RoutePrefix = string.Empty" +
-                    ";\r\n                });\r\n            }\r\n\r\n            app.UseHttpsRedirection();\r" +
-                    "\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r\n     " +
-                    "       app.UseEndpoints(endpoints =>\r\n            {\r\n                endpoints.M" +
-                    "apControllers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
+            this.Write("using CodeGenOutput.API.BLL;\r\nusing CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.A" +
+                    "PI.Filters;\r\nusing CodeGenOutput.API.Validation;\r\nusing FluentValidation;\r\nusing" +
+                    " MediatR;\r\nusing Microsoft.AspNetCore.Builder;\r\nusing Microsoft.AspNetCore.Hosti" +
+                    "ng;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Microsoft.Extensions.Configurat" +
+                    "ion;\r\nusing Microsoft.Extensions.DependencyInjection;\r\nusing Microsoft.Extension" +
+                    "s.Hosting;\r\nusing Microsoft.OpenApi.Models;\r\n\r\nnamespace CodeGenOutput.API\r\n{\r\n " +
+                    "   public class Startup\r\n    {\r\n        private readonly IConfiguration _configu" +
+                    "ration;\r\n\r\n        public Startup(IConfiguration configuration)\r\n        {\r\n    " +
+                    "        _configuration = configuration;\r\n        }\r\n\r\n        public void Config" +
+                    "ureServices(IServiceCollection services)\r\n        {\r\n            services.AddDbC" +
+                    "ontext<ApplicationDbContext>(options =>\r\n                    options.UseSqlServe" +
+                    "r(_configuration.GetConnectionString(\"ApplicationDbContext\")));\r\n\r\n            s" +
+                    "ervices.AddScoped<IUnitOfWork, UnitOfWork>();\r\n\r\n            services.AddScoped<" +
+                    "IBusinessLogicLayer, BusinessLogicLayer>();\r\n\r\n            services.AddAutoMappe" +
+                    "r(typeof(Startup));\r\n\r\n            services.AddValidatorsFromAssembly(typeof(Sta" +
+                    "rtup).Assembly);\r\n\r\n            services.AddMediatR(typeof(Startup));\r\n\r\n       " +
+                    "     services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavi" +
+                    "or<,>));\r\n\r\n            services.AddControllers(options => options.Filters.Add(n" +
+                    "ew ApiExceptionFilter()))\r\n                .AddNewtonsoftJson(options =>\r\n      " +
+                    "              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json" +
+                    ".ReferenceLoopHandling.Ignore\r\n                );\r\n\r\n            services.AddSwa" +
+                    "ggerGen(options =>\r\n            {\r\n                options.SwaggerDoc(\"v1\", new " +
+                    "OpenApiInfo { Title = \"CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n" +
+                    "        }\r\n\r\n        // This method gets called by the runtime. Use this method " +
+                    "to configure the HTTP request pipeline.\r\n        public void Configure(IApplicat" +
+                    "ionBuilder app, IWebHostEnvironment env)\r\n        {\r\n            if (env.IsDevel" +
+                    "opment())\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n\r\n  " +
+                    "              app.UseSwagger();\r\n                app.UseSwaggerUI(options =>\r\n  " +
+                    "              {\r\n                    options.SwaggerEndpoint(\"swagger/v1/swagger" +
+                    ".json\", \"CodeGenOutput.API v1\");\r\n                    options.RoutePrefix = stri" +
+                    "ng.Empty;\r\n                });\r\n            }\r\n\r\n            app.UseHttpsRedirec" +
+                    "tion();\r\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthorization();\r" +
+                    "\n\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n                end" +
+                    "points.MapControllers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

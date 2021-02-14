@@ -126,7 +126,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Configurations
             #line hidden
             
             #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties.ToList()) { 
+ foreach (CodeGenModelProperty property in _model.Properties) { 
             
             #line default
             #line hidden
