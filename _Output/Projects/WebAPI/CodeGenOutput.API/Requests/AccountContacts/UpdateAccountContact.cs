@@ -2,9 +2,11 @@ using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
+using FluentValidation.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.Requests.AccountContacts
 {
@@ -27,6 +29,11 @@ namespace CodeGenOutput.API.Requests.AccountContacts
         public async Task<Response> Handle(UpdateAccountContact request, CancellationToken cancellationToken)
         {
             AccountContact accountcontact = _mapper.Map<AccountContact>(request.AccountContactUpdateVM);
+
+            AccountContactValidator validator = new AccountContactValidator();
+            ValidationResult validationResult = await validator.ValidateAsync(accountcontact);
+            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
+
             accountcontact = await _bll.UpdateAccountContactAsync(accountcontact);
 
             return new Response()

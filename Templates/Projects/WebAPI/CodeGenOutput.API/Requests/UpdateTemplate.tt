@@ -8,9 +8,11 @@ using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
+using FluentValidation.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 {
@@ -33,6 +35,11 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
         public async Task<Response> Handle(Update<#= _model.Name #> request, CancellationToken cancellationToken)
         {
             <#= _model.Name #> <#= _model.Name.ToLower() #> = _mapper.Map<<#= _model.Name #>>(request.<#= _model.Name #>UpdateVM);
+
+            <#= _model.Name #>Validator validator = new <#= _model.Name #>Validator();
+            ValidationResult validationResult = await validator.ValidateAsync(<#= _model.Name.ToLower() #>);
+            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
+
             <#= _model.Name.ToLower() #> = await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
 
             return new Response()
