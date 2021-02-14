@@ -2,6 +2,7 @@
   "$schema": "./code-gen-config.schema.json",
   "CodeGenConfig": {
     "Models": {
+      "StringPropertyMaxLength": 100,
       "Defaults": {
         "Properties": [
           {
@@ -48,7 +49,8 @@
             },
             {
               "Name": "Description",
-              "Type": "string"
+              "Type": "string",
+              "MaxLength": 4000
             },
             {
               "Name": "Telephone",
@@ -164,16 +166,19 @@
             {
               "Name": "HouseNumber",
               "Type": "string",
-              "Required": true
+              "Required": true,
+              "MaxLength": 10
             },
             {
               "Name": "BoxNumber",
-              "Type": "string"
+              "Type": "string",
+              "MaxLength": 10
             },
             {
               "Name": "PostalCode",
               "Type": "string",
-              "Required": true
+              "Required": true,
+              "MaxLength": 10
             },
             {
               "Name": "City",

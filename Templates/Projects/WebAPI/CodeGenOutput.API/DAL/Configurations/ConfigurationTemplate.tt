@@ -20,9 +20,28 @@ namespace CodeGenOutput.API.DAL.Configurations
             builder.HasQueryFilter(x => !x.<#= auditDeletedProperty.Name #>);
 
 <# } #>
-            // builder.Property(t => t.Title)
-            //     .HasMaxLength(200)
-            //     .IsRequired();
+            builder.HasKey(x => x.<#= defaultKey.Name #>);
+<# foreach (CodeGenModelProperty property in _model.Properties.ToList()) { #>
+
+            builder.Property(x => x.<#= property.Name #>)
+<# if (property.Required) { #>
+                .IsRequired()
+<# } #>
+<# if (property.Type.ToLower() == "string") { #>
+<# if (property.MaxLength != null) { #>
+                .HasMaxLength(<#= property.MaxLength #>)
+<# } else { #>
+                .HasMaxLength(<#= _config.Models.StringPropertyMaxLength ?? 100 #>)
+<# } #>
+<# } #>
+<# if (property.DefaultValue != null) { #>
+                .HasDefaultValue(<#= property.DefaultValue #>)
+<# } #>
+<# if (!string.IsNullOrEmpty(property.ColumnType)) { #>
+                .HasColumnType("<#= property.ColumnType #>")
+<# } #>
+            ;
+<# } #>
         }
     }
 }

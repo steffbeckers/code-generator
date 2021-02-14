@@ -10,6 +10,7 @@ namespace CodeGen.Models
             List = new List<CodeGenModel>();
         }
 
+        public int? StringPropertyMaxLength { get; set; }
         public CodeGenModel Defaults { get; set; }
         public List<CodeGenModel> List { get; set; }
 

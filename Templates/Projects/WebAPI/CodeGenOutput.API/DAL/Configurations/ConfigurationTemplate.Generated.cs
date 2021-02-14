@@ -108,8 +108,205 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.DAL.Configurations
             #line hidden
             
             #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
-            this.Write("            // builder.Property(t => t.Title)\r\n            //     .HasMaxLength(2" +
-                    "00)\r\n            //     .IsRequired();\r\n        }\r\n    }\r\n}\r\n");
+            this.Write("            builder.HasKey(x => x.");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(");\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties.ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("\r\n            builder.Property(x => x.");
+            
+            #line default
+            #line hidden
+            
+            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(")\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ if (property.Required) { 
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("                .IsRequired()\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ if (property.Type.ToLower() == "string") { 
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ if (property.MaxLength != null) { 
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("                .HasMaxLength(");
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.MaxLength ));
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(")\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("                .HasMaxLength(");
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _config.Models.StringPropertyMaxLength ?? 100 ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(")\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ if (property.DefaultValue != null) { 
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("                .HasDefaultValue(");
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.DefaultValue ));
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(")\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ if (!string.IsNullOrEmpty(property.ColumnType)) { 
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("                .HasColumnType(\"");
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.ColumnType ));
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("\")\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 42 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("            ;\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\Configurations\ConfigurationTemplate.tt"
+            this.Write("        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden
