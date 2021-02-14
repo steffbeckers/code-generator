@@ -11,6 +11,7 @@ namespace CodeGenOutput.API.ViewModels
         public string BoxNumber { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
+        public string Country { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
 
@@ -25,6 +26,7 @@ namespace CodeGenOutput.API.ViewModels
         public string BoxNumber { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
+        public string Country { get; set; }
 
 
     }
@@ -36,6 +38,7 @@ namespace CodeGenOutput.API.ViewModels
         public string BoxNumber { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
+        public string Country { get; set; }
 
 
     }
@@ -48,5 +51,6 @@ namespace CodeGenOutput.API.ViewModels
         public string BoxNumber { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
+        public string Country { get; set; }
     }
 }

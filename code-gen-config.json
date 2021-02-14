@@ -43,7 +43,8 @@
           "Properties": [
             {
               "Name": "Name",
-              "Type": "string"
+              "Type": "string",
+              "Required": true
             },
             {
               "Name": "Description",
@@ -117,11 +118,13 @@
           "Properties": [
             {
               "Name": "FirstName",
-              "Type": "string"
+              "Type": "string",
+              "Required": true
             },
             {
               "Name": "LastName",
-              "Type": "string"
+              "Type": "string",
+              "Required": true
             },
             {
               "Name": "Telephone",
@@ -155,11 +158,13 @@
           "Properties": [
             {
               "Name": "Street",
-              "Type": "string"
+              "Type": "string",
+              "Required": true
             },
             {
               "Name": "HouseNumber",
-              "Type": "string"
+              "Type": "string",
+              "Required": true
             },
             {
               "Name": "BoxNumber",
@@ -167,11 +172,18 @@
             },
             {
               "Name": "PostalCode",
-              "Type": "string"
+              "Type": "string",
+              "Required": true
             },
             {
               "Name": "City",
-              "Type": "string"
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "Country",
+              "Type": "string",
+              "Required": true
             }
           ]
         }
