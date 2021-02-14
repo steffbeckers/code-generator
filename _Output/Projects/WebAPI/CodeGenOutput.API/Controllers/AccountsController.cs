@@ -2,6 +2,7 @@ using CodeGenOutput.API.Requests;
 using CodeGenOutput.API.Requests.Accounts;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -27,7 +28,8 @@ namespace CodeGenOutput.API.Controllers
         }
 
         // GET: api/accounts/{id}
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> GetAccountById([FromRoute] Guid id, [FromQuery] string include = "")
         {
             return Ok(await _mediator.Send(new GetAccountById() { Id = id, Include = include }));
@@ -42,15 +44,25 @@ namespace CodeGenOutput.API.Controllers
         }
 
         // PUT: api/accounts/{id}
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("{id}")]
         public async Task<IActionResult> UpdateAccount([FromRoute] Guid id, [FromBody] AccountUpdateVM accountUpdateVM)
         {
             if (id != accountUpdateVM.Id) { return BadRequest(); }
             return Ok(await _mediator.Send(new UpdateAccount() { AccountUpdateVM = accountUpdateVM }));
         }
 
+        // PATCH: api/accounts/{id}
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> PatchAccount([FromRoute] Guid id, [FromBody] JsonPatchDocument<AccountUpdateVM> accountPatchDocument)
+        {
+            return Ok(await _mediator.Send(new PatchAccount() { Id = id, PatchDocument = accountPatchDocument }));
+        }
+
         // DELETE: api/accounts/{id}
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteAccount([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new DeleteAccount() { Id = id }));

@@ -10,6 +10,7 @@ namespace CodeGenOutput.API.Mappers
         {
             CreateMap<Account, AccountVM>();
             CreateMap<Account, AccountListVM>();
+            CreateMap<Account, AccountUpdateVM>();
             CreateMap<AccountVM, Account>();
             CreateMap<AccountCreateVM, Account>();
             CreateMap<AccountUpdateVM, Account>();
