@@ -2,7 +2,6 @@ using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
-using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 using System.Threading;
