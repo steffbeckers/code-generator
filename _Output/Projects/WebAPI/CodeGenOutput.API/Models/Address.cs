@@ -33,15 +33,15 @@ namespace CodeGenOutput.API.Models
                 .MaximumLength(100).WithMessage(string.Format("Street has a {0} character limit", 100))
             ;
             RuleFor(x => x.HouseNumber)
-                .NotEmpty().WithMessage("HouseNumber is required")
-                .MaximumLength(10).WithMessage(string.Format("HouseNumber has a {0} character limit", 10))
+                .NotEmpty().WithMessage("House number is required")
+                .MaximumLength(10).WithMessage(string.Format("House number has a {0} character limit", 10))
             ;
             RuleFor(x => x.BoxNumber)
-                .MaximumLength(10).WithMessage(string.Format("BoxNumber has a {0} character limit", 10))
+                .MaximumLength(10).WithMessage(string.Format("Box number has a {0} character limit", 10))
             ;
             RuleFor(x => x.PostalCode)
-                .NotEmpty().WithMessage("PostalCode is required")
-                .MaximumLength(10).WithMessage(string.Format("PostalCode has a {0} character limit", 10))
+                .NotEmpty().WithMessage("Postal code is required")
+                .MaximumLength(10).WithMessage(string.Format("Postal code has a {0} character limit", 10))
             ;
             RuleFor(x => x.City)
                 .NotEmpty().WithMessage("City is required")

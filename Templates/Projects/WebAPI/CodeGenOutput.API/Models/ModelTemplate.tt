@@ -45,13 +45,13 @@ namespace CodeGenOutput.API.Models
 <# foreach (CodeGenModelProperty property in _model.Properties) { #>
             RuleFor(x => x.<#= property.Name #>)
 <# if (property.Required) { #>
-                .NotEmpty().WithMessage("<#= property.Name #> is required")
+                .NotEmpty().WithMessage("<#= property.DisplayName #> is required")
 <# } #>
 <# if (property.Type.ToLower() == "string") { #>
 <# if (property.MaxLength != null) { #>
-                .MaximumLength(<#= property.MaxLength #>).WithMessage(string.Format("<#= property.Name #> has a {0} character limit", <#= property.MaxLength #>))
+                .MaximumLength(<#= property.MaxLength #>).WithMessage(string.Format("<#= property.DisplayName #> has a {0} character limit", <#= property.MaxLength #>))
 <# } else { #>
-                .MaximumLength(<#= _config.Models.StringPropertyMaxLength ?? 100 #>).WithMessage(string.Format("<#= property.Name #> has a {0} character limit", <#= _config.Models.StringPropertyMaxLength ?? 100 #>))
+                .MaximumLength(<#= _config.Models.StringPropertyMaxLength ?? 100 #>).WithMessage(string.Format("<#= property.DisplayName #> has a {0} character limit", <#= _config.Models.StringPropertyMaxLength ?? 100 #>))
 <# } #>
 <# } #>
             ;

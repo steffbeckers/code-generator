@@ -39,7 +39,7 @@ namespace CodeGenOutput.API.Requests.AccountContacts
             return new Response()
             {
                 Code = "ACCOUNTCONTACT_CREATED",
-                Message = "AccountContact created",
+                Message = "Account contact link created",
                 Data = _mapper.Map<AccountContactVM>(accountcontact)
             };
         }

@@ -378,7 +378,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             #line hidden
             
             #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.DisplayName ));
             
             #line default
             #line hidden
@@ -426,7 +426,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             #line hidden
             
             #line 52 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.DisplayName ));
             
             #line default
             #line hidden
@@ -474,7 +474,7 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Models {
             #line hidden
             
             #line 54 "Templates\Projects\WebAPI\CodeGenOutput.API\Models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.DisplayName ));
             
             #line default
             #line hidden

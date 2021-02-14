@@ -3,7 +3,15 @@
     public class CodeGenModelProperty
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        private string _displayName;
+        public string DisplayName {
+            get {
+                return string.IsNullOrEmpty(_displayName) ? Name : _displayName;
+            }
+            set {
+                _displayName = value;
+            }
+        }
         public string Type { get; set; }
         public bool Key { get; set; }
         public bool Required { get; set; }

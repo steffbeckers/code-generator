@@ -21,6 +21,15 @@ namespace CodeGen.Models
                 _namePlural = value;
             }
         }
+        private string _displayName;
+        public string DisplayName {
+            get {
+                return string.IsNullOrEmpty(_displayName) ? Name : _displayName;
+            }
+            set {
+                _displayName = value;
+            }
+        }
         public bool Audit { get; set; }
         public bool ManyToMany { get; set; }
 

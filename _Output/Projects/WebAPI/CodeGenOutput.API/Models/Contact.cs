@@ -31,12 +31,12 @@ namespace CodeGenOutput.API.Models
         public ContactValidator()
         {
             RuleFor(x => x.FirstName)
-                .NotEmpty().WithMessage("FirstName is required")
-                .MaximumLength(100).WithMessage(string.Format("FirstName has a {0} character limit", 100))
+                .NotEmpty().WithMessage("First name is required")
+                .MaximumLength(100).WithMessage(string.Format("First name has a {0} character limit", 100))
             ;
             RuleFor(x => x.LastName)
-                .NotEmpty().WithMessage("LastName is required")
-                .MaximumLength(100).WithMessage(string.Format("LastName has a {0} character limit", 100))
+                .NotEmpty().WithMessage("Last name is required")
+                .MaximumLength(100).WithMessage(string.Format("Last name has a {0} character limit", 100))
             ;
             RuleFor(x => x.Telephone)
                 .MaximumLength(100).WithMessage(string.Format("Telephone has a {0} character limit", 100))

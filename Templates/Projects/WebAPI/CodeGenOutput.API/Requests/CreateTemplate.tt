@@ -45,7 +45,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
             return new Response()
             {
                 Code = "<#= _model.Name.ToUpper() #>_CREATED",
-                Message = "<#= _model.Name #> created",
+                Message = "<#= _model.DisplayName #> created",
                 Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>)
             };
         }

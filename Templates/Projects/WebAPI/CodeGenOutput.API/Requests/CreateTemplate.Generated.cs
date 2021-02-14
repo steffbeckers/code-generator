@@ -282,7 +282,7 @@ namespace CodeGenOutput.API.Requests.");
             #line hidden
             
             #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\CreateTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.DisplayName ));
             
             #line default
             #line hidden

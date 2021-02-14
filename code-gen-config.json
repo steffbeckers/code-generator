@@ -12,6 +12,7 @@
           },
           {
             "Name": "DateCreated",
+            "DisplayName": "Date created",
             "Type": "DateTime",
             "AuditDateCreated": true
           },
@@ -22,6 +23,7 @@
           // },
           {
             "Name": "DateModified",
+            "DisplayName": "Date modified",
             "Type": "DateTime?",
             "AuditDateModified": true
           },
@@ -87,6 +89,7 @@
         },
         {
           "Name": "AccountContact",
+          "DisplayName": "Account contact link",
           "Audit": true,
           "ManyToMany": true,
           "Properties": [
@@ -120,11 +123,13 @@
           "Properties": [
             {
               "Name": "FirstName",
+              "DisplayName": "First name",
               "Type": "string",
               "Required": true
             },
             {
               "Name": "LastName",
+              "DisplayName": "Last name",
               "Type": "string",
               "Required": true
             },
@@ -165,17 +170,20 @@
             },
             {
               "Name": "HouseNumber",
+              "DisplayName": "House number",
               "Type": "string",
               "Required": true,
               "MaxLength": 10
             },
             {
               "Name": "BoxNumber",
+              "DisplayName": "Box number",
               "Type": "string",
               "MaxLength": 10
             },
             {
               "Name": "PostalCode",
+              "DisplayName": "Postal code",
               "Type": "string",
               "Required": true,
               "MaxLength": 10
