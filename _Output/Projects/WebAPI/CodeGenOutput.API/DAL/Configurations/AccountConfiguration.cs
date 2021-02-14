@@ -10,9 +10,12 @@ namespace CodeGenOutput.API.DAL.Configurations
         {
             builder.HasQueryFilter(x => !x.Deleted);
 
-            // builder.Property(t => t.Title)
-            //     .HasMaxLength(200)
-            //     .IsRequired();
+            builder.Property(t => t.Name)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasDefaultValue()
+                .HasColumnType("nvarchar(100)")
+            ;
         }
     }
 }
