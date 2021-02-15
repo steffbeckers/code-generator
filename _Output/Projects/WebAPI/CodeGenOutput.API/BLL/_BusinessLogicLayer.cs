@@ -19,7 +19,6 @@ namespace CodeGenOutput.API.BLL
             _unitOfWork = unitOfWork;
 
             // Repositories
-            _accountRepository = unitOfWork.GetRepository<Account>();
             _accountcontactRepository = unitOfWork.GetRepository<AccountContact>();
             _addressRepository = unitOfWork.GetRepository<Address>();
             _contactRepository = unitOfWork.GetRepository<Contact>();

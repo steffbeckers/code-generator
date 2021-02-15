@@ -75,7 +75,6 @@ namespace CodeGenOutput.API.DAL
 
         public Task<TEntity> UpdateAsync(TEntity entity)
         {
-            GetDbSet().Attach(entity);
             _dbContext.Update(entity);
             return Task.FromResult(entity);
         }
@@ -91,11 +90,6 @@ namespace CodeGenOutput.API.DAL
 
         public Task DeleteAsync(TEntity entity)
         {
-            if (_dbContext.Entry(entity).State == EntityState.Detached)
-            {
-                GetDbSet().Attach(entity);
-            }
-
             _dbContext.Remove(entity);
             return Task.CompletedTask;
         }
