@@ -4,6 +4,13 @@
 
 https://steffbeckers.eu/projects/code-generator
 
+## Dependencies
+
+```bash
+$ dotnet tool install -g dotnet-ef
+$ dotnet tool install -g dotnet-t4
+```
+
 ## Start development
 
 ```bash

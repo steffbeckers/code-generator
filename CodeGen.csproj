@@ -39,11 +39,11 @@
   <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <TextTemplate>
-        <NameSpace>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('\', '.').Replace('.%(TextTemplate.Filename).tt', ''))</NameSpace>
+        <NameSpace>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('/', '.').Replace('\', '.').Replace('.%(TextTemplate.Filename).tt', ''))</NameSpace>
         <OutputPath>$([System.String]::Copy('%(TextTemplate.Identity)').Replace('.tt', '.Generated.cs'))</OutputPath>
       </TextTemplate>
     </ItemGroup>
-    <Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.NameSpace).%(TextTemplate.Filename) -o %(TextTemplate.OutputPath)" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.NameSpace).%(TextTemplate.Filename) -o %(TextTemplate.OutputPath)" />
   </Target>
 
   <Target Name="TextTemplateClean" AfterTargets="Clean">
