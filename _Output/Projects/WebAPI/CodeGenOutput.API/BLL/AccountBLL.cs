@@ -1,9 +1,11 @@
 using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.BLL
 {
@@ -30,16 +32,27 @@ namespace CodeGenOutput.API.BLL
 
         public async Task<Account> CreateAccountAsync(Account account)
         {
+            await ValidateAccountAsync(account);
             Account createdAccount = await _unitOfWork.GetRepository<Account>().CreateAsync(account);
             await _unitOfWork.Commit();
+            
             return createdAccount;
         }
 
         public async Task<Account> UpdateAccountAsync(Account account)
         {
+            await ValidateAccountAsync(account);
             Account updatedAccount = await _unitOfWork.GetRepository<Account>().UpdateAsync(account);
             await _unitOfWork.Commit();
+            
             return updatedAccount;
+        }
+
+        private async Task ValidateAccountAsync(Account account)
+        {
+            AccountValidator validator = new AccountValidator();
+            ValidationResult validationResult = await validator.ValidateAsync(account);
+            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
         }
 
         public async Task DeleteAccountAsync(Guid id)

@@ -30,11 +30,6 @@ namespace CodeGenOutput.API.Requests.Accounts
         {
             Account account = await _bll.GetAccountByIdAsync(request.AccountUpdateVM.Id);
             _mapper.Map(request.AccountUpdateVM, account);
-
-            AccountValidator validator = new AccountValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(account, cancellationToken);
-            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
-            
             account = await _bll.UpdateAccountAsync(account);
 
             return new Response()

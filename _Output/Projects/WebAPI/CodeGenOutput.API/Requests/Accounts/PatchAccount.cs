@@ -31,17 +31,10 @@ namespace CodeGenOutput.API.Requests.Accounts
 
         public async Task<Response> Handle(PatchAccount request, CancellationToken cancellationToken)
         {
-            Account account = await _bll.GetAccountByIdAsync(request.Id, string.Empty);
+            Account account = await _bll.GetAccountByIdAsync(request.Id);
             AccountUpdateVM accountUpdateVM = _mapper.Map<AccountUpdateVM>(account);
-
             request.PatchDocument.ApplyTo(accountUpdateVM);
-
-            account = _mapper.Map<Account>(accountUpdateVM);
-
-            AccountValidator validator = new AccountValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(account);
-            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
-
+            _mapper.Map(accountUpdateVM, account);
             account = await _bll.UpdateAccountAsync(account);
 
             return new Response()
