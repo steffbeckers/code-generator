@@ -38,6 +38,10 @@
     {
       "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
       "Output": "Startup.cs"
+    },
+    {
+      "T4Template": "CodeGenOutput.API\\Validation\\ValidatorsTemplate.tt",
+      "Output": "Validators.cs"
     }
   ],
   "ModelsBasedGenerator": [

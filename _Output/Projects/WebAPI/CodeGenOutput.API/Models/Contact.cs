@@ -34,17 +34,17 @@ namespace CodeGenOutput.API.Models
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("First name is required")
                 .MaximumLength(100).WithMessage(string.Format("First name has a {0} character limit", 100))
-                ;
+            ;
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("Last name is required")
                 .MaximumLength(100).WithMessage(string.Format("Last name has a {0} character limit", 100))
-                ;
+            ;
             RuleFor(x => x.Telephone)
                 .MaximumLength(100).WithMessage(string.Format("Telephone has a {0} character limit", 100))
-                ;
+            ;
             RuleFor(x => x.Email)
                 .MaximumLength(100).WithMessage(string.Format("Email has a {0} character limit", 100))
-                ;
+            ;
         }
 
         public void Init()

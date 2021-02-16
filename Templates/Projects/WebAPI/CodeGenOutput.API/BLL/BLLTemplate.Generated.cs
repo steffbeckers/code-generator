@@ -28,9 +28,9 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
             #line hidden
             
             #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(@"using CodeGenOutput.API.DAL;
-using CodeGenOutput.API.DAL.Repositories;
+            this.Write(@"using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -776,7 +776,7 @@ namespace CodeGenOutput.API.BLL
             #line hidden
             
             #line 64 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(")\r\n        {\r\n            ");
+            this.Write(")\r\n        {\r\n            ValidationResult validationResult = await Validators.");
             
             #line default
             #line hidden
@@ -788,31 +788,18 @@ namespace CodeGenOutput.API.BLL
             #line hidden
             
             #line 66 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("Validator validator = new ");
+            this.Write("Validator.ValidateAsync(");
             
             #line default
             #line hidden
             
             #line 66 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 66 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
-            this.Write("Validator();\r\n            ValidationResult validationResult = await validator.Val" +
-                    "idateAsync(");
-            
-            #line default
-            #line hidden
-            
-            #line 67 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 67 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
+            #line 66 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BLLTemplate.tt"
             this.Write(");\r\n            if (!validationResult.IsValid) { throw new ValidationException(va" +
                     "lidationResult.Errors); }\r\n        }\r\n    }\r\n}\r\n");
             

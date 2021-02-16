@@ -5,9 +5,9 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
-using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -63,8 +63,7 @@ namespace CodeGenOutput.API.BLL
 
         private async Task Validate<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
-            <#= _model.Name #>Validator validator = new <#= _model.Name #>Validator();
-            ValidationResult validationResult = await validator.ValidateAsync(<#= _model.Name.ToLower() #>);
+            ValidationResult validationResult = await Validators.<#= _model.Name #>Validator.ValidateAsync(<#= _model.Name.ToLower() #>);
             if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
         }
     }

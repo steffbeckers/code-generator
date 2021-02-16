@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
+using CodeGenOutput.API.Validation;
 using FluentValidation;
 using System;
 using System.Collections;
@@ -38,7 +39,7 @@ namespace CodeGenOutput.API.Models
 <# } #>
     }
 
-    public class <#= _model.Name #>Validator : AbstractValidator<<#= _model.Name #>>
+    public class <#= _model.Name #>Validator : AbstractValidator<<#= _model.Name #>>, IValidatorInitilizer
     {
         public <#= _model.Name #>Validator()
         {
@@ -55,6 +56,18 @@ namespace CodeGenOutput.API.Models
 <# } #>
 <# } #>
             ;
+<# } #>
+        }
+
+        public void Init()
+        {
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne) { #>
+            RuleFor(x => x.<#= relation.Name #>)
+                .SetValidator(Validators.<#= relation.Model #>Validator);
+<# } #>
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { #>
+            RuleForEach(x => x.<#= relation.Name #>)
+                .SetValidator(Validators.<#= relation.Model #>Validator);
 <# } #>
         }
     }

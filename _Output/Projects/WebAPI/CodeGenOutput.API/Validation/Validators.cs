@@ -1,4 +1,4 @@
-﻿using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Models;
 
 namespace CodeGenOutput.API.Validation
 {
@@ -11,15 +11,15 @@ namespace CodeGenOutput.API.Validation
     {
         public static AccountValidator AccountValidator = new AccountValidator();
         public static AccountContactValidator AccountContactValidator = new AccountContactValidator();
-        public static ContactValidator ContactValidator = new ContactValidator();
         public static AddressValidator AddressValidator = new AddressValidator();
+        public static ContactValidator ContactValidator = new ContactValidator();
         
         static Validators()
         {
-            AccountContactValidator.Init();
             AccountValidator.Init();
-            ContactValidator.Init();
+            AccountContactValidator.Init();
             AddressValidator.Init();
+            ContactValidator.Init();
         }
     }
 }
