@@ -17,6 +17,7 @@ namespace CodeGenOutput.API.Mappers
 <# foreach (CodeGenModel model in _config.Models.List) { #>
             CreateMap<<#= model.Name #>, <#= model.Name #>VM>();
             CreateMap<<#= model.Name #>, <#= model.Name #>ListVM>();
+            CreateMap<<#= model.Name #>, <#= model.Name #>UpdateVM>();
             CreateMap<<#= model.Name #>VM, <#= model.Name #>>();
             CreateMap<<#= model.Name #>CreateVM, <#= model.Name #>>();
             CreateMap<<#= model.Name #>UpdateVM, <#= model.Name #>>();

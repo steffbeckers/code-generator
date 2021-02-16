@@ -28,12 +28,8 @@ namespace CodeGenOutput.API.Requests.Addresses
 
         public async Task<Response> Handle(UpdateAddress request, CancellationToken cancellationToken)
         {
-            Address address = _mapper.Map<Address>(request.AddressUpdateVM);
-
-            AddressValidator validator = new AddressValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(address);
-            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
-
+            Address address = await _bll.GetAddressByIdAsync(request.AddressUpdateVM.Id);
+            _mapper.Map(request.AddressUpdateVM, address);
             address = await _bll.UpdateAddressAsync(address);
 
             return new Response()

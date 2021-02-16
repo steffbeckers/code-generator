@@ -48,17 +48,17 @@ namespace CodeGenOutput.API.BLL
             return updatedAccount;
         }
 
+        public async Task DeleteAccountAsync(Guid id)
+        {
+            await _unitOfWork.GetRepository<Account>().DeleteAsync(id);
+            await _unitOfWork.Commit();
+        }
+
         private async Task ValidateAccountAsync(Account account)
         {
             AccountValidator validator = new AccountValidator();
             ValidationResult validationResult = await validator.ValidateAsync(account);
             if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
-        }
-
-        public async Task DeleteAccountAsync(Guid id)
-        {
-            await _unitOfWork.GetRepository<Account>().DeleteAsync(id);
-            await _unitOfWork.Commit();
         }
     }
 }

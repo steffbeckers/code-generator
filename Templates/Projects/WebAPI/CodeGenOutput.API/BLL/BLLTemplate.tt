@@ -8,16 +8,18 @@
 using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.BLL
 {
     public interface I<#= _model.Name #>BLL
     {
-        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(string include);
-        Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, string include);
+        Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(string include = "");
+        Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, string include = "");
         Task<<#= _model.Name #>> Create<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
         Task<<#= _model.Name #>> Update<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>);
         Task Delete<#= _model.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>);
@@ -25,43 +27,45 @@ namespace CodeGenOutput.API.BLL
 
     public partial class BusinessLogicLayer : I<#= _model.Name #>BLL
     {
-        private readonly IRepository<<#= _model.Name #>> _<#= _model.Name.ToLower() #>Repository;
-
         public async Task<IEnumerable<<#= _model.Name #>>> Get<#= _model.NamePlural #>Async(string include = "")
         {
-            return await _<#= _model.Name.ToLower() #>Repository.GetAsync(include: include);
+            return await _unitOfWork.GetRepository<<#= _model.Name #>>().GetAsync(include: include);
         }
 
         public async Task<<#= _model.Name #>> Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, string include = "")
         {
-            return await _<#= _model.Name.ToLower() #>Repository.GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>, include: include);
+            return await _unitOfWork.GetRepository<<#= _model.Name #>>().GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>, include: include);
         }
 
         public async Task<<#= _model.Name #>> Create<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
-            <#= _model.Name #> created<#= _model.Name #> = await _<#= _model.Name.ToLower() #>Repository.CreateAsync(<#= _model.Name.ToLower() #>);
+            await Validate<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+            <#= _model.Name #> created<#= _model.Name #> = await _unitOfWork.GetRepository<<#= _model.Name #>>().CreateAsync(<#= _model.Name.ToLower() #>);
             await _unitOfWork.Commit();
+            
             return created<#= _model.Name #>;
         }
 
         public async Task<<#= _model.Name #>> Update<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>)
         {
-            // Keep creating auditing details
-            <#= _model.Name #> existing<#= _model.Name #> = await Get<#= _model.Name #>By<#= defaultKey.Name #>Async(<#= _model.Name.ToLower() #>.<#= defaultKey.Name #>);
-<# CodeGenModelProperty auditDateCreatedProperty = _config.Models.DefaultAuditDateCreatedProperty(); #>
-<# if (auditDateCreatedProperty != null) { #>
-            <#= _model.Name.ToLower() #>.DateCreated = existing<#= _model.Name #>.DateCreated;
-<# } #>
-
-            <#= _model.Name #> updated<#= _model.Name #> = await _<#= _model.Name.ToLower() #>Repository.UpdateAsync(<#= _model.Name.ToLower() #>);
+            await Validate<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+            <#= _model.Name #> updated<#= _model.Name #> = await _unitOfWork.GetRepository<<#= _model.Name #>>().UpdateAsync(<#= _model.Name.ToLower() #>);
             await _unitOfWork.Commit();
+            
             return updated<#= _model.Name #>;
         }
 
         public async Task Delete<#= _model.Name #>Async(<#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
-            await _<#= _model.Name.ToLower() #>Repository.DeleteAsync(<#= defaultKey.Name.ToLower() #>);
+            await _unitOfWork.GetRepository<<#= _model.Name #>>().DeleteAsync(<#= defaultKey.Name.ToLower() #>);
             await _unitOfWork.Commit();
+        }
+
+        private async Task Validate<#= _model.Name #>Async(<#= _model.Name #> <#= _model.Name.ToLower() #>)
+        {
+            <#= _model.Name #>Validator validator = new <#= _model.Name #>Validator();
+            ValidationResult validationResult = await validator.ValidateAsync(<#= _model.Name.ToLower() #>);
+            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
         }
     }
 }

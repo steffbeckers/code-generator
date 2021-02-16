@@ -28,12 +28,8 @@ namespace CodeGenOutput.API.Requests.AccountContacts
 
         public async Task<Response> Handle(UpdateAccountContact request, CancellationToken cancellationToken)
         {
-            AccountContact accountcontact = _mapper.Map<AccountContact>(request.AccountContactUpdateVM);
-
-            AccountContactValidator validator = new AccountContactValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(accountcontact);
-            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
-
+            AccountContact accountcontact = await _bll.GetAccountContactByIdAsync(request.AccountContactUpdateVM.Id);
+            _mapper.Map(request.AccountContactUpdateVM, accountcontact);
             accountcontact = await _bll.UpdateAccountContactAsync(accountcontact);
 
             return new Response()

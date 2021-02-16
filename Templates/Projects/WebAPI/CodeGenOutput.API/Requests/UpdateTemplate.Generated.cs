@@ -22,6 +22,12 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.Requests {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); 
+            
+            #line default
+            #line hidden
+            
+            #line 8 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(@"using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
@@ -37,97 +43,97 @@ namespace CodeGenOutput.API.Requests.");
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 18 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("\r\n{\r\n    public class Update");
             
             #line default
             #line hidden
             
-            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 19 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 20 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(" : IRequest<Response>\r\n    {\r\n        public ");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("UpdateVM ");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 22 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("UpdateVM { get; set; }\r\n    }\r\n\r\n    public class Update");
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("Handler : IRequestHandler<Update");
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 24 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 25 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(", Response>\r\n    {\r\n        private readonly I");
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 26 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("BLL _bll;\r\n        private readonly IMapper _mapper;\r\n\r\n        public Update");
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("Handler(IBusinessLogicLayer bll, IMapper mapper)\r\n        {\r\n            _bll = b" +
                     "ll;\r\n            _mapper = mapper;\r\n        }\r\n\r\n        public async Task<Respo" +
                     "nse> Handle(Update");
@@ -135,62 +141,86 @@ namespace CodeGenOutput.API.Requests.");
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 36 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(" request, CancellationToken cancellationToken)\r\n        {\r\n            ");
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write(" = _mapper.Map<");
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            this.Write(" = await _bll.Get");
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write(">(request.");
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            this.Write("By");
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            this.Write("Async(request.");
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 37 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write("UpdateVM);\r\n\r\n            ");
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            this.Write("UpdateVM.");
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 38 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            this.Write(");\r\n            _mapper.Map(request.");
             
             #line default
             #line hidden
@@ -202,20 +232,19 @@ namespace CodeGenOutput.API.Requests.");
             #line hidden
             
             #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write("Validator validator = new ");
+            this.Write("UpdateVM, ");
             
             #line default
             #line hidden
             
             #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
             #line 39 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write("Validator();\r\n            ValidationResult validationResult = await validator.Val" +
-                    "idateAsync(");
+            this.Write(");\r\n            ");
             
             #line default
             #line hidden
@@ -227,91 +256,78 @@ namespace CodeGenOutput.API.Requests.");
             #line hidden
             
             #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write(");\r\n            if (!validationResult.IsValid) { throw new ValidationException(va" +
-                    "lidationResult.Errors); }\r\n\r\n            ");
-            
-            #line default
-            #line hidden
-            
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(" = await _bll.Update");
             
             #line default
             #line hidden
             
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("Async(");
             
             #line default
             #line hidden
             
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 43 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 40 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(");\r\n\r\n            return new Response()\r\n            {\r\n                Code = \"");
             
             #line default
             #line hidden
             
-            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToUpper() ));
             
             #line default
             #line hidden
             
-            #line 47 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 44 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("_UPDATED\",\r\n                Message = \"");
             
             #line default
             #line hidden
             
-            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 48 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 45 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(" updated\",\r\n                Data = _mapper.Map<");
             
             #line default
             #line hidden
             
-            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write("VM>(");
             
             #line default
             #line hidden
             
-            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 49 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
+            #line 46 "Templates\Projects\WebAPI\CodeGenOutput.API\Requests\UpdateTemplate.tt"
             this.Write(")\r\n            };\r\n        }\r\n    }\r\n}\r\n");
             
             #line default

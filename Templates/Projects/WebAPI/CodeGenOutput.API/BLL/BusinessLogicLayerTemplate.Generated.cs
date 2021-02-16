@@ -80,57 +80,10 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API.BLL {
         public BusinessLogicLayer(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
-            // Repositories
+        }
+    }
+}
 ");
-            
-            #line default
-            #line hidden
-            
-            #line 27 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
- foreach(CodeGenModel model in _config.Models.List) { 
-            
-            #line default
-            #line hidden
-            
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write("            _");
-            
-            #line default
-            #line hidden
-            
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write("Repository = unitOfWork.GetRepository<");
-            
-            #line default
-            #line hidden
-            
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model.Name));
-            
-            #line default
-            #line hidden
-            
-            #line 28 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write(">();\r\n");
-            
-            #line default
-            #line hidden
-            
-            #line 29 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 30 "Templates\Projects\WebAPI\CodeGenOutput.API\BLL\BusinessLogicLayerTemplate.tt"
-            this.Write("        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

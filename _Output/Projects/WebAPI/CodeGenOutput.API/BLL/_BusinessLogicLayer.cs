@@ -17,11 +17,6 @@ namespace CodeGenOutput.API.BLL
         public BusinessLogicLayer(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
-            // Repositories
-            _accountcontactRepository = unitOfWork.GetRepository<AccountContact>();
-            _addressRepository = unitOfWork.GetRepository<Address>();
-            _contactRepository = unitOfWork.GetRepository<Contact>();
         }
     }
 }

@@ -9,6 +9,7 @@ using CodeGenOutput.API.Requests;
 using CodeGenOutput.API.Requests.<#= _model.NamePlural #>;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -34,7 +35,8 @@ namespace CodeGenOutput.API.Controllers
         }
 
         // GET: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
-        [HttpGet("{<#= defaultKey.Name.ToLower() #>}")]
+        [HttpGet]
+        [Route("{<#= defaultKey.Name.ToLower() #>}")]
         public async Task<IActionResult> Get<#= _model.Name #>By<#= defaultKey.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, [FromQuery] string include = "")
         {
             return Ok(await _mediator.Send(new Get<#= _model.Name #>By<#= defaultKey.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #>, Include = include }));
@@ -49,15 +51,25 @@ namespace CodeGenOutput.API.Controllers
         }
 
         // PUT: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
-        [HttpPut("{<#= defaultKey.Name.ToLower() #>}")]
+        [HttpPut]
+        [Route("{<#= defaultKey.Name.ToLower() #>}")]
         public async Task<IActionResult> Update<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, [FromBody] <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM)
         {
             if (<#= defaultKey.Name.ToLower() #> != <#= _model.Name.ToLower() #>UpdateVM.<#= defaultKey.Name #>) { return BadRequest(); }
             return Ok(await _mediator.Send(new Update<#= _model.Name #>() { <#= _model.Name #>UpdateVM = <#= _model.Name.ToLower() #>UpdateVM }));
         }
 
+        // PATCH: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
+        [HttpPatch]
+        [Route("{<#= defaultKey.Name.ToLower() #>}")]
+        public async Task<IActionResult> Patch<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>, [FromBody] JsonPatchDocument<<#= _model.Name #>UpdateVM> <#= _model.Name.ToLower() #>PatchDocument)
+        {
+            return Ok(await _mediator.Send(new Patch<#= _model.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #>, PatchDocument = <#= _model.Name.ToLower() #>PatchDocument }));
+        }
+
         // DELETE: api/<#= _model.NamePlural.ToLower() #>/{<#= defaultKey.Name.ToLower() #>}
-        [HttpDelete("{<#= defaultKey.Name.ToLower() #>}")]
+        [HttpDelete]
+        [Route("{<#= defaultKey.Name.ToLower() #>}")]
         public async Task<IActionResult> Delete<#= _model.Name #>([FromRoute] <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>)
         {
             return Ok(await _mediator.Send(new Delete<#= _model.Name #>() { <#= defaultKey.Name #> = <#= defaultKey.Name.ToLower() #> }));

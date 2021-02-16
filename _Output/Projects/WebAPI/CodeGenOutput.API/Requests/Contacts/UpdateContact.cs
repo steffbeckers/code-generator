@@ -28,12 +28,8 @@ namespace CodeGenOutput.API.Requests.Contacts
 
         public async Task<Response> Handle(UpdateContact request, CancellationToken cancellationToken)
         {
-            Contact contact = _mapper.Map<Contact>(request.ContactUpdateVM);
-
-            ContactValidator validator = new ContactValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(contact);
-            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
-
+            Contact contact = await _bll.GetContactByIdAsync(request.ContactUpdateVM.Id);
+            _mapper.Map(request.ContactUpdateVM, contact);
             contact = await _bll.UpdateContactAsync(contact);
 
             return new Response()

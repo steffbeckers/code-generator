@@ -2,6 +2,7 @@ using CodeGenOutput.API.Requests;
 using CodeGenOutput.API.Requests.Addresses;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -27,7 +28,8 @@ namespace CodeGenOutput.API.Controllers
         }
 
         // GET: api/addresses/{id}
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> GetAddressById([FromRoute] Guid id, [FromQuery] string include = "")
         {
             return Ok(await _mediator.Send(new GetAddressById() { Id = id, Include = include }));
@@ -42,15 +44,25 @@ namespace CodeGenOutput.API.Controllers
         }
 
         // PUT: api/addresses/{id}
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("{id}")]
         public async Task<IActionResult> UpdateAddress([FromRoute] Guid id, [FromBody] AddressUpdateVM addressUpdateVM)
         {
             if (id != addressUpdateVM.Id) { return BadRequest(); }
             return Ok(await _mediator.Send(new UpdateAddress() { AddressUpdateVM = addressUpdateVM }));
         }
 
+        // PATCH: api/addresses/{id}
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> PatchAddress([FromRoute] Guid id, [FromBody] JsonPatchDocument<AddressUpdateVM> addressPatchDocument)
+        {
+            return Ok(await _mediator.Send(new PatchAddress() { Id = id, PatchDocument = addressPatchDocument }));
+        }
+
         // DELETE: api/addresses/{id}
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteAddress([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new DeleteAddress() { Id = id }));

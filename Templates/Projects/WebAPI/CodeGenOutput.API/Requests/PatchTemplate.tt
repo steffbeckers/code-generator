@@ -9,34 +9,37 @@ using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
-using FluentValidation.Results;
 using MediatR;
+using Microsoft.AspNetCore.JsonPatch;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 {
-    public class Update<#= _model.Name #> : IRequest<Response>
+    public class Patch<#= _model.Name #> : IRequest<Response>
     {
-        public <#= _model.Name #>UpdateVM <#= _model.Name #>UpdateVM { get; set; }
+        public <#= defaultKey.Type #> <#= defaultKey.Name #> { get; set; }
+        public JsonPatchDocument<<#= _model.Name #>UpdateVM> PatchDocument { get; set; }
     }
 
-    public class Update<#= _model.Name #>Handler : IRequestHandler<Update<#= _model.Name #>, Response>
+    public class Patch<#= _model.Name #>Handler : IRequestHandler<Patch<#= _model.Name #>, Response>
     {
         private readonly I<#= _model.Name #>BLL _bll;
         private readonly IMapper _mapper;
 
-        public Update<#= _model.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        public Patch<#= _model.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
         {
             _bll = bll;
             _mapper = mapper;
         }
 
-        public async Task<Response> Handle(Update<#= _model.Name #> request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(Patch<#= _model.Name #> request, CancellationToken cancellationToken)
         {
-            <#= _model.Name #> <#= _model.Name.ToLower() #> = await _bll.Get<#= _model.Name #>By<#= defaultKey.Name #>Async(request.<#= _model.Name #>UpdateVM.<#= defaultKey.Name #>);
-            _mapper.Map(request.<#= _model.Name #>UpdateVM, <#= _model.Name.ToLower() #>);
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await _bll.Get<#= _model.Name #>By<#= defaultKey.Name #>Async(request.<#= defaultKey.Name #>);
+            <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM = _mapper.Map<<#= _model.Name #>UpdateVM>(<#= _model.Name.ToLower() #>);
+            request.PatchDocument.ApplyTo(<#= _model.Name.ToLower() #>UpdateVM);
+            _mapper.Map(<#= _model.Name.ToLower() #>UpdateVM, <#= _model.Name.ToLower() #>);
             <#= _model.Name.ToLower() #> = await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
 
             return new Response()

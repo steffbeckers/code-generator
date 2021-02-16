@@ -78,6 +78,10 @@
       "Output": "{1}\\Get{1}.cs"
     },
     {
+      "T4Template": "CodeGenOutput.API\\Requests\\PatchTemplate.tt",
+      "Output": "{1}\\Patch{0}.cs"
+    },
+    {
       "T4Template": "CodeGenOutput.API\\Requests\\UpdateTemplate.tt",
       "Output": "{1}\\Update{0}.cs"
     },

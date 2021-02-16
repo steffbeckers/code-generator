@@ -25,37 +25,47 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API {
             this.Write("using CodeGenOutput.API.BLL;\r\nusing CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.A" +
                     "PI.Filters;\r\nusing CodeGenOutput.API.Validation;\r\nusing FluentValidation;\r\nusing" +
                     " MediatR;\r\nusing Microsoft.AspNetCore.Builder;\r\nusing Microsoft.AspNetCore.Hosti" +
-                    "ng;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Microsoft.Extensions.Configurat" +
-                    "ion;\r\nusing Microsoft.Extensions.DependencyInjection;\r\nusing Microsoft.Extension" +
-                    "s.Hosting;\r\nusing Microsoft.OpenApi.Models;\r\n\r\nnamespace CodeGenOutput.API\r\n{\r\n " +
-                    "   public class Startup\r\n    {\r\n        private readonly IConfiguration _configu" +
-                    "ration;\r\n\r\n        public Startup(IConfiguration configuration)\r\n        {\r\n    " +
-                    "        _configuration = configuration;\r\n        }\r\n\r\n        public void Config" +
-                    "ureServices(IServiceCollection services)\r\n        {\r\n            services.AddDbC" +
-                    "ontext<ApplicationDbContext>(options =>\r\n                    options.UseSqlServe" +
-                    "r(_configuration.GetConnectionString(\"ApplicationDbContext\")));\r\n\r\n            s" +
-                    "ervices.AddScoped<IUnitOfWork, UnitOfWork>();\r\n\r\n            services.AddScoped<" +
-                    "IBusinessLogicLayer, BusinessLogicLayer>();\r\n\r\n            services.AddAutoMappe" +
-                    "r(typeof(Startup));\r\n\r\n            services.AddValidatorsFromAssembly(typeof(Sta" +
-                    "rtup).Assembly);\r\n\r\n            services.AddMediatR(typeof(Startup));\r\n\r\n       " +
-                    "     services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavi" +
-                    "or<,>));\r\n\r\n            services.AddControllers(options => options.Filters.Add(n" +
-                    "ew ApiExceptionFilter()))\r\n                .AddNewtonsoftJson(options =>\r\n      " +
-                    "              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json" +
-                    ".ReferenceLoopHandling.Ignore\r\n                );\r\n\r\n            services.AddSwa" +
-                    "ggerGen(options =>\r\n            {\r\n                options.SwaggerDoc(\"v1\", new " +
-                    "OpenApiInfo { Title = \"CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n" +
-                    "        }\r\n\r\n        // This method gets called by the runtime. Use this method " +
-                    "to configure the HTTP request pipeline.\r\n        public void Configure(IApplicat" +
-                    "ionBuilder app, IWebHostEnvironment env)\r\n        {\r\n            if (env.IsDevel" +
-                    "opment())\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n\r\n  " +
-                    "              app.UseSwagger();\r\n                app.UseSwaggerUI(options =>\r\n  " +
-                    "              {\r\n                    options.SwaggerEndpoint(\"swagger/v1/swagger" +
-                    ".json\", \"CodeGenOutput.API v1\");\r\n                    options.RoutePrefix = stri" +
-                    "ng.Empty;\r\n                });\r\n            }\r\n\r\n            app.UseHttpsRedirec" +
-                    "tion();\r\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthorization();\r" +
-                    "\n\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n                end" +
-                    "points.MapControllers();\r\n            });\r\n        }\r\n    }\r\n}\r\n");
+                    "ng;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.AspNetCore.Mvc.Formatters;" +
+                    "\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Microsoft.Extensions.Configuration" +
+                    ";\r\nusing Microsoft.Extensions.DependencyInjection;\r\nusing Microsoft.Extensions.H" +
+                    "osting;\r\nusing Microsoft.Extensions.Options;\r\nusing Microsoft.OpenApi.Models;\r\nu" +
+                    "sing System.Linq;\r\n\r\nnamespace CodeGenOutput.API\r\n{\r\n    public class Startup\r\n " +
+                    "   {\r\n        private readonly IConfiguration _configuration;\r\n\r\n        public " +
+                    "Startup(IConfiguration configuration)\r\n        {\r\n            _configuration = c" +
+                    "onfiguration;\r\n        }\r\n\r\n        public void ConfigureServices(IServiceCollec" +
+                    "tion services)\r\n        {\r\n            services.AddDbContext<ApplicationDbContex" +
+                    "t>(options =>\r\n                    options.UseSqlServer(_configuration.GetConnec" +
+                    "tionString(\"ApplicationDbContext\")));\r\n\r\n            services.AddScoped<IUnitOfW" +
+                    "ork, UnitOfWork>();\r\n\r\n            services.AddScoped<IBusinessLogicLayer, Busin" +
+                    "essLogicLayer>();\r\n\r\n            services.AddAutoMapper(typeof(Startup));\r\n\r\n   " +
+                    "         services.AddValidatorsFromAssembly(typeof(Startup).Assembly);\r\n\r\n      " +
+                    "      services.AddMediatR(typeof(Startup));\r\n\r\n            services.AddTransient" +
+                    "(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));\r\n\r\n            se" +
+                    "rvices.AddControllers(options =>\r\n            {\r\n                options.Filters" +
+                    ".Add(new ApiExceptionFilter());\r\n                options.InputFormatters.Insert(" +
+                    "0, GetJsonPatchInputFormatter());\r\n            }).AddNewtonsoftJson(options =>\r\n" +
+                    "                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Js" +
+                    "on.ReferenceLoopHandling.Ignore\r\n            );\r\n\r\n            services.AddSwagg" +
+                    "erGen(options =>\r\n            {\r\n                options.SwaggerDoc(\"v1\", new Op" +
+                    "enApiInfo { Title = \"CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n  " +
+                    "      }\r\n\r\n        // This method gets called by the runtime. Use this method to" +
+                    " configure the HTTP request pipeline.\r\n        public void Configure(IApplicatio" +
+                    "nBuilder app, IWebHostEnvironment env)\r\n        {\r\n            if (env.IsDevelop" +
+                    "ment())\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n\r\n    " +
+                    "            app.UseSwagger();\r\n                app.UseSwaggerUI(options =>\r\n    " +
+                    "            {\r\n                    options.SwaggerEndpoint(\"swagger/v1/swagger.j" +
+                    "son\", \"CodeGenOutput.API v1\");\r\n                    options.RoutePrefix = string" +
+                    ".Empty;\r\n                });\r\n            }\r\n\r\n            app.UseHttpsRedirecti" +
+                    "on();\r\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r" +
+                    "\n            app.UseEndpoints(endpoints =>\r\n            {\r\n                endpo" +
+                    "ints.MapControllers();\r\n            });\r\n        }\r\n\r\n        private static New" +
+                    "tonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()\r\n        {\r\n        " +
+                    "    var builder = new ServiceCollection()\r\n                .AddLogging()\r\n      " +
+                    "          .AddMvc()\r\n                .AddNewtonsoftJson()\r\n                .Serv" +
+                    "ices.BuildServiceProvider();\r\n\r\n            return builder\r\n                .Get" +
+                    "RequiredService<IOptions<MvcOptions>>()\r\n                .Value\r\n               " +
+                    " .InputFormatters\r\n                .OfType<NewtonsoftJsonPatchInputFormatter>()\r" +
+                    "\n                .First();\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden

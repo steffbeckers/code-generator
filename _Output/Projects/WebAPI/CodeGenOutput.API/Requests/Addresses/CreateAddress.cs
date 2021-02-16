@@ -2,11 +2,9 @@ using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
-using FluentValidation.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.Requests.Addresses
 {
@@ -29,11 +27,6 @@ namespace CodeGenOutput.API.Requests.Addresses
         public async Task<Response> Handle(CreateAddress request, CancellationToken cancellationToken)
         {
             Address address = _mapper.Map<Address>(request.AddressCreateVM);
-
-            AddressValidator validator = new AddressValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(address);
-            if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
-
             address = await _bll.CreateAddressAsync(address);
 
             return new Response()

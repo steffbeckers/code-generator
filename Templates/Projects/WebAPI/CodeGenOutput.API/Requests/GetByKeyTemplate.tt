@@ -38,7 +38,7 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
             <#= _model.Name #> <#= _model.Name.ToLower() #> = await _bll.Get<#= _model.Name #>By<#= defaultKey.Name #>Async(request.<#= defaultKey.Name #>, request.Include);
             if (<#= _model.Name.ToLower() #> == null)
             {
-                return new Response() { Success = false, Message = $"<#= _model.Name #> {request.Id} not found." };
+                return new Response() { Success = false, Message = $"<#= _model.Name #> {request.<#= defaultKey.Name #>} not found." };
             }
 
             return new Response() { Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>) };

@@ -22,11 +22,6 @@ namespace CodeGenOutput.API.BLL
         public BusinessLogicLayer(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
-            // Repositories
-<# foreach(CodeGenModel model in _config.Models.List) { #>
-            _<#= model.Name.ToLower() #>Repository = unitOfWork.GetRepository<<#= model.Name#>>();
-<# } #>
         }
     }
 }

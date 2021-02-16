@@ -2,13 +2,11 @@ using AutoMapper;
 using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
-using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationException = CodeGenOutput.API.Validation.ValidationException;
 
 namespace CodeGenOutput.API.Requests.Accounts
 {
