@@ -1,3 +1,4 @@
+using CodeGenOutput.API.Validation;
 using FluentValidation;
 using System;
 using System.Collections;
@@ -24,7 +25,7 @@ namespace CodeGenOutput.API.Models
 
     }
 
-    public class AddressValidator : AbstractValidator<Address>
+    public class AddressValidator : AbstractValidator<Address>, IValidatorInitilizer
     {
         public AddressValidator()
         {

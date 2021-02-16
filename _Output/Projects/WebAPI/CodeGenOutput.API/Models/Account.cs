@@ -1,10 +1,9 @@
+using CodeGenOutput.API.Validation;
 using FluentValidation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using CodeGenOutput.API.Validation;
 
 namespace CodeGenOutput.API.Models
 {
@@ -30,7 +29,7 @@ namespace CodeGenOutput.API.Models
         public ICollection<AccountContact> Contacts { get; set; }
     }
 
-    public class AccountValidator : AbstractValidator<Account>
+    public class AccountValidator : AbstractValidator<Account>, IValidatorInitilizer
     {
         public AccountValidator()
         {
