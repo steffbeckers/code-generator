@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using CodeGenOutput.API.Validation;
 
 namespace CodeGenOutput.API.Models
 {
@@ -51,6 +53,14 @@ namespace CodeGenOutput.API.Models
             RuleFor(x => x.VAT)
                 .MaximumLength(100).WithMessage(string.Format("VAT has a {0} character limit", 100))
             ;
+        }
+
+        public void Init()
+        {
+            RuleFor(x => x.Address)
+                .SetValidator(Validators.AddressValidator);
+            RuleForEach(x => x.Contacts)
+                .SetValidator(Validators.AccountContactValidator);
         }
     }
 }

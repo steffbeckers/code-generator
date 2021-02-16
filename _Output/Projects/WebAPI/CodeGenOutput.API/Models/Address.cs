@@ -52,5 +52,9 @@ namespace CodeGenOutput.API.Models
                 .MaximumLength(100).WithMessage(string.Format("Country has a {0} character limit", 100))
             ;
         }
+
+        public void Init()
+        {
+        }
     }
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using CodeGenOutput.API.Validation;
 
 namespace CodeGenOutput.API.Models
 {
@@ -26,24 +28,33 @@ namespace CodeGenOutput.API.Models
         public ICollection<AccountContact> Account { get; set; }
     }
 
-    public class ContactValidator : AbstractValidator<Contact>
+    public class ContactValidator : AbstractValidator<Contact>, IValidatorInitilizer
+
     {
-        public ContactValidator()
-        {
-            RuleFor(x => x.FirstName)
-                .NotEmpty().WithMessage("First name is required")
-                .MaximumLength(100).WithMessage(string.Format("First name has a {0} character limit", 100))
+    public ContactValidator()
+    {
+        RuleFor(x => x.FirstName)
+            .NotEmpty().WithMessage("First name is required")
+            .MaximumLength(100).WithMessage(string.Format("First name has a {0} character limit", 100))
             ;
-            RuleFor(x => x.LastName)
-                .NotEmpty().WithMessage("Last name is required")
-                .MaximumLength(100).WithMessage(string.Format("Last name has a {0} character limit", 100))
+        RuleFor(x => x.LastName)
+            .NotEmpty().WithMessage("Last name is required")
+            .MaximumLength(100).WithMessage(string.Format("Last name has a {0} character limit", 100))
             ;
-            RuleFor(x => x.Telephone)
-                .MaximumLength(100).WithMessage(string.Format("Telephone has a {0} character limit", 100))
+        RuleFor(x => x.Telephone)
+            .MaximumLength(100).WithMessage(string.Format("Telephone has a {0} character limit", 100))
             ;
-            RuleFor(x => x.Email)
-                .MaximumLength(100).WithMessage(string.Format("Email has a {0} character limit", 100))
+        RuleFor(x => x.Email)
+            .MaximumLength(100).WithMessage(string.Format("Email has a {0} character limit", 100))
             ;
-        }
+    }
+
+    public void Init()
+    {
+        RuleFor(x => x.Address)
+            .SetValidator(Validators.AddressValidator);
+        RuleForEach(x => x.Account)
+            .SetValidator(Validators.AccountContactValidator);
+    }
     }
 }

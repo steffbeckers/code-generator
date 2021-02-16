@@ -1,6 +1,7 @@
 using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -56,8 +57,7 @@ namespace CodeGenOutput.API.BLL
 
         private async Task ValidateAccountContactAsync(AccountContact accountcontact)
         {
-            AccountContactValidator validator = new AccountContactValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(accountcontact);
+            ValidationResult validationResult = await Validators.AccountContactValidator.ValidateAsync(accountcontact);
             if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
         }
     }

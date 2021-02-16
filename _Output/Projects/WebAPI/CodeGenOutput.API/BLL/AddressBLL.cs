@@ -1,6 +1,6 @@
-using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -56,8 +56,7 @@ namespace CodeGenOutput.API.BLL
 
         private async Task ValidateAddressAsync(Address address)
         {
-            AddressValidator validator = new AddressValidator();
-            ValidationResult validationResult = await validator.ValidateAsync(address);
+            ValidationResult validationResult = await Validators.AddressValidator.ValidateAsync(address);
             if (!validationResult.IsValid) { throw new ValidationException(validationResult.Errors); }
         }
     }

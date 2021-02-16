@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CodeGenOutput.API.Validation;
 
 namespace CodeGenOutput.API.Models
 {
@@ -32,6 +33,14 @@ namespace CodeGenOutput.API.Models
             ;
             RuleFor(x => x.SortOrder)
             ;
+        }
+
+        public void Init()
+        {
+            RuleFor(x => x.Account)
+                .SetValidator(Validators.AccountValidator);
+            RuleFor(x => x.Contact)
+                .SetValidator(Validators.ContactValidator);
         }
     }
 }
