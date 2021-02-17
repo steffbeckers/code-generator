@@ -1,12 +1,6 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.158.0/containers/dotnet/.devcontainer/base.Dockerfile
-
-# [Choice] .NET version: 5.0, 3.1, 2.1
-ARG VARIANT="5.0"
+# [Choice] .NET Core version: 5.0, 3.1, 2.1
+ARG VARIANT=3.1
 FROM mcr.microsoft.com/vscode/devcontainers/dotnetcore:0-${VARIANT}
-
-RUN dotnet tool install -g dotnet-ef
-RUN dotnet tool install -g dotnet-t4
-ENV PATH="/root/.dotnet/tools:${PATH}"
 
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"
@@ -18,6 +12,17 @@ ARG INSTALL_AZURE_CLI="false"
 COPY library-scripts/azcli-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/library-scripts/azcli-debian.sh; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+
+# Install SQL Tools: SQLPackage and sqlcmd
+COPY mssql/installSQLtools.sh installSQLtools.sh
+RUN bash ./installSQLtools.sh \
+     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+
+# Update args in docker-compose.yaml to set the UID/GID of the "vscode" user.
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID vscode && usermod --uid $USER_UID --gid $USER_GID vscode; fi
+
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
