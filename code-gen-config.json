@@ -199,7 +199,22 @@
               "Required": true
             }
           ]
-        }
+        }//,
+        // {
+        //   "Name": "Test",
+        //   "Audit": true,
+        //   "Properties": [
+        //     {
+        //       "Name": "Name",
+        //       "Type": "string",
+        //       "Required": true
+        //     },
+        //     {
+        //       "Name": "Description",
+        //       "Type": "string"
+        //     }
+        //   ]
+        // }
       ]
     },
     "Paths": {
