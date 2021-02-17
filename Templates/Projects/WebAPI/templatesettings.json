@@ -8,7 +8,7 @@
     "Build": true,
     "RecreateDatabase": true,
     "InstallProjectTemplate": false,
-    "OpenSwagger": true,
+    "OpenSwagger": false,
     "Run": true
   },
   "StartupProjectPath": "CodeGenOutput.API",

@@ -2,6 +2,10 @@
 ARG VARIANT=3.1
 FROM mcr.microsoft.com/vscode/devcontainers/dotnetcore:0-${VARIANT}
 
+RUN dotnet tool install -g dotnet-ef
+RUN dotnet tool install -g dotnet-t4
+ENV PATH="/root/.dotnet/tools:${PATH}"
+
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
