@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Steff Beckers <steff@steffbeckers.eu>",
+  "identity": "SteffBeckers.CodeGen.Templates.WebAPI",
+  "name": "Steff Beckers Code Generator Web API Template",
+  "shortName": "sb-cg-web-api",
+  "tags": {
+    "language": "C#"
+  },
+  //"classifications": ["Web", "WebAPI"], // Right at the top now :)
+  "sourceName": "CodeGenOutput",
+  "preferNameDirectory": true
+}

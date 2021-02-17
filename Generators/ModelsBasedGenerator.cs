@@ -40,10 +40,10 @@ namespace CodeGen.Generators
                     Path.GetDirectoryName(projectTemplateFile),
                     string.Format(data.Output, model.Name, model.NamePlural)
                 );
-                filePath = filePath.Replace("Templates\\", "");
+                filePath = filePath.Replace("Templates/", "");
 
                 // File text
-                string templateTypeFormat = projectTemplateFile.Replace("\\", ".").Replace(".tt", "");
+                string templateTypeFormat = projectTemplateFile.Replace("/", ".").Replace(".tt", "");
                 Type templateType = Type.GetType($"CodeGen.{templateTypeFormat}, CodeGen");
                 if (templateType == null) {
                     throw new Exception($"Can't get type for T4 template: CodeGen.{templateTypeFormat}, CodeGen");

@@ -124,7 +124,7 @@ namespace CodeGen.Generators
                         Path.GetDirectoryName(projectTemplateFile),
                         projectTemplateFileName
                     );
-                    filePath = filePath.Replace("Templates\\", "");
+                    filePath = filePath.Replace("Templates/", "");
 
                     // File text
                     string fileText = await _fileService.Read(projectTemplateFile);
@@ -163,7 +163,7 @@ namespace CodeGen.Generators
                     _configService.CodeGenConfig.Paths.Output,
                     codeGenTemplateSettings.TemplatePath
                 );
-                outputProjectPath = outputProjectPath.Replace("Templates\\", "");
+                outputProjectPath = outputProjectPath.Replace("Templates/", "");
 
                 // Output startup project path
                 string startupProjectPath = Path.Combine(
@@ -272,12 +272,10 @@ namespace CodeGen.Generators
             List<string> subDirectories = await _fileService.GetSubdirectories(Path.Combine("Templates", "Projects"));
             foreach (string directoryPath in subDirectories)
             {
-                string[] directoryPathArr = directoryPath.Split("\\");
-                string directory = directoryPathArr[directoryPathArr.Length - 1];
-
-                if (!projectTemplates.Contains(directory))
+                string directoryName = Path.GetFileName(directoryPath);
+                if (!projectTemplates.Contains(directoryName))
                 {
-                    projectTemplates.Add(directory);
+                    projectTemplates.Add(directoryName);
                 }
             }
 
