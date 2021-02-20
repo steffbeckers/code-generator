@@ -1,0 +1,51 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
+<# bool defaultKeyOverridden = _config.Models.DefaultKey() != _config.Models.DefaultKey(_model); #>
+using CodeGenOutput.API.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CodeGenOutput.API.DAL.Repositories
+{
+    public static class <#= _model.Name #>RepositoryExtensions
+    {
+        // Additional repository functions here
+
+        public static async Task<<#= _model.Name #>> GetBy<#= defaultKey.Name #>Async(
+            this IRepository<<#= _model.Name #>> repository,
+            <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>,
+            string include = ""
+        )
+        {
+            IQueryable<<#= _model.Name #>> query = repository.GetDbSet();
+
+            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(property);
+            }
+
+            return await query.FirstOrDefaultAsync(x => x.<#= defaultKey.Name #> == <#= defaultKey.Name.ToLower() #>);
+        }
+<# if (defaultKeyOverridden) { #>
+
+        public static async Task DeleteAsync(
+            this IRepository<<#= _model.Name #>> repository,
+            <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>
+        )
+        {
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await repository.GetBy<#= defaultKey.Name #>Async(<#= defaultKey.Name.ToLower() #>);
+            if (<#= _model.Name.ToLower() #> != null)
+            {
+                await repository.DeleteAsync(<#= _model.Name.ToLower() #>);
+            }
+        }
+<# } #>
+    }
+}
