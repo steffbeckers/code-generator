@@ -4,10 +4,7 @@ using CodeGenOutput.API.Models;
 namespace CodeGenOutput.API.BLL
 {
     public interface IBusinessLogicLayer :
-        IAccountBLL,
-        IAccountContactBLL,
-        IAddressBLL,
-        IContactBLL
+        IProjectBLL
     { }
 
     public partial class BusinessLogicLayer : IBusinessLogicLayer

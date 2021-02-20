@@ -13,10 +13,7 @@ namespace CodeGenOutput.API.DAL
         {
         }
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccountContact> AccountContacts { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

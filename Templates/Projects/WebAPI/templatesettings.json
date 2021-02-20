@@ -8,89 +8,89 @@
     "Build": true,
     "RecreateDatabase": true,
     "InstallProjectTemplate": false,
-    "OpenSwagger": true,
+    "OpenSwagger": false,
     "Run": true
   },
-  "StartupProjectPath": "CodeGenOutput.API\\",
+  "StartupProjectPath": "CodeGenOutput.API",
   "StartupProjectURL": "https://localhost:5000",
-  "MigrationsFolderPath": ".\\DAL\\Migrations",
+  "MigrationsFolderPath": "DAL/Migrations",
   "ConfigBasedGenerator": [
     {
-      "T4Template": "CodeGenOutput.API\\BLL\\BusinessLogicLayerTemplate.tt",
+      "T4Template": "CodeGenOutput.API/BLL/BusinessLogicLayerTemplate.tt",
       "Output": "_BusinessLogicLayer.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\DAL\\ApplicationDbContextTemplate.tt",
+      "T4Template": "CodeGenOutput.API/DAL/ApplicationDbContextTemplate.tt",
       "Output": "ApplicationDbContext.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\DAL\\GenericRepositoryTemplate.tt",
+      "T4Template": "CodeGenOutput.API/DAL/GenericRepositoryTemplate.tt",
       "Output": "Repository.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Mappers\\AutoMappingTemplate.tt",
+      "T4Template": "CodeGenOutput.API/Mappers/AutoMappingTemplate.tt",
       "Output": "AutoMapping.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Models\\AuditableTemplate.tt",
+      "T4Template": "CodeGenOutput.API/Models/AuditableTemplate.tt",
       "Output": "Auditable.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\StartupTemplate.tt",
+      "T4Template": "CodeGenOutput.API/StartupTemplate.tt",
       "Output": "Startup.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Validation\\ValidatorsTemplate.tt",
+      "T4Template": "CodeGenOutput.API/Validation/ValidatorsTemplate.tt",
       "Output": "Validators.cs"
     }
   ],
   "ModelsBasedGenerator": [
     {
-      "T4Template": "CodeGenOutput.API\\BLL\\BLLTemplate.tt",
+      "T4Template": "CodeGenOutput.API/BLL/BLLTemplate.tt",
       "Output": "{0}BLL.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Controllers\\ControllerTemplate.tt",
+      "T4Template": "CodeGenOutput.API/Controllers/ControllerTemplate.tt",
       "Output": "{1}Controller.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\DAL\\Configurations\\ConfigurationTemplate.tt",
+      "T4Template": "CodeGenOutput.API/DAL/Configurations/ConfigurationTemplate.tt",
       "Output": "{0}Configuration.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\DAL\\Repositories\\RepositoryTemplate.tt",
+      "T4Template": "CodeGenOutput.API/DAL/Repositories/RepositoryTemplate.tt",
       "Output": "{0}Repository.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Models\\ModelTemplate.tt",
+      "T4Template": "CodeGenOutput.API/Models/ModelTemplate.tt",
       "Output": "{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Requests\\CreateTemplate.tt",
-      "Output": "{1}\\Create{0}.cs"
+      "T4Template": "CodeGenOutput.API/Requests/CreateTemplate.tt",
+      "Output": "{1}/Create{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Requests\\DeleteTemplate.tt",
-      "Output": "{1}\\Delete{0}.cs"
+      "T4Template": "CodeGenOutput.API/Requests/DeleteTemplate.tt",
+      "Output": "{1}/Delete{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Requests\\GetByKeyTemplate.tt",
-      "Output": "{1}\\Get{0}ByKey.cs"
+      "T4Template": "CodeGenOutput.API/Requests/GetByKeyTemplate.tt",
+      "Output": "{1}/Get{0}ByKey.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Requests\\GetTemplate.tt",
-      "Output": "{1}\\Get{1}.cs"
+      "T4Template": "CodeGenOutput.API/Requests/GetTemplate.tt",
+      "Output": "{1}/Get{1}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Requests\\PatchTemplate.tt",
-      "Output": "{1}\\Patch{0}.cs"
+      "T4Template": "CodeGenOutput.API/Requests/PatchTemplate.tt",
+      "Output": "{1}/Patch{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\Requests\\UpdateTemplate.tt",
-      "Output": "{1}\\Update{0}.cs"
+      "T4Template": "CodeGenOutput.API/Requests/UpdateTemplate.tt",
+      "Output": "{1}/Update{0}.cs"
     },
     {
-      "T4Template": "CodeGenOutput.API\\ViewModels\\ViewModelTemplate.tt",
+      "T4Template": "CodeGenOutput.API/ViewModels/ViewModelTemplate.tt",
       "Output": "{0}VM.cs"
     }
   ]
