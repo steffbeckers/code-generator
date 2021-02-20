@@ -48,6 +48,7 @@ namespace CodeGen.Generators
             {
                 // List files within the project templates directory
                 List<string> projectTemplateFiles = await _fileService.TraverseDirectory(Path.Combine("Templates", "Projects", projectTemplate));
+                projectTemplateFiles = projectTemplateFiles.Select(x => x.Replace('\\', '/')).ToList();
 
                 // Search for template settings
                 CodeGenTemplateSettings codeGenTemplateSettings = null;
@@ -124,7 +125,7 @@ namespace CodeGen.Generators
                         Path.GetDirectoryName(projectTemplateFile),
                         projectTemplateFileName
                     );
-                    filePath = filePath.Replace("Templates/", "");
+                    filePath = filePath.Replace('\\', '/').Replace("Templates/", "");
 
                     // File text
                     string fileText = await _fileService.Read(projectTemplateFile);
@@ -157,20 +158,22 @@ namespace CodeGen.Generators
                 }
 
                 // Generation done
+                // TODO: Move next steps to other service
 
                 // Output project path
                 string outputProjectPath = Path.Combine(
                     _configService.CodeGenConfig.Paths.Output,
                     codeGenTemplateSettings.TemplatePath
                 );
-                outputProjectPath = outputProjectPath.Replace("Templates/", "");
+                outputProjectPath = outputProjectPath.Replace('\\', '/').Replace("Templates/", "");
 
                 // Output startup project path
                 string startupProjectPath = Path.Combine(
                     outputProjectPath,
                     codeGenTemplateSettings.StartupProjectPath
                 );
-
+                startupProjectPath = startupProjectPath.Replace('\\', '/');
+                
                 // Build after generate
                 if (codeGenTemplateSettings.AfterGenerate.Build)
                 {

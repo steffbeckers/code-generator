@@ -40,7 +40,7 @@ namespace CodeGen.Generators
                     Path.GetDirectoryName(projectTemplateFile),
                     string.Format(data.Output, model.Name, model.NamePlural)
                 );
-                filePath = filePath.Replace("Templates/", "");
+                filePath = filePath.Replace('\\', '/').Replace("Templates/", "");
 
                 // File text
                 string templateTypeFormat = projectTemplateFile.Replace("/", ".").Replace(".tt", "");
