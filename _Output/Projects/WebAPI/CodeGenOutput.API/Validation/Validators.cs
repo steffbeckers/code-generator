@@ -9,17 +9,11 @@ namespace CodeGenOutput.API.Validation
     
     public static class Validators
     {
-        public static AccountValidator AccountValidator = new AccountValidator();
-        public static AccountContactValidator AccountContactValidator = new AccountContactValidator();
-        public static AddressValidator AddressValidator = new AddressValidator();
-        public static ContactValidator ContactValidator = new ContactValidator();
+        public static ProjectValidator ProjectValidator = new ProjectValidator();
         
         static Validators()
         {
-            AccountValidator.Init();
-            AccountContactValidator.Init();
-            AddressValidator.Init();
-            ContactValidator.Init();
+            ProjectValidator.Init();
         }
     }
 }

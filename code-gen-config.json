@@ -41,7 +41,7 @@
       },
       "List": [
         {
-          "Name": "Account",
+          "Name": "Project",
           "Audit": true,
           "Properties": [
             {
@@ -51,170 +51,10 @@
             },
             {
               "Name": "Description",
-              "Type": "string",
-              "MaxLength": 4000
-            },
-            {
-              "Name": "Telephone",
               "Type": "string"
-            },
-            {
-              "Name": "Email",
-              "Type": "string"
-            },
-            {
-              "Name": "Website",
-              "Type": "string"
-            },
-            {
-              "Name": "VAT",
-              "Type": "string"
-            }
-          ],
-          "Relations": {
-            "OneToMany": [
-              {
-                "Name": "Contacts",
-                "Model": "AccountContact"
-              }
-            ],
-            "ManyToOne": [
-              {
-                "Name": "Address",
-                "Type": "Guid?",
-                "Model": "Address"
-              }
-            ]
-          }
-        },
-        {
-          "Name": "AccountContact",
-          "DisplayName": "Account contact link",
-          "Audit": true,
-          "ManyToMany": true,
-          "Properties": [
-            {
-              "Name": "IsPrimary",
-              "Type": "bool"
-            },
-            {
-              "Name": "SortOrder",
-              "Type": "int?"
-            }
-          ],
-          "Relations": {
-            "ManyToOne": [
-              {
-                "Name": "Account",
-                "Type": "Guid",
-                "Model": "Account"
-              },
-              {
-                "Name": "Contact",
-                "Type": "Guid",
-                "Model": "Contact"
-              }
-            ]
-          }
-        },
-        {
-          "Name": "Contact",
-          "Audit": true,
-          "Properties": [
-            {
-              "Name": "FirstName",
-              "DisplayName": "First name",
-              "Type": "string",
-              "Required": true
-            },
-            {
-              "Name": "LastName",
-              "DisplayName": "Last name",
-              "Type": "string",
-              "Required": true
-            },
-            {
-              "Name": "Telephone",
-              "Type": "string"
-            },
-            {
-              "Name": "Email",
-              "Type": "string"
-            }
-          ],
-          "Relations": {
-            "OneToMany": [
-              {
-                "Name": "Account",
-                "Model": "AccountContact"
-              }
-            ],
-            "ManyToOne": [
-              {
-                "Name": "Address",
-                "Type": "Guid?",
-                "Model": "Address"
-              }
-            ]
-          }
-        },
-        {
-          "Name": "Address",
-          "NamePlural": "Addresses",
-          "Audit": true,
-          "Properties": [
-            {
-              "Name": "Street",
-              "Type": "string",
-              "Required": true
-            },
-            {
-              "Name": "HouseNumber",
-              "DisplayName": "House number",
-              "Type": "string",
-              "Required": true,
-              "MaxLength": 10
-            },
-            {
-              "Name": "BoxNumber",
-              "DisplayName": "Box number",
-              "Type": "string",
-              "MaxLength": 10
-            },
-            {
-              "Name": "PostalCode",
-              "DisplayName": "Postal code",
-              "Type": "string",
-              "Required": true,
-              "MaxLength": 10
-            },
-            {
-              "Name": "City",
-              "Type": "string",
-              "Required": true
-            },
-            {
-              "Name": "Country",
-              "Type": "string",
-              "Required": true
             }
           ]
-        } //,
-        // {
-        //   "Name": "Test",
-        //   "Audit": true,
-        //   "Properties": [
-        //     {
-        //       "Name": "Name",
-        //       "Type": "string",
-        //       "Required": true
-        //     },
-        //     {
-        //       "Name": "Description",
-        //       "Type": "string"
-        //     }
-        //   ]
-        // }
+        }
       ]
     },
     "Paths": {
