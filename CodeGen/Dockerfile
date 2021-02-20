@@ -6,9 +6,11 @@ RUN dotnet tool install -g dotnet-t4
 ENV PATH="/root/.dotnet/tools:${PATH}"
 
 WORKDIR /src
-COPY ["CodeGen.csproj", ""]
-RUN dotnet restore "./CodeGen.csproj"
+COPY ["CodeGen/CodeGen.csproj", "CodeGen/"]
+COPY ["CodeGen.Models/CodeGen.Models.csproj", "CodeGen.Models/"]
+COPY ["CodeGen.Framework/CodeGen.Framework.csproj", "CodeGen.Framework/"]
+RUN dotnet restore "CodeGen/CodeGen.csproj"
 COPY . .
 
-WORKDIR "/src/."
+WORKDIR "/src/CodeGen"
 ENTRYPOINT ["dotnet", "watch", "run"]

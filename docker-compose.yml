@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  code-generator:
+    image: registry.steffbeckers.eu/code-generator
+    build:
+      context: .
+      dockerfile: CodeGen/Dockerfile
+  api:
+    image: registry.steffbeckers.eu/code-generator/api
+    build:
+      context: .
+      dockerfile: CodeGen.API/Dockerfile
