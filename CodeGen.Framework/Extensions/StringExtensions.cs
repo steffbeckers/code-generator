@@ -1,4 +1,4 @@
-﻿namespace CodeGen.Extensions
+﻿namespace CodeGen.Framework.Extensions
 {
     public static class StringExtensions
     {

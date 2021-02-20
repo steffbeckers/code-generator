@@ -8,12 +8,19 @@ namespace CodeGenOutput.API.Mappers
     {
         public AutoMapping()
         {
-            CreateMap<Project, ProjectVM>();
-            CreateMap<Project, ProjectListVM>();
-            CreateMap<Project, ProjectUpdateVM>();
-            CreateMap<ProjectVM, Project>();
-            CreateMap<ProjectCreateVM, Project>();
-            CreateMap<ProjectUpdateVM, Project>();
+            CreateMap<Account, AccountVM>();
+            CreateMap<Account, AccountListVM>();
+            CreateMap<Account, AccountUpdateVM>();
+            CreateMap<AccountVM, Account>();
+            CreateMap<AccountCreateVM, Account>();
+            CreateMap<AccountUpdateVM, Account>();
+
+            CreateMap<Contact, ContactVM>();
+            CreateMap<Contact, ContactListVM>();
+            CreateMap<Contact, ContactUpdateVM>();
+            CreateMap<ContactVM, Contact>();
+            CreateMap<ContactCreateVM, Contact>();
+            CreateMap<ContactUpdateVM, Contact>();
 
         }
     }

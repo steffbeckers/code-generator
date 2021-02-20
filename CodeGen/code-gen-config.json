@@ -41,7 +41,7 @@
       },
       "List": [
         {
-          "Name": "Project",
+          "Name": "Account",
           "Audit": true,
           "Properties": [
             {
@@ -51,14 +51,69 @@
             },
             {
               "Name": "Description",
+              "Type": "string",
+              "MaxLength": 512
+            },
+            {
+              "Name": "Telephone",
               "Type": "string"
             },
             {
-              "Name": "TemplateName",
+              "Name": "Email",
+              "Type": "string"
+            },
+            {
+              "Name": "Website",
+              "Type": "string"
+            }
+          ],
+          "Relations": {
+            "OneToMany": [
+              {
+                "Name": "Contacts",
+                "Model": "Contact"
+              }
+            ]
+          }
+        },
+        {
+          "Name": "Contact",
+          "Audit": true,
+          "Properties": [
+            {
+              "Name": "FirstName",
+              "DisplayName": "First name",
               "Type": "string",
               "Required": true
+            },
+            {
+              "Name": "LastName",
+              "DisplayName": "Last name",
+              "Type": "string",
+              "Required": true
+            },
+            {
+              "Name": "Telephone",
+              "Type": "string"
+            },
+            {
+              "Name": "Email",
+              "Type": "string"
+            },
+            {
+              "Name": "Website",
+              "Type": "string"
             }
-          ]
+          ],
+          "Relations": {
+            "ManyToOne": [
+              {
+                "Name": "Account",
+                "Type": "Guid?",
+                "Model": "Account"
+              }
+            ]
+          }
         }
       ]
     },

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CodeGenOutput.API.DAL.Configurations
 {
-    public class ProjectConfiguration : IEntityTypeConfiguration<Project>
+    public class AccountConfiguration : IEntityTypeConfiguration<Account>
     {
-        public void Configure(EntityTypeBuilder<Project> builder)
+        public void Configure(EntityTypeBuilder<Account> builder)
         {
             builder.HasQueryFilter(x => !x.Deleted);
 
@@ -18,11 +18,18 @@ namespace CodeGenOutput.API.DAL.Configurations
             ;
 
             builder.Property(x => x.Description)
+                .HasMaxLength(512)
+            ;
+
+            builder.Property(x => x.Telephone)
                 .HasMaxLength(100)
             ;
 
-            builder.Property(x => x.TemplateName)
-                .IsRequired()
+            builder.Property(x => x.Email)
+                .HasMaxLength(100)
+            ;
+
+            builder.Property(x => x.Website)
                 .HasMaxLength(100)
             ;
         }

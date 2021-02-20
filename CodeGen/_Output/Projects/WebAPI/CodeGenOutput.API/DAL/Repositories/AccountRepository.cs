@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace CodeGenOutput.API.DAL.Repositories
 {
-    public static class ProjectRepositoryExtensions
+    public static class AccountRepositoryExtensions
     {
         // Additional repository functions here
 
-        public static async Task<Project> GetByIdAsync(
-            this IRepository<Project> repository,
+        public static async Task<Account> GetByIdAsync(
+            this IRepository<Account> repository,
             Guid id,
             string include = ""
         )
         {
-            IQueryable<Project> query = repository.GetDbSet();
+            IQueryable<Account> query = repository.GetDbSet();
 
             foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {

@@ -1,4 +1,4 @@
-﻿using CodeGen.Extensions;
+﻿using CodeGen.Framework.Extensions;
 using System.Collections.Generic;
 
 namespace CodeGen.Models

@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeGen", "CodeGen\CodeGen.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeGen.API", "CodeGen.API\CodeGen.API.csproj", "{B16BFC82-9322-47DA-B206-B8076B0FF27E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGen.Models", "CodeGen.Models\CodeGen.Models.csproj", "{BA344E66-DB9D-4F88-85F8-E5E3594C0165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGen.Framework", "CodeGen.Framework\CodeGen.Framework.csproj", "{5D95365F-BADE-44C0-960C-87206E14D25F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B16BFC82-9322-47DA-B206-B8076B0FF27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B16BFC82-9322-47DA-B206-B8076B0FF27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B16BFC82-9322-47DA-B206-B8076B0FF27E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA344E66-DB9D-4F88-85F8-E5E3594C0165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA344E66-DB9D-4F88-85F8-E5E3594C0165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA344E66-DB9D-4F88-85F8-E5E3594C0165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA344E66-DB9D-4F88-85F8-E5E3594C0165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D95365F-BADE-44C0-960C-87206E14D25F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D95365F-BADE-44C0-960C-87206E14D25F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D95365F-BADE-44C0-960C-87206E14D25F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D95365F-BADE-44C0-960C-87206E14D25F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

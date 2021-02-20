@@ -4,7 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-CodeGen-06075989-882D-4771-BD2D-1D6354FF0F9D</UserSecretsId>
   </PropertyGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\CodeGen.Models\CodeGen.Models.csproj" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="dotnet-t4-project-tool" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
@@ -12,13 +14,11 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="_Output\**" />
     <Compile Remove="Templates\**" />
     <Compile Include="Templates\**\*Template*.cs" Watch="false" />
   </ItemGroup>
-
   <ItemGroup>
     <Watch Include="**\*settings*.json" />
     <Watch Include="code-gen-config.json" />
@@ -29,13 +29,11 @@
     <Watch Remove="**\bin\**\*" />
     <Watch Remove="**\obj\**\*" />
   </ItemGroup>
-
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-t4-project-tool" Version="2.2.0" />
     <TextTemplate Include="**\*.tt" />
     <Generated Include="**\*.Generated.cs" />
   </ItemGroup>
-
   <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <TextTemplate>
@@ -45,7 +43,6 @@
     </ItemGroup>
     <Exec WorkingDirectory="$(ProjectDir)" Command="t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.NameSpace).%(TextTemplate.Filename) -o %(TextTemplate.OutputPath)" />
   </Target>
-
   <Target Name="TextTemplateClean" AfterTargets="Clean">
     <Delete Files="@(Generated)" />
   </Target>
