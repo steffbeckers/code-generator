@@ -1,5 +1,4 @@
 using CodeGen.API.DAL;
-using CodeGen.API.Models;
 
 namespace CodeGen.API.BLL
 {

@@ -35,7 +35,7 @@ namespace CodeGen.API.BLL
             await ValidateProjectAsync(project);
             Project createdProject = await _unitOfWork.GetRepository<Project>().CreateAsync(project);
             await _unitOfWork.Commit();
-            
+
             return createdProject;
         }
 
@@ -44,7 +44,7 @@ namespace CodeGen.API.BLL
             await ValidateProjectAsync(project);
             Project updatedProject = await _unitOfWork.GetRepository<Project>().UpdateAsync(project);
             await _unitOfWork.Commit();
-            
+
             return updatedProject;
         }
 

@@ -1,9 +1,10 @@
 using CodeGen.API.Validation;
+using CodeGen.Models;
 using FluentValidation;
+using Newtonsoft.Json;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodeGen.API.Models
 {
@@ -18,8 +19,13 @@ namespace CodeGen.API.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string TemplateName { get; set; }
-
-
+        private string ConfigJson { get; set; }
+        [NotMapped]
+        public CodeGenConfig Config
+        {
+            get { return string.IsNullOrEmpty(ConfigJson) ? null : JsonConvert.DeserializeObject<CodeGenConfig>(ConfigJson); }
+            set { ConfigJson = JsonConvert.SerializeObject(value); }
+        }
     }
 
     public class ProjectValidator : AbstractValidator<Project>, IValidatorInitilizer

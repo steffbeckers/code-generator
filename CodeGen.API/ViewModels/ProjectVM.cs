@@ -1,5 +1,5 @@
+using CodeGen.Models;
 using System;
-using System.Collections.Generic;
 
 namespace CodeGen.API.ViewModels
 {
@@ -9,10 +9,9 @@ namespace CodeGen.API.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string TemplateName { get; set; }
+        public CodeGenConfig Config { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
-
-
     }
 
     public class ProjectListVM
@@ -21,8 +20,6 @@ namespace CodeGen.API.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string TemplateName { get; set; }
-
-
     }
 
     public class ProjectCreateVM
@@ -30,8 +27,7 @@ namespace CodeGen.API.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string TemplateName { get; set; }
-
-
+        public CodeGenConfig Config { get; set; }
     }
 
     public class ProjectUpdateVM
@@ -40,5 +36,6 @@ namespace CodeGen.API.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string TemplateName { get; set; }
+        public CodeGenConfig Config { get; set; }
     }
 }

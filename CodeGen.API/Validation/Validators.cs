@@ -6,11 +6,11 @@ namespace CodeGen.API.Validation
     {
         void Init();
     }
-    
+
     public static class Validators
     {
         public static ProjectValidator ProjectValidator = new ProjectValidator();
-        
+
         static Validators()
         {
             ProjectValidator.Init();

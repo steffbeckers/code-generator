@@ -2,11 +2,9 @@ using AutoMapper;
 using CodeGen.API.BLL;
 using CodeGen.API.Models;
 using CodeGen.API.ViewModels;
-using FluentValidation.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationException = CodeGen.API.Validation.ValidationException;
 
 namespace CodeGen.API.Requests.Projects
 {
