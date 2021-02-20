@@ -52,6 +52,11 @@
             {
               "Name": "Description",
               "Type": "string"
+            },
+            {
+              "Name": "TemplateName",
+              "Type": "string",
+              "Required": true
             }
           ]
         }

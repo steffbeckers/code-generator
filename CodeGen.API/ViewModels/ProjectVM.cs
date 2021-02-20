@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CodeGenOutput.API.ViewModels
+namespace CodeGen.API.ViewModels
 {
     public class ProjectVM
     {

@@ -1,11 +1,11 @@
-using CodeGenOutput.API.Validation;
+using CodeGen.API.Validation;
 using FluentValidation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CodeGenOutput.API.Models
+namespace CodeGen.API.Models
 {
     public class Project : Auditable
     {

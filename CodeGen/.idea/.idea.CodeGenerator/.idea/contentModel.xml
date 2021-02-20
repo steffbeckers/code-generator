@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Dev\SteffBeckers\code-generator" t="IncludeRecursive">
+      <e p=".dockerignore" t="Include" />
+      <e p=".gitignore" t="Include" />
+      <e p="_Output" t="Include">
+        <e p="Templates" t="Include">
+          <e p="Projects" t="Include">
+            <e p="WebAPI" t="Include">
+              <e p="CodeGenOutput.API" t="Include">
+                <e p="appsettings.Development.json" t="Include" />
+                <e p="appsettings.json" t="Include" />
+                <e p="bin" t="Include">
+                  <e p="Debug" t="Include">
+                    <e p="net5.0" t="Include">
+                      <e p="appsettings.Development.json" t="Include" />
+                      <e p="appsettings.json" t="Include" />
+                      <e p="CodeGenOutput.API.deps.json" t="Include" />
+                      <e p="CodeGenOutput.API.dll" t="Include" />
+                      <e p="CodeGenOutput.API.exe" t="Include" />
+                      <e p="CodeGenOutput.API.pdb" t="Include" />
+                      <e p="CodeGenOutput.API.runtimeconfig.dev.json" t="Include" />
+                      <e p="CodeGenOutput.API.runtimeconfig.json" t="Include" />
+                      <e p="Microsoft.OpenApi.dll" t="Include" />
+                      <e p="ref" t="Include">
+                        <e p="CodeGenOutput.API.dll" t="Include" />
+                      </e>
+                      <e p="Swashbuckle.AspNetCore.Swagger.dll" t="Include" />
+                      <e p="Swashbuckle.AspNetCore.SwaggerGen.dll" t="Include" />
+                      <e p="Swashbuckle.AspNetCore.SwaggerUI.dll" t="Include" />
+                    </e>
+                  </e>
+                </e>
+                <e p="obj" t="Include">
+                  <e p="CodeGenOutput.API.csproj.EntityFrameworkCore.targets" t="Include" />
+                  <e p="CodeGenOutput.API.csproj.nuget.dgspec.json" t="Include" />
+                  <e p="CodeGenOutput.API.csproj.nuget.g.props" t="Include" />
+                  <e p="CodeGenOutput.API.csproj.nuget.g.targets" t="Include" />
+                  <e p="Debug" t="Include">
+                    <e p="net5.0" t="Include">
+                      <e p="apphost.exe" t="Include" />
+                      <e p="CodeGenOutput.API.AssemblyInfoInputs.cache" t="Include" />
+                      <e p="CodeGenOutput.API.assets.cache" t="Include" />
+                      <e p="CodeGenOutput.API.csproj.CopyComplete" t="Include" />
+                      <e p="CodeGenOutput.API.csproj.CoreCompileInputs.cache" t="Include" />
+                      <e p="CodeGenOutput.API.csproj.FileListAbsolute.txt" t="Include" />
+                      <e p="CodeGenOutput.API.csprojAssemblyReference.cache" t="Include" />
+                      <e p="CodeGenOutput.API.dll" t="Include" />
+                      <e p="CodeGenOutput.API.GeneratedMSBuildEditorConfig.editorconfig" t="Include" />
+                      <e p="CodeGenOutput.API.genruntimeconfig.cache" t="Include" />
+                      <e p="CodeGenOutput.API.MvcApplicationPartsAssemblyInfo.cache" t="Include" />
+                      <e p="CodeGenOutput.API.pdb" t="Include" />
+                      <e p="CodeGenOutput.API.RazorTargetAssemblyInfo.cache" t="Include" />
+                      <e p="project.razor.json" t="Include" />
+                      <e p="ref" t="Include">
+                        <e p="CodeGenOutput.API.dll" t="Include" />
+                      </e>
+                      <e p="staticwebassets" t="Include">
+                        <e p="CodeGenOutput.API.StaticWebAssets.Manifest.cache" t="Include" />
+                        <e p="CodeGenOutput.API.StaticWebAssets.xml" t="Include" />
+                      </e>
+                    </e>
+                  </e>
+                  <e p="project.assets.json" t="Include" />
+                  <e p="project.nuget.cache" t="Include" />
+                </e>
+                <e p="Properties" t="Include">
+                  <e p="launchSettings.json" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="appsettings.json" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="code-gen-config.json" t="Include" />
+      <e p="code-gen-config.schema.json" t="Include" />
+      <e p="CodeGen.csproj" t="IncludeRecursive" />
+      <e p="CodeGenerator.sln" t="IncludeFlat" />
+      <e p="Dockerfile" t="Include" />
+      <e p="Extensions" t="Include">
+        <e p="StringExtensions.cs" t="Include" />
+      </e>
+      <e p="Generators" t="Include">
+        <e p="ConfigBasedGenerator.cs" t="Include" />
+        <e p="ModelsBasedGenerator.cs" t="Include" />
+        <e p="ProjectsGenerator.cs" t="Include" />
+      </e>
+      <e p="Models" t="Include">
+        <e p="CodeGenConfig.cs" t="Include" />
+        <e p="CodeGenConfigPaths.cs" t="Include" />
+        <e p="CodeGenModel.cs" t="Include" />
+        <e p="CodeGenModelProperty.cs" t="Include" />
+        <e p="CodeGenModelRelation.cs" t="Include" />
+        <e p="CodeGenModelRelations.cs" t="Include" />
+        <e p="CodeGenModels.cs" t="Include" />
+        <e p="CodeGenTemplateSettings.cs" t="Include" />
+        <e p="CodeGenTemplateSettingsAfterGenerate.cs" t="Include" />
+        <e p="CodeGenTemplateSettingsBeforeGenerate.cs" t="Include" />
+        <e p="CodeGenTemplateSettingsData.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="net5.0" t="Include">
+            <e p="CodeGen.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="omnisharp.json" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="README.md" t="Include" />
+      <e p="Services" t="Include">
+        <e p="ConfigService.cs" t="Include" />
+        <e p="FileService.cs" t="Include" />
+      </e>
+      <e p="Templates" t="Include">
+        <e p="ITextTemplate.cs" t="Include" />
+        <e p="Projects" t="Include">
+          <e p="WebAPI" t="Include">
+            <e p="CodeGenOutput.API" t="Include">
+              <e p="appsettings.Development.json" t="Include" />
+              <e p="appsettings.json" t="Include" />
+              <e p="bin" t="Include">
+                <e p="Debug" t="Include">
+                  <e p="net5.0" t="Include">
+                    <e p="appsettings.Development.json" t="Include" />
+                    <e p="appsettings.json" t="Include" />
+                    <e p="CodeGenOutput.API.deps.json" t="Include" />
+                    <e p="CodeGenOutput.API.dll" t="Include" />
+                    <e p="CodeGenOutput.API.exe" t="Include" />
+                    <e p="CodeGenOutput.API.pdb" t="Include" />
+                    <e p="CodeGenOutput.API.runtimeconfig.dev.json" t="Include" />
+                    <e p="CodeGenOutput.API.runtimeconfig.json" t="Include" />
+                    <e p="Microsoft.OpenApi.dll" t="Include" />
+                    <e p="ref" t="Include">
+                      <e p="CodeGenOutput.API.dll" t="Include" />
+                    </e>
+                    <e p="Swashbuckle.AspNetCore.Swagger.dll" t="Include" />
+                    <e p="Swashbuckle.AspNetCore.SwaggerGen.dll" t="Include" />
+                    <e p="Swashbuckle.AspNetCore.SwaggerUI.dll" t="Include" />
+                  </e>
+                </e>
+              </e>
+              <e p="BLL" t="Include">
+                <e p="BLLTemplate.cs" t="Include" />
+                <e p="BLLTemplate.Generated.cs" t="Include" />
+                <e p="BLLTemplate.tt" t="Include" />
+                <e p="BusinessLogicLayerTemplate.cs" t="Include" />
+                <e p="BusinessLogicLayerTemplate.Generated.cs" t="Include" />
+                <e p="BusinessLogicLayerTemplate.tt" t="Include" />
+              </e>
+              <e p="Controllers" t="Include">
+                <e p="ControllerTemplate.cs" t="Include" />
+                <e p="ControllerTemplate.Generated.cs" t="Include" />
+                <e p="ControllerTemplate.tt" t="Include" />
+              </e>
+              <e p="DAL" t="Include">
+                <e p="ApplicationDbContextTemplate.cs" t="Include" />
+                <e p="ApplicationDbContextTemplate.Generated.cs" t="Include" />
+                <e p="ApplicationDbContextTemplate.tt" t="Include" />
+                <e p="Configurations" t="Include">
+                  <e p="ConfigurationTemplate.cs" t="Include" />
+                  <e p="ConfigurationTemplate.Generated.cs" t="Include" />
+                  <e p="ConfigurationTemplate.tt" t="Include" />
+                </e>
+                <e p="GenericRepositoryTemplate.cs" t="Include" />
+                <e p="GenericRepositoryTemplate.Generated.cs" t="Include" />
+                <e p="GenericRepositoryTemplate.tt" t="Include" />
+                <e p="Repositories" t="Include">
+                  <e p="RepositoryTemplate.cs" t="Include" />
+                  <e p="RepositoryTemplate.Generated.cs" t="Include" />
+                  <e p="RepositoryTemplate.tt" t="Include" />
+                </e>
+              </e>
+              <e p="Mappers" t="Include">
+                <e p="AutoMappingTemplate.cs" t="Include" />
+                <e p="AutoMappingTemplate.Generated.cs" t="Include" />
+                <e p="AutoMappingTemplate.tt" t="Include" />
+              </e>
+              <e p="Models" t="Include">
+                <e p="AuditableTemplate.cs" t="Include" />
+                <e p="AuditableTemplate.Generated.cs" t="Include" />
+                <e p="AuditableTemplate.tt" t="Include" />
+                <e p="ModelTemplate.cs" t="Include" />
+                <e p="ModelTemplate.Generated.cs" t="Include" />
+                <e p="ModelTemplate.tt" t="Include" />
+              </e>
+              <e p="obj" t="Include">
+                <e p="CodeGenOutput.API.csproj.EntityFrameworkCore.targets" t="Include" />
+                <e p="CodeGenOutput.API.csproj.nuget.dgspec.json" t="Include" />
+                <e p="CodeGenOutput.API.csproj.nuget.g.props" t="Include" />
+                <e p="CodeGenOutput.API.csproj.nuget.g.targets" t="Include" />
+                <e p="Debug" t="Include">
+                  <e p="net5.0" t="Include">
+                    <e p="apphost.exe" t="Include" />
+                    <e p="CodeGenOutput.API.AssemblyInfoInputs.cache" t="Include" />
+                    <e p="CodeGenOutput.API.assets.cache" t="Include" />
+                    <e p="CodeGenOutput.API.csproj.CopyComplete" t="Include" />
+                    <e p="CodeGenOutput.API.csproj.CoreCompileInputs.cache" t="Include" />
+                    <e p="CodeGenOutput.API.csproj.FileListAbsolute.txt" t="Include" />
+                    <e p="CodeGenOutput.API.csprojAssemblyReference.cache" t="Include" />
+                    <e p="CodeGenOutput.API.dll" t="Include" />
+                    <e p="CodeGenOutput.API.GeneratedMSBuildEditorConfig.editorconfig" t="Include" />
+                    <e p="CodeGenOutput.API.genruntimeconfig.cache" t="Include" />
+                    <e p="CodeGenOutput.API.MvcApplicationPartsAssemblyInfo.cache" t="Include" />
+                    <e p="CodeGenOutput.API.pdb" t="Include" />
+                    <e p="CodeGenOutput.API.RazorTargetAssemblyInfo.cache" t="Include" />
+                    <e p="project.razor.json" t="Include" />
+                    <e p="ref" t="Include">
+                      <e p="CodeGenOutput.API.dll" t="Include" />
+                    </e>
+                    <e p="staticwebassets" t="Include">
+                      <e p="CodeGenOutput.API.StaticWebAssets.Manifest.cache" t="Include" />
+                      <e p="CodeGenOutput.API.StaticWebAssets.xml" t="Include" />
+                    </e>
+                  </e>
+                </e>
+                <e p="project.assets.json" t="Include" />
+                <e p="project.nuget.cache" t="Include" />
+                <e p="project.packagespec.json" t="Include" />
+                <e p="rider.project.restore.info" t="Include" />
+              </e>
+              <e p="Properties" t="Include">
+                <e p="launchSettings.json" t="Include" />
+              </e>
+              <e p="Requests" t="Include">
+                <e p="CreateTemplate.cs" t="Include" />
+                <e p="CreateTemplate.Generated.cs" t="Include" />
+                <e p="CreateTemplate.tt" t="Include" />
+                <e p="DeleteTemplate.cs" t="Include" />
+                <e p="DeleteTemplate.Generated.cs" t="Include" />
+                <e p="DeleteTemplate.tt" t="Include" />
+                <e p="GetByKeyTemplate.cs" t="Include" />
+                <e p="GetByKeyTemplate.Generated.cs" t="Include" />
+                <e p="GetByKeyTemplate.tt" t="Include" />
+                <e p="GetTemplate.cs" t="Include" />
+                <e p="GetTemplate.Generated.cs" t="Include" />
+                <e p="GetTemplate.tt" t="Include" />
+                <e p="PatchTemplate.cs" t="Include" />
+                <e p="PatchTemplate.Generated.cs" t="Include" />
+                <e p="PatchTemplate.tt" t="Include" />
+                <e p="UpdateTemplate.cs" t="Include" />
+                <e p="UpdateTemplate.Generated.cs" t="Include" />
+                <e p="UpdateTemplate.tt" t="Include" />
+              </e>
+              <e p="StartupTemplate.cs" t="Include" />
+              <e p="StartupTemplate.Generated.cs" t="Include" />
+              <e p="StartupTemplate.tt" t="Include" />
+              <e p="Validation" t="Include">
+                <e p="ValidatorsTemplate.cs" t="Include" />
+                <e p="ValidatorsTemplate.Generated.cs" t="Include" />
+                <e p="ValidatorsTemplate.tt" t="Include" />
+              </e>
+              <e p="ViewModels" t="Include">
+                <e p="ViewModelTemplate.cs" t="Include" />
+                <e p="ViewModelTemplate.Generated.cs" t="Include" />
+                <e p="ViewModelTemplate.tt" t="Include" />
+              </e>
+            </e>
+            <e p="templatesettings.json" t="Include" />
+          </e>
+        </e>
+        <e p="templatesettings.schema.json" t="Include" />
+      </e>
+      <e p="Worker.cs" t="Include" />
+    </e>
+    <e p="C:\Users\SteffBeckers\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\SteffBeckers\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_CodeGenerator.-1917145392.00" t="ExcludeRecursive" />
+  </component>
+</project>

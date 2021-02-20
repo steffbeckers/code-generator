@@ -1,8 +1,8 @@
-using CodeGenOutput.API.Models;
+using CodeGen.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CodeGenOutput.API.DAL.Configurations
+namespace CodeGen.API.DAL.Configurations
 {
     public class ProjectConfiguration : IEntityTypeConfiguration<Project>
     {

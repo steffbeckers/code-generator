@@ -12,7 +12,7 @@
     "Run": true
   },
   "StartupProjectPath": "CodeGenOutput.API",
-  "StartupProjectURL": "https://localhost:5000",
+  "StartupProjectURL": "http://localhost:5001",
   "MigrationsFolderPath": "DAL/Migrations",
   "ConfigBasedGenerator": [
     {
