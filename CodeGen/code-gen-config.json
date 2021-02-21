@@ -1,6 +1,7 @@
 {
   "$schema": "./code-gen-config.schema.json",
   "CodeGenConfig": {
+    "TemplateName": "WebAPI",
     "Models": {
       "StringPropertyMaxLength": 100,
       "Defaults": {

@@ -32,7 +32,8 @@ namespace CodeGen
                     services.AddSingleton<IFileService, FileService>();
                     services.AddSingleton<IConfigBasedGenerator, ConfigBasedGenerator>();
                     services.AddSingleton<IModelsBasedGenerator, ModelsBasedGenerator>();
-                    services.AddSingleton<IProjectsGenerator, ProjectsGenerator>();
+                    services.AddSingleton<IProjectGenerator, ProjectGenerator>();
+                    services.AddSingleton<IProjectRunnerService, ProjectRunnerService>();
                     services.AddHostedService<Worker>();
                 });
     }

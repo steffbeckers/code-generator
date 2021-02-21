@@ -20,11 +20,6 @@ namespace CodeGen.API.DAL.Configurations
             builder.Property(x => x.Description)
                 .HasMaxLength(100)
             ;
-
-            builder.Property(x => x.TemplateName)
-                .IsRequired()
-                .HasMaxLength(100)
-            ;
         }
     }
 }

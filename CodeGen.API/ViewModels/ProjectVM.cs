@@ -8,7 +8,6 @@ namespace CodeGen.API.ViewModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string TemplateName { get; set; }
         public CodeGenConfig Config { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
@@ -19,14 +18,12 @@ namespace CodeGen.API.ViewModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string TemplateName { get; set; }
     }
 
     public class ProjectCreateVM
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string TemplateName { get; set; }
         public CodeGenConfig Config { get; set; }
     }
 
@@ -35,7 +32,6 @@ namespace CodeGen.API.ViewModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string TemplateName { get; set; }
         public CodeGenConfig Config { get; set; }
     }
 }

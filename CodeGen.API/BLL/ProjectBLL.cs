@@ -1,7 +1,9 @@
 using CodeGen.API.DAL.Repositories;
+using CodeGen.API.Hubs;
 using CodeGen.API.Models;
 using CodeGen.API.Validation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -36,6 +38,8 @@ namespace CodeGen.API.BLL
             Project createdProject = await _unitOfWork.GetRepository<Project>().CreateAsync(project);
             await _unitOfWork.Commit();
 
+            _realtimeHub.Clients.Group("code-generators").SendAsync("Generate", createdProject);
+
             return createdProject;
         }
 
@@ -44,6 +48,8 @@ namespace CodeGen.API.BLL
             await ValidateProjectAsync(project);
             Project updatedProject = await _unitOfWork.GetRepository<Project>().UpdateAsync(project);
             await _unitOfWork.Commit();
+
+            _realtimeHub.Clients.Group("code-generators").SendAsync("Generate", updatedProject);
 
             return updatedProject;
         }
