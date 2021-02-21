@@ -11,7 +11,8 @@ namespace CodeGen.Services
 {
     public interface IProjectRunnerService
     {
-        Task<Process> Run();
+        Task Run();
+        Task Stop();
     }
 
     public class ProjectRunnerService : IProjectRunnerService
@@ -19,6 +20,8 @@ namespace CodeGen.Services
         private readonly ILogger<ProjectRunnerService> _logger;
         private readonly IConfigService _configService;
         private readonly IFileService _fileService;
+
+        private Process _runProjectProcess;
 
         public ProjectRunnerService(
             ILogger<ProjectRunnerService> logger,
@@ -31,7 +34,7 @@ namespace CodeGen.Services
             _fileService = fileService;
         }
 
-        public async Task<Process> Run()
+        public async Task Run()
         {
             string projectTemplateName = _configService.CodeGenConfig.TemplateName;
 
@@ -61,7 +64,7 @@ namespace CodeGen.Services
             if (codeGenTemplateSettings == null)
             {
                 _logger.LogInformation($"Project template settings not found for: {projectTemplateName}");
-                return null;
+                return;
             }
 
             // Output project path
@@ -78,12 +81,24 @@ namespace CodeGen.Services
             );
             startupProjectPath = startupProjectPath.Replace('\\', '/');
 
+            // Start project
             ProcessStartInfo dotnetRun = new ProcessStartInfo("dotnet");
             // TODO: Configurable --urls param
             //dotnetRun.Arguments = @"run";
             dotnetRun.Arguments = @"run --urls http://0.0.0.0:5001";
             dotnetRun.WorkingDirectory = startupProjectPath;
-            return Process.Start(dotnetRun);
+            _runProjectProcess = Process.Start(dotnetRun);
+            _runProjectProcess.WaitForExitAsync();
+        }
+
+        public async Task Stop()
+        {
+            if (_runProjectProcess != null && !_runProjectProcess.HasExited)
+            {
+                _logger.LogInformation("Stopping previous project run");
+                _runProjectProcess.Kill();
+                await Task.Delay(1000);
+            }
         }
     }
 }

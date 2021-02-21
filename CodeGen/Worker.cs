@@ -21,7 +21,6 @@ namespace CodeGen
         private readonly IProjectRunnerService _projectRunnerService;
 
         private HubConnection _realtimeConnection;
-        private Process _runProject;
 
         public Worker(
             IConfiguration configuration,
@@ -47,9 +46,7 @@ namespace CodeGen
                 {
                     await _configService.LoadFromConfigFile();
                     await _projectGenerator.Generate();
-                    _runProject = await _projectRunnerService.Run();
-                    if (_runProject != null)
-                        await _runProject.WaitForExitAsync();
+                    await _projectRunnerService.Run();
                 }
                 catch (Exception ex)
                 {
@@ -83,17 +80,10 @@ namespace CodeGen
                     {
                         try
                         {
-                            if (_runProject != null && !_runProject.HasExited)
-                            {
-                                _runProject.Kill();
-                                await Task.Delay(1000);
-                            }
-
                             await _configService.LoadFromRequest(project.Config);
+                            await _projectRunnerService.Stop();
                             await _projectGenerator.Generate();
-                            _runProject = await _projectRunnerService.Run();
-                            if (_runProject != null)
-                                _runProject.WaitForExitAsync();
+                            _projectRunnerService.Run();
                         }
                         catch (Exception ex)
                         {
