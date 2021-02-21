@@ -1,6 +1,7 @@
 using CodeGen.API.BLL;
 using CodeGen.API.DAL;
 using CodeGen.API.Filters;
+using CodeGen.API.Hubs;
 using CodeGen.API.Validation;
 using FluentValidation;
 using MediatR;
@@ -45,6 +46,12 @@ namespace CodeGen.API
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            // Realtime
+            services.AddSignalR();
+            services.AddSingleton<RealtimeHubState>();
+
+            services.AddCors();
+
             services.AddControllers(options =>
             {
                 options.Filters.Add(new ApiExceptionFilter());
@@ -81,7 +88,12 @@ namespace CodeGen.API
                 });
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors(options =>
+            {
+                options.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
 
             app.UseRouting();
 
@@ -90,6 +102,8 @@ namespace CodeGen.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                // Realtime
+                endpoints.MapHub<RealtimeHub>("/api/realtime-hub");
             });
         }
 

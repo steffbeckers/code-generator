@@ -1,5 +1,6 @@
 ﻿using CodeGen.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,9 @@ namespace CodeGen.Services
 {
     public interface IConfigService
     {
-        Task Load();
         CodeGenConfig CodeGenConfig { get; }
+        Task LoadFromConfigFile();
+        Task LoadFromRequest(CodeGenConfig codeGenConfig);
     }
 
     public class ConfigService : IConfigService
@@ -23,9 +25,16 @@ namespace CodeGen.Services
             _configuration = configuration;
         }
 
-        public Task Load()
+        public Task LoadFromConfigFile()
         {
             _codeGenConfig = _configuration.GetSection("CodeGenConfig").Get<CodeGenConfig>();
+            _codeGenConfig.Models.List = _codeGenConfig.Models.List.OrderBy(x => x.Name).ToList();
+            return Task.CompletedTask;
+        }
+
+        public Task LoadFromRequest(CodeGenConfig codeGenConfig)
+        {
+            _codeGenConfig = codeGenConfig;
             _codeGenConfig.Models.List = _codeGenConfig.Models.List.OrderBy(x => x.Name).ToList();
             return Task.CompletedTask;
         }
