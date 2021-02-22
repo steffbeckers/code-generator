@@ -49,7 +49,7 @@ namespace CodeGen.Services
                     Formatting.Indented,
                     new JsonSerializerSettings
                     {
-                        NullValueHandling = NullValueHandling.Ignore
+                        DefaultValueHandling = DefaultValueHandling.Ignore
                     }
                 )
             );

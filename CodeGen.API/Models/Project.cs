@@ -25,7 +25,7 @@ namespace CodeGen.API.Models
             get { return string.IsNullOrEmpty(ConfigJson) ? null : JsonConvert.DeserializeObject<CodeGenConfig>(ConfigJson); }
             set {
                 ConfigJson = JsonConvert.SerializeObject(value, Formatting.None,
-                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                    new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
             }
         }
     }
