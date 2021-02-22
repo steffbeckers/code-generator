@@ -23,7 +23,10 @@ namespace CodeGen.API.Models
         public CodeGenConfig Config
         {
             get { return string.IsNullOrEmpty(ConfigJson) ? null : JsonConvert.DeserializeObject<CodeGenConfig>(ConfigJson); }
-            set { ConfigJson = JsonConvert.SerializeObject(value); }
+            set {
+                ConfigJson = JsonConvert.SerializeObject(value, Formatting.None,
+                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            }
         }
     }
 
