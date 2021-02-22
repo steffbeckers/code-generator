@@ -12,7 +12,6 @@ namespace CodeGen.Services
     public interface IProjectRunnerService
     {
         Task Run();
-        Task Stop();
     }
 
     public class ProjectRunnerService : IProjectRunnerService
@@ -20,8 +19,6 @@ namespace CodeGen.Services
         private readonly ILogger<ProjectRunnerService> _logger;
         private readonly IConfigService _configService;
         private readonly IFileService _fileService;
-
-        private Process _runProjectProcess;
 
         public ProjectRunnerService(
             ILogger<ProjectRunnerService> logger,
@@ -87,18 +84,7 @@ namespace CodeGen.Services
             //dotnetRun.Arguments = @"run";
             dotnetRun.Arguments = @"run --urls http://0.0.0.0:5001";
             dotnetRun.WorkingDirectory = startupProjectPath;
-            _runProjectProcess = Process.Start(dotnetRun);
-            _runProjectProcess.WaitForExitAsync();
-        }
-
-        public async Task Stop()
-        {
-            if (_runProjectProcess != null && !_runProjectProcess.HasExited)
-            {
-                _logger.LogInformation("Stopping previous project run");
-                _runProjectProcess.Kill();
-                await Task.Delay(1000);
-            }
+            await Process.Start(dotnetRun).WaitForExitAsync();
         }
     }
 }

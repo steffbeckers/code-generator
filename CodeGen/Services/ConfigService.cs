@@ -1,6 +1,6 @@
 ﻿using CodeGen.Models;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,13 +16,17 @@ namespace CodeGen.Services
     public class ConfigService : IConfigService
     {
         private readonly IConfiguration _configuration;
-        
+        private readonly IFileService _fileService;
         private CodeGenConfig _codeGenConfig;
         public CodeGenConfig CodeGenConfig => _codeGenConfig;
 
-        public ConfigService(IConfiguration configuration)
+        public ConfigService(
+            IConfiguration configuration,
+            IFileService fileService
+        )
         {
             _configuration = configuration;
+            _fileService = fileService;
         }
 
         public Task LoadFromConfigFile()
@@ -32,11 +36,23 @@ namespace CodeGen.Services
             return Task.CompletedTask;
         }
 
-        public Task LoadFromRequest(CodeGenConfig codeGenConfig)
+        public async Task LoadFromRequest(CodeGenConfig codeGenConfig)
         {
-            _codeGenConfig = codeGenConfig;
-            _codeGenConfig.Models.List = _codeGenConfig.Models.List.OrderBy(x => x.Name).ToList();
-            return Task.CompletedTask;
+            codeGenConfig.Models.List = codeGenConfig.Models.List.OrderBy(x => x.Name).ToList();
+
+            await _fileService.Create(
+                "code-gen-config.json",
+                JsonConvert.SerializeObject(
+                    new {
+                        CodeGenConfig = codeGenConfig
+                    },
+                    Formatting.Indented,
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    }
+                )
+            );
         }
     }
 }

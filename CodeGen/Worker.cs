@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -78,25 +77,23 @@ namespace CodeGen
 
                     this._realtimeConnection.On("Generate", async (Project project) =>
                     {
-                        try
-                        {
-                            await _configService.LoadFromRequest(project.Config);
-                            await _projectRunnerService.Stop();
-                            await _projectGenerator.Generate();
-                            _projectRunnerService.Run();
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.LogError(ex, ex.Message);
-                            throw;
-                        }
+                        await _configService.LoadFromRequest(project.Config);
                     });
 
                     // Start initial realtime connection
                     await Connect();
 
-                    // Keep client alive
-                    await Task.Delay(10000, cancellationToken);
+                    try
+                    {
+                        await _configService.LoadFromConfigFile();
+                        await _projectGenerator.Generate();
+                        _projectRunnerService.Run();
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, ex.Message);
+                        throw;
+                    }
                 }
             }
         }
