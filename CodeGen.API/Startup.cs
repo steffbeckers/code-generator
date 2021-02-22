@@ -56,9 +56,10 @@ namespace CodeGen.API
             {
                 options.Filters.Add(new ApiExceptionFilter());
                 options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
-            }).AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+            }).AddNewtonsoftJson(options => {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
+            });
 
             services.AddSwaggerGen(options =>
             {

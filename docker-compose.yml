@@ -11,3 +11,8 @@ services:
     build:
       context: .
       dockerfile: CodeGen.API/Dockerfile
+  front-end:
+    image: registry.steffbeckers.eu/code-generator/front-end
+    build:
+      context: CodeGen.FrontEnd/code-generator/
+      dockerfile: CodeGen.FrontEnd/code-generator/Dockerfile

@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutGap="16px">
+  <div class="cursor-pointer" routerLink="/projects">Back to list</div>
+  <ng-container *ngIf="project$ | async as project">
+    <div fxLayout="column" fxLayoutGap="16px">
+      <div>
+        {{ project.name }}
+      </div>
+      <div *ngIf="project.description">
+        {{ project.description }}
+      </div>
+      <button (click)="generate()" type="button">Generate</button>
+      <div fxFlex="1 1 auto" fxLayout="row" fxLayoutGap="16px">
+        <div fxFlex="30%">
+          <textarea
+            fxFlexFill
+            [value]="project.config | json"
+            rows="40"
+            disabled="true"
+          ></textarea>
+        </div>
+        <div fxFlex="70%">
+          <iframe fxFlexFill [src]="outputUrl"></iframe>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

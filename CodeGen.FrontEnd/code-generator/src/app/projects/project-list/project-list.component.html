@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutGap="16px">
+  <ng-container *ngFor="let project of projects$ | async">
+    <div
+      class="cursor-pointer"
+      [routerLink]="project.id"
+      fxLayout="row"
+      fxLayoutGap="16px"
+    >
+      <!-- <div fxFlex="330px">{{ project.id.toUpperCase() }}</div> -->
+      <div>{{ project.name }}</div>
+      <div>{{ project.description }}</div>
+    </div>
+  </ng-container>
+</div>
