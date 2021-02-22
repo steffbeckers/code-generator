@@ -15,4 +15,4 @@ services:
     image: registry.steffbeckers.eu/code-generator/front-end
     build:
       context: CodeGen.FrontEnd/code-generator/
-      dockerfile: CodeGen.FrontEnd/code-generator/Dockerfile
+      dockerfile: Dockerfile
