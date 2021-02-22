@@ -35,6 +35,14 @@ namespace CodeGen.API.Controllers
             return Ok(await _mediator.Send(new GetProjectById() { Id = id, Include = include }));
         }
 
+        // GET: api/projects/{id}/generate
+        [HttpGet]
+        [Route("{id}/generate")]
+        public async Task<IActionResult> GenerateProjectById([FromRoute] Guid id)
+        {
+            return Ok(await _mediator.Send(new GenerateProjectById() { Id = id }));
+        }
+
         // POST: api/projects
         [HttpPost]
         public async Task<IActionResult> CreateProject([FromBody] ProjectCreateVM projectCreateVM)

@@ -18,7 +18,7 @@ namespace CodeGen.API.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        private string ConfigJson { get; set; }
+        public string ConfigJson { get; set; }
         [NotMapped]
         public CodeGenConfig Config
         {

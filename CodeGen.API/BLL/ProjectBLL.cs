@@ -17,6 +17,7 @@ namespace CodeGen.API.BLL
         Task<Project> GetProjectByIdAsync(Guid id, string include = "");
         Task<Project> CreateProjectAsync(Project project);
         Task<Project> UpdateProjectAsync(Project project);
+        Task GenerateProjectByIdAsync(Guid id);
         Task DeleteProjectAsync(Guid id);
     }
 
@@ -38,8 +39,6 @@ namespace CodeGen.API.BLL
             Project createdProject = await _unitOfWork.GetRepository<Project>().CreateAsync(project);
             await _unitOfWork.Commit();
 
-            _realtimeHub.Clients.Group("code-generators").SendAsync("Generate", createdProject);
-
             return createdProject;
         }
 
@@ -49,9 +48,13 @@ namespace CodeGen.API.BLL
             Project updatedProject = await _unitOfWork.GetRepository<Project>().UpdateAsync(project);
             await _unitOfWork.Commit();
 
-            _realtimeHub.Clients.Group("code-generators").SendAsync("Generate", updatedProject);
-
             return updatedProject;
+        }
+
+        public async Task GenerateProjectByIdAsync(Guid id)
+        {
+            Project project = await GetProjectByIdAsync(id);
+            await _realtimeHub.Clients.Group("code-generators").SendAsync("Generate", project);
         }
 
         public async Task DeleteProjectAsync(Guid id)
