@@ -13,20 +13,26 @@ namespace CodeGen.Models
 
         public string Name { get; set; }
         private string _namePlural;
-        public string NamePlural {
-            get {
+        public string NamePlural
+        {
+            get
+            {
                 return string.IsNullOrEmpty(_namePlural) ? Name.ToPlural() : _namePlural;
             }
-            set {
+            set
+            {
                 _namePlural = value;
             }
         }
         private string _displayName;
-        public string DisplayName {
-            get {
+        public string DisplayName
+        {
+            get
+            {
                 return string.IsNullOrEmpty(_displayName) ? Name : _displayName;
             }
-            set {
+            set
+            {
                 _displayName = value;
             }
         }

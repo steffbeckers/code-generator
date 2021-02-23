@@ -23,7 +23,8 @@ namespace CodeGen.API.Models
         public CodeGenConfig Config
         {
             get { return string.IsNullOrEmpty(ConfigJson) ? null : JsonConvert.DeserializeObject<CodeGenConfig>(ConfigJson); }
-            set {
+            set
+            {
                 ConfigJson = JsonConvert.SerializeObject(value, Formatting.None,
                     new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
             }

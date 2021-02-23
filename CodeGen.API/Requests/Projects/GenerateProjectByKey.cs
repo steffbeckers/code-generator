@@ -1,7 +1,5 @@
 using AutoMapper;
 using CodeGen.API.BLL;
-using CodeGen.API.Models;
-using CodeGen.API.ViewModels;
 using MediatR;
 using System;
 using System.Threading;

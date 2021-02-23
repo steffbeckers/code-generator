@@ -43,7 +43,8 @@ namespace CodeGen.Services
             await _fileService.Create(
                 "code-gen-config.json",
                 JsonConvert.SerializeObject(
-                    new {
+                    new
+                    {
                         CodeGenConfig = codeGenConfig
                     },
                     Formatting.Indented,

@@ -35,10 +35,6 @@
     <TextTemplate Include="**\*.tt" />
     <Generated Include="**\*.Generated.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Watch Remove="Generators\ProjectGenerator.cs" />
-    <Watch Remove="Services\ProjectRunnerService.cs" />
-  </ItemGroup>
   <Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <TextTemplate>

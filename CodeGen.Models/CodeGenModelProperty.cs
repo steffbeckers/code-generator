@@ -4,11 +4,14 @@
     {
         public string Name { get; set; }
         private string _displayName;
-        public string DisplayName {
-            get {
+        public string DisplayName
+        {
+            get
+            {
                 return string.IsNullOrEmpty(_displayName) ? Name : _displayName;
             }
-            set {
+            set
+            {
                 _displayName = value;
             }
         }
@@ -23,5 +26,5 @@
         public bool AuditModifiedBy { get; set; }
         public bool AuditDateModified { get; set; }
         public bool AuditDeleted { get; set; }
-  }
+    }
 }

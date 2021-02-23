@@ -1,5 +1,4 @@
 using CodeGen.API.DAL.Repositories;
-using CodeGen.API.Hubs;
 using CodeGen.API.Models;
 using CodeGen.API.Validation;
 using FluentValidation.Results;

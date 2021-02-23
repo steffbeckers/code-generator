@@ -1,6 +1,5 @@
-using System;
 using CodeGen.Generators;
-using CodeGen.Models;
+using CodeGen.Runners;
 using CodeGen.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +16,8 @@ namespace CodeGen
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostContext, config) => {
+                .ConfigureAppConfiguration((hostContext, config) =>
+                {
                     IHostEnvironment env = hostContext.HostingEnvironment;
 
                     config.SetBasePath(env.ContentRootPath);
@@ -30,10 +30,20 @@ namespace CodeGen
                 {
                     services.AddSingleton<IConfigService, ConfigService>();
                     services.AddSingleton<IFileService, FileService>();
-                    services.AddSingleton<IConfigBasedGenerator, ConfigBasedGenerator>();
-                    services.AddSingleton<IModelsBasedGenerator, ModelsBasedGenerator>();
-                    services.AddSingleton<IProjectGenerator, ProjectGenerator>();
-                    services.AddSingleton<IProjectRunnerService, ProjectRunnerService>();
+
+                    // TODO: Factory?
+                    switch (hostContext.Configuration.GetValue<string>("CodeGenConfig:Template:Type"))
+                    {
+                        case "DotNET":
+                            services.AddSingleton<IProjectGenerator, DotNETProjectGenerator>();
+                            services.AddSingleton<IProjectRunner, DotNETProjectRunner>();
+                            break;
+                        default:
+                            services.AddSingleton<IProjectGenerator, ProjectGenerator>();
+                            services.AddSingleton<IProjectRunner, ProjectRunner>();
+                            break;
+                    }
+
                     services.AddHostedService<Worker>();
                 });
     }

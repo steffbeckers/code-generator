@@ -1,5 +1,6 @@
 using CodeGen.Generators;
 using CodeGen.Models;
+using CodeGen.Runners;
 using CodeGen.Services;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,7 @@ namespace CodeGen
         private readonly ILogger<Worker> _logger;
         private readonly IConfigService _configService;
         private readonly IProjectGenerator _projectGenerator;
-        private readonly IProjectRunnerService _projectRunnerService;
+        private readonly IProjectRunner _projectRunner;
 
         private HubConnection _realtimeConnection;
 
@@ -26,14 +27,14 @@ namespace CodeGen
             ILogger<Worker> logger,
             IConfigService configService,
             IProjectGenerator projectGenerator,
-            IProjectRunnerService projectRunnerService
+            IProjectRunner projectRunner
         )
         {
             _configuration = configuration;
             _logger = logger;
             _configService = configService;
             _projectGenerator = projectGenerator;
-            _projectRunnerService = projectRunnerService;
+            _projectRunner = projectRunner;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -45,7 +46,7 @@ namespace CodeGen
                 {
                     await _configService.LoadFromConfigFile();
                     await _projectGenerator.Generate();
-                    await _projectRunnerService.Run();
+                    await _projectRunner.Run();
                 }
                 catch (Exception ex)
                 {
@@ -87,7 +88,7 @@ namespace CodeGen
                     {
                         await _configService.LoadFromConfigFile();
                         await _projectGenerator.Generate();
-                        _projectRunnerService.Run();
+                        _projectRunner.Run();
                     }
                     catch (Exception ex)
                     {

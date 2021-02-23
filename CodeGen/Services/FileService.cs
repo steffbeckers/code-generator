@@ -1,12 +1,7 @@
-﻿using CodeGen.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System;
+﻿using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeGen.Services
@@ -63,7 +58,8 @@ namespace CodeGen.Services
             return Task.FromResult(Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList());
         }
 
-        public bool DirectoryExists(string path) {
+        public bool DirectoryExists(string path)
+        {
             return Directory.Exists(path);
         }
 

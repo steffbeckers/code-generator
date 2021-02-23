@@ -1,19 +1,12 @@
 ﻿{
   "$schema": "../../templatesettings.schema.json",
-  "Generate": true,
-  "BeforeGenerate": {
-    "CommitProjectOutputDirectory": false
+  "Name": "WebAPI",
+  "Type": "DotNET",
+  "DotNET": {
+    "StartupProjectPath": "CodeGenOutput.API",
+    "StartupProjectURL": "http://localhost:5001",
+    "MigrationsFolderPath": "DAL/Migrations"
   },
-  "AfterGenerate": {
-    "Build": true,
-    "RecreateDatabase": true,
-    "InstallProjectTemplate": false,
-    "OpenSwagger": false,
-    "Run": true
-  },
-  "StartupProjectPath": "CodeGenOutput.API",
-  "StartupProjectURL": "http://localhost:5001",
-  "MigrationsFolderPath": "DAL/Migrations",
   "ConfigBasedGenerator": [
     {
       "T4Template": "CodeGenOutput.API/BLL/BusinessLogicLayerTemplate.tt",

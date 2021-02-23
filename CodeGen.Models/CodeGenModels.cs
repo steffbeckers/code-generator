@@ -15,22 +15,27 @@ namespace CodeGen.Models
         public List<CodeGenModel> List { get; set; }
 
         // Helpers
-        public CodeGenModelProperty DefaultKey(CodeGenModel model = null) {
-            if (model != null) {
+        public CodeGenModelProperty DefaultKey(CodeGenModel model = null)
+        {
+            if (model != null)
+            {
                 CodeGenModelProperty modelKey = model.Properties.Where(x => x.Key).FirstOrDefault();
-                if (modelKey != null) {
+                if (modelKey != null)
+                {
                     return modelKey;
                 }
             }
 
-            return Defaults.Properties.Where(x => x.Key).FirstOrDefault() ?? new CodeGenModelProperty() {
+            return Defaults.Properties.Where(x => x.Key).FirstOrDefault() ?? new CodeGenModelProperty()
+            {
                 Name = "Id",
                 Type = "Guid",
                 Key = true
             };
         }
 
-        public List<CodeGenModelProperty> DefaultAuditProperties() {
+        public List<CodeGenModelProperty> DefaultAuditProperties()
+        {
             return Defaults.Properties.Where(x =>
                 x.AuditCreatedBy ||
                 x.AuditDateCreated ||
@@ -40,7 +45,8 @@ namespace CodeGen.Models
             ).ToList();
         }
 
-        public CodeGenModelProperty DefaultAuditDateCreatedProperty() {
+        public CodeGenModelProperty DefaultAuditDateCreatedProperty()
+        {
             return Defaults.Properties.Where(x => x.AuditDateCreated).SingleOrDefault();
             // ?? new CodeGenModelProperty() {
             //     Name = "DateCreated",
@@ -49,7 +55,8 @@ namespace CodeGen.Models
             // };
         }
 
-        public CodeGenModelProperty DefaultAuditCreatedByProperty() {
+        public CodeGenModelProperty DefaultAuditCreatedByProperty()
+        {
             return Defaults.Properties.Where(x => x.AuditCreatedBy).SingleOrDefault();
             // ?? new CodeGenModelProperty() {
             //     Name = "CreatedBy",
@@ -58,7 +65,8 @@ namespace CodeGen.Models
             // };
         }
 
-        public CodeGenModelProperty DefaultAuditDateModifiedProperty() {
+        public CodeGenModelProperty DefaultAuditDateModifiedProperty()
+        {
             return Defaults.Properties.Where(x => x.AuditDateModified).SingleOrDefault();
             // ?? new CodeGenModelProperty() {
             //     Name = "DateModified",
@@ -67,7 +75,8 @@ namespace CodeGen.Models
             // };
         }
 
-        public CodeGenModelProperty DefaultAuditModifiedByProperty() {
+        public CodeGenModelProperty DefaultAuditModifiedByProperty()
+        {
             return Defaults.Properties.Where(x => x.AuditModifiedBy).SingleOrDefault();
             // ?? new CodeGenModelProperty() {
             //     Name = "ModifiedBy",
@@ -76,7 +85,8 @@ namespace CodeGen.Models
             // };
         }
 
-        public CodeGenModelProperty DefaultAuditDeletedProperty() {
+        public CodeGenModelProperty DefaultAuditDeletedProperty()
+        {
             return Defaults.Properties.Where(x => x.AuditDeleted).SingleOrDefault();
             // ?? new CodeGenModelProperty() {
             //     Name = "Deleted",
