@@ -42,6 +42,9 @@ namespace CodeGen
             bool standalone = _configuration.GetValue<bool>("Standalone");
             if (standalone)
             {
+                // Standalone
+                _logger.LogInformation($"Standalone");
+
                 try
                 {
                     await _configService.LoadFromConfigFile();
@@ -54,15 +57,16 @@ namespace CodeGen
                     throw;
                 }
             }
-            else
+            else 
             {
-                _logger.LogInformation($"API: {_configuration.GetValue<string>("API")}");
+                // API
+                _logger.LogInformation($"API: {_configuration.GetValue<string>("API:URL")}");
 
                 while (!cancellationToken.IsCancellationRequested && (this._realtimeConnection == null || this._realtimeConnection.State == HubConnectionState.Disconnected))
                 {
                     // Setup a connection to the realtime hub
                     this._realtimeConnection = new HubConnectionBuilder()
-                        .WithUrl(_configuration.GetValue<string>("API") + "/realtime-hub?isCodeGenerator=true")
+                        .WithUrl(_configuration.GetValue<string>("API:URL") + "/realtime-hub?isCodeGenerator=true")
                         .WithAutomaticReconnect()
                         .Build();
 
@@ -78,6 +82,13 @@ namespace CodeGen
 
                     this._realtimeConnection.On("Generate", async (Project project) =>
                     {
+                        // Only handle requests with template match
+                        // TODO: This could be better => Only send message to correct worker
+                        if (project.Config.Template.Name != _configuration.GetValue<string>("API:HandleTemplate"))
+                        {
+                            return;
+                        }
+
                         await _configService.LoadFromRequest(project.Config);
                     });
 
