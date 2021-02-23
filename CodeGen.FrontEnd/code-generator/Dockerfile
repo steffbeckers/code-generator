@@ -9,7 +9,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build.prod
+RUN npm run build -- --prod
 
 # production stage
 FROM nginx as production-stage
