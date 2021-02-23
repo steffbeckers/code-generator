@@ -2,8 +2,8 @@
   "$schema": "./code-gen-config.schema.json",
   "CodeGenConfig": {
     "Template": {
-      "Name": "WebAPI",
-      "Type": "DotNET"
+      "Name": "Angular",
+      "Type": "Angular"
     },
     "Models": {
       "StringPropertyMaxLength": 100,
@@ -120,9 +120,6 @@
           }
         }
       ]
-    },
-    "Paths": {
-      "Output": "_Output"
     }
   }
 }
