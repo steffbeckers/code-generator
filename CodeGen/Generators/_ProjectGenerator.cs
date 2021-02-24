@@ -105,10 +105,23 @@ namespace CodeGen.Generators
                 }
             }
 
+            // Filter excluded files
+            List<string> excludedFiles = new List<string>();
+            foreach (string projectTemplateFile in _projectTemplateFiles)
+            {
+                string projectTemplateFileName = Path.GetFileName(projectTemplateFile);
+
+                if (_projectTemplateSettings.Exclude.Any(x => projectTemplateFile.Contains(x)))
+                {
+                    excludedFiles.Add(projectTemplateFile);
+                }
+            }
+
             // Copy all non template generation files to output
             foreach (string projectTemplateFile in _projectTemplateFiles)
             {
-                if (templateGenerationFiles.Contains(projectTemplateFile)) { continue; }
+                if (excludedFiles.Contains(projectTemplateFile) ||
+                    templateGenerationFiles.Contains(projectTemplateFile)) { continue; }
 
                 string projectTemplateFileName = Path.GetFileName(projectTemplateFile);
 

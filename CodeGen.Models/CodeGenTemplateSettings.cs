@@ -8,6 +8,7 @@ namespace CodeGen.Models
         {
             ConfigBasedGenerator = new List<CodeGenTemplateSettingsData>();
             ModelsBasedGenerator = new List<CodeGenTemplateSettingsData>();
+            Exclude = new List<string>();
         }
 
         public string TemplatePath { get; set; }
@@ -15,5 +16,6 @@ namespace CodeGen.Models
 
         public List<CodeGenTemplateSettingsData> ConfigBasedGenerator { get; set; }
         public List<CodeGenTemplateSettingsData> ModelsBasedGenerator { get; set; }
+        public List<string> Exclude { get; set; }
     }
 }

@@ -4,5 +4,8 @@
   "Type": "Angular",
   "Angular": {},
   "ConfigBasedGenerator": [],
-  "ModelsBasedGenerator": []
+  "ModelsBasedGenerator": [],
+  "Exclude": [
+    "node_modules/"
+  ]
 }
