@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -119,10 +120,15 @@ namespace CodeGen.Generators
                 );
                 filePath = filePath.Replace('\\', '/').Replace("Templates/", "");
 
-                // File text
-                string fileText = await _fileService.Read(projectTemplateFile);
+                // Create output directory if not exists
+                await _fileService.CreateDirectory(Path.GetDirectoryName(filePath));
 
-                await _fileService.Create(filePath, fileText);
+                // Copy file to output directory if not exists
+                if (!await _fileService.Exists(filePath))
+                {
+                    _logger.LogInformation($"Copy file: " + projectTemplateFileName);
+                    await _fileService.Copy(projectTemplateFile, filePath);
+                }
             }
 
             // Generate files with config
@@ -157,13 +163,24 @@ namespace CodeGen.Generators
             _outputProjectPath = _outputProjectPath.Replace('\\', '/').Replace("Templates/", "");
         }
 
-        private Task CleanupProjectOutputDirectory(string projectName)
+        private async Task CleanupProjectOutputDirectory(string projectName)
         {
             string projectOutputFolderPath = Path.Combine("_Output", "Projects", projectName);
 
+            bool pathExists = _fileService.DirectoryExists(projectOutputFolderPath);
+            if (!pathExists) { return; }
+
             _logger.LogInformation("Cleaning project output folder: " + projectOutputFolderPath);
 
-            return _fileService.DeleteDirectory(projectOutputFolderPath);
+            ProcessStartInfo gitAdd = new ProcessStartInfo("git");
+            gitAdd.Arguments = $"add {projectOutputFolderPath}";
+            gitAdd.WorkingDirectory = projectOutputFolderPath;
+            await Process.Start(gitAdd).WaitForExitAsync();
+
+            ProcessStartInfo gitCheckoutDirectory = new ProcessStartInfo("git");
+            gitCheckoutDirectory.Arguments = $"checkout -- {projectOutputFolderPath}";
+            gitCheckoutDirectory.WorkingDirectory = projectOutputFolderPath;
+            await Process.Start(gitCheckoutDirectory).WaitForExitAsync();
         }
 
         private Task GenerateBasedOnConfig(string projectTemplateFile, CodeGenTemplateSettingsData data)

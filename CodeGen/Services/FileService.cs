@@ -10,21 +10,17 @@ namespace CodeGen.Services
     {
         Task Create(string path, string text);
         Task<string> Read(string path);
+        Task Copy(string fromPath, string toPath);
+        Task<bool> Exists(string path);
         Task<List<string>> GetSubdirectories(string path);
         Task<List<string>> TraverseDirectory(string path);
-        bool DirectoryExists(string projectsOutputFolderPath);
+        Task CreateDirectory(string path);
+        bool DirectoryExists(string path);
         Task DeleteDirectory(string path);
     }
 
     public class FileService : IFileService
     {
-        private readonly ILogger<FileService> _logger;
-
-        public FileService(ILogger<FileService> logger)
-        {
-            _logger = logger;
-        }
-
         public Task<string> Read(string path)
         {
             if (File.Exists(path))
@@ -43,9 +39,19 @@ namespace CodeGen.Services
                 Directory.CreateDirectory(directoryName);
             }
 
-            _logger.LogInformation($"Create file: " + path);
-
             return File.WriteAllTextAsync(path, text);
+        }
+
+        public Task Copy(string fromPath, string toPath)
+        {
+            File.Copy(fromPath, toPath);
+
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> Exists(string path)
+        {
+            return Task.FromResult(File.Exists(path));
         }
 
         public Task<List<string>> GetSubdirectories(string path)
@@ -56,6 +62,13 @@ namespace CodeGen.Services
         public Task<List<string>> TraverseDirectory(string path)
         {
             return Task.FromResult(Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList());
+        }
+
+        public Task CreateDirectory(string path)
+        {
+            Directory.CreateDirectory(path);
+
+            return Task.CompletedTask;
         }
 
         public bool DirectoryExists(string path)

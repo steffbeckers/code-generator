@@ -1,4 +1,4 @@
-namespace CodeGenOutput.API.Requests
+﻿namespace CodeGenOutput.API.Requests
 {
     public class Response
     {
