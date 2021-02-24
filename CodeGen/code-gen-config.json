@@ -1,10 +1,5 @@
 {
-  "$schema": "./code-gen-config.schema.json",
   "CodeGenConfig": {
-    "Template": {
-      "Name": "Angular",
-      "Type": "Angular"
-    },
     "Models": {
       "StringPropertyMaxLength": 100,
       "Defaults": {

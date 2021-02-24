@@ -1,5 +1,6 @@
 ﻿using CodeGen.Models;
 using CodeGen.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace CodeGen.Runners
 
         public async Task Run()
         {
-            _projectTemplateName = _configService.CodeGenConfig.Template.Name;
+            _projectTemplateName = _configService.AppSettings.GetValue<string>("Template:Name");
 
             _logger.LogInformation("Running project: " + _projectTemplateName);
 

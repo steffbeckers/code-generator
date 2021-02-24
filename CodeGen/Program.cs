@@ -31,8 +31,7 @@ namespace CodeGen
                     services.AddSingleton<IConfigService, ConfigService>();
                     services.AddSingleton<IFileService, FileService>();
 
-                    // TODO: Factory?
-                    switch (hostContext.Configuration.GetValue<string>("CodeGenConfig:Template:Type"))
+                    switch (hostContext.Configuration.GetValue<string>("Template:Type"))
                     {
                         case "DotNET":
                             services.AddSingleton<IProjectGenerator, DotNETProjectGenerator>();

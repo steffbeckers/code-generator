@@ -14,7 +14,6 @@ namespace CodeGen
 {
     public class Worker : BackgroundService
     {
-        private readonly IConfiguration _configuration;
         private readonly ILogger<Worker> _logger;
         private readonly IConfigService _configService;
         private readonly IProjectGenerator _projectGenerator;
@@ -23,14 +22,12 @@ namespace CodeGen
         private HubConnection _realtimeConnection;
 
         public Worker(
-            IConfiguration configuration,
             ILogger<Worker> logger,
             IConfigService configService,
             IProjectGenerator projectGenerator,
             IProjectRunner projectRunner
         )
         {
-            _configuration = configuration;
             _logger = logger;
             _configService = configService;
             _projectGenerator = projectGenerator;
@@ -39,12 +36,10 @@ namespace CodeGen
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            bool standalone = _configuration.GetValue<bool>("Standalone");
+            bool standalone = _configService.AppSettings.GetValue<bool>("Standalone");
             if (standalone)
             {
                 // Standalone
-                _logger.LogInformation($"Standalone");
-
                 try
                 {
                     await _configService.LoadFromConfigFile();
@@ -57,21 +52,19 @@ namespace CodeGen
                     throw;
                 }
             }
-            else 
+            else
             {
                 // API
-                _logger.LogInformation($"API: {_configuration.GetValue<string>("API:URL")}");
-
                 while (!cancellationToken.IsCancellationRequested && (this._realtimeConnection == null || this._realtimeConnection.State == HubConnectionState.Disconnected))
                 {
                     // Setup a connection to the realtime hub
-                    this._realtimeConnection = new HubConnectionBuilder()
-                        .WithUrl(_configuration.GetValue<string>("API:URL") + "/realtime-hub?isCodeGenerator=true")
+                    _realtimeConnection = new HubConnectionBuilder()
+                        .WithUrl($"{_configService.AppSettings.GetValue<string>("API:URL")}/realtime-hub?isCodeGenerator=true&Template={_configService.AppSettings.GetValue<string>("Template:Name")}")
                         .WithAutomaticReconnect()
                         .Build();
 
                     // When the connection is closed
-                    this._realtimeConnection.Closed += async (ex) =>
+                    _realtimeConnection.Closed += async (ex) =>
                     {
                         _logger.LogError("Lost realtime connection");
                         if (ex != null)
@@ -80,16 +73,9 @@ namespace CodeGen
                         await Task.CompletedTask;
                     };
 
-                    this._realtimeConnection.On("Generate", async (Project project) =>
+                    _realtimeConnection.On("Generate", async (CodeGenConfig config) =>
                     {
-                        // Only handle requests with template match
-                        // TODO: This could be better => Only send message to correct worker
-                        if (project.Config.Template.Name != _configuration.GetValue<string>("API:HandleTemplate"))
-                        {
-                            return;
-                        }
-
-                        await _configService.LoadFromRequest(project.Config);
+                        await _configService.UpdateConfig(config);
                     });
 
                     // Start initial realtime connection
@@ -115,18 +101,18 @@ namespace CodeGen
             try
             {
                 // Don't connect again if already connected
-                if (this._realtimeConnection.State == HubConnectionState.Disconnected)
+                if (_realtimeConnection.State == HubConnectionState.Disconnected)
                 {
                     _logger.LogInformation("Connecting to realtime hub...");
-                    await this._realtimeConnection.StartAsync();
+                    await _realtimeConnection.StartAsync();
                 }
 
-                if (this._realtimeConnection.State == HubConnectionState.Connected)
+                if (_realtimeConnection.State == HubConnectionState.Connected)
                     _logger.LogInformation("Connected.");
             }
             catch (Exception ex)
             {
-                _logger.LogError("Not able to connect. Is the API up and running? " + _configuration.GetValue<string>("API"));
+                _logger.LogError("Not able to connect. Is the API up and running? " + _configService.AppSettings.GetValue<string>("API:URL"));
                 _logger.LogError(ex.ToString());
             }
         }

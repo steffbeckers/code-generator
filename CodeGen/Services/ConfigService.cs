@@ -8,9 +8,10 @@ namespace CodeGen.Services
 {
     public interface IConfigService
     {
+        IConfiguration AppSettings { get; }
         CodeGenConfig CodeGenConfig { get; }
         Task LoadFromConfigFile();
-        Task LoadFromRequest(CodeGenConfig codeGenConfig);
+        Task UpdateConfig(CodeGenConfig codeGenConfig);
     }
 
     public class ConfigService : IConfigService
@@ -18,6 +19,8 @@ namespace CodeGen.Services
         private readonly IConfiguration _configuration;
         private readonly IFileService _fileService;
         private CodeGenConfig _codeGenConfig;
+
+        public IConfiguration AppSettings => _configuration;
         public CodeGenConfig CodeGenConfig => _codeGenConfig;
 
         public ConfigService(
@@ -36,7 +39,7 @@ namespace CodeGen.Services
             return Task.CompletedTask;
         }
 
-        public async Task LoadFromRequest(CodeGenConfig codeGenConfig)
+        public async Task UpdateConfig(CodeGenConfig codeGenConfig)
         {
             codeGenConfig.Models.List = codeGenConfig.Models.List.OrderBy(x => x.Name).ToList();
 

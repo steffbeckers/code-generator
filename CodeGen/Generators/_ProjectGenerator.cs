@@ -41,7 +41,7 @@ namespace CodeGen.Generators
 
         public virtual async Task Generate()
         {
-            _projectTemplateName = _configService.CodeGenConfig.Template.Name;
+            _projectTemplateName = _configService.AppSettings.GetValue<string>("Template:Name");
 
             _logger.LogInformation("Generating project from template: " + _projectTemplateName);
 
@@ -82,9 +82,9 @@ namespace CodeGen.Generators
             {
                 string projectTemplateFileName = Path.GetFileName(projectTemplateFile);
 
-                if (projectTemplateFile.EndsWith("templatesettings.json") ||
-                    projectTemplateFile.EndsWith(".tt") ||
-                    projectTemplateFile.EndsWith(".Generated.cs"))
+                if (projectTemplateFileName.EndsWith("templatesettings.json") ||
+                    projectTemplateFileName.EndsWith(".tt") ||
+                    projectTemplateFileName.EndsWith(".Generated.cs"))
                 {
                     templateGenerationFiles.Add(projectTemplateFile);
                 }
@@ -95,7 +95,7 @@ namespace CodeGen.Generators
             {
                 string projectTemplateFileName = Path.GetFileName(projectTemplateFile);
 
-                if (projectTemplateFile.EndsWith(".cs"))
+                if (projectTemplateFileName.EndsWith(".cs"))
                 {
                     if (templateGenerationFiles.Any(x => x.Contains(Path.GetFileNameWithoutExtension(projectTemplateFileName) + ".tt")))
                     {
