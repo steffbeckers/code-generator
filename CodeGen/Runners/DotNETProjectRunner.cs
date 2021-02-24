@@ -27,7 +27,7 @@ namespace CodeGen.Runners
             _fileService = fileService;
         }
 
-        public async Task Run()
+        public new async Task Run()
         {
             await base.Run();
 

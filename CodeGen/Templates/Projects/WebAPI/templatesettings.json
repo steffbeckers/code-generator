@@ -1,7 +1,4 @@
 ﻿{
-  "$schema": "../../templatesettings.schema.json",
-  "Name": "WebAPI",
-  "Type": "DotNET",
   "DotNET": {
     "StartupProjectPath": "CodeGenOutput.API",
     "StartupProjectURL": "http://localhost:5001",

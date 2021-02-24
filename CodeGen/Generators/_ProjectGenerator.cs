@@ -40,7 +40,7 @@ namespace CodeGen.Generators
             _fileService = fileService;
         }
 
-        public virtual async Task Generate()
+        public async Task Generate()
         {
             _projectTemplateName = _configService.AppSettings.GetValue<string>("Template:Name");
 

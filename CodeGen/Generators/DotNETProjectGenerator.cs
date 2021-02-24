@@ -28,7 +28,7 @@ namespace CodeGen.Generators
             _fileService = fileService;
         }
 
-        public override async Task Generate()
+        public new async Task Generate()
         {
             await base.Generate();
 
@@ -48,7 +48,7 @@ namespace CodeGen.Generators
             await dotnetBuildProcess.WaitForExitAsync();
             if (dotnetBuildProcess.ExitCode == 1)
             {
-                throw new Exception("Project build failed. Stopping next after generate steps");
+                throw new Exception("Project build failed.");
             }
 
             _logger.LogInformation("Recreating database/migrations: " + startupProjectPath);

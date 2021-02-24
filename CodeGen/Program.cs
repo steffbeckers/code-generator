@@ -33,6 +33,10 @@ namespace CodeGen
 
                     switch (hostContext.Configuration.GetValue<string>("Template:Type"))
                     {
+                        case "Angular":
+                            services.AddSingleton<IProjectGenerator, AngularProjectGenerator>();
+                            services.AddSingleton<IProjectRunner, AngularProjectRunner>();
+                            break;
                         case "DotNET":
                             services.AddSingleton<IProjectGenerator, DotNETProjectGenerator>();
                             services.AddSingleton<IProjectRunner, DotNETProjectRunner>();

@@ -1,7 +1,4 @@
 {
-  "$schema": "../../templatesettings.schema.json",
-  "Name": "Angular",
-  "Type": "Angular",
   "Angular": {},
   "ConfigBasedGenerator": [],
   "ModelsBasedGenerator": [],

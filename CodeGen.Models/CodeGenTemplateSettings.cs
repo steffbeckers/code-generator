@@ -12,6 +12,7 @@ namespace CodeGen.Models
         }
 
         public string TemplatePath { get; set; }
+        public CodeGenTemplateSettingsAngular Angular { get; set; }
         public CodeGenTemplateSettingsDotNET DotNET { get; set; }
 
         public List<CodeGenTemplateSettingsData> ConfigBasedGenerator { get; set; }
