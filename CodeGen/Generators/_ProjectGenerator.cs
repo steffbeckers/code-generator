@@ -203,6 +203,7 @@ namespace CodeGen.Generators
             ITextTemplate template = Activator.CreateInstance(templateType, _configService.CodeGenConfig) as ITextTemplate;
             string fileText = template.TransformText();
 
+            _logger.LogInformation("Create file: " + filePath);
             _fileService.Create(filePath, fileText);
 
             return Task.CompletedTask;
@@ -230,6 +231,7 @@ namespace CodeGen.Generators
                 ITextTemplate template = Activator.CreateInstance(templateType, _configService.CodeGenConfig, model) as ITextTemplate;
                 string fileText = template.TransformText();
 
+                _logger.LogInformation("Create file: " + filePath);
                 _fileService.Create(filePath, fileText);
             }
 
