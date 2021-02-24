@@ -126,7 +126,7 @@ namespace CodeGen.Generators
                 // Copy file to output directory if not exists
                 if (!await _fileService.Exists(filePath))
                 {
-                    _logger.LogInformation($"Copy file: " + projectTemplateFileName);
+                    _logger.LogInformation($"Copy file to: " + filePath);
                     await _fileService.Copy(projectTemplateFile, filePath);
                 }
             }
@@ -166,19 +166,19 @@ namespace CodeGen.Generators
         private async Task CleanupProjectOutputDirectory(string projectName)
         {
             string projectOutputFolderPath = Path.Combine("_Output", "Projects", projectName);
+            projectOutputFolderPath = projectOutputFolderPath.Replace('\\', '/');
 
-            bool pathExists = _fileService.DirectoryExists(projectOutputFolderPath);
-            if (!pathExists) { return; }
+            if (!_fileService.DirectoryExists(projectOutputFolderPath)) { return; }
 
             _logger.LogInformation("Cleaning project output folder: " + projectOutputFolderPath);
 
             ProcessStartInfo gitAdd = new ProcessStartInfo("git");
-            gitAdd.Arguments = $"add {projectOutputFolderPath}";
+            gitAdd.Arguments = $"add .";
             gitAdd.WorkingDirectory = projectOutputFolderPath;
             await Process.Start(gitAdd).WaitForExitAsync();
 
             ProcessStartInfo gitCheckoutDirectory = new ProcessStartInfo("git");
-            gitCheckoutDirectory.Arguments = $"checkout -- {projectOutputFolderPath}";
+            gitCheckoutDirectory.Arguments = $"restore --source=HEAD --staged --worktree -- .";
             gitCheckoutDirectory.WorkingDirectory = projectOutputFolderPath;
             await Process.Start(gitCheckoutDirectory).WaitForExitAsync();
         }
