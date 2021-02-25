@@ -5,10 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "host": "http-server -a 0.0.0.0 -p 4200",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "server": "angular-http-server"
   },
   "private": true,
   "dependencies": {
@@ -30,8 +30,8 @@
     "@angular/compiler-cli": "~11.2.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "angular-http-server": "^1.10.0",
     "codelyzer": "^6.0.0",
-    "http-server": "^0.12.3",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.1.0",

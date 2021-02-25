@@ -33,7 +33,7 @@ namespace CodeGen.Runners
 
             // Start project
             ProcessStartInfo angularRun = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
-            angularRun.Arguments = @"run host";
+            angularRun.Arguments = @"run server -- --path ./dist/code-gen-output/ -p 4200";
             angularRun.WorkingDirectory = _outputProjectPath;
             await Process.Start(angularRun).WaitForExitAsync();
         }
