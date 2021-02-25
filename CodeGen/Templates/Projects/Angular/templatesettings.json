@@ -1,8 +1,11 @@
 {
   "Angular": {},
   "ConfigBasedGenerator": [],
-  "ModelsBasedGenerator": [],
-  "Exclude": [
-    "node_modules/"
-  ]
+  "ModelsBasedGenerator": [
+    {
+      "T4Template": "src/app/shared/models/ModelTemplate.tt",
+      "Output": "{0}.model.ts"
+    }
+  ],
+  "Exclude": ["node_modules/"]
 }
