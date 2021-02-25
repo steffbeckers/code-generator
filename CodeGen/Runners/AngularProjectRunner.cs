@@ -33,7 +33,7 @@ namespace CodeGen.Runners
 
             // Start project
             ProcessStartInfo angularRun = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
-            angularRun.Arguments = @"start -- --host 0.0.0.0 --disable-host-check";
+            angularRun.Arguments = @"run host";
             angularRun.WorkingDirectory = _outputProjectPath;
             await Process.Start(angularRun).WaitForExitAsync();
         }

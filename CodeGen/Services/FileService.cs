@@ -11,6 +11,7 @@ namespace CodeGen.Services
         Task Create(string path, string text);
         Task<string> Read(string path);
         Task Copy(string fromPath, string toPath);
+        Task CopyIfNewer(string fromPath, string toPath);
         Task<bool> Exists(string path);
         Task<List<string>> GetSubdirectories(string path);
         Task<List<string>> TraverseDirectory(string path);
@@ -44,7 +45,20 @@ namespace CodeGen.Services
 
         public Task Copy(string fromPath, string toPath)
         {
-            File.Copy(fromPath, toPath);
+            File.Copy(fromPath, toPath, true);
+
+            return Task.CompletedTask;
+        }
+
+        public Task CopyIfNewer(string fromPath, string toPath)
+        {
+            FileInfo fromFile = new FileInfo(fromPath);
+            FileInfo toFile = new FileInfo(toPath);
+
+            if (fromFile.LastWriteTime > toFile.LastWriteTime)
+            {
+                return Copy(fromPath, toPath);
+            }
 
             return Task.CompletedTask;
         }

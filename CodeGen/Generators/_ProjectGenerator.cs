@@ -136,8 +136,13 @@ namespace CodeGen.Generators
                 // Create output directory if not exists
                 await _fileService.CreateDirectory(Path.GetDirectoryName(filePath));
 
-                // Copy file to output directory if not exists
-                if (!await _fileService.Exists(filePath))
+                // Copy file to output directory if newer
+                if (await _fileService.Exists(filePath))
+                {
+                    _logger.LogInformation($"Replace file if newer: " + filePath);
+                    await _fileService.CopyIfNewer(projectTemplateFile, filePath);
+                }
+                else
                 {
                     _logger.LogInformation($"Copy file to: " + filePath);
                     await _fileService.Copy(projectTemplateFile, filePath);

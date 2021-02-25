@@ -37,8 +37,12 @@ namespace CodeGen.Generators
             ProcessStartInfo npmInstall = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
             npmInstall.Arguments = @"install";
             npmInstall.WorkingDirectory = _outputProjectPath;
-            npmInstall.RedirectStandardOutput = false;
             await Process.Start(npmInstall).WaitForExitAsync();
+
+            ProcessStartInfo npmBuild = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
+            npmBuild.Arguments = @"run build";
+            npmBuild.WorkingDirectory = _outputProjectPath;
+            await Process.Start(npmBuild).WaitForExitAsync();
         }
     }
 }
