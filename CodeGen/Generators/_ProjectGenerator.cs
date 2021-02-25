@@ -235,7 +235,7 @@ namespace CodeGen.Generators
                 string filePath = Path.Combine(
                     "_Output",
                     Path.GetDirectoryName(projectTemplateFile),
-                    string.Format(data.Output, model.Name, model.NamePlural)
+                    string.Format(data.Output, model.Name, model.NamePlural, model.Name.ToLower(), model.NamePlural.ToLower())
                 );
                 filePath = filePath.Replace('\\', '/').Replace("Templates/", "");
 

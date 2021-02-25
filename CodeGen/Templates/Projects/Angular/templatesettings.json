@@ -1,10 +1,39 @@
 {
   "Angular": {},
-  "ConfigBasedGenerator": [],
+  "ConfigBasedGenerator": [
+    {
+      "T4Template": "src/app/AppRoutingModuleTemplate.tt",
+      "Output": "app-routing.module.ts"
+    }
+  ],
   "ModelsBasedGenerator": [
     {
       "T4Template": "src/app/shared/models/ModelTemplate.tt",
-      "Output": "{0}.model.ts"
+      "Output": "{2}.model.ts"
+    },
+    {
+      "T4Template": "src/app/modules/ModelComponentCSSTemplate.tt",
+      "Output": "../{3}/{3}.component.scss"
+    },
+    {
+      "T4Template": "src/app/modules/ModelComponentHTMLTemplate.tt",
+      "Output": "../{3}/{3}.component.html"
+    },
+    {
+      "T4Template": "src/app/modules/ModelComponentSpecTemplate.tt",
+      "Output": "../{3}/{3}.component.spec.ts"
+    },
+    {
+      "T4Template": "src/app/modules/ModelComponentTSTemplate.tt",
+      "Output": "../{3}/{3}.component.ts"
+    },
+    {
+      "T4Template": "src/app/modules/ModelModuleTemplate.tt",
+      "Output": "../{3}/{3}.module.ts"
+    },
+    {
+      "T4Template": "src/app/modules/ModelRoutingModuleTemplate.tt",
+      "Output": "../{3}/{3}-routing.module.ts"
     }
   ],
   "Exclude": ["node_modules/"]

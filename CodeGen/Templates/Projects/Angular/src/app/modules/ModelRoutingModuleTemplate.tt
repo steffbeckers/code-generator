@@ -1,0 +1,17 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { <#= _model.NamePlural #>Component } from './<#= _model.NamePlural.ToLower() #>.component';
+
+const routes: Routes = [{ path: '', component: <#= _model.NamePlural #>Component }];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class <#= _model.NamePlural #>RoutingModule { }
