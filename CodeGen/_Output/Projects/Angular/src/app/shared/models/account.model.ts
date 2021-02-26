@@ -1,7 +1,14 @@
+import { Contact } from './contact.model';
+
 export class Account {
-  Name: string;
-  Description: string;
-  Telephone: string;
-  Email: string;
-  Website: string;
+  id: string;
+  name: string;
+  description: string;
+  telephone: string;
+  email: string;
+  website: string;
+  dateCreated: Date;
+  dateModified: Date;
+
+  contacts: Contact[] = [];
 }
