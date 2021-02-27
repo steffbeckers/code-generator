@@ -1,0 +1,19 @@
+.layout {
+  padding: 16px;
+}
+
+nav .link {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.active {
+    font-weight: bold;
+  }
+}
