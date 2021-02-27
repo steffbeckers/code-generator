@@ -6,11 +6,14 @@ import { environment } from 'src/environments/environment';
 export class AccountsService {
   constructor(private http: HttpClient) {}
 
-  getAccounts(include: string = '') {
+  getAccounts(include?: string) {
+    let params: { include?: string } = {};
+    if (include) {
+      params.include = include;
+    }
+
     return this.http.get(`${environment.api}/accounts`, {
-      params: {
-        include,
-      },
+      params,
     });
   }
 }

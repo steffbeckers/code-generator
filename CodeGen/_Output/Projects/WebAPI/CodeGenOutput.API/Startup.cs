@@ -45,6 +45,8 @@ namespace CodeGenOutput.API
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            services.AddCors();
+
             services.AddControllers(options =>
             {
                 options.Filters.Add(new ApiExceptionFilter());
@@ -80,6 +82,13 @@ namespace CodeGenOutput.API
                     options.RoutePrefix = string.Empty;
                 });
             }
+
+            app.UseCors(options =>
+            {
+                options.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
 
             app.UseRouting();
 
