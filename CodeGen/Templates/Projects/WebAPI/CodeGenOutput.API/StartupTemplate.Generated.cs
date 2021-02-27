@@ -60,17 +60,16 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API {
                     "     app.UseSwaggerUI(options =>\r\n                {\r\n                    options" +
                     ".SwaggerEndpoint(\"swagger/v1/swagger.json\", \"CodeGenOutput.API v1\");\r\n          " +
                     "          options.RoutePrefix = string.Empty;\r\n                });\r\n            " +
-                    "}\r\n\r\n            app.UseHttpsRedirection();\r\n\r\n            app.UseRouting();\r\n\r\n" +
-                    "            app.UseAuthorization();\r\n\r\n            app.UseEndpoints(endpoints =>" +
-                    "\r\n            {\r\n                endpoints.MapControllers();\r\n            });\r\n " +
-                    "       }\r\n\r\n        private static NewtonsoftJsonPatchInputFormatter GetJsonPatc" +
-                    "hInputFormatter()\r\n        {\r\n            var builder = new ServiceCollection()\r" +
-                    "\n                .AddLogging()\r\n                .AddMvc()\r\n                .AddN" +
-                    "ewtonsoftJson()\r\n                .Services.BuildServiceProvider();\r\n\r\n          " +
-                    "  return builder\r\n                .GetRequiredService<IOptions<MvcOptions>>()\r\n " +
-                    "               .Value\r\n                .InputFormatters\r\n                .OfType" +
-                    "<NewtonsoftJsonPatchInputFormatter>()\r\n                .First();\r\n        }\r\n   " +
-                    " }\r\n}\r\n");
+                    "}\r\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r\n   " +
+                    "         app.UseEndpoints(endpoints =>\r\n            {\r\n                endpoints" +
+                    ".MapControllers();\r\n            });\r\n        }\r\n\r\n        private static Newtons" +
+                    "oftJsonPatchInputFormatter GetJsonPatchInputFormatter()\r\n        {\r\n            " +
+                    "var builder = new ServiceCollection()\r\n                .AddLogging()\r\n          " +
+                    "      .AddMvc()\r\n                .AddNewtonsoftJson()\r\n                .Services" +
+                    ".BuildServiceProvider();\r\n\r\n            return builder\r\n                .GetRequ" +
+                    "iredService<IOptions<MvcOptions>>()\r\n                .Value\r\n                .In" +
+                    "putFormatters\r\n                .OfType<NewtonsoftJsonPatchInputFormatter>()\r\n   " +
+                    "             .First();\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden
