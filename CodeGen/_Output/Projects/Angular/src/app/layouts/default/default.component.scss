@@ -2,18 +2,28 @@
   padding: 16px;
 }
 
-nav .link {
-  cursor: pointer;
+header {
+  .title {
+    cursor: pointer;
 
-  &:hover {
-    text-decoration: underline;
+    &:focus {
+      outline: 0;
+    }
   }
 
-  &:focus {
-    outline: 0;
-  }
+  nav .link {
+    cursor: pointer;
 
-  &.active {
-    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &.active {
+      font-weight: bold;
+    }
   }
 }
