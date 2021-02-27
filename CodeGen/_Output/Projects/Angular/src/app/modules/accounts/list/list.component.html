@@ -6,6 +6,9 @@
     </div>
   </header>
   <main fxLayout="column" fxLayoutGap="16px">
+    <ng-container *ngIf="(accounts$ | async) === null">
+      <p>Loading...</p>
+    </ng-container>
     <ng-container *ngIf="accounts$ | async as accounts">
       <table *ngIf="accounts.length > 0">
         <thead>
@@ -16,7 +19,11 @@
           <th>Website</th>
         </thead>
         <tbody>
-          <tr *ngFor="let account of accounts">
+          <tr
+            class="clickable"
+            *ngFor="let account of accounts"
+            [routerLink]="account.id"
+          >
             <td>{{ account.name }}</td>
             <td>{{ account.description }}</td>
             <td>{{ account.telephone }}</td>

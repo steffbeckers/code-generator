@@ -12,14 +12,16 @@ import { AccountsService } from '../accounts.service';
 export class AccountsListComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
-  accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
+  accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>(null);
 
   constructor(private accountsService: AccountsService) {}
 
   ngOnInit(): void {
-    this.accountsService.getAccounts().subscribe((response: Response) => {
-      this.accounts$.next(response.data);
-    });
+    this.subs.push(
+      this.accountsService.getAccounts().subscribe((response: Response) => {
+        this.accounts$.next(response.data);
+      })
+    );
   }
 
   ngOnDestroy(): void {

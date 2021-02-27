@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountsComponent } from './accounts.component';
+import { AccountsDetailComponent } from './detail/detail.component';
 import { AccountsListComponent } from './list/list.component';
 
 const routes: Routes = [
@@ -8,6 +9,7 @@ const routes: Routes = [
     path: '',
     component: AccountsComponent,
     children: [
+      { path: ':id', component: AccountsDetailComponent },
       { path: '', component: AccountsListComponent },
       { path: '**', pathMatch: 'full', redirectTo: '' },
     ],

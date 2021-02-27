@@ -1,0 +1,5 @@
+<ng-container *ngIf="account$ | async as account">
+  <div style="white-space: pre">
+    {{ account | json }}
+  </div>
+</ng-container>
