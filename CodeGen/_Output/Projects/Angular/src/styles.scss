@@ -39,3 +39,16 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+table {
+  border-spacing: 0px;
+
+  td {
+    padding: 8px 16px 8px 0px;
+  }
+
+  th,
+  td {
+    text-align: left;
+  }
+}

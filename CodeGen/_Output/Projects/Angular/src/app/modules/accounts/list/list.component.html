@@ -1,0 +1,31 @@
+<div fxLayout="column" fxLayoutGap="16px">
+  <header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="32px">
+    <h2 class="title">Accounts</h2>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <button>Create new</button>
+    </div>
+  </header>
+  <main fxLayout="column" fxLayoutGap="16px">
+    <ng-container *ngIf="accounts$ | async as accounts">
+      <table *ngIf="accounts.length > 0">
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Telephone</th>
+          <th>E-mail</th>
+          <th>Website</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.name }}</td>
+            <td>{{ account.description }}</td>
+            <td>{{ account.telephone }}</td>
+            <td>{{ account.email }}</td>
+            <td>{{ account.website }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="accounts.length === 0">No accounts found.</p>
+    </ng-container>
+  </main>
+</div>
