@@ -81,8 +81,6 @@ namespace CodeGenOutput.API
                 });
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
