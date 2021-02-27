@@ -41,35 +41,38 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API {
                     "ices.AddAutoMapper(typeof(Startup));\r\n\r\n            services.AddValidatorsFromAs" +
                     "sembly(typeof(Startup).Assembly);\r\n\r\n            services.AddMediatR(typeof(Star" +
                     "tup));\r\n\r\n            services.AddTransient(typeof(IPipelineBehavior<,>), typeof" +
-                    "(ValidationBehavior<,>));\r\n\r\n            services.AddControllers(options =>\r\n   " +
-                    "         {\r\n                options.Filters.Add(new ApiExceptionFilter());\r\n    " +
-                    "            options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());\r\n  " +
-                    "          }).AddNewtonsoftJson(options =>\r\n                options.SerializerSet" +
-                    "tings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore\r\n    " +
-                    "        );\r\n\r\n            services.AddSwaggerGen(options =>\r\n            {\r\n    " +
-                    "            options.SwaggerDoc(\"v1\", new OpenApiInfo { Title = \"CodeGenOutput.AP" +
-                    "I\", Version = \"v1\" });\r\n            });\r\n        }\r\n\r\n        // This method get" +
-                    "s called by the runtime. Use this method to configure the HTTP request pipeline." +
-                    "\r\n        public void Configure(IApplicationBuilder app, IWebHostEnvironment env" +
-                    ")\r\n        {\r\n            // Reverse proxy hosting\r\n            // https://docs." +
-                    "microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-5.0\r" +
-                    "\n            app.UseForwardedHeaders(new ForwardedHeadersOptions\r\n            {\r" +
-                    "\n                ForwardedHeaders = ForwardedHeaders.XForwardedProto\r\n          " +
-                    "  });\r\n\r\n            if (env.IsDevelopment())\r\n            {\r\n                ap" +
-                    "p.UseDeveloperExceptionPage();\r\n\r\n                app.UseSwagger();\r\n           " +
-                    "     app.UseSwaggerUI(options =>\r\n                {\r\n                    options" +
-                    ".SwaggerEndpoint(\"swagger/v1/swagger.json\", \"CodeGenOutput.API v1\");\r\n          " +
-                    "          options.RoutePrefix = string.Empty;\r\n                });\r\n            " +
-                    "}\r\n\r\n            app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r\n   " +
-                    "         app.UseEndpoints(endpoints =>\r\n            {\r\n                endpoints" +
-                    ".MapControllers();\r\n            });\r\n        }\r\n\r\n        private static Newtons" +
-                    "oftJsonPatchInputFormatter GetJsonPatchInputFormatter()\r\n        {\r\n            " +
-                    "var builder = new ServiceCollection()\r\n                .AddLogging()\r\n          " +
-                    "      .AddMvc()\r\n                .AddNewtonsoftJson()\r\n                .Services" +
-                    ".BuildServiceProvider();\r\n\r\n            return builder\r\n                .GetRequ" +
-                    "iredService<IOptions<MvcOptions>>()\r\n                .Value\r\n                .In" +
-                    "putFormatters\r\n                .OfType<NewtonsoftJsonPatchInputFormatter>()\r\n   " +
-                    "             .First();\r\n        }\r\n    }\r\n}\r\n");
+                    "(ValidationBehavior<,>));\r\n\r\n            services.AddCors();\r\n\r\n            serv" +
+                    "ices.AddControllers(options =>\r\n            {\r\n                options.Filters.A" +
+                    "dd(new ApiExceptionFilter());\r\n                options.InputFormatters.Insert(0," +
+                    " GetJsonPatchInputFormatter());\r\n            }).AddNewtonsoftJson(options =>\r\n  " +
+                    "              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json" +
+                    ".ReferenceLoopHandling.Ignore\r\n            );\r\n\r\n            services.AddSwagger" +
+                    "Gen(options =>\r\n            {\r\n                options.SwaggerDoc(\"v1\", new Open" +
+                    "ApiInfo { Title = \"CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n    " +
+                    "    }\r\n\r\n        // This method gets called by the runtime. Use this method to c" +
+                    "onfigure the HTTP request pipeline.\r\n        public void Configure(IApplicationB" +
+                    "uilder app, IWebHostEnvironment env)\r\n        {\r\n            // Reverse proxy ho" +
+                    "sting\r\n            // https://docs.microsoft.com/en-us/aspnet/core/host-and-depl" +
+                    "oy/linux-nginx?view=aspnetcore-5.0\r\n            app.UseForwardedHeaders(new Forw" +
+                    "ardedHeadersOptions\r\n            {\r\n                ForwardedHeaders = Forwarded" +
+                    "Headers.XForwardedProto\r\n            });\r\n\r\n            if (env.IsDevelopment())" +
+                    "\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n\r\n           " +
+                    "     app.UseSwagger();\r\n                app.UseSwaggerUI(options =>\r\n           " +
+                    "     {\r\n                    options.SwaggerEndpoint(\"swagger/v1/swagger.json\", \"" +
+                    "CodeGenOutput.API v1\");\r\n                    options.RoutePrefix = string.Empty;" +
+                    "\r\n                });\r\n            }\r\n\r\n            app.UseCors(options =>\r\n    " +
+                    "        {\r\n                options.AllowAnyOrigin()\r\n                    .AllowA" +
+                    "nyMethod()\r\n                    .AllowAnyHeader();\r\n            });\r\n\r\n         " +
+                    "   app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r\n            app.U" +
+                    "seEndpoints(endpoints =>\r\n            {\r\n                endpoints.MapController" +
+                    "s();\r\n            });\r\n        }\r\n\r\n        private static NewtonsoftJsonPatchIn" +
+                    "putFormatter GetJsonPatchInputFormatter()\r\n        {\r\n            var builder = " +
+                    "new ServiceCollection()\r\n                .AddLogging()\r\n                .AddMvc(" +
+                    ")\r\n                .AddNewtonsoftJson()\r\n                .Services.BuildServiceP" +
+                    "rovider();\r\n\r\n            return builder\r\n                .GetRequiredService<IO" +
+                    "ptions<MvcOptions>>()\r\n                .Value\r\n                .InputFormatters\r" +
+                    "\n                .OfType<NewtonsoftJsonPatchInputFormatter>()\r\n                ." +
+                    "First();\r\n        }\r\n    }\r\n}\r\n");
             
             #line default
             #line hidden
