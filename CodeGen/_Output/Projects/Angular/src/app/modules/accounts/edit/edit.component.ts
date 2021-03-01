@@ -72,6 +72,14 @@ export class AccountsEditComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (this.form.pristine) {
+      if (this.close) {
+        this.router.navigateByUrl(`/accounts/${this.account$.value.id}`);
+        return;
+      }
+      return;
+    }
+
     const account: Account = {
       ...this.account$.value,
       ...this.form.getRawValue(),
