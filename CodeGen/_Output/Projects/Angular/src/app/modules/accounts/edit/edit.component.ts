@@ -15,6 +15,7 @@ export class AccountsEditComponent implements OnInit {
 
   account$: BehaviorSubject<Account> = new BehaviorSubject<Account>(null);
   saving: boolean;
+  close: boolean;
   form = this.fb.group({
     name: [null, [Validators.required]],
     description: [null],
@@ -66,7 +67,7 @@ export class AccountsEditComponent implements OnInit {
   }
 
   save(): void {
-    if (this.form.invalid) {
+    if (this.saving || this.form.invalid) {
       return;
     }
 
@@ -82,6 +83,11 @@ export class AccountsEditComponent implements OnInit {
           this.saving = false;
 
           if (!response.success) {
+            return;
+          }
+
+          if (this.close) {
+            this.router.navigateByUrl(`/accounts/${account.id}`);
             return;
           }
 
