@@ -31,6 +31,10 @@ export class AccountsService {
     });
   }
 
+  createAccount(account: Account): Observable<Response> {
+    return this.http.post<Response>(`${environment.api}/accounts`, account);
+  }
+
   updateAccount(account: Account): Observable<Response> {
     return this.http.put<Response>(
       `${environment.api}/accounts/${account.id}`,

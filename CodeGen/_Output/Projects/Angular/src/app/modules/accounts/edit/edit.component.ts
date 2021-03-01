@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { AccountsService } from '../accounts.service';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
 })
-export class AccountsEditComponent implements OnInit {
+export class AccountsEditComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   account$: BehaviorSubject<Account> = new BehaviorSubject<Account>(null);

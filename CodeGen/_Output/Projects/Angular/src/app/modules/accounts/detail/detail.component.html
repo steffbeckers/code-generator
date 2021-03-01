@@ -6,6 +6,7 @@
     <header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="32px">
       <h2 class="title">Account: {{ account.name }}</h2>
       <div fxLayout="row" fxLayoutGap="16px">
+        <button fxFlex="100px" (click)="delete()">Delete</button>
         <button fxFlex="100px" routerLink="edit">Edit</button>
       </div>
     </header>
@@ -41,7 +42,6 @@
           <label>Date modified</label>
           <div>{{ account.dateModified | date: "dd/MM/yyyy HH:mm:ss" }}</div>
         </div>
-        <button fxFlex="100px" (click)="delete()">Delete</button>
       </div>
     </main>
   </div>
