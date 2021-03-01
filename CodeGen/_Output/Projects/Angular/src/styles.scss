@@ -34,6 +34,9 @@ ul {
   padding: 0;
   font-weight: normal;
 }
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 ol,
 ul {
@@ -47,17 +50,40 @@ img {
 
 table {
   border-spacing: 0px;
+  border-collapse: collapse;
 
-  td {
-    padding: 8px 16px 8px 0px;
+  thead {
+    border-bottom: 1px solid #aaaaaa;
+
+    th {
+      padding: 0px 16px 4px 4px;
+      text-align: left;
+    }
   }
 
-  th,
-  td {
-    text-align: left;
+  tbody {
+    tr {
+      border-bottom: 1px solid #aaaaaa;
+    }
+    tr:hover {
+      background-color: #eeeeee;
+    }
+
+    td {
+      padding: 8px 16px 8px 4px;
+      text-align: left;
+    }
   }
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.field {
+  margin-bottom: 16px;
+
+  label {
+    font-weight: bold;
+  }
 }

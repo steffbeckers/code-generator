@@ -1,1 +1,55 @@
-<p>edit works!</p>
+<ng-container *ngIf="(account$ | async) === null">
+  <p>Loading...</p>
+</ng-container>
+<ng-container *ngIf="account$ | async as account">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div fxLayout="column" fxLayoutGap="16px">
+      <header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="32px">
+        <h2 class="title">Account: {{ account.name }}</h2>
+        <div fxLayout="row" fxLayoutGap="16px">
+          <button
+            fxFlex="100px"
+            type="submit"
+            [disabled]="saving || form.pristine"
+          >
+            Save
+          </button>
+        </div>
+      </header>
+      <main fxLayout="column" fxLayoutGap="16px">
+        <div fxLayout="row wrap" fxLayoutGap="16px">
+          <div class="field" fxLayout="column" fxLayoutGap="4px">
+            <label>Name</label>
+            <input formControlName="name" type="text" />
+          </div>
+          <div class="field" fxLayout="column" fxLayoutGap="4px">
+            <label>Description</label>
+            <input formControlName="description" />
+          </div>
+          <div class="field" fxLayout="column" fxLayoutGap="4px">
+            <label>Telephone</label>
+            <input formControlName="telephone" type="text" />
+          </div>
+          <div class="field" fxLayout="column" fxLayoutGap="4px">
+            <label>E-mail</label>
+            <input formControlName="email" type="text" />
+          </div>
+          <div class="field" fxLayout="column" fxLayoutGap="4px">
+            <label>Website</label>
+            <input formControlName="website" type="text" />
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="16px">
+          <div class="field" fxLayout="column" fxLayoutGap="4px">
+            <label>Date created</label>
+            <div>{{ account.dateCreated | date: "dd/MM/yyyy HH:mm:ss" }}</div>
+          </div>
+          <div class="field" fxLayout="column" fxLayoutGap="4px">
+            <label>Date modified</label>
+            <div>{{ account.dateModified | date: "dd/MM/yyyy HH:mm:ss" }}</div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </form>
+</ng-container>

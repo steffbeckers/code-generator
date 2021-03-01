@@ -30,6 +30,7 @@ export class AccountsDetailComponent implements OnInit, OnDestroy {
             .getAccountById(id, 'Contacts')
             .subscribe((response: Response) => {
               if (!response.success) {
+                // TODO: Check code
                 this.router.navigateByUrl('/accounts');
                 return;
               }

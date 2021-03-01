@@ -1,9 +1,12 @@
+<ng-container *ngIf="(account$ | async) === null">
+  <p>Loading...</p>
+</ng-container>
 <ng-container *ngIf="account$ | async as account">
   <div fxLayout="column" fxLayoutGap="16px">
     <header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="32px">
       <h2 class="title">Account: {{ account.name }}</h2>
       <div fxLayout="row" fxLayoutGap="16px">
-        <button routerLink="edit">Edit</button>
+        <button fxFlex="100px" routerLink="edit">Edit</button>
       </div>
     </header>
     <main fxLayout="column" fxLayoutGap="16px">
@@ -11,10 +14,6 @@
         <div class="field" fxLayout="column" fxLayoutGap="4px">
           <label>Name</label>
           <div>{{ account.name }}</div>
-        </div>
-        <div class="field" fxLayout="column" fxLayoutGap="4px">
-          <label>Description</label>
-          <div>{{ account.description }}</div>
         </div>
         <div class="field" fxLayout="column" fxLayoutGap="4px">
           <label>Description</label>
