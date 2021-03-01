@@ -6,12 +6,14 @@ import { AccountsComponent } from './accounts.component';
 import { AccountsService } from './accounts.service';
 import { AccountsListComponent } from './list/list.component';
 import { AccountsDetailComponent } from './detail/detail.component';
+import { AccountsEditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
     AccountsComponent,
     AccountsListComponent,
     AccountsDetailComponent,
+    AccountsEditComponent,
   ],
   imports: [SharedModule, AccountsRoutingModule],
   providers: [AccountsService],
