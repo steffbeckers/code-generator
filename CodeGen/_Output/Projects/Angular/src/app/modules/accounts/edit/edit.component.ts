@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { Account } from 'src/app/shared/models/account.model';
 import { Response } from 'src/app/shared/models/response.model';
 import { AccountsService } from '../accounts.service';
 

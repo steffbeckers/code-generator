@@ -32,7 +32,7 @@
           <div>{{ account.website }}</div>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutGap="16px">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
         <div class="field" fxLayout="column" fxLayoutGap="4px">
           <label>Date created</label>
           <div>{{ account.dateCreated | date: "dd/MM/yyyy HH:mm:ss" }}</div>
@@ -41,6 +41,7 @@
           <label>Date modified</label>
           <div>{{ account.dateModified | date: "dd/MM/yyyy HH:mm:ss" }}</div>
         </div>
+        <button fxFlex="100px" (click)="delete()">Delete</button>
       </div>
     </main>
   </div>

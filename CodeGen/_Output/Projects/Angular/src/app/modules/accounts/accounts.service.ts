@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Account } from 'src/app/shared/models/account.model';
 import { Response } from 'src/app/shared/models/response.model';
 import { environment } from 'src/environments/environment';
 
@@ -34,6 +35,12 @@ export class AccountsService {
     return this.http.put<Response>(
       `${environment.api}/accounts/${account.id}`,
       account
+    );
+  }
+
+  deleteAccount(account: Account): Observable<Response> {
+    return this.http.delete<Response>(
+      `${environment.api}/accounts/${account.id}`
     );
   }
 }

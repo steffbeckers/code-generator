@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { Account } from 'src/app/shared/models/account.model';
 import { Response } from 'src/app/shared/models/response.model';
 import { AccountsService } from '../accounts.service';
 
@@ -45,6 +46,21 @@ export class AccountsDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     for (const sub of this.subs) {
       sub.unsubscribe();
+    }
+  }
+
+  delete(): void {
+    if (confirm('Are you sure?')) {
+      const account: Account = this.account$.value;
+      this.subs.push(
+        this.accountsService
+          .deleteAccount(account)
+          .subscribe((response: Response) => {
+            if (response.success) {
+              this.router.navigateByUrl('/accounts');
+            }
+          })
+      );
     }
   }
 }
