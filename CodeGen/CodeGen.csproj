@@ -23,10 +23,10 @@
   <ItemGroup>
     <Watch Include="**\*settings*.json" />
     <Watch Include="code-gen-config.json" />
-    <Watch Include="Templates\**\*.tt" />
+    <Watch Include="Templates\**\*" />
     <Watch Include="**\*.cs" />
+    <Watch Remove="_Output\**" />
     <Watch Remove="**\*Generated.cs" />
-    <Watch Remove="**\_Output\**" />
     <Watch Remove="**\bin\**\*" />
     <Watch Remove="**\obj\**\*" />
   </ItemGroup>
