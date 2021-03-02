@@ -7,6 +7,8 @@
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
@@ -24,21 +26,27 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
     public class Get<#= _model.Name #>By<#= defaultKey.Name #>Handler : IRequestHandler<Get<#= _model.Name #>By<#= defaultKey.Name #>, Response>
     {
-        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public Get<#= _model.Name #>By<#= defaultKey.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        public Get<#= _model.Name #>By<#= defaultKey.Name #>Handler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(Get<#= _model.Name #>By<#= defaultKey.Name #> request, CancellationToken cancellationToken)
         {
-            <#= _model.Name #> <#= _model.Name.ToLower() #> = await _bll.Get<#= _model.Name #>By<#= defaultKey.Name #>Async(request.<#= defaultKey.Name #>, request.Include);
+            IRepository<<#= _model.Name #>> repository = _unitOfWork.GetRepository<<#= _model.Name #>>();
+
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await repository.GetByIdAsync(request.Id, request.Include);
             if (<#= _model.Name.ToLower() #> == null)
             {
-                return new Response() { Success = false, Message = $"<#= _model.Name #> {request.<#= defaultKey.Name #>} not found." };
+                return new Response() {
+                    Success = false,
+                    Code = "<#= _model.Name.ToUpper() #>_NOT_FOUND",
+                    Message = $"<#= _model.Name #> {request.Id} not found."
+                };
             }
 
             return new Response() { Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>) };

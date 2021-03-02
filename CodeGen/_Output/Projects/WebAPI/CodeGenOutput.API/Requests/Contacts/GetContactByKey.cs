@@ -1,5 +1,7 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.DAL.Repositories;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
@@ -17,21 +19,27 @@ namespace CodeGenOutput.API.Requests.Contacts
 
     public class GetContactByIdHandler : IRequestHandler<GetContactById, Response>
     {
-        private readonly IContactBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetContactByIdHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public GetContactByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(GetContactById request, CancellationToken cancellationToken)
         {
-            Contact contact = await _bll.GetContactByIdAsync(request.Id, request.Include);
+            IRepository<Contact> repository = _unitOfWork.GetRepository<Contact>();
+
+            Contact contact = await repository.GetByIdAsync(request.Id, request.Include);
             if (contact == null)
             {
-                return new Response() { Success = false, Message = $"Contact {request.Id} not found." };
+                return new Response() {
+                    Success = false,
+                    Code = "CONTACT_NOT_FOUND",
+                    Message = $"Contact {request.Id} not found."
+                };
             }
 
             return new Response() { Data = _mapper.Map<ContactVM>(contact) };

@@ -1,6 +1,8 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using CodeGenOutput.API.ViewModels;
 using FluentValidation.Results;
 using MediatR;
@@ -17,20 +19,36 @@ namespace CodeGenOutput.API.Requests.Contacts
 
     public class UpdateContactHandler : IRequestHandler<UpdateContact, Response>
     {
-        private readonly IContactBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateContactHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public UpdateContactHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(UpdateContact request, CancellationToken cancellationToken)
         {
-            Contact contact = await _bll.GetContactByIdAsync(request.ContactUpdateVM.Id);
+            IRepository<Contact> repository = _unitOfWork.GetRepository<Contact>();
+
+            Contact contact = await repository.GetByIdAsync(request.ContactUpdateVM.Id);
             _mapper.Map(request.ContactUpdateVM, contact);
-            contact = await _bll.UpdateContactAsync(contact);
+
+            ValidationResult validationResult = await Validators.ContactValidator.ValidateAsync(contact, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                return new Response()
+                {
+                    Success = false,
+                    Code = "CONTACT_INVALID",
+                    Message = "Contact data invalid",
+                    Data = validationResult.Errors
+                };
+            }
+
+            contact = await repository.UpdateAsync(contact);
+            await _unitOfWork.Commit();
 
             return new Response()
             {

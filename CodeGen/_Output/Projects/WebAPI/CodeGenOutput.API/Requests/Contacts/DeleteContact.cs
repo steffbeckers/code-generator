@@ -1,5 +1,7 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.Models;
 using MediatR;
 using System;
 using System.Threading;
@@ -14,16 +16,19 @@ namespace CodeGenOutput.API.Requests.Contacts
 
     public class DeleteContactHandler : IRequestHandler<DeleteContact, Response>
     {
-        private readonly IContactBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteContactHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public DeleteContactHandler(IUnitOfWork unitOfWork)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Response> Handle(DeleteContact request, CancellationToken cancellationToken)
         {
-            await _bll.DeleteContactAsync(request.Id);
+            IRepository<Contact> repository = _unitOfWork.GetRepository<Contact>();
+
+            await repository.DeleteAsync(request.Id);
+            await _unitOfWork.Commit();
 
             return new Response()
             {

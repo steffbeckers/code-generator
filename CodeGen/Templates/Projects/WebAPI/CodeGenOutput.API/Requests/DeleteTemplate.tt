@@ -7,6 +7,8 @@
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
+using CodeGenOutput.API.Models;
 using MediatR;
 using System;
 using System.Threading;
@@ -21,16 +23,19 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
     public class Delete<#= _model.Name #>Handler : IRequestHandler<Delete<#= _model.Name #>, Response>
     {
-        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public Delete<#= _model.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        public Delete<#= _model.Name #>Handler(IUnitOfWork unitOfWork)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Response> Handle(Delete<#= _model.Name #> request, CancellationToken cancellationToken)
         {
-            await _bll.Delete<#= _model.Name #>Async(request.<#= defaultKey.Name #>);
+            IRepository<<#= _model.Name #>> repository = _unitOfWork.GetRepository<<#= _model.Name #>>();
+
+            await repository.DeleteAsync(request.Id);
+            await _unitOfWork.Commit();
 
             return new Response()
             {

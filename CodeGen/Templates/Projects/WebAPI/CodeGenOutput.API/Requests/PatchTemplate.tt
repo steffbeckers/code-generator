@@ -7,6 +7,7 @@
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
@@ -25,29 +26,30 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
     public class Patch<#= _model.Name #>Handler : IRequestHandler<Patch<#= _model.Name #>, Response>
     {
-        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public Patch<#= _model.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        public Patch<#= _model.Name #>Handler(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IMediator mediator
+        )
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         public async Task<Response> Handle(Patch<#= _model.Name #> request, CancellationToken cancellationToken)
         {
-            <#= _model.Name #> <#= _model.Name.ToLower() #> = await _bll.Get<#= _model.Name #>By<#= defaultKey.Name #>Async(request.<#= defaultKey.Name #>);
+            IRepository<<#= _model.Name #>> repository = _unitOfWork.GetRepository<<#= _model.Name #>>();
+
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await repository.GetByIdAsync(request.Id);
             <#= _model.Name #>UpdateVM <#= _model.Name.ToLower() #>UpdateVM = _mapper.Map<<#= _model.Name #>UpdateVM>(<#= _model.Name.ToLower() #>);
             request.PatchDocument.ApplyTo(<#= _model.Name.ToLower() #>UpdateVM);
-            _mapper.Map(<#= _model.Name.ToLower() #>UpdateVM, <#= _model.Name.ToLower() #>);
-            <#= _model.Name.ToLower() #> = await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
 
-            return new Response()
-            {
-                Code = "<#= _model.Name.ToUpper() #>_UPDATED",
-                Message = "<#= _model.Name #> updated",
-                Data = _mapper.Map<<#= _model.Name #>VM>(<#= _model.Name.ToLower() #>)
-            };
+            return await _mediator.Send(new Update<#= _model.Name #>() { <#= _model.Name #>UpdateVM = <#= _model.Name.ToLower() #>UpdateVM }, cancellationToken);
         }
     }
 }

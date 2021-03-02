@@ -6,8 +6,11 @@
 <#@ import namespace="CodeGen.Models" #>
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using CodeGenOutput.API.ViewModels;
+using FluentValidation.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,19 +24,34 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
     public class Create<#= _model.Name #>Handler : IRequestHandler<Create<#= _model.Name #>, Response>
     {
-        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public Create<#= _model.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        public Create<#= _model.Name #>Handler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(Create<#= _model.Name #> request, CancellationToken cancellationToken)
         {
+            IRepository<<#= _model.Name #>> repository = _unitOfWork.GetRepository<<#= _model.Name #>>();
+
             <#= _model.Name #> <#= _model.Name.ToLower() #> = _mapper.Map<<#= _model.Name #>>(request.<#= _model.Name #>CreateVM);
-            <#= _model.Name.ToLower() #> = await _bll.Create<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+
+            ValidationResult validationResult = await Validators.<#= _model.Name #>Validator.ValidateAsync(<#= _model.Name.ToLower() #>, cancellationToken);
+            if (!validationResult.IsValid) {
+                return new Response()
+                {
+                    Success = false,
+                    Code = "<#= _model.Name.ToUpper() #>_INVALID",
+                    Message = "<#= _model.Name #> data invalid",
+                    Data = validationResult.Errors
+                };
+            }
+
+            <#= _model.Name.ToLower() #> = await repository.CreateAsync(<#= _model.Name.ToLower() #>);
+            await _unitOfWork.Commit();
 
             return new Response()
             {

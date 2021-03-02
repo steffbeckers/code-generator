@@ -6,6 +6,7 @@
 <#@ import namespace="CodeGen.Models" #>
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
@@ -23,20 +24,22 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
     public class Get<#= _model.NamePlural #>Handler : IRequestHandler<Get<#= _model.NamePlural #>, Response>
     {
-        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public Get<#= _model.NamePlural #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        public Get<#= _model.NamePlural #>Handler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(Get<#= _model.NamePlural #> request, CancellationToken cancellationToken)
         {
-            List<<#= _model.Name #>> <#= _model.NamePlural.ToLower() #> = (await _bll.Get<#= _model.NamePlural #>Async(request.Include)).ToList();
+            IRepository<<#= _model.Name #>> repository = _unitOfWork.GetRepository<<#= _model.Name #>>();
 
-            return new Response() { Data = _mapper.Map<List<<#= _model.Name #>ListVM>>(<#= _model.NamePlural.ToLower() #>) };
+            IEnumerable<<#= _model.Name #>> <#= _model.NamePlural.ToLower() #> = await repository.GetAsync(include: request.Include);
+
+            return new Response() { Data = _mapper.Map<List<<#= _model.Name #>ListVM>>(<#= _model.NamePlural.ToLower() #>).ToList() };
         }
     }
 }

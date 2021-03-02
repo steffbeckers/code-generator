@@ -1,5 +1,6 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
@@ -18,29 +19,30 @@ namespace CodeGenOutput.API.Requests.Contacts
 
     public class PatchContactHandler : IRequestHandler<PatchContact, Response>
     {
-        private readonly IContactBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public PatchContactHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public PatchContactHandler(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IMediator mediator
+        )
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         public async Task<Response> Handle(PatchContact request, CancellationToken cancellationToken)
         {
-            Contact contact = await _bll.GetContactByIdAsync(request.Id);
+            IRepository<Contact> repository = _unitOfWork.GetRepository<Contact>();
+
+            Contact contact = await repository.GetByIdAsync(request.Id);
             ContactUpdateVM contactUpdateVM = _mapper.Map<ContactUpdateVM>(contact);
             request.PatchDocument.ApplyTo(contactUpdateVM);
-            _mapper.Map(contactUpdateVM, contact);
-            contact = await _bll.UpdateContactAsync(contact);
 
-            return new Response()
-            {
-                Code = "CONTACT_UPDATED",
-                Message = "Contact updated",
-                Data = _mapper.Map<ContactVM>(contact)
-            };
+            return await _mediator.Send(new UpdateContact() { ContactUpdateVM = contactUpdateVM }, cancellationToken);
         }
     }
 }

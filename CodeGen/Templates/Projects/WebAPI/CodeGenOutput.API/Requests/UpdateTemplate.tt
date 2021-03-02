@@ -7,7 +7,9 @@
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using CodeGenOutput.API.ViewModels;
 using FluentValidation.Results;
 using MediatR;
@@ -24,20 +26,36 @@ namespace CodeGenOutput.API.Requests.<#= _model.NamePlural #>
 
     public class Update<#= _model.Name #>Handler : IRequestHandler<Update<#= _model.Name #>, Response>
     {
-        private readonly I<#= _model.Name #>BLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public Update<#= _model.Name #>Handler(IBusinessLogicLayer bll, IMapper mapper)
+        public Update<#= _model.Name #>Handler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(Update<#= _model.Name #> request, CancellationToken cancellationToken)
         {
-            <#= _model.Name #> <#= _model.Name.ToLower() #> = await _bll.Get<#= _model.Name #>By<#= defaultKey.Name #>Async(request.<#= _model.Name #>UpdateVM.<#= defaultKey.Name #>);
+            IRepository<<#= _model.Name #>> repository = _unitOfWork.GetRepository<<#= _model.Name #>>();
+
+            <#= _model.Name #> <#= _model.Name.ToLower() #> = await repository.GetByIdAsync(request.<#= _model.Name #>UpdateVM.Id);
             _mapper.Map(request.<#= _model.Name #>UpdateVM, <#= _model.Name.ToLower() #>);
-            <#= _model.Name.ToLower() #> = await _bll.Update<#= _model.Name #>Async(<#= _model.Name.ToLower() #>);
+
+            ValidationResult validationResult = await Validators.<#= _model.Name #>Validator.ValidateAsync(<#= _model.Name.ToLower() #>, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                return new Response()
+                {
+                    Success = false,
+                    Code = "<#= _model.Name.ToUpper() #>_INVALID",
+                    Message = "<#= _model.Name #> data invalid",
+                    Data = validationResult.Errors
+                };
+            }
+
+            <#= _model.Name.ToLower() #> = await repository.UpdateAsync(<#= _model.Name.ToLower() #>);
+            await _unitOfWork.Commit();
 
             return new Response()
             {

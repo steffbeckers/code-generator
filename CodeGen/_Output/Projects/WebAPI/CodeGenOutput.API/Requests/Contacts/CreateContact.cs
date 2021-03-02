@@ -1,7 +1,10 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using CodeGenOutput.API.ViewModels;
+using FluentValidation.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,19 +18,34 @@ namespace CodeGenOutput.API.Requests.Contacts
 
     public class CreateContactHandler : IRequestHandler<CreateContact, Response>
     {
-        private readonly IContactBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CreateContactHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public CreateContactHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(CreateContact request, CancellationToken cancellationToken)
         {
+            IRepository<Contact> repository = _unitOfWork.GetRepository<Contact>();
+
             Contact contact = _mapper.Map<Contact>(request.ContactCreateVM);
-            contact = await _bll.CreateContactAsync(contact);
+
+            ValidationResult validationResult = await Validators.ContactValidator.ValidateAsync(contact, cancellationToken);
+            if (!validationResult.IsValid) {
+                return new Response()
+                {
+                    Success = false,
+                    Code = "CONTACT_INVALID",
+                    Message = "Contact data invalid",
+                    Data = validationResult.Errors
+                };
+            }
+
+            contact = await repository.CreateAsync(contact);
+            await _unitOfWork.Commit();
 
             return new Response()
             {
