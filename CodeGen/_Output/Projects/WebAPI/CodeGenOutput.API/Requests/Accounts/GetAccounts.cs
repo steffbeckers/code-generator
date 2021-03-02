@@ -1,5 +1,6 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
@@ -17,20 +18,22 @@ namespace CodeGenOutput.API.Requests.Accounts
 
     public class GetAccountsHandler : IRequestHandler<GetAccounts, Response>
     {
-        private readonly IAccountBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAccountsHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public GetAccountsHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(GetAccounts request, CancellationToken cancellationToken)
         {
-            List<Account> accounts = (await _bll.GetAccountsAsync(request.Include)).ToList();
+            IRepository<Account> repository = _unitOfWork.GetRepository<Account>();
 
-            return new Response() { Data = _mapper.Map<List<AccountListVM>>(accounts) };
+            IEnumerable<Account> accounts = await repository.GetAsync(include: request.Include);
+
+            return new Response() { Data = _mapper.Map<List<AccountListVM>>(accounts).ToList() };
         }
     }
 }

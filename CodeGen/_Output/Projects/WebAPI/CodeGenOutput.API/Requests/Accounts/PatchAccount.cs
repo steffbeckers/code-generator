@@ -1,5 +1,6 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
 using CodeGenOutput.API.ViewModels;
 using MediatR;
@@ -18,29 +19,30 @@ namespace CodeGenOutput.API.Requests.Accounts
 
     public class PatchAccountHandler : IRequestHandler<PatchAccount, Response>
     {
-        private readonly IAccountBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public PatchAccountHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public PatchAccountHandler(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IMediator mediator
+        )
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         public async Task<Response> Handle(PatchAccount request, CancellationToken cancellationToken)
         {
-            Account account = await _bll.GetAccountByIdAsync(request.Id);
+            IRepository<Account> repository = _unitOfWork.GetRepository<Account>();
+
+            Account account = await repository.GetByIdAsync(request.Id);
             AccountUpdateVM accountUpdateVM = _mapper.Map<AccountUpdateVM>(account);
             request.PatchDocument.ApplyTo(accountUpdateVM);
-            _mapper.Map(accountUpdateVM, account);
-            account = await _bll.UpdateAccountAsync(account);
 
-            return new Response()
-            {
-                Code = "ACCOUNT_UPDATED",
-                Message = "Account updated",
-                Data = _mapper.Map<AccountVM>(account)
-            };
+            return await _mediator.Send(new UpdateAccount() { AccountUpdateVM = accountUpdateVM }, cancellationToken);
         }
     }
 }

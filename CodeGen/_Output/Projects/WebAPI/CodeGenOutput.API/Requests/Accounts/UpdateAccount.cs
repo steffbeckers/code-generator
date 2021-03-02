@@ -1,6 +1,8 @@
 using AutoMapper;
 using CodeGenOutput.API.BLL;
+using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
+using CodeGenOutput.API.Validation;
 using CodeGenOutput.API.ViewModels;
 using FluentValidation.Results;
 using MediatR;
@@ -17,20 +19,36 @@ namespace CodeGenOutput.API.Requests.Accounts
 
     public class UpdateAccountHandler : IRequestHandler<UpdateAccount, Response>
     {
-        private readonly IAccountBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateAccountHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public UpdateAccountHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(UpdateAccount request, CancellationToken cancellationToken)
         {
-            Account account = await _bll.GetAccountByIdAsync(request.AccountUpdateVM.Id);
+            IRepository<Account> repository = _unitOfWork.GetRepository<Account>();
+
+            Account account = await repository.GetByIdAsync(request.AccountUpdateVM.Id);
             _mapper.Map(request.AccountUpdateVM, account);
-            account = await _bll.UpdateAccountAsync(account);
+
+            ValidationResult validationResult = await Validators.AccountValidator.ValidateAsync(account, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                return new Response()
+                {
+                    Success = false,
+                    Code = "ACCOUNT_INVALID",
+                    Message = "Account data invalid",
+                    Data = validationResult.Errors
+                };
+            }
+
+            account = await repository.UpdateAsync(account);
+            await _unitOfWork.Commit();
 
             return new Response()
             {
