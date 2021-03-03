@@ -22,81 +22,89 @@ namespace CodeGen.Templates.Projects.Angular.src.app {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write("import { NgModule } from \'@angular/core\';\r\nimport { RouterModule, Routes } from \'" +
-                    "@angular/router\';\r\n\r\nconst routes: Routes = [\r\n");
+            this.Write(@"import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LayoutDefaultComponent } from './layouts/default/default.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: LayoutDefaultComponent,
+    children: [
+");
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            #line 16 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
  foreach (CodeGenModel model in _config.Models.List) { 
             
             #line default
             #line hidden
             
-            #line 12 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write("  {\r\n    path: \'");
-            
-            #line default
-            #line hidden
-            
-            #line 13 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 13 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write("\',\r\n    loadChildren: () =>\r\n      import(\'./");
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write("/");
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write(".module\').then((m) => m.");
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural ));
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write("Module),\r\n  },\r\n");
-            
-            #line default
-            #line hidden
-            
             #line 17 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
- } 
+            this.Write("      {\r\n        path: \'");
             
             #line default
             #line hidden
             
             #line 18 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
-            this.Write("];\r\n\r\n@NgModule({\r\n  imports: [RouterModule.forRoot(routes)],\r\n  exports: [Router" +
-                    "Module],\r\n})\r\nexport class AppRoutingModule {}\r\n");
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write("\',\r\n        loadChildren: () =>\r\n          import(\'./modules/");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write("/");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write(".module\').then(\r\n            (m) => m.");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write("Module\r\n          ),\r\n      },\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\Angular\src\app\AppRoutingModuleTemplate.tt"
+            this.Write("    ],\r\n  },\r\n];\r\n\r\n@NgModule({\r\n  imports: [RouterModule.forRoot(routes)],\r\n  ex" +
+                    "ports: [RouterModule],\r\n})\r\nexport class AppRoutingModule {}\r\n");
             
             #line default
             #line hidden

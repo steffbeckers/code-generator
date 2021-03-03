@@ -6,15 +6,24 @@
 <#@ import namespace="CodeGen.Models" #>
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutDefaultComponent } from './layouts/default/default.component';
 
 const routes: Routes = [
-<# foreach (CodeGenModel model in _config.Models.List) { #>
   {
-    path: '<#= model.NamePlural.ToLower() #>',
-    loadChildren: () =>
-      import('./<#= model.NamePlural.ToLower() #>/<#= model.NamePlural.ToLower() #>.module').then((m) => m.<#= model.NamePlural #>Module),
-  },
+    path: '',
+    component: LayoutDefaultComponent,
+    children: [
+<# foreach (CodeGenModel model in _config.Models.List) { #>
+      {
+        path: '<#= model.NamePlural.ToLower() #>',
+        loadChildren: () =>
+          import('./modules/<#= model.NamePlural.ToLower() #>/<#= model.NamePlural.ToLower() #>.module').then(
+            (m) => m.<#= model.NamePlural #>Module
+          ),
+      },
 <# } #>
+    ],
+  },
 ];
 
 @NgModule({

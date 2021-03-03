@@ -13,27 +13,27 @@
     },
     {
       "T4Template": "src/app/modules/ModelComponentCSSTemplate.tt",
-      "Output": "../{3}/{3}.component.scss"
+      "Output": "{3}/{3}.component.scss"
     },
     {
       "T4Template": "src/app/modules/ModelComponentHTMLTemplate.tt",
-      "Output": "../{3}/{3}.component.html"
+      "Output": "{3}/{3}.component.html"
     },
     {
       "T4Template": "src/app/modules/ModelComponentSpecTemplate.tt",
-      "Output": "../{3}/{3}.component.spec.ts"
+      "Output": "{3}/{3}.component.spec.ts"
     },
     {
       "T4Template": "src/app/modules/ModelComponentTSTemplate.tt",
-      "Output": "../{3}/{3}.component.ts"
+      "Output": "{3}/{3}.component.ts"
     },
     {
       "T4Template": "src/app/modules/ModelModuleTemplate.tt",
-      "Output": "../{3}/{3}.module.ts"
+      "Output": "{3}/{3}.module.ts"
     },
     {
       "T4Template": "src/app/modules/ModelRoutingModuleTemplate.tt",
-      "Output": "../{3}/{3}-routing.module.ts"
+      "Output": "{3}/{3}-routing.module.ts"
     }
   ],
   "Exclude": ["node_modules/"]
