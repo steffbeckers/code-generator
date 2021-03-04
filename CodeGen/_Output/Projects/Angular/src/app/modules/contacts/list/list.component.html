@@ -1,0 +1,38 @@
+<div fxLayout="column" fxLayoutGap="16px">
+  <header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="32px">
+    <h2 class="title">Contacts</h2>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <button fxFlex="100px" routerLink="new">Create new</button>
+    </div>
+  </header>
+  <main fxLayout="column" fxLayoutGap="16px">
+    <ng-container *ngIf="(contacts$ | async) === null">
+      <p>Loading...</p>
+    </ng-container>
+    <ng-container *ngIf="contacts$ | async as contacts">
+      <table *ngIf="contacts.length > 0">
+        <thead>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Telephone</th>
+          <th>E-mail</th>
+          <th>Website</th>
+        </thead>
+        <tbody>
+          <tr
+            class="clickable"
+            *ngFor="let contact of contacts"
+            [routerLink]="contact.id"
+          >
+            <td>{{ contact.firstName }}</td>
+            <td>{{ contact.lastName }}</td>
+            <td>{{ contact.telephone }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.website }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="contacts.length === 0">No contacts found.</p>
+    </ng-container>
+  </main>
+</div>
