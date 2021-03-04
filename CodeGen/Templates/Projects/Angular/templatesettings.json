@@ -57,6 +57,40 @@
       "T4Template": "src/app/modules/components/create/ModelCreateComponentTSTemplate.tt",
       "Output": "../../{3}/create/create.component.ts"
     },
+    //// Detail
+    {
+      "T4Template": "src/app/modules/components/detail/ModelDetailComponentCSSTemplate.tt",
+      "Output": "../../{3}/detail/detail.component.scss"
+    },
+    {
+      "T4Template": "src/app/modules/components/detail/ModelDetailComponentHTMLTemplate.tt",
+      "Output": "../../{3}/detail/detail.component.html"
+    },
+    {
+      "T4Template": "src/app/modules/components/detail/ModelDetailComponentSpecTemplate.tt",
+      "Output": "../../{3}/detail/detail.component.spec.ts"
+    },
+    {
+      "T4Template": "src/app/modules/components/detail/ModelDetailComponentTSTemplate.tt",
+      "Output": "../../{3}/detail/detail.component.ts"
+    },
+    //// Edit
+    {
+      "T4Template": "src/app/modules/components/edit/ModelEditComponentCSSTemplate.tt",
+      "Output": "../../{3}/edit/edit.component.scss"
+    },
+    {
+      "T4Template": "src/app/modules/components/edit/ModelEditComponentHTMLTemplate.tt",
+      "Output": "../../{3}/edit/edit.component.html"
+    },
+    {
+      "T4Template": "src/app/modules/components/edit/ModelEditComponentSpecTemplate.tt",
+      "Output": "../../{3}/edit/edit.component.spec.ts"
+    },
+    {
+      "T4Template": "src/app/modules/components/edit/ModelEditComponentTSTemplate.tt",
+      "Output": "../../{3}/edit/edit.component.ts"
+    },
     //// List
     {
       "T4Template": "src/app/modules/components/list/ModelListComponentCSSTemplate.tt",

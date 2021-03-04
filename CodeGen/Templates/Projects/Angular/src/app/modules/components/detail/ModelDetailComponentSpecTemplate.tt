@@ -1,0 +1,30 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { <#= _model.NamePlural #>DetailComponent } from './detail.component';
+
+describe('<#= _model.NamePlural #>DetailComponent', () => {
+  let component: <#= _model.NamePlural #>DetailComponent;
+  let fixture: ComponentFixture<<#= _model.NamePlural #>DetailComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [<#= _model.NamePlural #>DetailComponent],
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(<#= _model.NamePlural #>DetailComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

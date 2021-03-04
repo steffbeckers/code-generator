@@ -1,0 +1,48 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Framework.Extensions" #>
+<#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
+<ng-container *ngIf="(<#= _model.Name.ToLower() #>$ | async) === null">
+  <p>Loading...</p>
+</ng-container>
+<ng-container *ngIf="<#= _model.Name.ToLower() #>$ | async as <#= _model.Name.ToLower() #>">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="32px">
+      <h2 class="title"><#= _model.Name #>: {{ <#= _model.Name.ToLower() #>.name }}</h2>
+      <div fxLayout="row" fxLayoutGap="16px">
+        <button fxFlex="100px" (click)="delete()">Delete</button>
+        <button fxFlex="100px" routerLink="edit">Edit</button>
+      </div>
+    </header>
+    <main fxLayout="column" fxLayoutGap="16px">
+      <div fxLayout="row wrap" fxLayoutGap="16px">
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
+        <div class="field" fxLayout="column" fxLayoutGap="4px">
+          <label><#= property.DisplayName #></label>
+          <div>{{ <#= _model.Name.ToLower() #>.<#= property.Name.ToCamelCase() #> }}</div>
+        </div>
+<# } #>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+<# CodeGenModelProperty auditDateCreatedProperty = _config.Models.Defaults.Properties.FirstOrDefault(x => x.AuditDateCreated); #>
+<# if (auditDateCreatedProperty != null) { #>
+        <div class="field" fxLayout="column" fxLayoutGap="4px">
+          <label><#= auditDateCreatedProperty.DisplayName #></label>
+          <div>{{ <#= _model.Name.ToLower() #>.<#= auditDateCreatedProperty.Name.ToCamelCase() #> | date: "dd/MM/yyyy HH:mm:ss" }}</div>
+        </div>
+<# } #>
+<# CodeGenModelProperty auditDateModifiedProperty = _config.Models.Defaults.Properties.FirstOrDefault(x => x.AuditDateModified); #>
+<# if (auditDateModifiedProperty != null) { #>
+        <div class="field" fxLayout="column" fxLayoutGap="4px">
+          <label><#= auditDateModifiedProperty.DisplayName #></label>
+          <div>{{ <#= _model.Name.ToLower() #>.<#= auditDateModifiedProperty.Name.ToCamelCase() #> | date: "dd/MM/yyyy HH:mm:ss" }}</div>
+        </div>
+<# } #>
+      </div>
+    </main>
+  </div>
+</ng-container>
