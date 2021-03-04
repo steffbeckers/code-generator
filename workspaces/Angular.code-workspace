@@ -2,11 +2,11 @@
   "folders": [
     {
       "name": "Output",
-      "path": "CodeGen\\_Output\\Projects\\Angular"
+      "path": "..\\CodeGen\\_Output\\Projects\\Angular"
     },
     {
       "name": "Template",
-      "path": "CodeGen\\Templates\\Projects\\Angular"
+      "path": "..\\CodeGen\\Templates\\Projects\\Angular"
     }
   ],
   "settings": {}

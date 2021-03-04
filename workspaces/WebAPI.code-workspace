@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "name": "Output",
+      "path": "..\\CodeGen\\_Output\\Projects\\WebAPI"
+    },
+    {
+      "name": "Template",
+      "path": "..\\CodeGen\\Templates\\Projects\\WebAPI"
+    }
+  ],
+  "settings": {}
+}
