@@ -13,6 +13,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.shared.models {
     using System.Text;
     using System.Collections.Generic;
     using CodeGen.Models;
+    using CodeGen.Framework.Extensions;
     using System;
     
     
@@ -21,67 +22,307 @@ namespace CodeGen.Templates.Projects.Angular.src.app.shared.models {
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
             
-            #line 7 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write("export class ");
-            
-            #line default
-            #line hidden
-            
-            #line 7 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 7 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write(" {\r\n");
-            
-            #line default
-            #line hidden
-            
             #line 8 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
- foreach (CodeGenModelProperty property in _model.Properties) { 
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); 
             
             #line default
             #line hidden
             
             #line 9 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write("  ");
-            
-            #line default
-            #line hidden
-            
-            #line 9 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name ));
-            
-            #line default
-            #line hidden
-            
-            #line 9 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write(": ");
-            
-            #line default
-            #line hidden
-            
-            #line 9 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type ));
-            
-            #line default
-            #line hidden
-            
-            #line 9 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
-            this.Write(";\r\n");
+ List<string> modelsToImport = _model.Relations.OneToMany.Union(_model.Relations.ManyToOne).Select(x => x.Model).ToList(); 
             
             #line default
             #line hidden
             
             #line 10 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
- } 
+ foreach (string model in modelsToImport) { 
             
             #line default
             #line hidden
             
             #line 11 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("import { ");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(" } from \'./");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( model.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(".model\';\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("\r\nexport class ");
+            
+            #line default
+            #line hidden
+            
+            #line 14 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 14 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(" {\r\n  ");
+            
+            #line default
+            #line hidden
+            
+            #line 15 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 15 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 15 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type.ToTypeScript() ));
+            
+            #line default
+            #line hidden
+            
+            #line 15 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(";\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 16 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("  ");
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type.ToTypeScript() ));
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(";\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ foreach (CodeGenModelProperty property in _config.Models.Defaults.Properties.Where(x => x.Name != defaultKey.Name && !x.AuditDeleted).ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("  ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Type.ToTypeScript() ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(";\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne) { 
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("  ");
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Model ));
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(";\r\n  ");
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("Id: ");
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Type.ToTypeScript() ));
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(";\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 26 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { 
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("  ");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( relation.Model ));
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+            this.Write("[] = [];\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\shared\models\ModelTemplate.tt"
             this.Write("}\r\n");
             
             #line default

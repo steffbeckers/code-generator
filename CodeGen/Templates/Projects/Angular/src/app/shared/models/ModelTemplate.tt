@@ -4,8 +4,28 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+<#@ import namespace="CodeGen.Framework.Extensions" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
+<# List<string> modelsToImport = _model.Relations.OneToMany.Union(_model.Relations.ManyToOne).Select(x => x.Model).ToList(); #>
+<# foreach (string model in modelsToImport) { #>
+import { <#= model #> } from './<#= model.ToLower() #>.model';
+<# } #>
+
 export class <#= _model.Name #> {
-<# foreach (CodeGenModelProperty property in _model.Properties) { #>
-  <#= property.Name #>: <#= property.Type #>;
+  <#= defaultKey.Name.ToCamelCase() #>: <#= defaultKey.Type.ToTypeScript() #>;
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
+  <#= property.Name.ToCamelCase() #>: <#= property.Type.ToTypeScript() #>;
+<# } #>
+<# foreach (CodeGenModelProperty property in _config.Models.Defaults.Properties.Where(x => x.Name != defaultKey.Name && !x.AuditDeleted).ToList()) { #>
+  <#= property.Name.ToCamelCase() #>: <#= property.Type.ToTypeScript() #>;
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.ManyToOne) { #>
+  <#= relation.Name.ToCamelCase() #>: <#= relation.Model #>;
+  <#= relation.Name.ToCamelCase() #>Id: <#= relation.Type.ToTypeScript() #>;
+<# } #>
+
+<# foreach (CodeGenModelRelation relation in _model.Relations.OneToMany) { #>
+  <#= relation.Name.ToCamelCase() #>: <#= relation.Model #>[] = [];
 <# } #>
 }

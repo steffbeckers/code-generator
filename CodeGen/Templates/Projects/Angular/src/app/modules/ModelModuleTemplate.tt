@@ -5,13 +5,25 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 
 import { <#= _model.NamePlural #>RoutingModule } from './<#= _model.NamePlural.ToLower() #>-routing.module';
 import { <#= _model.NamePlural #>Component } from './<#= _model.NamePlural.ToLower() #>.component';
+import { <#= _model.NamePlural #>Service } from './<#= _model.NamePlural.ToLower() #>.service';
+import { <#= _model.NamePlural #>ListComponent } from './list/list.component';
+import { <#= _model.NamePlural #>DetailComponent } from './detail/detail.component';
+import { <#= _model.NamePlural #>CreateComponent } from './create/create.component';
+import { <#= _model.NamePlural #>EditComponent } from './edit/edit.component';
 
 @NgModule({
-  declarations: [<#= _model.NamePlural #>Component],
-  imports: [CommonModule, <#= _model.NamePlural #>RoutingModule],
+  declarations: [
+    <#= _model.NamePlural #>Component,
+    <#= _model.NamePlural #>ListComponent,
+    <#= _model.NamePlural #>DetailComponent,
+    <#= _model.NamePlural #>CreateComponent,
+    <#= _model.NamePlural #>EditComponent,
+  ],
+  imports: [SharedModule, <#= _model.NamePlural #>RoutingModule],
+  providers: [<#= _model.NamePlural #>Service],
 })
 export class <#= _model.NamePlural #>Module {}

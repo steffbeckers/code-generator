@@ -22,8 +22,8 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
-            this.Write("import { NgModule } from \'@angular/core\';\r\nimport { CommonModule } from \'@angular" +
-                    "/common\';\r\n\r\nimport { ");
+            this.Write("import { NgModule } from \'@angular/core\';\r\nimport { SharedModule } from \'../../sh" +
+                    "ared/shared.module\';\r\n\r\nimport { ");
             
             #line default
             #line hidden
@@ -71,7 +71,43 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
             #line hidden
             
             #line 11 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
-            this.Write(".component\';\r\n\r\n@NgModule({\r\n  declarations: [");
+            this.Write(".component\';\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("Service } from \'./");
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(".service\';\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("ListComponent } from \'./list/list.component\';\r\nimport { ");
             
             #line default
             #line hidden
@@ -83,7 +119,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
             #line hidden
             
             #line 14 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
-            this.Write("Component],\r\n  imports: [CommonModule, ");
+            this.Write("DetailComponent } from \'./detail/detail.component\';\r\nimport { ");
             
             #line default
             #line hidden
@@ -95,18 +131,115 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
             #line hidden
             
             #line 15 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
-            this.Write("RoutingModule],\r\n})\r\nexport class ");
+            this.Write("CreateComponent } from \'./create/create.component\';\r\nimport { ");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            #line 16 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            #line 16 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("EditComponent } from \'./edit/edit.component\';\r\n\r\n@NgModule({\r\n  declarations: [\r\n" +
+                    "    ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("Component,\r\n    ");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("ListComponent,\r\n    ");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("DetailComponent,\r\n    ");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("CreateComponent,\r\n    ");
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("EditComponent,\r\n  ],\r\n  imports: [SharedModule, ");
+            
+            #line default
+            #line hidden
+            
+            #line 26 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 26 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("RoutingModule],\r\n  providers: [");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write("Service],\r\n})\r\nexport class ");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\modules\ModelModuleTemplate.tt"
             this.Write("Module {}\r\n");
             
             #line default

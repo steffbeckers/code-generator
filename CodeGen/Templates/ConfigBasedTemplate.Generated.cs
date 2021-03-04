@@ -8,21 +8,58 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeGen.Templates.Projects.Angular.src.app.modules {
+namespace CodeGen.Templates {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using CodeGen.Models;
     using System;
     
     
-    public partial class ModelComponentHTMLTemplate : ModelComponentHTMLTemplateBase {
+    public partial class ConfigBasedTemplate : ConfigBasedTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
             
-            #line 7 "Templates\Projects\Angular\src\app\modules\ModelComponentHTMLTemplate.tt"
-            this.Write("<router-outlet></router-outlet>\r\n");
+            #line 6 "Templates\ConfigBasedTemplate.tt"
+            this.Write("namespace ");
+            
+            #line default
+            #line hidden
+            
+            #line 6 "Templates\ConfigBasedTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _namespace ));
+            
+            #line default
+            #line hidden
+            
+            #line 6 "Templates\ConfigBasedTemplate.tt"
+            this.Write("\r\n{\r\n    public partial class ");
+            
+            #line default
+            #line hidden
+            
+            #line 8 "Templates\ConfigBasedTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _name ));
+            
+            #line default
+            #line hidden
+            
+            #line 8 "Templates\ConfigBasedTemplate.tt"
+            this.Write(" : ITextTemplate\r\n    {\r\n        public CodeGenConfig _config;\r\n\r\n        public " +
+                    "");
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\ConfigBasedTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _name ));
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\ConfigBasedTemplate.tt"
+            this.Write("(CodeGenConfig config)\r\n        {\r\n            _config = config;\r\n        }\r\n    " +
+                    "}\r\n}\r\n");
             
             #line default
             #line hidden
@@ -33,7 +70,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
         }
     }
     
-    public class ModelComponentHTMLTemplateBase {
+    public class ConfigBasedTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         

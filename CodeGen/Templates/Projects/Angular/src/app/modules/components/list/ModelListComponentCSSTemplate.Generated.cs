@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeGen.Templates.Projects.Angular.src.app.modules {
+namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
@@ -16,16 +16,10 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
     using System;
     
     
-    public partial class ModelComponentHTMLTemplate : ModelComponentHTMLTemplateBase {
+    public partial class ModelListComponentCSSTemplate : ModelListComponentCSSTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
-            
-            #line 7 "Templates\Projects\Angular\src\app\modules\ModelComponentHTMLTemplate.tt"
-            this.Write("<router-outlet></router-outlet>\r\n");
-            
-            #line default
-            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         
@@ -33,7 +27,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
         }
     }
     
-    public class ModelComponentHTMLTemplateBase {
+    public class ModelListComponentCSSTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         

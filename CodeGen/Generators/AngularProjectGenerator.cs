@@ -32,12 +32,21 @@ namespace CodeGen.Generators
         {
             await base.Generate();
 
+            _logger.LogInformation("Formatting generated code");
+
+            ProcessStartInfo npmFormat = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
+            npmFormat.Arguments = @"run format";
+            npmFormat.WorkingDirectory = _outputProjectPath;
+            await Process.Start(npmFormat).WaitForExitAsync();
+
             _logger.LogInformation("Installing dependencies");
 
             ProcessStartInfo npmInstall = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
             npmInstall.Arguments = @"install";
             npmInstall.WorkingDirectory = _outputProjectPath;
             await Process.Start(npmInstall).WaitForExitAsync();
+
+            _logger.LogInformation("Building project");
 
             ProcessStartInfo npmBuild = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
             npmBuild.Arguments = @"run build";
