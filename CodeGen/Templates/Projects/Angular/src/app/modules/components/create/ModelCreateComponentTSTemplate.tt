@@ -4,3 +4,68 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { <#= _model.Name #> } from 'src/app/shared/models/<#= _model.Name.ToLower() #>.model';
+import { Response } from 'src/app/shared/models/response.model';
+import { <#= _model.NamePlural #>Service } from '../<#= _model.NamePlural.ToLower() #>.service';
+
+@Component({
+  selector: 'app-<#= _model.NamePlural.ToLower() #>-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.scss'],
+})
+export class <#= _model.NamePlural #>CreateComponent implements OnInit, OnDestroy {
+  private subs: Subscription[] = [];
+
+  saving: boolean;
+  form = this.fb.group({
+    name: [null, [Validators.required]],
+    description: [null],
+    telephone: [null],
+    email: [null],
+    website: [null],
+  });
+
+  constructor(
+    private <#= _model.NamePlural.ToLower() #>Service: <#= _model.NamePlural #>Service,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
+  }
+
+  save(): void {
+    if (this.saving || this.form.invalid) {
+      return;
+    }
+
+    const <#= _model.Name.ToLower() #>: <#= _model.Name #> = this.form.getRawValue();
+
+    this.saving = true;
+    this.subs.push(
+      this.<#= _model.NamePlural.ToLower() #>Service.create<#= _model.Name #>(<#= _model.Name.ToLower() #>).subscribe(
+        (response: Response) => {
+          this.saving = false;
+
+          if (!response.success) {
+            return;
+          }
+
+          this.router.navigateByUrl(`/<#= _model.NamePlural.ToLower() #>/${response.data.id}`);
+        },
+        (error: any) => {
+          this.saving = false;
+        }
+      )
+    );
+  }
+}

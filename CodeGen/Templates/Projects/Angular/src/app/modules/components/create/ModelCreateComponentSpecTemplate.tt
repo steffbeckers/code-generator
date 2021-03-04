@@ -4,3 +4,27 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { <#= _model.NamePlural #>CreateComponent } from './create.component';
+
+describe('<#= _model.NamePlural #>CreateComponent', () => {
+  let component: <#= _model.NamePlural #>CreateComponent;
+  let fixture: ComponentFixture<<#= _model.NamePlural #>CreateComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [<#= _model.NamePlural #>CreateComponent],
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(<#= _model.NamePlural #>CreateComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

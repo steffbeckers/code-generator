@@ -4,3 +4,35 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { <#= _model.Name #> } from 'src/app/shared/models/account.model';
+import { Response } from 'src/app/shared/models/response.model';
+import { <#= _model.NamePlural #>Service } from '../<#= _model.NamePlural.ToLower() #>.service';
+
+@Component({
+  selector: 'app-<#= _model.NamePlural.ToLower() #>-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss'],
+})
+export class <#= _model.NamePlural #>ListComponent implements OnInit, OnDestroy {
+  private subs: Subscription[] = [];
+
+  <#= _model.NamePlural.ToLower() #>$: BehaviorSubject<<#= _model.Name #>[]> = new BehaviorSubject<<#= _model.Name #>[]>(null);
+
+  constructor(private <#= _model.NamePlural.ToLower() #>Service: <#= _model.NamePlural #>Service) {}
+
+  ngOnInit(): void {
+    this.subs.push(
+      this.<#= _model.NamePlural.ToLower() #>Service.get<#= _model.NamePlural #>().subscribe((response: Response) => {
+        this.<#= _model.NamePlural.ToLower() #>$.next(response.data);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
+  }
+}

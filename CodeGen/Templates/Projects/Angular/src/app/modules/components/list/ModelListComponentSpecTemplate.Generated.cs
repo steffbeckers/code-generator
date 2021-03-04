@@ -20,6 +20,89 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
+            
+            #line 7 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write("import { ComponentFixture, TestBed } from \'@angular/core/testing\';\r\n\r\nimport { Mo" +
+                    "dules");
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write("ListComponent } from \'./list.component\';\r\n\r\ndescribe(\'Modules");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write("ListComponent\', () => {\r\n  let component: Modules");
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write("ListComponent;\r\n  let fixture: ComponentFixture<Modules");
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write("ListComponent>;\r\n\r\n  beforeEach(async () => {\r\n    await TestBed.configureTesting" +
+                    "Module({\r\n      declarations: [Modules");
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write("ListComponent],\r\n    }).compileComponents();\r\n  });\r\n\r\n  beforeEach(() => {\r\n    " +
+                    "fixture = TestBed.createComponent(Modules");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentSpecTemplate.tt"
+            this.Write("ListComponent);\r\n    component = fixture.componentInstance;\r\n    fixture.detectCh" +
+                    "anges();\r\n  });\r\n\r\n  it(\'should create\', () => {\r\n    expect(component).toBeTrut" +
+                    "hy();\r\n  });\r\n});\r\n");
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         

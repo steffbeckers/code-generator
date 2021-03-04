@@ -3,4 +3,40 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Framework.Extensions" #>
 <#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
+<div fxLayout="column" fxLayoutGap="16px">
+  <header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="32px">
+    <h2 class="title"><#= _model.NamePlural #></h2>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <button fxFlex="100px" routerLink="new">Create new</button>
+    </div>
+  </header>
+  <main fxLayout="column" fxLayoutGap="16px">
+    <ng-container *ngIf="(<#= _model.NamePlural.ToLower() #>$ | async) === null">
+      <p>Loading...</p>
+    </ng-container>
+    <ng-container *ngIf="<#= _model.NamePlural.ToLower() #>$ | async as <#= _model.NamePlural.ToLower() #>">
+      <table *ngIf="<#= _model.NamePlural.ToLower() #>.length > 0">
+        <thead>
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
+          <th><#= property.DisplayName #></th>
+<# } #>
+        </thead>
+        <tbody>
+          <tr
+            class="clickable"
+            *ngFor="let <#= _model.Name.ToLower() #> of <#= _model.NamePlural.ToLower() #>"
+            [routerLink]="<#= _model.Name.ToLower() #>.<#= defaultKey.Name.ToCamelCase() #>"
+          >
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
+            <td>{{ <#= _model.Name.ToLower() #>.<#= property.Name.ToCamelCase() #> }}</td>
+<# } #>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="<#= _model.NamePlural.ToLower() #>.length === 0">No <#= _model.NamePlural.ToLower() #> found.</p>
+    </ng-container>
+  </main>
+</div>

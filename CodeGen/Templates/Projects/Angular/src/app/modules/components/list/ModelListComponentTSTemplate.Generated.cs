@@ -20,6 +20,173 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
+            
+            #line 7 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("import { Component, OnDestroy, OnInit } from \'@angular/core\';\r\nimport { BehaviorS" +
+                    "ubject, Subscription } from \'rxjs\';\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(" } from \'src/app/shared/models/account.model\';\r\nimport { Response } from \'src/app" +
+                    "/shared/models/response.model\';\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("Service } from \'../");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(".service\';\r\n\r\n@Component({\r\n  selector: \'app-");
+            
+            #line default
+            #line hidden
+            
+            #line 14 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 14 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("-list\',\r\n  templateUrl: \'./list.component.html\',\r\n  styleUrls: [\'./list.component" +
+                    ".scss\'],\r\n})\r\nexport class ");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("ListComponent implements OnInit, OnDestroy {\r\n  private subs: Subscription[] = []" +
+                    ";\r\n\r\n  ");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("$: BehaviorSubject<");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("[]> = new BehaviorSubject<");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("[]>(null);\r\n\r\n  constructor(private ");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("Service: ");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("Service) {}\r\n\r\n  ngOnInit(): void {\r\n    this.subs.push(\r\n      this.");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("Service.get");
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("().subscribe((response: Response) => {\r\n        this.");
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 28 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            this.Write("$.next(response.data);\r\n      })\r\n    );\r\n  }\r\n\r\n  ngOnDestroy(): void {\r\n    for" +
+                    " (const sub of this.subs) {\r\n      sub.unsubscribe();\r\n    }\r\n  }\r\n}\r\n");
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         

@@ -47,7 +47,19 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
             #line hidden
             
             #line 9 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
-            this.Write(".component\';\r\n\r\nconst routes: Routes = [{ path: \'\', component: ");
+            this.Write(".component\';\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 10 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 10 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("CreateComponent } from \'./create/create.component\';\r\nimport { ");
             
             #line default
             #line hidden
@@ -59,20 +71,106 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules {
             #line hidden
             
             #line 11 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
-            this.Write("Component }];\r\n\r\n@NgModule({\r\n  imports: [RouterModule.forChild(routes)],\r\n  expo" +
-                    "rts: [RouterModule]\r\n})\r\nexport class ");
+            this.Write("DetailComponent } from \'./detail/detail.component\';\r\nimport { ");
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            #line 12 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 17 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
-            this.Write("RoutingModule { }\r\n");
+            #line 12 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("EditComponent } from \'./edit/edit.component\';\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("ListComponent } from \'./list/list.component\';\r\n\r\nconst routes: Routes = [\r\n  {\r\n " +
+                    "   path: \'\',\r\n    component: ");
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("Component,\r\n    children: [\r\n      { path: \'new\', component: ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("CreateComponent },\r\n      { path: \':id/edit\', component: ");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("EditComponent },\r\n      { path: \':id\', component: ");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("DetailComponent },\r\n      { path: \'\', component: ");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("ListComponent },\r\n      { path: \'**\', pathMatch: \'full\', redirectTo: \'\' },\r\n    ]" +
+                    ",\r\n  },\r\n];\r\n\r\n@NgModule({\r\n  imports: [RouterModule.forChild(routes)],\r\n  expor" +
+                    "ts: [RouterModule],\r\n})\r\nexport class ");
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\ModelRoutingModuleTemplate.tt"
+            this.Write("RoutingModule {}\r\n");
             
             #line default
             #line hidden

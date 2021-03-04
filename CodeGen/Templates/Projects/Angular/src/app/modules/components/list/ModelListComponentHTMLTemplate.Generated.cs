@@ -12,6 +12,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using CodeGen.Framework.Extensions;
     using CodeGen.Models;
     using System;
     
@@ -20,6 +21,239 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
+            
+            #line 8 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); 
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("<div fxLayout=\"column\" fxLayoutGap=\"16px\">\r\n  <header fxLayout=\"row\" fxLayoutAlig" +
+                    "n=\"space-between\" fxLayoutGap=\"32px\">\r\n    <h2 class=\"title\">");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("</h2>\r\n    <div fxLayout=\"row\" fxLayoutGap=\"16px\">\r\n      <button fxFlex=\"100px\" " +
+                    "routerLink=\"new\">Create new</button>\r\n    </div>\r\n  </header>\r\n  <main fxLayout=" +
+                    "\"column\" fxLayoutGap=\"16px\">\r\n    <ng-container *ngIf=\"(");
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("$ | async) === null\">\r\n      <p>Loading...</p>\r\n    </ng-container>\r\n    <ng-cont" +
+                    "ainer *ngIf=\"");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("$ | async as ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("\">\r\n      <table *ngIf=\"");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(".length > 0\">\r\n        <thead>\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("          <th>");
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.DisplayName ));
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("</th>\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 26 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("        </thead>\r\n        <tbody>\r\n          <tr\r\n            class=\"clickable\"\r\n" +
+                    "            *ngFor=\"let ");
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(" of ");
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("\"\r\n            [routerLink]=\"");
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(".");
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("\"\r\n          >\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("            <td>{{ ");
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(".");
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(" }}</td>\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 35 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write("          </tr>\r\n        </tbody>\r\n      </table>\r\n      <p *ngIf=\"");
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(".length === 0\">No ");
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentHTMLTemplate.tt"
+            this.Write(" found.</p>\r\n    </ng-container>\r\n  </main>\r\n</div>\r\n");
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         

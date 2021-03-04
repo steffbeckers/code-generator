@@ -20,6 +20,219 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.create {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
+            
+            #line 7 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write("import { Component, OnDestroy, OnInit } from \'@angular/core\';\r\nimport { FormBuild" +
+                    "er, Validators } from \'@angular/forms\';\r\nimport { Router } from \'@angular/router" +
+                    "\';\r\nimport { Subscription } from \'rxjs\';\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(" } from \'src/app/shared/models/");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(".model\';\r\nimport { Response } from \'src/app/shared/models/response.model\';\r\nimpor" +
+                    "t { ");
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write("Service } from \'../");
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(".service\';\r\n\r\n@Component({\r\n  selector: \'app-");
+            
+            #line default
+            #line hidden
+            
+            #line 16 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 16 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write("-create\',\r\n  templateUrl: \'./create.component.html\',\r\n  styleUrls: [\'./create.com" +
+                    "ponent.scss\'],\r\n})\r\nexport class ");
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(@"CreateComponent implements OnInit, OnDestroy {
+  private subs: Subscription[] = [];
+
+  saving: boolean;
+  form = this.fb.group({
+    name: [null, [Validators.required]],
+    description: [null],
+    telephone: [null],
+    email: [null],
+    website: [null],
+  });
+
+  constructor(
+    private ");
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write("Service: ");
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(@"Service,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
+  }
+
+  save(): void {
+    if (this.saving || this.form.invalid) {
+      return;
+    }
+
+    const ");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(" = this.form.getRawValue();\r\n\r\n    this.saving = true;\r\n    this.subs.push(\r\n    " +
+                    "  this.");
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write("Service.create");
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write("(");
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 55 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(").subscribe(\r\n        (response: Response) => {\r\n          this.saving = false;\r\n" +
+                    "\r\n          if (!response.success) {\r\n            return;\r\n          }\r\n\r\n      " +
+                    "    this.router.navigateByUrl(`/");
+            
+            #line default
+            #line hidden
+            
+            #line 63 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 63 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentTSTemplate.tt"
+            this.Write("/${response.data.id}`);\r\n        },\r\n        (error: any) => {\r\n          this.sa" +
+                    "ving = false;\r\n        }\r\n      )\r\n    );\r\n  }\r\n}\r\n");
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         

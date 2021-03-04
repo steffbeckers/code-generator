@@ -20,6 +20,88 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.create {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
+            
+            #line 7 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write("import { ComponentFixture, TestBed } from \'@angular/core/testing\';\r\n\r\nimport { ");
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write("CreateComponent } from \'./create.component\';\r\n\r\ndescribe(\'");
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 11 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write("CreateComponent\', () => {\r\n  let component: ");
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write("CreateComponent;\r\n  let fixture: ComponentFixture<");
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write("CreateComponent>;\r\n\r\n  beforeEach(async () => {\r\n    await TestBed.configureTesti" +
+                    "ngModule({\r\n      declarations: [");
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 17 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write("CreateComponent],\r\n    }).compileComponents();\r\n  });\r\n\r\n  beforeEach(() => {\r\n  " +
+                    "  fixture = TestBed.createComponent(");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentSpecTemplate.tt"
+            this.Write("CreateComponent);\r\n    component = fixture.componentInstance;\r\n    fixture.detect" +
+                    "Changes();\r\n  });\r\n\r\n  it(\'should create\', () => {\r\n    expect(component).toBeTr" +
+                    "uthy();\r\n  });\r\n});\r\n");
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         

@@ -12,6 +12,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.create {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using CodeGen.Framework.Extensions;
     using CodeGen.Models;
     using System;
     
@@ -20,6 +21,94 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.create {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
+            
+            #line 8 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); 
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write("<form [formGroup]=\"form\" (ngSubmit)=\"save()\">\r\n  <div fxLayout=\"column\" fxLayoutG" +
+                    "ap=\"16px\">\r\n    <header fxLayout=\"row\" fxLayoutAlign=\"space-between\" fxLayoutGap" +
+                    "=\"32px\">\r\n      <h2 class=\"title\">New ");
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 12 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write(@"</h2>
+      <div fxLayout=""row"" fxLayoutGap=""16px"">
+        <button fxFlex=""100px"" type=""submit"" [disabled]=""saving"">Save</button>
+      </div>
+    </header>
+    <main fxLayout=""column"" fxLayoutGap=""16px"">
+      <div fxLayout=""row wrap"" fxLayoutGap=""16px"">
+");
+            
+            #line default
+            #line hidden
+            
+            #line 19 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 20 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write("        <div class=\"field\" fxLayout=\"column\" fxLayoutGap=\"4px\">\r\n          <label" +
+                    ">");
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.DisplayName ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Required ? " *" : ""));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write("</label>\r\n          <input formControlName=\"");
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write("\" type=\"text\" />\r\n        </div>\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 24 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\create\ModelCreateComponentHTMLTemplate.tt"
+            this.Write("      </div>\r\n    </main>\r\n  </div>\r\n</form>\r\n");
+            
+            #line default
+            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         
