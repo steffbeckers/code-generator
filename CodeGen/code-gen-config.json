@@ -59,6 +59,7 @@
             },
             {
               "Name": "Email",
+              "DisplayName": "E-mail",
               "Type": "string"
             },
             {
@@ -97,6 +98,7 @@
             },
             {
               "Name": "Email",
+              "DisplayName": "E-mail",
               "Type": "string"
             },
             {
