@@ -76,12 +76,21 @@
             {
                 switch (str)
                 {
+                    case "int":
+                    case "int?":
+                    case "float":
+                    case "float?":
+                    case "double":
+                    case "double?":
+                        return "number";
                     case "bool":
                         return "boolean";
                     case "Guid":
+                    case "Guid?":
                         return "string";
                     case "DateTime":
-                        return "string";
+                    case "DateTime?":
+                        return "Date";
                 }
             }
 
