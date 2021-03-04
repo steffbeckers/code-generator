@@ -201,8 +201,24 @@ namespace CodeGen.Generators
             await Process.Start(gitCheckoutDirectory).WaitForExitAsync();
         }
 
-        private Task GenerateBasedOnConfig(string projectTemplateFile, CodeGenTemplateSettingsData data)
+        private async Task GenerateBasedOnConfig(string projectTemplateFile, CodeGenTemplateSettingsData data)
         {
+            // Create template data if not exists
+            string projectTemplateDataFile = projectTemplateFile.Replace(".tt", ".cs");
+            if (!await _fileService.Exists(projectTemplateDataFile))
+            {
+                string fileDataPath = projectTemplateDataFile.Replace('\\', '/');
+
+                string name = Path.GetFileNameWithoutExtension(fileDataPath);
+                string nameSpace = "CodeGen." + fileDataPath.Replace("/", ".").Replace($".{name}.cs", "");
+                ConfigBasedTemplate dataTemplate = new ConfigBasedTemplate(name, nameSpace);
+                string fileDataText = dataTemplate.TransformText();
+
+                _logger.LogInformation("Create template data: " + fileDataPath);
+                await _fileService.Create(fileDataPath, fileDataText);
+                return;
+            }
+
             // File path
             string filePath = Path.Combine(
                 "_Output",
@@ -222,13 +238,27 @@ namespace CodeGen.Generators
             string fileText = template.TransformText();
 
             _logger.LogInformation("Create file: " + filePath);
-            _fileService.Create(filePath, fileText);
-
-            return Task.CompletedTask;
+            await _fileService.Create(filePath, fileText);
         }
 
-        private Task GenerateForEachModel(string projectTemplateFile, CodeGenTemplateSettingsData data)
+        private async Task GenerateForEachModel(string projectTemplateFile, CodeGenTemplateSettingsData data)
         {
+            // Create template data if not exists
+            string projectTemplateDataFile = projectTemplateFile.Replace(".tt", ".cs");
+            if (!await _fileService.Exists(projectTemplateDataFile))
+            {
+                string filePath = projectTemplateDataFile.Replace('\\', '/');
+
+                string name = Path.GetFileNameWithoutExtension(filePath);
+                string nameSpace = "CodeGen." + filePath.Replace("/", ".").Replace($".{name}.cs", "");
+                ModelBasedTemplate template = new ModelBasedTemplate(name, nameSpace);
+                string fileText = template.TransformText();
+
+                _logger.LogInformation("Create template data: " + filePath);
+                await _fileService.Create(filePath, fileText);
+                return;
+            }
+
             foreach (CodeGenModel model in _configService.CodeGenConfig.Models.List)
             {
                 // File path
@@ -250,10 +280,8 @@ namespace CodeGen.Generators
                 string fileText = template.TransformText();
 
                 _logger.LogInformation("Create file: " + filePath);
-                _fileService.Create(filePath, fileText);
+                await _fileService.Create(filePath, fileText);
             }
-
-            return Task.CompletedTask;
         }
 
         // OLD

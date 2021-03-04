@@ -8,61 +8,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeGen.Templates {
+namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using CodeGen.Models;
     using System;
     
     
-    public partial class ModelBasedTemplate : ModelBasedTemplateBase {
+    public partial class ModelListComponentTSTemplate : ModelListComponentTSTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
-            
-            #line 6 "Templates\ModelBasedTemplate.tt"
-            this.Write("using CodeGen.Models;\r\n\r\nnamespace ");
-            
-            #line default
-            #line hidden
-            
-            #line 8 "Templates\ModelBasedTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _namespace ));
-            
-            #line default
-            #line hidden
-            
-            #line 8 "Templates\ModelBasedTemplate.tt"
-            this.Write("\r\n{\r\n    public partial class ");
-            
-            #line default
-            #line hidden
-            
-            #line 10 "Templates\ModelBasedTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _name ));
-            
-            #line default
-            #line hidden
-            
-            #line 10 "Templates\ModelBasedTemplate.tt"
-            this.Write(" : ITextTemplate\r\n    {\r\n        public CodeGenConfig _config;\r\n        public Co" +
-                    "deGenModel _model;\r\n\r\n        public ");
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\ModelBasedTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _name ));
-            
-            #line default
-            #line hidden
-            
-            #line 15 "Templates\ModelBasedTemplate.tt"
-            this.Write("(CodeGenConfig config, CodeGenModel model)\r\n        {\r\n            _config = conf" +
-                    "ig;\r\n            _model = model;\r\n        }\r\n    }\r\n}\r\n");
-            
-            #line default
-            #line hidden
             return this.GenerationEnvironment.ToString();
         }
         
@@ -70,7 +27,7 @@ namespace CodeGen.Templates {
         }
     }
     
-    public class ModelBasedTemplateBase {
+    public class ModelListComponentTSTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         

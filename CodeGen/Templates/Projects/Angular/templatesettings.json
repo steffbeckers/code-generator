@@ -1,5 +1,6 @@
 {
   "Angular": {},
+  "Exclude": ["node_modules/"],
   "ConfigBasedGenerator": [
     {
       "T4Template": "src/app/AppRoutingModuleTemplate.tt",
@@ -7,10 +8,13 @@
     }
   ],
   "ModelsBasedGenerator": [
+    // Shared module
+    //// Models
     {
       "T4Template": "src/app/shared/models/ModelTemplate.tt",
       "Output": "{2}.model.ts"
     },
+    // Feature modules
     {
       "T4Template": "src/app/modules/ModelComponentCSSTemplate.tt",
       "Output": "{3}/{3}.component.scss"
@@ -34,7 +38,41 @@
     {
       "T4Template": "src/app/modules/ModelRoutingModuleTemplate.tt",
       "Output": "{3}/{3}-routing.module.ts"
+    },
+    // Components within feature modules
+    //// Create
+    {
+      "T4Template": "src/app/modules/components/create/ModelCreateComponentCSSTemplate.tt",
+      "Output": "../../{3}/create/create.component.scss"
+    },
+    {
+      "T4Template": "src/app/modules/components/create/ModelCreateComponentHTMLTemplate.tt",
+      "Output": "../../{3}/create/create.component.html"
+    },
+    {
+      "T4Template": "src/app/modules/components/create/ModelCreateComponentSpecTemplate.tt",
+      "Output": "../../{3}/create/create.component.spec.ts"
+    },
+    {
+      "T4Template": "src/app/modules/components/create/ModelCreateComponentTSTemplate.tt",
+      "Output": "../../{3}/create/create.component.ts"
+    },
+    //// List
+    {
+      "T4Template": "src/app/modules/components/list/ModelListComponentCSSTemplate.tt",
+      "Output": "../../{3}/list/list.component.scss"
+    },
+    {
+      "T4Template": "src/app/modules/components/list/ModelListComponentHTMLTemplate.tt",
+      "Output": "../../{3}/list/list.component.html"
+    },
+    {
+      "T4Template": "src/app/modules/components/list/ModelListComponentSpecTemplate.tt",
+      "Output": "../../{3}/list/list.component.spec.ts"
+    },
+    {
+      "T4Template": "src/app/modules/components/list/ModelListComponentTSTemplate.tt",
+      "Output": "../../{3}/list/list.component.ts"
     }
-  ],
-  "Exclude": ["node_modules/"]
+  ]
 }

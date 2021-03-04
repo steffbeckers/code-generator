@@ -21,43 +21,43 @@ namespace CodeGen.Templates {
             this.GenerationEnvironment = null;
             
             #line 6 "Templates\ConfigBasedTemplate.tt"
-            this.Write("namespace ");
+            this.Write("using CodeGen.Models;\r\n\r\nnamespace ");
             
             #line default
             #line hidden
             
-            #line 6 "Templates\ConfigBasedTemplate.tt"
+            #line 8 "Templates\ConfigBasedTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _namespace ));
             
             #line default
             #line hidden
             
-            #line 6 "Templates\ConfigBasedTemplate.tt"
+            #line 8 "Templates\ConfigBasedTemplate.tt"
             this.Write("\r\n{\r\n    public partial class ");
             
             #line default
             #line hidden
             
-            #line 8 "Templates\ConfigBasedTemplate.tt"
+            #line 10 "Templates\ConfigBasedTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _name ));
             
             #line default
             #line hidden
             
-            #line 8 "Templates\ConfigBasedTemplate.tt"
+            #line 10 "Templates\ConfigBasedTemplate.tt"
             this.Write(" : ITextTemplate\r\n    {\r\n        public CodeGenConfig _config;\r\n\r\n        public " +
                     "");
             
             #line default
             #line hidden
             
-            #line 12 "Templates\ConfigBasedTemplate.tt"
+            #line 14 "Templates\ConfigBasedTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _name ));
             
             #line default
             #line hidden
             
-            #line 12 "Templates\ConfigBasedTemplate.tt"
+            #line 14 "Templates\ConfigBasedTemplate.tt"
             this.Write("(CodeGenConfig config)\r\n        {\r\n            _config = config;\r\n        }\r\n    " +
                     "}\r\n}\r\n");
             
