@@ -194,9 +194,9 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.detail {
             #line hidden
             
             #line 37 "Templates\Projects\Angular\src\app\modules\components\detail\ModelDetailComponentTSTemplate.tt"
-            this.Write("ById(id, \'Contacts\')\r\n            .subscribe((response: Response) => {\r\n         " +
-                    "     if (!response.success) {\r\n                // TODO: Check code\r\n            " +
-                    "    this.router.navigateByUrl(\'/");
+            this.Write("ById(id)\r\n            .subscribe((response: Response) => {\r\n              if (!re" +
+                    "sponse.success) {\r\n                // TODO: Check code\r\n                this.rou" +
+                    "ter.navigateByUrl(\'/");
             
             #line default
             #line hidden

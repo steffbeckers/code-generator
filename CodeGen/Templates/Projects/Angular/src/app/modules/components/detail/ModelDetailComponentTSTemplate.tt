@@ -34,7 +34,7 @@ export class <#= _model.NamePlural #>DetailComponent implements OnInit, OnDestro
 
         this.subs.push(
           this.<#= _model.NamePlural.ToLower() #>Service
-            .get<#= _model.Name #>ById(id, 'Contacts')
+            .get<#= _model.Name #>ById(id)
             .subscribe((response: Response) => {
               if (!response.success) {
                 // TODO: Check code
