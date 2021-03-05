@@ -2,9 +2,16 @@
   "Angular": {},
   "Exclude": ["node_modules/"],
   "ConfigBasedGenerator": [
+    // Modules
     {
       "T4Template": "src/app/AppRoutingModuleTemplate.tt",
       "Output": "app-routing.module.ts"
+    },
+    // Layouts
+    //// Default
+    {
+      "T4Template": "src/app/layouts/default/DefaultComponentHTMLTemplate.tt",
+      "Output": "default.component.html"
     }
   ],
   "ModelsBasedGenerator": [
@@ -38,6 +45,14 @@
     {
       "T4Template": "src/app/modules/ModelRoutingModuleTemplate.tt",
       "Output": "{3}/{3}-routing.module.ts"
+    },
+    {
+      "T4Template": "src/app/modules/ModelServiceSpecTemplate.tt",
+      "Output": "{3}/{3}.service.spec.ts"
+    },
+    {
+      "T4Template": "src/app/modules/ModelServiceTSTemplate.tt",
+      "Output": "{3}/{3}.service.ts"
     },
     // Components within feature modules
     //// Create

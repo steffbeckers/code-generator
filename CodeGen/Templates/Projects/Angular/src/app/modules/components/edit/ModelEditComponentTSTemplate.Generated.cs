@@ -12,6 +12,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using CodeGen.Framework.Extensions;
     using CodeGen.Models;
     using System;
     
@@ -21,7 +22,13 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
             
-            #line 7 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 8 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+ CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); 
+            
+            #line default
+            #line hidden
+            
+            #line 9 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("import { Component, OnDestroy, OnInit } from \'@angular/core\';\r\nimport { FormBuild" +
                     "er, Validators } from \'@angular/forms\';\r\nimport { Router, ActivatedRoute } from " +
                     "\'@angular/router\';\r\nimport { BehaviorSubject, Subscription } from \'rxjs\';\r\nimpor" +
@@ -30,139 +37,208 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(" } from \'src/app/shared/models/");
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(".model\';\r\nimport { Response } from \'src/app/shared/models/response.model\';\r\nimpor" +
                     "t { ");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 15 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 15 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("Service } from \'../");
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 15 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 13 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 15 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(".service\';\r\n\r\n@Component({\r\n  selector: \'app-");
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 18 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 16 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 18 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("-edit\',\r\n  templateUrl: \'./edit.component.html\',\r\n  styleUrls: [\'./edit.component" +
                     ".scss\'],\r\n})\r\nexport class ");
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 20 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 22 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("EditComponent implements OnInit, OnDestroy {\r\n  private subs: Subscription[] = []" +
                     ";\r\n\r\n  ");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("$: BehaviorSubject<");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("> = new BehaviorSubject<");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
-            this.Write(">(null);\r\n  saving: boolean;\r\n  close: boolean;\r\n  form = this.fb.group({\r\n    na" +
-                    "me: [null, [Validators.required]],\r\n    description: [null],\r\n    telephone: [nu" +
-                    "ll],\r\n    email: [null],\r\n    website: [null],\r\n  });\r\n\r\n  constructor(\r\n    pri" +
-                    "vate ");
+            #line 25 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(">(null);\r\n  saving: boolean;\r\n  close: boolean;\r\n  form = this.fb.group({\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 29 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+ foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { 
+            
+            #line default
+            #line hidden
+            
+            #line 30 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+ if (property.Required) { 
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write("    ");
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 31 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(": [null, [Validators.required]],\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 32 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write("    ");
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( property.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 33 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(": [null],\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 34 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+ } 
             
             #line default
             #line hidden
             
             #line 35 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 36 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write("  });\r\n\r\n  constructor(\r\n    private ");
+            
+            #line default
+            #line hidden
+            
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("Service: ");
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 35 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 39 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(@"Service,
     private router: Router,
     private route: ActivatedRoute,
@@ -180,25 +256,25 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
             #line default
             #line hidden
             
-            #line 47 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 51 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 47 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 51 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("Service\r\n            .get");
             
             #line default
             #line hidden
             
-            #line 48 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 52 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 48 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 52 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("ById(id)\r\n            .subscribe((response: Response) => {\r\n              if (!re" +
                     "sponse.success) {\r\n                // TODO: Check code\r\n                this.rou" +
                     "ter.navigateByUrl(\'/");
@@ -206,74 +282,74 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 56 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 52 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 56 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("\');\r\n                return;\r\n              }\r\n\r\n              this.");
             
             #line default
             #line hidden
             
-            #line 56 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 60 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 56 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 60 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("$.next(response.data);\r\n            })\r\n        );\r\n      })\r\n    );\r\n\r\n    this." +
                     "subs.push(\r\n      this.");
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 67 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 67 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("$.subscribe((");
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 67 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 67 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(": ");
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 67 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 63 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 67 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(") => {\r\n        this.form.patchValue(");
             
             #line default
             #line hidden
             
-            #line 64 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 68 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 64 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 68 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(@");
         this.form.markAsPristine();
       })
@@ -298,98 +374,98 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
             #line default
             #line hidden
             
-            #line 83 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 87 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 83 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 87 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("/${this.");
             
             #line default
             #line hidden
             
-            #line 83 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 87 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 83 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 87 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("$.value.id}`);\r\n        return;\r\n      }\r\n      return;\r\n    }\r\n\r\n    const ");
             
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 93 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 93 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(": ");
             
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 93 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 93 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(" = {\r\n      ...this.");
             
             #line default
             #line hidden
             
-            #line 90 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 94 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 90 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 94 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("$.value,\r\n      ...this.form.getRawValue(),\r\n    };\r\n\r\n    this.saving = true;\r\n " +
                     "   this.subs.push(\r\n      this.");
             
             #line default
             #line hidden
             
-            #line 96 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 100 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 96 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 100 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("Service.update");
             
             #line default
             #line hidden
             
-            #line 96 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 100 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 96 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 100 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("(");
             
             #line default
             #line hidden
             
-            #line 96 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 100 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 96 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 100 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(").subscribe(\r\n        (response: Response) => {\r\n          this.saving = false;\r\n" +
                     "\r\n          if (!response.success) {\r\n            return;\r\n          }\r\n\r\n      " +
                     "    if (this.close) {\r\n            this.router.navigateByUrl(`/");
@@ -397,30 +473,18 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
             #line default
             #line hidden
             
-            #line 105 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 109 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 105 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            #line 109 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("/${");
             
             #line default
             #line hidden
             
-            #line 105 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 105 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
-            this.Write(".id}`);\r\n            return;\r\n          }\r\n\r\n          this.");
-            
-            #line default
-            #line hidden
-            
             #line 109 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
@@ -428,6 +492,30 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.edit {
             #line hidden
             
             #line 109 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(".");
+            
+            #line default
+            #line hidden
+            
+            #line 109 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToCamelCase() ));
+            
+            #line default
+            #line hidden
+            
+            #line 109 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write("}`);\r\n            return;\r\n          }\r\n\r\n          this.");
+            
+            #line default
+            #line hidden
+            
+            #line 113 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 113 "Templates\Projects\Angular\src\app\modules\components\edit\ModelEditComponentTSTemplate.tt"
             this.Write("$.next(response.data);\r\n        },\r\n        (error: any) => {\r\n          this.sav" +
                     "ing = false;\r\n        }\r\n      )\r\n    );\r\n  }\r\n}\r\n");
             

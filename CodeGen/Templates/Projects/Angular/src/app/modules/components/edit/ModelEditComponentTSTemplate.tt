@@ -3,7 +3,9 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Framework.Extensions" #>
 <#@ import namespace="CodeGen.Models" #>
+<# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,11 +26,13 @@ export class <#= _model.NamePlural #>EditComponent implements OnInit, OnDestroy 
   saving: boolean;
   close: boolean;
   form = this.fb.group({
-    name: [null, [Validators.required]],
-    description: [null],
-    telephone: [null],
-    email: [null],
-    website: [null],
+<# foreach (CodeGenModelProperty property in _model.Properties.Where(x => x.Name != defaultKey.Name).ToList()) { #>
+<# if (property.Required) { #>
+    <#= property.Name.ToCamelCase() #>: [null, [Validators.required]],
+<# } else { #>
+    <#= property.Name.ToCamelCase() #>: [null],
+<# } #>
+<# } #>
   });
 
   constructor(
@@ -102,7 +106,7 @@ export class <#= _model.NamePlural #>EditComponent implements OnInit, OnDestroy 
           }
 
           if (this.close) {
-            this.router.navigateByUrl(`/<#= _model.NamePlural.ToLower() #>/${<#= _model.Name.ToLower() #>.id}`);
+            this.router.navigateByUrl(`/<#= _model.NamePlural.ToLower() #>/${<#= _model.Name.ToLower() #>.<#= defaultKey.Name.ToCamelCase() #>}`);
             return;
           }
 

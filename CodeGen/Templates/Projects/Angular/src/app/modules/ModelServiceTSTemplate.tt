@@ -1,0 +1,56 @@
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGen.Models" #>
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { <#= _model.Name #> } from 'src/app/shared/models/<#= _model.Name.ToLower() #>.model';
+import { Response } from 'src/app/shared/models/response.model';
+import { environment } from 'src/environments/environment';
+
+@Injectable()
+export class <#= _model.NamePlural #>Service {
+  constructor(private http: HttpClient) {}
+
+  get<#= _model.NamePlural #>(include: string = null): Observable<Response> {
+    let params: { include?: string } = {};
+    if (include) {
+      params.include = include;
+    }
+
+    return this.http.get<Response>(`${environment.api}/<#= _model.NamePlural.ToLower() #>`, {
+      params,
+    });
+  }
+
+  get<#= _model.Name #>ById(id: string, include: string = null): Observable<Response> {
+    let params: { include?: string } = {};
+    if (include) {
+      params.include = include;
+    }
+
+    return this.http.get<Response>(`${environment.api}/<#= _model.NamePlural.ToLower() #>/${id}`, {
+      params,
+    });
+  }
+
+  create<#= _model.Name #>(<#= _model.Name.ToLower() #>: <#= _model.Name #>): Observable<Response> {
+    return this.http.post<Response>(`${environment.api}/<#= _model.NamePlural.ToLower() #>`, <#= _model.Name.ToLower() #>);
+  }
+
+  update<#= _model.Name #>(<#= _model.Name.ToLower() #>: <#= _model.Name #>): Observable<Response> {
+    return this.http.put<Response>(
+      `${environment.api}/<#= _model.NamePlural.ToLower() #>/${<#= _model.Name.ToLower() #>.id}`,
+      <#= _model.Name.ToLower() #>
+    );
+  }
+
+  delete<#= _model.Name #>(<#= _model.Name.ToLower() #>: <#= _model.Name #>): Observable<Response> {
+    return this.http.delete<Response>(
+      `${environment.api}/<#= _model.NamePlural.ToLower() #>/${<#= _model.Name.ToLower() #>.id}`
+    );
+  }
+}

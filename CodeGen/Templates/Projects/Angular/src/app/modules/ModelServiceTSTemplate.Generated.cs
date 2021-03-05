@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
+namespace CodeGen.Templates.Projects.Angular.src.app.modules {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
@@ -16,186 +16,299 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
     using System;
     
     
-    public partial class ModelListComponentTSTemplate : ModelListComponentTSTemplateBase {
+    public partial class ModelServiceTSTemplate : ModelServiceTSTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
             
-            #line 7 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("import { Component, OnDestroy, OnInit } from \'@angular/core\';\r\nimport { BehaviorS" +
-                    "ubject, Subscription } from \'rxjs\';\r\nimport { ");
+            #line 7 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("import { HttpClient } from \'@angular/common/http\';\r\nimport { Injectable } from \'@" +
+                    "angular/core\';\r\nimport { Observable } from \'rxjs\';\r\nimport { ");
             
             #line default
             #line hidden
             
-            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 10 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 10 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(" } from \'src/app/shared/models/");
             
             #line default
             #line hidden
             
-            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 10 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 9 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 10 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(".model\';\r\nimport { Response } from \'src/app/shared/models/response.model\';\r\nimpor" +
-                    "t { ");
+                    "t { environment } from \'src/environments/environment\';\r\n\r\n@Injectable()\r\nexport " +
+                    "class ");
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 15 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("Service } from \'../");
+            #line 15 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("Service {\r\n  constructor(private http: HttpClient) {}\r\n\r\n  get");
             
             #line default
             #line hidden
             
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 11 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write(".service\';\r\n\r\n@Component({\r\n  selector: \'app-");
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
-            
-            #line default
-            #line hidden
-            
-            #line 14 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("-list\',\r\n  templateUrl: \'./list.component.html\',\r\n  styleUrls: [\'./list.component" +
-                    ".scss\'],\r\n})\r\nexport class ");
-            
-            #line default
-            #line hidden
-            
-            #line 18 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 18 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
             
             #line default
             #line hidden
             
-            #line 18 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("ListComponent implements OnInit, OnDestroy {\r\n  private subs: Subscription[] = []" +
-                    ";\r\n\r\n  ");
+            #line 18 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("(include: string = null): Observable<Response> {\r\n    let params: { include?: str" +
+                    "ing } = {};\r\n    if (include) {\r\n      params.include = include;\r\n    }\r\n\r\n    r" +
+                    "eturn this.http.get<Response>(`${environment.api}/");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 24 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("$: BehaviorSubject<");
+            #line 24 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("`, {\r\n      params,\r\n    });\r\n  }\r\n\r\n  get");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 29 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("[]> = new BehaviorSubject<");
+            #line 29 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("ById(id: string, include: string = null): Observable<Response> {\r\n    let params:" +
+                    " { include?: string } = {};\r\n    if (include) {\r\n      params.include = include;" +
+                    "\r\n    }\r\n\r\n    return this.http.get<Response>(`${environment.api}/");
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 35 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 35 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("/${id}`, {\r\n      params,\r\n    });\r\n  }\r\n\r\n  create");
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
             
             #line default
             #line hidden
             
-            #line 21 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("[]>(null);\r\n\r\n  constructor(private ");
+            #line 40 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("(");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 40 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 40 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("): Observable<Response> {\r\n    return this.http.post<Response>(`${environment.api" +
+                    "}/");
+            
+            #line default
+            #line hidden
+            
+            #line 41 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("Service: ");
+            #line 41 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("`, ");
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            #line 41 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 23 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("Service) {}\r\n\r\n  ngOnInit(): void {\r\n    this.subs.push(\r\n      this.");
+            #line 41 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(");\r\n  }\r\n\r\n  update");
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 44 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("(");
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 44 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("): Observable<Response> {\r\n    return this.http.put<Response>(\r\n      `${environm" +
+                    "ent.api}/");
+            
+            #line default
+            #line hidden
+            
+            #line 46 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("Service.get");
+            #line 46 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("/${");
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural ));
+            #line 46 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 27 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("().subscribe((response: Response) => {\r\n        this.");
+            #line 46 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(".id}`,\r\n      ");
             
             #line default
             #line hidden
             
-            #line 28 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
+            #line 47 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 47 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("\r\n    );\r\n  }\r\n\r\n  delete");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("(");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(": ");
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name ));
+            
+            #line default
+            #line hidden
+            
+            #line 51 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("): Observable<Response> {\r\n    return this.http.delete<Response>(\r\n      `${envir" +
+                    "onment.api}/");
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( _model.NamePlural.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 28 "Templates\Projects\Angular\src\app\modules\components\list\ModelListComponentTSTemplate.tt"
-            this.Write("$.next(response.data);\r\n      })\r\n    );\r\n  }\r\n\r\n  ngOnDestroy(): void {\r\n    for" +
-                    " (const sub of this.subs) {\r\n      sub.unsubscribe();\r\n    }\r\n  }\r\n}\r\n");
+            #line 53 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write("/${");
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture( _model.Name.ToLower() ));
+            
+            #line default
+            #line hidden
+            
+            #line 53 "Templates\Projects\Angular\src\app\modules\ModelServiceTSTemplate.tt"
+            this.Write(".id}`\r\n    );\r\n  }\r\n}\r\n");
             
             #line default
             #line hidden
@@ -206,7 +319,7 @@ namespace CodeGen.Templates.Projects.Angular.src.app.modules.components.list {
         }
     }
     
-    public class ModelListComponentTSTemplateBase {
+    public class ModelServiceTSTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         

@@ -211,6 +211,7 @@ namespace CodeGen.Generators
 
                 string name = Path.GetFileNameWithoutExtension(fileDataPath);
                 string nameSpace = "CodeGen." + fileDataPath.Replace("/", ".").Replace($".{name}.cs", "");
+                nameSpace = nameSpace.Replace("default", "@default");
                 ConfigBasedTemplate dataTemplate = new ConfigBasedTemplate(name, nameSpace);
                 string fileDataText = dataTemplate.TransformText();
 
@@ -251,6 +252,7 @@ namespace CodeGen.Generators
 
                 string name = Path.GetFileNameWithoutExtension(filePath);
                 string nameSpace = "CodeGen." + filePath.Replace("/", ".").Replace($".{name}.cs", "");
+                nameSpace = nameSpace.Replace("default", "@default");
                 ModelBasedTemplate template = new ModelBasedTemplate(name, nameSpace);
                 string fileText = template.TransformText();
 

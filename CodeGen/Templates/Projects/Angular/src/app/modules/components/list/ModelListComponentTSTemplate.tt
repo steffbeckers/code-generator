@@ -6,7 +6,7 @@
 <#@ import namespace="CodeGen.Models" #>
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { <#= _model.Name #> } from 'src/app/shared/models/account.model';
+import { <#= _model.Name #> } from 'src/app/shared/models/<#= _model.Name.ToLower() #>.model';
 import { Response } from 'src/app/shared/models/response.model';
 import { <#= _model.NamePlural #>Service } from '../<#= _model.NamePlural.ToLower() #>.service';
 
