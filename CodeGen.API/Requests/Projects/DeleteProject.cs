@@ -1,5 +1,6 @@
 using AutoMapper;
-using CodeGen.API.BLL;
+using CodeGen.API.DAL;
+using CodeGen.API.Models;
 using MediatR;
 using System;
 using System.Threading;
@@ -14,16 +15,19 @@ namespace CodeGen.API.Requests.Projects
 
     public class DeleteProjectHandler : IRequestHandler<DeleteProject, Response>
     {
-        private readonly IProjectBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteProjectHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public DeleteProjectHandler(IUnitOfWork unitOfWork)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Response> Handle(DeleteProject request, CancellationToken cancellationToken)
         {
-            await _bll.DeleteProjectAsync(request.Id);
+            IRepository<Project> repository = _unitOfWork.GetRepository<Project>();
+
+            await repository.DeleteAsync(request.Id);
+            await _unitOfWork.Commit();
 
             return new Response()
             {

@@ -18,7 +18,7 @@ namespace CodeGen.API.DAL.Configurations
             ;
 
             builder.Property(x => x.Description)
-                .HasMaxLength(100)
+                .HasMaxLength(512)
             ;
         }
     }

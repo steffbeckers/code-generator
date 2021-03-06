@@ -1,5 +1,6 @@
 using AutoMapper;
-using CodeGen.API.BLL;
+using CodeGen.API.DAL;
+using CodeGen.API.DAL.Repositories;
 using CodeGen.API.Models;
 using CodeGen.API.ViewModels;
 using MediatR;
@@ -17,21 +18,27 @@ namespace CodeGen.API.Requests.Projects
 
     public class GetProjectByIdHandler : IRequestHandler<GetProjectById, Response>
     {
-        private readonly IProjectBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetProjectByIdHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public GetProjectByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Response> Handle(GetProjectById request, CancellationToken cancellationToken)
         {
-            Project project = await _bll.GetProjectByIdAsync(request.Id, request.Include);
+            IRepository<Project> repository = _unitOfWork.GetRepository<Project>();
+
+            Project project = await repository.GetByIdAsync(request.Id, request.Include);
             if (project == null)
             {
-                return new Response() { Success = false, Message = $"Project {request.Id} not found." };
+                return new Response() {
+                    Success = false,
+                    Code = "PROJECT_NOT_FOUND",
+                    Message = $"Project {request.Id} not found."
+                };
             }
 
             return new Response() { Data = _mapper.Map<ProjectVM>(project) };

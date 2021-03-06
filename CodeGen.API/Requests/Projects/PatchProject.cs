@@ -1,5 +1,5 @@
 using AutoMapper;
-using CodeGen.API.BLL;
+using CodeGen.API.DAL;
 using CodeGen.API.Models;
 using CodeGen.API.ViewModels;
 using MediatR;
@@ -18,29 +18,30 @@ namespace CodeGen.API.Requests.Projects
 
     public class PatchProjectHandler : IRequestHandler<PatchProject, Response>
     {
-        private readonly IProjectBLL _bll;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public PatchProjectHandler(IBusinessLogicLayer bll, IMapper mapper)
+        public PatchProjectHandler(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IMediator mediator
+        )
         {
-            _bll = bll;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         public async Task<Response> Handle(PatchProject request, CancellationToken cancellationToken)
         {
-            Project project = await _bll.GetProjectByIdAsync(request.Id);
+            IRepository<Project> repository = _unitOfWork.GetRepository<Project>();
+
+            Project project = await repository.GetByIdAsync(request.Id);
             ProjectUpdateVM projectUpdateVM = _mapper.Map<ProjectUpdateVM>(project);
             request.PatchDocument.ApplyTo(projectUpdateVM);
-            _mapper.Map(projectUpdateVM, project);
-            project = await _bll.UpdateProjectAsync(project);
 
-            return new Response()
-            {
-                Code = "PROJECT_UPDATED",
-                Message = "Project updated",
-                Data = _mapper.Map<ProjectVM>(project)
-            };
+            return await _mediator.Send(new UpdateProject() { ProjectUpdateVM = projectUpdateVM }, cancellationToken);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CodeGen.API.DAL.Migrations
 {
-    public partial class ProjectConfigInDB : Migration
+    public partial class ProjectUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

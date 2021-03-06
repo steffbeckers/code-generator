@@ -1,4 +1,3 @@
-using CodeGen.API.BLL;
 using CodeGen.API.DAL;
 using CodeGen.API.Filters;
 using CodeGen.API.Hubs;
@@ -35,8 +34,6 @@ namespace CodeGen.API
                     options.UseSqlServer(_configuration.GetConnectionString("ApplicationDbContext")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();
 
             services.AddAutoMapper(typeof(Startup));
 
