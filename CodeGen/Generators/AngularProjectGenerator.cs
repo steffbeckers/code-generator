@@ -49,7 +49,7 @@ namespace CodeGen.Generators
             _logger.LogInformation("Building project");
 
             ProcessStartInfo npmBuild = new ProcessStartInfo(_configService.AppSettings.GetValue<string>("Paths:NPM"));
-            npmBuild.Arguments = @"run build";
+            npmBuild.Arguments = @"run build -- --prod";
             npmBuild.WorkingDirectory = _outputProjectPath;
             await Process.Start(npmBuild).WaitForExitAsync();
         }
