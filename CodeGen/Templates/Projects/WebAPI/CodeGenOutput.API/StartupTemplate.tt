@@ -4,7 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="CodeGen.Models" #>
-using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Filters;
 using CodeGenOutput.API.Validation;
@@ -40,8 +39,6 @@ namespace CodeGenOutput.API
                     options.UseSqlServer(_configuration.GetConnectionString("ApplicationDbContext")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();
 
             services.AddAutoMapper(typeof(Startup));
 

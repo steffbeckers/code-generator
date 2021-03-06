@@ -22,57 +22,56 @@ namespace CodeGen.Templates.Projects.WebAPI.CodeGenOutput.API {
             this.GenerationEnvironment = null;
             
             #line 7 "Templates\Projects\WebAPI\CodeGenOutput.API\StartupTemplate.tt"
-            this.Write("using CodeGenOutput.API.BLL;\r\nusing CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.A" +
-                    "PI.Filters;\r\nusing CodeGenOutput.API.Validation;\r\nusing FluentValidation;\r\nusing" +
-                    " MediatR;\r\nusing Microsoft.AspNetCore.Builder;\r\nusing Microsoft.AspNetCore.Hosti" +
-                    "ng;\r\nusing Microsoft.AspNetCore.HttpOverrides;\r\nusing Microsoft.AspNetCore.Mvc;\r" +
-                    "\nusing Microsoft.AspNetCore.Mvc.Formatters;\r\nusing Microsoft.EntityFrameworkCore" +
-                    ";\r\nusing Microsoft.Extensions.Configuration;\r\nusing Microsoft.Extensions.Depende" +
-                    "ncyInjection;\r\nusing Microsoft.Extensions.Hosting;\r\nusing Microsoft.Extensions.O" +
-                    "ptions;\r\nusing Microsoft.OpenApi.Models;\r\nusing System.Linq;\r\n\r\nnamespace CodeGe" +
-                    "nOutput.API\r\n{\r\n    public class Startup\r\n    {\r\n        private readonly IConfi" +
-                    "guration _configuration;\r\n\r\n        public Startup(IConfiguration configuration)" +
-                    "\r\n        {\r\n            _configuration = configuration;\r\n        }\r\n\r\n        p" +
-                    "ublic void ConfigureServices(IServiceCollection services)\r\n        {\r\n          " +
-                    "  services.AddDbContext<ApplicationDbContext>(options =>\r\n                    op" +
-                    "tions.UseSqlServer(_configuration.GetConnectionString(\"ApplicationDbContext\")));" +
-                    "\r\n\r\n            services.AddScoped<IUnitOfWork, UnitOfWork>();\r\n\r\n            se" +
-                    "rvices.AddScoped<IBusinessLogicLayer, BusinessLogicLayer>();\r\n\r\n            serv" +
-                    "ices.AddAutoMapper(typeof(Startup));\r\n\r\n            services.AddValidatorsFromAs" +
-                    "sembly(typeof(Startup).Assembly);\r\n\r\n            services.AddMediatR(typeof(Star" +
-                    "tup));\r\n\r\n            services.AddTransient(typeof(IPipelineBehavior<,>), typeof" +
-                    "(ValidationBehavior<,>));\r\n\r\n            services.AddCors();\r\n\r\n            serv" +
-                    "ices.AddControllers(options =>\r\n            {\r\n                options.Filters.A" +
-                    "dd(new ApiExceptionFilter());\r\n                options.InputFormatters.Insert(0," +
-                    " GetJsonPatchInputFormatter());\r\n            }).AddNewtonsoftJson(options =>\r\n  " +
-                    "              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json" +
-                    ".ReferenceLoopHandling.Ignore\r\n            );\r\n\r\n            services.AddSwagger" +
-                    "Gen(options =>\r\n            {\r\n                options.SwaggerDoc(\"v1\", new Open" +
-                    "ApiInfo { Title = \"CodeGenOutput.API\", Version = \"v1\" });\r\n            });\r\n    " +
-                    "    }\r\n\r\n        // This method gets called by the runtime. Use this method to c" +
-                    "onfigure the HTTP request pipeline.\r\n        public void Configure(IApplicationB" +
-                    "uilder app, IWebHostEnvironment env)\r\n        {\r\n            // Reverse proxy ho" +
-                    "sting\r\n            // https://docs.microsoft.com/en-us/aspnet/core/host-and-depl" +
-                    "oy/linux-nginx?view=aspnetcore-5.0\r\n            app.UseForwardedHeaders(new Forw" +
-                    "ardedHeadersOptions\r\n            {\r\n                ForwardedHeaders = Forwarded" +
-                    "Headers.XForwardedProto\r\n            });\r\n\r\n            if (env.IsDevelopment())" +
-                    "\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n\r\n           " +
-                    "     app.UseSwagger();\r\n                app.UseSwaggerUI(options =>\r\n           " +
-                    "     {\r\n                    options.SwaggerEndpoint(\"swagger/v1/swagger.json\", \"" +
-                    "CodeGenOutput.API v1\");\r\n                    options.RoutePrefix = string.Empty;" +
-                    "\r\n                });\r\n            }\r\n\r\n            app.UseCors(options =>\r\n    " +
-                    "        {\r\n                options.AllowAnyOrigin()\r\n                    .AllowA" +
-                    "nyMethod()\r\n                    .AllowAnyHeader();\r\n            });\r\n\r\n         " +
-                    "   app.UseRouting();\r\n\r\n            app.UseAuthorization();\r\n\r\n            app.U" +
-                    "seEndpoints(endpoints =>\r\n            {\r\n                endpoints.MapController" +
-                    "s();\r\n            });\r\n        }\r\n\r\n        private static NewtonsoftJsonPatchIn" +
-                    "putFormatter GetJsonPatchInputFormatter()\r\n        {\r\n            var builder = " +
-                    "new ServiceCollection()\r\n                .AddLogging()\r\n                .AddMvc(" +
-                    ")\r\n                .AddNewtonsoftJson()\r\n                .Services.BuildServiceP" +
-                    "rovider();\r\n\r\n            return builder\r\n                .GetRequiredService<IO" +
-                    "ptions<MvcOptions>>()\r\n                .Value\r\n                .InputFormatters\r" +
-                    "\n                .OfType<NewtonsoftJsonPatchInputFormatter>()\r\n                ." +
-                    "First();\r\n        }\r\n    }\r\n}\r\n");
+            this.Write("using CodeGenOutput.API.DAL;\r\nusing CodeGenOutput.API.Filters;\r\nusing CodeGenOutp" +
+                    "ut.API.Validation;\r\nusing FluentValidation;\r\nusing MediatR;\r\nusing Microsoft.Asp" +
+                    "NetCore.Builder;\r\nusing Microsoft.AspNetCore.Hosting;\r\nusing Microsoft.AspNetCor" +
+                    "e.HttpOverrides;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.AspNetCore.Mv" +
+                    "c.Formatters;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Microsoft.Extensions." +
+                    "Configuration;\r\nusing Microsoft.Extensions.DependencyInjection;\r\nusing Microsoft" +
+                    ".Extensions.Hosting;\r\nusing Microsoft.Extensions.Options;\r\nusing Microsoft.OpenA" +
+                    "pi.Models;\r\nusing System.Linq;\r\n\r\nnamespace CodeGenOutput.API\r\n{\r\n    public cla" +
+                    "ss Startup\r\n    {\r\n        private readonly IConfiguration _configuration;\r\n\r\n  " +
+                    "      public Startup(IConfiguration configuration)\r\n        {\r\n            _conf" +
+                    "iguration = configuration;\r\n        }\r\n\r\n        public void ConfigureServices(I" +
+                    "ServiceCollection services)\r\n        {\r\n            services.AddDbContext<Applic" +
+                    "ationDbContext>(options =>\r\n                    options.UseSqlServer(_configurat" +
+                    "ion.GetConnectionString(\"ApplicationDbContext\")));\r\n\r\n            services.AddSc" +
+                    "oped<IUnitOfWork, UnitOfWork>();\r\n\r\n            services.AddAutoMapper(typeof(St" +
+                    "artup));\r\n\r\n            services.AddValidatorsFromAssembly(typeof(Startup).Assem" +
+                    "bly);\r\n\r\n            services.AddMediatR(typeof(Startup));\r\n\r\n            servic" +
+                    "es.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));\r\n\r" +
+                    "\n            services.AddCors();\r\n\r\n            services.AddControllers(options " +
+                    "=>\r\n            {\r\n                options.Filters.Add(new ApiExceptionFilter())" +
+                    ";\r\n                options.InputFormatters.Insert(0, GetJsonPatchInputFormatter(" +
+                    "));\r\n            }).AddNewtonsoftJson(options =>\r\n                options.Serial" +
+                    "izerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignor" +
+                    "e\r\n            );\r\n\r\n            services.AddSwaggerGen(options =>\r\n            " +
+                    "{\r\n                options.SwaggerDoc(\"v1\", new OpenApiInfo { Title = \"CodeGenOu" +
+                    "tput.API\", Version = \"v1\" });\r\n            });\r\n        }\r\n\r\n        // This met" +
+                    "hod gets called by the runtime. Use this method to configure the HTTP request pi" +
+                    "peline.\r\n        public void Configure(IApplicationBuilder app, IWebHostEnvironm" +
+                    "ent env)\r\n        {\r\n            // Reverse proxy hosting\r\n            // https:" +
+                    "//docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetco" +
+                    "re-5.0\r\n            app.UseForwardedHeaders(new ForwardedHeadersOptions\r\n       " +
+                    "     {\r\n                ForwardedHeaders = ForwardedHeaders.XForwardedProto\r\n   " +
+                    "         });\r\n\r\n            if (env.IsDevelopment())\r\n            {\r\n           " +
+                    "     app.UseDeveloperExceptionPage();\r\n\r\n                app.UseSwagger();\r\n    " +
+                    "            app.UseSwaggerUI(options =>\r\n                {\r\n                    " +
+                    "options.SwaggerEndpoint(\"swagger/v1/swagger.json\", \"CodeGenOutput.API v1\");\r\n   " +
+                    "                 options.RoutePrefix = string.Empty;\r\n                });\r\n     " +
+                    "       }\r\n\r\n            app.UseCors(options =>\r\n            {\r\n                o" +
+                    "ptions.AllowAnyOrigin()\r\n                    .AllowAnyMethod()\r\n                " +
+                    "    .AllowAnyHeader();\r\n            });\r\n\r\n            app.UseRouting();\r\n\r\n    " +
+                    "        app.UseAuthorization();\r\n\r\n            app.UseEndpoints(endpoints =>\r\n  " +
+                    "          {\r\n                endpoints.MapControllers();\r\n            });\r\n     " +
+                    "   }\r\n\r\n        private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInp" +
+                    "utFormatter()\r\n        {\r\n            var builder = new ServiceCollection()\r\n   " +
+                    "             .AddLogging()\r\n                .AddMvc()\r\n                .AddNewto" +
+                    "nsoftJson()\r\n                .Services.BuildServiceProvider();\r\n\r\n            re" +
+                    "turn builder\r\n                .GetRequiredService<IOptions<MvcOptions>>()\r\n     " +
+                    "           .Value\r\n                .InputFormatters\r\n                .OfType<New" +
+                    "tonsoftJsonPatchInputFormatter>()\r\n                .First();\r\n        }\r\n    }\r\n" +
+                    "}\r\n");
             
             #line default
             #line hidden

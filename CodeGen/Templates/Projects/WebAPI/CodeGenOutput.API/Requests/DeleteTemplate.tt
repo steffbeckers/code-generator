@@ -6,7 +6,6 @@
 <#@ import namespace="CodeGen.Models" #>
 <# CodeGenModelProperty defaultKey = _config.Models.DefaultKey(_model); #>
 using AutoMapper;
-using CodeGenOutput.API.BLL;
 using CodeGenOutput.API.DAL;
 using CodeGenOutput.API.Models;
 using MediatR;
