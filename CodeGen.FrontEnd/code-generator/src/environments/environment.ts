@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   api: 'https://localhost:5002/api',
-  output: 'http://localhost:5001',
 };
 
 /*
