@@ -13,7 +13,7 @@ namespace CodeGen.API.DAL.Repositories
         public static async Task<Project> GetByIdAsync(
             this IRepository<Project> repository,
             Guid id,
-            string include = null
+            string include
         )
         {
             IQueryable<Project> query = repository.GetDbSet();

@@ -42,7 +42,7 @@ namespace CodeGenOutput.API.DAL
         DbSet<TEntity> GetDbSet();
         Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
-            string include = """",
+            string include = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         );
         Task<TEntity> GetBy");
@@ -126,7 +126,7 @@ namespace CodeGenOutput.API.DAL
 
         public async Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
-            string include = """",
+            string include = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         )
         {
@@ -137,9 +137,11 @@ namespace CodeGenOutput.API.DAL
                 query = query.Where(filter);
             }
 
-            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(property);
+            if (!string.IsNullOrEmpty(include)) {
+                foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
             }
 
             if (orderBy != null)
@@ -155,49 +157,49 @@ namespace CodeGenOutput.API.DAL
             #line default
             #line hidden
             
-            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write("Async(");
             
             #line default
             #line hidden
             
-            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 72 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(")\r\n        {\r\n            return await GetDbSet().FindAsync(");
             
             #line default
             #line hidden
             
-            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 76 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 74 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 76 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(@");
         }
 
@@ -218,49 +220,49 @@ namespace CodeGenOutput.API.DAL
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Type ));
             
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(" ");
             
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 89 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(")\r\n        {\r\n            TEntity entity = await GetBy");
             
             #line default
             #line hidden
             
-            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 93 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name ));
             
             #line default
             #line hidden
             
-            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 93 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write("Async(");
             
             #line default
             #line hidden
             
-            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 93 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture( defaultKey.Name.ToLower() ));
             
             #line default
             #line hidden
             
-            #line 91 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
+            #line 93 "Templates\Projects\WebAPI\CodeGenOutput.API\DAL\GenericRepositoryTemplate.tt"
             this.Write(@");
             if (entity != null)
             {

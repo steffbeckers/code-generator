@@ -21,14 +21,16 @@ namespace CodeGenOutput.API.DAL.Repositories
         public static async Task<<#= _model.Name #>> GetBy<#= defaultKey.Name #>Async(
             this IRepository<<#= _model.Name #>> repository,
             <#= defaultKey.Type #> <#= defaultKey.Name.ToLower() #>,
-            string include = ""
+            string include
         )
         {
             IQueryable<<#= _model.Name #>> query = repository.GetDbSet();
 
-            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(property);
+            if (!string.IsNullOrEmpty(include)) {
+                foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
             }
 
             return await query.FirstOrDefaultAsync(x => x.<#= defaultKey.Name #> == <#= defaultKey.Name.ToLower() #>);
