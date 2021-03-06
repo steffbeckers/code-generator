@@ -22,7 +22,7 @@ namespace CodeGen.API.Controllers
 
         // GET: api/projects
         [HttpGet]
-        public async Task<IActionResult> GetProjects([FromQuery] string include = "")
+        public async Task<IActionResult> GetProjects([FromQuery] string include)
         {
             return Ok(await _mediator.Send(new GetProjects() { Include = include }));
         }
@@ -30,7 +30,7 @@ namespace CodeGen.API.Controllers
         // GET: api/projects/{id}
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetProjectById([FromRoute] Guid id, [FromQuery] string include = "")
+        public async Task<IActionResult> GetProjectById([FromRoute] Guid id, [FromQuery] string include)
         {
             return Ok(await _mediator.Send(new GetProjectById() { Id = id, Include = include }));
         }

@@ -12,7 +12,7 @@ namespace CodeGen.API.DAL
         DbSet<TEntity> GetDbSet();
         Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
-            string include = "",
+            string include = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         );
         Task<TEntity> GetByIdAsync(Guid id);
@@ -38,7 +38,7 @@ namespace CodeGen.API.DAL
 
         public async Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
-            string include = "",
+            string include = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null
         )
         {
@@ -49,9 +49,12 @@ namespace CodeGen.API.DAL
                 query = query.Where(filter);
             }
 
-            foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            if (!string.IsNullOrEmpty(include))
             {
-                query = query.Include(property);
+                foreach (string property in include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
             }
 
             if (orderBy != null)
