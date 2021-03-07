@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ProjectsService } from './services/projects.service';
 
 @NgModule({
   declarations: [],
@@ -21,6 +20,5 @@ import { ProjectsService } from './services/projects.service';
     HttpClientModule,
     FlexLayoutModule,
   ],
-  providers: [ProjectsService],
 })
 export class SharedModule {}
