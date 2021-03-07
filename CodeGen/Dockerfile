@@ -18,4 +18,11 @@ RUN dotnet restore "CodeGen/CodeGen.csproj"
 COPY . .
 
 WORKDIR "/src/CodeGen"
+RUN git config --global user.name "Code Generator" && \
+git config --global user.email "code-generator@steffbeckers.eu" && \
+git init && \
+git add . && \
+git commit -m "Initial commit" && \
+git status
+
 ENTRYPOINT ["dotnet", "watch", "run"]
