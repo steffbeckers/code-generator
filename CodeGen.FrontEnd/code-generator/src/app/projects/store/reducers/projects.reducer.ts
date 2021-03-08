@@ -23,29 +23,44 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(ProjectsActions.loadProjects, (state) => {
+  on(ProjectsActions.getProjects, (state) => {
     return {
       ...state,
       loading: true,
       error: null,
     };
   }),
-  on(ProjectsActions.loadProjectsSuccess, (state, { response }) => {
-    return adapter.setAll(response.data, { ...state, loading: false });
+  on(ProjectsActions.getProjectsSuccess, (state, { response }) => {
+    return adapter.upsertMany(response.data, { ...state, loading: false });
   }),
-  on(ProjectsActions.loadProjectsFailure, (state, { error }) => {
-    state = adapter.removeAll(state);
+  on(ProjectsActions.getProjectsFailure, (state, { error }) => {
     return {
       ...state,
       loading: false,
       error,
     };
   }),
-  // TODO: Load project by id
-  on(ProjectsActions.selectProject, (state, { project }) => {
+  on(ProjectsActions.getProjectById, (state) => {
     return {
       ...state,
-      selectedProjectId: project.id,
+      loading: true,
+      error: null,
+    };
+  }),
+  on(ProjectsActions.getProjectByIdSuccess, (state, { response }) => {
+    return adapter.upsertOne(response.data, { ...state, loading: false });
+  }),
+  on(ProjectsActions.getProjectByIdFailure, (state, { error }) => {
+    return {
+      ...state,
+      loading: false,
+      error,
+    };
+  }),
+  on(ProjectsActions.selectProjectById, (state, { id }) => {
+    return {
+      ...state,
+      selectedProjectId: id,
     };
   })
 );

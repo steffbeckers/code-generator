@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { Project } from 'src/app/shared/models/project.model';
-import { Response } from 'src/app/shared/models/response.model';
-import { ProjectsService } from 'src/app/shared/services/projects.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ProjectsFacade } from '../projects.facade';
 
 @Component({
   selector: 'app-project-detail',
@@ -13,30 +11,19 @@ import { ProjectsService } from 'src/app/shared/services/projects.service';
 export class ProjectDetailComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
-  project$: BehaviorSubject<Project> = new BehaviorSubject<Project>(null);
+  project$ = this.projectsFacade.selectedProject$;
 
   constructor(
-    private projectsService: ProjectsService,
-    private router: Router,
+    private projectsFacade: ProjectsFacade,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.subs.push(
       this.route.paramMap.subscribe((params) => {
-        const projectId = params.get('id');
-        this.subs.push(
-          this.projectsService
-            .getProjectById(projectId)
-            .subscribe((response: Response) => {
-              if (!response.success) {
-                this.router.navigateByUrl('/projects');
-                return;
-              }
-
-              this.project$.next(response.data as Project);
-            })
-        );
+        const id = params.get('id');
+        this.projectsFacade.getProjectById(id);
+        this.projectsFacade.selectProjectById(id);
       })
     );
   }
@@ -45,19 +32,5 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     for (const sub of this.subs) {
       sub.unsubscribe();
     }
-  }
-
-  generate(): void {
-    this.subs.push(
-      this.projectsService
-        .generateProjectById(this.project$.value.id)
-        .subscribe((response: Response) => {
-          if (!response.success) {
-            return;
-          }
-
-          // TODO: Visual feedback?
-        })
-    );
   }
 }

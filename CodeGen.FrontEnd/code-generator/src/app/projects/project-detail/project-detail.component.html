@@ -1,4 +1,5 @@
-<div fxLayout="column" fxLayoutGap="16px">
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px">
+  <button routerLink="/projects" type="button">Back to projects</button>
   <ng-container *ngIf="project$ | async as project">
     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="16px">
       <h2>

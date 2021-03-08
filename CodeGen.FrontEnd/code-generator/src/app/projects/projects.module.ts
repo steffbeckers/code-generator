@@ -8,7 +8,8 @@ import { StoreModule } from '@ngrx/store';
 import * as fromProjects from './store/reducers/projects.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectsEffects } from './store/effects/projects.effects';
-import { ProjectsService } from '../shared/services/projects.service';
+import { ProjectsService } from './projects.service';
+import { ProjectsFacade } from './projects.facade';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,6 @@ import { ProjectsService } from '../shared/services/projects.service';
     ),
     EffectsModule.forFeature([ProjectsEffects]),
   ],
-  providers: [ProjectsService],
+  providers: [ProjectsService, ProjectsFacade],
 })
 export class ProjectsModule {}

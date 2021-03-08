@@ -4,8 +4,8 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as ProjectsActions from '../actions/projects.actions';
-import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { Response } from 'src/app/shared/models/response.model';
+import { ProjectsService } from '../../projects.service';
 
 @Injectable()
 export class ProjectsEffects {
@@ -16,14 +16,14 @@ export class ProjectsEffects {
 
   loadProjects$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ProjectsActions.loadProjects),
+      ofType(ProjectsActions.getProjects),
       switchMap(() =>
         this.projectsService.getProjects().pipe(
           map((response: Response) =>
-            ProjectsActions.loadProjectsSuccess({ response })
+            ProjectsActions.getProjectsSuccess({ response })
           ),
           catchError((error) =>
-            of(ProjectsActions.loadProjectsFailure({ error }))
+            of(ProjectsActions.getProjectsFailure({ error }))
           )
         )
       )
@@ -32,14 +32,14 @@ export class ProjectsEffects {
 
   loadProjectById$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ProjectsActions.loadProjectsById),
+      ofType(ProjectsActions.getProjectById),
       switchMap(({ id }) =>
         this.projectsService.getProjectById(id).pipe(
           map((response: Response) =>
-            ProjectsActions.loadProjectsByIdSuccess({ response })
+            ProjectsActions.getProjectByIdSuccess({ response })
           ),
           catchError((error) =>
-            of(ProjectsActions.loadProjectsFailure({ error }))
+            of(ProjectsActions.getProjectsFailure({ error }))
           )
         )
       )

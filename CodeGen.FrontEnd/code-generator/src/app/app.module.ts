@@ -26,6 +26,7 @@ import { AppEffects } from './store/effects/app.effects';
     EffectsModule.forRoot([AppEffects]),
     // TODO: Disable Redux dev tools in production
     // !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent],

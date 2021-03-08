@@ -1,31 +1,30 @@
 import { createAction, props } from '@ngrx/store';
-import { Project } from 'src/app/shared/models/project.model';
 import { Response } from 'src/app/shared/models/response.model';
 
-export const loadProjects = createAction('[Projects] Load Projects');
-export const loadProjectsSuccess = createAction(
-  '[Projects] Load Projects Success',
+export const getProjects = createAction('[Projects] Get projects');
+export const getProjectsSuccess = createAction(
+  '[Projects] Get projects Success',
   props<{ response: Response }>()
 );
-export const loadProjectsFailure = createAction(
-  '[Projects] Load Projects Failure',
+export const getProjectsFailure = createAction(
+  '[Projects] Get projects Failure',
   props<{ error: any }>()
 );
 
-export const loadProjectsById = createAction(
-  '[Projects] Load Project by id',
+export const getProjectById = createAction(
+  '[Projects] Get project by id',
   props<{ id: string }>()
 );
-export const loadProjectsByIdSuccess = createAction(
-  '[Projects] Load Project by id Success',
+export const getProjectByIdSuccess = createAction(
+  '[Projects] Get project by id Success',
   props<{ response: Response }>()
 );
-export const loadProjectsByIdFailure = createAction(
-  '[Projects] Load Project by id Failure',
+export const getProjectByIdFailure = createAction(
+  '[Projects] Get project by id Failure',
   props<{ error: any }>()
 );
 
-export const selectProject = createAction(
-  '[Projects] Select project',
-  props<{ project: Project }>()
+export const selectProjectById = createAction(
+  '[Projects] Select project by id',
+  props<{ id: string }>()
 );

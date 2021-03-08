@@ -13,3 +13,14 @@ export const {
   selectAll,
   selectTotal,
 } = fromProjects.adapter.getSelectors(selectProjectsState);
+
+export const selectEntity = createSelector(
+  selectEntities,
+  (entities, props) => entities[props.id]
+);
+
+export const selectedProject = createSelector(
+  selectEntities,
+  selectProjectsState,
+  (entities, state) => entities[state.selectedProjectId]
+);

@@ -1,31 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { Project } from 'src/app/shared/models/project.model';
-import { Response } from 'src/app/shared/models/response.model';
-import { ProjectsService } from 'src/app/shared/services/projects.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as ProjectsActions from 'src/app/projects/store/actions/projects.actions';
+import { selectAll } from '../store/selectors/projects.selectors';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
 })
-export class ProjectListComponent implements OnInit, OnDestroy {
-  private subs: Subscription[] = [];
+export class ProjectListComponent implements OnInit {
+  projects$ = this.store.select(selectAll);
 
-  projects$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
-
-  constructor(private projectsService: ProjectsService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.projectsService.getProjects().subscribe((response: Response) => {
-      if (!response.success) return;
-      this.projects$.next(response.data as Project[]);
-    });
-  }
-
-  ngOnDestroy(): void {
-    for (const sub of this.subs) {
-      sub.unsubscribe();
-    }
+    this.store.dispatch(ProjectsActions.getProjects());
   }
 }
