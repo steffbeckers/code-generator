@@ -53,16 +53,28 @@ namespace CodeGen.Generators
 
             _logger.LogInformation("Recreating database/migrations: " + startupProjectPath);
 
+            string migrationsProjectPath = Path.Combine(
+                _outputProjectPath,
+                _projectTemplateSettings.DotNET.MigrationsProjectPath
+            );
+            migrationsProjectPath = migrationsProjectPath.Replace('\\', '/');
+
             // Drop the existing database
             ProcessStartInfo dotnetDropDatabase = new ProcessStartInfo("dotnet");
             dotnetDropDatabase.Arguments = @"ef database drop --force --no-build";
-            dotnetDropDatabase.WorkingDirectory = startupProjectPath;
+            dotnetDropDatabase.WorkingDirectory = migrationsProjectPath;
             await Process.Start(dotnetDropDatabase).WaitForExitAsync();
+
+            // Remove Initial migration
+            ProcessStartInfo dotnetRemoveInitialMigration = new ProcessStartInfo("dotnet");
+            dotnetRemoveInitialMigration.Arguments = @"ef migrations remove";
+            dotnetRemoveInitialMigration.WorkingDirectory = migrationsProjectPath;
+            await Process.Start(dotnetRemoveInitialMigration).WaitForExitAsync();
 
             // Generate new Initial migration
             ProcessStartInfo dotnetAddInitialMigration = new ProcessStartInfo("dotnet");
             dotnetAddInitialMigration.Arguments = @"ef migrations add Initial --output-dir " + _projectTemplateSettings.DotNET.MigrationsFolderPath + " --no-build";
-            dotnetAddInitialMigration.WorkingDirectory = startupProjectPath;
+            dotnetAddInitialMigration.WorkingDirectory = migrationsProjectPath;
             await Process.Start(dotnetAddInitialMigration).WaitForExitAsync();
 
             if (_configuration.GetValue<bool>("Standalone"))
