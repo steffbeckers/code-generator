@@ -1,0 +1,9 @@
+﻿{
+    "DotNET": {
+        "StartupProjectPath": "src/CodeGenOutput.HttpApi.Host",
+        "StartupProjectURL": "https://localhost:44370",
+        "MigrationsFolderPath": "src/CodeGenOutput.EntityFrameworkCore.DbMigrations/Migrations"
+    },
+    "ConfigBasedGenerator": [],
+    "ModelsBasedGenerator": []
+}

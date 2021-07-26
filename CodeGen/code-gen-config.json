@@ -1,122 +1,93 @@
 {
-  "CodeGenConfig": {
-    "Models": {
-      "StringPropertyMaxLength": 100,
-      "Defaults": {
-        "Properties": [
-          {
-            "Name": "Id",
-            "Type": "Guid",
-            "Key": true
-          },
-          {
-            "Name": "DateCreated",
-            "DisplayName": "Date created",
-            "Type": "DateTime",
-            "AuditDateCreated": true
-          },
-          // {
-          //   "Name": "CreatedBy",
-          //   "Type": "Guid",
-          //   "AuditCreatedBy": true
-          // },
-          {
-            "Name": "DateModified",
-            "DisplayName": "Date modified",
-            "Type": "DateTime?",
-            "AuditDateModified": true
-          },
-          // {
-          //   "Name": "ModifiedBy",
-          //   "Type": "Guid?",
-          //   "AuditModifiedBy": true
-          // },
-          {
-            "Name": "Deleted",
-            "Type": "bool",
-            "AuditDeleted": true
-          }
-        ]
-      },
-      "List": [
-        {
-          "Name": "Account",
-          "Audit": true,
-          "Properties": [
-            {
-              "Name": "Name",
-              "Type": "string",
-              "Required": true
+    "CodeGenConfig": {
+        "Models": {
+            "StringPropertyMaxLength": 100,
+            "Defaults": {
+                "Properties": [
+                    {
+                        "Name": "Id",
+                        "Type": "Guid",
+                        "Key": true
+                    }
+                ]
             },
-            {
-              "Name": "Description",
-              "Type": "string",
-              "MaxLength": 512
-            },
-            {
-              "Name": "Telephone",
-              "Type": "string"
-            },
-            {
-              "Name": "Email",
-              "DisplayName": "E-mail",
-              "Type": "string"
-            },
-            {
-              "Name": "Website",
-              "Type": "string"
-            }
-          ],
-          "Relations": {
-            "OneToMany": [
-              {
-                "Name": "Contacts",
-                "Model": "Contact"
-              }
+            "List": [
+                {
+                    "Name": "Account",
+                    "Properties": [
+                        {
+                            "Name": "Name",
+                            "Type": "string",
+                            "Required": true
+                        },
+                        {
+                            "Name": "Description",
+                            "Type": "string",
+                            "MaxLength": 512
+                        },
+                        {
+                            "Name": "Telephone",
+                            "Type": "string"
+                        },
+                        {
+                            "Name": "Email",
+                            "DisplayName": "E-mail",
+                            "Type": "string"
+                        },
+                        {
+                            "Name": "Website",
+                            "Type": "string"
+                        }
+                    ],
+                    "Relations": {
+                        "OneToMany": [
+                            {
+                                "Name": "Contacts",
+                                "Model": "Contact"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "Name": "Contact",
+                    "Properties": [
+                        {
+                            "Name": "FirstName",
+                            "DisplayName": "First name",
+                            "Type": "string",
+                            "Required": true
+                        },
+                        {
+                            "Name": "LastName",
+                            "DisplayName": "Last name",
+                            "Type": "string",
+                            "Required": true
+                        },
+                        {
+                            "Name": "Telephone",
+                            "Type": "string"
+                        },
+                        {
+                            "Name": "Email",
+                            "DisplayName": "E-mail",
+                            "Type": "string"
+                        },
+                        {
+                            "Name": "Website",
+                            "Type": "string"
+                        }
+                    ],
+                    "Relations": {
+                        "ManyToOne": [
+                            {
+                                "Name": "Account",
+                                "Type": "Guid?",
+                                "Model": "Account"
+                            }
+                        ]
+                    }
+                }
             ]
-          }
-        },
-        {
-          "Name": "Contact",
-          "Audit": true,
-          "Properties": [
-            {
-              "Name": "FirstName",
-              "DisplayName": "First name",
-              "Type": "string",
-              "Required": true
-            },
-            {
-              "Name": "LastName",
-              "DisplayName": "Last name",
-              "Type": "string",
-              "Required": true
-            },
-            {
-              "Name": "Telephone",
-              "Type": "string"
-            },
-            {
-              "Name": "Email",
-              "DisplayName": "E-mail",
-              "Type": "string"
-            },
-            {
-              "Name": "Website",
-              "Type": "string"
-            }
-          ],
-          "Relations": {
-            "ManyToOne": [
-              {
-                "Name": "Account",
-                "Type": "Guid?",
-                "Model": "Account"
-              }
-            ]
-          }
         }
-      ]
     }
-  }
 }

@@ -53,8 +53,8 @@ namespace CodeGen.Runners
             // Start project
             ProcessStartInfo dotnetRun = new ProcessStartInfo("dotnet");
             // TODO: Configurable --urls param
-            //dotnetRun.Arguments = @"run";
-            dotnetRun.Arguments = @"run --urls http://0.0.0.0:5001";
+            //dotnetRun.Arguments = @"run --urls http://0.0.0.0:5001";
+            dotnetRun.Arguments = @"run";
             dotnetRun.WorkingDirectory = startupProjectPath;
             await Process.Start(dotnetRun).WaitForExitAsync();
         }
